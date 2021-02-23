@@ -1,7 +1,7 @@
 {
   "name": "rocketpool-docs",
   "version": "0.0.1",
-  "description": "Rocket Pool Decentralised Ethereum Proof of Stake Network",
+  "description": "Rocket Pool Documentation - Decentralised ETH2 Proof of Stake Protocol",
   "main": "index.js",
   "authors": {
     "name": "David Rugendyke",
@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.5.3"
-  }
+    "vuepress": "^1.8.2"
+  },
+  "dependencies": {}
 }

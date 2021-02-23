@@ -27,12 +27,13 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
+    repo: 'rocket-pool/rocketpool.github.io',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
     logo: '/images/logo-small.png',
+    smoothScroll: true,
     nav: [
     {
         text: 'Overview',
@@ -58,11 +59,12 @@ module.exports = {
     sidebar: {
       '/overview/': [
         {
-          title: 'Guide',
+          title: 'Overview',
           collapsable: false,
           children: [
             '',
-            'using-vue',
+            'explainer-series',
+            'faq',
           ]
         }
       ],
