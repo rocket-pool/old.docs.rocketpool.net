@@ -9,7 +9,7 @@ Everybody loves a good explainer series! For the best detailed understanding of 
 ![Explainer Series](/images/headers/explainer-series.png)
 
 1. [ Overview and Users of the protocol](https://medium.com/rocket-pool/rocket-pool-staking-protocol-part-1-8be4859e5fbd)
-2. [ The Network and Trusted Node DAO's](https://medium.com/rocket-pool/rocket-pool-staking-protocol-part-2-e0d346911fe1)
+2. [ The Protocol DAO and Oracle Node DAO](https://medium.com/rocket-pool/rocket-pool-staking-protocol-part-2-e0d346911fe1)
 3.  RPL & Tokenomics (TBA)
 4. Launch Details and Audit Reports (TBA)
 

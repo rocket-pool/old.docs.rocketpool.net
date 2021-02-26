@@ -75,7 +75,6 @@ This FAQ section aims to compliment the [explainer series of articles](/overview
 [**Can I build on top of the protocol or use it in my SaaS business?**](#integrated-dapps-saas-business-and-more)  
 *Get your dApp connected with decentralised staking or run a node in the network and generate higher returns!*
 
-
 ## Contact
 
 [**Website**](https://www.rocketpool.net/)  

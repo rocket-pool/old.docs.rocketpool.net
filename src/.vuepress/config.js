@@ -28,7 +28,7 @@ module.exports = {
    */
   themeConfig: {
     repo: 'rocket-pool/rocketpool.github.io',
-    editLinks: false,
+    editLinks: true,
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
@@ -45,11 +45,11 @@ module.exports = {
       },
       {
         text: 'Documentation',
-        link: '/docs/'
+        link: '/documentation/'
       },
       {
-        text: 'Tokenomics',
-        link: '/tokenomics/'
+        text: 'Guides',
+        link: '/guides/'
       },
       {
         text: 'Website',
@@ -68,6 +68,17 @@ module.exports = {
           ]
         }
       ],
+      '/documentation/': [
+        {
+          title: 'Documentation',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+              '',
+              'smart-node',
+          ]
+        }
+      ],
     }
   },
 
@@ -77,5 +88,11 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+    ['vuepress-plugin-code-copy', {
+        color: '#ffbca5',
+        staticIcon: true,
+        backgroundColor: '#ffbca5'
+        }
+    ]
   ]
 }
