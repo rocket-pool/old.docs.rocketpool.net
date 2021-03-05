@@ -1,4 +1,4 @@
-# :desktop_computer: Smart Node
+# :package: Smart Node
 
 ## Getting Started
 
@@ -29,3 +29,4 @@ With wget:
 mkdir -p ~/bin && wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool && chmod +x ~/bin/rocketpool
 ```
 
+*TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/smart-node/introduction.html)

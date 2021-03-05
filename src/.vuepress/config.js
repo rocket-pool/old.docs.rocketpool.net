@@ -76,6 +76,8 @@ module.exports = {
           children: [
               '',
               'smart-node',
+              'smart-contracts',
+              'js-library'
           ]
         }
       ],
