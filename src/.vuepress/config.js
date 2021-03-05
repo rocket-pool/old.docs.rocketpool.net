@@ -68,6 +68,15 @@ module.exports = {
           ]
         }
       ],
+      '/whitepaper/': [
+        {
+          title: 'White Paper',
+          collapsable: false,
+          children: [
+            '',
+          ]
+        }
+      ],
       '/documentation/': [
         {
           title: 'Documentation',
