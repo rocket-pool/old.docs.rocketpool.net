@@ -12,7 +12,7 @@ This guide assumes familiarity with JavaScript and provides all code samples as 
 ### Installation
 The Rocket Pool JavaScript library can be added to your application via NPM, and requires [web3.js](https://github.com/ethereum/web3.js/):
 
-```
+``` shell
 npm install github:rocket-pool/rocketpool-js
 npm install web3
 ```
