@@ -123,9 +123,3 @@ contract Example {
 
 }
 ```
-
-
-
-
-*TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/contracts/design.html#architecture)
-
