@@ -82,7 +82,6 @@ Contracts marked as “internal” do not provide methods which are accessible t
 
 ## Deposits
 
-### Overview
 The main reason for extending the Rocket Pool network is to implement custom deposit logic which funnels user deposits into the deposit pool. For example, a fund manager may wish to stake their users’ ETH in Rocket Pool via their own smart contracts, and abstract the use of Rocket Pool itself away from their users.
 
 Note: the `RocketDepositPool` contract address should not be hard-coded in your contracts, but retrieved from `RocketStorage` dynamically. See [Interacting With Rocket Pool](http://localhost:8080/documentation/smart-contracts.html#interacting-with-rocket-pool) for more details.
