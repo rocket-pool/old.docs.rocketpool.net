@@ -1,6 +1,8 @@
 # Documentation Hub
 
-Rocket Pool Documentation Hub - Features Whitepaper, FAQs, Technical Docs, Guides and more. Is written in [Vuepress](https://v1.vuepress.vuejs.org/guide/#how-it-works) + has [emojis](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json) and will be built out over the coming months. We welcome all contributions!
+Rocket Pool Documentation Hub - Features Whitepaper, FAQs, Technical Docs, Guides and more. Is written in [Vuepress](https://v1.vuepress.vuejs.org/guide/#how-it-works) + has [emojis](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json) and will be built out over the coming months.
+
+We welcome all contributions! Please refer to our [ contribution guidelines ]( ./CONTRIBUTING.md ).
 
 ## Local Testing
 

@@ -30,3 +30,5 @@ mkdir -p ~/bin && wget https://github.com/rocket-pool/smartnode-install/releases
 ```
 
 *TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/smart-node/introduction.html)
+
+!!!include(./documentation/smart-node-sections/security-considerations.md)!!!
