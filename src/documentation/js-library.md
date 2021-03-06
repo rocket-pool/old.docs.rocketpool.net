@@ -85,11 +85,6 @@ Contract version sets are primarily used for accessing old event data. They prov
 * `versionSet.getPastEvents(eventName, options)`: As per [web3’s contract.getPastEvents](https://web3js.readthedocs.io/en/v1.2.1/web3-eth-contract.html#getpastevents), but returns a promise resolving to the events for all versions of the contract
 
 
-*TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/js-library/introduction.html)
-
-
-
-
 ## Deposit
 
 ### Overview
@@ -329,3 +324,5 @@ Each submodule shares common methods for interacting with its underlying ERC-20 
 * `tokens.reth.getTotalCollateral()`: Get the total amount of ETH collateral available for exchage in wei; returns `Promise<string>`
 * `tokens.reth.getCollateralRate()`: Get the proportion of rETH backed by ETH collateral in the contract as a fraction of 1; returns `Promise<number>`
 * `tokens.reth.burn(amount, options, onConfirmation)`: Burn the specified amount of rETH in wei for ETH; returns `Promise<TransactionReceipt>`
+
+*TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/js-library/introduction.html)
