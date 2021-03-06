@@ -80,5 +80,53 @@ The Rocket Pool contracts, as defined in `RocketStorage`, are:
 
 Contracts marked as “internal” do not provide methods which are accessible to the general public, and so are generally not useful for extension. For information on specific contract methods, consult their interfaces in the [Rocket Pool repository](https://github.com/rocket-pool/rocketpool/tree/master/contracts/interface).
 
+## Deposits
+
+### Overview
+The main reason for extending the Rocket Pool network is to implement custom deposit logic which funnels user deposits into the deposit pool. For example, a fund manager may wish to stake their users’ ETH in Rocket Pool via their own smart contracts, and abstract the use of Rocket Pool itself away from their users.
+
+Note: the `RocketDepositPool` contract address should not be hard-coded in your contracts, but retrieved from `RocketStorage` dynamically. See [Interacting With Rocket Pool](http://localhost:8080/documentation/smart-contracts.html#interacting-with-rocket-pool) for more details.
+
+### Implementation
+
+The following describes a basic example contract which forwards deposited ETH into Rocket Pool and minted rETH back to the caller:
+
+``` solidity
+import "RocketStorageInterface.sol";
+import "RocketDepositPoolInterface.sol";
+import "RocketETHTokenInterface.sol";
+
+contract Example {
+
+    RocketStorageInterface rocketStorage = RocketStorageInterface(0);
+
+    constructor(address _rocketStorageAddress) public {
+        rocketStorage = RocketStorageInterface(_rocketStorageAddress);
+    }
+
+    receive() external payable {
+        // Check deposit amount
+        require(msg.value > 0, "Invalid deposit amount");
+        // Load contracts
+        address rocketDepositPoolAddress = rocketStorage.getAddress(keccak256(abi.encodePacked("contract.address", "rocketDepositPool")));
+        RocketDepositPoolInterface rocketDepositPool = RocketDepositPoolInterface(rocketDepositPoolAddress);
+        address rocketETHTokenAddress = rocketStorage.getAddress(keccak256(abi.encodePacked("contract.address", "rocketETHToken")));
+        RocketETHTokenInterface rocketETHToken = RocketETHTokenInterface(rocketETHTokenAddress);
+        // Forward deposit to RP & get amount of rETH minted
+        uint256 rethBalance1 = rocketETHToken.balanceOf(address(this));
+        rocketDepositPool.deposit{value: msg.value}();
+        uint256 rethBalance2 = rocketETHToken.balanceOf(address(this));
+        require(rethBalance2 > rethBalance1, "No rETH was minted");
+        uint256 rethMinted = rethBalance2 - rethBalance1;
+        // Transfer rETH to caller
+        require(rocketETHToken.transfer(msg.sender, rethMinted), "rETH was not transferred to caller");
+    }
+
+}
+```
+
+
+
+
 *TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/contracts/design.html#architecture)
 
