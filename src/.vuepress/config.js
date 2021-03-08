@@ -71,6 +71,7 @@ module.exports = {
       '/whitepaper/': [
         {
           title: 'White Paper',
+          sidebarDepth: 1,
           collapsable: false,
           children: [
             '',
