@@ -837,3 +837,4 @@ All arguments for ETH or token amounts are given in wei. All endpoints return da
 - `queue can-process`: Check whether the deposit pool can be processed
 - `queue process`: Process the deposit pool
 
+!!!include(./documentation/smart-node-sections/security-considerations.md)!!!
