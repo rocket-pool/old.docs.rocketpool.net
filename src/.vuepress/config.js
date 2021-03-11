@@ -94,6 +94,16 @@ module.exports = {
     }
   },
 
+  // Import markdown plugins
+  markdown: {
+    extendMarkdown: md => {
+      // Import include plugin, ref: https://www.npmjs.com/package/markdown-it-include
+      md.use( require( 'markdown-it-include' ), {
+        root: `${ __dirname }/../`,
+      } )
+    }
+  },
+
   /**
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
