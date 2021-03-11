@@ -52,7 +52,6 @@ If you have made any deposits of 32 ETH, the created minipools will have 16 ETH 
 
 ```
 rocketpool minipool refund
-
 ```
 
 This will display a list of all eligible minipools, and prompt you to select one or all of them to refund your ETH from. Once refunded, you should see their balances reflected in your node account.
