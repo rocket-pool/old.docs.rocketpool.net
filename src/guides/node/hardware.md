@@ -38,7 +38,7 @@ Here are Ken's comments on why he chose this setup:
 
 ### GreyWizard's NUC10i7FNH
 
-![](./images/NUC10i7FNH.jpg)
+![](./images/GreyWizard.jpg)
 
 The NUC10i7FNH is another one of Intel's own NUCs. This one sports a 10th-generation processor, and was released in 2019. It comes with a six core i7-10710U CPU (1.10 GHz, boosts to 4.7 GHz), two DDR4 slots, an M.2 slot and a 2.5" slot for SSDs, and USB 3.1 ports. It draws about 20 watts of power. It is an incredibly powerful machine, given its power consumption and size. Discord user GreyWizard uses this NUC for his node - the extra power gives him peace of mind knowing that no matter what the future of the Ethereum 2.0 chain holds, his machine will be able to handle it.
 
