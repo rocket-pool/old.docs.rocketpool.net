@@ -90,6 +90,18 @@ module.exports = {
           ]
         }
       ],
+      '/guides/': [
+        {
+          title: 'Guides',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+              '',
+              'platform',
+              'node/hardware',
+          ]
+        }
+      ],
     }
   },
 
