@@ -11,17 +11,24 @@ Running a Rocket Pool node
 
 ### Darcius's Shelf Rig
 
-### Yorick's Mini / Micro ATX Build
+### Yorick's microATX Build
 
 ![](./images/Yorick-stock.jpg)
 
-Veteran hardware enthusiast YorickDowne has a lot of experience building and maintaining servers. Using that knowledge, he has settled on a flexible micro ATX setup. His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node. He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Support/Recommendations/#resources-hardware). The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory. For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
+Veteran hardware enthusiast YorickDowne has a lot of experience building and maintaining servers. Using that knowledge, he has settled on a flexible microATX setup. His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node. He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Support/Recommendations/#resources-hardware). The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory. For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
 
 Yorick's Setup:
-- TBD
+- Motherboard: [SuperMicro X11SCL-F-O](https://www.newegg.com/supermicro-mbd-x11scl-f-o-8th-generation-intel-core-i3-pentium-celeron-processor-intel-xeon-pro/p/N82E16813183671) ($200)
+- CPU: [Intel i3-9100F](https://www.newegg.com/intel-core-i3-9th-gen-core-i3-9100f/p/N82E16819118072) ($150)
+- RAM: [Samsung 1x16GB DDR4 ECC UDIMM 2400MHz](https://www.newegg.com/samsung-16gb-288-pin-ddr4-sdram/p/1WK-002G-00080) ($100)
+- Storage: [Samsung 970 EVO Plus 1TB M.2 2280 NVMe SSD](https://www.newegg.com/samsung-970-evo-plus-1tb/p/N82E16820147743?Item=N82E16820147743) ($165)
+- Case: [SilverStone Micro ATX HTPC Case ML04B-USA](https://www.amazon.com/Silverstone-Technology-Aluminum-Center-ML04B-USA/dp/B07PD8CL7P/) ($110)
+- PSU: Any (example: [Seasonic PRIME Fanless PX-500 Platinum 500W](https://www.newegg.com/seasonic-prime-fanless-px-500-500w/p/N82E16817151234)) ($161)
+- Case fans: Any
+- **Total: About $886**
 
 Here are Yorick's comments on why he chose this setup:
-- *It is at the same or lower cost as NUC*
+- *It is at the same or lower cost as some NUCs*
 - *It has ECC RAM, which means that if memory fails - which it does now and then - I will know, because the system will tell me. I do not have to run memtest87 for 4-5 days to figure out whether my problem with instability is even memory-related. I protect my time fiercely so I can spend it bloviating on Discord instead of troubleshooting hardware*
 - *It has IPMI, which is remote management via Ethernet/browser of the entire machine, including UEFI and power-cycle. I should be allowed to go on extended vacation and still have full remote access.*
 - *If I want redundant storage so eventual SSD failure is a non-event, I can do that*
@@ -35,9 +42,10 @@ Here are Yorick's comments on why he chose this setup:
 Sometimes, shelling out for new hardware just doesn't make sense. In Discord user Drez's case, runnning a Rocket Pool node is one of those times. Drez happened to have a spare laptop lying around, and they turned it into a node with ease. Their machine comes with a quad core i7-4710HQ (2.5 GHz), two DDR3 slots, and a 2.5" SATA slot. Being a laptop, it also comes with its own battery (which offsets the need for a UPS). They added some additional upgrades over time, giving the laptop even more power for extra peace of mind.
 
 Drez's setup:
-- Base: [MSI GE70 2PE Apache Pro](https://www.msi.com/Laptop/GE70-2PE-Apache-Pro/Specification) ($1800)
+- Laptop: [MSI GE70 2PE Apache Pro](https://www.msi.com/Laptop/GE70-2PE-Apache-Pro/Specification) ($1800)
 - RAM: 2x8GB DDR3 1333Mhz (Included)
-- SSD: [Samsung 860 EVO 1TB 2.5" SATA](https://www.amazon.com/Samsung-Inch-Internal-MZ-76E1T0B-AM/dp/B078DPCY3T)
+- SSD: [Samsung 860 EVO 1TB 2.5" SATA](https://www.amazon.com/Samsung-Inch-Internal-MZ-76E1T0B-AM/dp/B078DPCY3T) ($110)
+- **Total: $1910**
 
 Here are Drez's comments on why they chose this setup:
 
