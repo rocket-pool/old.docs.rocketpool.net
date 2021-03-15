@@ -86,7 +86,7 @@ module.exports = {
               '',
               'smart-node',
               'smart-contracts',
-              'js-library'
+              'js-library',
               'glossary'
           ]
         }
