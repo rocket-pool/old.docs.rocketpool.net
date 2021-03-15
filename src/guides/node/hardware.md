@@ -13,6 +13,36 @@ Running a Rocket Pool node
 
 ### Yorick's Mini / Micro ATX Build
 
+![](./images/Yorick-stock.jpg)
+
+Veteran hardware enthusiast YorickDowne has a lot of experience building and maintaining servers. Using that knowledge, he has settled on a flexible micro ATX setup. His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node. He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Support/Recommendations/#resources-hardware). The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory. For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
+
+Yorick's Setup:
+- TBD
+
+Here are Yorick's comments on why he chose this setup:
+- *It is at the same or lower cost as NUC*
+- *It has ECC RAM, which means that if memory fails - which it does now and then - I will know, because the system will tell me. I do not have to run memtest87 for 4-5 days to figure out whether my problem with instability is even memory-related. I protect my time fiercely so I can spend it bloviating on Discord instead of troubleshooting hardware*
+- *It has IPMI, which is remote management via Ethernet/browser of the entire machine, including UEFI and power-cycle. I should be allowed to go on extended vacation and still have full remote access.*
+- *If I want redundant storage so eventual SSD failure is a non-event, I can do that*
+- *It allows for great flexibility in build choices. I can choose however much RAM and compute I want; I can choose to run a NAS with virtualization tech like TrueNAS Scale and run the node on there alongside some other home-servery stuff.*
+
+
+### Drez's Laptop
+
+![](./images/Drez.jpg)
+
+Sometimes, shelling out for new hardware just doesn't make sense. In Discord user Drez's case, runnning a Rocket Pool node is one of those times. Drez happened to have a spare laptop lying around, and they turned it into a node with ease. Their machine comes with a quad core i7-4710HQ (2.5 GHz), two DDR3 slots, and a 2.5" SATA slot. Being a laptop, it also comes with its own battery (which offsets the need for a UPS). They added some additional upgrades over time, giving the laptop even more power for extra peace of mind.
+
+Drez's setup:
+- Base: [MSI GE70 2PE Apache Pro](https://www.msi.com/Laptop/GE70-2PE-Apache-Pro/Specification) ($1800)
+- RAM: 2x8GB DDR3 1333Mhz (Included)
+- SSD: [Samsung 860 EVO 1TB 2.5" SATA](https://www.amazon.com/Samsung-Inch-Internal-MZ-76E1T0B-AM/dp/B078DPCY3T)
+
+Here are Drez's comments on why they chose this setup:
+
+*Main reason i am gonna stake on this laptop is because i already had spare one and dont need to spend extra money on new server. I like its mobility, compactness, built-in screen for easy monitoring. In case of overheating i bought a laptop cooling pad and spare CPU cooler just in case, i also recommend to change thermal compound paste especially if your gonna run on an older machine*
+
 
 ## NUCs (Next Unit of Computing) and Mini PCs
 
