@@ -71,6 +71,7 @@ module.exports = {
       '/whitepaper/': [
         {
           title: 'White Paper',
+          sidebarDepth: 1,
           collapsable: false,
           children: [
             '',
@@ -85,8 +86,10 @@ module.exports = {
           children: [
               '',
               'smart-node',
+              'smart-node-advanced',
               'smart-contracts',
-              'js-library'
+              'js-library',
+              'glossary'
           ]
         }
       ],
@@ -102,6 +105,16 @@ module.exports = {
           ]
         }
       ],
+    }
+  },
+
+  // Import markdown plugins
+  markdown: {
+    extendMarkdown: md => {
+      // Import include plugin, ref: https://www.npmjs.com/package/markdown-it-include
+      md.use( require( 'markdown-it-include' ), {
+        root: `${ __dirname }/../`,
+      } )
     }
   },
 

@@ -9,11 +9,13 @@
   },
   "repository": "https://github.com/rocket-pool/rocketpool.github.io",
   "scripts": {
-    "dev": "vuepress dev src",
+    "nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" || echo '\u001b[31mWARNING: UNSUPPORTED NODE VERSION\u001b[0m\n'",
+    "dev": "npm run nvm && vuepress dev src",
     "build": "vuepress build src"
   },
   "license": "MIT",
   "devDependencies": {
+    "markdown-it-include": "^2.0.0",
     "vuepress": "^1.8.2"
   },
   "dependencies": {
