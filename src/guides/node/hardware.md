@@ -1,13 +1,43 @@
 # :computer: Selecting Staking Hardware
 
-TBD. This guide is for people that want to run a node at home (so no VPS). It is meant to capture some various options for node hardware based on my survey of the RP Discord server. Each option here comes from one user ("advocate"). For each one, I'm collecting the complete hardware laydown, the motivation for why the advocate selected it, and pros and cons.
+So! You've decided that you want to run your own Rocket Pool node at home. You want to pick the hardware, you want to set it up, and you want to have complete control over everything that happens to it. You're determined to help maximize the decentralization of the Ethereum ecosystem while being as secure as you can possibly be. Outstanding!
+
+But where do you start? How do you pick a computer that's right for you? There are dozens of guides with conflicting suggestions out there, or vague parts lists that ask you to fill in the blanks. Rather than add another one of those guides to the community, we've decided to go a slightly different route. Here, we've collected and listed a few of the staking setups that members of the Rocket Pool community have decided to share. We've tried to include a very diverse set of options so you can fully appreciate just how flexible the hardware for running a Rocket Pool node can be. We've included complete PC's and servers, small NUCs and mini-PCs, and even a Raspberry Pi in our list! We've also asked the users to describe what they like about their setups to help you understand the pros and cons of each one.
+
+Take a look at some of Rocket Pool's staking setups below; hopefully you'll find some inspiration for your own node! 
 
 
-## Full Server or PC
+## Full Servers and PCs
 
-Running a Rocket Pool node 
+PCs and servers come in all shapes and sizes, and all manners of cost and performance. They are known for their modularity and flexibility - each component is customizable and swappable, from the motherboard to the memory. With countless options available, it can be overwhelming to settle on the right ones for you. In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves.
+
 
 ### Xer0's Server
+
+![](./images/Xer0.jpg)
+
+Discord user **Xer0** is among the many stakers that opted to go with a conventional PC form factor for their staking machine. They wanted to build a rig that would last for years and years to come with minimal maintenance and upgrading required, while still offering complete customization of every component. To that end, Xer0 devised and built a full ATX server - much like a traditional desktop PC, but targeted exclusively at staking on Ethereum. Their setup includes a six-core Xeon Bronze 3204 (1.9 GHz), 8 DDR4 slots, and an M.2 slot... though since this is essentially a home server build, the exact components are completely up to the end user.
+
+Xer0's setup:
+- Motherboard: [Supermicro X11SPI-TF](https://www.newegg.com/supermicro-mbd-x11spi-tf-o-intel-xeon-scalable-processors-single-socket-p-supported-cpu-tdp-suppor/p/1B4-005W-00153) ($440)
+- CPU: [Xeon Bronze 3204](https://www.amazon.com/Intel-BX806954216-Bronze-1-9GHz-FC-LGA14B/dp/B07RTBMWVJ) ($248)
+- RAM: [NEMIX 2x32GB DDR4 ECC 2933MHz](https://www.amazon.com/2x32GB-DDR4-2933-PC4-23400-Registered-Memory/dp/B07V1YG2VV) ($359)
+- SSD: [Sabrent 2TB Rocket M.2 2280 SSD](https://www.newegg.com/sabrent-rocket-2tb/p/14R-00X6-00007) ($250)
+- Case: [SilverStone HTPC ATX GD07B](https://www.amazon.com/dp/B007X8TQW0) ($172)
+- PSU: [EVGA SuperNova 650 G3, 80+ Gold](https://www.newegg.com/evga-supernova-g3-series-220-g3-0650-y1-650w/p/N82E16817438094) ($111)
+- Cooler: [Nuctua NH-D9 DX-3647 4U](https://www.amazon.com/Noctua-NH-D9-DX-3647-4U-Premium/dp/B07DPQJH5J) ($100)
+- **Total: $1680**
+
+Here are Xer0's comments on why they chose this setup:
+
+*Obviously there is no need to build a monstrosity for simply staking on the Ethereum network, but I do have a few reasons why I built something like this.*
+ 
+1. *Now I believe that 1 or more validators in the future will be worth much more than what we are seeing right now, so I wanted to buy something that will be able to support the network for at least the next 10-20 years without a hiccup.*
+1. *By creating a machine that has at this many cores I've also given myself a lot more headroom to the point of I could run an L2 aggregator on top of this without any problems (regarding hardware) and anything else that I'd want to run on a server.* :)
+1. *I like building computers, and so I built it…*
+1. *With a server build, It gives me a lot more flexibility with hardware and features that most computers don't have natively.*
+1. *A bit of future proof (just in-case)* :wink:
+
 
 ### Darcius's Shelf Rig
 
@@ -149,6 +179,22 @@ Here are moralcompass's comments on why they chose this setup:
 - *USB and serial ports available for graceful shutdown signal from UPS*
 
 
-## Raspberry Pi!
+## Jcrtp's Raspberry Pi
 
-### Me!
+![](./images/jcrtp.jpg)
+
+This is certainly the most controversial option on the hardware example list. Raspberry Pi's are credit-card sized "single board computers" that include a CPU and RAM built directly onto the board. They are also quite cheap, with the most powerful model only costing $80. While they were originally intended as a simple option to help teach young students how to program, the hardware hacking community has become enamored with these capabile little computers and have employed them in hundreds of use cases... including staking! It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.1 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
+
+Despite the general consensus in the Ethereum space that Raspberry Pi's should not be used for staking, Discord user **jcrtp** is confident that his configuration can handle the load of being a Rocket Pool node ([click here for his guide](https://github.com/jclapis/rp-pi-guide/blob/main/Overview.md)). This makes it the cheapest and lowest power option currently available, but offers the least amount of overhead or flexibility if the future of Ethereum staking demands higher performance. 
+
+Jcrtp's Setup:
+- Base: [Raspberry Pi 4B 8GB Basic Kit](https://www.amazon.com/CanaKit-Raspberry-Basic-Kit-8GB/dp/B08DJ9MLHV/ref=sr_1_2?dchild=1&keywords=raspberry+pi+4b+8gb&qid=1616386386&sr=8-2) ($90)
+- MicroSD Card: [Samsung EVO Select 32GB U1 MB-ME32GA/AM](https://www.amazon.com/Samsung-MicroSDHC-Adapter-MB-ME32GA-AM/dp/B06XWN9Q99) ($7)
+- Case: [3D Printed from Thingiverse](https://www.thingiverse.com/thing:3793664) ($2)
+- Fan: [Scythe Mini Kaze 2 40mm Fan](https://www.amazon.com/Scythe-Mini-Quiet-3500RPM-Single/dp/B07ZHMTRK6) ($7)
+- SSD: [Samsung T5 1TB Portable SSD](https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA1T0B/dp/B073H552FJ) ($120)
+- **Total: $226**
+
+Here are jcrtp's comments on why he chose this setup:
+
+*I think of staking as the antithesis to PoW mining. Proof-of-stake offers the same, if not better, security as proof-of-work but prides itself on requiring much, much fewer computational resources. My goal is to take this to the extreme, and run my Rocket Pool node with the lowest possible power consumption without sacrificing the security of the network. After experimenting for a few months, I've found a configuration for the Raspberry Pi that can accomplish both of these goals. Sure, you can get down to 10 watts with a NUC and have more headroom... but that's not the point. Having an $80, 5-watt machine contribute to the security of Ethereum as well as a $10,000 rack-mount server just makes me happy.*
