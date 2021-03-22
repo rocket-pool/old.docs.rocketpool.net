@@ -80,16 +80,30 @@ module.exports = {
       ],
       '/documentation/': [
         {
-          title: 'Documentation',
-          sidebarDepth: 2,
+          title: 'Stakers',
+          sidebarDepth: 1,
           collapsable: false,
           children: [
               '',
+              'glossary'
+          ]
+        },
+        {
+          title: 'Node operators',
+          sidebarDepth: 1,
+          collapsable: false,
+          children: [
               'smart-node',
               'smart-node-advanced',
+          ]
+        },
+        {
+          title: 'Developers',
+          sidebarDepth: 1,
+          collapsable: false,
+          children: [
               'smart-contracts',
               'js-library',
-              'glossary'
           ]
         }
       ],

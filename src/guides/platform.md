@@ -1,5 +1,3 @@
 # :package: Choosing a Platform
 
-## Getting Started
-
-test
+*todo: add guidelines for choosing a platform*
