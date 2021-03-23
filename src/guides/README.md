@@ -1,3 +1,3 @@
 # :ledger: Guides
 
-Guides will go here!
+This section contains guides for Rocketpool users.
