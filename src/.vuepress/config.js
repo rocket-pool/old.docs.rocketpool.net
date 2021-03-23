@@ -102,6 +102,7 @@ module.exports = {
               '',
               'platform',
               'node/hardware',
+              'node/geth-pruning'
           ]
         }
       ],
