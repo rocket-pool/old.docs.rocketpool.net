@@ -100,8 +100,43 @@ module.exports = {
           collapsable: false,
           children: [
               '',
-              'platform',
-              'node/hardware',
+              'staking',
+              {
+                title: 'Running a Rocket Pool Node',
+                sidebarDepth: 2,
+                collapsable: false,
+                children: [
+                    'responsibilities',
+                    'platform',
+                    {
+                      title: 'Running a Local Node',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          'local/hardware',
+                          'local/os'
+                      ]
+                    },
+                    {
+                      title: 'Running a Cloud (VPS) Node',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          'vps/providers',
+                          'vps/os'
+                      ]
+                    },
+                    {
+                      title: 'Running a Node on a Raspberry Pi',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          'vps/providers',
+                          'vps/os'
+                      ]
+                    }
+                ]
+              }
           ]
         }
       ],
