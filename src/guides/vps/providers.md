@@ -46,7 +46,7 @@ Disadvantages:
 
 Public cloud offerings are almost always the better choice if cost is not a concern. We will have a more detailed breakdown of cost estimates below but for a rough comparison:
 - AWS t2.large + 1TB EBS storage ~ $200 a month
-- OVH Dedicated Server ~ $100 a month
+- OVH Dedicated Server ~ $120 a month
 
 Cheaper VPS options from providers like Contabo can be found for under $40 a month!
 
@@ -58,12 +58,10 @@ Cheaper VPS options from providers like Contabo can be found for under $40 a mon
 
 
 ## Provider Comparison (beta placeholders)
-| Provider     | Model                                                                                                                                                                | CPU | RAM (GB) | SSD Storage (GB) | Price (Month) USD |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | -------- | ---------------- | ----------------- |
-| contabo       | [VPS M SSD](https://contabo.com/en/vps/vps-m-ssd)                                                                                              | 6   | 16       | 400              | $12.00            |
-| netcup       | [VPS 4000 G9](https://www.netcup.eu/bestellen/produkt.php?produkt=2602)                                                                                              | 8   | 32       | 800              | $25.00            |
-| Hetzner      | [CPX41](https://www.hetzner.com/cloud)                                                                                                                               | 8   | 16       | 120 +200         | $37.00            |
-| OVH          | [Comfort](https://us.ovhcloud.com/order/vps/?v=3#/vps/build?selection=~(range~'Comfort~pricingMode~'default~flavor~'vps-comfort-4-8-160~datacenters~(US-EAST-VA~1))) | 4   | 8        | 160 +200         | $45.00            |
-| So you Start | [E3-SSD-1-32](https://www.soyoustart.com/us/order/soYouStart.xml?reference=1804sys47)                                                                                | 4   | 32       | 480              | $48.00            |
-| Linnode      | N/A                                                                                                                                                                  | 6   | 16       | 320              | $80.00            |
-| AWS      | [t2.large](https://aws.amazon.com/ec2/instance-types/t2/)                                                                                                                | 2   | 8       | 400              | $132.00            |
+| Provider | Model| CPU | RAM (GB) | SSD Storage (GB) | Price (Month) USD | Type |
+| -------- | ----------------------------------------------------------------------- | -- | -- | ---- | ------- | --------- |
+| Contabo  | [VPS XL SSD](https://contabo.com/en/vps/vps-xl-ssd/)                    | 10 | 60 | 1600 | $35     | VPS       |
+| Netcup   | [VPS 6000 G9](https://www.netcup.eu/bestellen/produkt.php?produkt=2604) | 12 | 48 | 1200 | $35     | VPS       |
+| Hetzner  | [CPX41](https://www.hetzner.com/cloud)                                  | 8  | 16 | 1210*| $64     | VPS       |
+| OVH      | [Rise-1](https://www.ovhcloud.com/en/bare-metal/rise/rise-1/)           | 4  | 32 | 2000*| $120    | Dedicated |
+| AWS      | [t2.large](https://aws.amazon.com/ec2/instance-types/t2/)               | 2  | 8  | 1000 | $200    | Cloud     |
