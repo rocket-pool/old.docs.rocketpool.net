@@ -131,8 +131,13 @@ module.exports = {
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
-                          'vps/providers',
-                          'vps/os'
+                          'pi/overview',
+                          'pi/preliminary-setup',
+                          'pi/preparing-the-os',
+                          'pi/docker',
+                          'pi/native',
+                          'pi/overclocking',
+                          'pi/grafana'
                       ]
                     }
                 ]
