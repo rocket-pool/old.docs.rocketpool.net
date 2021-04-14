@@ -1,14 +1,25 @@
 ## Getting Started
 
-### OS & Hardware Requirements
+### Supported Operating Systems
 
 The smart node client is supported on Linux, MacOS and Windows. **Note that a smart node cannot be run locally on Windows at this stage; the Windows client can only be used to manage a remote server**.
 
-The smart node service is supported on AMD64 architecture and all Unix platforms, with automatic OS dependency installation for Ubuntu, Debian, CentOS and Fedora. **OS dependencies (docker engine and docker-compose) must be installed manually on all other Unix platforms.**
+The smart node service is supported on AMD64 architecture and all Unix platforms, with automatic OS dependency installation for Ubuntu, Debian, CentOS and Fedora. OS dependencies (docker engine and docker-compose) must be installed manually on all other Unix platforms.
 
 Support for additional architectures (e.g. ARM) and operating systems will be added incrementally, after successful testing of the existing version.
 
-The Smart Node service requires at least 16GB of memory and 200GB of (SSD) hard disk space in order to run. Note that a node operator must have root access to their node in order to install and run the smart node service.
+Note that a node operator must have root access to their node in order to install and run the smart node service.
+
+### Hardware Requirements
+
+The Rocketpool smart node stack will manage an ETH1 node, an ETH2 node and the integration into the Rocketpool network. Depending on your specific ETH1 and ETH2 nodes your hardware usage may vary slightly. We recommend letting the setup script pick random ETH clients to support ecosystem client diversity.
+
+When staking on mainnet, we recommend at least 16GB of memory and 500GB of hard disk space in order to run. Note that **an SSD is required**, as the ETH clients rely on high I/O.
+
+For a detailed overwiev of hardware usage and syncing times per client type, the [eth2-docker]( https://eth2-docker.net/docs/Usage/ResourceUsage ) project has up-to-date statistics.
+
+To see what setups Rocketpool community users are using, please refer to [the Rocketpool hardware guide]( /guides/node/hardware.html ).
+
 
 ### Installation
 

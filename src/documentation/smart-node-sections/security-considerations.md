@@ -24,9 +24,9 @@ You might decide to set your firewall to "deny by default" and open up specific 
 
 ### Rocketpool firewall ports
 
-The docker containers used by Rocket Pool use different ports, depending on your configuration you will likely only need two of these.
+The different ETH clients use different ports for peer discovery, but the docker containers used by Rocket Pool standardise this port to `9001/udp` and `9001/tcp`.
 
-In that case the documented ports for the containers are:
+If you are running any clients externally, these are their ports:
 
 - [ Go Ethereum (GETH) ]( https://geth.ethereum.org/docs/interface/private-network#setting-up-networking ):  3030-30305/udp
 - [ Prysm ]( https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites ): 13000/tcp and 13000/udp
