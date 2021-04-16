@@ -116,7 +116,8 @@ module.exports = {
               '',
               'platform',
               'node/hardware',
-              'node/geth-pruning'
+              'node/geth-pruning',
+              'node/securing-your-node'
           ]
         }
       ],
