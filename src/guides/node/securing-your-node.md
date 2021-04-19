@@ -9,6 +9,19 @@ The goal of this guide is to walk you through steps you can take to secure your 
 
 You should absolutely take all essential steps.
 
+## Keep your client machine secure (essential)
+
+Your client machine is the device from which you connect to your Rocketpool node. If you run your Rocketpool node by physically logging into it (as in it has a keyboard and screen that you use to interact withit) then this section is not relevant for you.
+
+If your client machine is compromised and you use it to log into your Rocketpool node, then most security measures will only protect you very little. Make sure that your client machine is as secure as it can be, some suggestions to do this include (but are definitely not limited to):
+
+- Don't use your client machine for risky activities (think downloading files from dodgy websites)
+- Keep your client machine updated with security patches
+- Consider malware and antivirus protection measures
+- Consider a dedicated machine as your 'crypto client'
+
+There is no definitive guide to keeping your client machine secure, but being aware that it is a factor in your security is a good first step.
+
 ## Secure your SSH access (essential)
 
 Regardless of whether your node is physically next to you or in a datacenter, it is likely that either 1) you access it through SSH or 2) SSH is enabled even if you do not use it.
