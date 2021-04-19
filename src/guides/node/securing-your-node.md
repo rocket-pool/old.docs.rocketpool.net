@@ -9,7 +9,7 @@ The goal of this guide is to walk you through steps you can take to secure your 
 
 You should absolutely take all essential steps.
 
-## Secure your SSH access
+## Secure your SSH access (essential)
 
 Regardless of whether your node is physically next to you or in a datacenter, it is likely that either 1) you access it through SSH or 2) SSH is enabled even if you do not use it.
 
@@ -43,10 +43,10 @@ You should now be able to log into your Rocketpool node using `ssh user@ip.of.ro
 
 ### Disable passwords (essential)
 
-To disable password authentication and use SSH keys instead, change the following lines in `/etc/ssh/sshd_config`, for example using `nano /etc/ssh/sshd_config`:
+To disable password authentication and use SSH keys instead, change the following lines in `/etc/ssh/sshd_config`, for example using `sudo nano /etc/ssh/sshd_config`:
 
 1. Uncomment `#AuthorizedKeysFile` if it is commented
-2. Change `ChallengeResponseAuthentication yes` to `ChallengeResponseAuthentication yes`
+2. Change `ChallengeResponseAuthentication yes` to `ChallengeResponseAuthentication no`
 3. Change `PasswordAuthentication yes` to `PasswordAuthentication no`
 4. Change `PermitRootLogin yes` to `PermitRootLogin without-password`
 
@@ -95,7 +95,7 @@ Ubuntu finds and patches security problems on an ongoing basis, it is important 
 To do this:
 
 1. Run `sudo apt update && sudo apt install unattended-upgrades update-notifier-common -y`, this will install the auto update package, this should be in Ubuntu by default so we're just running it in case it was removed for some reason
-2. Open `/etc/apt/apt.conf.d/20auto-upgrades`, for example with `nano /etc/apt/apt.conf.d/20auto-upgrades` and add your settings, see the block below for a good starting point
+2. Open `/etc/apt/apt.conf.d/20auto-upgrades`, for example with `sudo nano /etc/apt/apt.conf.d/20auto-upgrades` and add your settings, see the block below for a good starting point
 3. Run `service unattended-upgrades restart`
 
 This is an example of reasonable auto-update settings:
