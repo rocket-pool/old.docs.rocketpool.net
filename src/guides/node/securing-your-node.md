@@ -11,7 +11,7 @@ You should absolutely take all essential steps.
 
 ## Keep your client machine secure (essential)
 
-Your client machine is the device from which you connect to your Rocketpool node. If you run your Rocketpool node by physically logging into it (as in it has a keyboard and screen that you use to interact withit) then this section is not relevant for you.
+Your client machine is the device from which you connect to your Rocketpool node. If you run your Rocketpool node by physically logging into it (as in it has a keyboard and screen that you use to interact with it) then this section is not relevant for you.
 
 If your client machine is compromised and you use it to log into your Rocketpool node, then most security measures will only protect you very little. Make sure that your client machine is as secure as it can be, some suggestions to do this include (but are definitely not limited to):
 
@@ -26,14 +26,14 @@ There is no definitive guide to keeping your client machine secure, but being aw
 
 Regardless of whether your node is physically next to you or in a datacenter, it is likely that either 1) you access it through SSH or 2) SSH is enabled even if you do not use it.
 
-SSH connections are based on secure cryptography, but as with any secure system the real security comes from using it correctly. There are three main things to do for your SSH settings:
+SSH connections are based on secure cryptography, but as with any secure system, the real security comes from using it correctly. There are three main things to do for your SSH settings:
 
 1. Disable password authentication and use SSH keys instead
 2. Change the default port to something other than port `22/tcp`
 
 ### Use SSH keys (essential)
 
-The downside of password authentication is that it is susceptible to brute-force attacks. SSH keys work similarly to private keys in blockchain world, they are far more secure. If you have never heard of SSH keys, these are good pages to read before continuing:
+The downside of password authentication is that it is susceptible to brute-force attacks. SSH keys work similarly to private keys in blockchain-world, they are far more secure. If you have never heard of SSH keys, these are good pages to read before continuing:
 
 1. [Github "About SSH" page]( https://docs.github.com/en/github/authenticating-to-github/about-ssh )
 2. [Github "Generating a new SSH key and adding it to the ssh-agent"]( https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent )
@@ -107,7 +107,7 @@ Ubuntu finds and patches security problems on an ongoing basis, it is important 
 
 To do this:
 
-1. Run `sudo apt update && sudo apt install unattended-upgrades update-notifier-common -y`, this will install the auto update package, this should be in Ubuntu by default so we're just running it in case it was removed for some reason
+1. Run `sudo apt update && sudo apt install unattended-upgrades update-notifier-common -y`, this will install the auto-update package, this should be in Ubuntu by default so we're just running it in case it was removed for some reason
 2. Open `/etc/apt/apt.conf.d/20auto-upgrades`, for example with `sudo nano /etc/apt/apt.conf.d/20auto-upgrades` and add your settings, see the block below for a good starting point
 3. Run `service unattended-upgrades restart`
 
@@ -144,9 +144,9 @@ Unattended-Upgrade::Automatic-Reboot-Time \"02:00\";
 service unattended-upgrades restart
 ```
 
-## Enable a your Firewall (essential)
+## Enable a Firewall (essential)
 
-A firewall filters network traffic to prevent undesireble connections. By default there should be no problematic ports open on your machine, but it is for example possible that a vulnerability allows an attacker to send requests on a port that shouldn't be responding to anything.
+A firewall filters network traffic to prevent undesirable connections. By default, there should be no problematic ports open on your machine, but it is for example possible that a vulnerability allows an attacker to send requests on a port that shouldn't be responding to anything.
 
 Ubuntu comes with `ufw` installed by default, the **u**ncomplicated **f**ire **w**all is a convenient package to manage your firewall.
 
