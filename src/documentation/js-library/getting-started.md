@@ -44,7 +44,6 @@ The Rocket Pool library is divided into several modules, each for interacting wi
 * `settings.minipool`: Provides information on minipool settings
 * `network`: Provides information on network settings
 * `settings.node`: Provides information on smart node settings
-* `tokens.neth`: Manages nETH token interactions
 * `tokens.reth`: Manages rETH token interactions
 
 All methods typically return promises due to the asynchronous nature of working with the Ethereum network.

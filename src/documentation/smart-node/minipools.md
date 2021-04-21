@@ -50,7 +50,7 @@ rocketpool minipool exit
 
 This will display a list of all eligible minipools, and prompt you to select one or all of them to exit.
 When you successfully exit a minipool, it can take several hours for its status to be reflected by your node.
-It can also take longer for it to be marked as withdrawable by the Rocket Pool network and for nETH to be minted to it for withdrawal.
+It can also take longer for it to be marked as withdrawable by the Rocket Pool network.
 
 
 <br>

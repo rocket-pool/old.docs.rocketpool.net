@@ -62,7 +62,7 @@ The `settings` module loads Rocket Pool network settings data from the chain, an
     Get the timeout period in blocks for minipools to launch within; returns `Promise<number>`
 
 * `settings.minipool.getWithdrawalDelay()`:
-    Get the delay in blocks before nodes can withdraw nETH from minipools; returns `Promise<number>`
+    Get the delay in blocks before nodes can withdraw from minipools; returns `Promise<number>`
 
 ### Network Settings:
 

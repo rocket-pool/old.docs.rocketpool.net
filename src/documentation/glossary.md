@@ -47,9 +47,6 @@ The amount of RPL token, expressed as a percentage of the value of ETH staked by
 ## Minipool (Validator)
 A validator that was funded and initialized via the Rocket Pool software.  It is most commonly composed of an equal amount of ETH contributed from regular users via the deposit pool and ETH contributed from node operators during their registration process. 
 
-## nETH
-A temporary use token that is created when a node operator exits a minipool. This token will be used until the eth2.0 merge is complete. nETH represents the amount of ETH being returned to the node operator and any ETH earnings that they have accumulated if they exit their minipool validator before the merge.  Once the eth2.0 merge is complete a node operator can redeem nETH for an equivalent amount of ETH.  After the merge node operators that exit minipools will be withdrawn directly into ETH eliminating the need for the nETH token
-
 ## Node
 In the ethereum network, nodes are devices (computers) that run an ethereum client software. 
 

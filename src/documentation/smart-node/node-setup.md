@@ -132,4 +132,4 @@ If you want to send ETH or tokens from your node account to another Ethereum add
 rocketpool node send [amount] [token] [to-address]
 ```
 
-This will send the specified amount of ETH or nETH from the node account to the specified address.
+This will send the specified amount of ETH from the node account to the specified address.

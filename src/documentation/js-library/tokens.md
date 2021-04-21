@@ -5,9 +5,8 @@
 ## Overview
 
 
-The `tokens` module manages the various Rocket Pool tokens, and is broken down into two submodules:
+The `tokens` module manages the various Rocket Pool tokens:
 
-* `tokens.neth`: Manages rETH token interactions
 * `tokens.reth`: Manages rETH token interactions
 
 Each submodule shares common methods for interacting with its underlying ERC-20 token.
@@ -34,11 +33,6 @@ Mutator methods are restricted to their respective accounts.
 
 * `tokens.[token].transferFrom(from, to, amount, options, onConfirmation)`:
     Transfer the specified amount of tokens in wei from the 'from' address to the 'to' address; returns `Promise<TransactionReceipt>`
-
-### nETH Token:
-
-* `tokens.neth.burn(amount, options, onConfirmation)`:
-    Burn the specified amount of nETH in wei for ETH; returns `Promise<TransactionReceipt>`
 
 ### rETH Token:
 

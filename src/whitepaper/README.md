@@ -75,8 +75,6 @@ The decentralized staking network in Rocket Pool offers continuous staking, whic
 
 Users who deposit ETH to be staked by node operators will instantly receive the rETH token, which represents a tokenized staking deposit; it can be held, traded, or sold.  rETH does not need to be locked with Rocket Pool to gain staking rewards over time.  It will be able to be traded for ETH so long as liquids is provided in the Rocket Pool deposit contract.
 
-~~Node operators will receive the nETH token when they complete their node operator staking and decide to leave the network; this token can be traded 1:1 for ETH when available in Phase 2 of the Ethereum 2.0 rollout or can be sold/traded on the open market as well.  This token will be phased out when Phase 2 arrives as it will be replaced with native ETH on the Ethereum 2 blockchain.~~
-
 ## Components
 
 The Rocket Pool protocol defines what interactions are necessary for the Rocket Pool network to meet its design goals.
@@ -165,14 +163,6 @@ When a user deposits into the Rocket Pool network, they will instantly receive t
 within the network, and it can be traded, sold, or held as the user desires.
 
 When smart contracts are natively enabled on eth2, a smart contract will be deployed that will allow users with the rETH token to burn it for ETH.  This is expected to occur during Phase 2 on the eth2 rollout map.
-
-~~### nETH~~
-
-~~For Phase 0 and 1 of the eth2 rollout, if you run a node in Rocket Pool and withdraw from the network, you will receive the nETH token, which is a 1:1 token representing your deposit, rewards + commissions earned in the network for the time you participated.~~
-
-~~This is not the same as rETH, which represents tokenized staking deposits + rewards earned by the whole network and is not 1:1.~~
-
-~~When smart contracts are natively enabled on eth2, a smart contract will be deployed that will allow users with the nETH token to burn it for ETH.  This is expected to occur during Phase 2 on the eth2 rollout map.~~ 
 
 <br>
 <br>
