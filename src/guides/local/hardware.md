@@ -59,7 +59,7 @@ Darcius's setup:
 
 ![](./images/Yorick-stock.jpg)
 
-Veteran hardware enthusiast **YorickDowne** has a lot of experience building and maintaining servers. Using that knowledge, he has settled on a flexible microATX setup. His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node. He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Support/Recommendations/#resources-hardware). The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory. For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
+Veteran hardware enthusiast **YorickDowne** has a lot of experience building and maintaining servers. Using that knowledge, he has settled on a flexible microATX setup. His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node. He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Usage/Hardware). The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory. For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
 
 Yorick's Setup:
 - Motherboard: [SuperMicro X11SCL-F-O](https://www.newegg.com/supermicro-mbd-x11scl-f-o-8th-generation-intel-core-i3-pentium-celeron-processor-intel-xeon-pro/p/N82E16813183671) ($200)
