@@ -1,6 +1,6 @@
 # :european_castle: Securing your node
 
-This guide assumes you are on `Ubuntu 20.02 LTS`, the concepts will carry over to other systems but the example commands may not.
+This guide assumes you are on `Ubuntu 20.04 LTS`, the concepts will carry over to other systems but the example commands may not.
 
 The goal of this guide is to walk you through steps you can take to secure your node against malicious actors. It will separate actions into these categories:
 

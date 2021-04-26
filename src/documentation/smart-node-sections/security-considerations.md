@@ -32,4 +32,4 @@ If you are running any clients externally, these are their ports:
 - [ Prysm ]( https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites ): 13000/tcp and 13000/udp
 - [ Lighthouse ]( https://lighthouse-book.sigmaprime.io/advanced_networking.html ): 9000/tcp and 9000/udp
 
-Rocketpool itself uses no special ports.
+Rocketpool itself uses no special ports besides the standardized node ports `9001/udp` and `9001/tcp`.
