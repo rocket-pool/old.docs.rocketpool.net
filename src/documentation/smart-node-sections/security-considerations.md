@@ -2,6 +2,8 @@
 
 This section is intended for more advanced users. If you misconfigure the things described in this section you could prevent your node from syncing or prevent access altogether.
 
+Also see the [securing your node]( /guides/node/securing-your-node ) guide.
+
 ### Server hardening
 
 Especially if your device is directly connected to the internet (if it is in a datacenter for example) it makes sense to implement some best practices such as:

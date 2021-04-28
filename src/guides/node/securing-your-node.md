@@ -9,6 +9,8 @@ The goal of this guide is to walk you through steps you can take to secure your 
 
 You should absolutely take all essential steps.
 
+*Wizards only: If you want to go above and beyond and know your way around the terminal, have a look as the popular open source [imthenachoman/How-To-Secure-A-Linux-Server]( https://github.com/imthenachoman/How-To-Secure-A-Linux-Server ) guide.*
+
 ## Keep your client machine secure (essential)
 
 Your client machine is the device from which you connect to your Rocketpool node. If you run your Rocketpool node by physically logging into it (as in it has a keyboard and screen that you use to interact with it) then this section is not relevant for you.
