@@ -71,6 +71,7 @@ module.exports = {
       '/whitepaper/': [
         {
           title: 'White Paper',
+          sidebarDepth: 1,
           collapsable: false,
           children: [
             '',
@@ -79,18 +80,56 @@ module.exports = {
       ],
       '/documentation/': [
         {
-          title: 'Documentation',
+          title: 'Stakers',
+          sidebarDepth: 1,
+          collapsable: false,
+          children: [
+              '',
+              'glossary'
+          ]
+        },
+        {
+          title: 'Node operators',
+          sidebarDepth: 1,
+          collapsable: false,
+          children: [
+              'smart-node',
+              'smart-node-advanced',
+          ]
+        },
+        {
+          title: 'Developers',
+          sidebarDepth: 1,
+          collapsable: false,
+          children: [
+              'smart-contracts',
+              'js-library',
+          ]
+        }
+      ],
+      '/guides/': [
+        {
+          title: 'Guides',
           sidebarDepth: 2,
           collapsable: false,
           children: [
               '',
-              'smart-node',
-              'smart-contracts',
-              'js-library',
-              'glossary'
+              'platform',
+              'node/hardware',
+              'node/geth-pruning'
           ]
         }
       ],
+    }
+  },
+
+  // Import markdown plugins
+  markdown: {
+    extendMarkdown: md => {
+      // Import include plugin, ref: https://www.npmjs.com/package/markdown-it-include
+      md.use( require( 'markdown-it-include' ), {
+        root: `${ __dirname }/../`,
+      } )
     }
   },
 

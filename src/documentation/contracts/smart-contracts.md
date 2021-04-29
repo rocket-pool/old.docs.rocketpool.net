@@ -31,4 +31,96 @@ contract Example {
 
 }
 ```
+The above constructor should be called with the address of the `RocketStorage` contract on the appropriate network.
 
+Because of Rocket Pool's architecture, the addresses of other contracts should not be used directly but retrieved from the blockchain before use. Network upgrades may have occurred since the previous interaction, resulting in outdated addresses.
+
+Other contract instances can be created using the appropriate interface taken from the [Rocket Pool repository](https://github.com/rocket-pool/rocketpool/tree/master/contracts/interface), e.g.:
+
+``` solidity
+import "RocketStorageInterface.sol";
+import "RocketDepositPoolInterface.sol";
+
+contract Example {
+
+    RocketStorageInterface rocketStorage = RocketStorageInterface(0);
+
+    constructor(address _rocketStorageAddress) public {
+        rocketStorage = RocketStorageInterface(_rocketStorageAddress);
+    }
+
+    exampleMethod() public {
+        address rocketDepositPoolAddress = rocketStorage.getAddress(keccak256(abi.encodePacked("contract.address", "rocketDepositPool")));
+        RocketDepositPoolInterface rocketDepositPool = RocketDepositPoolInterface(rocketDepositPoolAddress);
+        ...
+    }
+
+}
+```
+The Rocket Pool contracts, as defined in `RocketStorage`, are:
+* `rocketRole` - Handles assignment of privileged admin roles (internal)
+* `rocketVault` - Stores ETH held by network contracts (internal, not upgradeable)
+* `rocketUpgrade` - Provides upgrade functionality for the network (internal)
+* `rocketDepositPool` - Accepts user-deposited ETH and handles assignment to minipools
+* `rocketMinipoolFactory` - Creates minipool contract instances (internal)
+* `rocketMinipoolManager` - Creates & manages all minipools in the network
+* `rocketMinipoolQueue` - Organises minipools into a queue for ETH assignment
+* `rocketMinipoolStatus` - Handles minipool status updates from watchtower nodes
+* `rocketNetworkBalances` - Handles network balance updates from watchtower nodes
+* `rocketNetworkFees` - Calculates node commission rates based on network node demand
+* `rocketNetworkWithdrawal` - Handles processing of beacon chain validator withdrawals
+* `rocketNodeDeposit` - Handles node deposits for minipool creation
+* `rocketNodeManager` - Registers & manages all nodes in the network
+* `rocketDepositSettings` - Provides network settings relating to deposits
+* `rocketMinipoolSettings` - Provides network settings relating to minipools
+* `rocketNetworkSettings` - Provides miscellaneous network settings
+* `rocketNodeSettings` - Provides network settings relating to nodes
+* `rocketETHToken` - The rETH token contract (not upgradeable)
+* `addressQueueStorage` - A utility contract (internal)
+* `addressSetStorage` - A utility contract (internal)
+
+Contracts marked as “internal” do not provide methods which are accessible to the general public, and so are generally not useful for extension. For information on specific contract methods, consult their interfaces in the [Rocket Pool repository](https://github.com/rocket-pool/rocketpool/tree/master/contracts/interface).
+
+## Deposits
+
+The main reason for extending the Rocket Pool network is to implement custom deposit logic which funnels user deposits into the deposit pool. For example, a fund manager may wish to stake their users’ ETH in Rocket Pool via their own smart contracts, and abstract the use of Rocket Pool itself away from their users.
+
+Note: the `RocketDepositPool` contract address should not be hard-coded in your contracts, but retrieved from `RocketStorage` dynamically. See [Interacting With Rocket Pool](http://localhost:8080/documentation/smart-contracts.html#interacting-with-rocket-pool) for more details.
+
+### Implementation
+
+The following describes a basic example contract which forwards deposited ETH into Rocket Pool and minted rETH back to the caller:
+
+``` solidity
+import "RocketStorageInterface.sol";
+import "RocketDepositPoolInterface.sol";
+import "RocketETHTokenInterface.sol";
+
+contract Example {
+
+    RocketStorageInterface rocketStorage = RocketStorageInterface(0);
+
+    constructor(address _rocketStorageAddress) public {
+        rocketStorage = RocketStorageInterface(_rocketStorageAddress);
+    }
+
+    receive() external payable {
+        // Check deposit amount
+        require(msg.value > 0, "Invalid deposit amount");
+        // Load contracts
+        address rocketDepositPoolAddress = rocketStorage.getAddress(keccak256(abi.encodePacked("contract.address", "rocketDepositPool")));
+        RocketDepositPoolInterface rocketDepositPool = RocketDepositPoolInterface(rocketDepositPoolAddress);
+        address rocketETHTokenAddress = rocketStorage.getAddress(keccak256(abi.encodePacked("contract.address", "rocketETHToken")));
+        RocketETHTokenInterface rocketETHToken = RocketETHTokenInterface(rocketETHTokenAddress);
+        // Forward deposit to RP & get amount of rETH minted
+        uint256 rethBalance1 = rocketETHToken.balanceOf(address(this));
+        rocketDepositPool.deposit{value: msg.value}();
+        uint256 rethBalance2 = rocketETHToken.balanceOf(address(this));
+        require(rethBalance2 > rethBalance1, "No rETH was minted");
+        uint256 rethMinted = rethBalance2 - rethBalance1;
+        // Transfer rETH to caller
+        require(rocketETHToken.transfer(msg.sender, rethMinted), "rETH was not transferred to caller");
+    }
+
+}
+```
