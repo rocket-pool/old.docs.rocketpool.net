@@ -325,4 +325,3 @@ Each submodule shares common methods for interacting with its underlying ERC-20 
 * `tokens.reth.getCollateralRate()`: Get the proportion of rETH backed by ETH collateral in the contract as a fraction of 1; returns `Promise<number>`
 * `tokens.reth.burn(amount, options, onConfirmation)`: Burn the specified amount of rETH in wei for ETH; returns `Promise<TransactionReceipt>`
 
-*TODO:* Finish porting rest of: [old docs for this section](https://rocket-pool.readthedocs.io/en/latest/js-library/introduction.html)

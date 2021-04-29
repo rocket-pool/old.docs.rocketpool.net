@@ -93,8 +93,8 @@ module.exports = {
           sidebarDepth: 1,
           collapsable: false,
           children: [
-              'smart-node',
-              'smart-node-advanced',
+              'smart-node/smart-node',
+              //'smart-node-advanced',
           ]
         },
         {
@@ -102,7 +102,7 @@ module.exports = {
           sidebarDepth: 1,
           collapsable: false,
           children: [
-              'smart-contracts',
+              'smart-contracts/smart-contracts',
               'js-library',
           ]
         }
