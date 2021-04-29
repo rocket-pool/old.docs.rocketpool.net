@@ -50,7 +50,6 @@ The decentralized staking network in Rocket Pool 2.5 offers continuous staking w
 
 Users whom deposit ETH to be staked by node operators will instantly receive the `rETH` token which represents a tokenized staking deposit, it can be held, traded or sold and does not need to be locked with Rocket Pool to gain staking rewards over time. It will be able to be traded for BETH when `Phase 2` of the Ethereum 2.0 roll out occurs and smart contracts on Ethereum 2.0 are enabled.
 
-Node operators will receive the `nETH` token when they complete their node operator staking and decide to leave the network, this token can be traded 1:1 for BETH when available in `Phase 2` of the Ethereum 2.0 roll-out or can be sold/traded on the open market as well. This token will be phased out when Phase 2 arrives as it will be replaced with native ETH on the Ethereum 2 blockchain.
 ### Components
 The Rocket Pool protocol defines what interactions are necessary for the Rocket Pool network to meet its design goals.
 
@@ -117,12 +116,6 @@ A Rocket Pool DAO will be formed in the future to allow RPL stakers the ability 
 When a user deposits into the Rocket Pool network, they will instantly receive the rETH token which represents their deposit and the rewards it gains over time in the Rocket Pool network. This token does not need to be locked within the network and it can be traded, sold or held as the user desires.
 
 When smart contracts are natively enabled on ETH2, a smart contract will be deployed that will allow users with the rETH token to burn it for ETH. This is expected to occur during Phase 2 on the ETH2 roll out map.
-##### nETH
-For Phase 0 and 1 of the ETH2 rollout, if you run a node in Rocket Pool and withdraw from the network, you will receive the nETH token which is a 1:1 token representing your deposit, rewards + commissions earned in the network for the time you participated.
-
-This is not the same as rETH which represents tokenized staking deposits + rewards earned by the whole network and is not 1:1.
-
-When smart contracts are natively enabled on ETH2, a smart contract will be deployed that will allow users with the nETH token to burn it for ETH. This is expected to occur during Phase 2 on the ETH2 roll out map.
 
 ## User Types
 ### Overview
@@ -239,4 +232,3 @@ Darren has considerable Ethereum experience and has delivered several proof-of-c
 
 When Darren is not sitting at a laptop, he is usually at the beach with his family.
 
-*TODO:* Finish porting rest of whitepaper and update at same time

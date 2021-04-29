@@ -25,7 +25,7 @@ This FAQ section aims to compliment the [explainer series of articles](/overview
 *Protocols can be used by everyone, from regular users to professional SaaS providers.*
 
 [**What tokens does Rocket Pool use?**](#what-tokens-does-rocket-pool-use)  
-*We use three tokens. RPL, rETH and nETH. Find out more here.*
+*We use two tokens. RPL and rETH. Find out more here.*
 
 [**Who's making it?**](#who-s-making-it)  
 *It not aliens or lizard people. Well, fairly sure anyway.*  
@@ -164,10 +164,6 @@ This token does not need to be locked within the network and it can be traded, s
 
 This token can also be traded back to the protocol for ETH + rewards earned at anytime, providing there is sufficient liquidty in the protocol to meet the trade.
 
-**nETH — Rocket Pool Staking Deposit Token for Node Operators**  
-
-If a node operator wishes to quite staking, they can do so in the protocol and receive the nETH token which is a 1:1 representation of their staked ETH + rewards. There is a 3 month delay for receiving this token to make sure node operators only use it in an emergency situation. This is a temporary token which will be removed with ETH2 withdrawals for staked ETH is enabled in Phase 1.5 or 2 of the ETH2 rollout.
-
 ### Who's making it?
 
 Rocket Pool was originally started in [late 2016 by David Rugendyke](https://medium.com/rocket-pool/rocket-pool-your-new-casper-friendly-ethereum-pos-pool-in-alpha-75709bd19936), a senior developer with over 18 years commercial experience and a computer science background.
@@ -220,8 +216,6 @@ Rocket Pool is a protocol that contains a decentralised network of node operator
 
 If you are a staker and just sending your deposit to Rocket Pools smart contracts, you will instantly receive rETH tokens which are a form of tokenised staking, they will still gain rewards over time, but you don’t need to hold them with us and can trade/sell or hold them as you wish. You can also trade them back to the protocol for ETH + rewards gained if there is liquidity available in the protocol to cover the exchange.
 
-If you are a node operator in the Rocket Pool protocol, when you logout, you will receive nETH. This is a 1:1 token that represents your deposit + rewards + commission earned in network. So if you deposited 16 ETH as a node operator and received 18 nETH when logging out, it means you made 2 ETH in rewards and commissions. This nETH token will be phased out in Phase 2 of the ETH2 rollout and will be replaced with native ETH during this time. There is also a 3 month wait for nETH, so it should primarily be used by node operators when they need to exit staking due to an emergency.
-
 ### Are your smart contracts audited and open source?  
 
 In the interest of transparency, they are [open source](https://github.com/rocket-pool/rocketpool) for all to analyse. Additionally, before the smart contracts are deployed to mainnet they will be fully audited by both Sigma Prime and ConsenSys Diligence, two of the best auditing teams around.
@@ -240,7 +234,7 @@ As a node operator, you can take advantage of the following benefits:
 - You stake your own ETH, free from any commissions.
 - You can stake RPL on your node as collateral and earn more RPL from the protocol for providing this insurance promise.
 - You are always in control of your own node.
-- You can come and go anytime from the network. You’ll receive nETH when you do which backs your deposit + rewards earned.
+- Once withdrawls are enabled on eth2.0 you can come and go anytime from the network.
 
 ### What is the minimum staking amount for a node operator?
 
