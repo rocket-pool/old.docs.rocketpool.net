@@ -21,14 +21,13 @@ For a detailed overwiev of hardware usage and syncing times per client type, the
 To see what setups Rocketpool community users are using, please refer to [the Rocketpool hardware guide]( /guides/node/hardware.html ).
 
 
-### Installation
+### Binary Installation
 
 Firstly, install the smart node client locally. For Linux & MacOS, run either the cURL or wget command depending on which utilities are installed on your system. You can check with `curl --version` and `wget --version` respectively.
 
 #### Linux (64 bit)
 
-<section-header :title="'With cURL:'" />
-
+With cURL:
 ``` shell 
 curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 --create-dirs -o ~/bin/rocketpool && chmod +x ~/bin/rocketpool
 ```
@@ -57,8 +56,9 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 1. Move it to the desired location on your system (e.g. `C:\bin\rocketpool.exe`).
 1. Open the command prompt and run it via its full path (e.g. `C:\bin\rocketpool.exe`).
 
-Secondly, install the smart node service either locally or on a remote server. To install locally, simply run `rocketpool service install`. To install remotely, provide flags for the remote host address, username, and SSH identity file, e.g.:
+### Service Installation
 
+Secondly, install the smart node service either locally or on a remote server. To install locally, simply run `rocketpool service install`. To install remotely, provide flags for the remote host address, username, and SSH identity file, e.g.:
 ``` shell
 rocketpool --host example.com --user username --key /path/to/identity.pem service install
 ```
@@ -75,7 +75,7 @@ The following installation options are available:
 Once the smart node service has been installed, you may need to start a new shell session if working locally. This is required for updated user permissions to take effect (for interacting with docker engine).
 
 
-### Configuration
+### Service Configuration
 
 Once the smart node service is installed, it must be configured before use. Simply run `rocketpool service config` and follow the prompts to select which Eth 1.0 and Eth 2.0 clients to run in the smart node stack.
 
