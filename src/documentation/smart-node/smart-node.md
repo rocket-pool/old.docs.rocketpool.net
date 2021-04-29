@@ -1,4 +1,4 @@
-# The Rocket Pool Smart Node Stack
+# Smart Node Stack
 
 <br>
 

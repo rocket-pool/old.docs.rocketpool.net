@@ -90,7 +90,7 @@ module.exports = {
         },
         {
           title: 'Node operators',
-          sidebarDepth: 1,
+          sidebarDepth: 2,
           collapsable: false,
           children: [
               'smart-node/smart-node',
@@ -99,7 +99,7 @@ module.exports = {
         },
         {
           title: 'Developers',
-          sidebarDepth: 1,
+          sidebarDepth: 2,
           collapsable: false,
           children: [
               'smart-contracts/smart-contracts',
