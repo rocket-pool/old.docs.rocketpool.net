@@ -2,6 +2,8 @@
 
 This section is intended for more advanced users. If you misconfigure the things described in this section you could prevent your node from syncing or prevent access altogether.
 
+Also see the [securing your node]( /guides/node/securing-your-node ) guide.
+
 ### Server hardening
 
 Especially if your device is directly connected to the internet (if it is in a datacenter for example) it makes sense to implement some best practices such as:
@@ -32,4 +34,4 @@ If you are running any clients externally, these are their ports:
 - [ Prysm ]( https://docs.prylabs.network/docs/prysm-usage/p2p-host-ip/#incoming-p2p-connection-prerequisites ): 13000/tcp and 13000/udp
 - [ Lighthouse ]( https://lighthouse-book.sigmaprime.io/advanced_networking.html ): 9000/tcp and 9000/udp
 
-Rocketpool itself uses no special ports.
+Rocketpool itself uses no special ports besides the standardized node ports `9001/udp` and `9001/tcp`.
