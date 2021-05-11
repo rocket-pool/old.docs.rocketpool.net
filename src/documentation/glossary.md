@@ -1,8 +1,4 @@
----
-sidebar: auto
----
-
-# Glossary
+# :bookmark_tabs: Glossary
 You may stumble upon some unfamiliar concepts in the Rocket Pool documentation. This section lists the common terms in the documentation for easy access, learning and plugin/theme development.
 
 ## APY - Annual Percent Yield (APY):

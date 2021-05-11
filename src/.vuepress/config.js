@@ -93,8 +93,8 @@ module.exports = {
           sidebarDepth: 2,
           collapsable: false,
           children: [
-              'smart-node/smart-node',
-              //'smart-node-advanced',
+              'smart-node-basic',
+              'smart-node-advanced'
           ]
         },
         {
