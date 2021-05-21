@@ -114,21 +114,29 @@ module.exports = {
           collapsable: false,
           children: [
               '',
-              'staking',
+              {
+                title: 'Staking with Rocket Pool',
+                sidebarDepth: 1,
+                collapsable: true,
+                children: [
+                    'staking/overview',
+                    'staking/staking'
+                ]
+              },
               {
                 title: 'Running a Rocket Pool Node',
                 sidebarDepth: 2,
-                collapsable: false,
+                collapsable: true,
                 children: [
-                    'responsibilities',
-                    'platform',
+                    'node/responsibilities',
+                    'node/platform',
                     {
                       title: 'Running a Local Node',
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
-                          'local/hardware',
-                          'local/os'
+                          'node/local/hardware',
+                          'node/local/os'
                       ]
                     },
                     {
@@ -136,27 +144,36 @@ module.exports = {
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
-                          'vps/providers',
-                          'vps/os'
+                          'node/vps/providers',
+                          'node/vps/os'
                       ]
                     },
                     {
-                      title: 'Running a Node on a Raspberry Pi',
+                      title: '[TEMP] - Running a Node on a Raspberry Pi',
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
-                          'pi/overview',
-                          'pi/preliminary-setup',
-                          'pi/preparing-the-os',
-                          'pi/docker',
-                          'pi/native',
-                          'pi/overclocking',
-                          'pi/grafana'
+                          'node/pi/overview',
+                          'node/pi/preliminary-setup',
+                          'node/pi/preparing-the-os',
+                          'node/pi/docker',
+                          'node/pi/native',
+                          'node/pi/overclocking',
+                          'node/pi/grafana'
                       ]
                     },
-                    'securing-your-node',
-                    'geth-pruning'
+                    'node/securing-your-node',
+                    'node/geth-pruning'
                 ]
+              },
+              {
+                  title: 'Practicing on the Test Network',
+                  sidebarDepth: 1,
+                  collapsable: true,
+                  children: [
+                      'testnet/overview',
+                      'testnet/faucet'
+                  ]
               }
           ]
         }
