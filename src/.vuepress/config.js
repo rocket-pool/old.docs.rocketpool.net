@@ -131,7 +131,7 @@ module.exports = {
                     'node/responsibilities',
                     'node/platform',
                     {
-                      title: 'Running a Local Node',
+                      title: 'Preparing a Local Node',
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
@@ -140,7 +140,7 @@ module.exports = {
                       ]
                     },
                     {
-                      title: 'Running a Cloud (VPS) Node',
+                      title: 'Preparing a Cloud (VPS) Node',
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
@@ -149,7 +149,7 @@ module.exports = {
                       ]
                     },
                     {
-                      title: '[TEMP] - Running a Node on a Raspberry Pi',
+                      title: '[TEMP] - Preparing a Raspberry Pi',
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
@@ -162,8 +162,36 @@ module.exports = {
                           'node/pi/grafana'
                       ]
                     },
+                    {
+                      title: 'Installing Rocket Pool',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          'node/eth1-clients',
+                          'node/eth2-clients',
+                          'node/install-modes',
+                          'node/docker',
+                          'node/hybrid',
+                          'node/native',
+                      ]
+                    },
                     'node/securing-your-node',
-                    'node/geth-pruning'
+                    'node/create-validator',
+                    'node/rewards',
+                    {
+                      title: 'Monitoring and Maintenance',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          'node/performance',
+                          'node/grafana',
+                          'node/updates',
+                          'node/backups',
+                          'node/geth-pruning'
+                      ]
+                    },
+                    'node/troubleshooting',
+                    'node/faq'
                 ]
               },
               {
