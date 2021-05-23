@@ -1,17 +1,28 @@
 # :cd: Preparing a PC, Mini-PC, or NUC
 
-Before installing Rocket Pool, there are a few checks you should to do make sure your system is compatible and will work correctly.
+Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
+
+
+---
+**:warning: NOTE:
+We strongly encourage you to create a dedicated machine for running a Rocket Pool node.
+Running a node on a general-use machine, such as your daily work desktop or a gaming rig, presents extra security risks that may compromise your wallet and result in the theft of your coins.**
+
+**For maximum safety, please build a new machine that is dedicated exclusively to running a node.**
+
+---
+
 
 
 ## System Requirements
 
-Below is a brief description of the software and hardware requirements that a Rocket Pool node require.
+Below is a brief description of the software and hardware requirements that a Rocket Pool node requires.
 This guide assumes that you already have your machine physically built, and the operating system installed.
 
 
 ### Supported Operating Systems
 
-Rocket Pool's Smartnode client currently supports **Linux** and **MacOS** systems.
+Rocket Pool's Smartnode client currently supports **Linux** and **macOS** systems.
 
 At this time, **Windows** can be used to remotely manage a remote Linux or Mac machine, but the Smartnode itself cannot currently run on a Windows system. However, Rocket Pool *can* be run on a Linux [virtual machine](https://en.wikipedia.org/wiki/System_virtual_machine) hosted by a Windows machine.
 This setup is not recommended over simply installing Linux as the host operating system, but it does work if necessary.
@@ -25,7 +36,7 @@ Note that the user must have **root / Administrator** access (or **sudo** privil
 
 #### Linux Support
 
-There are a many variants of the Linux OS (called distributions, or **distros** for short). While you can run Rocket Pool from any modern distro, Rocket Pool's installer can automatically install the entire stack on [Ubuntu](https://ubuntu.com/about), [Debian](https://www.debian.org/intro/why_debian), [CentOS](https://www.centos.org/about/), and [Fedora](https://docs.fedoraproject.org/en-US/project/).
+There are many variants of the Linux OS (called distributions, or **distros** for short). While you can run Rocket Pool from any modern distro, Rocket Pool's installer can automatically install the entire stack on [Ubuntu](https://ubuntu.com/about), [Debian](https://www.debian.org/intro/why_debian), [CentOS](https://www.centos.org/about/), and [Fedora](https://docs.fedoraproject.org/en-US/project/).
 
 For installation on other distros, the Smartnode installer will not be able to automatically install some system dependencies (such as `docker-compose`).
 Some manual steps will be required during installation.
@@ -34,7 +45,7 @@ For `arm64` systems, the Smartnode installer only natively supports Debian and D
 For other distros, manual steps will be required during installation.
 
 
-#### [TODO] MacOS Support
+#### [TODO] macOS Support
 
 [A description of support on Mac goes here.
 TLDR, OSX is good, but the installer doesn't know how to deal with arm64 so manual intervention is required.]
@@ -51,7 +62,7 @@ However, for the sake of completeness, we have assembled the following hardware 
 - CPU: Dual-core 1.6+ GHz
 - RAM: 8 GB DDR4 2133 MHz
 - SSD: 128 GB, 9k Read IOPS, 3k Write IOPS**
-- Network: 10+ Mbps, ??? monthly data cap [TODO]
+- Network: 10+ Mbps, 300+ GB monthly data cap
 - ETH1: Infura, Pocket
 - ETH2: Nimbus, Prysm
 
@@ -87,6 +98,7 @@ See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-
 Before installing Rocket Pool, please review the following checklist:
 
 - Your system is fully built, powers on, and can boot into the operating system.
+- You will not do any other activity on the system, such as browsing the Internet, checking email, or playing games.
 - You have a Linux or MacOS operating system installed.
 - Your user account has root / Administrator privileges.
 - You have an SSD that meets the performance requirements.
@@ -95,4 +107,4 @@ Before installing Rocket Pool, please review the following checklist:
 - If your ISP caps your data, it is more than 1.5 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!
-Move on to the [Choosing an ETH1 Client](/guides/node/eth1-clients) section.
+Move on to the [Choosing an ETH1 Client](../eth1-clients) section.
