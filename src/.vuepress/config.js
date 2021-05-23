@@ -136,7 +136,8 @@ module.exports = {
                       collapsable: true,
                       children: [
                           'node/local/hardware',
-                          'node/local/os'
+                          'node/local/prepare-pc',
+                          'node/local/prepare-pi',
                       ]
                     },
                     {
