@@ -117,7 +117,7 @@ Teku is Apache 2.0 licensed and written in Java, a language notable for its matu
 ### Client Comparison Table
 
 | Client | CPU Usage | Minimum RAM Usage | Sync Time |
-| - | - | - | - | - |
+| - | - | - | - |
 | Lighthouse | Moderate | 4 GB | Moderate |
 | Nimbus | Low (Single-threaded) | 0.75 GB | Moderate |
 | Prysm | Moderate | 2 GB | Fast |
