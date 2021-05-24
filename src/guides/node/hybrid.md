@@ -1,4 +1,4 @@
-# :arrow_up_down: Configuring a Hybrid Rocket Pool Node with External Clients
+# :arrow_up_down: [NYI] Configuring a Hybrid Rocket Pool Node with External Clients
 
 # TODO
 

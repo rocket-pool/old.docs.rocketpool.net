@@ -1,4 +1,4 @@
-# :computer: Choosing an ETH2 Client
+# :computer: [NYI] Choosing an ETH2 Client
 
 # TODO
 

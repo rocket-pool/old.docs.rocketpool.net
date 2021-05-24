@@ -1,4 +1,4 @@
-# :computer: Choosing an ETH1 Client
+# :computer: [NYI] Choosing an ETH1 Client
 
 # TODO
 

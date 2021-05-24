@@ -1,4 +1,4 @@
-# :mag: Creating a Minipool and ETH2 Validator
+# :mag: [NYI] Creating a Minipool and ETH2 Validator
 
 # TODO
 

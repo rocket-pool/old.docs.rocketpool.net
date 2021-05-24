@@ -1,4 +1,4 @@
-# :chart_with_upwards_trend: How to Stake with Rocket Pool
+# :chart_with_upwards_trend: [NYI] How to Stake with Rocket Pool
 
 # TODO
 

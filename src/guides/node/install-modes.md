@@ -1,4 +1,4 @@
-# :cd: Selecting a Rocket Pool Mode
+# :cd: [NYI] Selecting a Rocket Pool Mode
 
 # TODO
 
