@@ -381,4 +381,4 @@ vm.vfs_cache_pressure=10
 Then save and exit like you've done before (`Ctrl+O`, `Ctrl+X`).
 
 And with that, your Pi is up and running and ready to run Rocket Pool!
-Move on to the [Choosing an ETH1 Client](../eth1-clients) section.
+Move on to the [Choosing your ETH Clients](../eth-clients) section.

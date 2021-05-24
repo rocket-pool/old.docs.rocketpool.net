@@ -1,4 +1,4 @@
-# :cd: Preparing a PC, Mini-PC, or NUC
+# :cd: [WIP] Preparing a PC, Mini-PC, or NUC
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 
@@ -105,4 +105,4 @@ Before installing Rocket Pool, please review the following checklist:
 - If your ISP caps your data, it is more than 1.5 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!
-Move on to the [Choosing an ETH1 Client](../eth1-clients) section.
+Move on to the [Choosing your ETH Clients](../eth-clients) section.

@@ -168,8 +168,7 @@ module.exports = {
                       sidebarDepth: 2,
                       collapsable: true,
                       children: [
-                          'node/eth1-clients',
-                          'node/eth2-clients',
+                          'node/eth-clients',
                           'node/install-modes',
                           'node/docker',
                           'node/hybrid',
