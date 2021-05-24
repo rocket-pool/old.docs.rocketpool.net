@@ -1,4 +1,4 @@
-# :cloud: Selecting a Hosting Provider
+# :cloud: [WIP] Selecting a Hosting Provider
 
 There are many dedicated server, virtual private server **(VPS)** and public cloud providers available but choosing the correct one can be difficult. **The biggest challenge is finding an option with adequate SSD storage.**
 

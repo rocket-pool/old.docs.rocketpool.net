@@ -1,4 +1,4 @@
-# :droplet: Getting Test Ether from a Faucet
+# :droplet: [NYI] Getting Test Ether from a Faucet
 
 # TODO
 

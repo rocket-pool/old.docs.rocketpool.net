@@ -1,4 +1,4 @@
-# :whale: Configuring a Standard Rocket Pool Node with Docker
+# :whale: [NYI] Configuring a Standard Rocket Pool Node with Docker
 
 # TODO
 

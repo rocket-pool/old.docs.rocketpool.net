@@ -2,6 +2,15 @@
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 
+---
+**:warning: NOTE:
+We strongly encourage you to create a dedicated machine for running a Rocket Pool node.
+Running a node on a general-use machine, such as your daily work desktop or a gaming rig, presents extra security risks that may compromise your wallet and result in the theft of your coins.**
+
+**For maximum safety, please build a new machine that is dedicated exclusively to running a node.**
+
+---
+
 
 ## System Requirements
 
@@ -51,7 +60,7 @@ However, for the sake of completeness, we have assembled the following hardware 
 - CPU: Dual-core 1.6+ GHz
 - RAM: 8 GB DDR4 2133 MHz
 - SSD: 128 GB, 9k Read IOPS, 3k Write IOPS**
-- Network: 10+ Mbps, ??? monthly data cap [TODO]
+- Network: 10+ Mbps, 300+ GB monthly data cap
 - ETH1: Infura, Pocket
 - ETH2: Nimbus, Prysm
 
@@ -87,6 +96,7 @@ See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-
 Before installing Rocket Pool, please review the following checklist:
 
 - Your system is fully built, powers on, and can boot into the operating system.
+- You will not do any other activity on the system, such as browsing the Internet, checking email, or playing games.
 - You have a Linux or macOS operating system installed.
 - Your user account has root / Administrator privileges.
 - You have an SSD that meets the performance requirements.
@@ -95,4 +105,4 @@ Before installing Rocket Pool, please review the following checklist:
 - If your ISP caps your data, it is more than 1.5 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!
-Move on to the [Choosing an ETH1 Client](/guides/node/eth1-clients) section.
+Move on to the [Choosing an ETH1 Client](../eth1-clients) section.

@@ -1,4 +1,4 @@
-# :computer: Configuring a Native Rocket Pool Node without Docker
+# :computer: [NYI] Configuring a Native Rocket Pool Node without Docker
 
 # TODO
 

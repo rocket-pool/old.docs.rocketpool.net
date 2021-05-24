@@ -1,3 +1,3 @@
-# :cd: Preparing the Operating System
+# :cd: [NYI] Preparing the Operating System
 
-TBD
+TODO - Discuss how to deploy a VPS image, what OS to choose, other considerations.

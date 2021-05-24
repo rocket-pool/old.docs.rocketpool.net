@@ -1,4 +1,4 @@
-# :dollar: Claiming Node Operator Rewards
+# :dollar: [NYI] Claiming Node Operator Rewards
 
 # TODO
 
