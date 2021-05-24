@@ -2,7 +2,6 @@
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 
-
 ---
 **:warning: NOTE:
 We strongly encourage you to create a dedicated machine for running a Rocket Pool node.
@@ -11,7 +10,6 @@ Running a node on a general-use machine, such as your daily work desktop or a ga
 **For maximum safety, please build a new machine that is dedicated exclusively to running a node.**
 
 ---
-
 
 
 ## System Requirements
@@ -31,7 +29,7 @@ Note that it will require extra resource overhead, and comes with its own set of
 Rocket Pool is natively compatible with **AMD64 (x64)** and **arm64 (aarch64)** CPU architectures.
 For other architectures, you will need to compile the smartnode clients from source.
 
-Note that the user must have **root / Administrator** access (or **sudo** privileges) in order to install the Smartnode.
+Note that the user must have **root / Administrator** access (or **sudo** privileges) to install the Smartnode.
 
 
 #### Linux Support
@@ -89,7 +87,7 @@ However, for the sake of completeness, we have assembled the following hardware 
 The eth1 blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer better future-proofing.
 The larger your storage, the longer you can go between needing to reclaim space by pruning.*
 
-*\*\* If you are unsure of your disk meets these performance requirements, `fio` is a good way to test them.
+*\*\* If you are unsure if your disk meets these performance requirements, `fio` is a good way to test them.
 See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-linux/) for Linux instructions, and [here](https://www.nivas.hr/blog/2017/09/19/measuring-disk-io-performance-macos/) for MacOS instructions.* 
 
 
@@ -99,7 +97,7 @@ Before installing Rocket Pool, please review the following checklist:
 
 - Your system is fully built, powers on, and can boot into the operating system.
 - You will not do any other activity on the system, such as browsing the Internet, checking email, or playing games.
-- You have a Linux or MacOS operating system installed.
+- You have a Linux or macOS operating system installed.
 - Your user account has root / Administrator privileges.
 - You have an SSD that meets the performance requirements.
 - Your SSD is mounted on your file system.
