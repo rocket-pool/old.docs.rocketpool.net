@@ -144,7 +144,7 @@ Below are a few examples of NUC setups that some Rocket Pool veterans use and re
 ![](./images/Ken.jpg)
 
 The NUC8i5BEK is one of Intel's own NUCs with an 8th-generation processor.
-Released in 2018, this model comes with a quad core i5-8259U CPU (2.30 GHz), two DDR4 slots, an M.2 slot for SSDs, and USB 3.1 ports.
+Released in 2018, this model comes with a quad-core i5-8259U CPU (2.30 GHz), two DDR4 slots, an M.2 slot for SSDs, and USB 3.1 ports.
 It normally draws about 20 watts, but Discord user **Ken** has been able to optimize it down to 9 watts during normal validation.
 It is more than capable of handling any ETH1 and any ETH2 client, making it an excellent choice for a lightweight, efficient node machine.
 
@@ -157,11 +157,11 @@ Ken's Setup:
 
 Here are Ken's comments on why he chose this setup:
 
-*Small size and footprint, power supply is a brink on the power cord (like a laptop), single-board computer, x86 architecture, low purchase price point, low power consumption (~10W), 3-year warranty, and an active manufacture product line (intel).
-8th generations are plenty fast and at a lower price point than the latest generation chips.
-I upgraded to a fan-less (passively cooled) case so the NUC is absolutely silent (0 db) as I’m leaving it my home office (a stock NUC is near silent already).
-Plus no mechanical wear on the fan bearings.
-Resale or re-purpose value if I decide to retire this hardware platform as my RP node - NUC’s make a great workstation computer.*
+- *Small size and footprint, the power supply is a brick on the power cord (like a laptop), single-board computer, x86 architecture, low purchase price point, low power consumption (~10W), 3-year warranty, and an active manufacture product line (Intel).*
+- *8th generations are plenty fast and at a lower price point than the latest generation chips.*
+- *I upgraded to a fan-less (passively cooled) case, so the NUC is absolutely silent (0 dB) as I’m leaving it my home office (a stock NUC is near silent already).*
+- *Plus no mechanical wear on the fan bearings.*
+- *Resale or re-purpose value if I decide to retire this hardware platform as my RP node - NUC’s make a great workstation computer.*
 
 
 ### GreyWizard's NUC10i7FNH
