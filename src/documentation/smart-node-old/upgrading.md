@@ -44,13 +44,13 @@ With wget:
 
 Before upgrading the smart node service, if you have made any customizations to your service configuration files, back them up::
 
-    cp -r ~/.rocketpool ~/.rocketpool.bak
+    sudo cp -r ~/.rocketpool ~/.rocketpool.bak
 
 Any changes to these files will be overwritten, so you will need to restore them manually after updating.
 
 Next, pause the service before making changes to it::
 
-    rocketpool service pause
+    rocketpool service stop
 
 Then, upgrade the service configuration files with::
 
