@@ -150,20 +150,6 @@ module.exports = {
                       ]
                     },
                     {
-                      title: '[TEMP] - Preparing a Raspberry Pi',
-                      sidebarDepth: 2,
-                      collapsable: true,
-                      children: [
-                          'node/pi/overview',
-                          'node/pi/preliminary-setup',
-                          'node/pi/preparing-the-os',
-                          'node/pi/docker',
-                          'node/pi/native',
-                          'node/pi/overclocking',
-                          'node/pi/grafana'
-                      ]
-                    },
-                    {
                       title: 'Installing Rocket Pool',
                       sidebarDepth: 2,
                       collapsable: true,
