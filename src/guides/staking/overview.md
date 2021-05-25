@@ -1,4 +1,4 @@
-# :book: Staking Overview
+# :book: [WIP] Staking Overview
 
 In general, staking is the act of depositing ETH to activate validator software.  
 This software is responsible for storing data, processing transactions, and adding new blocks to the blockchain.  
