@@ -31,6 +31,10 @@ In most situations, this is a good option to choose when creating a new node fro
 It's the fastest, most hands-off procedure. 
 It will also handle updates to the ETH1 and ETH2 clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
 
+:exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
+While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
+In this case, we suggest you use the Native configuration mode listed below.** 
+
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker) section.
 
 
@@ -52,6 +56,10 @@ The `rocketpool_eth1` and `rocketpool_eth2` containers will either be included o
 
 :warning: NOTE: This configuration is not currently compatible with **Nimbus** because Nimbus does not offer a separate, dedicated validator client in its official Docker images.
 This may be provided in the future.
+
+:exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
+While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
+In this case, we suggest you use the Native configuration mode listed below.** 
 
 If you would like to use this mode, proceed to the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid) section.
 
