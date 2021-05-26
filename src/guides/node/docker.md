@@ -378,14 +378,14 @@ Please enter the Ethstats Label (leave blank for none)
 ```
 
 This refers to a statistics aggregation service called [ethstats](https://ethstats.net/), which tracks some information about your node.
-It isn't required, and can be left blank to ignore it.
+It isn't required and can be left blank to ignore it.
 
 ```
 Please enter the Ethstats Login (leave blank for none)
 (optional - for reporting Eth 1.0 node status to ethstats.net)
 ```
 
-This lets you enter your `ethstats` credentials for data reporting, if you're using that service.
+This lets you enter your `ethstats` credentials for data reporting if you're using that service.
 Again, this is optional and can be left blank.
 
 ```
@@ -398,7 +398,7 @@ Please enter the Cache Size (leave blank for the default of 1024)
  By default, **x64** systems will use **1024 MB** and **arm64** systems will use **256 MB**.
  We have provided some guidance on general rules of thumb to set this to based on your total system RAM.
 
- **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client, otherwise it should be left at **256 MB**.
+ **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client, otherwise, it should be left at **256 MB**.
 
  ```
  Please enter the Max Peers (leave blank for the default of 50)
@@ -408,7 +408,7 @@ Please enter the Cache Size (leave blank for the default of 1024)
  ```
 
  This determines how many peers Geth will connect to.
- Generally, lower peers means lower overall data usage and lower system resource consumption.
+ Generally, lower peers mean lower overall data usage and lower system resource consumption.
  For low-power systems, this can lead to better overall validator performance.
  However, with a lower peer count, any actions you perform may take slightly longer to propagate out to the entire ETH1 network.
 
@@ -420,7 +420,7 @@ Please enter the P2P Port (leave blank for the default of 30303)
 ```
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
-If you have a specific setup where the default of port 30303 is not available, you can change it here.
+If you have a specific setup where the default port 30303 is not available, you can change it here.
 
 
 ### Configuring Infura
@@ -445,7 +445,7 @@ Please enter the Pocket App or Load Balancer ID (leave blank for the standard Ro
 (the ID of your Pocket App; if you use a Load Balancer, prefix it with lb/)
 ```
 
-Pocket has generously allowed Rocket Pool node operators use their network for free.
+Pocket has generously allowed Rocket Pool node operators to use their network for free.
 If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
 If you have your own account with Pocket and would like to use that instead, you can enter it here.
 
@@ -503,5 +503,5 @@ It is safe to leave this at the default setting of 9001 unless your system alrea
 
 At this point, your configuration is complete.
 Congratulations!
-You're ready to start your Smartnode, and explore the CLI in greater detail.
+You're ready to start your Smartnode and explore the CLI in greater detail.
 Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions, and how you can expect to use it.
