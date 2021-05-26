@@ -31,7 +31,9 @@ At a high-level, here's what is involved in installing Rocket Pool:
 
 The instructions for downloading the CLI vary based on your Operating System.
 
-### Linux
+:::: tabs
+
+::: tab Linux
 
 On Linux, start by creating a new folder that will hold the CLI application:
 ```shell
@@ -76,9 +78,9 @@ Please check if your system is x64 or arm64, and download the appropriate versio
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
+:::
 
-
-### macOS
+::: tab macOS
 
 On macOS, download the CLI for your machine with the following command.
 
@@ -117,9 +119,9 @@ Please check if your system is x64 or arm64, and download the appropriate versio
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
+:::
 
-
-### Windows
+::: tab Windows
 
 The Windows CLI can be downloaded [here](https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-windows-amd64.exe).
 Note that it only supports x64 installations of Windows.
@@ -134,6 +136,9 @@ $ rocketpool --version
 
 rocketpool version 1.0.0-rc1
 ```
+:::
+
+::::
 
 
 ## Installing the Smartnode Stack
@@ -149,8 +154,9 @@ There are two different ways to install the Smartnode stack:
 
 Choose the appropriate setup below.
 
+:::: tabs
 
-### Local Installation
+::: tab Local Installation
 
 To install the stack locally, simply run this command:
 ```
@@ -203,18 +209,16 @@ rocketpool service install -d
 ```
 
 Once this is finished, the Smartnode stack will be ready to run.
+:::
 
----
-
-
-### Remote Installation
+::: tab Remote Installation
 
 To install the stack remotely, you will need to first have SSH key-based authentication configured.
 This means you'll use an SSH key to log into the remote system instead of a password (though you can put a password on the key itself).
 This improves your node's security and is generally considered good practice anyway.
 There is an excellent guide on [how to set it up for Linux systems here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/).
 
-Once the key is setup, use this command to install the Smartnode stack:
+Once the key is set up, use this command to install the Smartnode stack:
 ```
 rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service install
 ```
@@ -277,8 +281,9 @@ rocketpool --host <your remote hostname> --user <your remote username> --key <yo
 ```
 
 Once this is finished, the Smartnode stack will be ready to run.
+:::
 
----
+::::
 
 
 ## Configuring Docker's Storage Location
@@ -367,8 +372,9 @@ Which Eth 1.0 client would you like to run?
 
 For this configuration mode, where Rocket Pool will install and manage your ETH1 and ETH2 clients, select between Geth, Infura, or Pocket.
 
+:::: tabs
 
-### Configuring Geth
+::: tab Geth
 
 If you select Geth, you will be presented with the following questions:
 
@@ -421,9 +427,9 @@ Please enter the P2P Port (leave blank for the default of 30303)
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
 If you have a specific setup where the default of port 30303 is not available, you can change it here.
+:::
 
-
-### Configuring Infura
+::: tab Infura
 
 If you select Infura, you will be presented with the following questions:
 
@@ -434,9 +440,9 @@ Please enter the Infura Project ID
 
 When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
 Enter it here.
+:::
 
-
-### Configuring Pocket
+::: tab Pocket
 
 If you select Pocket, you will be presented with the following questions:
 
@@ -448,7 +454,9 @@ Please enter the Pocket App or Load Balancer ID (leave blank for the standard Ro
 Pocket has generously allowed Rocket Pool node operators use their network for free.
 If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
 If you have your own account with Pocket and would like to use that instead, you can enter it here.
+:::
 
+::::
 
 ### ETH2 Configuration
 
