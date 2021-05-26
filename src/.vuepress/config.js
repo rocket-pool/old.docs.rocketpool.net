@@ -161,6 +161,7 @@ module.exports = {
                           'node/native',
                       ]
                     },
+                    'node/cli-tutorial',
                     'node/securing-your-node',
                     'node/create-validator',
                     'node/rewards',
