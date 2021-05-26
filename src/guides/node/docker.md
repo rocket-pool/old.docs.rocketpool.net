@@ -19,7 +19,7 @@ Refer to your OS's instructions to learn how to do this if you are unfamiliar.
 
 ## Process Overview
 
-At a high-level, here's what is involved in installing Rocket Pool:
+At a high level, here's what is involved in installing Rocket Pool:
 
 1. Download the Rocket Pool command-line interface (CLI)
 1. Use the CLI to install the Smartnode stack
@@ -27,7 +27,7 @@ At a high-level, here's what is involved in installing Rocket Pool:
 1. Done!
 
 
-## Downloading the CLI
+## Downloading the Rocket Pool CLI
 
 The instructions for downloading the CLI vary based on your Operating System.
 
@@ -74,7 +74,7 @@ rocketpool version 1.0.0-rc1
 ```
 
 it means that you downloaded the wrong version above.
-Please check if your system is x64 or arm64, and download the appropriate version.
+Please check if your system is *x64* or *arm64*, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
@@ -149,7 +149,7 @@ It won't actually run anything yet; that comes later.
 
 There are two different ways to install the Smartnode stack:
 
-- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node
+- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node. Note: A local installation applies if you are already SSH'ing into your node and running the command from with that interface.  
 - A **remote** install, where you use the CLI to connect to a different machine that you want to turn into a node
 
 Choose the appropriate setup below.
@@ -384,14 +384,14 @@ Please enter the Ethstats Label (leave blank for none)
 ```
 
 This refers to a statistics aggregation service called [ethstats](https://ethstats.net/), which tracks some information about your node.
-It isn't required, and can be left blank to ignore it.
+It isn't required and can be left blank to ignore it.
 
 ```
 Please enter the Ethstats Login (leave blank for none)
 (optional - for reporting Eth 1.0 node status to ethstats.net)
 ```
 
-This lets you enter your `ethstats` credentials for data reporting, if you're using that service.
+This lets you enter your `ethstats` credentials for data reporting if you're using that service.
 Again, this is optional and can be left blank.
 
 ```
@@ -404,7 +404,7 @@ Please enter the Cache Size (leave blank for the default of 1024)
  By default, **x64** systems will use **1024 MB** and **arm64** systems will use **256 MB**.
  We have provided some guidance on general rules of thumb to set this to based on your total system RAM.
 
- **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client, otherwise it should be left at **256 MB**.
+ **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client; otherwise it should be left at **256 MB**.
 
  ```
  Please enter the Max Peers (leave blank for the default of 50)
@@ -413,12 +413,12 @@ Please enter the Cache Size (leave blank for the default of 1024)
  systems or constrained networks)
  ```
 
- This determines how many peers Geth will connect to.
- Generally, lower peers means lower overall data usage and lower system resource consumption.
+ This determines how many peers Geth will connect with.
+ Generally, lower peers mean lower overall data usage and lower system resource consumption.
  For low-power systems, this can lead to better overall validator performance.
  However, with a lower peer count, any actions you perform may take slightly longer to propagate out to the entire ETH1 network.
 
- For **x64** systems this defaults to **50**, and for **arm64** systems this defaults to **12**.
+ For **x64** systems, this defaults to **50** and for **arm64** systems this defaults to **12**.
 
 ```
 Please enter the P2P Port (leave blank for the default of 30303)
@@ -426,7 +426,7 @@ Please enter the P2P Port (leave blank for the default of 30303)
 ```
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
-If you have a specific setup where the default of port 30303 is not available, you can change it here.
+If you have a specific setup where the default port 30303 is not available, you can change it here.
 :::
 
 ::: tab Infura
@@ -451,7 +451,7 @@ Please enter the Pocket App or Load Balancer ID (leave blank for the standard Ro
 (the ID of your Pocket App; if you use a Load Balancer, prefix it with lb/)
 ```
 
-Pocket has generously allowed Rocket Pool node operators use their network for free.
+Pocket has generously allowed Rocket Pool node operators to use their network for free.
 If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
 If you have your own account with Pocket and would like to use that instead, you can enter it here.
 :::
@@ -466,12 +466,12 @@ Once you're finished configuring the ETH1 client, you will be prompted with this
 Would you like to run a random Eth 2.0 client (recommended)? [y/n]
 ```
 
-Rocket Pool is strongly committed to the health and diversity of the Beacon Chain, which means we do not favor one client over another.
+Rocket Pool is firmly committed to the health and diversity of the Beacon Chain, which means we do not favor one client over another.
 To this end, the default behavior is to run a **random ETH2 client**.
 All four clients are stable and perform very well, so there is no wrong choice (depending on your available hardware resources).
 Therefore, choosing a random client with not negatively impact your validators but will contribute to the security of the ETH2 ecosystem.
 
-That being said, we also offer you the option to choose your own client if you have a specific one in mind.
+That being said, we also offer you the option to choose your client if you have a specific one in mind.
 Users with low-power systems, such as the **Raspberry Pi**, may want to do this as it allows you to explicitly pick an ETH2 client that is tailored to systems with low resources.
 
 For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients) section.
@@ -485,7 +485,7 @@ Please enter the Custom Graffiti (leave blank for none)
 
 When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
 This is called the block's `graffiti`.
-You can enter a custom message here if you like, or leave it blank.
+You can enter a custom message here if you like or leave it blank.
 
 ```
 Please enter the Max Peers (leave blank for the default of 45)
@@ -495,7 +495,7 @@ Please enter the Max Peers (leave blank for the default of 45)
 ```
 
 Similar to Geth, each ETH2 client lets you specify a maximum number of P2P peers to connect to in order to share the state of the beacon chain.
-The default values depend on the client and whether you're on an x64 or an arm64 machine, but are generally safe to use.
+The default values depend on the client and whether you're on an x64 or an arm64 machine but are generally safe to use.
 If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
 
 ```
@@ -503,7 +503,7 @@ Please enter the P2P Port (leave blank for the default of 9001)
 (The port to use for P2P (blockchain) traffic)
 ```
 
-This is the TCP and UDP port that the ETH2 client will connect to its peers on.
+This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
 
 
@@ -512,4 +512,4 @@ It is safe to leave this at the default setting of 9001 unless your system alrea
 At this point, your configuration is complete.
 Congratulations!
 You're ready to start your Smartnode, and explore the CLI in greater detail.
-Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions, and how you can expect to use it.
+Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions and how you can expect to use it.
