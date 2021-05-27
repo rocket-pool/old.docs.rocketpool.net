@@ -405,7 +405,7 @@ Please enter the Cache Size (leave blank for the default of 1024)
  By default, **x64** systems will use **1024 MB** and **arm64** systems will use **256 MB**.
  We have provided some guidance on general rules of thumb to set this to based on your total system RAM.
 
- **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client; otherwise it should be left at **256 MB**.
+ **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client; otherwise, it should be left at **256 MB**.
 
  ```
  Please enter the Max Peers (leave blank for the default of 50)
@@ -512,5 +512,5 @@ It is safe to leave this at the default setting of 9001 unless your system alrea
 
 At this point, your configuration is complete.
 Congratulations!
-You're ready to start your Smartnode, and explore the CLI in greater detail.
+You're ready to start your Smartnode and explore the CLI in greater detail.
 Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions and how you can expect to use it.
