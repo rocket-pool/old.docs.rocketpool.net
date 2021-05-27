@@ -217,6 +217,7 @@ module.exports = {
         staticIcon: true,
         backgroundColor: '#ffbca5'
         }
-    ]
+    ],
+    'vuepress-plugin-element-tabs'
   ]
 }

@@ -16,7 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "markdown-it-include": "^2.0.0",
-    "vuepress": "^1.8.2"
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-element-tabs": "^0.2.8"
   },
   "dependencies": {
     "vuepress-plugin-code-copy": "^1.0.6"

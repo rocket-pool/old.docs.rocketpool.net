@@ -19,7 +19,7 @@ Refer to your OS's instructions to learn how to do this if you are unfamiliar.
 
 ## Process Overview
 
-At a high-level, here's what is involved in installing Rocket Pool:
+At a high level, here's what is involved in installing Rocket Pool:
 
 1. Download the Rocket Pool command-line interface (CLI)
 1. Use the CLI to install the Smartnode stack
@@ -27,11 +27,13 @@ At a high-level, here's what is involved in installing Rocket Pool:
 1. Done!
 
 
-## Downloading the CLI
+## Downloading the Rocket Pool CLI
 
 The instructions for downloading the CLI vary based on your Operating System.
 
-### Linux
+:::: tabs
+
+::: tab Linux
 
 On Linux, start by creating a new folder that will hold the CLI application:
 ```shell
@@ -72,13 +74,13 @@ rocketpool version 1.0.0-rc1
 ```
 
 it means that you downloaded the wrong version above.
-Please check if your system is x64 or arm64, and download the appropriate version.
+Please check if your system is **x64** or **arm64**, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
+:::
 
-
-### macOS
+::: tab macOS
 
 On macOS, download the CLI for your machine with the following command.
 
@@ -117,9 +119,9 @@ Please check if your system is x64 or arm64, and download the appropriate versio
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
+:::
 
-
-### Windows
+::: tab Windows
 
 The Windows CLI can be downloaded [here](https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-windows-amd64.exe).
 Note that it only supports x64 installations of Windows.
@@ -134,6 +136,9 @@ $ rocketpool --version
 
 rocketpool version 1.0.0-rc1
 ```
+:::
+
+::::
 
 
 ## Installing the Smartnode Stack
@@ -144,13 +149,15 @@ It won't actually run anything yet; that comes later.
 
 There are two different ways to install the Smartnode stack:
 
-- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node
+- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node.
+  *Note: If you are already using SSH to connect to your remote node, you will be creating a local installation on that node, so follow the local setup.* 
 - A **remote** install, where you use the CLI to connect to a different machine that you want to turn into a node
 
 Choose the appropriate setup below.
 
+:::: tabs
 
-### Local Installation
+::: tab Local Installation
 
 To install the stack locally, simply run this command:
 ```
@@ -203,18 +210,16 @@ rocketpool service install -d
 ```
 
 Once this is finished, the Smartnode stack will be ready to run.
+:::
 
----
-
-
-### Remote Installation
+::: tab Remote Installation
 
 To install the stack remotely, you will need to first have SSH key-based authentication configured.
 This means you'll use an SSH key to log into the remote system instead of a password (though you can put a password on the key itself).
 This improves your node's security and is generally considered good practice anyway.
 There is an excellent guide on [how to set it up for Linux systems here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/).
 
-Once the key is setup, use this command to install the Smartnode stack:
+Once the key is set up, use this command to install the Smartnode stack:
 ```
 rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service install
 ```
@@ -277,8 +282,9 @@ rocketpool --host <your remote hostname> --user <your remote username> --key <yo
 ```
 
 Once this is finished, the Smartnode stack will be ready to run.
+:::
 
----
+::::
 
 
 ## Configuring Docker's Storage Location
@@ -367,8 +373,9 @@ Which Eth 1.0 client would you like to run?
 
 For this configuration mode, where Rocket Pool will install and manage your ETH1 and ETH2 clients, select between Geth, Infura, or Pocket.
 
+:::: tabs
 
-### Configuring Geth
+::: tab Geth
 
 If you select Geth, you will be presented with the following questions:
 
@@ -398,7 +405,7 @@ Please enter the Cache Size (leave blank for the default of 1024)
  By default, **x64** systems will use **1024 MB** and **arm64** systems will use **256 MB**.
  We have provided some guidance on general rules of thumb to set this to based on your total system RAM.
 
- **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client, otherwise, it should be left at **256 MB**.
+ **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client; otherwise, it should be left at **256 MB**.
 
  ```
  Please enter the Max Peers (leave blank for the default of 50)
@@ -408,11 +415,11 @@ Please enter the Cache Size (leave blank for the default of 1024)
  ```
 
  This determines how many peers Geth will connect to.
- Generally, lower peers mean lower overall data usage and lower system resource consumption.
+ Generally, a lower peer count means lower overall data usage and lower system resource consumption.
  For low-power systems, this can lead to better overall validator performance.
  However, with a lower peer count, any actions you perform may take slightly longer to propagate out to the entire ETH1 network.
 
- For **x64** systems this defaults to **50**, and for **arm64** systems this defaults to **12**.
+ For **x64** systems, this defaults to **50** and for **arm64** systems this defaults to **12**.
 
 ```
 Please enter the P2P Port (leave blank for the default of 30303)
@@ -420,10 +427,10 @@ Please enter the P2P Port (leave blank for the default of 30303)
 ```
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
-If you have a specific setup where the default port 30303 is not available, you can change it here.
+If you have a specific setup where the default port of 30303 is not available, you can change it here.
+:::
 
-
-### Configuring Infura
+::: tab Infura
 
 If you select Infura, you will be presented with the following questions:
 
@@ -434,9 +441,9 @@ Please enter the Infura Project ID
 
 When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
 Enter it here.
+:::
 
-
-### Configuring Pocket
+::: tab Pocket
 
 If you select Pocket, you will be presented with the following questions:
 
@@ -448,7 +455,9 @@ Please enter the Pocket App or Load Balancer ID (leave blank for the standard Ro
 Pocket has generously allowed Rocket Pool node operators to use their network for free.
 If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
 If you have your own account with Pocket and would like to use that instead, you can enter it here.
+:::
 
+::::
 
 ### ETH2 Configuration
 
@@ -458,12 +467,12 @@ Once you're finished configuring the ETH1 client, you will be prompted with this
 Would you like to run a random Eth 2.0 client (recommended)? [y/n]
 ```
 
-Rocket Pool is strongly committed to the health and diversity of the Beacon Chain, which means we do not favor one client over another.
+Rocket Pool is firmly committed to the health and diversity of the Beacon Chain, which means we do not favor one client over another.
 To this end, the default behavior is to run a **random ETH2 client**.
 All four clients are stable and perform very well, so there is no wrong choice (depending on your available hardware resources).
 Therefore, choosing a random client with not negatively impact your validators but will contribute to the security of the ETH2 ecosystem.
 
-That being said, we also offer you the option to choose your own client if you have a specific one in mind.
+That being said, we also offer you the option to choose a specific client if you have one in mind.
 Users with low-power systems, such as the **Raspberry Pi**, may want to do this as it allows you to explicitly pick an ETH2 client that is tailored to systems with low resources.
 
 For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients) section.
@@ -477,7 +486,7 @@ Please enter the Custom Graffiti (leave blank for none)
 
 When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
 This is called the block's `graffiti`.
-You can enter a custom message here if you like, or leave it blank.
+You can enter a custom message here if you like or leave it blank.
 
 ```
 Please enter the Max Peers (leave blank for the default of 45)
@@ -487,7 +496,7 @@ Please enter the Max Peers (leave blank for the default of 45)
 ```
 
 Similar to Geth, each ETH2 client lets you specify a maximum number of P2P peers to connect to in order to share the state of the beacon chain.
-The default values depend on the client and whether you're on an x64 or an arm64 machine, but are generally safe to use.
+The default values depend on the client and whether you're on an x64 or an arm64 machine but are generally safe to use.
 If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
 
 ```
@@ -495,7 +504,7 @@ Please enter the P2P Port (leave blank for the default of 9001)
 (The port to use for P2P (blockchain) traffic)
 ```
 
-This is the TCP and UDP port that the ETH2 client will connect to its peers on.
+This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
 
 
@@ -504,4 +513,4 @@ It is safe to leave this at the default setting of 9001 unless your system alrea
 At this point, your configuration is complete.
 Congratulations!
 You're ready to start your Smartnode and explore the CLI in greater detail.
-Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions, and how you can expect to use it.
+Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions and how you can expect to use it.
