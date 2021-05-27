@@ -74,7 +74,7 @@ rocketpool version 1.0.0-rc1
 ```
 
 it means that you downloaded the wrong version above.
-Please check if your system is *x64* or *arm64*, and download the appropriate version.
+Please check if your system is **x64** or **arm64**, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
 
 ---
@@ -149,7 +149,8 @@ It won't actually run anything yet; that comes later.
 
 There are two different ways to install the Smartnode stack:
 
-- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node. Note: A local installation applies if you are already SSH'ing into your node and running the command from with that interface.  
+- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node.
+  *Note: If you are already using SSH to connect to your remote node, you will be creating a local installation on that node, so follow the local setup.* 
 - A **remote** install, where you use the CLI to connect to a different machine that you want to turn into a node
 
 Choose the appropriate setup below.
@@ -413,8 +414,8 @@ Please enter the Cache Size (leave blank for the default of 1024)
  systems or constrained networks)
  ```
 
- This determines how many peers Geth will connect with.
- Generally, lower peers mean lower overall data usage and lower system resource consumption.
+ This determines how many peers Geth will connect to.
+ Generally, a lower peer count means lower overall data usage and lower system resource consumption.
  For low-power systems, this can lead to better overall validator performance.
  However, with a lower peer count, any actions you perform may take slightly longer to propagate out to the entire ETH1 network.
 
@@ -426,7 +427,7 @@ Please enter the P2P Port (leave blank for the default of 30303)
 ```
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
-If you have a specific setup where the default port 30303 is not available, you can change it here.
+If you have a specific setup where the default port of 30303 is not available, you can change it here.
 :::
 
 ::: tab Infura
@@ -471,7 +472,7 @@ To this end, the default behavior is to run a **random ETH2 client**.
 All four clients are stable and perform very well, so there is no wrong choice (depending on your available hardware resources).
 Therefore, choosing a random client with not negatively impact your validators but will contribute to the security of the ETH2 ecosystem.
 
-That being said, we also offer you the option to choose your client if you have a specific one in mind.
+That being said, we also offer you the option to choose a specific client if you have one in mind.
 Users with low-power systems, such as the **Raspberry Pi**, may want to do this as it allows you to explicitly pick an ETH2 client that is tailored to systems with low resources.
 
 For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients) section.
