@@ -93,42 +93,43 @@ This FAQ section aims to compliment the [explainer series of articles](/overview
 
 ### What is Proof of Stake?
 
-Proof of Stake is a consensus protocol used in Ethereum 2.0. It is different to the Proof of Work (PoW) protocol, which you may have heard of before, because Bitcoin uses PoW. With a decentralised blockchain, these consensus protocols help keep everyone on the same page, so we all know what transactions have been processed and in what order.
+Proof of Stake is a consensus protocol used in Ethereum 2.0 (ETH2). It is different from the Proof of Work (PoW) protocol, which you may have heard of before, because Bitcoin uses PoW. With a decentralised blockchain, these consensus protocols help keep everyone on the same page, so we all know what transactions have been processed and in what order. This is known as validation.
 
-Ethereum currently has a Proof of Stake (PoS) chain called the beacon chain, which is faster, more energy efficient and more decentralised than PoW. It's powered by users depositing ETH and providing an Ethereum node online 24/7 to perform the required validation. As a reward for providing the node, the beacon chain gives node operators additional ETH on top of their deposits. It can be viewed similarly to earning interest in a bank account, with the exception these rewards are generated in return for helping secure the network.
+ETH2 currently has a Proof of Stake (PoS) chain called the Beacon Chain, which is faster, more energy efficient and more decentralised than PoW. It's powered by users depositing ETH and providing an Ethereum node online 24/7 to perform the required validation. As a reward for providing the node, the Beacon Chain gives node operators additional ETH on top of their deposits. It can be viewed similarly to earning interest in a bank account, with the exception that these rewards are generated in return for helping secure the network.
 
 ### What does Rocket Pool do?
 
-Rocket Pool is the base layer protocol for decentralised and trustless ETH2 staking.
+Rocket Pool is the base layer protocol for decentralised and trustless Ethereum 2.0 staking.
 
-Designed to support stakers of all shapes and sizes, Rocket Pool was built with the intent to allow anyone to trustlessly stake as little as **0.01** ETH to a network of decentralised node operators with full autonomy underpinned by RPL collateral. You can stake **ETH** by trading it for **rETH**, a [token which gains staking rewards over time](https://medium.com/rocket-pool/rocket-pool-2-5-tokenised-staking-48601d52d924#92b0) based on the performance of an entire network of decentralised node operators. You can also stake **16 ETH** as a node operator in the protocol, earn rewards on your own stake fee free + earn commissions & RPL rewards from the network, generating a higher ROI by staking in the protocol vs staking outside of it as a solo node operator. 
+Designed to support stakers of all shapes and sizes, Rocket Pool was built with the intent to allow anyone to trustlessly stake as little as **0.01** ETH to a network of decentralised node operators with full autonomy underpinned by RPL collateral (a type of bonding or insurance that ensures good behavior). You can stake **ETH** by trading it for **rETH**, a [token which gains staking rewards over time](https://medium.com/rocket-pool/rocket-pool-2-5-tokenised-staking-48601d52d924#92b0) based on the performance of an entire network of decentralised node operators. You can also stake **16 ETH** as a node operator in the protocol, earn rewards on your own stake fee free, plus earn commissions and RPL rewards from the network, generating a higher ROI by staking in the protocol vs staking outside of it as a solo node operator. 
 
 ### Why would I need to use it?
 
-Rocket Pool removes several high barriers to entry that exist with Proof of Stake on the Ethereum 2.0 for both individuals, groups and businesses.
+Rocket Pool removes several high barriers to entry that exist with Proof of Stake on Ethereum 2.0 for both individuals, groups and businesses.
 
-- The beacon chain requires a deposit of at least **32 ETH**. Rocket Pool will allow anyone to earn rewards on deposits as small as **0.01 ETH**.
+- The Beacon Chain requires a deposit of at least **32 ETH**. Rocket Pool will allow anyone to earn rewards on deposits as small as **0.01 ETH**.
 
-- Depositing ETH with the beacon chain will also require the user to have knowledge on how to interact with smart contracts. Rocket Pool handles all interactions with the beacon chain for you.
+- Depositing ETH with the Beacon Chain will also require the user to have knowledge on how to interact with smart contracts. Rocket Pool handles all interactions with the Beacon Chain for you.
 
-- Ethereum 2.0 is being rolled out over several phases. Depositing during the early phase 0 or 1 means your deposit is locked until phase 2 arrives which could be several years. With Rocket Pool you instantly get our rETH token when depositing, this is a tokenised staking deposit which gains rewards over time and doesn't need to be locked with us. It can be traded/sold/held at anytime providing our users with liquidity. It can also be traded back to Rocket Pool for ETH + rewards at anytime if there is liquidity available, no need to wait years.
+- Ethereum 2.0 is being rolled out over several phases. Depositing during the early phases 0 or 1 means your deposit is locked until phase 2 arrives, which could be several years. With Rocket Pool you instantly get our rETH token when depositing. This is a tokenised staking deposit which gains rewards over time and doesn't need to be locked with us. It can be traded/sold/held at any time providing our users with liquidity. It can also be traded back to Rocket Pool for ETH plus rewards at any time if there is liquidity available - no need to wait years.
 
-- The beacon chain will require a user who makes a deposit to be technically proficient at running an Ethereum node 24/7 and keeping that node online + secure. Rocket Pool has a decentralised network of independent Ethereum node operators that provide this service.
+- The Beacon Chain will require a user who makes a deposit to be technically proficient at running an Ethereum node 24/7 and keeping that node online and secure. Rocket Pool has a decentralised network of independent Ethereum node operators that provide this service.
 
-- The beacon chain will penalise users who make a deposit but fail to keep their node online. Rocket Pool socialises any penalties or losses that occur on nodes across the whole network which minimises the effect greatly for any single user.
+- The Beacon Chain will penalise users who make a deposit but fail to keep their node online. Rocket Pool socialises any penalties or losses that occur on nodes across the whole network which minimises the effect greatly for any single user.
 
 - Some users may be confident in running their own node but do not have the 32 ETH required for the deposit. If they join Rocket Pool's decentralised network of Ethereum node operators, they only need 16 ETH minimum to solo stake. They also get the added benefit of receiving extra income from the network for providing this service which generates a higher ROI than staking solo.
 
 ### How does it work?
 
-Hold tight, this is a meaty one! The protocol is primarily composed of 3 main elements, Smart Contracts, the Smart Node Network and Minipool Validators.
+Hold tight, this is a meaty one! The protocol is primarily composed of 3 main elements, smart contracts, the Smart Node Network and Minipool Validators.
 
-- Our Smart Contracts accept ETH deposits, assign them to node operators with staking commission rates based on current node operator demand and also issue + track various tokens. 
+- Our smart contracts accept ETH deposits, assigning them to node operators with staking commission rates based on current node operator demand, and also issue and track various tokens. 
 
-- Our Smart Node Network is a decentralised network of special Ethereum nodes that run our Smart Node software. They feature custom background processes that allow them to communicate with the protocols smart contracts, and just as importantly, provide the network consensus required by the beacon chain.
-- Any user can run one of these smart nodes and stake their own ETH fee-free if they have the minimum 16 ETH required. For providing the protocol with a smart node, the user also receives extra rewards from the network on top of the rewards they earn staking their own ETH. They also earn RPL generated by the protocol in return for providing the network with an insurance promise, done by adding collateral to their node in the form of RPL tokens.
+- Our Smart Node Network is a decentralised network of special Ethereum nodes that run our Smart Node software. They feature custom background processes that allow them to communicate with the protocol's smart contracts, and just as importantly, provide the network consensus (validation) required by the Beacon Chain.
 
-- Minipool Validators are another smart contract, but these are worth defining on their own due to being such a key aspect of the protocol. These are smart contracts that are created by node operators who deposit 16 ETH on their node. When they do this, their minipool contract receives 16 ETH in deposits from users who just want to stake but not run a node (rETH stakers). When this contract contains a total of 32 ETH, that amount is sent to begin staking and at the same time a new validator is created on the node which performs the consensus duties for that deposit to earn those staking rewards, neat!
+- Any user can run one of these Smart Nodes and stake their own ETH fee-free if they have the minimum 16 ETH required. For providing the protocol with a Smart Node, the user also receives extra rewards from the network on top of the rewards they earn staking their own ETH. They earn RPL tokens in return for intially putting up RPL as collateral, insuring or bonding their node against bad behavior or poor performance.
+
+- Minipool Validators are another smart contract, but these are worth defining on their own due to being such a key aspect of the protocol. These smart contracts are created by node operators who deposit 16 ETH on their node. When they do this, this smart contract receives 16 ETH in deposits from users who just want to stake but not run a node (rETH stakers). When this contract contains a total of 32 ETH (16 ETH initial deposit plus 16 ETH from rETH stakers), a new validator is created on the node which performs the consensus duties for that deposit to earn staking rewards. Neat!
 
 View the visual guide below to get a glimpse of how these components work together in the Rocket Pool protocol.
 
