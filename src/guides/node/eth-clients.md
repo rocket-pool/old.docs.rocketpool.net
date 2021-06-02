@@ -41,6 +41,9 @@ Rocket Pool may fit into the free tier, depending on what you do with your node.
 Because of this restriction, it is possible to exceed the limits of the free tier, which will prevent Rocket Pool from working correctly.
 We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
 
+:warning: **NOTE: If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.**
+
 
 ### Pocket
 
@@ -54,6 +57,9 @@ While using it doesn't contribute to the decentralization of Ethereum, it also d
 Pocket normally relies on users paying for transactions via their POKT token, but they have agreed to allow Rocket Pool node operators to use their network **free of charge**.
 
 One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
+
+:warning: **NOTE: If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.**
 
 
 ### Client Comparison Table
@@ -92,7 +98,7 @@ Lighthouse is implemented in [Rust](https://www.rust-lang.org/) and will maintai
 ### Nimbus
 
 [Nimbus](https://nimbus.team/) is a client implementation for both Ethereum 2.0 and Ethereum 1.0 that strives to be as lightweight as possible in terms of resources used.
-This allows it to perform well on embedded systems, resource-restricted devices -- including Raspberry Pis and mobile devices.
+This allows it to perform well on embedded systems and resource-restricted devices - including **Raspberry Pis** and mobile devices.
 
 However, resource-restricted hardware is not the only thing Nimbus is good for.
 Its low resource consumption makes it easy to run Nimbus together with other workloads on your server (this is especially valuable for stakers looking to lower the cost of their server instances).
