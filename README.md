@@ -8,7 +8,7 @@ We welcome all contributions! Please refer to our [ contribution guidelines ]( .
 
 If you want to test this locally, follow the next few steps:
 
-- Clone this repo eg: `git clone git@github.com:rocket-pool/rocketpool.github.io.git ./rpdocs`
+- Clone this repo eg: `git clone git@github.com:rocket-pool/docs.rocketpool.net.git ./rpdocs`
 - Move into the directory: `cd rpdocs`
 - Install dependencies using: `npm install` or `yarn install`
 - Run the dev server which will create the site and update automatically when you make changes: `yarn dev` or `npm run dev`
