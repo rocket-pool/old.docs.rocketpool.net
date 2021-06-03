@@ -1,4 +1,4 @@
-# :computer: [WIP] Configuring a Native Rocket Pool Node without Docker
+# :computer: Configuring a Native Rocket Pool Node without Docker
 
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack natively onto your system, without the use of Docker containers.
 
@@ -484,18 +484,228 @@ Copy `build/nimbus_beacon_node` from the release archive into `/srv/nimbus/`.
 :::
 
 ::: tab Prysm
-TODO
+```
+sudo mkdir /srv/prysm
+
+sudo chown $USER:$USER /srv/prysm
+```
+
+Next, make a folder for Prysm's chain data on the SSD.
+
+If your chain data and OS live on the same SSD:
+```
+sudo mkdir /srv/prysm/prysm_data
+
+sudo chown eth2:eth2 /srv/prysm/prysm_data
+```
+
+If they live on separate disks (e.g. an external SSD, as with the **Raspberry Pi**), then assuming that your SSD is mounted to `/mnt/rpdata`:
+```
+sudo mkdir /mnt/rpdata/prysm_data
+
+sudo chown eth2:eth2 /mnt/rpdata/prysm_data
+```
+
+Now, grab [the latest Prysm binaries](https://github.com/prysmaticlabs/prysm/releases/), or [build them from source](https://github.com/prysmaticlabs/prysm/) if you want.
+
+Sepcifically, you want to save the `beacon-chain-xxx` and `validator-xxx` binaries the release page archive into `/srv/prysm/` (and optionally, rename them to `beacon-chain` and `validator` - the rest of the guide will assume you have done this).
 :::
 
 ::: tab Teku
+```
+sudo mkdir /srv/teku
 
+sudo chown $USER:$USER /srv/teku
+```
+
+Next, make a folder for Teku's chain data on the SSD.
+
+If your chain data and OS live on the same SSD:
+```
+sudo mkdir /srv/teku/teku_data
+
+sudo chown eth2:eth2 /srv/teku/teku_data
+```
+
+If they live on separate disks (e.g. an external SSD, as with the **Raspberry Pi**), then assuming that your SSD is mounted to `/mnt/rpdata`:
+```
+sudo mkdir /mnt/rpdata/teku_data
+
+sudo chown eth2:eth2 /mnt/rpdata/teku_data
+```
+
+Now, grab [the latest Teku release](https://github.com/ConsenSys/teku/releases/), or [build it from source](https://github.com/ConsenSys/teku/) if you want.
+
+Copy the `bin` and `lib` folders from the release archive into `/srv/teku/`.
 :::
 ::::
 
 
-Next, create a systemd service for Nimbus. You can use mine as a template if you want:
+Next, create a systemd service for your ETH2 client.
+The following are examples that show typical command line arguments to use in each one:
+
+:::: tabs
+::: tab Lighthouse x64
 ```
-$ sudo nano /etc/systemd/system/nimbus.service
+sudo nano /etc/systemd/system/lh-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Lighthouse Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=/srv/lighthouse/lighthouse beacon --network prater --datadir /srv/lighthouse/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
+
+[Install]
+WantedBy=multi-user.target
+```
+::: 
+
+::: tab Nimbus x64
+```
+sudo nano /etc/systemd/system/nimbus.service
+```
+
+Contents:
+```
+[Unit]
+Description=Nimbus
+After=network.target
+
+[Service]
+Type=simple
+User=rp
+Restart=always
+RestartSec=5
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=prater --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Now, create the validator folders that Nimbus needs because it will crash without them:
+```
+sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
+
+sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
+
+sudo chown eth2:eth2 /srv/rocketpool/data/ -R
+```
+
+Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
+
+Open the `sudoers` file:
+```
+sudo nano /etc/sudoers
+```
+
+Add this line under `# Cmnd alias specification`:
+```
+Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
+```
+
+Add this line under `# User privilege specification`:
+```
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
+```
+
+That whole section should now look like this:
+```
+# Cmnd alias specification
+Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
+```
+
+Finally, modify `/srv/rocketpool/restart-validator.sh`:
+- Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
+:::
+::: tab Prysm x64
+```
+sudo nano /etc/systemd/system/prysm-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Prysm Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::: tab Teku x64
+```
+sudo nano /etc/systemd/system/teku-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Teku Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=/srv/teku/bin/teku --network=prater --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::: tab Lighthouse arm64
+The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
+If you have a different configuration, replace all instances of that below with your own folder.
+
+```
+sudo nano /etc/systemd/system/lh-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Lighthouse Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=ionice -c 2 -n 0 /srv/lighthouse/lighthouse beacon --network prater --datadir /mnt/rpdata/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::: tab Nimbus arm64
+Note that since Nimbus runs the beacon node and validator client together, you only need to make one service to act as both.
+
+The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
+If you have a different configuration, replace all instances of that below with your own folder.
+
+```
+sudo nano /etc/systemd/system/nimbus.service
 ```
 
 Contents:
@@ -509,57 +719,32 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=taskset 0x01 ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=80 --non-interactive --network=pyrmont --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="Made on an RPi 4!" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --log-file="/mnt/rpdata/nimbus_data/nimbus.log" --rpc --rpc-port=5052
+ExecStart=taskset 0x01 ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=prater --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-Some notes:
-- The user is set to `eth2`.
-- Nimbus is preceeded by `taskset 0x01`. Basically, this constrains Nimbus to only run on CPU 0 (since it's single threaded).
-  See the Geth notes for the rationale here.
-- `ionice -c 2 -n 0` tells your system to give Nimbus the highest possible priority for disk I/O (behind critical system processes), so it can process and attest as quickly as possible
+Note the following:
+
+- Nimbus is preceeded by `taskset 0x01`. Basically, this constrains Nimbus to only run on CPU 0 (since it's single threaded). If you followed the Geth guide for ETH1 (which constrained Geth to CPU 2 and 3), this will ensure that the processes don't overlap on the same core and will provide maximum performance.
 - Change the `--graffiti` to whatever you want.
-- By default, Nimbus will try to connect to 160 peers. That's a lot.
-  I changed the max value using `--max-peers=80` to lighten the CPU load a little, but you are free to experiement with this if you want.
+- By default, Nimbus will try to connect to 160 peers. We changed it here to `--max-peers=60` to lighten the CPU load a little, but you are free to experiement with this if you want.
 
-Next, add a log watcher script:
+Now, create the validator folders that Nimbus needs because it will crash without them:
 ```
-$ sudo nano /srv/nimbus/log.sh
-```
+sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
 
-Contents:
-```
-#!/bin/bash
-journalctl -u nimbus -b -f
+sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
+
+sudo chown eth2:eth2 /srv/rocketpool/data/ -R
 ```
 
-Make it executable:
-```
-$ sudo chmod +x /srv/nimbus/log.sh
-```
-
-Finally, create the validator folders that Nimbus needs because it will crash without them:
-```
-$ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
-$ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
-$ sudo chown eth2:eth2 /srv/rocketpool/data/ -R
-```
-
-~~~~~~~~~~~~~~~~~~
-Next, modify `restart-validator.sh`:
-- Uncomment the line at the end and change it to `sudo systemctl restart <your VC service name>`
-
-For example, if you're using Lighthouse
-
-
-
-Finally, we have to give the `rp` user the ability to call `systemctl restart nimbus` so it can restart Nimbus when new validator keys are created (which is what you set up when you modified `restart-validator.sh` earlier).
+Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
 
 Open the `sudoers` file:
 ```
-$ sudo nano /etc/sudoers
+sudo nano /etc/sudoers
 ```
 
 Add this line under `# Cmnd alias specification`:
@@ -569,7 +754,7 @@ Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
 
 Add this line under `# User privilege specification`:
 ```
-eth2    ALL=(ALL) NOPASSWD: RP_CMDS
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
 That whole section should now look like this:
@@ -579,212 +764,363 @@ Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
 
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
-eth2    ALL=(ALL) NOPASSWD: RP_CMDS
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
-~~~~~~~~~~~~~~~~~~
+Finally, modify `/srv/rocketpool/restart-validator.sh`:
+- Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
+:::
+::: tab Prysm arm64
+The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
+If you have a different configuration, replace all instances of that below with your own folder.
 
+```
+sudo nano /etc/systemd/system/prysm-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Prysm Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::: tab Teku arm64
+The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
+If you have a different configuration, replace all instances of that below with your own folder.
+
+```
+sudo nano /etc/systemd/system/teku-bn.service
+```
+
+Contents:
+```
+[Unit]
+Description=Teku Beacon Node
+After=network.target
+
+[Service]
+Type=simple
+User=eth2
+Restart=always
+RestartSec=5
+ExecStart=ionice -c 2 -n 0 /srv/teku/bin/teku --network=prater --data-path=/mnt/rpdata/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::::
+
+Some notes:
+- The user is set to `eth2`.
+- For arm64 systems, `ionice -c 2 -n 0` tells your system to give ETH2 the highest possible priority for disk I/O (behind critical system processes), so it can process and attest as quickly as possible
+
+Next, add a log watcher script in the folder you put your ETH2 client into:
+
+:::: tabs
+::: tab Lighthouse
+```
+sudo nano /srv/lighthouse/bn-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u lh-bn -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/lighthouse/bn-log.sh
+```
+:::
+::: tab Nimbus
+```
+sudo nano /srv/nimbus/log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u nimbus -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/nimbus/log.sh
+```
+:::
+::: tab Prysm
+```
+sudo nano /srv/prysm/bn-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u prysm-bn -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/prysm/bn-log.sh
+```
+:::
+::: tab Teku
+```
+sudo nano /srv/teku/bn-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u teku-bn -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/teku/bn-log.sh
+```
+:::
+::::
+
+With that, ETH2 is all set.
+On to the validator client!
+
+
+## Installing the Validator Client
+
+---
+:warning: NOTE: Nimbus does not have a seperate validator client at this time, so it is not included in these instructions.
+If you plan to use Nimbus, you've already taken care of this during the ETH2 client setup and can skip this section.
+
+---
+
+First, create a systemd service for your validator client.
+The following are examples that show typical command line arguments to use in each one:
+
+:::: tabs
+::: tab Lighthouse
+```
+sudo nano /etc/systemd/system/lh-vc.service
+```
+
+Contents:
+```
+[Unit]
+Description=Lighthouse Validator
+After=network.target
+
+[Service]
+Type=simple
+User=rp
+Restart=always
+RestartSec=5
+ExecStart=/srv/lighthouse/lighthouse validator --network prater --datadir /srv/rocketpool/data/validators/lighthouse --init-slashing-protection --beacon-node "http://localhost:5002" --graffiti "RP Lighthouse"
+
+[Install]
+WantedBy=multi-user.target
+```
+::: 
+::: tab Prysm
+```
+sudo nano /etc/systemd/system/prysm-vc.service
+```
+
+Contents:
+```
+[Unit]
+Description=Prysm Validator
+After=network.target
+
+[Service]
+Type=simple
+User=rp
+Restart=always
+RestartSec=5
+ExecStart=/srv/prysm/validator --accept-terms-of-use --prater --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5002" --graffiti "RP Prysm"
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::: tab Teku
+```
+sudo nano /etc/systemd/system/teku-vc.service
+```
+
+Contents:
+```
+[Unit]
+Description=Teku Validator
+After=network.target
+
+[Service]
+Type=simple
+User=rp
+Restart=always
+RestartSec=5
+ExecStart=/srv/teku/bin/teku validator-client --network=prater --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5002" --validators-graffiti="RP Teku"
+
+[Install]
+WantedBy=multi-user.target
+```
+:::
+::::
+
+Next, add a log watcher script in the folder you put your validator client into:
+
+:::: tabs
+::: tab Lighthouse
+```
+sudo nano /srv/lighthouse/vc-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u lh-vc -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/lighthouse/vc-log.sh
+```
+:::
+::: tab Prysm
+```
+sudo nano /srv/prysm/vc-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u prysm-vc -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/prysm/vc-log.sh
+```
+:::
+::: tab Teku
+```
+sudo nano /srv/teku/vc-log.sh
+```
+
+The contents should be this:
+```
+#!/bin/bash
+journalctl -u teku-vc -b -f
+```
+
+Make it executable:
+```
+sudo chmod +x /srv/teku/vc-log.sh
+```
+:::
+::::
+
+Now, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
+
+Open the `sudoers` file:
+```
+sudo nano /etc/sudoers
+```
+
+Add this line under `# Cmnd alias specification`, replacing `<validator service name>` with the name of your validator service (e.g. `lh-vc`, `prysm-vc`, or `teku-vc`)
+```
+Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart <validator service name>
+```
+
+Add this line under `# User privilege specification`:
+```
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
+```
+
+That whole section should now look like this:
+```
+# Cmnd alias specification
+Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart <validator service name>
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+rp    ALL=(ALL) NOPASSWD: RP_CMDS
+```
+
+Finally, modify `/srv/rocketpool/restart-validator.sh`:
+- Uncomment the line at the end and change it to `sudo systemctl restart <validator service name>`
+
+The services are now installed, so it's time to enable and start them.
 
 
 ## Enabling and Running the Services
 
-With all of the services installed, it's time to enable them so they'll automatically restart if they break, or start on a reboot:
-```
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable geth
-$ sudo systemctl enable nimbus
-$ sudo systemctl enable rp-node
-$ sudo systemctl enable rp-watchtower
-```
+With all of the services installed, it's time to:
 
-Now that they're enabled, kick them all off:
-```
-$ sudo systemctl start geth
-$ sudo systemctl start nimbus
-$ sudo systemctl start rp-node
-$ sudo systemctl start rp-watchtower
-```
+- Enable them so they'll automatically restart if they break, and automatically start on a reboot
+- Start them all!
 
-The last step is to create a wallet with `$ rp wallet init` or `$ rp wallet restore`.
+:::: tabs
+::: tab Lighthouse
+```
+sudo systemctl daemon-reload
+
+sudo systemctl enable geth lh-bn lh-vc rp-node rp-watchtower
+
+sudo systemctl start geth lh-bn lh-vc rp-node rp-watchtower
+```
+:::
+::: tab Nimbus
+```
+sudo systemctl daemon-reload
+
+sudo systemctl enable geth nimbus rp-node rp-watchtower
+
+sudo systemctl start geth nimbus rp-node rp-watchtower
+```
+:::
+::: tab Prysm
+```
+sudo systemctl daemon-reload
+
+sudo systemctl enable geth prysm-bn prysm-vc rp-node rp-watchtower
+
+sudo systemctl start geth prysm-bn prysm-vc rp-node rp-watchtower
+```
+:::
+::: tab Teku
+```
+sudo systemctl daemon-reload
+
+sudo systemctl enable geth teku-bn teku-vc rp-node rp-watchtower
+
+sudo systemctl start geth teku-bn teku-vc rp-node rp-watchtower
+```
+:::
+::::
+
+The last step is to create a wallet with `rp wallet init` or `rp wallet restore`.
 Once that's done, change the permissions on the password and wallet files so the Rocket Pool CLI, node, and watchtower can all use them:
 ```
-$ sudo chown eth2:eth2 -R /srv/rocketpool/data
-$ sudo chmod 660 /srv/rocketpool/data/password
-$ sudo chmod 660 /srv/rocketpool/data/wallet
+sudo chown rp:rp -R /srv/rocketpool/data
+
+sudo chmod 660 /srv/rocketpool/data/password
+
+sudo chmod 660 /srv/rocketpool/data/wallet
 ```
 
+And with that, you're ready to learn how to use the CLI!
 
-## Using and Monitoring Rocket Pool
-
-At this point, you have a working instance of Rocket Pool running on your Pi!
-Congratulations! You worked hard to get this far, so take a few minutes to celebrate.
-Once you're back, let's talk about how to actually use Rocket Pool and monitor how things are going.
-
-
-### Setting up a Validator
-
-With respect to using it, Rocket Pool developer Jake Pospischil has written up [a wonderful guide on exactly this](https://medium.com/rocket-pool/rocket-pool-v2-5-beta-node-operators-guide-77859891766b) already.
-It also covers installing Rocket Pool, but that's for boring old normal computers... you already did that whole process!
-Anyway, to learn how to use Rocket Pool for validating on ETH2, take a look at the guide linked above and skip about halfway down the page, to the section labeled **Registering Your Node**.
-That will walk you through the ins-and-outs of how to create a validator with Rocket Pool.
-
-
-### Monitoring your Pi's Performance
-
-You can use the log scripts you created for each of them to see how they're doing, and resolve any problems that come up.
-
-You've also seen `htop`, which gives you a nice live view into your system resources:
-```
-$ htop
-```
-![](images/Htop.png)
-
-On the top display with the bars, `Mem` shows you how much RAM you're currently using (and how much you have left).
-`Swp` shows you how much swap space you're using, and how much is left.
-
-On the bottom table, each row represents a process.
-Geth and Nimbus will probably be on top, which you can see in the rightmost column labeled `Command`.
-The `RES` column shows you how much RAM each process is taking - in this screenshot, Geth is taking 748 MB and Nimbus is taking 383 MB.
-The `CPU%` column shows you how much CPU power each process is consuming.
-100% represents a single core, so if it's over 100%, that means it's using a lot from multiple cores (like Geth is here, with 213%).
-
-If you want to track how much network I/O your system uses over time, you can install a nice utility called `vnstat`:
-```
-$ sudo apt install vnstat
-```
-
-To run it, do this:
-```
-$ vnstat -i eth0
-```
-
-This won't work right away because it needs time to collect data about your system, but as the days and weeks pass, it will end up looking like this:
-
-```
-$ vnstat -i eth0
-Database updated: 2021-02-21 01:55:00
-
-   eth0 since 2021-01-29
-
-          rx:  513.65 GiB      tx:  191.36 GiB      total:  705.01 GiB
-
-   monthly
-                     rx      |     tx      |    total    |   avg. rate
-     ------------------------+-------------+-------------+---------------
-       2021-01     14.71 GiB |    4.95 GiB |   19.66 GiB |   63.06 kbit/s
-       2021-02    498.94 GiB |  186.40 GiB |  685.34 GiB |    3.39 Mbit/s
-     ------------------------+-------------+-------------+---------------
-     estimated    695.74 GiB |  259.92 GiB |  955.66 GiB |
-
-   daily
-                     rx      |     tx      |    total    |   avg. rate
-     ------------------------+-------------+-------------+---------------
-     yesterday     10.51 GiB |   15.04 GiB |   25.55 GiB |    2.54 Mbit/s
-         today    928.06 MiB |    1.22 GiB |    2.13 GiB |    2.65 Mbit/s
-     ------------------------+-------------+-------------+---------------
-     estimated     11.35 GiB |   15.27 GiB |   26.62 GiB |
-```
-
-This will let you keep tabs on your total network usage, which might be helpful if your ISP imposes a data cap.
-
-Finally, and most importantly, use a block explorer like [Beaconcha.in](https://pyrmont.beaconcha.in) to watch your validator's attestation performance and income.
-If everything is set up right, you should see something like this:
-![](images/Beaconchain.png)
-
-All of the attestations should say `Attested` for their **Status**, and ideally all of the **Opt. Incl. Dist.** should be 0 (though an occasional 1 or 2 is fine).
-
-And that's all there is to it! Congratulations again, and enjoy validating with your Raspberry Pi!
-
-
-## Updating Rocket Pool, Geth, or Nimbus
-
-When a new version of a client is released, you'll want to upgrade things.
-Because we're not using Rocket Pool's own client deployment process, you will be responsible for keeping track of new Geth and Nimbus releases, in addition to new Rocket Pool releases.
-
-
-### Upgrading Geth
-
-Shut down the Geth service:
-```
-$ sudo systemctl stop geth
-```
-
-Download the new release, and extract the binary like you did when you first installed the Geth service (instructions above).
-For the sake of this example, I'll assume you have it in `/tmp/geth-linux-arm64-[version]`.
-
-Next, replace the old binary with it:
-```
-$ sudo mv /srv/geth/geth /srv/geth/geth_bak
-$ sudo mv /tmp/geth-linux-arm64-[version]/geth /srv/geth
-```
-This will also back up the old Geth binary as `/srv/geth/geth_bak` if you need to bring it back.
-
-Finally, restart Geth:
-```
-$ sudo systemctl start geth
-```
-
-You may want to monitor the logs a bit (`/srv/geth/log.sh`) to make sure everything is working.
-
-
-### Upgrading Nimbus
-
-Shut down the Nimbus service:
-```
-$ sudo systemctl stop nimbus
-```
-
-Download the new release, and extract the binary like you did when you first installed the Nimbus service (instructions above).
-For the sake of this example, I'll assume you have it in `/tmp/nimbus-eth2_Linux_arm64v8_[version]`
-
-Next, replace the old binary with it:
-```
-$ sudo mv /srv/nimbus/nimbus /srv/nimbus/nimbus_bak
-$ sudo mv /tmp/nimbus-eth2_Linux_arm64v8_[version]/build/nimbus_beacon_node /srv/nimbus/nimbus
-```
-This will also back up the old Nimbus binary as `/srv/nimbus/nimbus_bak` if you need to bring it back.
-
-Finally, restart Nimbus:
-```
-$ sudo systemctl start geth
-```
-
-You may want to monitor the logs a bit (`/srv/nimbus/log.sh`) to make sure everything worked well.
-
-
-### Updating Rocket Pool
-
-Shut down the Node and Watchtower services:
-```
-$ sudo systemctl stop rp-node rp-watchtower
-```
-
-Download the new releases:
-
-Next, replace the old binary with it:
-```
-$ sudo mv /usr/local/bin/rocketpool /usr/local/bin/rocketpool_bak
-$ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
-$ sudo wget https://github.com/jclapis/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O /usr/local/bin/rocketpool
-$ sudo wget https://github.com/jclapis/smartnode-install/releases/latest/download/rocketpool-daemon-linux-arm64 -O /usr/local/bin/rocketpoold
-```
-This will also back up the old CLI and daemon binaries if you need to bring them back.
-
-You *may* also need to download the new installer package, if it contains an updated `config.yml`.
-This is something you'll have to ask about on Discord, or compare the commit history for yourself.
-If it is the case, then you'll need to replace the file in `/srv/rocketpool/config.yml` with the new one - but be sure to make a backup of the old one first because this will erase all of your settings, so you'll have to copy them over again.
-
-Restart the services:
-```
-$ sudo systemctl start rp-node rp-watchtower
-```
-
-Finally, check the version to make sure that it updated correctly:
-```
-$ rp service version
-
-Rocket Pool client version: 1.0.0-beta.1
-Rocket Pool service version: 1.0.0-beta.1
-Selected Eth 1.0 client: Geth (jclapis/go-ethereum:v1.10.1)
-Selected Eth 2.0 client: Nimbus (jclapis/nimbus:v1.0.11)
-```
+Move on to the [A Tour of the CLI](./cli-tutorial) section next.
