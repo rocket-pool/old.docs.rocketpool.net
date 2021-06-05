@@ -32,7 +32,7 @@ The original Ethereum 1.0 protocol that uses a consensus mechanism known as proo
 Ethereum Software clients that run the eth1.0 network.
 
 ## eth2 Client
-Ethereum Software clients that run the eth1.0 network. 
+Ethereum Software clients that run the eth2.0 network. 
 
 ## eth2.0
 The Ethereum 2.0 network and update to the Ethernet network that was launched in December 2020 and will replace the older proof-of-work eth1.0 consensus mechanism.
