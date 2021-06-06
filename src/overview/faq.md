@@ -50,7 +50,7 @@ This FAQ section aims to compliment the [explainer series of articles](/overview
 [**What is a decentralised staking protocol exactly?**](#what-is-a-decentralised-staking-protocol-exactly)  
 *OK, expect your mind to be blown.*
 
-[**How can I access my deposit + rewards before ETH2 Phase 2?**](#how-can-i-access-my-deposit-+-rewards-before-eth2-phase-2)  
+[**How can I access my deposit and rewards before ETH2 Phase 2?**](#how-can-i-access-my-deposit-and-rewards-before-eth2-phase-2)  
 *I heard something about withdrawals not being allowed for a while...*
 
 [**Are your smart contracts audited and open source?**](#are-your-smart-contracts-audited-and-open-source)  
@@ -213,7 +213,7 @@ Rocket Pool is a protocol that contains a decentralised network of node operator
 - *Scalability* — by opening up the network it means a huge number of nodes can be brought online to meet demand
 - *Quadratic Leaking* — this is a fancy term for how the beacon chain punishes validators for being offline. As a node operator, if you go offline with a big group of other validators your punishment is greater — this deters centralised staking services.
 
-### How can I access my deposit + rewards before ETH2 Phase 2?
+### How can I access my deposit and rewards before ETH2 Phase 2?
 
 If you are a staker and just sending your deposit to Rocket Pools smart contracts, you will instantly receive rETH tokens which are a form of tokenised staking, they will still gain rewards over time, but you don’t need to hold them with us and can trade/sell or hold them as you wish. You can also trade them back to the protocol for ETH + rewards gained if there is liquidity available in the protocol to cover the exchange.
 
