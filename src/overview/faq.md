@@ -21,7 +21,7 @@ This FAQ section aims to compliment the [explainer series of articles](/overview
 [**How does it work?**](#how-does-it-work)  
 *Smart contracts, smart nodes & decentralised infrastructure.*
 
-[**Protocol operator vs Staking as a Service (SaaS) provider?**](#protocol-operator-vs-staking-as-a-service-saas-provider)  
+[**Independent node operator vs Staking as a Service (SaaS) provider?**](#independent-node-operator-vs-staking-as-a-service-saas-provider)  
 *Protocols can be used by everyone, from regular users to professional SaaS providers.*
 
 [**What tokens does Rocket Pool use?**](#what-tokens-does-rocket-pool-use)  
@@ -135,9 +135,9 @@ View the visual guide below to get a glimpse of how these components work togeth
 
 [![How staking in the protocol flows](/images/rp-infographic-staking-protocol-flow.png)](https://www.rocketpool.net/images/infographic-rocket-pool-2.png)
 
-### Protocol operator vs Staking as a Service (SaaS) provider?
+### Independent node operator vs Staking as a Service (SaaS) provider?
 
-Protocols support a wide array of actors, including service providers.
+Rocket Pool protocols support a wide array of actors, including independent node operators and service providers.
 
 Web3 is full of highly knowledgeable Staking as a Service providers, helping the world better access the proof of stake landscape with projects like Ethereum. They support everything from institutional capital, to hedge funds, family offices and everything in between.
 
@@ -193,17 +193,17 @@ If you want to run a node in the network, you can stake as a node for as little 
 
 ### What commissions are possible when staking with Rocket Pool?
 
-The main commission that node operators are awarded in the Rocket Pool protocol is variable and based on supply (node operators available to stake ETH) and demand (ETH needing to be staked). So it can go from very low to high depending on how many deposits are arriving into the network, their size and how many node operators are available to accommodate these new deposits. Currently the minimum commission is 5% of rewards earned and the maximum is 20%. ***ToDo - this needs clarification. 5-20% of whose rewards? The 16 ETH assigned to is from other non-operator users? Are "rewards" and "commission" synonymous here? If not, what defines a commission vs a reward?
+Commissions for node operators come from rewards generated from the 16 ETH pooled from non-operator stakers. The commission is variable and based on supply (node operators available to stake ETH) and demand (ETH needing to be staked). So it can go from very low to high depending on how many non-operator deposits are arriving into the network, their size and how many node operators are available to accommodate these new deposits. Currently the minimum commission is 5% of rewards earned and the maximum is 20%. 
 
 ### How does the protocol protect the value of rETH?
 
 Our smart contracts are responsible for holding and moving funds. In the interest of transparency, they are [open source](https://github.com/rocket-pool/rocketpool) for all to analyse. Additionally, before the smart contracts are deployed to mainnet they will be fully audited by both Sigma Prime and ConsenSys Diligence, two of the best auditing teams around.
 
-Rocket Pool is a decentralised network of node operators. If you are a non-operater staker, your deposit will be allocated to a node operator who will perform Proof of Stake duties. Node operators are required to stake as much ETH as they are assigned — this means they have skin in the game; they are highly incentivised to perform their duties diligently due to this economic bond.  ***ToDo - this last sentence doesn't follow. The bond is from RPL. Their skin is their own 16 ETH, not the additional ETH assigned to them.
+Rocket Pool is a decentralised network of node operators. If you are a non-operater staker, your deposit will be allocated to a node operator who will perform Proof of Stake duties. Node operators are required to stake as much ETH as they are assigned. If there is ETH loss due to poor node perfomance, the operator must first compensate the pool's lost ETH with their original 16 ETH and the loss of RPL. If this does not completely make up for the loss, the rest is spread across the entire network, rather than one user taking large losses just due to bad luck that their deposit ended up on a bad node.
 
-As a staker in the network, all losses from penalties or slashing conditions that occur from deposits landing on poorly performing nodes are socialised. This means that the entire network absorbs the penalties, rather than one user suffering 100% just due to bad luck that their deposit ended up on a bad node. Also if a seriously bad node operator ends up with < 32 ETH, but > 16 ETH after staking, it means they’ve suffered extended downtime, so the network itself is compensated from the node operators original 16 ETH deposit which adds further protection to stakers deposits.  **ToDo - need more detail. How does this happen? If the operator gets slashed to 28 ETH for example, what happens in detail? Is RPL auctioned to make up the 4 ETH to get them back to 32? Do they need to then put up more RPL to get back to par?
+For example, if a node leaves the network with 28 ETH, the operator retains 12 ETH, the network retains 16 ETH - all loss is on the operator. If a node leaves with 15 ETH, the network retains 16 ETH and the operator makes up the missing 1 ETH through the loss of RPL. If there is not enough RPL to cover the loss, the rest of the lost ETH is spread across the network.
 
-Node operators are also required to stake a min 10% of the value of the 16 ETH deposit in RPL. This is a security promise to the protocol, where if they finish staking with < 16 ETH, this RPL is sold at auction and the ETH returned to the protocol. Node operators are also incentivised by the protocol to stake as much RPL as insurance as possible, due to additional rewards that are given for providing a bigger safety net should they perform badly.
+Node operators thus have a large incentive to perform well. Node operators are also incentivised by the protocol to stake as much RPL as insurance as possible, due to additional rewards that are given for providing a bigger safety net should they perform badly.
 
 ### What is a decentralised staking protocol exactly?
 
