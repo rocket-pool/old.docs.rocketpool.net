@@ -147,9 +147,7 @@ ETH holders can choose between paying a SaaS provider or being paid to be an ope
 
 This design means Bison Trails or Gemini could use Rocket Pool the same as a DeFi power user. Simply show up with 16 ETH and you’re treated the same as any other node operator. Rocket Pool’s democratized staking system doesn’t favor any one party, as ETH staked through Rocket Pool always directly supports the network.
 
-Rocket Pool’s staked ETH wrapper, rETH, is the purest in DeFi. We foresee a vibrant ecosystem of integrations ranging from lending markets to run validators more efficiently to composability for productivity.  ***ToDo - fix this. Not clear at all.
-
-In short, rETH is a natural building block for Etherum, and the most trust-minimised form of staked ETH.
+Rocket Pool’s staked ETH wrapper, rETH, is the purest in DeFi because of the Rocket Pool network being fully distributed and trust-minimised. This makes rETH a natural building block for Etherum and providers of all kinds.
 
 ### What tokens does Rocket Pool use?
 
@@ -189,7 +187,7 @@ As big as you're comfortable with, unlimited.
 
 If you just want to stake you will receive our rETH token when you deposit. You can then do as you want with this token, it will still gain staking rewards over time and can be sold/traded or traded back to Rocket Pool for ETH + rewards if there is liquidity available for the trade.
 
-If you want to run a node in the network, you can stake as a node for as little or long as you wish. The longer you stake though, the bigger the commission you get as it is generated from the staking rewards earned on your node over time. ***ToDo Question - this sounds like compounding. Is it?
+If you want to run a node in the network, you can stake as a node for as little or long as you wish. The longer you stake, the more rewards you gain of course.
 
 ### What commissions are possible when staking with Rocket Pool?
 
@@ -199,11 +197,11 @@ Commissions for node operators come from rewards generated from the 16 ETH poole
 
 Our smart contracts are responsible for holding and moving funds. In the interest of transparency, they are [open source](https://github.com/rocket-pool/rocketpool) for all to analyse. Additionally, before the smart contracts are deployed to mainnet they will be fully audited by both Sigma Prime and ConsenSys Diligence, two of the best auditing teams around.
 
-Rocket Pool is a decentralised network of node operators. If you are a non-operater staker, your deposit will be allocated to a node operator who will perform Proof of Stake duties. Node operators are required to stake as much ETH as they are assigned. If there is ETH loss due to poor node perfomance, the operator must first compensate the pool's lost ETH with their original 16 ETH and the loss of RPL. If this does not completely make up for the loss, the rest is spread across the entire network, rather than one user taking large losses just due to bad luck that their deposit ended up on a bad node.
+Rocket Pool is a decentralised network of node operators. If you are a non-operater staker, your deposit will be allocated to a node operator who will perform Proof of Stake duties. Node operators are required to stake as much ETH as they are assigned. If there is ETH loss due to poor node performance, the operator must first compensate the pool's lost ETH with their original 16 ETH and the loss of RPL. If this does not completely make up for the loss, the rest is spread across the entire network through a reduction in the relative value of rETH, rather than one user taking large losses just due to bad luck that their deposit ended up on a bad node.
 
-For example, if a node leaves the network with 28 ETH, the operator retains 12 ETH, the network retains 16 ETH - all loss is on the operator. If a node leaves with 15 ETH, the network retains 16 ETH and the operator makes up the missing 1 ETH through the loss of RPL. If there is not enough RPL to cover the loss, the rest of the lost ETH is spread across the network.
+For example, if a node leaves the network with 28 ETH, the operator retains 12 ETH, the network retains 16 ETH - all loss is on the operator. If a node leaves with 15 ETH, the network retains 16 ETH and the operator makes up the missing 1 ETH through the loss of RPL. If the node leaves with 10 ETH, and there is only 1.6 ETH-worth of RPL from the original bond, the network retains 11.6 ETH, and the loss of 4.4 ETH (16 - 10 + 1.6) is spread across the network. 
 
-Node operators thus have a large incentive to perform well. Node operators are also incentivised by the protocol to stake as much RPL as insurance as possible, due to additional rewards that are given for providing a bigger safety net should they perform badly.
+Node operators thus have a large incentive to perform well. Node operators are also incentivised by the protocol to stake as much RPL as insurance as possible, due to additional rewards that are given for providing a bigger safety net should they perform poorly.
 
 ### What is a decentralised staking protocol exactly?
 
