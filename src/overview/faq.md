@@ -209,11 +209,11 @@ Rocket Pool is a protocol that contains a decentralised network of node operator
 
 - *Fault tolerance* — failures only affect a small number of nodes
 - *Scalability* — by opening up the network it means a huge number of nodes can be brought online to meet demand
-- *Quadratic Leaking* — this is a fancy term for how the beacon chain punishes validators for being offline. As a node operator, if you go offline with a big group of other validators your punishment is greater — this deters centralised staking services.
+- *Quadratic Leaking* — this is a fancy term for how the Beacon Chain punishes validators for being offline. As a node operator, if you go offline with a big group of other validators your punishment is greater — this deters centralised staking services.
 
 ### How can I access my deposit and rewards before ETH2 Phase 2?
 
-If you are a staker and just sending your deposit to Rocket Pools smart contracts, you will instantly receive rETH tokens which are a form of tokenised staking, they will still gain rewards over time, but you don’t need to hold them with us and can trade/sell or hold them as you wish. You can also trade them back to the protocol for ETH + rewards gained if there is liquidity available in the protocol to cover the exchange.
+If you are a non-operator staker and just sending your deposit to Rocket Pools smart contracts, you will instantly receive rETH tokens which are a form of tokenised staking, they will still gain rewards over time, but you don’t need to hold them with us and can trade/sell or hold them as you wish. You can also trade them back to the protocol for ETH + rewards gained if there is liquidity available in the protocol to cover the exchange.
 
 ### Are your smart contracts audited and open source?  
 
@@ -228,22 +228,22 @@ In the interest of transparency, they are [open source](https://github.com/rocke
 As a node operator, you can take advantage of the following benefits:
 
 - You get to use our awesome [Smart Node Stack](https://github.com/rocket-pool/smartnode), a super handy setup to make staking very easy. [Get started here with the installer](https://github.com/rocket-pool/smartnode-install).
-- You require only 16 ETH to stake (as opposed to 32 ETH solo), since Rocket Pool assigns 16 ETH of the protocols deposits. You can also stake 16 ETH deposits multiple times on the one node.
+- You require only 16 ETH to stake (as opposed to 32 ETH solo), since Rocket Pool assigns 16 ETH of the protocol's deposits. You can also stake 16 ETH deposits multiple times on the one node.
 - You earn extra rewards by charging Rocket Pool users a set percentage of the rewards earned on your node. This commission amount is variable and determined by the current capacity of the network when your node receives a deposit. If the network is under a lot of demand and you make a 16 ETH deposit, you will get a higher commission for helping out when needed the most.
 - You stake your own ETH, free from any commissions.
 - You can stake RPL on your node as collateral and earn more RPL from the protocol for providing this insurance promise.
 - You are always in control of your own node.
-- Once withdrawls are enabled on eth2.0 you can come and go anytime from the network.
+- Once withdrawls are enabled on ETH2.0 you can come and go anytime from the network.
 
 ### What is the minimum staking amount for a node operator?
 
-The minimum staking amount for a node operator is 16 ETH. But you can easily stake in multiples of 16 ETH on your own node using our smart node software. You will also need some RPL to act as collateral in the event of serious downtime or penalties. This collateral is treated as an insurance promise to the protocol which earns your more RPL the longer you stake. 
+The minimum staking amount for a node operator is 16 ETH. But you can easily stake in multiples of 16 ETH on your own node using our smart node software. You will also need some RPL to act as collateral in the event of serious downtime or penalties. This collateral is treated as an insurance promise to the protocol which earns you more RPL the longer you stake. 
 
 ### What is involved in running a Rocket Pool node?
 
 As a node operator you will need to run a server 24/7 performing proof of stake validator duties. Use our [Smart Node Stack](https://github.com/rocket-pool/smartnode) to manage your node + validators in the protocol, a super handy package to make staking very easy. [Get started here with the installer](https://github.com/rocket-pool/smartnode-install).
 
-Apart from that you just need the prerequisite ether deposit (16 ETH) and a minimum of 10% its value in RPL.
+Apart from that you just need the prerequisite ETH deposit (16 ETH) and a minimum of 10% its value in RPL.
 
 ### How is the RPL token used?
 
@@ -259,5 +259,5 @@ If you’re a dApp, you can integrate directly into Rocket Pools smart contracts
 
 If you’re a SaaS (Staking as a Service) provider, you might want to maximise returns for your users. Spin up a few smart nodes in the Rocket Pool network and put that ETH to work earning staking rewards + extra commissions + RPL rewards.
 
-Are you a wallet or DEX and want to give your users the ability to stake their ETH but not leave your service? Just write a smart contract that can manage depositing ETH into Rocket Pool on your users behalf and then receiving rETH back instantly. Bam! Staking services delivered.
-There’s lots more possibilities, Rocket Pool is a permissionless smart contract based staking protocol, anyone can plug into it. Your users don’t even have to know you’re using us, that’s entirely up to you!
+Are you a wallet or DEX and want to give your users the ability to stake their ETH but not leave your service? Just write a smart contract that can manage depositing ETH into Rocket Pool on your users' behalf and then receive rETH back instantly. Bam! Staking services delivered.
+There are many more possibilities. Rocket Pool is a permissionless smart contract based staking protocol, anyone can plug into it. Your users don’t even have to know you’re using us, that’s entirely up to you!
