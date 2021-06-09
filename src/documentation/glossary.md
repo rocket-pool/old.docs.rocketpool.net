@@ -49,8 +49,8 @@ In the ethereum network, nodes are devices (computers) that run an ethereum clie
 ## Node Commission
 The amount of supplemental ETH awarded to a node operator. This is effectively the “fee” that is taken from normal stakers; in Rocket Pool, that fee is given to the node operators. This value is determined by the number of node operators and the amount of ETH available in the deposit pool. It can range from 5 - 20% with the ideal target of 10%. Each minipool’s commission will be locked for life upon the creation of the minipool.
 
-## Node Commission, minimum
-The smallest node commission that a node operator is willing to accept in forming a minipool validator. This value is chosen by the node operator when they initially form a minipool validator. 
+## Node Commission, slippage
+The amount of negative slippage in node commission that a node operator is willing to accept when forming a minipool validator.  Slippage is the difference between the commission rate shown and the commission rate you are willing to accept when the transaction completes. The amount of negative slippage tolerated is chosen by the node operator when they initially form a minipool validator. 
 
 ## Node Operator
 An individual that wishes to secure the Ethereum network by operating a node (computer) that will run the Rocket Pool software, an eth2 validator client, and optionally an eth1 and eth2 beacon client as well. Node operators will earn ETH APY rewards at a greater rate than solo-stakers on the Ethereum 2.0 network. 
