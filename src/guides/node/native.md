@@ -11,19 +11,15 @@ The general plan is as follows:
 
 This is a fairly involved setup so it will take some time to complete.
 
----
-:warning: **WARNING: This guide is intended for users that are experienced with Linux system administration and usage.
-This includes using the terminal, creating system accounts, managing permissions, and installing services. 
-If you are not familiar with these activites, we do not recommend that you use the native mode.**
-
----
-
----
-:warning: **NOTE: The diversity of Operating Systems and distros available make it impractical to make guides available for all of them.
+The diversity of Operating Systems and distros available make it impractical to make guides available for all of them.
 The instructions in this guide are tailored to a Debian-based system (including Ubuntu).
-For other distros or operating systems, you may follow the high-level steps described in the guide but will have to substitute certain commands for the ones that your system uses as appropriate.**
+For other distros or operating systems, you may follow the high-level steps described in the guide but will have to substitute certain commands for the ones that your system uses as appropriate.
 
----
+::: warning
+This guide is intended for users that are experienced with Linux system administration and usage.
+This includes using the terminal, creating system accounts, managing permissions, and installing services. 
+**If you are not familiar with these activites, we do not recommend that you use the native mode.**
+:::
 
 
 ## Creating Service Accounts
@@ -50,11 +46,10 @@ Finally, make one for the validator and Rocket Pool, which we'll call `rp`:
 sudo useradd -r -s /sbin/nologin rp
 ```
 
----
-:bulb: NOTE: If you're using Nimbus, ignore the `rp` account.
+::: tip NOTE
+If you're using Nimbus, ignore the `rp` account.
 Any time you see it used in this guide, just substitute it with `eth2` instead.
-
----
+:::
 
 Now, add yourself to the `rp` group.
 You'll need to do this in order to use the Rocket Pool CLI, because it and the Rocket Pool daemon both need to access the ETH1 wallet file.
@@ -901,11 +896,10 @@ On to the validator client!
 
 ## Installing the Validator Client
 
----
-:warning: NOTE: Nimbus does not have a seperate validator client at this time, so it is not included in these instructions.
+::: tip NOTE
+Nimbus does not have a seperate validator client at this time, so it is not included in these instructions.
 If you plan to use Nimbus, you've already taken care of this during the ETH2 client setup and can skip this section.
-
----
+:::
 
 First, create a systemd service for your validator client.
 The following are examples that show typical command line arguments to use in each one:
@@ -1121,6 +1115,6 @@ sudo chmod 660 /srv/rocketpool/data/password
 sudo chmod 660 /srv/rocketpool/data/wallet
 ```
 
-And with that, you're ready to learn how to use the CLI!
+And with that, you're ready to secure your operating system to protect your node.
 
-Move on to the [A Tour of the CLI](./cli-tutorial) section next.
+Move on to the [Securing your Node](./securing-your-node) section next.

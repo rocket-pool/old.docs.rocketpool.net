@@ -3,11 +3,10 @@
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using a hybrid configuration.
 [Docker](https://www.docker.com/resources/what-container) will be used to run the Rocket Pool stack itself, which you will then configure to talk to your already existing external ETH1 and/or ETH2 clients.
 
----
-:warning: **WARNING: This guide is intended for users that are familiar with terminal usage and how to configure and maintain ETH1 or ETH2 clients.
-If you are not familiar with these activites, we do not recommend that you use the hybrid mode.**
-
----
+::: warning 
+This guide is intended for users that are familiar with terminal usage and how to configure and maintain ETH1 or ETH2 clients.
+**If you are not familiar with these activites, we do not recommend that you use the hybrid mode.**
+:::
 
 Please start by following the [Configuring a Standard Rocket Pool Node with Docker](./docker) guide to install and configure the Smartnode stack.
 However, make these following changes:
@@ -34,11 +33,10 @@ geth ... --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,net,personal
 
 Once you have ensured that configuration, restart your ETH1 client so the new settings take effect.
 
----
-:bulb: NOTE: Websockets are only necessary if you are using **Nimbus** for your ETH2 client,
+::: tip NOTE
+Websockets are only necessary if you are using **Nimbus** for your ETH2 client,
 If you plan to use a different client, you can ignore the Websocket portions in your command line arguments.
-
----
+:::
 
 This should not impact your security posture as long as the ports used for RPC access (for example, `--http.port` and `--ws.port` in Geth) are only accessible by your local system.
 If they are properly firewalled or hidden behind a router, an attacker will not be able to access your node from the outside.
@@ -149,14 +147,13 @@ Change the addresses in `chains/eth1/provider` and `chains/eth1/wsProvider` to `
 
 If you have your own ETH2 client, you will first need to make sure it's listening for incoming RPC traffic on the address `0.0.0.0` - this is necessary for the Rocket Pool Docker containers to be able to contact it.
 
----
-:bulb: NOTE: In this configuration, Rocket Pool will **still run its own validator client** because it will be responsible for managing the validator keys of any minipools you create.
+::: tip NOTE
+In this configuration, Rocket Pool will **still run its own validator client** because it will be responsible for managing the validator keys of any minipools you create.
 This validator client will then attach to your external ETH2 node to perform its duties.
 
 **This means that Nimbus cannot be used in this configuration, as it does not (currently) officially support a separate validator client process.
 You will have to use a different ETH2 validator client.**
-
----
+:::
 
 
 ### Setting the Command Line Arguments
@@ -167,12 +164,6 @@ Below are examples how how to configure this for each ETH2 client by modifying i
 ::: tab Lighthouse
 ```
 lighthouse beacon ... --http --http-address 0.0.0.0 --http-port 5052
-```
-:::
-
-::: tab Nimbus
-```
-nimbus_beacon_node ... --rpc --rpc-address 0.0.0.0 --rpc-port 5052
 ```
 :::
 
@@ -296,16 +287,15 @@ Change the address in `chains/eth2/provider` to `<ip_address>:<http_port>` where
 - `<ip_address>` is the IP address of the machine running the ETH2 node
 - `<http_port>` is the port for RPC traffic that you specified in your ETH2 client's arguments
 
----
-:warning: NOTE: The address here *does not* have an HTTP prefix; this is by design, it is not a mistake.
+::: warning
+The address here *does not* have an HTTP prefix; this is by design, it is not a mistake.
 Do not include a prefix when you input the IP address.
-
----
+:::
 
 
 ## Wrapping Up
 
 At this point, your configuration is complete.
 Congratulations!
-You're ready to start your Smartnode, and explore the CLI in greater detail.
-Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions, and how you can expect to use it.
+You're ready to secure your operating system to protect your node.
+Move on to the [Securing your Node](./securing-your-node) section next.

@@ -8,13 +8,12 @@ This will install and configure everything you need to run a complete node, incl
 
 All you need to do is tell it what you want to run!
 
----
-:warning: **NOTE:** The below instructions require you to use your system's **terminal** to enter and execute commands.
+::: tip NOTE
+The below instructions require you to use your system's **terminal** to enter and execute commands.
 If you are connected to the node machine via SSH, you are already doing this.
 If you are on the node machine and using a Desktop UI, you will need to open a terminal window to execute the following commands.
 Refer to your OS's instructions to learn how to do this if you are unfamiliar.
-
----
+:::
 
 
 ## Process Overview
@@ -66,9 +65,8 @@ $ rocketpool --version
 rocketpool version 1.0.0-rc1
 ```
 
----
-
-:bulb: **TIP:** If you see an error message like this,
+::: tip
+If you see an error message like this,
 ```
 -bash: /home/user/rocketpool: cannot execute binary file: Exec format error
 ```
@@ -76,8 +74,6 @@ rocketpool version 1.0.0-rc1
 it means that you downloaded the wrong version above.
 Please check if your system is **x64** or **arm64**, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
-
----
 :::
 
 ::: tab macOS
@@ -107,9 +103,8 @@ $ rocketpool --version
 rocketpool version 1.0.0-rc1
 ```
 
----
-
-:bulb: **TIP:** If you see an error message like this,
+::: tip
+If you see an error message like this,
 ```
 /usr/local/bin/rocketpool: Exec format error
 ```
@@ -117,8 +112,6 @@ rocketpool version 1.0.0-rc1
 it means that you downloaded the wrong version above.
 Please check if your system is x64 or arm64, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
-
----
 :::
 
 ::: tab Windows
@@ -180,8 +173,7 @@ Step 7 of 7: Copying package files to Rocket Pool user data directory...
 If there aren't any error messages, then the installation was successful.
 By default, it will be put into the `~/.rocketpool` directory inside of your user account's home folder.
 
----
-:bulb: NOTE: The Smartnode installer cannot install `docker` and `docker-compose` on all platforms automatically.
+Note that the Smartnode installer cannot install `docker` and `docker-compose` on all platforms automatically.
 If you receive an error message like this during the installation:
 
 ```
@@ -251,8 +243,7 @@ Step 7 of 7: Copying package files to Rocket Pool user data directory...
 If there aren't any error messages, then the installation was successful.
 By default, it will be put into the `~/.rocketpool` directory inside of your user account's home folder.
 
----
-:bulb: NOTE: The Smartnode installer cannot install `docker` and `docker-compose` on all platforms automatically.
+Note that the Smartnode installer cannot install `docker` and `docker-compose` on all platforms automatically.
 If you receive an error message like this during the installation:
 
 ```
@@ -293,10 +284,9 @@ By default, Docker will store all of its container data on your operating system
 In some cases, this is not what you want.
 For example, on **Raspberry Pi** systems, all of the chain data should be stored on the external SSD, not on the MicroSD card.
 
----
-:bulb: NOTE: If you are fine with this default behavior, skip down to the next section.
-
----
+::: tip NOTE
+If you are fine with this default behavior, skip down to the next section.
+:::
 
 To do this, create a new file called `/etc/docker/daemon.json` as the root user:
 
@@ -512,5 +502,5 @@ It is safe to leave this at the default setting of 9001 unless your system alrea
 
 At this point, your configuration is complete.
 Congratulations!
-You're ready to start your Smartnode and explore the CLI in greater detail.
-Jump over to the [A Tour of the CLI](./cli-tutorial) section for a walkthrough of its functions and how you can expect to use it.
+You're ready to secure your operating system to protect your node.
+Move on to the [Securing your Node](./securing-your-node) section next.

@@ -1,4 +1,4 @@
-# :european_castle: Securing your node
+# :european_castle: Securing your Node
 
 This guide assumes you are on `Ubuntu 20.04 LTS`, the concepts will carry over to other systems but the example commands may not.
 

@@ -161,10 +161,11 @@ module.exports = {
                           'node/native',
                       ]
                     },
-                    'node/cli-tutorial',
                     'node/securing-your-node',
+                    'node/cli-intro',
                     'node/create-validator',
                     'node/rewards',
+                    'node/advanced-cli',
                     {
                       title: 'Monitoring and Maintenance',
                       sidebarDepth: 2,

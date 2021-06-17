@@ -2,14 +2,12 @@
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 
----
-**:warning: NOTE:
+::: danger
 We strongly encourage you to create a dedicated machine for running a Rocket Pool node.
-Running a node on a general-use machine, such as your daily work desktop or a gaming rig, presents extra security risks that may compromise your wallet and result in the theft of your coins.**
+Running a node on a general-use machine, such as your daily work desktop or a gaming rig, presents extra security risks that may compromise your wallet and result in the theft of your coins.
 
 **For maximum safety, please build a new machine that is dedicated exclusively to running a node.**
-
----
+:::
 
 
 ## System Requirements

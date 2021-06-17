@@ -6,13 +6,12 @@ To that end, we've worked hard to tweak and optimize a whole host of settings an
 
 This setup will run **a full ETH1 node** and **a full ETH2 node** on the Pi, making your system contribute to the health of the Etherum network while simultaneously acting as a Rocket Pool node operator.
 
----
-**:bulb: NOTE: This setup works well with the current implementations of eth1 and eth2.
+::: warning NOTE
+This setup works well with the current implementations of eth1 and eth2.
 It's possible that after the merge of the eth1 chain and the beacon chain, a full node may be more computationally demanding.
 While we have been advised that this is unlikely, there is a chance that the Raspberry Pi may not be able to run a full node post-merge.
-Please factor this into your decision before settling on it as a node platform.**
-
----
+**Please factor this into your decision before settling on it as a node platform.**
+:::
 
 
 ## Preliminary Setup
@@ -118,12 +117,11 @@ If you have your keyboard plugged into the blue ports, take it out and plug it i
 
 ### Formatting the SSD and Creating a New Partition
 
----
-**:warning: WARNING: This process is going to erase everything on your SSD.
+::: warning
+This process is going to erase everything on your SSD.
 If you already have a partition with stuff on it, SKIP THIS STEP because you're about to delete it all!
-If you've never used this SSD before and it's totally empty, then follow this step.**
-
----
+If you've never used this SSD before and it's totally empty, then follow this step.
+:::
 
 Run this command to find the location of your disk in the device table:
 
@@ -265,15 +263,13 @@ We have also tested a slower SSD with read IOPS of 5k and write IOPS of 1k, and 
 If you use an SSD slower than the specs above, just be prepared that you might see a lot of missed attestations.
 If yours meets or exceeds them, then you're all set and can move on.
 
----
-**:bulb: Note:
+::: tip NOTE
 If your SSD doesn't meet the above specs but it should, you might be able to fix it with a firmware update.
 For example, this has been experienced by the Rocket Pool community with the Samsung T7.
 Two of them fresh out of the box only showed 3.5K read IOPS and 1.2K write IOPS.
 After applying all available firmware updates, the performance was back up to the numbers shown in the above example.
-Check with your manufacturer's support website for the latest firmware and make sure your drive is up to date - you may have to update the firmware multiple times until there are no more updates left.**
-
----
+Check with your manufacturer's support website for the latest firmware and make sure your drive is up to date - you may have to update the firmware multiple times until there are no more updates left.
+:::
 
 Last but not least, remove the test file you just made:
 ```
