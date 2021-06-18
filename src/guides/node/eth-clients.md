@@ -41,8 +41,10 @@ Rocket Pool may fit into the free tier, depending on what you do with your node.
 Because of this restriction, it is possible to exceed the limits of the free tier, which will prevent Rocket Pool from working correctly.
 We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
 
-:warning: **NOTE: If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.**
+::: warning
+If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
+:::
 
 
 ### Pocket
@@ -58,8 +60,10 @@ Pocket normally relies on users paying for transactions via their POKT token, bu
 
 One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
 
-:warning: **NOTE: If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.**
+::: warning
+If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
+:::
 
 
 ### Client Comparison Table
@@ -124,7 +128,7 @@ Teku is Apache 2.0 licensed and written in Java, a language notable for its matu
 
 | Client | CPU Usage | Minimum RAM Usage | Sync Time |
 | - | - | - | - |
-| Lighthouse | Moderate | 4 GB | Moderate |
+| Lighthouse | Moderate | 2 GB | Moderate |
 | Nimbus | Low (Single-threaded) | 0.75 GB | Moderate |
 | Prysm | Moderate | 2 GB | Fast |
 | Teku | Moderate | 4 GB | Slow (normal sync)<br/>Instant ([checkpoint sync](https://www.youtube.com/watch?v=Oz3flfj50Ig)) |

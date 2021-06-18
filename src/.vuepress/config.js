@@ -162,6 +162,7 @@ module.exports = {
                       ]
                     },
                     'node/securing-your-node',
+                    'node/starting-rp',
                     'node/cli-intro',
                     'node/create-validator',
                     'node/rewards',
