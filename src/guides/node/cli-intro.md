@@ -1,4 +1,4 @@
-# :computer: [WIP] Intro to the Command Line Interface
+# :computer: Intro to the Command Line Interface
 
 As a node operator, the CLI is your primary tool for interacting with Rocket Pool.
 You will use it to create new minipools, check on the status of everything, claim periodic RPL rewards, exit and withdraw from your minipools when you're ready, and a host of other activities.
@@ -279,8 +279,8 @@ You'll probably use it a lot when you first set the node up, then never need it 
 The output of `rocketpool node sync` will look like this:
 
 ```
-Your eth1 client is fully synced.
-Your eth2 client is still syncing (76.90%).
+Your eth1 client is still syncing (76.26%).
+Your eth2 client is still syncing (39.92%).
 ```
 
 Note that **Prysm** currently doesn't provide its completion percent - you'll need to look in the `eth2` logs if you use it.
@@ -332,3 +332,216 @@ Waiting for the transaction to be mined... **DO NOT EXIT!** This transaction is 
 
 Most operations only require one transaction, so the CLI will wait until it has been mined and then exit.
 However, `stake-rpl` is one of the few commands that requires *two* transactions, so this dialog will appear twice. 
+
+
+### `deposit`
+
+This command will let you deposit ETH and create a new minipool (a new ETH2 validator).
+As with `stake-rpl`, this is an interactive command that will perform a transaction.
+
+It will start by asking you how much you want to deposit to the new minipool:
+
+```
+Please choose an amount of ETH to deposit:
+1: 32 ETH (minipool begins staking immediately)
+2: 16 ETH (minipool begins staking after ETH is assigned)
+```
+
+(For more information on these options, see the next section on [Creating a Minipool](./create-validator.md)).
+
+Once you select your deposit amount, it will prompt you for your choice of commission rate slippage:
+
+```
+The current network node commission rate that your minipool should receive is 20.000000%.
+The suggested maximum commission rate slippage for your deposit transaction is 1.000000%.
+This will result in your minipool receiving a minimum possible commission rate of 19.000000%.
+Do you want to use the suggested maximum commission rate slippage? [y/n]
+```
+
+Again, this option will be described in more detail in the next section.
+
+After that, you will be prompted with the expected gas cost for the transaction and one final confirmation dialog.
+If you accept, your ETH deposit will be processed and you will create a new minipool (and a corresponding ETH2 validator).
+
+
+### `claim-rpl`
+
+This command lets you manually trigger an RPL rewards claim after an RPL checkpoint.
+This process is normally handled automatically by the `rocketpool_node` Docker container or process, but if you disable automatic claiming and prefer to do it manually, you can use this command to do it.
+
+
+
+### `send`
+
+This command lets you send ETH, RPL, or other Rocket Pool-related tokens from the node wallet to a different address.
+This might be useful if you want to move your funds on the wallet elsewhere.
+
+The syntax for using the `send` command is like this:
+
+```
+rocketpool node send <amount> <token> <address>
+```
+
+The arguments are as follows:
+
+- `<amount>` is the amount of the token to send.
+- `<token>` is the token to send - this can be `eth`, `rpl`, `fsrpl` (the old legacy RPL token), or `reth`.
+- `<address>` is the Ethereum address to send the tokens to.
+
+For example:
+
+```
+rocketpool node send 1 eth <my friend's address>
+```
+
+would send 1 ETH to my friend.
+
+
+## Minipool Commands
+
+The `minipool` group involves commands that affect your minipools.
+As with the `node` group, we'll cover these more in-depth in the next section but it may be helpful to see them all now.
+
+Here is what the `rocketpool minipool help` output will show:
+
+```
+NAME:
+   rocketpool minipool - Manage the node's minipools
+
+USAGE:
+   rocketpool minipool [global options] command [command options] [arguments...]
+
+VERSION:
+   1.0.0-rc3
+
+COMMANDS:
+   status, s    Get a list of the node's minipools
+   refund, r    Refund ETH belonging to the node from minipools
+   dissolve, d  Dissolve initialized or prelaunch minipools
+   exit, e      Exit staking minipools from the beacon chain
+   close, c     Withdraw balances from dissolved minipools and close them
+
+GLOBAL OPTIONS:
+   --help, -h  show help
+```
+
+Below is a summary of the commands that you'll typically use.
+
+
+### `status`
+
+This command simply provides a summary of each of your minipools.
+This includes its current status, the eth1 address of the minipool, the commission on it (called the `node fee`), the public key of the corresponding ETH2 validator, and some other things:
+
+```
+$ rocketpool minipool status
+
+1 Staking minipool(s):
+
+--------------------
+
+Address:              <minipool eth1 address>
+Status updated:       2021-05-21, 14:05 +0000 UTC
+Node fee:             20.000000%
+Node deposit:         16.000000 ETH
+RP ETH assigned:      2021-05-23, 13:32 +0000 UTC
+RP deposit:           16.000000 ETH
+Validator pubkey:     <validator eth2 address>
+Validator index:      0
+Validator seen:       yes
+```
+
+
+### `refund`
+
+This command lets you pull 16 ETH back from a minipool if you deposited 32 ETH to create one, once Rocket Pool was able to contribute 16 ETH from the rETH staking pool.
+
+
+### `exit`
+
+This command submits a voluntary exit for your validator on the Beacon Chain.
+Use this when you want to close a validator and withdraw its final ETH balance.
+Note that **this cannot be undone** - once you trigger an exit, the validator will shut down permanently.
+
+
+## Useful Flags
+
+There are some useful global flags that you can add to some of the above commands, which you may want to take advantage of.
+
+
+### Setting a Custom Gas Price
+
+By default, Rocket Pool will use the ETH engine to look at the current transaction pool and suggest a reasonable gas price for any transactions you trigger.
+If you prefer, you can set the gas price manually with the `-g` flag.
+To do this, add it after `rocketpool` and before the other command information.
+
+For example, calling `node set-timezone` with this flag would provide the following output:
+
+```
+$ rocketpool -g 10 node set-timezone
+
+Would you like to detect your timezone automatically? [y/n]
+n
+
+Please enter a timezone to register with in the format 'Country/City':
+Australia/Brisbane
+
+You have chosen to register with the timezone 'Australia/Brisbane', is this correct? [y/n]
+y
+
+Suggested gas price: 24.000000 Gwei
+Estimated gas used: 74259 gas
+Estimated gas cost: 0.001782 ETH
+
+Requested gas price: 10.000000 Gwei
+Maximum requested gas cost: 0.000742 ETH
+
+Are you sure you want to set your timezone? [y/n]
+```
+
+This shows that the network *recommends* 24 gwei, but it will use your set price of 10 gwei instead when submitting this transaction.
+
+
+### Canceling / Overwriting a Stuck Transaction
+
+Sometimes, you might run into a scenario where you sent a transaction to the network but you used a gas price that is far too low for the network conditions, and it will take a prohibitively long time to execute.
+Since all of your subsequent transactions will wait until that one goes through, that transaction essentially blocks all of the operations on your Rocket Pool node.
+To deal with this situation, we've added a global flag that lets you "cancel" such a transaction by replacing it with something else.
+
+Every Ethereum wallet, including your node wallet, sends transactions sequentially.
+Each transaction you send has a number called a `nonce` that identifies where it lives in that sequence.
+The very first transaction you send will have a `nonce` of 0, the next one you send will have a `nonce` of 1, and so on.
+
+This overwriting technique involves sending a *new* transaction that uses the same `nonce` as your existing *stuck* transaction, but will ideally include a higher gas price than the stuck one.
+This means that the new one will be mined first.
+As soon as it's mined into a block, the old one will be discarded from the network as though it was never sent in the first place.
+
+To use this flag, you first need to find the `nonce` of your stuck transaction:
+
+1. Go to an ETH1 block explorer like [https://etherscan.io](https://etherscan.io).
+1. Navigate to the address of your wallet, and look at the list of transactions.
+1. Go through them, starting with the most recent, until you find the furthest one down the list that has the `Pending` state.
+1. Mark the `nonce` of that transaction. That's what you'll need.
+
+Once you have it, simply call any transaction with the CLI using the `--nonce <value>` flag after `rocketpool` and before the rest of the command.
+
+For example, this will submit a transaction where I send a small amount of ETH from myself back to myself.
+I'll burn a little gas doing it, but it will unstick the broken transaction that uses a `nonce` of 10:
+
+```
+$ rocketpool --nonce 10 n n 0.0001 eth <node wallet>
+
+Suggested gas price: 24.000000 Gwei
+Estimated gas used: 21000 gas
+Estimated gas cost: 0.000504 ETH
+
+Are you sure you want to send 0.000100 eth to <node wallet>? This action cannot be undone! [y/n]
+```
+
+The Smartnode stack will automatically check to make sure that the `nonce` you have provided is valid (it refers to a pending transaction) before sending it and wasting your gas accidentally.
+If not, it will return an error message.
+Otherwise, it will go through and provide you with the transaction details so you can monitor it to confirm that it did, in fact, overwrite your old stuck transaction. 
+
+
+That's it for the common CLI commands.
+In the next section, we'll walk through how to create a minipool and start validating on the Beacon Chain.
