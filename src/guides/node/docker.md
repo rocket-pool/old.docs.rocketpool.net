@@ -418,6 +418,15 @@ Please enter the P2P Port (leave blank for the default of 30303)
 
 This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
 If you have a specific setup where the default port of 30303 is not available, you can change it here.
+
+::: tip NOTE
+
+To make sure Geth can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
+Configure it to forward **port 30303** (or whichever port you specified) on both TCP and UDP to your machine's local IP address
+This way, other ETH1 clients can discover it and communicate with it from the outside.
+
+Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+
 :::
 
 ::: tab Infura
@@ -497,6 +506,15 @@ Please enter the P2P Port (leave blank for the default of 9001)
 This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
 
+::: tip NOTE
+
+To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
+Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
+This way, other ETH2 clients can discover it and communicate with it from the outside.
+
+Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+
+:::
 
 ## Wrapping Up
 

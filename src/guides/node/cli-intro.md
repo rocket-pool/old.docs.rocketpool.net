@@ -529,7 +529,7 @@ For example, this will submit a transaction where I send a small amount of ETH f
 I'll burn a little gas doing it, but it will unstick the broken transaction that uses a `nonce` of 10:
 
 ```
-$ rocketpool --nonce 10 n n 0.0001 eth <node wallet>
+$ rocketpool --nonce 10 node send 0.0001 eth <node wallet>
 
 Suggested gas price: 24.000000 Gwei
 Estimated gas used: 21000 gas
