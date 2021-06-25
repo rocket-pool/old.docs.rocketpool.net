@@ -165,8 +165,6 @@ module.exports = {
                     'node/starting-rp',
                     'node/cli-intro',
                     'node/create-validator',
-                    'node/rewards',
-                    'node/advanced-cli',
                     {
                       title: 'Monitoring and Maintenance',
                       sidebarDepth: 2,
@@ -179,6 +177,7 @@ module.exports = {
                           'node/geth-pruning'
                       ]
                     },
+                    'node/rewards',
                     'node/troubleshooting',
                     'node/faq'
                 ]
