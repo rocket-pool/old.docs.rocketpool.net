@@ -30,6 +30,7 @@ Advantages:
 Disadvantages:
 
 - Requires stable, uncapped Internet and electricity
+  - **Running a node uses ~1.4 TB of data per month. If you have a data cap below this amount, you may run into problems while running a local node!**
 - You're solely responsible for network & computer security
 - Can be challenging if you're not experienced with computer maintenance
 - Vulnerable to theft

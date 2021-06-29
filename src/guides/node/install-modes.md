@@ -24,8 +24,10 @@ It uses the following Docker containers:
 - `rocketpool_eth2` - This will be your ETH2 beacon node client.
 - `rocketpool_validator` -  This will be your ETH2 validator client, which is responsible for your validator duties (such as attesting to blocks or proposing new blocks).
 
-  :warning: NOTE: **Nimbus** does not have a separate validator client.
-  It runs the beacon node and validator clients together inside the ETH2 container. 
+::: tip NOTE
+**Nimbus** does not have a separate validator client.
+It runs the beacon node and validator clients together inside the ETH2 container.
+:::
 
 In most situations, this is a good option to choose when creating a new node from scratch.
 It's the fastest, most hands-off procedure. 
@@ -54,12 +56,16 @@ When using this configuration, the Smartnode will use the following Docker conta
 
 The `rocketpool_eth1` and `rocketpool_eth2` containers will either be included or excluded, depending on which clients you already have running externally.
 
-:warning: NOTE: This configuration is not currently compatible with **Nimbus** because Nimbus does not offer a separate, dedicated validator client in its official Docker images.
+::: tip NOTE
+This configuration is not currently compatible with **Nimbus** because Nimbus does not offer a separate, dedicated validator client in its official Docker images.
 This may be provided in the future.
+:::
 
-:exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
+::: warning NOTE
+Currently, some of the Docker containers need to run as the `root` user to function correctly.
 While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
-In this case, we suggest you use the Native configuration mode listed below.** 
+In this case, we suggest you use the Native configuration mode listed below.
+:::
 
 If you would like to use this mode, proceed to the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid) section.
 
