@@ -89,7 +89,7 @@ Please read both options below to determine which one applies to you.
 
 ::: tab Method 2
 
-**Use this method only if your withdrawal address *cannot* be used to sign contracts via MetaMask (e.g. Argent or a Smart Contract).**
+**Use this method only if your withdrawal address *cannot* be used to sign transactions via MetaMask (e.g. Argent or a Smart Contract).**
 
 In this method, you will run:
 
