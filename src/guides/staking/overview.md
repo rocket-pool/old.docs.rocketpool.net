@@ -1,8 +1,8 @@
 # :book: [WIP] Staking Overview
 
-In general, staking is the act of depositing ETH to activate validator software.  
-This software is responsible for storing data, processing transactions, and adding new blocks to the blockchain.  
-This will keep Ethereum secure for everyone and earn new ETH in the process.  
+In general, staking is the act of depositing ETH to activate validator software.
+This software is responsible for storing data, processing transactions, and adding new blocks to the blockchain.
+This will keep Ethereum secure for everyone and earn new ETH in the process.
 This process, known as proof-of-stake, is being introduced by the [Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/). 
 
 **For Rocket Pool staking users**, staking means swapping as little as 0.01 ETH for rETH.  
