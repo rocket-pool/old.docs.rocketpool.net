@@ -37,7 +37,7 @@ It will also handle updates to the ETH1 and ETH2 clients with every new Smartnod
 While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
 In this case, we suggest you use the Native configuration mode listed below.** 
 
-If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker) section.
+If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 
 
 ## The Hybrid Configuration with External Clients
@@ -67,7 +67,7 @@ While Docker containers are generally quite good at preventing a user from escap
 In this case, we suggest you use the Native configuration mode listed below.
 :::
 
-If you would like to use this mode, proceed to the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid) section.
+If you would like to use this mode, proceed to the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
 
 
 ## The Native Configuration without Docker
@@ -83,4 +83,4 @@ In this mode, the Smartnode Installer is no longer relevant.
 You are responsible for manually instantiating, maintaining, and upgrading the Smartnode infrastructure, the ETH clients, and the validator clients.
 While we provide some example documentation on how to do this, we suggest that this mode should only be used by **experienced system administrators**.
 
-If you would like to use this mode, proceed to the [Configuring a Native Rocket Pool Node without Docker](./native) section.
+If you would like to use this mode, proceed to the [Configuring a Native Rocket Pool Node without Docker](./native.md) section.

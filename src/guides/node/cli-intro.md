@@ -525,15 +525,23 @@ To use this flag, you first need to find the `nonce` of your stuck transaction:
 
 Once you have it, simply call any transaction with the CLI using the `--nonce <value>` flag after `rocketpool` and before the rest of the command.
 
-For example, this will submit a transaction where I send a small amount of ETH from myself back to myself.
-I'll burn a little gas doing it, but it will unstick the broken transaction that uses a `nonce` of 10:
+::: tip
+You will probably want to combine this with the `-g` flag above to set a high gas price.
+:::
+
+For example, say I submitted a transaction with a `nonce` of 10 and a gas price of 5, but the current average gas price is 100 so my transaction is stuck.
+To fix it, I will submit a transaction where I send a small amount of ETH from myself back to myself with a gas price of 150.
+I'll burn a little gas doing it, but it will unstick the broken transaction:
 
 ```
-$ rocketpool --nonce 10 node send 0.0001 eth <node wallet>
+$ rocketpool --nonce 10 -g 150 node send 0.0001 eth <node wallet>
 
 Suggested gas price: 24.000000 Gwei
 Estimated gas used: 21000 gas
 Estimated gas cost: 0.000504 ETH
+
+Requested gas price: 150.000000 Gwei
+Maximum requested gas cost: 0.003150 ETH
 
 Are you sure you want to send 0.000100 eth to <node wallet>? This action cannot be undone! [y/n]
 ```

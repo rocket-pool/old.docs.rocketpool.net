@@ -182,15 +182,7 @@ module.exports = {
                     'node/faq'
                 ]
               },
-              {
-                  title: 'Practicing on the Test Network',
-                  sidebarDepth: 1,
-                  collapsable: true,
-                  children: [
-                      'testnet/overview',
-                      'testnet/faucet'
-                  ]
-              }
+              'testnet/overview',
           ]
         }
       ],

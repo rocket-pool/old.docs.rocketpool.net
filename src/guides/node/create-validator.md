@@ -19,7 +19,7 @@ You'll also want to provide it with the **RPL token**, because you'll need to st
 
 :::: tabs
 ::: tab Running on the Prater Test Network
-If you're running on the Prater test network, please see the [Getting Test Ether from a Faucet](../testnet/faucet.md) section to learn how to acquire test ETH.
+If you're running on the Prater test network, please see the [Practicing with the Test Network](../testnet/overview.md) section to learn how to acquire test ETH.
 
 For test RPL, we have added a similar faucet function directly to the CLI.
 You can use the command `rocketpool faucet withdraw-rpl` to acquire some RPL on the test network.
@@ -265,6 +265,7 @@ In that time, the commission rate falls to 17%.
 
 If you set a slippage of 2%, then the lowest you are willing to let it go down is 18%.
 Since 17% is less than 18%, your deposit will be cancelled and your ETH will be refunded to you.
+**Note that you will still have to pay some gas fees, even if the transaction is reverted in this way.**
 
 If you set a slippage of 4%, then the lowest you are willing to let it go down is 16%.
 Since 17% is greater than 16%, your minipool will be created and added to the queue with a commission rate of 17% for its entire life.
