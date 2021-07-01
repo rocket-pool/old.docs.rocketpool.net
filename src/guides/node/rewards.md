@@ -69,6 +69,12 @@ When the network's average gas price is higher than this limit, automatic RPL re
 They will resume once the average gas price falls below this limit.
 By default this is set to **150 gwei** but you can change it to any number you want.
 
+::: warning NOTE
+The new gas setting will not take effect until you restart the `rocketpool_node` service.
+In Docker and Hybrid modes, you can do this with `docker restart rocketpool_node`.
+In Native mode, you can do this with e.g. `sudo systemctl restart rp-node`.
+:::
+
 
 ### Disabling Automatic Claims
 

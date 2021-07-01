@@ -36,7 +36,7 @@ To the Beacon chain, a minipool looks exactly the same as a normal validator.
 It has the same responsibilities, same rules it must follow, same rewards, and so on.
 The only difference is in how the minipool was created on the ETH1 chain, and how withdrawals work when the node operator decides to voluntarily exit the minipool.
 All of the creation, withdrawing, and rewards delegation is handled by Rocket Pool's **smart contracts** on the ETH1 chain.
-This makes it completely decentralized and trustless.
+This makes it completely decentralized.
 
 A Rocket Pool **Node** is a single computer with an ETH1 wallet that was registered with Rocket Pool's smart contracts.
 The node can then create as many minipools as it can afford, all running happily on the same machine together.
