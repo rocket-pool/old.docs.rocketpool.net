@@ -89,6 +89,165 @@ The larger your storage, the longer you can go between needing to reclaim space 
 See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-linux/) for Linux instructions, and [here](https://www.nivas.hr/blog/2017/09/19/measuring-disk-io-performance-macos/) for MacOS instructions.* 
 
 
+## Installing the Operating System
+
+If you're using macOS, it's highly likely that you already have the Operating System installed and can skip this step.
+
+If you're installing Linux from scratch, each of the distributions listed above come with helpful and detailed tutorials for installing the Operating System from scratch.
+As an example though, we will walk you through the process of installing and preparing **Ubuntu Server**.
+
+Start by downloading the installation media and putting it onto a USB stick.
+[Here is a detailed guide](https://help.ubuntu.com/community/Installation/FromUSBStick) on how to do this.
+
+Once you have the installer on a bootable USB stick, [follow this excellent guide](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview) to learn how to install Ubuntu Server.
+
+::: tip
+Ubuntu Server is a **CLI-only** version of Ubuntu.
+It does not have a desktop interface.
+This is largely unnecessary for a node; it adds extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer the Server image.
+However, if you want a desktop UI on your node, you can follow [this tutorial](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview) instead.
+:::
+
+
+### Installing and Using SSH
+
+Once the server is installed and you're able to log in, you need to get its IP address.
+An easy way to do this is with `ifconfig`:
+
+```
+sudo apt install ifconfig
+
+ifconfig
+```
+
+You may see several entries here, but the one you want to look for is going to look something like this:
+
+```
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+      inet 192.168.1.8  netmask 255.255.255.0  broadcast 192.168.1.255
+      inet6 fe80::96f2:bf29:e269:1097  prefixlen 64  scopeid 0x20<link>
+      ether <mac address>  txqueuelen 1000  (Ethernet)
+      ...
+```
+
+The flags should say `UP,BROADCAST,RUNNING,MULTICAST`.
+The `inet` value (here `192.168.1.8`) is your machine's local IP address.
+
+Next, install SSH:
+
+```
+sudo apt install openssh-server
+```
+
+Once this is done, you can log into the machine's terminal remotely from your laptop or desktop.
+To access the machine, open a new terminal (**from your remote machine, not on the node**) on Linux or macOS (use Powershell on Windows) and type the following command:
+
+```
+ssh [your node's local IP address]
+```
+
+Enter your username and password, and you'll be in!
+
+
+## Setting up Swap Space
+
+In most cases, if you choose your ETH1 and ETH2 clients and your instance type carefully, you should not run out of RAM.
+Then again, it never hurts to add a little more.
+What we're going to do now is add what's called **swap space**.
+Essentially, it means we're going to use the SSD as "backup RAM" in case something goes horribly, horribly wrong and your server runs out of regular RAM.
+The SSD isn't nearly as fast as the regular RAM, so if it hits the swap space it will slow things down, but it won't completely crash and break everything.
+Think of this as extra insurance that you'll (most likely) never need.
+
+
+### Creating a Swap File
+
+The first step is to make a new file that will act as your swap space.
+Decide how much you want to use - a reasonable start would be 8 GB, so you have 8 GB of normal RAM and 8 GB of "backup RAM" for a total of 16 GB.
+To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill. 
+Luckily, since your SSD has 1 or 2 TB of space, allocating 8 to 24 GB for a swapfile is negligible.
+
+For the sake of this walkthrough, let's pick a nice middleground - say, 16 GB of swap space for a total RAM of 24 GB.
+Just substitute whatever number you want in as we go.
+
+Enter this, which will create a new file called `/swapfile` and fill it with 16 GB of zeros.
+To change the amount, just change the number in `count=16` to whatever you want. **Note that this is going to take a long time, but that's ok.**
+```
+$ sudo dd if=/dev/zero of=/swapfile bs=1G count=16 status=progress
+```
+
+Next, set the permissions so only the root user can read or write to it (for security):
+```
+$ sudo chmod 600 /swapfile
+```
+
+Now, mark it as a swap file:
+```
+$ sudo mkswap /swapfile
+```
+
+Next, enable it:
+```
+$ sudo swapon /swapfile
+```
+
+Finally, add it to the mount table so it automatically loads when your server reboots:
+```
+$ sudo nano /etc/fstab
+```
+
+Add a new line at the end that looks like this:
+```
+LABEL=writable  /        ext4   defaults        0 0
+...
+/swapfile                            none            swap    sw              0       0
+```
+
+Press `Ctrl+O` and `Enter` to save, then `Ctrl+X` and `Enter` to exit.
+
+To verify that it's active, run these commands:
+```
+$ sudo apt install htop
+$ htop
+```
+
+Your output should look like this at the top:
+![](../local/images/pi/Swap.png)
+
+If you see a non-zero number in the last row labeled `Swp`, then you're all set.
+
+Press `q` or `F10` to quit out of `htop` and get back to the terminal.
+
+
+### Configuring Swappiness and Cache Pressure
+
+By default, Linux will eagerly use a lot of swap space to take some of the pressure off of the system's RAM.
+We don't want that. We want it to use all of the RAM up to the very last second before relying on SWAP.
+The next step is to change what's called the "swappiness" of the system, which is basically how eager it is to use the swap space.
+There is a lot of debate about what value to set this to, but we've found a value of 6 works well enough.
+
+We also want to turn down the "cache pressure", which dictates how quickly the server will delete a cache of its filesystem.
+Since we're going to have a lot of spare RAM with our setup, we can make this "10" which will leave the cache in memory for a while, reducing disk I/O.
+
+To set these, run these commands:
+```
+$ sudo sysctl vm.swappiness=6
+$ sudo sysctl vm.vfs_cache_pressure=10
+```
+
+Now, put them into the `sysctl.conf` file so they are reapplied after a reboot:
+```
+$ sudo nano /etc/sysctl.conf
+```
+
+Add these two lines to the end:
+```
+vm.swappiness=6
+vm.vfs_cache_pressure=10
+```
+
+Then save and exit like you've done before (`Ctrl+O`, `Ctrl+X`).
+
+
 ### Pre-installation System Checks
 
 Before installing Rocket Pool, please review the following checklist:
