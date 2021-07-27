@@ -149,8 +149,8 @@ Note that stopping the services **does not disable autostart**; the processes wi
 
 Now that the Smartnode services have been started, it's a good idea to check that they're running correctly without errors.
 
-:::: tabs
-::: tab Docker (Default) Mode
+::::: tabs
+:::: tab Docker (Default) Mode
 The first thing to check is whether the Docker containers are running well, or if they are constantly restarting due to an error.
 Run the following command:
 
@@ -173,6 +173,13 @@ ac629c08c896   ethereum/client-go:v1.10.3          "sh /setup/start-nod…"   2 
 The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly.
 
+::: warning NOTE
+If you are using Prysm as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+This is okay!
+The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
+Once this is done, the container will function correctly - until then, just ignore it.
+::: 
+
 Still, it might be useful to check the logs of the various services.
 
 To check on the logs, use the `rocketpool service logs <container>` command, where `<container>` is one of `eth1`, `eth2`, `validator`, `api`, `node`, or `watchtower`.
@@ -194,9 +201,9 @@ eth1_1        | INFO [06-17|05:17:19.486] Imported new block receipts           
 ```
 
 You should do this for both `eth1` and `eth2` to make sure both clients are running without any errors.
-:::
+::::
 
-::: tab Hybrid Mode
+:::: tab Hybrid Mode
 The first thing to check is whether the Docker containers are running well, or if they are constantly restarting due to an error.
 Run the following command:
 
@@ -217,14 +224,21 @@ a3c22f54eff0   rocketpool/smartnode:v1.0.0-rc3     "/go/bin/rocketpool …"   2 
 The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly.
 
+::: warning NOTE
+If you are using Prysm as your ETH2 client and letting Rocket Pool manage it via Docker, you will likely notice the `rocketpool_validator` container is constantly restarting.
+This is okay!
+The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
+Once this is done, the container will function correctly - until then, just ignore it.
+::: 
+
 Still, it might be useful to check the logs of the various services.
 
 To check on the logs, use the `rocketpool service logs <container>` command, where `<container>` is one of `eth1`, `eth2`, `validator`, `api`, `node`, or `watchtower`.
 
 You can ignore `eth1` and/or `eth2` based on which ones you are maintaining externally, but if you are letting Rocket Pool manage one of them, you should check the status of it now using this command.
-:::
+::::
 
-::: tab Native Mode
+:::: tab Native Mode
 The easiest way to check the status and logs in native mode is to use the logging scripts that you created when you first set up the Smartnode services.
 
 For example, to check Geth's log, you would just run:
@@ -235,8 +249,8 @@ For example, to check Geth's log, you would just run:
 
 You should see that it is slowly chugging along without any errors.
 Do this for your ETH1 and ETH2 clients now to verify that they are working properly.
-:::
 ::::
+:::::
 
 
 ## Setting up a Wallet

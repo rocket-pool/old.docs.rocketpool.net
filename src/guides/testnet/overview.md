@@ -21,7 +21,7 @@ You should only use test ETH that you received on the Goerli network from a fauc
 :::
 
 
-## Configuring a Testnet
+## Configuring the Testnet
 
 [The default configuration of Rocket Pool using Docker](../node/install-modes.md) handles all of the settings involved in using a testnet for you automatically.
 There's nothing special you need to do.
@@ -71,3 +71,55 @@ The second way to get test ETH is via [the service that Mudit Gupta hosts on his
 For this, you'll need a Twitter or Facebook account.
 Follow the directions on that page, which involve posting your Goerli wallet address and pasting a link to that message onto the service's site.
 You should receive some Goerli ETH into the wallet you posted shortly after doing this.
+
+
+## Getting Test RPL on Goerli
+
+If you're testing out node operation, you'll need some test RPL in addition to test ETH.
+To get this, you'll need to use the Smartnode stack's command line interface (CLI) tool.
+You'll want to set up the Smartnode stack following the [Node Operator's guide](../node/responsibilities.md) before collecting RPL from the faucet.
+
+Once your Smartnode CLI is installed and you have a wallet assigned to your node, you can access the built-in RPL faucet.
+Use the following command to check on its status:
+
+```
+rocketpool faucet status
+```
+
+The output will look like this:
+
+```
+The faucet has a balance of 1999400.000000 RPL.
+You can withdraw 600.000000 RPL (requires a 0.500000 GoETH fee)!
+Allowances reset in 26585 blocks.
+```
+
+The faucet is on a timer, so each node operator can only use the faucet once every 4 or 5 days.
+
+- The **faucet balance** indicates how much RPL is still available.
+- The **withdraw amount** shows how much RPL you can receive from the faucet during the current cycle.
+  If you already used the faucet, this line will change to let you know that you can't use it again this cycle.
+- The **reset** timer shows how long (in blocks) it is until the next cycle, at which point you can use the faucet again.
+  The amount of time remaining (in seconds) is approximately `this number * 13 seconds per block / 60 seconds`.
+
+::: warning NOTE
+The RPL faucet charges a 0.5 goerli ETH fee to use it, in order to prevent people from abusing the system.
+You'll need to have at least this amount in your node wallet already in order to use it!
+:::
+
+When you're ready to receive RPL from the faucet, use the following command:
+
+```
+rocketpool faucet withdraw
+```
+
+After a short wait, you'll see the following output:
+
+```
+Successfully withdrew 600.000000 RPL from the faucet.
+```
+
+This will provide you with 600 of the **legacy (v1) RPL** token, which is analogous to the original RPL token on mainnet.
+Rocket Pool uses a **new (v2) RPL** token which supports the inflation used to reward node operators.
+
+To learn how to swap legacy RPL for new RPL, follow the steps in the [Creating a Minipool (ETH2 Validator)](../node/create-validator.md) guide.

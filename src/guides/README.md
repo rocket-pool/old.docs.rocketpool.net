@@ -1,77 +1,27 @@
 # :ledger: Guides Overview
 
-# TODO
-This section contains guides for Rocketpool users.
+Welcome to the Guides section of the Rocket Pool documentation!
+Here you will find various guides that walk you through every step of the various Rocket Pool processes.
 
+If you're looking to stake your ETH with Rocket Pool and receive rETH in return, please visit the [Staking Guide](./staking/overview.md).
+Staking is a very simple process, and this guide is filled with step-by-step instructions (including screenshots) that show you how it's done.
 
-# How to Stake with Rocket Pool
+If you're interested in running a Rocket Pool node to create your own ETH2 validators, take a look at our [Node Operator's guide](./node/responsibilities.md).
+This is a very comprehensive guide that goes over all of the considerations involved in node operation, including:
 
-- [Testnet] Getting goerli ETH from a faucet
-- Getting onto the staking website
-- Staking ETH for rETH
-- How to track growth over time
-- Tax disclaimer (depends on country of origin)
+- Deciding to run a node locally at home, or remotely on the cloud
+- Selecting the hardware for a local machine, or selecting a remote hosting provider
+- Preparing and securing the operating system of your node
+- Selecting your ETH1 and ETH2 clients
+- Installing Rocket Pool's Smartnode stack
+- Creating a new ETH2 validator using the Rocket Pool network
+- Maintaining and updating your node
 
+Both guides will show you how to practice for free on the Rocket Pool testnet so you can get a feel for everything without risking any of your real-life ETH.
 
-# Running a Rocket Pool Node
+::: warning NOTE
+The guides are also written to support the processes on the Ethereum mainnet when you're ready to stake your real funds, but Rocket Pool is currently still in beta and does not operate on mainnet yet.
+:::
 
-- Overview
-  - Node operator responsibilities
-  - Tax disclaimer (depends on country of origin)
-- Picking a Setup: Local Node vs. VPS
-  - Local node requirements (hardware, ISP, data caps, reliable power)
-  - VPS requirements (data rates, storage rates, security, etc.)
-- Local Node Setup:
-  - Build, prepare hardware, install OS via ISO (follow vendor directions)
-  - Prepare the OS: set up 2nd drive, test performance (fio), set up swap if needed?
-- VPS Setup:
-  - Pick a VPS provider
-  - Create an image
-  - Prepare the OS: test performance (fio), set up swap if needed?
-- Raspberry Pi Setup (copy of Local Node with some extra sauce)
-- Install & Configure Rocket Pool
-  - Choosing an ETH1 client
-  - Choosing an ETH2 client
-  - Standard (Full Docker install):
-    - Install normally, change geth cache if necessary, change peers if necessary
-    - How to Update
-  - Docker with external ETH1 and/or ETH2 clients:
-    - Install
-    - Modify config settings to point to external clients
-    - How to Update
-  - Native:
-    - Set up system accounts, set up services, install binaries, etc.
-    - How to Update
-- Using the CLI
-  - Common command walkthrough
-- How to Create a Validator
-  - How does the commission work?
-  - 16 vs. 32 ETH?
-  - What's the queue?
-- Securing your Node
-  - Setting a trusted withdrawal address
-  - Setting up OS permissions
-  - Firewall & locking down ports
-  - SSH hardening (key exchange, passwordless)
-- Monitoring & Maintaining your Node
-  - Watching system performance
-  - Watching validator performance
-  - Setting up Grafana
-  - Dealing with system updates & down time
-  - Setting up a backup strategy
-  - Checking on RPL claims & gas reserves in your node wallet
-- Troubleshooting
-  - Sync issues
-  - Peer issues
-  - Can't do X because I don't have enough gas
-  - Can't deposit because I haven't staked enough RPL
-  - My minipool was dissolved
-  - My TX is stuck because I set gas too low, help!
-  - Others that come up?
-
-# How Do I...? (FAQ)
-  - Recover my node if my machine broke?
-  - See how much RPL I've earned?
-  - See what the current gas price is?
-  - Disable automatic RPL claims?
-  - Other stuff the community asks for
+When you're ready, select a guide from the options above based on your interests.
+You are also free to explore the various pages using the sidebar to the left. 
