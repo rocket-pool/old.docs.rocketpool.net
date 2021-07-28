@@ -1,4 +1,4 @@
-# :evergreen_tree: Pruning Geth
+# Pruning Geth
 
 If you use `geth` as your ETH1 client, you will notice that a newly synced node takes up far less space than a `geth` instance that synced a while ago and has been online since.
 

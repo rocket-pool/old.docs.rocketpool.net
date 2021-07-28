@@ -1,4 +1,4 @@
-# :arrow_up: Checking for Updates
+# Checking for Updates
 
 One of the responsibilities of a node operator is making sure your system is up to date with the latest security patches.
 Automatic updates are convenient but can interfere with your node operation, so it may be preferable to run them manually.

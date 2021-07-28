@@ -1,4 +1,4 @@
-# :notebook: A Node Operator's Responsibilities
+# A Node Operator's Responsibilities
 
 ## How ETH2 Staking Works
 

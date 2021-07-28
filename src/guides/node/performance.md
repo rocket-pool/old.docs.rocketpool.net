@@ -1,4 +1,4 @@
-# :bar_chart: Monitoring your Node's Performance
+# Monitoring your Node's Performance
 
 Now that your node is up and running and you have one or more minipools attached, you'll need to keep an eye on everything to make sure it's running smoothly.
 

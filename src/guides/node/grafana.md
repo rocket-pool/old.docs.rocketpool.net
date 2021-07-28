@@ -1,4 +1,4 @@
-# :bar_chart: [NYI] Creating a Grafana Dashboard
+# [NYI] Creating a Grafana Dashboard
 
 # TODO
 

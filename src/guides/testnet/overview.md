@@ -1,4 +1,4 @@
-# :book: Practicing with the Test Network
+# Practicing with the Test Network
 
 An Ethereum **test network** (`testnet` for short) is an Ethereum blockchain, functionally identical to the standard Ethereum blockchain, but it's intended to be used for testing smart contracts before they go live onto the main "real" blockchain (called `mainnet`).
 Testnets run in parallel with mainnet - there are actually several of them running right now!

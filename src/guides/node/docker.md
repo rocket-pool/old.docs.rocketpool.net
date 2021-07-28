@@ -1,4 +1,4 @@
-# :whale: Configuring a Standard Rocket Pool Node with Docker
+# Configuring a Standard Rocket Pool Node with Docker
 
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using the standard [Docker](https://www.docker.com/resources/what-container)-based setup. 
 This will install and configure everything you need to run a complete node, including:

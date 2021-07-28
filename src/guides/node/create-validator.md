@@ -1,4 +1,4 @@
-# :mag: Creating a Minipool (ETH2 Validator)
+# Creating a Minipool (ETH2 Validator)
 
 If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the ETH1 and ETH2 chains on your respective clients. 
 If so, then you are ready to register your node on the Rocket Pool network and create a minipool with an ETH2 validator!

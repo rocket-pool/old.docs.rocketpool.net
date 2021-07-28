@@ -1,4 +1,4 @@
-# :question: Choosing a Platform
+# Choosing a Platform
 
 Alright! So you've decided to try your hand at running a Rocket Pool node. The first step of the process is to decide what kind of platform you want to run your node on. If you already have one in mind, great! You can skip to the next section. If you aren't sure yet, then read on for some information about your options.
 

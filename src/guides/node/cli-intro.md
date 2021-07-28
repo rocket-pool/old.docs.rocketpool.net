@@ -1,4 +1,4 @@
-# :computer: Intro to the Command Line Interface
+# Intro to the Command Line Interface
 
 As a node operator, the CLI is your primary tool for interacting with Rocket Pool.
 You will use it to create new minipools, check on the status of everything, claim periodic RPL rewards, exit and withdraw from your minipools when you're ready, and a host of other activities.

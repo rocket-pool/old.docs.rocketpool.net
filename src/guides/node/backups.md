@@ -1,4 +1,4 @@
-# :floppy_disk: [NYI] Backing Up your Node
+# [NYI] Backing Up your Node
 
 # TODO
 

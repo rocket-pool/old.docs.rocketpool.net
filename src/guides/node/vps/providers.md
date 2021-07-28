@@ -1,4 +1,4 @@
-# :cloud: Selecting a Hosting Provider
+# Selecting a Hosting Provider
 
 If you've arrived at this section, then you would like to run a Rocket Pool node but can't set one up locally at your home; you require a **virtual private server (VPS)** hosted on the cloud.
 There are several different services available that can provide such a machine, and they come in two different flavors: VPS providers and public cloud providers.

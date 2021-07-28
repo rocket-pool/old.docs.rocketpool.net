@@ -1,4 +1,4 @@
-# :dollar: Claiming Node Operator Rewards
+# Claiming Node Operator Rewards
 
 As a Rocket Pool node operator, you are entitled to regular rewards that will be provided in the form of the RPL token.
 This section will describe how these rewards work and how you can claim them.

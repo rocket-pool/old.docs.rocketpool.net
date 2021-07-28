@@ -1,4 +1,4 @@
-# :cd: Preparing the Operating System
+# Preparing the Operating System
 
 As described in the previous section, there are many different VPS and cloud providers.
 Writing guides for all of them would be somewhat impractical, but in this section we'll go over a typical workflow for preparing a virtual machine hosted on [Amazon Web Services](https://aws.amazon.com/).

@@ -1,4 +1,4 @@
-# :chart_with_upwards_trend: How to Stake with Rocket Pool
+# How to Stake with Rocket Pool
 
 In this guide, we'll walk you through the process of how to stake your ETH with Rocket Pool, providing it for Node Operators to create new ETH2 validators with.
 As described in the [Staking Overview](overview.md), this will involve depositing your ETH into Rocket Pool's vault and receiving an equal value of rETH back.

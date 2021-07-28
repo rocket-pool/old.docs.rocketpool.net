@@ -1,4 +1,4 @@
-# :cd: Preparing a Raspberry Pi
+# Preparing a Raspberry Pi
 
 This guide will walk you through how run a Rocket Pool node using a Raspberry Pi.
 While this is not typically recommended in most staking guides, we recognize that it is attractive because it is a much more affordable option than standing up an entire PC.

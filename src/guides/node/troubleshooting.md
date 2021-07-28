@@ -1,4 +1,4 @@
-# :warning: [NYI] Troubleshooting your Node
+# [NYI] Troubleshooting your Node
 
 # TODO
 

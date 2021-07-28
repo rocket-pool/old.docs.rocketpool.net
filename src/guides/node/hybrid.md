@@ -1,4 +1,4 @@
-# :arrow_up_down: Configuring a Hybrid Rocket Pool Node with External Clients
+# Configuring a Hybrid Rocket Pool Node with External Clients
 
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using a hybrid configuration.
 [Docker](https://www.docker.com/resources/what-container) will be used to run the Rocket Pool stack itself, which you will then configure to talk to your already existing external ETH1 and/or ETH2 clients.

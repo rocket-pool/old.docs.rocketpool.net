@@ -1,4 +1,4 @@
-# :computer: Selecting Staking Hardware
+# Selecting Staking Hardware
 
 So!
 You've decided that you want to run your own Rocket Pool node at home.

@@ -1,4 +1,4 @@
-# :cd: [WIP] Preparing a PC, Mini-PC, or NUC
+# [WIP] Preparing a PC, Mini-PC, or NUC
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 

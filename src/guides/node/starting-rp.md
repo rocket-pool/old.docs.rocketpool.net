@@ -1,4 +1,4 @@
-# :checkered_flag: Starting Rocket Pool and Setting Up a Node Wallet
+# Starting Rocket Pool and Setting Up a Node Wallet
 
 At this point, you should have the complete Rocket Pool infrastructure running, including the Smartnode stack, an ETH1 client, and an ETH2 client.
 You should also have hardened your operating system from outside attackers.

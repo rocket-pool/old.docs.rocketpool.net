@@ -1,4 +1,4 @@
-# :question: Selecting a Rocket Pool Mode
+# Selecting a Rocket Pool Mode
 
 Rocket Pool's Smartnode stack is quite flexible; there are several different ways to run it.
 It can stand up an entire full node from scratch, it can integrate with existing eth1 or eth2 deployments, and it can even run natively as a set of system services.

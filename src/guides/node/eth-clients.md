@@ -1,4 +1,4 @@
-# :computer: Choosing your ETH Clients
+# Choosing your ETH Clients
 
 Rocket Pool's Smartnode installer can transform your machine into a full ETH1 and ETH2 node, as it requires both clients in order to operate properly.
 If you already have ETH1 and ETH2 clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid) section.

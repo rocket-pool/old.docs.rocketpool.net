@@ -1,4 +1,4 @@
-# :book: Staking Overview
+# Staking Overview
 
 ## How ETH2 Staking Works
 

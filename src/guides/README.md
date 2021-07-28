@@ -1,4 +1,4 @@
-# :ledger: Guides Overview
+# Guides Overview
 
 Welcome to the Guides section of the Rocket Pool documentation!
 Here you will find various guides that walk you through every step of the various Rocket Pool processes.

@@ -1,4 +1,4 @@
-# :question: [NYI] How Do I...? (FAQ)
+# [NYI] How Do I...? (FAQ)
 
 # TODO
 
