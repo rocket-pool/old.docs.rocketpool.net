@@ -42,8 +42,6 @@ Check the next section to learn how to get some test ETH on Goerli, which you'll
 To use the Rocket Pool test network, you'll need ETH on Goerli.
 Luckily, you can get this for free using a **faucet** - an automated service that will provide you with Goerli ETH to test with.
 
-There are two main faucets available to help you test Rocket Pool.
-
 ::: warning NOTE
 You will need to provide an Ethereum address in order to receive test ETH.
 
@@ -54,23 +52,52 @@ If you are planning to run a node, please go through the [Node Operator Guide](.
 You will be prompted to return here at the appropriate step.
 :::
 
-### The EthStaker Discord Server
+Rocket Pool provides a faucet in its [Discord server](https://discordapp.com/invite/tCRG54c).
+Join the server and head to the `#faucet` channel in the `TESTNET` group.
+Here, you can interact with a bot that provides Goerli ETH for testing.
 
-EthStaker is a community aimed at helping people learn how to stake ETH, run validators, stay informed of the latest developments and news, and promote the overall health and diversity of the Beacon Chain.
-They have generously collaborated with Rocket Pool to make a faucet available for testers that have a Discord account.
+You can type `!help` to receive some useful information about how to use the bot, which will provide the following text:
 
-Click on [this link](https://discord.gg/GGGmqZdCBf) to join the EthStaker server on Discord.
-Once there, head to the `request-goerli-eth` channel.
-[TODO] *Complete this once they've enabled the faucet again*
+```
+Rocket Pool Goerli ETH Bot
 
+Welcome to the Rocket Pool Goerli ETH Faucet. See below for my commands.
 
-### Mudit Gupta's Blog
+!goerliEth <address>
+Sends 1 goerli eth to the address specified.
+Ex: !goerliEth 0x56d389C4E07A48d429035532402301310B8143A0
+Purpose: so you can test out UI staking at https://beta.rocketpool.net/ and/or register your node.
 
-The second way to get test ETH is via [the service that Mudit Gupta hosts on his blog](https://faucet.goerli.mudit.blog/).
+!nodeOperator <address>
+Sends 17 goerli eth to the address specified.
+Ex: !nodeOperator 0x56d389C4E07A48d429035532402301310B8143A0
+Purpose: so you can set up your 16 goerli eth node.
+Note: you must be registered with Rocket Pool before requesting.
 
-For this, you'll need a Twitter or Facebook account.
-Follow the directions on that page, which involve posting your Goerli wallet address and pasting a link to that message onto the service's site.
-You should receive some Goerli ETH into the wallet you posted shortly after doing this.
+!help
+Shows this message.
+
+!mod
+Tags the maintainers of this bot, please use if you are experiencing any issues.
+```
+
+If you aren't planning to register a node and just want some ETH to test staking to receive rETH, or if you are planning to register a node but haven't yet, type the following command in the channel:
+
+```
+!goerliEth <your goerli address>
+```
+
+without the angle brackets.
+If your wallet doesn't have any ETH already, the bot will send your wallet 1 ETH to test with.
+
+If you *are* planning to run a node and you need 16 Goerli ETH to test a `node deposit` so you can create a validator, use this command instead:
+
+```
+!nodeOperator <your goerli address>
+```
+
+This will give you 17 Goerli ETH to test minipool creation with, but the address you provide it *must* be a registered Rocket Pool node.
+Therefore, we recommend you use the `!goerliEth` command first to get enough ETH to pay for the gas involved in setting up your node, then call `!nodeOperator` once it's set up and ready to begin staking.
 
 
 ## Getting Test RPL on Goerli
