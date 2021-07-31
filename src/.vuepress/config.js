@@ -183,6 +183,7 @@ module.exports = {
                 ]
               },
               'testnet/overview',
+              'testnet/upgrading',
           ]
         }
       ],
