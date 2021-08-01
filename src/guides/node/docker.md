@@ -57,7 +57,7 @@ Mark it as executable, so it has permissions to run:
 chmod +x ~/bin/rocketpool
 ```
 
-Next, log out and log back in (or close SSH and reconnect), or simply restart.
+Next, **log out and log back in** (or close SSH and reconnect), or simply restart.
 This is because the path that you saved the CLI to (`~/bin`) may not be in your system's `PATH` variable (the list of places your system searches for executables) yet.
 Logging out and back in will put it there. 
 
@@ -307,7 +307,7 @@ This will be empty at first, which is fine. Add this as the contents:
 ```
 
 where `<your external mount point>` is the directory that your other drive is mounted to.
-In the case of Raspberry Pi users, it should be `/mnt/rpdata` or whatever folder you set up in the [Preparing a Raspberry Pi](./local/prepare-pi) section.
+In the case of Raspberry Pi users, it should be `/mnt/rpdata` or whatever folder you set up in the [Preparing a Raspberry Pi](./local/prepare-pi.md) section.
 
 Press `Ctrl+O, Enter` to save the file, and `Ctrl+X, Enter` to exit the editor.
 
@@ -341,7 +341,7 @@ This will launch a CLI-based interview that will ask you a few questions to help
 ### ETH1 Configuration
 
 First, it will ask you about which ETH1 client you want to use.
-For help deciding on an option, consult the [Choosing your ETH Clients](./eth-clients) section.
+For help deciding on an option, consult the [Choosing your ETH Clients](./eth-clients.md) section.
 
 The prompt will look like this:
 
@@ -478,7 +478,7 @@ Therefore, choosing a random client with not negatively impact your validators b
 That being said, we also offer you the option to choose a specific client if you have one in mind.
 Users with low-power systems, such as the **Raspberry Pi**, may want to do this as it allows you to explicitly pick an ETH2 client that is tailored to systems with low resources.
 
-For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients) section.
+For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients.md) section.
 
 Regardless of which client you choose, the next question will be this:
 
@@ -525,4 +525,4 @@ Each router has a different way of doing this, so **you'll need to check out you
 At this point, your configuration is complete.
 Congratulations!
 You're ready to secure your operating system to protect your node.
-Move on to the [Securing your Node](./securing-your-node) section next.
+Move on to the [Securing your Node](./securing-your-node.md) section next.

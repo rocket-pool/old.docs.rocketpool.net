@@ -1117,4 +1117,4 @@ sudo chmod 660 /srv/rocketpool/data/wallet
 
 And with that, you're ready to secure your operating system to protect your node.
 
-Move on to the [Securing your Node](./securing-your-node) section next.
+Move on to the [Securing your Node](./securing-your-node.md) section next.

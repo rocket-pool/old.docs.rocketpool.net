@@ -8,7 +8,7 @@ This guide is intended for users that are familiar with terminal usage and how t
 **If you are not familiar with these activites, we do not recommend that you use the hybrid mode.**
 :::
 
-Please start by following the [Configuring a Standard Rocket Pool Node with Docker](./docker) guide to install and configure the Smartnode stack.
+Please start by following the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) guide to install and configure the Smartnode stack.
 However, make these following changes:
 
 - If you have your own external ETH1 client, just **select Geth during the ETH1 portion of the interview** and leave all of the options blank (use the defaults).
@@ -40,7 +40,7 @@ If you plan to use a different client, you can ignore the Websocket portions in 
 
 This should not impact your security posture as long as the ports used for RPC access (for example, `--http.port` and `--ws.port` in Geth) are only accessible by your local system.
 If they are properly firewalled or hidden behind a router, an attacker will not be able to access your node from the outside.
-Consult the [Securing your Node](./securing-your-node) section for more information on how to check this.
+Consult the [Securing your Node](./securing-your-node.md) section for more information on how to check this.
 
 
 ### Updating `docker-compose.yml`
@@ -184,7 +184,7 @@ Once you have ensured that configuration, restart your ETH2 client so the new se
 
 This should not impact your security posture as long as the port used for RPC access (for example, `--rpc-port`) is only accessible by your local system.
 If it is properly firewalled or hidden behind a router, an attacker will not be able to access your node from the outside.
-Consult the [Securing your Node](./securing-your-node) section for more information on how to check this.
+Consult the [Securing your Node](./securing-your-node.md) section for more information on how to check this.
 
 
 
@@ -298,4 +298,4 @@ Do not include a prefix when you input the IP address.
 At this point, your configuration is complete.
 Congratulations!
 You're ready to secure your operating system to protect your node.
-Move on to the [Securing your Node](./securing-your-node) section next.
+Move on to the [Securing your Node](./securing-your-node.md) section next.

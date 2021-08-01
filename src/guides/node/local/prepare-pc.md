@@ -50,7 +50,7 @@ TLDR, OSX is good, but the installer doesn't know how to deal with arm64 so manu
 ### Hardware Requirements
 
 The hardware requirements for a node depend largely on which eth1 and eth2 clients you decide to run.
-As shown in [the hardware guide](./hardware), there is a wide range of possible configurations that work well.
+As shown in [the hardware guide](./hardware.md), there is a wide range of possible configurations that work well.
 However, for the sake of completeness, we have assembled the following hardware profiles:
 
 

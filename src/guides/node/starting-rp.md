@@ -322,7 +322,7 @@ If you don't see any errors, then your wallet and validators will be recovered.
 As of the current build, Rocket Pool needs to have access to your wallet's private key in order to perform its automatic duties.
 **This means that the private key will exist in a file on your machine.**
 If an attacker manages to gain access to your machine, they could gain access to your node wallet and steal all of the tokens that it contains!
-Please ensure that you have followed the security guide in the [Securing your Node](./securing-your-node) section before you continue, and are comfortable with your security posture.
+Please ensure that you have followed the security guide in the [Securing your Node](./securing-your-node.md) section before you continue, and are comfortable with your security posture.
 :::
 
 :::: tabs
