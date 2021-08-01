@@ -475,7 +475,11 @@ sudo chown eth2:eth2 /mnt/rpdata/nimbus_data
 
 Now, grab [the latest Nimbus release](https://github.com/status-im/nimbus-eth2/releases), or [build it from source](https://github.com/status-im/nimbus-eth2/) if you want.
 
-Copy `build/nimbus_beacon_node` from the release archive into `/srv/nimbus/`.
+Copy `build/nimbus_beacon_node` from the release archive into `/srv/nimbus/`, optionally renaming it to `nimbus` (the rest of the guide assumes you have done this):
+
+```shell
+cp build/nimbus_beacon_node /srv/nimbus/nimbus
+```
 :::
 
 ::: tab Prysm

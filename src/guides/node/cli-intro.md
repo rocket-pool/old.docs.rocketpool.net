@@ -66,7 +66,7 @@ This lists out each of the available commands along with a shortcut for them (th
 Below, we'll go through the common operations you can expect to use as a node operator.
 
 ::: tip
-For a complete description of all of the commands and flags, consult the [Command Reference documentation](../../documentation/smart-node-advanced#command-reference).
+For a complete description of all of the commands and flags, consult the [Command Reference documentation](../../documentation/smart-node-advanced.md#command-reference).
 :::
 
 
