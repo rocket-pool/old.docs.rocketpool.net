@@ -122,6 +122,7 @@ Next, grab the installation package - we're going to throw almost everything in 
 1. The config file that Rocket Pool uses to understand the directories and routes for everything
 2. The script that lets Rocket Pool restart the validator service once a new minipool is created (so it can load the new keys)
 
+We also need to create the `settings.yml` file that holds all of your node's specific configuration details. 
 Follow these steps for your system's architecture:
 
 :::: tabs
@@ -138,6 +139,8 @@ cp amd64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
 
 cp amd64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
 
+touch -a /srv/rocketpool/settings.yml
+
 cd /srv/rocketpool
 ```
 :::
@@ -153,6 +156,8 @@ tar xf rp-smartnode-install-arm64.tar.xz
 cp arm64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
 
 cp arm64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
+
+touch -a /srv/rocketpool/settings.yml
 
 cd /srv/rocketpool
 ```
