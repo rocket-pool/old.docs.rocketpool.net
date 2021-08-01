@@ -134,9 +134,9 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 
 tar xf rp-smartnode-install-amd64.tar.xz
 
-cp rp-smartnode-install/network/prater/config.yml /srv/rocketpool
+cp amd64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
 
-cp rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
+cp amd64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
 
 cd /srv/rocketpool
 ```
@@ -150,9 +150,9 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 
 tar xf rp-smartnode-install-arm64.tar.xz
 
-cp rp-smartnode-install/network/prater/config.yml /srv/rocketpool
+cp arm64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
 
-cp rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
+cp arm64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
 
 cd /srv/rocketpool
 ```
