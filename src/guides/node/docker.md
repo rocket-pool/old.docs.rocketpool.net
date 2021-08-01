@@ -57,6 +57,10 @@ Mark it as executable, so it has permissions to run:
 chmod +x ~/bin/rocketpool
 ```
 
+Next, log out and log back in (or close SSH and reconnect), or simply restart.
+This is because the path that you saved the CLI to (`~/bin`) may not be in your system's `PATH` variable (the list of places your system searches for executables) yet.
+Logging out and back in will put it there. 
+
 Now, test running it with the `--version` flag.
 You should see output like this:
 ```
