@@ -148,6 +148,15 @@ ssh [your node's local IP address]
 
 Enter your username and password, and you'll be in!
 
+::: warning NOTE
+At this point, you should *strongly consider* configuring your router to make your node's IP address **static**.
+This means that your node will have the same IP address forever, so you can always SSH into it using that IP address.
+Otherwise, it's possible that your node's IP could change at some point, and the above SSH command will no longer work.
+You'll have to enter your router's configuration to find out what your node's new IP address is.
+
+Each router is different, so you will need to consult your router's documentation to learn how to assign a static IP address.
+:::
+
 
 ## Setting up Swap Space
 
