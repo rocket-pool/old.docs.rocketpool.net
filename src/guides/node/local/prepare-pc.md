@@ -271,4 +271,4 @@ Before installing Rocket Pool, please review the following checklist:
 - If your ISP caps your data, it is more than 1.5 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!
-Move on to the [Choosing your ETH Clients](../eth-clients) section.
+Move on to the [Choosing your ETH Clients](../eth-clients.md) section.
