@@ -7,7 +7,7 @@
     "name": "David Rugendyke",
     "email": "contact@rocketpool.net"
   },
-  "repository": "https://github.com/rocket-pool/rocketpool.github.io",
+  "repository": "https://github.com/rocket-pool/docs.rocketpool.net",
   "scripts": {
     "nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" || echo '\u001b[31mWARNING: UNSUPPORTED NODE VERSION\u001b[0m\n'",
     "dev": "npm run nvm && vuepress dev src",
