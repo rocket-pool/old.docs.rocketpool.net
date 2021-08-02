@@ -137,7 +137,7 @@ You'll need to have at least this amount in your node wallet already in order to
 When you're ready to receive RPL from the faucet, use the following command:
 
 ```
-rocketpool faucet withdraw
+rocketpool faucet withdraw-rpl
 ```
 
 After a short wait, you'll see the following output:
