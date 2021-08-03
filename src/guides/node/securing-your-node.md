@@ -51,7 +51,7 @@ As a quick cheatsheet:
 
 Once you have your SSH key offline, you can add it to your Rocketpool node either by:
 
-1. Running `ssh-copy-id ~/.ssh/your_key.pub username@ip.of.rocketpool.node`
+1. Running `ssh-copy-id -i ~/.ssh/your_key.pub username@ip.of.rocketpool.node`
 2. On your Rocketpool node opening `~/.ssh/authorized_keys` and adding the contents of `~/.ssh/your_key.pub`, note that this has to be the `.pub` file
 
 You should now be able to log into your Rocketpool node using `ssh user@ip.of.rocketpool.node` without being prompted for the password of your user.

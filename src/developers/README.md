@@ -1,4 +1,4 @@
-# :ledger: Documentation
+# Developer Documentation
 
 Rocket Pool is a first of its kind ETH2 Proof of Stake Protocol, designed to be community owned, decentralised, trustless and compatible with staking in Ethereum 2.0.
 

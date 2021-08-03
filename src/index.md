@@ -2,18 +2,18 @@
 home: false
 heroImage: /images/logo.png
 tagline: Decentralised & Trustless ETH2 Staking Protocol
-actionText: Quick Overview →
+actionText: Get Started →
 actionLink: /overview/
 features:
-- title: White Paper
-  details: Read an in-depth overview of the protocol in the white paper, covers all areas in an easy to read manner.
-  link: /whitepaper/
-- title: Documentation
-  details: All you need to know about our installing and running a smart node + our javascript lib and smart contracts. 
-  link: /documentation/
+- title: Overview
+  details: Learn all about what Rocket Pool is, how it works, and how to use it with an easy-to-read series of articles.
+  link: /overview/
 - title: Guides
-  details: How to participate in the final beta, stake or setup a smart node on a variety of providers from your home to Amazon.
+  details: Follow our detailed walkthroughs to practice using Rocket Pool on the Prater test network, from staking ETH to running a node.
   link: /guides/
+- title: For Developers
+  details: Review our API Documentation and code examples to quickly integrate your application with our protocol.
+  link: /developers/
 footer: Made by Rocket Pool with ❤️
 ---
 

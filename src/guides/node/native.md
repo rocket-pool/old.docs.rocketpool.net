@@ -68,7 +68,7 @@ You can put this wherever you want; for this guide, I'll put it into `/srv`:
 ```
 sudo mkdir -p /srv/rocketpool/data
 
-sudo chown $USER:$USER /srv/rocketpool
+sudo chown -R $USER:$USER /srv/rocketpool
 ```
 
 Now, download the CLI and daemon binaries (or ignore this and build them from source if you prefer).

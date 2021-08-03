@@ -1,4 +1,4 @@
-# :card_index_dividers: Javascript Library
+# [WIP] Javascript
 
 ## Introduction
 

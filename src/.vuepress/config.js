@@ -27,9 +27,10 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: 'rocket-pool/rocketpool.github.io',
+    repo: 'rocket-pool/docs.rocketpool.net',
     editLinks: true,
-    docsDir: '',
+    docsDir: 'src',
+    docsBranch: 'main',
     editLinkText: '',
     lastUpdated: false,
     logo: '/images/logo-small.png',
@@ -40,16 +41,12 @@ module.exports = {
         link: '/overview/',
       },
       {
-        text: 'White Paper',
-        link: '/whitepaper/',
-      },
-      {
-        text: 'Documentation',
-        link: '/documentation/'
-      },
-      {
         text: 'Guides',
         link: '/guides/'
+      },
+      {
+        text: 'For Developers',
+        link: '/developers/'
       },
       {
         text: 'Website',
@@ -65,45 +62,7 @@ module.exports = {
             '',
             'explainer-series',
             'faq',
-          ]
-        }
-      ],
-      '/whitepaper/': [
-        {
-          title: 'White Paper',
-          sidebarDepth: 1,
-          collapsable: false,
-          children: [
-            '',
-          ]
-        }
-      ],
-      '/documentation/': [
-        {
-          title: 'Stakers',
-          sidebarDepth: 1,
-          collapsable: false,
-          children: [
-              '',
-              'glossary'
-          ]
-        },
-        {
-          title: 'Node operators',
-          sidebarDepth: 2,
-          collapsable: false,
-          children: [
-              'smart-node-basic',
-              'smart-node-advanced'
-          ]
-        },
-        {
-          title: 'Developers',
-          sidebarDepth: 2,
-          collapsable: false,
-          children: [
-              'smart-contracts/smart-contracts',
-              'js-library',
+            'glossary',
           ]
         }
       ],
@@ -186,6 +145,36 @@ module.exports = {
               'testnet/upgrading',
           ]
         }
+      ],
+      '/developers/': [
+        {
+          title: 'For Developers',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            '',
+            {
+              title: 'Integration Examples',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'usage/contracts/contracts',
+                'usage/go/go',
+                'usage/js/js',
+              ]
+            },
+            {
+              title: 'API Reference',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                  'api/contracts',
+                  'api/go',
+                  'api/js'
+              ]
+            },
+          ]
+        },
       ],
     }
   },

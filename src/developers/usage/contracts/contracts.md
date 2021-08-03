@@ -1,4 +1,4 @@
-# :memo: Smart Contracts
+# [WIP] Smart Contracts
 
 <br>
 
