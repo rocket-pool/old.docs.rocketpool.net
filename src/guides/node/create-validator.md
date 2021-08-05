@@ -128,7 +128,7 @@ We **strongly** encourage you to use the test transaction mechanism before confi
 ::::
 
 Once this is done, you will **no longer be able to change your withdrawal address using the `set-withdrawal-address` command**.
-To change it, you will need to send a signed transaction to your minipool from the **new** withdrawal address.
+To change it, you will need to send a signed transaction to your minipool from its **active** withdrawal address (the one you just switched to).
 The Rocket Pool website has a function to help you do this, though currently only MetaMask is supported.   
 
 
