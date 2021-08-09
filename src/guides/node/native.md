@@ -512,7 +512,18 @@ sudo chown eth2:eth2 /mnt/rpdata/prysm_data
 
 Now, grab [the latest Prysm binaries](https://github.com/prysmaticlabs/prysm/releases/), or [build them from source](https://github.com/prysmaticlabs/prysm/) if you want.
 
-Sepcifically, you want to save the `beacon-chain-xxx` and `validator-xxx` binaries the release page archive into `/srv/prysm/` (and optionally, rename them to `beacon-chain` and `validator` - the rest of the guide will assume you have done this).
+Specifically, you want to save the `beacon-chain-xxx` and `validator-xxx` binaries the release page archive into `/srv/prysm/` (and optionally, rename them to `beacon-chain` and `validator` - the rest of the guide will assume you have done this).
+
+Also, Prysm needs the Prater `genesis.ssz` to function correctly.
+Download it like this:
+
+```
+sudo wget https://github.com/eth2-clients/eth2-networks/raw/master/shared/prater/genesis.ssz -O /srv/prysm/genesis.ssz
+
+sudo chown eth2:eth2 /srv/prysm/genesis.ssz 
+```
+
+Now, create the service file:
 :::
 
 ::: tab Teku
@@ -649,7 +660,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
@@ -793,7 +804,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
