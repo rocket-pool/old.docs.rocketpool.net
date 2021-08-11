@@ -941,7 +941,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/lighthouse/lighthouse validator --network prater --datadir /srv/rocketpool/data/validators/lighthouse --init-slashing-protection --beacon-node "http://localhost:5002" --graffiti "RP Lighthouse"
+ExecStart=/srv/lighthouse/lighthouse validator --network prater --datadir /srv/rocketpool/data/validators/lighthouse --init-slashing-protection --beacon-node "http://localhost:5052" --graffiti "RP Lighthouse"
 
 [Install]
 WantedBy=multi-user.target
@@ -963,7 +963,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/validator --accept-terms-of-use --prater --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5002" --graffiti "RP Prysm"
+ExecStart=/srv/prysm/validator --accept-terms-of-use --prater --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5052" --graffiti "RP Prysm"
 
 [Install]
 WantedBy=multi-user.target
@@ -985,7 +985,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku validator-client --network=prater --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5002" --validators-graffiti="RP Teku"
+ExecStart=/srv/teku/bin/teku validator-client --network=prater --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku"
 
 [Install]
 WantedBy=multi-user.target
