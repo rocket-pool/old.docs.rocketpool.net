@@ -119,3 +119,4 @@ Keep your node secure and running smoothly:
 1. Monitor uptime and performance, for example with [Beaconcha.in](https://beaconcha.in/) and [Uptimerobot](https://uptimerobot.com/)
 2. Check that the RPL rewards are sent to your withdrawal address every 28 days
 3. [Prune when needed]( https://docs.rocketpool.net/guides/node/geth-pruning.html#pruning-clears-disk-space )
+4. [Update the Rocketpool stack]( https://docs.rocketpool.net/guides/node/updates.html#updating-the-smartnode-stack ) periodically
