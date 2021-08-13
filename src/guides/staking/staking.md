@@ -44,7 +44,7 @@ Ensure that **Custom Token** is selected in this dialog.
 In the **Token Contract Address** box, put the following value:
 
 ```
-0x62BC478FFC429161115A6E4090f819CE5C50A5d9
+0x178e141a0e3b34152f73ff610437a7bf9b83267a
 ```
 
 The **Token Symbol** should automatically be populated with `rETH`, and the **Decimals of Precision** should automatically be populated with `18`.
