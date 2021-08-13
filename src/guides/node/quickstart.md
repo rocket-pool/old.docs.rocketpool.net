@@ -1,8 +1,8 @@
 # Quickstart / Cheatsheet
 
-This is a non-exhausive quickstart. It is probably only useful if you are intimately familiar with the commandline and/or have run a Rocketpool node before.
+This is a non-exhaustive quickstart. It is probably only useful if you are intimately familiar with the commandline and/or have run a Rocketpool node before.
 
-These scripts assume you are using a `zsh` shell on `Ubuntu 20.04 LTS`. If you are not, use `crtl+f` to check where you need to edit them.
+These scripts assume you are using a `zsh` shell on `Ubuntu 20.04 LTS`. If you are not, use `crtl+f` for instances of `.zshrc` to check where you need to edit them.
 
 ::: danger 🚨 IMPORTANT
 This is not a beginner guide, if this is your first time using Rocketpool [start here]( https://docs.rocketpool.net/guides/ ).
@@ -14,17 +14,7 @@ This is not a beginner guide, if this is your first time using Rocketpool [start
 
 Make sure your server is accessible and ready to go with a non-root user. For inspiration see [this script suite on Github]( https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty ).
 
-Make sure that if you use a firewall you open the Rocketpool ports, if behind a NAT forward them to your box as well.
-
-```shell
-# Geth ports
-sudo ufw allow 30303:30305/tcp comment 'Go Ethereum'
-sudo ufw allow 30303:30305/udp comment 'Go Ethereum'
-
-# Rocketpool standardized the eth2 port using Docker
-sudo ufw allow 9001/tcp comment 'Rocketpool arbitrary default port'
-sudo ufw allow 9001/udp comment 'Rocketpool arbitrary default port'
-```
+If you're behind a NAT forward ports `9001/(udp,tcp)` and `30303:30305/(tcp,udp)` them to your box as well. This is done in your router settings, [find your router model here]( https://portforward.com/router.htm ) if this is new to you. If you have multiple modem/router devices you may have to forward them all, see [this article]( https://portforward.com/help/doublerouterportforwarding.htm ).
 
 ## Step 2: install Rocketpool
 
@@ -90,17 +80,15 @@ echo "Then run 'rocketpool service start'and 'rocketpool wallet init'"
 
 ## Step 3: start services
 
-As the above script states, you need to log out and in before starting the service and initting the wallet. If you do not you'll get a bunch of errors. If you are logged in to the non-root user via the root user, you can simply run `exit` and `su <non-root user name>`.
+As the above script states, you need to log out and in before starting the service and initting the wallet with `rocketpool wallet init`. If you do not you'll get a bunch of errors. If you are logged in to the non-root user via the root user, you can simply run `exit` and `su <non-root user name>`.
 
 After logging out and in, run `rocketpool service start` to start the containers. You can then use the cli [as documented]( https://docs.rocketpool.net/guides/node/cli-intro.html )
 
 ## Step 4: wait for sync to complete
 
-Docker will sync the ETH1 and ETH2 chains now. The ETH1 will be quick, the ETH2 will be slow. You can check progress with `rockerpool node sync`. This will error for a bit until there is sufficient data.
+Docker will sync the ETH1 and ETH2 chains now. The ETH1 will be quick (<12 hours), the ETH2 will be slow (Lighthouse/Teku/Prysm about a day, Nimbus multiple days). You can check progress with `rockerpool node sync`. This will error for a bit until there is sufficient data.
 
 The ETH2 sync is CPU dependent, when using a Pi: make sure it is [ overclocked ](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#overclocking-the-pi) as much as your cooling allows.
-
-Eta for ETH2 sync is a few days.
 
 ## Step 5: Start validators
 
