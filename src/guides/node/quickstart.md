@@ -22,8 +22,8 @@ sudo ufw allow 30303:30305/tcp comment 'Go Ethereum'
 sudo ufw allow 30303:30305/udp comment 'Go Ethereum'
 
 # Rocketpool standardized the eth2 port using Docker
-sudo ufw allow 9001/tcp comment 'Roketpool arbitrary default port'
-sudo ufw allow 9001/udp comment 'Roketpool arbitrary default port'
+sudo ufw allow 9001/tcp comment 'Rocketpool arbitrary default port'
+sudo ufw allow 9001/udp comment 'Rocketpool arbitrary default port'
 ```
 
 ## Step 2: install Rocketpool
