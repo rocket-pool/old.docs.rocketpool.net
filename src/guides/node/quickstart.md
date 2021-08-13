@@ -86,7 +86,7 @@ After logging out and in, run `rocketpool service start` to start the containers
 
 ## Step 4: wait for sync to complete
 
-Docker will sync the ETH1 and ETH2 chains now. The ETH1 will be quick (<12 hours), the ETH2 will be slow (Lighthouse/Teku/Prysm about a day, Nimbus multiple days). You can check progress with `rockerpool node sync`. This will error for a bit until there is sufficient data.
+Docker will sync the ETH1 and ETH2 chains now. The ETH1 will be quick (<12 hours), the ETH2 will be slow (Lighthouse/Teku/Prysm about a day, Nimbus multiple days). You can check progress with `rocketpool node sync`. This will error for a bit until there is sufficient data.
 
 The ETH2 sync is CPU dependent, when using a Pi: make sure it is [ overclocked ](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#overclocking-the-pi) as much as your cooling allows.
 
