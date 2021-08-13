@@ -12,7 +12,7 @@ This is not a beginner guide, if this is your first time using Rocketpool [start
 
 ## Step 1: prep the server
 
-Make sure your server is accessible and ready to go with a non-root user. For inspiration see [this script suite on Gitrhub]( https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty ).
+Make sure your server is accessible and ready to go with a non-root user. For inspiration see [this script suite on Github]( https://github.com/actuallymentor/vps-setup-ssh-zsh-pretty ).
 
 Make sure that if you use a firewall you open the Rocketpool ports, if behind a NAT forward them to your box as well.
 
