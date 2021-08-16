@@ -6,7 +6,9 @@ The reason for this is that the initial sync defaults to "fast sync" which downl
 
 Since after the initial sync your node has been keeping track of all transactions in detail, it is taking up a lot more space than a fresh fast-sync would.
 
-⚠️ Warning: this is advanced material, only prune if you understand what is going on.
+::: warning
+This is advanced material, only prune if you understand what is going on.
+:::
 
 ## Pruning clears disk space
 
@@ -38,8 +40,12 @@ To make the process of pruning easy to do, you can use the following script. Cop
 
 Do not break the connection to your server during this process. Expect the process to take multiple hours. Anecdotally, it should take 5-10 hours.
 
+::: danger
+This script only works on ARM devices like the Raspberry Pi with geth version `v1.10.7` or above. You can check your geth version with `docker exec -i rocketpool_eth1 geth version`
+:::
+
 ```shell
-#!/bin/zsh
+#!/bin/sh
 
 #########################
 # customisation settings
@@ -80,7 +86,7 @@ else
 fi
 
 # Check for free disk space
-if (( $freeDiskSpaceInGB < $minimumDiskSpaceinGB )); then
+if [ $freeDiskSpaceInGB -lt $minimumDiskSpaceinGB ]; then
     echo "🛑 Free disk space is $freeDiskSpaceInGB, which is under the minimum $minimumDiskSpaceinGB GB"
     exit 1
 else
@@ -103,3 +109,5 @@ docker run --rm \
 echo "Prune complete, restarting rocketpool ETH1 container"
 docker start rocketpool_eth1
 ```
+
+For the advanced terminal users, you may run the script in the background using a command like `nohup sh prune.sh & disown`. Note that this will skip the disk path check. You may then track progress with `tail -f nohup.out` or a similar command.
