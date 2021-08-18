@@ -3,6 +3,9 @@
 ::: warning NOTE
 The Smartnode metrics and dashboard are still **experimental**.
 If you encounter issues while setting them up using the guides below, please report them to the Rocket Pool team on the official Discord server.
+
+Also, note that the Smartnode's metrics collector and Grafana dashboard are *entirely optional*.
+You do not need to set them up to successfully run the Smartnode stack.
 :::
 
 Now that you have your node up and running, you'll probably want to have a convenient way to monitor everything about it at a glance to make sure it's functioning correctly (and what kind of earnings it's generating for you).
