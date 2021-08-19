@@ -73,18 +73,25 @@ For those who prefer to fine-tune their port settings, the interview will ask yo
 Note that all of these ports are restricted to Docker's internal network with the exception of the Grafana port - that will be opened on your machine (so you can access it via a browser from other machines, such as your desktop or phone) so you may want to change that if the default port conflicts with something you already have.
 
 ::::: warning NOTE
-If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open the Grafana port in order for outside machines to access it:
-
+If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open the Grafana port in order for outside machines to access it, and to allow local connections between Grafana and Prometheus:
 :::: tabs
 
-::: tab From anywhere
+::: tab Grafana from anywhere
 ```shell
+# Allow Grafana access to prometheus
+sudo ufw allow 9103 comment "Allow grafana access to prometheus"
+
+# Allow any ip to connect to Grafana
+# This will still require port forwarding if you want it outside your network
 sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
 ```
 :::
 
-::: tab From local network
+::: tab Grafana from local network
 ```shell
+# Allow Grafana access to prometheus
+sudo ufw allow 9103 comment "Allow grafana access to prometheus"
+
 # This assumes your local IP structure is 192.168.1.xxx
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow grafana from local network'
 
