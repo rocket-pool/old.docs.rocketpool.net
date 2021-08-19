@@ -128,6 +128,39 @@ After that, you should be all set.
 ::::
 :::::
 
+### Linking Beaconcha.in metrics
+
+If you would like to use the Beaconcha.in app and it's integrated metrics functionality, you can do so using the metrics that the Rocketpool stack exposes.
+
+Depending on your ETH2client, the Beaconcha.in instructions at `https://beaconcha.in/user/settings#app` tell you to set the metrics port to a certain value, or to simply run a command. You will need to substitute the ports in the Beaconcha.in instructions for the ports you set during the previous steps, if you used the default ports:
+
+::::: tabs
+
+:::: tab Prysm
+Substitute `--beaconnode.address=http://localhost:8080/metrics` with `--beaconnode.address=http://localhost:9003/metrics`.
+
+Substitute `--validator.address=http://localhost:8081/metrics` with `--validator.address=http://localhost:9101/metrics`.
+::::
+
+:::: tab Nimbus
+Substitute `--beaconnode.address=http://localhost:8008/metrics` with `--beaconnode.address=http://localhost:9003/metrics`.
+::::
+
+:::: tab Lighthouse
+No changes needed.
+::::
+
+:::::
+
+If after running the metrics command you see `ERRO[0000] failed sending data` once or twice that is fine, if you see `ERRO[0000] failed getting data` that is a structural issue. If all is going well you will see logs along the lines of:
+
+```shell
+INFO[0000] starting exporter    BeaconnodeAddress="http://localhost:9103/metrics" BeaconnodeType=nimbus Debug=false Interval=1m2s Partition=/ ServerTimeout=10s ValidatorAddress= ValidatorType=prysm Version=beaconcha.in@7522930
+INFO[0000] collected data       duration=82.69446ms
+INFO[0000] sent data            duration=320.560427ms
+```
+
+If you would like to run the Beaconcha.in metrics server in the background, you can use the syntax `nohup <metrics command> & disown` where `<metrics command>` is the command under the "Run Metrics Exporter" section of the Beaconcha.in documentation. Note that if you do this you can view their logs with `tail -f nohup.out` and will need to use `ps aux` to get the process ID if you want to `kill` it.
 
 ## Setting up Grafana
 
