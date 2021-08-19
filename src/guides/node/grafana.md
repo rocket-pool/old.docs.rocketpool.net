@@ -77,23 +77,36 @@ If you have UFW enabled as referenced in the [Securing your Node](./securing-you
 :::: tabs
 
 ::: tab Grafana from anywhere
+This will still require port forwarding if you want to access Grafana outside your network.
 ```shell
 # Allow Grafana access to prometheus
 sudo ufw allow 9103 comment "Allow grafana access to prometheus"
 
 # Allow any ip to connect to Grafana
-# This will still require port forwarding if you want it outside your network
 sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
 ```
 :::
 
-::: tab Grafana from local network
+::: tab Grafana from local network 
+This is useful if your Rocketpool node and the device with which you want to view Grafana are on the same local network, usually that means they are attached to the same router.
+
+Please check whether your local network uses the `192.168.1.xxx` structure, you may have to change the command below if for example your network looks like `192.168.99.xxx`.
 ```shell
 # Allow Grafana access to prometheus
 sudo ufw allow 9103 comment "Allow grafana access to prometheus"
 
 # This assumes your local IP structure is 192.168.1.xxx
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow grafana from local network'
+
+:::
+
+::: tab Grafana from local subnet 
+Useful if your Rocketpool node is not connected to the same subnet as the device from which you are viewing Grafana. This may happen when your Rocketpool node is connected directly to the modem of you ISP and the device you use to view Grafana is connected to a secondary router.
+
+Please check whether your local network uses the `192.168.1.xxx` structure, you may have to change the command below if for example your network looks like `192.168.99.xxx`.
+```shell
+# Allow Grafana access to prometheus
+sudo ufw allow 9103 comment "Allow grafana access to prometheus"
 
 # To allow any devices in the broader subnet
 # for example allowing 192.168.2.20 to access
