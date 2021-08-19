@@ -72,9 +72,32 @@ It will also modify your ETH2 and Validator clients so they expose their own met
 For those who prefer to fine-tune their port settings, the interview will ask you if you'd like to change any of the ports used for the above services.
 Note that all of these ports are restricted to Docker's internal network with the exception of the Grafana port - that will be opened on your machine (so you can access it via a browser from other machines, such as your desktop or phone) so you may want to change that if the default port conflicts with something you already have.
 
-::: warning NOTE
-If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open the Grafana port in order for outside machines to access it.
+::::: warning NOTE
+If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open the Grafana port in order for outside machines to access it:
+
+:::: tabs
+
+::: tab From anywhere
+```shell
+sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
+```
 :::
+
+::: tab From local network
+```shell
+# This assumes your local IP structure is 192.168.1.xxx
+sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow grafana from local network'
+
+# To allow any devices in the broader subnet
+# for example allowing 192.168.2.20 to access
+# grafana on 192.168.1.20
+sudo ufw allow from 192.168.1.0/16 proto tcp to any port 3100 comment 'Allow grafana from local subnets'
+```
+:::
+
+::::
+
+:::::
 
 After you reconfigure the Smartnode to enable / disable metrics, you'll have to run the following commands for the changes to take effect:
 
