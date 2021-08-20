@@ -50,8 +50,8 @@ If you already have an existing setup, you can derive the necessary information 
 
 ## Enabling the Metrics Server
 
-::::: tabs
-:::: tab Setup for Docker Mode
+::::::: tabs
+:::::: tab Setup for Docker Mode
 Enabling metrics in Docker mode is the easiest of all.
 
 Start by running the Smartnode configuration command again:
@@ -73,45 +73,48 @@ For those who prefer to fine-tune their port settings, the interview will ask yo
 Note that all of these ports are restricted to Docker's internal network with the exception of the Grafana port - that will be opened on your machine (so you can access it via a browser from other machines, such as your desktop or phone) so you may want to change that if the default port conflicts with something you already have.
 
 ::::: warning NOTE
-If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open the Grafana port in order for outside machines to access it, and to allow local connections between Grafana and Prometheus:
+If you have UFW enabled as referenced in the [Securing your Node](./securing-your-node.md) section, you will need to open a few ports in order for outside machines to access Grafana, and to allow local connections between the Node Exporter and Prometheus:
 :::: tabs
 
-::: tab Grafana from anywhere
-This will still require port forwarding if you want to access Grafana outside your network.
+::: tab Local Network
+Use this if you want to access Grafana from any machine inside your local network, but deny access everywhere else.
+This will be the most common use case.
+
+Please check whether your local network uses the `192.168.1.xxx` structure first.
+You may have to change the command below to match your local network's configuration if it uses a different address structure (e.g. `192.168.99.xxx`).
 ```shell
-# Allow Grafana access to prometheus
-sudo ufw allow 9103 comment "Allow grafana access to prometheus"
-
-# Allow any ip to connect to Grafana
-sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
-```
-:::
-
-::: tab Grafana from local network 
-This is useful if your Rocketpool node and the device with which you want to view Grafana are on the same local network, usually that means they are attached to the same router.
-
-Please check whether your local network uses the `192.168.1.xxx` structure, you may have to change the command below if for example your network looks like `192.168.99.xxx`.
-```shell
-# Allow Grafana access to prometheus
-sudo ufw allow 9103 comment "Allow grafana access to prometheus"
+# Allow node-exporter access to Prometheus
+sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
 
 # This assumes your local IP structure is 192.168.1.xxx
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow grafana from local network'
-
 :::
 
-::: tab Grafana from local subnet 
-Useful if your Rocketpool node is not connected to the same subnet as the device from which you are viewing Grafana. This may happen when your Rocketpool node is connected directly to the modem of you ISP and the device you use to view Grafana is connected to a secondary router.
+::: tab Local Subnet 
+Use this if your Rocket Pool node is not connected to the same subnet as the device from which you are viewing Grafana.
+This may happen when your node is connected directly to your ISP's modem and the device you use to view Grafana is connected to a secondary router.
 
-Please check whether your local network uses the `192.168.1.xxx` structure, you may have to change the command below if for example your network looks like `192.168.99.xxx`.
+An example is provided below; tailor it to your network's subnet structure.
 ```shell
-# Allow Grafana access to prometheus
-sudo ufw allow 9103 comment "Allow grafana access to prometheus"
+# Allow node-exporter access to Prometheus
+sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
 
 # To allow any devices in the broader subnet
 # for example allowing 192.168.2.20 to access
 # grafana on 192.168.1.20
 sudo ufw allow from 192.168.1.0/16 proto tcp to any port 3100 comment 'Allow grafana from local subnets'
+```
+:::
+
+::: tab Anywhere
+This will let you access Grafana from anywhere.
+If you want to access it from outside your local network, you will still need to forward the Grafana port (default 3100) in your router settings.
+```shell
+# Allow node-exporter access to Prometheus
+sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
+
+# Allow any IP to connect to Grafana
+sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
 ```
 :::
 
@@ -156,20 +159,20 @@ docker restart rocketpool_exporter
 ```
 
 After that, you should be all set.
-::::
+::::::
 
-:::: tab Setup for Hybrid Mode
-
-*Coming soon!*
-
-::::
-
-:::: tab Setup for Native Mode
+:::::: tab Setup for Hybrid Mode
 
 *Coming soon!*
 
-::::
-:::::
+::::::
+
+:::::: tab Setup for Native Mode
+
+*Coming soon!*
+
+::::::
+:::::::
 
 
 ## Setting up Grafana
