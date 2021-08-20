@@ -84,7 +84,13 @@ Please check whether your local network uses the `192.168.1.xxx` structure first
 You may have to change the command below to match your local network's configuration if it uses a different address structure (e.g. `192.168.99.xxx`).
 ```shell
 # Allow node-exporter access to Prometheus
-sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
+dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": ")[0-9./]+" )
+if [ -v $dockersubnet ]; then
+	echo "Something went wrong getting the docker subnet"
+else
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	echo "Firewall update successful"
+fi
 
 # This assumes your local IP structure is 192.168.1.xxx
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow grafana from local network'
@@ -97,7 +103,13 @@ This may happen when your node is connected directly to your ISP's modem and the
 An example is provided below; tailor it to your network's subnet structure.
 ```shell
 # Allow node-exporter access to Prometheus
-sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
+dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": ")[0-9./]+" )
+if [ -v $dockersubnet ]; then
+	echo "Something went wrong getting the docker subnet"
+else
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	echo "Firewall update successful"
+fi
 
 # To allow any devices in the broader subnet
 # for example allowing 192.168.2.20 to access
@@ -111,7 +123,13 @@ This will let you access Grafana from anywhere.
 If you want to access it from outside your local network, you will still need to forward the Grafana port (default 3100) in your router settings.
 ```shell
 # Allow node-exporter access to Prometheus
-sudo ufw allow 9103 comment "Allow node-exporter access to prometheus"
+dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": ")[0-9./]+" )
+if [ -v $dockersubnet ]; then
+	echo "Something went wrong getting the docker subnet"
+else
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	echo "Firewall update successful"
+fi
 
 # Allow any IP to connect to Grafana
 sudo ufw allow 3100/tcp comment 'Allow grafana from anywhere'
