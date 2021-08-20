@@ -92,7 +92,7 @@ rocketpool service install-update-tracker
 ```
 
 Under the hood, this will install a service that hooks into your Operating System's package manager, periodically checks for updates, and sends that information to Prometheus.
-This service different for every Operating System, but it has been confirmed to work on the following:
+This service is different for every Operating System, but it has been confirmed to work on the following:
 
 - Ubuntu 20.04+
 - Debian 9 and 10
