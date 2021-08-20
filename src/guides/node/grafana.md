@@ -88,7 +88,7 @@ dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": 
 if [ -v $dockersubnet ]; then
 	echo "Something went wrong getting the docker subnet"
 else
-	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow node-exporter access to prometheus"
 	echo "Firewall update successful"
 fi
 
@@ -107,7 +107,7 @@ dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": 
 if [ -v $dockersubnet ]; then
 	echo "Something went wrong getting the docker subnet"
 else
-	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow node-exporter access to prometheus"
 	echo "Firewall update successful"
 fi
 
@@ -127,7 +127,7 @@ dockersubnet=$( docker inspect rocketpool_monitor-net | grep -Po "(?<="Subnet": 
 if [ -v $dockersubnet ]; then
 	echo "Something went wrong getting the docker subnet"
 else
-	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow grafana access to prometheus"
+	sudo ufw allow from $dockersubnet to any port 9103 comment "Allow node-exporter access to prometheus"
 	echo "Firewall update successful"
 fi
 
