@@ -86,7 +86,7 @@ This will return an ip in CIDR notation that looks like `172.23.0.0/16`.
 Then run the following, but replace `172.23.0.0/16` with the output of the previous command:
 
 ```shell
-sudo ufw allow from 172.23.0.0/16 to any port 9103 comment "Allow node-exporter access to prometheus"
+sudo ufw allow from 172.23.0.0/16 to any port 9103 comment "Allow prometheus access to node-exporter"
 ```
 
 You can then open the firewall to allow external devices access to your Grafana dashboard.
