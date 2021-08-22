@@ -213,43 +213,6 @@ Password: admin
 You will then be prompted to change the default password for the `admin` account.
 Pick something strong and don't forget it!
 
-Once you reach the home page, head to the **Configuration** menu (the small gear icon on the left-side menu) and select **Data sources**:
-
-<center>
-
-![](./images/grafana-config.png)
-
-</center>
-
-Here, click the **Add data source** button in the top right corner.
-
-Select **Prometheus** from this list (it should be the first option).
-
-In this settings dialog, all you need to change is the **URL** box in the **HTTP** section.
-Change it to the following value:
-
-```
-http://prometheus:<port>
-```
-
-Where `<port>` is the port you assigned to Prometheus during the `rocketpool service config` setup earlier.
-For example, if you use the default of `9091`, then it should look like this:
-
-<center>
-
-![](./images/grafana-prometheus.png)
-
-</center>
-
-Click the **Save & test** button, and it should pop up with the following confirmation notice:
-
-<center>
-
-![](./images/grafana-working.png)
-
-</center>
-
-This means that Prometheus is up, and Grafana can talk to it.
 Time to grab the dashboard!
 
 ::::
