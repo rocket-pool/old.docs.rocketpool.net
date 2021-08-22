@@ -282,7 +282,7 @@ chains:
     ...
 ```
 
-Change the address in `chains/eth2/provider` to `<ip_address>:<http_port>` where:
+Change the address in `chains/eth2/provider` to `http://<ip_address>:<http_port>` where:
 
 - `<ip_address>` is the IP address of the machine running the ETH2 node
 - `<http_port>` is the port for RPC traffic that you specified in your ETH2 client's arguments
