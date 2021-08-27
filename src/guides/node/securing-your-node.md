@@ -63,7 +63,7 @@ To disable password authentication and use SSH keys instead, change the followin
 1. Uncomment `#AuthorizedKeysFile` if it is commented
 2. Change `ChallengeResponseAuthentication yes` to `ChallengeResponseAuthentication no`
 3. Change `PasswordAuthentication yes` to `PasswordAuthentication no`
-4. Change `PermitRootLogin yes` to `PermitRootLogin without-password`
+4. Change `PermitRootLogin yes` to `PermitRootLogin prohibit-password`
 
 You may also run:
 
@@ -76,7 +76,7 @@ sed -i 's/ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no
 sed -i 's/#\{0,1\}PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
 # Disable root login with password
-sed -i 's/#\{0,1\}PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
+sed -i 's/#\{0,1\}PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
 
 # Reload SSH daemon
 service sshd reload
