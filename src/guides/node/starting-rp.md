@@ -286,6 +286,11 @@ Once you confirm your mnemonic phrase, you will be presented with the unique ETH
 
 If you already have a wallet from a previous installation, you can recover it and regenerate all of the validators attached to it instead of making a new one.
 
+::: warning NOTE
+This will not work until your eth1 node has finished syncing.
+Please watch its log file to see when it's done; once it is, you can run follow this step.
+:::
+
 To do this, use the following command:
 
 ```

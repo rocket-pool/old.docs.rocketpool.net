@@ -440,6 +440,7 @@ For measuring performance, you can use LINPACK.
 We'll build it from source.
 ```
 $ cd ~
+$ sudo apt install gcc
 $ wget http://www.netlib.org/benchmark/linpackc.new -O linpack.c 
 ...
 $ cc -O3 -o linpack linpack.c -lm
@@ -493,7 +494,7 @@ Next, install a program called **stressberry**.
 This will be our benchmarking tool.
 Install it like this:
 ```
-$ sudo apt install stress
+$ sudo apt install stress python3-pip
 $ pip3 install stressberry
 $ source ~/.profile
 ```
