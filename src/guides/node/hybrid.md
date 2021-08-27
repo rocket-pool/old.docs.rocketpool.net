@@ -278,18 +278,17 @@ chains:
   eth1:
     ...
   eth2:
-    provider: eth2:5052
+    provider: http://eth2:5052
     ...
 ```
 
-Change the address in `chains/eth2/provider` to `<ip_address>:<http_port>` where:
+Change the address in `chains/eth2/provider` to `http://<ip_address>:<http_port>` where:
 
 - `<ip_address>` is the IP address of the machine running the ETH2 node
 - `<http_port>` is the port for RPC traffic that you specified in your ETH2 client's arguments
 
 ::: warning
-The address here *does not* have an HTTP prefix; this is by design, it is not a mistake.
-Do not include a prefix when you input the IP address.
+Since 1.0.0-rc6, the address here also has an HTTP prefix.
 :::
 
 

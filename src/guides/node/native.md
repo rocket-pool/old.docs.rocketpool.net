@@ -171,7 +171,7 @@ Now, open `config.yml` in `nano` or your editor of choice, and make the followin
 - Change `smartnode.validatorKeychainPath` to `validatorKeychainPath: /srv/rocketpool/data/validators`
 - Change `smartnode.validatorRestartCommand` to `validatorRestartCommand: "/srv/rocketpool/restart-validator.sh"`
 - Change `chains.eth1.provider` to `provider: http://127.0.0.1:8545`
-- Change `chains.eth1.wsProvider` to `provider: ws://127.0.0.1:8546`
+- Change `chains.eth1.wsProvider` to `wsProvider: ws://127.0.0.1:8546`
 - Change `chains.eth2.provider` to `provider: 127.0.0.1:5052` (note the lack of `http://` at the front, this is on purpose)
 
 Now open `~/.profile` with your editor of choice and add this line to the end:
