@@ -213,7 +213,8 @@ Password: admin
 You will then be prompted to change the default password for the `admin` account.
 Pick something strong and don't forget it!
 
-Time to grab the dashboard!
+Thanks to community member **tedsteen**'s work, Grafana will automatically connect to your Prometheus instance so it has access to the metrics that it collects. 
+All you need to do is grab the dashboard!
 
 ::::
 
