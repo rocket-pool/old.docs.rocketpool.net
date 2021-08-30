@@ -87,6 +87,7 @@ module.exports = {
                 sidebarDepth: 2,
                 collapsable: true,
                 children: [
+                    'node/quickstart',
                     'node/responsibilities',
                     'node/platform',
                     {
