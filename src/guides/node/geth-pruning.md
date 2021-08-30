@@ -40,10 +40,6 @@ To make the process of pruning easy to do, you can use the following script. Cop
 
 Do not break the connection to your server during this process. Expect the process to take multiple hours. Anecdotally, it should take 5-10 hours.
 
-::: danger
-This script only works on ARM devices like the Raspberry Pi with geth version `v1.10.7` or above. You can check your geth version with `docker exec -i rocketpool_eth1 geth version`
-:::
-
 ```shell
 #!/bin/sh
 
