@@ -611,7 +611,7 @@ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
 
 sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
 
-sudo chown eth2:eth2 /srv/rocketpool/data/ -R
+sudo chown eth2:eth2 /srv/rocketpool/data/validators/ -R
 ```
 
 Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
@@ -752,7 +752,7 @@ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
 
 sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
 
-sudo chown eth2:eth2 /srv/rocketpool/data/ -R
+sudo chown eth2:eth2 /srv/rocketpool/data/validators/ -R
 ```
 
 Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
