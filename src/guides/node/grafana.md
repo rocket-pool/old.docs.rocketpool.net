@@ -501,3 +501,65 @@ While the standard dashboard tries to do a good job capturing everything you'd w
 You can add new graphs, change the way graphs look, move things around, and much more!
 
 Take a look at [Grafana's Tutorials](https://grafana.com/tutorials/) page to learn how to play with it and set it up to your liking.
+
+## Customizing the Metrics Stack
+
+The tools used in the Rocket Pool Metrics Stack offer a wide array of configuration options beyond what is included in the default Rocket Pool installation. This section includes configuration examples for different use cases.
+
+In general, [Grafana configuration options](https://grafana.com/docs/grafana/latest/administration/configuration/) should be passed through using environment variables in `docker-compose-metrics.yml`. Any config option can be converted to an environment variable using the following syntax:
+
+```
+GF_<SectionName>_<KeyName>
+```
+
+### Grafana SMTP Settings for Sending Emails
+
+To send emails from Grafana, e.g. for alerts or to invite other users, SMTP settings need to be configured in the Rocket Pool Metrics Stack. See the [Grafana SMTP configuration](https://grafana.com/docs/grafana/latest/administration/configuration/#smtp) page for reference.
+
+Open `~/.rocketpool/docker-compose-metrics.yml` in a text editor. Include the below `GF_SMTP_<KEYNAME>` environment variables in the `environment` section of the `grafana` service:
+
+```yaml
+version: "3.4"
+services:
+...
+  grafana:
+    image: grafana/grafana:8.1.1
+    container_name: ${COMPOSE_PROJECT_NAME}_grafana
+    restart: unless-stopped
+    environment:
+      - GF_SERVER_HTTP_PORT=${GRAFANA_PORT:-3100}
+      ## SMTP settings start
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=mail.example.com:<port>
+      - GF_SMTP_USER=admin@example.com
+      - GF_SMTP_PASSWORD=password
+      - GF_SMTP_FROM_ADDRESS=admin@example.com
+      - GF_SMTP_FROM_NAME="Rocketpool Grafana Admin"
+      ## SMTP server settings end
+    ports: 
+      - "${GRAFANA_PORT:-3100}:${GRAFANA_PORT:-3100}/tcp"
+    volumes:
+      - "./grafana-prometheus-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml"
+      - "grafana-storage:/var/lib/grafana"
+    networks:
+      - net
+...
+```
+
+To test the SMTP settings, go to the **Alerting** menu and click **Notification channels**.
+
+<center>
+
+![](./images/grafana-notification-channels.png)
+
+</center>
+
+Click **Add channel** and select **Email** as the type. Enter an email address in the **Addresses** section and click **Test**.
+
+<center>
+
+![](./images/grafana-new-notification-channel.png)
+
+</center>
+
+Check to see that the test email was received.
