@@ -16,6 +16,7 @@ One of the most popular is called [Grafana](https://grafana.com/) - an easy-to-u
 Rocket Pool comes out-of-the-box with support for Grafana and its dependencies; it even comes with a pre-built dashboard for each of the ETH2 clients.
 For example, here is a snapshot of what the dashboard for Nimbus looks like:
 
+
 ![](./images/nimbus-dashboard.png)
 
 The pre-built dashboard was based on many rounds of feedback from the Rocket Pool community during the beta tests and the final Prater testnet.
@@ -104,7 +105,7 @@ sudo ufw allow from 192.168.1.0/24 proto tcp to any port 3100 comment 'Allow gra
 ```
 :::
 
-::: tab Local Subnet 
+::: tab Local Subnet
 Use this if your Rocket Pool node is not connected to the same subnet as the device from which you are viewing Grafana. This may happen when your node is connected directly to your ISP's modem and the device you use to view Grafana is connected to a secondary router.
 
 Please check whether your local network uses the `192.168.1.xxx` structure first.
@@ -207,11 +208,7 @@ http://192.168.1.5:3100
 
 You will see a login screen like this:
 
-<center>
-
 ![](./images/grafana-login.png)
-
-</center>
 
 The default Grafana information is:
 
@@ -224,9 +221,9 @@ You will then be prompted to change the default password for the `admin` account
 Pick something strong and don't forget it!
 
 Once you reach the home page, head to the **Configuration** menu (the small gear icon on the left-side menu) and select **Data sources**:
-<center>
+
 ![](./images/grafana-config.png)
-</center>
+
 Here, click the **Add data source** button in the top right corner.
 Select **Prometheus** from this list (it should be the first option).
 In this settings dialog, all you need to change is the **URL** box in the **HTTP** section.
@@ -236,13 +233,13 @@ http://prometheus:<port>
 ```
 Where `<port>` is the port you assigned to Prometheus during the `rocketpool service config` setup earlier.
 For example, if you use the default of `9091`, then it should look like this:
-<center>
+
 ![](./images/grafana-prometheus.png)
-</center>
+
 Click the **Save & test** button, and it should pop up with the following confirmation notice:
-<center>
+
 ![](./images/grafana-working.png)
-</center>
+
 This means that Prometheus is up, and Grafana can talk to it.
 Time to grab the dashboard!
 
@@ -268,11 +265,7 @@ Now that you have Grafana attached to Prometheus, you can import the standard da
 
 Start by going to the **Create** menu (the plus icon on the right-side bar) and click on **Import**:
 
-<center>
-
 ![](./images/grafana-import.png)
-
-</center>
 
 When prompted for the URL, select the option from the below list based on which ETH2 client you are using:
 
@@ -293,11 +286,7 @@ Select this option.
 
 Your screen should look like this (using Lighthouse as an example):
 
-<center>
-
 ![](./images/grafana-import2.png)
-
-</center>
 
 If yours matches, click the **Import** button and you will be immediately taken to your new dashboard.
 
@@ -305,11 +294,9 @@ At first glance, you should see lots of information about your node and your val
 Each box comes with a handy tooltip on the top left corner (the `i` icon) that you can hover over to learn more about it.
 For example, here is the tooltip for the **Your Validator Share** box:
 
-<center>
 
 ![](./images/tooltip.png)
 
-</center>
 
 However, we aren't done setting things up yet - there is still a little more configuration to do.
 
@@ -334,11 +321,9 @@ We have to tailor the dashboard to your specific hardware so it knows how to cap
 To update your CPU temperature gauge, click the title of the **CPU Temp** box and select **Edit** from the drop down.
 Your screen will now look something like this:
 
-<center>
 
 ![](./images/cpu-temp.png)
 
-</center>
 
 This is Grafana's edit mode, where you can change what is displayed and how it looks.
 We're interested in the query box highlighted in red, to the right of the **Metrics browser** button.
@@ -355,16 +340,14 @@ These are unique to each machine, so you'll have to fill them in based on what y
 To do this, follow these steps:
 
 1. Remove the `, sensor=""` portion so it ends with `chip=""}`. For clarity, the whole thing should now be `node_hwmon_temp_celsius{job="node", chip=""}`.
-1. Put your cursor in-between the quote marks of `chip=""` and press `Ctrl+Spacebar`. This will bring up an auto-complete box with the available options, which looks like this:
+2. Put your cursor in-between the quote marks of `chip=""` and press `Ctrl+Spacebar`. This will bring up an auto-complete box with the available options, which looks like this:
 
-    <center>
 
-    ![](./images/grafana-autocomplete.png)
+![](./images/grafana-autocomplete.png)
 
-    </center>
 
-1. Select the option that corresponds to your system's CPU.
-1. Once that's selected, add `, sensor=""` back into the string. Place your cursor in-between the quote marks of `sensor=""` and press `Ctrl+Spacebar` to get another auto-complete menu. Select the sensor you want to monitor.
+3. Select the option that corresponds to your system's CPU.
+4. Once that's selected, add `, sensor=""` back into the string. Place your cursor in-between the quote marks of `sensor=""` and press `Ctrl+Spacebar` to get another auto-complete menu. Select the sensor you want to monitor.
 
 ::: tip Tip
 If you don't know which `chip` or `sensor` is correct, you'll have to try all of them until you find the one that looks right. To help with this, install the `lm-sensors` package (for example, `sudo apt install lm-sensors` on Debian / Ubuntu) and run the `sensors -u` command to provide what sensors your computer has. You can try to correlate a chip ID from Grafana's list with what you see here based on their names and IDs.
