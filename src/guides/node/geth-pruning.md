@@ -34,11 +34,100 @@ There are some important things to note:
 - You need at least `40GB` of free disk space for the prune to succeed, of you are below that you run the risk of corrupting your data
 - The enterprising among you may want to run an Infura fallback during this process
 
+## How to prune geth
+
+These are step by step pruning instructions. If you are an advanced user, you may consider the script below these instructions instead.
+
+### Step 1: ensure sufficient disk space
+
+There are a few preconditions for the pruning process. The fist is that we need at least `50 GB` of free disk space on the drive that holds your `eth1` chain data. To check this, run the following to check your mounted drives:
+
+```shell
+df -h
+```
+
+The output will look something like this:
+
+```
+Filesystem      Size  Used Avail Use% Mounted on
+udev            3.8G     0  3.8G   0% /dev
+tmpfs           782M  4.6M  777M   1% /run
+/dev/mmcblk0p2  118G   13G  100G  12% /
+/dev/sda1       1.8T  128G  1.7T   7% /mnt/ssd
+```
+
+We are looking for the mount path of the SSD that holds the chain data, in the above example this is `/mnt/ssd`. Write down that path, we will need it later. Note that we are *not* looking for the device identifier, so not a path that starts with `/dev`.
+
+We can check the free disk space of the drive by looking at the `Avail` column. Make sure this is over `50GB`.
+
+### Step 2: get geth version
+
+We will be using a non-rocketpool docker container that runs geth in order to do the pruning. To make sure the external geth is fully compatible with your chain data, we'll need to make sure we use the exact same geth version.
+
+To check your Rocketpool geth version, run:
+
+```shell
+docker exec -i rocketpool_eth1 geth version | grep -Po "(?<=^Version: )[0-9\.]+"
+```
+
+This will output a version number, like `1.10.8`. 
+
+### Step 3: stop Rocketpool eth1
+
+While the pruning is done, we need to make sure there is no interference from a running Rocketpool container. To do this we don't need to stop Rocketpool altogether, we can simply stop the eth1 container by running:
+
+```shell
+docker stop rocketpool_eth1
+```
+
+### Step 4: start the pruning
+
+Based on the geth version you retreived in step 2, we will download a new docker container that will do the pruning. In the below command, substitute the word `GETH_VERSION` with the version number and the `ETH_MOUNT_POINT` with the mount path from step 1 (twice!):
+
+```shell
+docker run --rm \
+    -v rocketpool_eth1clientdata:👉ETH1_MOUNT_POINT \
+    -ti ethereum/client-go:v👉GETH_VERSION \
+    snapshot prune-state --datadir 👉ETH1_MOUNT_POINT/geth
+```
+
+This could for example look like:
+
+```shell
+# 🛑 This is an example, do NOT copy paste
+docker run --rm \
+    -v rocketpool_eth1clientdata:/mnt/ssd \
+    -ti ethereum/client-go:v1.10.8 \
+    snapshot prune-state --datadir /mnt/ssd/geth
+```
+
+The pruning process will now start, this can take 5 to 10 hours depending on how long your geth has been running.
+
+::: warning NOTE
+If you are running on testnet, make sure to change `prune-state` to `prune-state --goerli`.
+:::
+
+Do not close your terminal or stop the pruning command while it is running.
+
+### Step 5: restart the Rocketpool eth1 container
+
+Once the pruning command is done, you can restart the Rocketpool container by running:
+
+```shell
+docker start rocketpool_eth1
+```
+
+You are now done pruning.
+
 ## Example pruning script
 
 To make the process of pruning easy to do, you can use the following script. Copy the contents into a file on your server, for example `~/prune-geth.sh`, and run the script.
 
 Do not break the connection to your server during this process. Expect the process to take multiple hours. Anecdotally, it should take 5-10 hours.
+
+::: warning NOTE
+If you are running on testnet, make sure to change `prune-state` to `prune-state --goerli`.
+:::
 
 ```shell
 #!/bin/sh
@@ -100,7 +189,7 @@ echo "Starting GETH offline prune"
 docker run --rm \
     -v $ETH1_DATA_VOLUME:$ETH1_MOUNT_POINT \
     -ti ethereum/client-go:v$GETH_VERSION \
-    snapshot prune-state --goerli --datadir $ETH1_MOUNT_POINT/geth
+    snapshot prune-state --datadir $ETH1_MOUNT_POINT/geth
 
 echo "Prune complete, restarting rocketpool ETH1 container"
 docker start rocketpool_eth1
