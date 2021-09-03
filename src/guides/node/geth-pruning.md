@@ -74,7 +74,7 @@ This will output a version number, like `1.10.8`.
 
 ### Step 3: stop Rocketpool eth1
 
-While the pruning is done, we need to make sure there is no interference from a running Rocketpool container. To do this we don't need to stop Rocketpool altogether, we can simply stop the eth1 container by running:
+While the pruning is being done, we need to make sure there is no interference from a running Rocketpool container. To do this we don't need to stop Rocketpool altogether, we can simply stop the eth1 container by running:
 
 ```shell
 docker stop rocketpool_eth1
