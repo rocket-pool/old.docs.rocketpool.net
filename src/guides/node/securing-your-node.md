@@ -106,7 +106,7 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-The most important line is the first, which tells us that the public key was saved at `Your public key has been saved in /Users/you/.ssh/id_ed1337.pub` (or whatever path you changed it to).
+The most important line is the first, which tells us that the public key was saved at `Your public key has been saved in /Users/you/.ssh/id_ed1337.pub` (or whatever path you changed it to), make sure you remember that path or write it down since we need it later.
 
 #### Adding an SSH key to your local machine
 
