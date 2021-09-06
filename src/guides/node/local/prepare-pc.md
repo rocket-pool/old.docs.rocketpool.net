@@ -1,4 +1,4 @@
-# [WIP] Preparing a PC, Mini-PC, or NUC
+# Preparing a PC, Mini-PC, or NUC
 
 Before installing Rocket Pool, there are a few checks you should do to make sure your system is compatible and will work correctly.
 
@@ -41,11 +41,27 @@ For `arm64` systems, the Smartnode installer only natively supports Debian and D
 For other distros, manual steps will be required during installation.
 
 
-#### [TODO] macOS Support
+#### macOS Support
 
-[A description of support on Mac goes here.
-TLDR, OSX is good, but the installer doesn't know how to deal with arm64 so manual intervention is required.]
+You will need to install the following pre-requisites:
 
+```Docker Desktop``` by [downloading the binary](https://www.docker.com/products/docker-desktop) installer from the website and dragging it to your Applications folder.
+
+```XCode Command Line Tools``` can be downloaded by opening up the Terminal application (located in /Applications/Utilties) and executing the following command:
+
+```
+xcode-select --install
+```
+
+We highly recommend using [Homebrew](https://brew.sh) as your package manager for Mac. It allows you to install packages easily using the ```brew``` command.
+
+For example, to install ```wget``` using Homebrew execute the following command in the Terminal:
+
+```
+brew install wget
+```
+
+Please ensure your Firewall (Settings -> Security & Privacy -> Firewall) is turned on and allowing the correct ports.
 
 ### Hardware Requirements
 
