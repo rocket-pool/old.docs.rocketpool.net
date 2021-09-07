@@ -141,8 +141,16 @@ module.exports = {
                     'node/faq'
                 ]
               },
-              'testnet/overview',
-              'testnet/upgrading',
+              {
+                title: 'Testing Rocket Pool with the Prater Test Network',
+                sidebarDepth: 2,
+                collapsable: true,
+                children: [
+                  'testnet/overview',
+                  'testnet/upgrading',
+                ]
+              },
+              'node/mainnet',
           ]
         }
       ],
