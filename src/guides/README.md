@@ -17,11 +17,7 @@ This is a very comprehensive guide that goes over all of the considerations invo
 - Creating a new ETH2 validator using the Rocket Pool network
 - Maintaining and updating your node
 
-Both guides will show you how to practice for free on the Rocket Pool testnet so you can get a feel for everything without risking any of your real-life ETH.
-
-::: warning NOTE
-The guides are also written to support the processes on the Ethereum mainnet when you're ready to stake your real funds, but Rocket Pool is currently still in beta and does not operate on mainnet yet.
-:::
+Both guides will show you how to practice for free on the Rocket Pool testnet so you can get a feel for everything without risking any of your real-life ETH, and how to stake your real ETH on the Ethereum mainnet once you're comfortable with the process.
 
 When you're ready, select a guide from the options above based on your interests.
 You are also free to explore the various pages using the sidebar to the left. 

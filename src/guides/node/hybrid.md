@@ -287,8 +287,9 @@ Change the address in `chains/eth2/provider` to `http://<ip_address>:<http_port>
 - `<ip_address>` is the IP address of the machine running the ETH2 node
 - `<http_port>` is the port for RPC traffic that you specified in your ETH2 client's arguments
 
-::: warning
-Since 1.0.0-rc6, the address here also has an HTTP prefix.
+::: tip NOTE
+In previous Rocket Pool betas, this setting didn't have an `http://` prefix.
+Starting with Smartnode v1.0.0-rc6, that prefix is now included.
 :::
 
 

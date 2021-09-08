@@ -145,6 +145,35 @@ Note that stopping the services **does not disable autostart**; the processes wi
 ::::
 
 
+## Confirming the Correct Version and Network
+
+Once the containers or services are up, a good first step is to confirm that you have the correct versions of the clients and are on the network that you expect.
+You can do this with the following command:
+
+```
+rocketpool service version
+```
+
+The output will look like this:
+
+```
+Your Smartnode is currently using the Ethereum Mainnet.
+
+Rocket Pool client version: 1.0.0-pre
+Rocket Pool service version: 1.0.0-pre
+Selected Eth 1.0 client: Geth (ethereum/client-go:v1.10.8)
+Selected Eth 2.0 client: Nimbus (statusim/nimbus-eth2:multiarch-v1.4.2)
+
+```
+
+The first line will tell you if your Smartnode is configured for the Ethereum mainnet or for the Prater testnet.
+
+::: warning NOTE
+If you are not on the network you expect to be on, go back to the Installing Rocket Pool section and review the installation instructions - you may have missed the portion that has different instructions depending on which network you want to use.
+:::
+
+The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's `config.yml` file.
+
 ## Checking the Service Status and Logs
 
 Now that the Smartnode services have been started, it's a good idea to check that they're running correctly without errors.

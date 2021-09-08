@@ -122,12 +122,53 @@ Next, grab the installation package - we're going to throw almost everything in 
 1. The config file that Rocket Pool uses to understand the directories and routes for everything
 2. The script that lets Rocket Pool restart the validator service once a new minipool is created (so it can load the new keys)
 
-We also need to create the `settings.yml` file that holds all of your node's specific configuration details. 
+We also need to create the `settings.yml` file that holds all of your node's specific configuration details.
+
+::: tip NOTE
+The configuration for the **Ethereum mainnet** is different from the configuration for the **Prater testnet**!
+Choose which one you want to use, and follow the appropriate tab below.
+:::
+
 Follow these steps for your system's architecture:
 
 :::: tabs
+::: tab x64 on Mainnet
+```shell
+cd /tmp
 
-::: tab x64
+wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-amd64.tar.xz
+
+tar xf rp-smartnode-install-amd64.tar.xz
+
+cp amd64/rp-smartnode-install/network/mainnet/config.yml /srv/rocketpool
+
+cp amd64/rp-smartnode-install/network/mainnet/chains/eth2/restart-validator.sh /srv/rocketpool
+
+touch -a /srv/rocketpool/settings.yml
+
+cd /srv/rocketpool
+```
+:::
+
+::: tab arm64 on Mainnet
+```shell
+cd /tmp
+
+wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-arm64.tar.xz
+
+tar xf rp-smartnode-install-arm64.tar.xz
+
+cp arm64/rp-smartnode-install/network/mainnet/config.yml /srv/rocketpool
+
+cp arm64/rp-smartnode-install/network/mainnet/chains/eth2/restart-validator.sh /srv/rocketpool
+
+touch -a /srv/rocketpool/settings.yml
+
+cd /srv/rocketpool
+```
+:::
+
+::: tab x64 on the Testnet
 ```shell
 cd /tmp
 
@@ -145,7 +186,7 @@ cd /srv/rocketpool
 ```
 :::
 
-::: tab arm64
+::: tab arm64 on the Testnet
 ```shell
 cd /tmp
 
@@ -172,7 +213,7 @@ Now, open `config.yml` in `nano` or your editor of choice, and make the followin
 - Change `smartnode.validatorRestartCommand` to `validatorRestartCommand: "/srv/rocketpool/restart-validator.sh"`
 - Change `chains.eth1.provider` to `provider: http://127.0.0.1:8545`
 - Change `chains.eth1.wsProvider` to `wsProvider: ws://127.0.0.1:8546`
-- Change `chains.eth2.provider` to `provider: 127.0.0.1:5052` (note the lack of `http://` at the front, this is on purpose)
+- Change `chains.eth2.provider` to `provider: http://127.0.0.1:5052`
 
 Now open `~/.profile` with your editor of choice and add this line to the end:
 ```
@@ -356,7 +397,7 @@ Type=simple
 User=eth1
 Restart=always
 RestartSec=5
-ExecStart=/srv/geth/geth --goerli --datadir /srv/geth/geth_data --http --http.port 8545 --http.api eth,net,personal,web3 --ws --ws.port 8546 --ws.api eth,net,personal,web3
+ExecStart=/srv/geth/geth --datadir /srv/geth/geth_data --mainnet --http --http.port 8545 --http.api eth,net,personal,web3 --ws --ws.port 8546 --ws.api eth,net,personal,web3
 
 [Install]
 WantedBy=multi-user.target
@@ -375,7 +416,7 @@ Type=simple
 User=eth1
 Restart=always
 RestartSec=5
-ExecStart=taskset 0x0c ionice -c 3 /srv/geth/geth --cache 256 --maxpeers 12 --goerli --datadir /mnt/rpdata/geth_data --http --http.port 8545 --http.api eth,net,personal,web3 --ws --ws.port 8546 --ws.api eth,net,personal,web3
+ExecStart=taskset 0x0c ionice -c 3 /srv/geth/geth --mainnet --cache 512 --maxpeers 12 --datadir /mnt/rpdata/geth_data --http --http.port 8545 --http.api eth,net,personal,web3 --ws --ws.port 8546 --ws.api eth,net,personal,web3
 
 [Install]
 WantedBy=multi-user.target
@@ -388,14 +429,18 @@ Note that the `taskset 0x0c ionice -c 3` at the start is meant for Raspberry Pi'
 
 You can omit that prefix if you're not on a low-power system.
 :::
-
 ::::
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to run on the **Prater testnet** instead, replace the `--mainnet` flag in the `ExecStart` string with `--goerli`.
+:::
 
 Some notes:
 
 - You can optionally use the `--cache` flag to lower the amount of RAM that Geth uses.
   - If you have 4 GB of RAM, **set this to 256**.
-  - If you have 8 GB of RAM, **you can increase it to 512** so it syncs faster.
+  - If you have 8 GB of RAM, **you can leave it at 512** so it syncs faster and doesn't require pruning as frequently.
   - For larger amounts of RAM, you can ignore this flag.
 - You can optionally use the `--maxpeers` flag to lower the peer count. The peer count isn't very important for the ETH1 node, and lowering it can free up some extra resources if you need them.
 
@@ -426,8 +471,8 @@ All set on the ETH1 client; now for ETH2.
 Start by making a folder for your ETH2 binary and log script.
 Choose the instructions for the client you want to run:
 
-:::: tabs
-::: tab Lighthouse
+::::: tabs
+:::: tab Lighthouse
 ```
 sudo mkdir /srv/lighthouse
 
@@ -453,9 +498,9 @@ sudo chown eth2:eth2 /mnt/rpdata/lighthouse_data
 Now, grab [the latest Lighthouse release](https://github.com/sigp/lighthouse/releases/), or [build it from source](https://github.com/sigp/lighthouse/) if you want.
 
 Copy `lighthouse` from the release archive into `/srv/lighthouse/`.
-::: 
+:::: 
 
-::: tab Nimbus
+:::: tab Nimbus
 ```
 sudo mkdir /srv/nimbus
 
@@ -485,9 +530,9 @@ Copy `build/nimbus_beacon_node` from the release archive into `/srv/nimbus/`, op
 ```shell
 cp build/nimbus_beacon_node /srv/nimbus/nimbus
 ```
-:::
+::::
 
-::: tab Prysm
+:::: tab Prysm
 ```
 sudo mkdir /srv/prysm
 
@@ -514,7 +559,8 @@ Now, grab [the latest Prysm binaries](https://github.com/prysmaticlabs/prysm/rel
 
 Specifically, you want to save the `beacon-chain-xxx` and `validator-xxx` binaries the release page archive into `/srv/prysm/` (and optionally, rename them to `beacon-chain` and `validator` - the rest of the guide will assume you have done this).
 
-Also, Prysm needs the Prater `genesis.ssz` to function correctly.
+::: warning NOTE
+If you want to run on the **Prater testnet**, you will need Prater's `genesis.ssz` file to function correctly.
 Download it like this:
 
 ```
@@ -522,11 +568,11 @@ sudo wget https://github.com/eth2-clients/eth2-networks/raw/master/shared/prater
 
 sudo chown eth2:eth2 /srv/prysm/genesis.ssz 
 ```
-
-Now, create the service file:
 :::
 
-::: tab Teku
+::::
+
+:::: tab Teku
 ```
 sudo mkdir /srv/teku
 
@@ -552,15 +598,15 @@ sudo chown eth2:eth2 /mnt/rpdata/teku_data
 Now, grab [the latest Teku release](https://github.com/ConsenSys/teku/releases/), or [build it from source](https://github.com/ConsenSys/teku/) if you want.
 
 Copy the `bin` and `lib` folders from the release archive into `/srv/teku/`.
-:::
 ::::
+:::::
 
 
 Next, create a systemd service for your ETH2 client.
 The following are examples that show typical command line arguments to use in each one:
 
-:::: tabs
-::: tab Lighthouse x64
+::::: tabs
+:::: tab Lighthouse x64
 ```
 sudo nano /etc/systemd/system/lh-bn.service
 ```
@@ -576,14 +622,20 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/lighthouse/lighthouse beacon --network prater --datadir /srv/lighthouse/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
+ExecStart=/srv/lighthouse/lighthouse beacon --network mainnet --datadir /srv/lighthouse/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
 
 [Install]
 WantedBy=multi-user.target
 ```
-::: 
 
-::: tab Nimbus x64
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network mainnet` flag in the `ExecStart` string with `--network prater`.
+:::
+
+:::: 
+
+:::: tab Nimbus x64
 ```
 sudo nano /etc/systemd/system/nimbus.service
 ```
@@ -599,11 +651,16 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/nimbus/nimbus --non-interactive --network=prater --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
+:::
 
 Now, create the validator folders that Nimbus needs because it will crash without them:
 ```
@@ -643,8 +700,8 @@ rp    ALL=(ALL) NOPASSWD: RP_CMDS
 
 Finally, modify `/srv/rocketpool/restart-validator.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
-:::
-::: tab Prysm x64
+::::
+:::: tab Prysm x64
 ```
 sudo nano /etc/systemd/system/prysm-bn.service
 ```
@@ -660,13 +717,22 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `ExecStart` string with the following:
+```
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+```
 :::
-::: tab Teku x64
+
+::::
+:::: tab Teku x64
 ```
 sudo nano /etc/systemd/system/teku-bn.service
 ```
@@ -682,13 +748,19 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku --network=prater --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
 :::
-::: tab Lighthouse arm64
+
+::::
+:::: tab Lighthouse arm64
 The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
 If you have a different configuration, replace all instances of that below with your own folder.
 
@@ -707,13 +779,19 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/lighthouse/lighthouse beacon --network prater --datadir /mnt/rpdata/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
+ExecStart=ionice -c 2 -n 0 /srv/lighthouse/lighthouse beacon --network mainnet --datadir /mnt/rpdata/lighthouse_data --port 9001 --discovery-port 9001 --eth1 --eth1-endpoints http://localhost:8545 --http --http-port 5052 --eth1-blocks-per-log-query 150 --disable-upnp
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
 :::
-::: tab Nimbus arm64
+
+::::
+:::: tab Nimbus arm64
 Note that since Nimbus runs the beacon node and validator client together, you only need to make one service to act as both.
 
 The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
@@ -734,11 +812,16 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=taskset 0x01 ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=prater --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
+ExecStart=taskset 0x01 ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=mainnet --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
+:::
 
 Note the following:
 
@@ -784,8 +867,8 @@ rp    ALL=(ALL) NOPASSWD: RP_CMDS
 
 Finally, modify `/srv/rocketpool/restart-validator.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
-:::
-::: tab Prysm arm64
+::::
+:::: tab Prysm arm64
 The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
 If you have a different configuration, replace all instances of that below with your own folder.
 
@@ -804,13 +887,22 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `ExecStart` string with the following:
+```
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+```
 :::
-::: tab Teku arm64
+
+::::
+:::: tab Teku arm64
 The following assumes you have a separate SSD for your chain data mounted to `/mnt/rpdata`.
 If you have a different configuration, replace all instances of that below with your own folder.
 
@@ -829,13 +921,19 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/teku/bin/teku --network=prater --data-path=/mnt/rpdata/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+ExecStart=ionice -c 2 -n 0 /srv/teku/bin/teku --network=mainnet --data-path=/mnt/rpdata/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
 :::
+
 ::::
+:::::
 
 Some notes:
 - The user is set to `eth2`.
@@ -924,8 +1022,8 @@ If you plan to use Nimbus, you've already taken care of this during the ETH2 cli
 First, create a systemd service for your validator client.
 The following are examples that show typical command line arguments to use in each one:
 
-:::: tabs
-::: tab Lighthouse
+::::: tabs
+:::: tab Lighthouse
 ```
 sudo nano /etc/systemd/system/lh-vc.service
 ```
@@ -941,13 +1039,19 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/lighthouse/lighthouse validator --network prater --datadir /srv/rocketpool/data/validators/lighthouse --init-slashing-protection --beacon-node "http://localhost:5052" --graffiti "RP Lighthouse"
+ExecStart=/srv/lighthouse/lighthouse validator --network mainnet --datadir /srv/rocketpool/data/validators/lighthouse --init-slashing-protection --beacon-node "http://localhost:5052" --graffiti "RP Lighthouse"
 
 [Install]
 WantedBy=multi-user.target
 ```
-::: 
-::: tab Prysm
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network mainnet` flag in the `ExecStart` string with `--network prater`.
+:::
+
+:::: 
+:::: tab Prysm
 ```
 sudo nano /etc/systemd/system/prysm-vc.service
 ```
@@ -963,13 +1067,18 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/validator --accept-terms-of-use --prater --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5052" --graffiti "RP Prysm"
+ExecStart=/srv/prysm/validator --accept-terms-of-use --mainnet --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5052" --graffiti "RP Prysm"
 
 [Install]
 WantedBy=multi-user.target
 ```
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--mainnet` flag in the `ExecStart` string with `--prater`.
 :::
-::: tab Teku
+
+::::
+:::: tab Teku
 ```
 sudo nano /etc/systemd/system/teku-vc.service
 ```
@@ -985,13 +1094,19 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku validator-client --network=prater --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku"
+ExecStart=/srv/teku/bin/teku validator-client --network=mainnet --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku"
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+::: warning NOTE
+The above configuration is for the **Ethereum mainnet**.
+If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
 :::
+
 ::::
+:::::
 
 Next, add a log watcher script in the folder you put your validator client into:
 

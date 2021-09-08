@@ -30,6 +30,11 @@ At a high level, here's what is involved in installing Rocket Pool:
 
 The instructions for downloading the CLI vary based on your Operating System.
 
+::: warning NOTE
+You must perform the following instructions **on the machine you will use for your Rocket Pool node.**
+If you are not using a keyboard and monitor directly connected to your node machine, you will need to access it remotely (e.g. via SSH) and run these commands on it through that remote connection.
+:::
+
 :::: tabs
 
 ::: tab Linux
@@ -104,7 +109,7 @@ You should see output like this:
 ```
 $ rocketpool --version
 
-rocketpool version 1.0.0-rc1
+rocketpool version 1.0.0
 ```
 
 ::: tip
@@ -118,23 +123,6 @@ Please check if your system is x64 or arm64, and download the appropriate versio
 If your system is neither of those, then you will not be able to run Rocket Pool.
 :::
 
-::: tab Windows
-
-The Windows CLI can be downloaded [here](https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-windows-amd64.exe).
-Note that it only supports x64 installations of Windows.
-
-Simply download it, rename it to `rocketpool.exe`, and place it anywhere you like in your filesystem (e.g. `C:\Program Files\Rocket Pool\rocketpool.exe`).
-For the easiest use, make sure that the containing folder you put it into is [added to your system path](https://stackoverflow.com/a/44272417).
-
-Once this is done, open a Command Prompt and test it by running the CLI with the `--version` flag.
-You should see output like this:
-```
-$ rocketpool --version
-
-rocketpool version 1.0.0-rc1
-```
-:::
-
 ::::
 
 
@@ -144,22 +132,25 @@ Now that you have the CLI installed, you can deploy the Smartnode stack.
 This will prepare your system with Docker, [docker-compose](https://docs.docker.com/compose/), and load the Smartnode files so they're ready to go.
 It won't actually run anything yet; that comes later.
 
-There are two different ways to install the Smartnode stack:
+To deploy the Smartnode stack, you will need to run the following command on your node machine (either by logging in locally, or connecting remotely such as through SSH).
 
-- A **local** install, which you should do if you're running the Rocket Pool CLI on the machine that you want to turn into a node.
-  *Note: If you are already using SSH to connect to your remote node, you will be creating a local installation on that node, so follow the local setup.* 
-- A **remote** install, where you use the CLI to connect to a different machine that you want to turn into a node
-
-Choose the appropriate setup below.
+::: warning TIP
+Choose whether you want to use the Prater test network to test Rocket Pool with free test ETH, or if you want to use the real Ethereum main network to stake real ETH, and follow the corresponding tab below.
+:::
 
 :::: tabs
-
-::: tab Local Installation
-
-To install the stack locally, simply run this command:
+::: tab The Ethereum Main Network
 ```
 rocketpool service install
 ```
+:::
+
+::: tab The Prater Test Network
+```
+rocketpool service install -n prater
+```
+:::
+::::
 
 This will grab the latest version of the Smartnode stack and set it up.
 You should see output like this at the end:
@@ -201,85 +192,21 @@ sudo usermod -aG docker $USER
 After this, **log out and back in or restart your SSH session** for the settings to take effect.
 
 Finally, re-run the installer with the `-d` flag to skip Docker installation:
+:::: tabs
+::: tab The Ethereum Main Network
 ```
 rocketpool service install -d
 ```
-
-Once this is finished, the Smartnode stack will be ready to run.
 :::
 
-::: tab Remote Installation
-
-To install the stack remotely, you will need to first have SSH key-based authentication configured.
-This means you'll use an SSH key to log into the remote system instead of a password (though you can put a password on the key itself).
-This improves your node's security and is generally considered good practice anyway.
-There is an excellent guide on [how to set it up for Linux systems here](https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/).
-
-Once the key is set up, use this command to install the Smartnode stack:
+::: tab The Prater Test Network
 ```
-rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service install
+rocketpool service install -n prater -d
 ```
-
-Where:
-
-- `<your remote hostname>` is the hostname or IP of your node
-- `<your remote username>` is the name of your user account on the remote node
-- `<your private SSH key>` is the path to the private SSH key you created to log into the remote system 
-
-For example:
-```
-rocketpool --host https://example.com --user me --key ~/.ssh/id_rsa service install
-```
-
-This will grab the latest version of the Smartnode stack and set it up.
-You should see output like this at the end:
-
-```
-Step 5 of 7: Creating Rocket Pool user data directory...
-Step 6 of 7: Downloading Rocket Pool package files...
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   651  100   651    0     0   3271      0 --:--:-- --:--:-- --:--:--  3271
-100 7845k  100 7845k    0     0  5689k      0  0:00:01  0:00:01 --:--:-- 10.2M
-Step 7 of 7: Copying package files to Rocket Pool user data directory...
-```
-
-If there aren't any error messages, then the installation was successful.
-By default, it will be put into the `~/.rocketpool` directory inside of your user account's home folder.
-
-Note that the Smartnode installer cannot install `docker` and `docker-compose` on all platforms automatically.
-If you receive an error message like this during the installation:
-
-```
-Automatic dependency installation for the Mint operating system is not supported.
-Please install docker and docker-compose manually, then try again with the '-d' flag to skip OS dependency installation.
-Be sure to add yourself to the docker group with 'sudo usermod -aG docker $USER' after installing docker.
-Log out and back in, or restart your system after you run this command.
-```
-
-Then you simply have to install those two things manually.
-Perform the following on your remote node, **not on your local machine**:
-
-Docker provides common [install instructions here](https://docs.docker.com/engine/install/).
-
-Docker-compose provides common [install instructions here](https://docs.docker.com/compose/install/).
-
-Next, give your user account permission to use Docker:
-```shell
-sudo usermod -aG docker $USER
-```
-
-After this, **close SSH** for the permission settings to take effect.
-
-Finally, re-run the installer on your local machine with the `-d` flag to skip Docker installation:
-```
-rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service install -d
-```
-
-Once this is finished, the Smartnode stack will be ready to run.
 :::
-
 ::::
+
+Once this is finished, the Smartnode stack will be ready to run.
 
 
 ## Configuring Docker's Storage Location
