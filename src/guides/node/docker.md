@@ -240,7 +240,7 @@ Press `Ctrl+O, Enter` to save the file, and `Ctrl+X, Enter` to exit the editor.
 
 Next, make the folder:
 ```
-mkdir -p <your external mount point>/docker
+sudo mkdir -p <your external mount point>/docker
 ```
 
 (Again, for example, this would be `/mnt/rpdata/docker` for Raspberry Pi users.)
