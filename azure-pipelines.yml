@@ -32,7 +32,7 @@ steps:
 - bash: |
     aws --profile default configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     aws --profile default configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $DOCKER_REPO
+    aws ecr get-login-password --region $DOCKER_REPO_REGION | docker login --username AWS --password-stdin $DOCKER_REPO
     docker build -t docs.rocketpool.net:latest .
     docker tag docs.rocketpool.net:latest $DOCKER_REPO/docs.rocketpool.net:latest
     docker push $DOCKER_REPO/docs.rocketpool.net:latest
