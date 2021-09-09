@@ -64,6 +64,11 @@ Moving a node from the testnet to mainnet is a simple process:
    You will overwrite this with the latest version of the CLI anyway, but if you want to be thorough, you can remove the old one first.
 
 At this point your testnet installation has been purged, and you can safely migrate to a new mainnet installation.
+Select the guide you want below and **carefully follow the instructions**:
+
+[Docker Mode installation](docker.md)
+
+[Hybrid Mode installation](hybrid.md)
 ::::
 
 :::: tab Native Mode
