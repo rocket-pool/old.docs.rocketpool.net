@@ -28,5 +28,17 @@ steps:
   env:
     GITHUB_PEM_PATH: $(githubPEM.secureFilePath)
     GITHUB_APP_ID: $(GITHUB_APP_ID)
-    GITHUB_APP_INSTALLATION_ID: $(GITHUB_APP_INSTALLATION_ID)  
-
+    GITHUB_APP_INSTALLATION_ID: $(GITHUB_APP_INSTALLATION_ID)
+- bash: |
+    aws --profile default configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    aws --profile default configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    aws ecr get-login-password --region $DOCKER_REPO_REGION | docker login --username AWS --password-stdin $DOCKER_REPO
+    docker build -t docs.rocketpool.net:latest .
+    docker tag docs.rocketpool.net:latest $DOCKER_REPO/docs.rocketpool.net:latest
+    docker push $DOCKER_REPO/docs.rocketpool.net:latest
+  displayName: "Build"
+  env:
+    AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+    DOCKER_REPO: $(DOCKER_REPO)
+    DOCKER_REPO_REGION: $(DOCKER_REPO_REGION)
