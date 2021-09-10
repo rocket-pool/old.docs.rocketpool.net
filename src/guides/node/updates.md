@@ -103,8 +103,8 @@ The most consistent way to find out about new releases is to subscribe to the Ro
 
 The steps to upgrade depend on which mode your node uses. Select from the options below:
 
-:::: tabs
-::: tab Linux (Docker or Hybrid Mode)
+:::::: tabs
+::::: tab Linux (Docker or Hybrid Mode)
 
 Stop the Rocket Pool services:
 ```
@@ -125,11 +125,20 @@ For `arm64` systems (like the Raspberry Pi):
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
 ```
 
-Now run the install command:
+Now run the install command (**select the tab for the network that you'd like to upgrade**):
 
+:::: tabs
+::: tab The Ethereum Mainnet
 ```
 rocketpool service install -d
 ```
+:::
+::: tab The Prater Testnet
+```
+rocketpool service install -n prater -d
+```
+:::
+::::
 
 The `-d` flag tells it to ignore system dependencies like Docker, since you already have them.
 
@@ -152,11 +161,13 @@ Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
 
 Both the client and service should match the new release version.
 
-:::
-::: tab Linux (Native Mode)
+:::::
+::::: tab Linux (Native Mode)
 
-:warning: *This will only update the Smartnode stack itself - it **will not** update your ETH1 and ETH2 clients.*
-*You will have to do this manually (see the next section below).*
+::: warning NOTE
+This will only update the Smartnode stack itself - it **will not** update your ETH1 and ETH2 clients.
+You will have to do this manually (see the next section below).
+:::
 
 Stop the Rocket Pool services:
 ```
@@ -193,6 +204,11 @@ You *may* also need to download the new installer package, if it contains an upd
 This is something you'll have to ask about on Discord, or compare the commit history for yourself.
 If it is the case, then you'll need to replace the file in `/srv/rocketpool/config.yml` with the new one - but be sure to make a backup of the old one first because this will erase all of your settings, so you'll have to copy them over again.
 
+::: warning NOTE
+The config file package has both mainnet and Prater testnet configurations in it.
+If you do have to upgrade the config files, *make sure you use the ones for the correct network*.
+:::
+
 Next, start Rocket Pool up again:
 
 ```
@@ -212,8 +228,8 @@ Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
 
 Both the client and service should match the new release version.
 
-:::
-::: tab macOS (Docker or Hybrid Mode)
+:::::
+::::: tab macOS (Docker or Hybrid Mode)
 
 Stop the Rocket Pool services:
 ```
@@ -232,11 +248,20 @@ For `arm64` systems, such as the Mac mini with M1:
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /usr/local/bin/rocketpool
 ```
 
-Now run the install command:
+Now run the install command (**select the tab for the network that you'd like to upgrade**):
 
+:::: tabs
+::: tab The Ethereum Mainnet
 ```
 rocketpool service install -d
 ```
+:::
+::: tab The Prater Testnet
+```
+rocketpool service install -n prater -d
+```
+:::
+::::
 
 The `-d` flag tells it to ignore system dependencies like Docker, since you already have them.
 
@@ -259,43 +284,8 @@ Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
 
 Both the client and service should match the new release version.
 
-:::
-
-::: tab Windows
-The Windows CLI can be downloaded [here](https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-windows-amd64.exe).
-Note that it only supports x64 installations of Windows.
-
-Put it into the same folder as the old Rocket Pool executable, replacing it.
-
-Now run the install command:
-
-```
-rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service install -d
-```
-
-The `-d` flag tells it to ignore system dependencies like Docker, since you already have them.
-
-Next, start Rocket Pool up again:
-
-```
-rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service start
-```
-
-Finally, check the version to make sure the CLI and Smartnode stack are both up to date:
-
-```
-rocketpool --host <your remote hostname> --user <your remote username> --key <your private SSH key> service version
-
-Rocket Pool client version: 1.0.0-rc3
-Rocket Pool service version: 1.0.0-rc3
-Selected Eth 1.0 client: Geth (rocketpool/client-go:v1.10.4)
-Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
-```
-
-Both the client and service should match the new release version.
-:::
-
-::::
+:::::
+::::::
 
 
 ## Manually Updating the ETH1 or ETH2 Client
