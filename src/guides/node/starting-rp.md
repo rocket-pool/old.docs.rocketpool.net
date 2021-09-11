@@ -200,10 +200,10 @@ ac629c08c896   ethereum/client-go:v1.10.3          "sh /setup/start-nod…"   2 
 ```
 
 The key thing to check is the `STATUS` column.
-If none of the entries state `Restarting...`, then the containers should be running properly.
+If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
@@ -251,10 +251,10 @@ a3c22f54eff0   rocketpool/smartnode:v1.0.0-rc3     "/go/bin/rocketpool …"   2 
 ```
 
 The key thing to check is the `STATUS` column.
-If none of the entries state `Restarting...`, then the containers should be running properly.
+If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm as your ETH2 client and letting Rocket Pool manage it via Docker, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
