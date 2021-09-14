@@ -9,11 +9,14 @@ You should absolutely take all essential steps.
 
 *Wizards only: If you want to go above and beyond and know your way around the terminal, have a look as the popular open source [imthenachoman/How-To-Secure-A-Linux-Server]( https://github.com/imthenachoman/How-To-Secure-A-Linux-Server ) guide.*
 
+
 ## Assumptions in this guide
 
 This guide assumes your node runs `Ubuntu 20.04 LTS`, the concepts will carry over to other systems but the example commands may not.
 
-We also assume your client machine you use to connect to your node has a Linux-style command line. So any Linux or Mac machine is fine. If you are on Windows, consider using [Git Bash]( https://git-scm.com/downloads ), which is an alternative command-line interface that makes it possible to use common Linux commands like `ls`, `cd`, and `ssh` as if you are on a Linux-like system. If you don't choose to do this you will need a separate SSH client for example.
+As with all of the commands in this guide, we assume that you are connecting **remotely** to your node's command terminal using `ssh`.
+If you need a refresher on how to use `ssh`, take a look at the [Intro to Secure Shell](../ssh.md) guide first.
+
 
 ## Keep your client machine secure (essential)
 

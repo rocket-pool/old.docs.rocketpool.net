@@ -97,6 +97,8 @@ Once that's complete, you're ready to start preparing Ubuntu to run a Rocket Poo
 You can use the local terminal on it, or you can SSH in from your desktop / laptop as the installation guide suggests.
 The process will be the same either way, so do whatever's most convenient for you.
 
+If you aren't familiar with `ssh`, take a look at the [Intro to Secure Shell](../ssh.md) guide.
+
 ::: warning NOTE
 At this point, you should *strongly consider* configuring your router to make your Pi's IP address **static**.
 This means that your Pi will have the same IP address forever, so you can always SSH into it using that IP address.

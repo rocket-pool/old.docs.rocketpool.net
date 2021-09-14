@@ -97,6 +97,7 @@ module.exports = {
                           'node/local/hardware',
                           'node/local/prepare-pc',
                           'node/local/prepare-pi',
+                          'node/ssh'
                       ]
                     },
                     {

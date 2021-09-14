@@ -155,14 +155,9 @@ Next, install SSH:
 sudo apt install openssh-server
 ```
 
-Once this is done, you can log into the machine's terminal remotely from your laptop or desktop.
-To access the machine, open a new terminal (**from your remote machine, not on the node**) on Linux or macOS (use Powershell on Windows) and type the following command:
+Once this is done, you can log into the machine's terminal remotely from your laptop or desktop using `ssh`.
 
-```
-ssh [your node's local IP address]
-```
-
-Enter your username and password, and you'll be in!
+If you aren't familiar with `ssh`, take a look at the [Intro to Secure Shell](../ssh.md) guide.
 
 ::: warning NOTE
 At this point, you should *strongly consider* configuring your router to make your node's IP address **static**.
