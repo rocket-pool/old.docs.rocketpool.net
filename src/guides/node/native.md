@@ -573,6 +573,7 @@ sudo chown eth2:eth2 /srv/prysm/genesis.ssz
 ::::
 
 :::: tab Teku
+
 ```
 sudo mkdir /srv/teku
 
@@ -593,6 +594,11 @@ If they live on separate disks (e.g. an external SSD, as with the **Raspberry Pi
 sudo mkdir /mnt/rpdata/teku_data
 
 sudo chown eth2:eth2 /mnt/rpdata/teku_data
+```
+
+Teku needs Java 11 to function, ensure that you have it installed.
+```
+sudo apt install openjdk-11-jre -y
 ```
 
 Now, grab [the latest Teku release](https://github.com/ConsenSys/teku/releases/), or [build it from source](https://github.com/ConsenSys/teku/) if you want.
