@@ -681,7 +681,7 @@ Next, we have to give the `rp` user the ability to restart the validator client 
 
 Open the `sudoers` file:
 ```
-sudo nano /etc/sudoers
+sudo visudo
 ```
 
 Add this line under `# Cmnd alias specification`:
