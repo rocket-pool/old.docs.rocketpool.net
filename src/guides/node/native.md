@@ -612,6 +612,8 @@ The following are examples that show typical command line arguments to use in ea
 
 ::::: tabs
 :::: tab Lighthouse x64
+The following assumes you use the default data folder at: `/srv/lighthouse/lighthouse_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/lh-bn.service
 ```
@@ -641,6 +643,8 @@ If you want to use the **Prater testnet** instead, replace the `--network mainne
 :::: 
 
 :::: tab Nimbus x64
+The following assumes you use the default data folder at: `/srv/nimbus/nimbus_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/nimbus.service
 ```
@@ -707,6 +711,8 @@ Finally, modify `/srv/rocketpool/restart-validator.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
 ::::
 :::: tab Prysm x64
+The following assumes you use the default data folder at: `/srv/prysm/prysm_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/prysm-bn.service
 ```
@@ -738,6 +744,8 @@ ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state
 
 ::::
 :::: tab Teku x64
+The following assumes you use the default data folder at: `/srv/teku/teku_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/teku-bn.service
 ```
@@ -762,10 +770,6 @@ WantedBy=multi-user.target
 ::: warning NOTE
 The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
-:::
-
-::: warning NOTE
-If you are using a non-standard data path, you should edit the `--data-path` flag.
 :::
 
 ::::
