@@ -573,7 +573,6 @@ sudo chown eth2:eth2 /srv/prysm/genesis.ssz
 ::::
 
 :::: tab Teku
-
 ```
 sudo mkdir /srv/teku
 
