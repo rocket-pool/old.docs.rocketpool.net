@@ -748,7 +748,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 --eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target
@@ -757,6 +757,10 @@ WantedBy=multi-user.target
 ::: warning NOTE
 The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `--network=mainnet` flag in the `ExecStart` string with `--network=prater`.
+:::
+
+::: warning NOTE
+If you are using a non-standard data path, you should edit the `--data-path` flag.
 :::
 
 ::::
@@ -1094,7 +1098,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku validator-client --network=mainnet --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku"
+ExecStart=/srv/teku/bin/teku validator-client --network=mainnet --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku" --log-destination=CONSOLE
 
 [Install]
 WantedBy=multi-user.target
