@@ -61,7 +61,7 @@ ETH in this pool comes from two sources:
 1. ETH that other stakers have deposited, which hasn't been used by a node operator to create a new validator yet
 2. ETH that was returned by a node operator after they exited one of their validators and received their rewards from the Beacon Chain (**note that this is not possible until after the ETH1-ETH2 Merge occurs and withdrawals are enabled**)
 
-During the period before the Merge, it's possible that the liquidity pool won't have enough balance to cover your unstaking.
+It's possible that if node operators have put all of the staking pool to work on the Beacon chain, then the liquidity pool won't have enough balance to cover your unstaking.
 In this scenario, you may find other ways to trade your rETH back to ETH (such as a decentralized exchange like [Uniswap](https://app.uniswap.org/#/swap)) - though they will likely come with a small premium.
 :::
 
