@@ -163,7 +163,7 @@ module.exports = {
           children: [
             '',
             {
-              title: 'Integration Examples',
+              title: 'Integration Usage and Examples',
               sidebarDepth: 2,
               collapsable: true,
               children: [
@@ -178,7 +178,35 @@ module.exports = {
               collapsable: true,
               children: [
                   'api/contracts',
-                  'api/go',
+                  {
+                    title: 'Go Bindings',
+                    sidebarDepth: 2,
+                    collapsable: true,
+                    children: [
+                      'api/go/auction',
+                      'api/go/contracts',
+                      'api/go/dao',
+                      'api/go/deposit',
+                      'api/go/minipool',
+                      'api/go/network',
+                      'api/go/node',
+                      'api/go/rewards',
+                      'api/go/rocketpool',
+                      {
+                        title: 'settings',
+                        sidebarDepth: 2,
+                        collapsable: true,
+                        children: [
+                          'api/go/settings-protocol',
+                          'api/go/settings-trustednode',
+                        ]
+                      },
+                      'api/go/storage',
+                      'api/go/tokens',
+                      'api/go/types',
+                      'api/go/utils',
+                    ]
+                  },
                   'api/js'
               ]
             },
