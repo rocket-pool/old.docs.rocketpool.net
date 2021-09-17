@@ -158,29 +158,44 @@ Ubuntu will load this key for you automatically when you use `ssh` if this priva
 The second line states the location of the **public key**, which is called `id_ed25519.pub` by default.
 We'll need the public key for the next step.
 
-### Loading up your new SSH key
 
-SSH keys are just files on your hard drive. Before they can help you authenticate, your local SSH software needs to know to use the SSH key. This local software is called `ssh-agent`. You need to load your SSH key **every time you open a new terminal**.
-
-You can tell the `ssh-agent` to load the key we just created by running:
+::: tip NOTE
+Ubuntu *should* load this new key automatically.
+However, some systems (such as macOS machines) will not load it automatically - you will have to tell it to do this with the following command **on your client machine**:
 
 ```shell
-ssh-add ~/.ssh/id_ed25519
+ssh-add /home/username/.ssh/id_ed25519
 ```
 
-Note that that path that you need to use is the one the the previous section showed you, so in our example `/home/username/.ssh/id_ed25519`. Do not use the file with the `.pub` extension since we are loading the private key, not the public key.
+Note that this is the path of the **private key** that we generated in the previous step, **not the public key**.
+Replace the path with whatvever your system printed in that previous step.
 
-If you get an error saying that the `ssh-agent` is not running, start it by running:
+If you get an error saying that the `ssh-agent` is not running, start it by running the following command **on your client machine**:
 
 ```shell
 eval $(ssh-agent)
 ```
 
-:::: tip NOTE
-If you don't want to type these two commands every time you open the terminal, you can create a shortcut for adding you key by adding an `alias` to your `~/.bashrc` file. You do this by running `nano ~/.bashrc` and adding this (edit it to use your SSH key path): `alias loadkey='ssh-add ~/.ssh/id_ed25519'`.
+If you don't want to type these two commands every time you open the terminal, you can create a shortcut for adding you key by adding an `alias` to your `~/.bashrc` file.
 
-Close and open your terminal for the changes to take effect. You could then type `loadkey` into your terminal instead of typing the fill `ssh-add` command.
-::::
+Open the file using the text editor:
+
+```shell
+nano ~/.bashrc
+```
+
+Add this line to the end (assuming you used the default path for the private key - update as necessary):
+
+```
+alias loadkey='ssh-add $HOME/.ssh/id_ed25519'
+```
+
+Save and exit with `Ctrl+O` and `Enter`, then `Ctrl+X`.
+Next, close and open your terminal for the changes to take effect.
+
+You can now type `loadkey` **on your client machine** to load the key.
+:::
+
 
 ### Adding the Public Key to your Node
 
