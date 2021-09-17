@@ -22,6 +22,11 @@ module.exports = {
   ],
 
   /**
+   * ref：https://v1.vuepress.vuejs.org/config/#theme
+   */
+  theme: 'default-prefers-color-scheme',
+
+  /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
