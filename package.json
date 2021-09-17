@@ -21,6 +21,7 @@
     "vuepress-plugin-element-tabs": "^0.2.8"
   },
   "dependencies": {
-    "vuepress-plugin-code-copy": "^1.0.6"
+    "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-theme-default-prefers-color-scheme": "^2.0.0"
   }
 }
