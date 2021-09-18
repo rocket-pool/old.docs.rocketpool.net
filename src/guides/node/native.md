@@ -761,7 +761,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 --eth1-deposit-contract-max-request-size=150
+ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=http://localhost:8545 --rest-api-enabled --rest-api-port=5052 --eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target
