@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "vuepress-plugin-code-copy": "^1.0.6",
+    "vuepress-plugin-zooming": "^1.1.8",
     "vuepress-theme-default-prefers-color-scheme": "^2.0.0"
   }
 }
