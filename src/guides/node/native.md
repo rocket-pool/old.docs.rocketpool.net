@@ -577,6 +577,8 @@ sudo chown eth2:eth2 /srv/prysm/genesis.ssz
 sudo mkdir /srv/teku
 
 sudo chown $USER:$USER /srv/teku
+
+sudo mkhomedir_helper rp
 ```
 
 Next, make a folder for Teku's chain data on the SSD.
