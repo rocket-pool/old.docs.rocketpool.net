@@ -190,7 +190,15 @@ module.exports = {
                     children: [
                       'api/go/auction',
                       'api/go/contracts',
-                      'api/go/dao',
+                      {
+                        title: 'dao',
+                        children: [
+                          'api/go/dao',
+                          'api/go/dao-protocol',
+                          'api/go/dao-trustednode',
+
+                        ]
+                      },
                       'api/go/deposit',
                       'api/go/minipool',
                       'api/go/network',
@@ -209,7 +217,14 @@ module.exports = {
                       'api/go/storage',
                       'api/go/tokens',
                       'api/go/types',
-                      'api/go/utils',
+                      {
+                        title: 'utils',
+                        children: [
+                          'api/go/utils',
+                          'api/go/utils-eth',
+                          'api/go/utils-strings',
+                        ]
+                      }
                     ]
                   },
                   'api/js'
