@@ -251,7 +251,13 @@ module.exports = {
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    ['vuepress-plugin-zooming', {
+      options: {
+          bgColor: 'black',
+          zIndex: 10000,
+      }
+    }
+    ],
     ['vuepress-plugin-code-copy', {
         color: '#ffbca5',
         staticIcon: true,
