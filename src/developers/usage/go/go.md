@@ -32,7 +32,7 @@ require (
 
 Run `go mod tidy` afterwards to pull down the appropriate version into your cache.
 
-As you may expect, all of the packages contained in the library stem from the `"github.com/rocket-pool/rocketpool-go/` package.
+As you may expect, all of the packages contained in the library stem from the `github.com/rocket-pool/rocketpool-go/` package.
 
 
 ## Initializing the Rocket Pool Manager
@@ -249,3 +249,169 @@ If you want to wait for the transaction to complete before moving forward, you c
 
 This leverages the [utils.WaitForTransaction()](../../api/go/utils.md#func-waitfortransaction) function to block until the transaction has been successfully mined.
 
+
+## Pool Staking Reference
+
+This section describes common operations involving the staking pool.
+
+
+### Statistics
+
+The staking pool's current balance:
+
+```go
+    depositPoolBalance, err := deposit.GetBalance(rp, nil)
+    if err != nil {
+        return 0, err
+    }
+    balanceEth := eth.WeiToEth(depositPoolBalance)
+    return balanceEth, nil
+```
+
+The ETH/rETH exchange rate:
+```go
+    exchangeRate, err := tokens.GetRETHExchangeRate(rp, nil)
+    if err != nil {
+        return 0, err
+    }
+    return exchangeRate, nil
+```
+
+
+### Staking ETH for rETH
+
+Staking uses the [deposit.Deposit()](../../api/go/deposit.md#func-deposit) function:
+
+```go
+    // This assumes you already have the private key and chain ID from elsewhere
+    opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
+    if err != nil {
+        return fmt.Errorf("Error getting Transactor options: %w", err)
+    }
+    opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
+    opts.GasTipCap = nil // Set to the user's desired max priority fee
+    opts.Context = context.Background()
+
+    // Set Value to be the amount of ETH you want to stake, in wei
+    amountToStake := 1.0
+    opts.Value = eth.EthToWei(amountToStake)
+
+    // Simulate the transaction to make sure it is allowed, and get the gas estimate
+    gasInfo, err := deposit.EstimateDepositGas(rp, opts)
+    if err != nil {
+        return fmt.Errorf("Error simulating Deposit: %w", err)
+    }
+
+    // This is where you can ask the user if they're alright with these gas limits,
+    // and let them overwrite the max fees if desired
+
+    // Run the deposit to stake the ETH and receive rETH
+    txHash, err := deposit.Deposit(rp, opts)
+    if err != nil {
+        return fmt.Errorf("Error during Deposit: %w", err)
+    }
+
+    // Wait for the transaction to be mined
+    _, err = utils.WaitForTransaction(ethClient, txHash)
+    if err != nil {
+        return fmt.Errorf("Error waiting for transaction: %w", err)
+    }
+
+    return nil
+```
+
+
+### Unstaking rETH for ETH
+
+Unstaking uses the [tokens.BurnRETH()](../../api/go/tokens.md#func-burnreth) function:
+
+```go
+    // This assumes you already have the private key and chain ID from elsewhere
+    opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
+    if err != nil {
+        return fmt.Errorf("Error getting Transactor options: %w", err)
+    }
+    opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
+    opts.GasTipCap = nil // Set to the user's desired max priority fee
+    opts.Context = context.Background()
+
+    // Set Value to be the amount of rETH you want to unstake
+    rEthToBurn := 1.0
+    rEthToBurnWei := eth.EthToWei(rEthToBurn)
+
+    // Simulate the transaction to make sure it is allowed, and get the gas estimate
+    gasInfo, err := tokens.EstimateBurnRETHGas(rp, rEthToBurnWei, opts)
+    if err != nil {
+        return fmt.Errorf("Error simulating unstake: %w", err)
+    }
+
+    // This is where you can ask the user if they're alright with these gas limits,
+    // and let them overwrite the max fees if desired
+
+    txHash, err := tokens.BurnRETH(rp, rEthToBurnWei, opts)
+    if err != nil {
+        return fmt.Errorf("Error during unstake: %w", err)
+    }
+
+    // Wait for the transaction to be mined
+    _, err = utils.WaitForTransaction(ethClient, txHash)
+    if err != nil {
+        return fmt.Errorf("Error waiting for transaction: %w", err)
+    }
+
+    return nil
+```
+
+
+## Network Statistics Reference
+
+This section describes how to get some useful statistics about the Rocket Pool network.
+
+
+### Node Count
+
+The number of nodes registered with Rocket Pool comes from the [node.GetNodeCount()](../../api/go/node.md#func-getnodecount) function:
+
+```go
+    nodeCount, err := node.GetNodeCount(rp, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting total number of Rocket Pool nodes: %w", err)
+    }
+```
+
+
+### Minipool Count
+
+The number of minipools can be retrieved with [minipool.GetMinipoolCountPerStatus()](../../api/go/minipool.md#func-getminipoolcountperstatus) for active minipools, which breaks up into counts for each different status.
+The number of finalized pools can be retrieved with [minipool.GetFinalisedMinipoolCount()](../../api/go/minipool.md#func-getfinalisedminipoolcount).
+
+The statuses are described as follows:
+- **Initialized**: waiting for a deposit still
+- **Prelaunch:** deposits are done, waiting to be staked by the node operator's `rocketpool_node` container 
+- **Staking:** deposited, validator created, and active (or pending) on the Beacon Chain
+- **Dissolved:** staking failed, funds returned to the node operator and staking pool
+- **Withdrawable:** exited from the Beacon Chain, waiting for rewards to be withdrawn to the minipool
+- **Finalized:** exited, withdrawn from, and essentially closed (inactive)
+
+```go
+    // The 2nd and 3rd parameters are for batching support if necessary
+    minipoolCounts, err := minipool.GetMinipoolCountPerStatus(rp, 0, 0, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
+    }
+    initializedCount := minipoolCounts.Initialized.Uint64()
+    prelaunchCount := minipoolCounts.Prelaunch.Uint64()
+    stakingCount := minipoolCounts.Staking.Uint64()
+    withdrawableCount := minipoolCounts.Withdrawable.Uint64()
+    dissolvedCount := minipoolCounts.Dissolved.Uint64()
+
+    finalizedCount, err := minipool.GetFinalisedMinipoolCount(rp, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
+    }
+
+    // Remove the number of finalized pools from the number of withdrawable pools,
+    // because finalized pools always have the withdrawable state
+    withdrawableCount -= finalizedCount
+    return nil
+```
