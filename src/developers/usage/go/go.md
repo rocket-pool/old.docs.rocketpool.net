@@ -415,3 +415,38 @@ The statuses are described as follows:
     withdrawableCount -= finalizedCount
     return nil
 ```
+
+
+### Current Node Fee (Commission Rate)
+
+The [network.GetNodeFee()](../../api/go/network.md#func-getnodefee) function will retrieve the current commission rate for new minipools based on the size of the deposit pool:
+
+```go
+    nodeFee, err := network.GetNodeFee(rp, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting current node fee for new minipools: %w", err)
+    }
+```
+
+
+### Total and Effective Total RPL Staked
+
+The total amount of RPL staked across the network can be found with the [node.GetTotalRPLStake()](../../api/go/node.md#func-gettotalrplstake) function:
+
+```go
+    totalValueStakedWei, err := node.GetTotalRPLStake(rp, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
+    }
+    totalValueStaked := eth.WeiToEth(totalValueStakedWei)
+```
+
+The *effective* total amount of RPL staked (which honors the 150% collateral reward limit) comes from the [node.GetTotalEffectiveRPLStake()](../../api/go/node.md#func-gettotaleffectiverplstake) function:
+
+```go
+    totalEffectiveStakedWei, err := node.GetTotalEffectiveRPLStake(rp, nil)
+    if err != nil {
+        return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
+    }
+    totalEffectiveStaked := eth.WeiToEth(totalEffectiveStakedWei)
+```
