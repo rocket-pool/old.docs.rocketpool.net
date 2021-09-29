@@ -433,6 +433,9 @@ This can, however, be problematic if you install some software that attempts to 
 ::: warning NOTE
 This section is for people who feel comfortable with the command-line and firewalls.
 It is likely that these settings are too restrictive for many non-Smartnode applications.
+
+Be aware that Docker ignores rules set by `ufw`. Outbound restrictions will apply to [Native](node/native.html) Rocket Pool setups only.
+If you are running a [Standard](node/docker.html) Docker-based Rocket Pool setup, you can skip this section.
 :::
 
 The following commands will lock both in and outbound traffic to only the minimum requirements.
@@ -462,6 +465,18 @@ sudo ufw allow out http comment 'allow HTTP traffic out'
 Allow HTTPS traffic for things like `apt`:
 ```shell
 sudo ufw allow out https comment 'Allow HTTPS traffic out'
+```
+
+Allow execution clients (e.g. Geth) to connect to peers:
+```shell
+sudo ufw allow out 30303,30313,40303/tcp comment 'Allow execution clients p2p traffic out'
+sudo ufw allow out 30303,30313,40303/udp comment 'Allow execution clients p2p traffic out'
+```
+
+Allow consensus clients (e.g. Lighthouse, Nimbus, Prysm, Teku) to connect to peers:
+```shell
+sudo ufw allow out 9000:9100,12000,13000/tcp comment 'Allow consensus clients p2p traffic out'
+sudo ufw allow out 9000:9100,12000,13000/udp comment 'Allow consensus clients p2p traffic out'
 ```
 
 Reload the settings:
