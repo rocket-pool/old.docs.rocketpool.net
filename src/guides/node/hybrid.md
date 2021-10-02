@@ -191,8 +191,7 @@ Consult the [Securing your Node](./securing-your-node.md) section for more infor
 
 ### Updating `docker-compose.yml`
 
-Next, open `~/.rocketpool/docker-compose.yml` in a text editor.
-It will look like this (truncated for brevity):
+Next, open `~/.rocketpool/docker-compose.yml` in a text editor. It should look like this (truncated for brevity):
 
 ```
 version: "3.4"
@@ -230,6 +229,7 @@ services:
       - eth1
       - eth2
 ```
+If you followed the earlier section on setting up an external ETH1 client, then you already edited this file and it will look slightly different from above but the following instructions still apply.
 
 Remove the entire `eth2` section under the `services` section.
 Next, go through each other service and remove `eth2` from its list of dependencies (the `depends_on` section).
