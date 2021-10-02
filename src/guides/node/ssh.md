@@ -69,3 +69,22 @@ The client will then prompt you for your user's password; once you enter that, y
 You will be greeted with a welcome message, some details about your machine, and a new prompt.
 
 At this point, everything you type in the terminal **is executed remotely on your node machine** - it's as if you were logged directly into the node machine and typing on it with a locally-attached keyboard!
+
+You'll need to be able to ssh into the terminal periodically for updates and maintenance. It can be inconvenient to remember how to log in to your node, so it may be helpful to shorten this command by creating a memorable alias. If you do this, be sure to create the alias on the client machine, not while logged into the node. So if your terminal is still connected to the node, first run `exit` at the command prompt, or open a new terminal window locally.
+
+Assuming, as before, that your node's username is `staker` and your node's IP address is `192.168.1.10`, create the alias with the following command:
+
+```sh
+echo "alias ethnode='ssh staker@192.168.1.10'" >> ~/.bash_aliases
+```
+
+Reload the alias list to make your current terminal window aware of the new alias:
+```sh
+source ~/.bash_aliases
+```
+
+And now connect to the node using the alias you just created:
+
+```sh
+ethnode
+```
