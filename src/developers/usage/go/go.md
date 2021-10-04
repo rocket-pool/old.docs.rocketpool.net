@@ -97,13 +97,13 @@ import (
 Next, use the following snippet:
 
 ```go
-    // Get the deposit pool balance
-    depositPoolBalance, err := deposit.GetBalance(rp, nil)
-    if err != nil {
-        fmt.Printf("Error getting the deposit pool balance: %s\n", err.Error())
-        os.Exit(1)
-    }
-    fmt.Printf("Deposit Pool Balance: %f\n", eth.WeiToEth(depositPoolBalance))
+// Get the deposit pool balance
+depositPoolBalance, err := deposit.GetBalance(rp, nil)
+if err != nil {
+    fmt.Printf("Error getting the deposit pool balance: %s\n", err.Error())
+    os.Exit(1)
+}
+fmt.Printf("Deposit Pool Balance: %f\n", eth.WeiToEth(depositPoolBalance))
 ```
 
 The [deposit.GetBalance()](../../api/go/deposit.md#func-getbalance) function will return the amount of ETH in the staking pool.
@@ -144,11 +144,11 @@ import (
 Start by retrieving the private key used for signing the transaction, and specifying the chain ID you want to execute the transaction on:
 
 ```go
-    // You'll have to retrieve this key for your user in your system
-    var privateKey *ecdsa.PrivateKey
+// You'll have to retrieve this key for your user in your system
+var privateKey *ecdsa.PrivateKey
 
-    // 1 for Mainnet, but insert your chain ID of choice here (e.g. 5 for Goerli)
-    chainID := big.NewInt(1)
+// 1 for Mainnet, but insert your chain ID of choice here (e.g. 5 for Goerli)
+chainID := big.NewInt(1)
 ```
 
 
@@ -157,16 +157,16 @@ Start by retrieving the private key used for signing the transaction, and specif
 Next, prepare the transactor options:
 
 ```go
-    // Set up the transactor options
-    opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
-    if err != nil {
-        fmt.Printf("Error getting Transactor options: %s\n", err.Error())
-        os.Exit(1)
-    }
-    opts.GasFeeCap = nil // Max total gas fee - nil uses the internal oracle
-    opts.GasTipCap = nil // Max priority fee - nil uses the internal oracle
-    opts.GasLimit = 0 // When set to 0, the library will automatically calculate it
-    opts.Context = context.Background()
+// Set up the transactor options
+opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
+if err != nil {
+    fmt.Printf("Error getting Transactor options: %s\n", err.Error())
+    os.Exit(1)
+}
+opts.GasFeeCap = nil // Max total gas fee - nil uses the internal oracle
+opts.GasTipCap = nil // Max priority fee - nil uses the internal oracle
+opts.GasLimit = 0 // When set to 0, the library will automatically calculate it
+opts.Context = context.Background()
 ```
 
 Note that the current Geth library uses `opts.GasFeeCap` and `opts.GasTipCap` to specify the total maximum fee and the maximum priority fee (introduced with EIP 1559) respectively.
@@ -176,9 +176,9 @@ The `opts.GasLimit` can be left at 0; the library will automatically calculate t
 Next, specify the amount of ETH to deposit into the Staking Pool:
 
 ```go
-    // Set Value to be the amount of ETH you want to stake, in wei
-    amountToStake := 1.0
-    opts.Value = eth.EthToWei(amountToStake)
+// Set Value to be the amount of ETH you want to stake, in wei
+amountToStake := 1.0
+opts.Value = eth.EthToWei(amountToStake)
 ```
 
 This is another instance where the `eth.EthToWei()` utility function comes in handy.
@@ -189,14 +189,14 @@ This is another instance where the `eth.EthToWei()` utility function comes in ha
 Now that the options are set, simulate the transaction:
 
 ```go
-    // Simulate the transaction to make sure it is allowed, and get the gas estimate
-    gasInfo, err := deposit.EstimateDepositGas(rp, opts)
-    if err != nil {
-        fmt.Printf("Error simulating Deposit: %s\n", err.Error())
-        os.Exit(1)
-    }
-    fmt.Printf("Staking %f ETH\n", amountToStake)
-    fmt.Printf("Estimated gas needed: %d to %d", gasInfo.EstGasLimit, gasInfo.SafeGasLimit)
+// Simulate the transaction to make sure it is allowed, and get the gas estimate
+gasInfo, err := deposit.EstimateDepositGas(rp, opts)
+if err != nil {
+    fmt.Printf("Error simulating Deposit: %s\n", err.Error())
+    os.Exit(1)
+}
+fmt.Printf("Staking %f ETH\n", amountToStake)
+fmt.Printf("Estimated gas needed: %d to %d", gasInfo.EstGasLimit, gasInfo.SafeGasLimit)
 ```
 
 Each transaction function in the Rocket Pool library comes with a corresponding `EstimateXYZGas()` function - in this example, the function is [deposit.EstimateDepositGas()](../../api/go/deposit.md#func-estimatedepositgas).
@@ -212,17 +212,17 @@ At this point, it's a good idea to present the gas information to the user so th
 Once they're satisfied, run the actual transaction:
 
 ```go
-    // This is where you can ask the user if they're alright with these gas limits,
-    // and let them overwrite the max fees if desired
+// This is where you can ask the user if they're alright with these gas limits,
+// and let them overwrite the max fees if desired
 
-    // Run the deposit to stake the ETH and receive rETH
-    txHash, err := deposit.Deposit(rp, opts)
-    if err != nil {
-        fmt.Printf("Error during Deposit: %s\n", err.Error())
-        os.Exit(1)
-    }
+// Run the deposit to stake the ETH and receive rETH
+txHash, err := deposit.Deposit(rp, opts)
+if err != nil {
+    fmt.Printf("Error during Deposit: %s\n", err.Error())
+    os.Exit(1)
+}
 
-    fmt.Printf("Transaction submitted with hash %s\n", txHash.Hex())
+fmt.Printf("Transaction submitted with hash %s\n", txHash.Hex())
 ```
 
 All transaction functions (such as [deposit.Deposit()](../../api/go/deposit.md#func-deposit) used here) will return the hash of the transaction that was submitted.
@@ -234,17 +234,17 @@ You can display this to the user (presumably with a link to a chain explorer).
 If you want to wait for the transaction to complete before moving forward, you can do the following:
 
 ```go
-    // Print a waiting message
-    fmt.Println("Waiting for it to be mined...")
+// Print a waiting message
+fmt.Println("Waiting for it to be mined...")
 
-    // Wait for the transaction to be mined
-    _, err = utils.WaitForTransaction(ethClient, txHash)
-    if err != nil {
-        fmt.Printf("Error waiting for transaction: %s\n", err.Error())
-        os.Exit(1)
-    }
+// Wait for the transaction to be mined
+_, err = utils.WaitForTransaction(ethClient, txHash)
+if err != nil {
+    fmt.Printf("Error waiting for transaction: %s\n", err.Error())
+    os.Exit(1)
+}
 
-    fmt.Println("Successfully staked ETH for rETH!")
+fmt.Println("Successfully staked ETH for rETH!")
 ```
 
 This leverages the [utils.WaitForTransaction()](../../api/go/utils.md#func-waitfortransaction) function to block until the transaction has been successfully mined.
@@ -260,21 +260,21 @@ This section describes common operations involving the staking pool.
 The staking pool's current balance:
 
 ```go
-    depositPoolBalance, err := deposit.GetBalance(rp, nil)
-    if err != nil {
-        return 0, err
-    }
-    balanceEth := eth.WeiToEth(depositPoolBalance)
-    return balanceEth, nil
+depositPoolBalance, err := deposit.GetBalance(rp, nil)
+if err != nil {
+    return 0, err
+}
+balanceEth := eth.WeiToEth(depositPoolBalance)
+return balanceEth, nil
 ```
 
 The ETH/rETH exchange rate:
 ```go
-    exchangeRate, err := tokens.GetRETHExchangeRate(rp, nil)
-    if err != nil {
-        return 0, err
-    }
-    return exchangeRate, nil
+exchangeRate, err := tokens.GetRETHExchangeRate(rp, nil)
+if err != nil {
+    return 0, err
+}
+return exchangeRate, nil
 ```
 
 
@@ -283,41 +283,41 @@ The ETH/rETH exchange rate:
 Staking uses the [deposit.Deposit()](../../api/go/deposit.md#func-deposit) function:
 
 ```go
-    // This assumes you already have the private key and chain ID from elsewhere
-    opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
-    if err != nil {
-        return fmt.Errorf("Error getting Transactor options: %w", err)
-    }
-    opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
-    opts.GasTipCap = nil // Set to the user's desired max priority fee
-    opts.Context = context.Background()
+// This assumes you already have the private key and chain ID from elsewhere
+opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
+if err != nil {
+    return fmt.Errorf("Error getting Transactor options: %w", err)
+}
+opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
+opts.GasTipCap = nil // Set to the user's desired max priority fee
+opts.Context = context.Background()
 
-    // Set Value to be the amount of ETH you want to stake, in wei
-    amountToStake := 1.0
-    opts.Value = eth.EthToWei(amountToStake)
+// Set Value to be the amount of ETH you want to stake, in wei
+amountToStake := 1.0
+opts.Value = eth.EthToWei(amountToStake)
 
-    // Simulate the transaction to make sure it is allowed, and get the gas estimate
-    gasInfo, err := deposit.EstimateDepositGas(rp, opts)
-    if err != nil {
-        return fmt.Errorf("Error simulating Deposit: %w", err)
-    }
+// Simulate the transaction to make sure it is allowed, and get the gas estimate
+gasInfo, err := deposit.EstimateDepositGas(rp, opts)
+if err != nil {
+    return fmt.Errorf("Error simulating Deposit: %w", err)
+}
 
-    // This is where you can ask the user if they're alright with these gas limits,
-    // and let them overwrite the max fees if desired
+// This is where you can ask the user if they're alright with these gas limits,
+// and let them overwrite the max fees if desired
 
-    // Run the deposit to stake the ETH and receive rETH
-    txHash, err := deposit.Deposit(rp, opts)
-    if err != nil {
-        return fmt.Errorf("Error during Deposit: %w", err)
-    }
+// Run the deposit to stake the ETH and receive rETH
+txHash, err := deposit.Deposit(rp, opts)
+if err != nil {
+    return fmt.Errorf("Error during Deposit: %w", err)
+}
 
-    // Wait for the transaction to be mined
-    _, err = utils.WaitForTransaction(ethClient, txHash)
-    if err != nil {
-        return fmt.Errorf("Error waiting for transaction: %w", err)
-    }
+// Wait for the transaction to be mined
+_, err = utils.WaitForTransaction(ethClient, txHash)
+if err != nil {
+    return fmt.Errorf("Error waiting for transaction: %w", err)
+}
 
-    return nil
+return nil
 ```
 
 
@@ -326,40 +326,40 @@ Staking uses the [deposit.Deposit()](../../api/go/deposit.md#func-deposit) funct
 Unstaking uses the [tokens.BurnRETH()](../../api/go/tokens.md#func-burnreth) function:
 
 ```go
-    // This assumes you already have the private key and chain ID from elsewhere
-    opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
-    if err != nil {
-        return fmt.Errorf("Error getting Transactor options: %w", err)
-    }
-    opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
-    opts.GasTipCap = nil // Set to the user's desired max priority fee
-    opts.Context = context.Background()
+// This assumes you already have the private key and chain ID from elsewhere
+opts, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
+if err != nil {
+    return fmt.Errorf("Error getting Transactor options: %w", err)
+}
+opts.GasFeeCap = nil // Set to the user's desired max total transaction fee
+opts.GasTipCap = nil // Set to the user's desired max priority fee
+opts.Context = context.Background()
 
-    // Set Value to be the amount of rETH you want to unstake
-    rEthToBurn := 1.0
-    rEthToBurnWei := eth.EthToWei(rEthToBurn)
+// Set Value to be the amount of rETH you want to unstake
+rEthToBurn := 1.0
+rEthToBurnWei := eth.EthToWei(rEthToBurn)
 
-    // Simulate the transaction to make sure it is allowed, and get the gas estimate
-    gasInfo, err := tokens.EstimateBurnRETHGas(rp, rEthToBurnWei, opts)
-    if err != nil {
-        return fmt.Errorf("Error simulating unstake: %w", err)
-    }
+// Simulate the transaction to make sure it is allowed, and get the gas estimate
+gasInfo, err := tokens.EstimateBurnRETHGas(rp, rEthToBurnWei, opts)
+if err != nil {
+    return fmt.Errorf("Error simulating unstake: %w", err)
+}
 
-    // This is where you can ask the user if they're alright with these gas limits,
-    // and let them overwrite the max fees if desired
+// This is where you can ask the user if they're alright with these gas limits,
+// and let them overwrite the max fees if desired
 
-    txHash, err := tokens.BurnRETH(rp, rEthToBurnWei, opts)
-    if err != nil {
-        return fmt.Errorf("Error during unstake: %w", err)
-    }
+txHash, err := tokens.BurnRETH(rp, rEthToBurnWei, opts)
+if err != nil {
+    return fmt.Errorf("Error during unstake: %w", err)
+}
 
-    // Wait for the transaction to be mined
-    _, err = utils.WaitForTransaction(ethClient, txHash)
-    if err != nil {
-        return fmt.Errorf("Error waiting for transaction: %w", err)
-    }
+// Wait for the transaction to be mined
+_, err = utils.WaitForTransaction(ethClient, txHash)
+if err != nil {
+    return fmt.Errorf("Error waiting for transaction: %w", err)
+}
 
-    return nil
+return nil
 ```
 
 
@@ -373,10 +373,10 @@ This section describes how to get some useful statistics about the Rocket Pool n
 The number of nodes registered with Rocket Pool comes from the [node.GetNodeCount()](../../api/go/node.md#func-getnodecount) function:
 
 ```go
-    nodeCount, err := node.GetNodeCount(rp, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting total number of Rocket Pool nodes: %w", err)
-    }
+nodeCount, err := node.GetNodeCount(rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting total number of Rocket Pool nodes: %w", err)
+}
 ```
 
 
@@ -394,26 +394,26 @@ The statuses are described as follows:
 - **Finalized:** exited, withdrawn from, and essentially closed (inactive)
 
 ```go
-    // The 2nd and 3rd parameters are for batching support if necessary
-    minipoolCounts, err := minipool.GetMinipoolCountPerStatus(rp, 0, 0, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
-    }
-    initializedCount := minipoolCounts.Initialized.Uint64()
-    prelaunchCount := minipoolCounts.Prelaunch.Uint64()
-    stakingCount := minipoolCounts.Staking.Uint64()
-    withdrawableCount := minipoolCounts.Withdrawable.Uint64()
-    dissolvedCount := minipoolCounts.Dissolved.Uint64()
+// The 2nd and 3rd parameters are for batching support if necessary
+minipoolCounts, err := minipool.GetMinipoolCountPerStatus(rp, 0, 0, nil)
+if err != nil {
+    return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
+}
+initializedCount := minipoolCounts.Initialized.Uint64()
+prelaunchCount := minipoolCounts.Prelaunch.Uint64()
+stakingCount := minipoolCounts.Staking.Uint64()
+withdrawableCount := minipoolCounts.Withdrawable.Uint64()
+dissolvedCount := minipoolCounts.Dissolved.Uint64()
 
-    finalizedCount, err := minipool.GetFinalisedMinipoolCount(rp, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
-    }
+finalizedCount, err := minipool.GetFinalisedMinipoolCount(rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting total number of Rocket Pool minipools: %w", err)
+}
 
-    // Remove the number of finalized pools from the number of withdrawable pools,
-    // because finalized pools always have the withdrawable state
-    withdrawableCount -= finalizedCount
-    return nil
+// Remove the number of finalized pools from the number of withdrawable pools,
+// because finalized pools always have the withdrawable state
+withdrawableCount -= finalizedCount
+return nil
 ```
 
 
@@ -422,10 +422,10 @@ The statuses are described as follows:
 The [network.GetNodeFee()](../../api/go/network.md#func-getnodefee) function will retrieve the current commission rate for new minipools based on the size of the deposit pool:
 
 ```go
-    nodeFee, err := network.GetNodeFee(rp, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting current node fee for new minipools: %w", err)
-    }
+nodeFee, err := network.GetNodeFee(rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting current node fee for new minipools: %w", err)
+}
 ```
 
 
@@ -434,19 +434,42 @@ The [network.GetNodeFee()](../../api/go/network.md#func-getnodefee) function wil
 The total amount of RPL staked across the network can be found with the [node.GetTotalRPLStake()](../../api/go/node.md#func-gettotalrplstake) function:
 
 ```go
-    totalValueStakedWei, err := node.GetTotalRPLStake(rp, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
-    }
-    totalValueStaked := eth.WeiToEth(totalValueStakedWei)
+totalValueStakedWei, err := node.GetTotalRPLStake(rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
+}
+totalValueStaked := eth.WeiToEth(totalValueStakedWei)
 ```
 
 The *effective* total amount of RPL staked (which honors the 150% collateral reward limit) comes from the [node.GetTotalEffectiveRPLStake()](../../api/go/node.md#func-gettotaleffectiverplstake) function:
 
 ```go
-    totalEffectiveStakedWei, err := node.GetTotalEffectiveRPLStake(rp, nil)
-    if err != nil {
-        return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
-    }
-    totalEffectiveStaked := eth.WeiToEth(totalEffectiveStakedWei)
+totalEffectiveStakedWei, err := node.GetTotalEffectiveRPLStake(rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting total effective amount of RPL staked on the network: %w", err)
+}
+totalEffectiveStaked := eth.WeiToEth(totalEffectiveStakedWei)
+```
+
+
+### Next Checkpoint Time
+
+The time of the next checkpoint can be retrieved as a Unix timestamp.
+You will need to call two functions to get it - first, the timestamp for the start of the current claim period with [rewards.GetClaimIntervalTimeStart()](../../api/go/rewards.md#func-getclaimintervaltimestart) and second, the interval time with [rewards.GetClaimIntervalTime()](../../api/go/rewards.md#func-getclaimintervaltime):
+
+```go
+// Get the timestamp for the start of the current claim period
+lastCheckpoint, err := rewards.GetClaimIntervalTimeStart(collector.rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting the start of the rewards claim period: %w", err)
+}
+
+// Get the rewards checkpoint interval
+rewardsInterval, err := rewards.GetClaimIntervalTime(collector.rp, nil)
+if err != nil {
+    return fmt.Errorf("Error getting the rewards interval: %w", err)
+}
+
+// This is the Unix timestamp for the end of the current reward period
+nextRewardsTime := float64(lastCheckpoint.Add(rewardsInterval).Unix()) * 1000
 ```
