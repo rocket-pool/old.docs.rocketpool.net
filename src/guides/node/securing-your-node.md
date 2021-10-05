@@ -344,6 +344,131 @@ Once it's been restarted, try connecting with SSH again on your "other" terminal
 Keep doing this until you have it working again and are able to successfully connect.
 :::
 
+### (Optional) Enable two factor authentication
+
+Two factor authentication is requiring a second security measure, usually on a separate device from your primary one. You may be used to logging into a crypto exchange with a password (primary) and Google Authenticator code (secondary).
+
+SSH can be configured to require a Google Authenticator code, which means that an attacker that somehow compromised your SSH key and it's passphrase would still need the device with the authenticator app on it (presumably your phone).
+
+Before you begin, be sure you installed Google Authenticator or a compatible equivalent installed on your phone. For Android users, consider andOTP which is an open source alternative that supports password locking and convenient backups.
+
+::: danger WARNING
+It is recommended to have a second terminal with an ssh connection to your node open, just in case you mistype and lock yourself out.
+
+Similarly to SSH keys, if you lose your 2FA code you will lose access to your node. The good news is that if you have physical access there is usually a way to fix it, but it will be a hassle. Be careful to read the instructions below with care.
+:::
+
+The first step is to install the Google Authenticator module with this command:
+
+```shell
+sudo apt install -y libpam-google-authenticator
+```
+
+We the tell `PAM` (pluggable authentication modules) to use the module. First open the config file:
+
+```shell
+sudo nano /etc/pam.d/sshd
+```
+
+Then add these lines to the top of the file:
+
+```shell
+# Enable Google Authenticator
+auth required pam_google_authenticator.so
+```
+
+Then exit the file with `ctrl+x` and type `y` to confirm your changes.
+
+Now `PAM` knows to use Google Authenticator, the next step is to tell `sshd` to use `PAM`. Open the `sshd` config file:
+
+```shell
+sudo nano /etc/ssh/sshd_config
+```
+
+Now change the line `ChallengeResponseAuthentication no` to `ChallengeResponseAuthentication yes` so it looks like this:
+
+```
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication yes
+```
+
+Also add the following line at the bottom of `/etc/ssh/sshd_config`, which indicated to `sshd` that we need both an SSH key and the Google Authenticator code:
+
+```shell
+AuthenticationMethods publickey,keyboard-interactive
+```
+
+Then exit the file with `ctrl+x` and type `y` to confirm your changes.
+
+Next step is to reload the `sshd` daemon so it uses the new settings:
+
+```shell
+sudo systemctl restart sshd.service
+```
+
+Now that `sshd` is set up, we need to create our 2FA codes. In your terminal, run:
+
+```shell
+google-authenticator 
+```
+
+It will ask you for some parameters, the recommended defaults are:
+
+```
+Do you want me to update your "/home/rocketeer/.google_authenticator" file?: yes
+Make tokens “time-base””: yes
+Update the .google_authenticator file: yes
+Disallow multiple uses: yes
+Increase the original generation time limit: no
+Enable rate-limiting: yes
+
+Do you want authentication tokens to be time-based: YES
+Do you want me to update your "/yourusername/.google_authenticator" file: YES
+Do you want to disallow multiple uses of the same authentication token: YES
+By default... < long story about time skew > ... Do you want to do so: NO
+Do you want to enable rate-limiting: YES
+```
+
+You will now see a big QR code on your screen, scan it with your Google Authenticator app to add it. You will also see your secret and a few backup codes looking like this:
+
+```
+Your new secret key is: IRG2TALMR5U2LK5VQ5AQIG3HA4
+Your verification code is 282436
+Your emergency scratch codes are:
+  29778030
+  86888537
+  50553659
+  41403052
+  82649596
+```
+
+Record the emergency scratch codes somewhere in case you need to recover your 2FA.
+
+You can now try to `ssh` into your node, and you will notice that you are asked for a verification code **and** a password. Go ahead and try it in a new terminal to make sure everything works.
+
+The reason for it asking for a password even though you're using SSH keys is because while `sshd` got the memo about not using passwords, `PAM` didn't yet.
+
+To fix this, open the PAM config:
+
+```shell
+sudo nano /etc/pam.d/sshd
+```
+
+Find `@include common-auth` and comment it out by adding a `#` in front of it, so it looks like this:
+
+```
+# Standard Un*x authentication.
+#@include common-auth
+```
+
+Now restart `sshd` for a final time so it grabs the new settings:
+
+```shell
+sudo systemctl restart sshd.service
+```
+
+When you try to SSH into your server with your SSH keys, you should now also be asked for a 2FA verification code, but not for a password.
 
 ## ESSENTIAL: Enable Automatic Security Updates
 
