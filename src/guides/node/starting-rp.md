@@ -169,7 +169,7 @@ Selected Eth 2.0 client: Nimbus (statusim/nimbus-eth2:multiarch-v1.4.2)
 The first line will tell you if your Smartnode is configured for the Ethereum mainnet or for the Prater testnet.
 
 ::: warning NOTE
-If you are not on the network you expect to be on, go back to the Installing Rocket Pool section and review the installation instructions - you may have missed the portion that has different instructions depending on which network you want to use.
+If you are not on the network you expect to be on, go back to the Installing Rocket Pool section and review the installation instructions - you may have missed the portion that has different instructions depending on which network you want to use. BUT If you are on the native config and you accepted default parameters when you ran ```rp service config```, then it's likely these don't match and that's ok because your systemctl scripts should contain the correct config
 :::
 
 The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's `config.yml` file.
