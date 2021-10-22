@@ -129,6 +129,7 @@ module.exports = {
                     'node/securing-your-node',
                     'node/starting-rp',
                     'node/cli-intro',
+                    'node/prepare-node',
                     'node/create-validator',
                     {
                       title: 'Monitoring and Maintenance',

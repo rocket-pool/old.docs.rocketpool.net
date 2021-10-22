@@ -1,171 +1,4 @@
-# Creating a Minipool (ETH2 Validator)
-
-If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the ETH1 and ETH2 chains on your respective clients. 
-If so, then you are ready to register your node on the Rocket Pool network and create a minipool with an ETH2 validator!
-If not, please review the previous sections and return here once you've completed those steps.
-
-
-## Preparing for Minipool Creation
-
-Before creating a new minipool and ETH2 validator, there are a few steps to take to finish preparing your node.
-These only need to be done once though; once you've done them, you can skip to the [Creating a New Minipool](#creating-a-new-minipool) section if you want to create multiple minipools on your node.
-
-
-### Loading your Node Wallet
-
-Registering your node and standing up a validator both involve submitting transactions to the Ethereum network from your node wallet.
-This means **you'll need to have some ETH on it** to pay for the gas costs of those transactions.
-You'll also want to provide it with the **RPL token**, because you'll need to stake some of that prior to creating a minipool as collateral.
-
-:::: tabs
-::: tab Running on the Prater Test Network
-If you're running on the Prater test network, please see the [Practicing with the Test Network](../testnet/overview.md) section to learn how to acquire test ETH.
-
-For test RPL, we have added a similar faucet function directly to the CLI.
-Please see the [Getting Test RPL on Goerli](../testnet/overview.md#getting-test-rpl-on-goerli) guide to acquire some.
-:::
-::: tab Running on the Main Network
-We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH and RPL tokens.
-Start by transferring some ETH and RPL from your existing wallet to the node wallet.
-As a reminder, you can use `rocketpool wallet status` to get the address of the node wallet if you need it.
-If you are not sure how to send cryptocurrency from your existing wallet, please consult your wallet's documentation.
-
-::: danger
-Sending cryptocurrency across wallets is a non-reversible operation!
-If you enter the wrong recipient address, **there is no way to retrieve your tokens**.
-We recommend you send a small amount of ETH first as a **test transaction** to verify that you correctly entered the node wallet's address, and then **whitelist** that address in your other wallet if possible to avoid mistyping it.
-:::
-::::
-
-
-### Registering your Node with the Network
-
-Once you have ETH and RPL in your wallet, you can register your node with the Rocket Pool network to access all of its features.
-To do this, run the following command:
-
-```
-rocketpool node register
-```
-
-This will prompt you for the timezone you want to register with.
-By default, this will detect the timezone from your system clock, but you can change it if you prefer.
-Any of the `Country/City` format timezones [listed on this page](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) should be acceptable.
-
-::: tip NOTE
-The timezone is just used for the global map of node operators displayed on the main site.
-You don't need to set it to your actual timezone if you have security concerns.
-If you prefer to remain anonymous, use a generic option such as `Etc/UTC`.
-:::
-
-Once this is complete, you will officially be a member of the Rocket Pool network!
-
-
-### Setting your Withdrawal Address
-
-Before anything else, it's probably in your best interest to change the **withdrawal address** for your node.
-This is the address that all of your RPL checkpoint rewards, your staked RPL, and your Beacon Chain ETH will be sent to when you claim your checkpoint rewards or exit your validator and withdraw from your minipool.
-
-::: warning NOTE
-By default, this is set to your node's wallet address.
-However, for security reasons, **it's recommended to set this to a different cold wallet that you control, such as a MetaMask address or a hardware wallet.**
-
-This way, if your node wallet is compromised, the attacker doesn't get access to your staked ETH and RPL by forcing you to exit because all of those funds will be sent to your separate cold wallet (which they hopefully do not have).
-:::
-
-There are two different ways to do this.
-Please read both options below to determine which one applies to you.
-
-:::: tabs
-::: tab Method 1
-**Use this method if your new withdrawal address can be used to sign transactions via MetaMask.**
-
-
-1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
-2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
-   1. The easiest way to do this is to navigate to the [Rocket Pool withdrawal address site](https://testnet.rocketpool.net/withdrawal/).
-   2. If you haven't already connected Metamask to the Rocket Pool website, do this now. Click the **connect metamask** button in the center of the screen. Metamask will open up a prompt asking you to confirm the connection:
-<center>
-![](./images/connect-metamask.png)
-</center>
-      Click **Next**, then click **Confirm** to enable the Rocket Pool website to use your wallet.
-   3. Select **Withdrawal Address** from the top menu (or the hamburger menu on the left side if you're on a mobile device).
-   4. You will see this prompt: 
-<center>
-![](./images/node-address.png)
-</center>
-      Type your **node wallet address** here and click on the **Check Mark button** to continue.
-   5. You will be prompted with a question asking if you want to set a new node withdrawal address or confirm a pending one. Select **Confirm**.
-   6. Now, there should be a new confirmation dialog in Metamask. Click the Metamask icon to open it and you should see something like this:
-<center>
-![](./images/confirm-address.png)
-</center>
-      Click **Confirm** to send the transaction to the network. This will take some time until it gets mined, but once it does, you will see a confirmation dialog:
-<center>
-![](./images/confirmed.png)
-</center>
-1. Your new withdrawal address will now be confirmed and activated. You can view this with `rocketpool node status`.
-:::
-
-::: tab Method 2
-
-**Use this method only if your withdrawal address *cannot* be used to sign transactions via MetaMask (e.g. Argent or a Smart Contract).**
-
-In this method, you will run:
-
-```
-rocketpool node set-withdrawal-address --force <your cold wallet address>
-```
-
-You will be offered the chance to send a test transaction before confirming this, to ensure that you have the right address.
-If you confirm this command when it prompts you, your new withdrawal address will be set immediately.
-
-::: danger
-By doing this, you bypass the safety measure associated with Method 1, which requires you to prove that you own the new address.
-If you make a typo here, there is no way to undo it and **your minipool's rewards will essentially be lost forever**.
-
-We **strongly** encourage you to use the test transaction mechanism before confirming this, and if possible, use Method 1 instead.
-:::
-::::
-
-Once this is done, you will **no longer be able to change your withdrawal address using the `set-withdrawal-address` command**.
-To change it, you will need to send a signed transaction to your minipool from its **active** withdrawal address (the one you just switched to).
-The Rocket Pool website has a function to help you do this, though currently only MetaMask is supported.   
-
-
-### Swapping RPL v1 for RPL v2
-
-In many cases, the RPL that you start with is going to be the legacy RPL token that is no longer used.
-Luckily, the CLI offers a function that allows you to easily swap it for the modern RPL token used by the network today.
-
-**Swapping will be done at a 1-to-1 ratio**; if you have 1000 of the RPL v1 token, you can swap it for 1000 of the RPL v2 token.
-All you will need to do is pay a small amount of gas for the transaction.
-
-**This swap can be done at any time.**
-
-To do this, run the following command:
-
-```
-rocketpool node swap-rpl
-```
-
-This will ask you if you want to swap all of the RPL v1 in your node wallet for RPL v2 or specify a custom amount.
-When you've made your choice, confirm the transaction and wait for it to be processed and added to the blockchain.
-
-Once the transaction is accepted, you can confirm that it worked with `rocketpool node status`:
-
-```
-The node <node address> has a balance of 131.973495 ETH and 1440.000000 RPL.
-
-The node is registered with Rocket Pool with a timezone location of Etc/UTC.
-
-The node has a total stake of 0.000000 RPL and an effective stake of 0.000000 RPL, allowing it to run 0 minipool(s) in total.
-The node does not have any minipools yet.
-```
-
-You should see your new RPL v2 balance on the top line where it describes how much RPL you currently have.
-
-
-## Creating a New Minipool
+# Creating a New Minipool (ETH2 Validator)
 
 As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the eth1.0 chain that your node manages.
 The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new eth2.0 validator.
@@ -178,7 +11,7 @@ By creating the minipool, you are acknowledging that you are effectively locking
 :::
 
 
-### Staking RPL
+## Staking RPL
 
 Before you can create a minipool, you'll first need to stake some RPL as collateral.
 **At a minimum**, you'll need to stake 1.6 ETH worth of RPL which is 10% of your total bond in the node.
@@ -228,9 +61,73 @@ The node must keep at least 10810.143971 RPL staked to collateralize its minipoo
 If the `collateral ratio` is 10% or higher, then you have enough staked to create a new minipool.
 
 
+## (Optional) Finding a Custom Vanity Address for your Minipool
+
+By default, when you create a new minipool, Rocket Pool will generate a random unique address for it.
+However, the Smartnode provides the ability to search for a custom **vanity address** for the minipool.
+
+A vanity address is one where you effectively pick some set of characters that the address starts with - with the caveat that they must be hexadecimal characters since Ethereum addresses are all hexadecimal.
+That means any of the following characters are legal:
+
+```
+0 1 2 3 4 5 6 7 8 9 a b c d e f
+```
+
+For example, you could make your minipool's address start with a bunch of zeros (`0x000000...`), `0x600d` (hex for "good") or `0xa77e57ed` (hex for "attested", a fitting prefix for a minipool).
+Here is one of the team's test pools with such a prefix: [https://goerli.etherscan.io/address/0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD](https://goerli.etherscan.io/address/0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD)
+
+To find such a vanity address, you will need to **search for it**.
+This searching process involves picking a number, applying it as a "salt" to the hashing algorithm, and comparing the results against what you're looking for.
+The results are effectively random (though any given salt always produces the same result), so the only way to find an address with the prefix you want is to try lots and lots of them until you find a salt that works.
+
+If you would like a custom vanity address to use for your minipool when you create it, you can use the following command to search for one:
+
+```
+rocketpool minipool find-vanity-address
+```
+
+This will prompt you for the prefix you want to search for, and ask which type of deposit you will be doing (a 16 ETH or a 32 ETH deposit - see below for more info on these types).
+Once you enter that information, it will begin trying lots and lots of salts until it finds one that produces your desired prefix!
+
+Here is a complete example of the process:
+
+```
+$ rocketpool minipool find-vanity-address
+
+Please specify the address prefix you would like to search for (must start with 0x):
+0xa77e57
+
+Please choose a deposit type to search for:
+1: 32 ETH (minipool begins staking immediately)
+2: 16 ETH (minipool begins staking after ETH is assigned)
+2
+
+Running with 12 threads.
+Found on thread 3: salt 0x5cd7fb = 0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD
+Finished in 1.91145873s
+```
+
+In this case, we searched for `0xa77e57` as the prefix and found the salt `0x5cd7fb` which could generate it.
+In the next step, when we create a minipool, we can specify this salt as an optional argument to create the new minipool at the address associated with the salt (`0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD` as shown above).
+
+In general, each additional character you search for will multiply the search time by about 16.
+Because of this, **we recommend you only look for prefixes of 7 or 8 characters max unless you have a very powerful machine with many CPU cores**.
+Otherwise, it might take prohibitively long to find a salt that produces the prefix you want.
+
+::: tip NOTE
+The salt that gets generated is specific to the following variables:
+- The network you're using (either the Prater Testnet or Mainnet)
+- The node address
+- The deposit type (16 or 32 ETH)
+- The salt
+
+If you change any of those variables, the minipool address for a given salt will change as well.
+:::
+
+For more advanced usage (such as searching for a different node address or changing how many CPU cores are used for searching), take a look at the help text with `rocketpool minipool find-vanity-address --help`.
 
 
-### Depositing ETH
+## Depositing ETH and Creating a Minipool
 
 After everything you've done so far, you are finally ready to deposit your ETH, create a new minipool, and create an ETH2 validator.
 This is done with the following command:
@@ -238,6 +135,14 @@ This is done with the following command:
 ```
 rocketpool node deposit
 ```
+
+::: tip NOTE
+If you want to use a salt for a vanity address that you found using the process above, run the following command instead:
+
+```
+rocketpool node deposit --salt <your salt, e.g. 0x1234abcd>
+```
+:::
 
 You will first be prompted to choose how much ETH you want to deposit to your new minipool:
 
@@ -323,14 +228,26 @@ Note that creating a minipool **is an expensive transaction**!
 Pay close attention to the total cost and ensure that you accept it.
 
 If you accept, your minipool creation will be triggered.
-Once the transaction completes, you will be given the address of your new minipool contract on the eth1 chain.
-You can visit this with any block explorer if you'd like.
+Once the transaction completes, you will be given the address of your new minipool contract on the eth1 chain and its corresponding validator public key on the Beacon Chain.
+You can visit these with any block explorers if you'd like.
 
 
-### Confirming a Successful Stake
 
-Once you've finished your deposit, you can check on the new minipool's status with the `rocketpool minipool status` command.
-You will likely see something like this:
+## Confirming a Successful Stake
+
+Upon creation, your minipool will be put into the `initialized` state.
+It will remain here until it's your turn in the Rocket Pool queue to be given 16 ETH from the staking pool so you can stake your new validator on the Beacon Chain.
+
+::: tip NOTE
+If you did a 32 ETH deposit, you will skip this step and go immediately to the `prelaunch` step below.
+:::
+
+Once this happens, your minipool will move into the `prelaunch` state for a certain period of time (currently 12 hours).
+Your 16 ETH deposit will be transferred to be Beacon Chain, and the Oracle DAO [will verify that it is all correct](https://github.com/rocket-pool/rocketpool-research/blob/master/Reports/withdrawal-creds-exploit.md).
+During this time, you can observe the validator by looking up its validator pubkey with a Beacon Chain explorer such as [https://beaconcha.in](https://beaconcha.in) (or [https://prater.beaconcha.in](https://prater.beaconcha.in) for the Prater Testnet).
+
+You can check on the new minipool's status with the `rocketpool minipool status` command.
+For example, when it has moved into `prelaunch`, you will likely see something like this:
 
 ```
 1 Prelaunch minipool(s):
@@ -346,24 +263,11 @@ RP deposit:           16.000000 ETH
 
 ```
 
-This indicates that your minipool is in the "prelaunch" stage.
-The `node deposit` process creates the minipool, but it doesn't stake the 32 ETH to create a new Beacon Chain validator.
-First, you must wait for your turn in the Rocket Pool queue so you can pull 16 ETH from the rETH staking pool.
-Once this is done, you must wait for the `rocketpool_node` Docker container (or the `rp-node` service if you used the Native setup) to use that to create a new validator.
+After this prelaunch period, your minipool will enter `staking` status and send the additional 16 ETH from the staking pool to the deposit contract.
+This will be done by the `rocketpool_node` Docker container (or the `rp-node` service if you used the Native setup) - if, for some reason, you are taking abnormally long to enter `staking` status, looking at the logs for this container / service will likely tell you what's wrong.
+You can check these logs with the `rocketpool service logs node` command (or `/srv/rocketpool/node_log.sh` on Native mode setups).
 
-It may take a few minutes for the `node` process to do this once you exit the Rocket Pool queue.
-You can follow its progress by watching the logs with the `rocketpool service logs node` command (or `/srv/rocketpool/node_log.sh` on Native mode setups).
-
-At some point, you should see log messages like this:
-
-```
-Jun 21 01:19:48 rp-dev: 2021/06/21 01:19:48 Checking for minipools to launch...
-Jun 21 01:19:48 rp-dev: 2021/06/21 01:19:48 1 minipool(s) are ready for staking...
-Jun 21 01:19:48 rp-dev: 2021/06/21 01:19:48 Staking minipool <your minipool address>...
-```
-
-Followed by lots of logs, including the transaction hash of this operation and a notice about restarting the `rocketpool_validator` Docker container (or the validator process with `/srv/rocketpool/restart-validator.sh` on Native mode setups).
-If they complete successfully, then you should see the status of your minipool change from `Prelaunch` to `Staking`:
+Running `rocketpool minipool status` will then show something like this:
 
 ```
 $ rocketpool minipool status
@@ -385,7 +289,24 @@ Validator seen:       no
 --------------------
 ```
 
+Once the Beacon Chain accepts both of the 16 ETH deposits (one from you and one from the staking pool), your validator will enter the Beacon Chain queue where it will wait for its turn to become activated and start staking.
+
+::: tip NOTE
+If you did a 32 ETH deposit, you will be refunded 16 ETH at this stage which you can claim using `rocketpool minipool refund`.
+:::
+
+At this point, you're done!
 Congratulations!
 You have officially created a validator with Rocket Pool!
 
-Have a look at the next sections in Monitoring and Maintenance to learn how to watch your validator's performance and health over  time.
+Have a look at the next sections in Monitoring and Maintenance to learn how to watch your validator's performance and health over time.
+
+
+## Creating Multiple Minipools
+
+Conveniently, your Rocket Pool node is capable of hosting as many minipools as you want.
+You **do not** need to create a new node for each minipool.
+
+If you would like to make a second (or third, or fourth...) minipool for your node, all you need to do is run `rocketpool node deposit` again.
+Note that you may need to stake more RPL first to maintain an overall collateral level of at least 10% before you do this.
+Also, you won't be able to reuse an old vanity address salt - you'll need to search for another unique one for each of your minipools.

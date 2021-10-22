@@ -90,14 +90,24 @@ If you aren't planning to register a node and just want some ETH to test staking
 without the angle brackets.
 If your wallet doesn't have any ETH already, the bot will send your wallet 1 ETH to test with.
 
-If you *are* planning to run a node and you need 16 Goerli ETH to test a `node deposit` so you can create a validator, use this command instead:
+If you *are* planning to run a node, do the following:
+
+1. Start by running the `!goerliEth` command above to acquire enough gas to register your node
+2. Register your node (see the [Preparing your Node](../node/prepare-node.md) page for instructions)
+3. Run the following command to get 16 Goerli ETH so you can create a validator:
 
 ```
 !nodeOperator <your goerli address>
 ```
 
-This will give you 17 Goerli ETH to test minipool creation with, but the address you provide it *must* be a registered Rocket Pool node.
-Therefore, we recommend you use the `!goerliEth` command first to get enough ETH to pay for the gas involved in setting up your node, then call `!nodeOperator` once it's set up and ready to begin staking.
+In order to use `!nodeOperator`, the address you provide it *must* be a registered Rocket Pool node.
+Therefore, you must follow these 3 steps in that order.
+
+::: warning NOTE
+To prevent abuse, there is a cooldown timer on sending messages in the faucet channel.
+Therefore, there will be a delay between when you can run the `!goerliEth` and `!nodeOperator` commands.
+If you want to bypass this, you can always ask for help - someone who has a cooldown available will likely be able to run the command for you.
+:::
 
 
 ## Getting Test RPL on Goerli
