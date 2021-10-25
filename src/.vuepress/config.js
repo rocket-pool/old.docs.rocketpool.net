@@ -228,7 +228,98 @@ module.exports = {
                       }
                     ]
                   },
-                  'api/js'
+                  {
+                      title: 'JS Reference',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          {
+                              title: 'Auction',
+                              children: [
+                                  'api/js/Auction',
+                              ]
+                          },
+                          {
+                              title: 'Contracts',
+                              children: [
+                                  'api/js/Contracts',
+                              ]
+                          },
+                          {
+                              title: 'DAO',
+                              children: [
+                                  'api/js/DAONodeTrusted',
+                                  'api/js/DAONodeTrustedActions',
+                                  'api/js/DAONodeTrustedProposals',
+                                  'api/js/DAONodeTrustedSettings',
+                                  'api/js/DAOProposal',
+                              ]
+                          },
+                          {
+                              title: 'Deposit',
+                              children: [
+                                  'api/js/Deposit',
+                              ]
+                          },
+                          {
+                              title: 'Minipool',
+                              children: [
+                                  'api/js/Minipool',
+                                  'api/js/MinipoolContract',
+                              ]
+                          },
+                          {
+                              title: 'Network',
+                              children: [
+                                  'api/js/Network',
+                              ]
+                          },
+                          {
+                              title: 'Node',
+                              children: [
+                                  'api/js/Node',
+                              ]
+                          },
+                          {
+                              title: 'Rewards',
+                              children: [
+                                  'api/js/Rewards',
+                                  'api/js/Pool',
+                              ]
+                          },
+                          {
+                              title: 'Settings',
+                              children: [
+                                  'api/js/AuctionSettings',
+                                  'api/js/DepositSettings',
+                                  'api/js/MinipoolSettings',
+                                  'api/js/NetworkSettings',
+                                  'api/js/NodeSettings',
+                              ]
+                          },
+                          {
+                              title: 'Tokens',
+                              children: [
+                                  'api/js/ERC20',
+                                  'api/js/LegacyRPL',
+                                  'api/js/RETH',
+                                  'api/js/RPL',
+                              ]
+                          },
+                          {
+                              title: 'Vault',
+                              children: [
+                                  'api/js/Vault',
+                              ]
+                          },
+                          {
+                              title: 'Rocketpool',
+                              children: [
+                                  'api/js/RocketPool',
+                              ]
+                          },
+                      ]
+                  },
               ]
             },
           ]
