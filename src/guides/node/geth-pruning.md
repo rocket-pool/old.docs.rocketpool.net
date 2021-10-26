@@ -82,13 +82,13 @@ docker stop rocketpool_eth1
 
 ### Step 4: start the pruning
 
-Based on the geth version you retreived in step 2, we will download a new docker container that will do the pruning. In the below command, substitute the word `GETH_VERSION` with the version number and the `ETH_MOUNT_POINT` with the mount path from step 1 (twice!):
+Based on the geth version you retreived in step 2, we will download a new docker container that will do the pruning. In the below command, substitute the word `GETH_VERSION` with the version number:
 
 ```shell
 docker run --rm \
-    -v rocketpool_eth1clientdata:👉ETH1_MOUNT_POINT \
+    -v rocketpool_eth1clientdata:/eth1client \
     -ti ethereum/client-go:v👉GETH_VERSION \
-    snapshot prune-state --datadir 👉ETH1_MOUNT_POINT/geth
+    snapshot prune-state --datadir /eth1client/geth
 ```
 
 This could for example look like:
@@ -96,9 +96,9 @@ This could for example look like:
 ```shell
 # 🛑 This is an example, do NOT copy paste
 docker run --rm \
-    -v rocketpool_eth1clientdata:/mnt/ssd \
+    -v rocketpool_eth1clientdata:/eth1client \
     -ti ethereum/client-go:v1.10.8 \
-    snapshot prune-state --datadir /mnt/ssd/geth
+    snapshot prune-state --datadir /eth1client/geth
 ```
 
 The pruning process will now start, this can take 5 to 10 hours depending on how long your geth has been running.
