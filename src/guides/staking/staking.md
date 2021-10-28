@@ -5,9 +5,9 @@ As described in the [Staking Overview](overview.md), this will involve depositin
 By doing this, you will become a **Rocket Pool Staker**.
 
 The easiest way to stake with Rocket Pool is done via its web interface to the underlying smart contracts.
-You’ll need a computer with Google Chrome, Mozilla Firefox, Opera or Brave with [MetaMask](https://metamask.io/) installed, or a web3 enabled browser.
+You’ll need a computer with Google Chrome, Mozilla Firefox, Opera or Brave with [MetaMask](https://metamask.io/) installed, or a wallet that supports [WalletConnect](https://walletconnect.com/), or a web3 enabled browser.
 
-We will use MetaMask throughout this guide; if you’re using a web3 enabled browser, please consult its documentation for the relevant steps and match them with these instructions.
+We will use MetaMask throughout this guide as an example; if you’re using WalletConnect or a web3 enabled browser, please consult its documentation for the relevant steps and match them with these instructions.
 
 ::: warning NOTE
 Rocket Pool has not launched on mainnet yet, so you cannot currently stake real ETH.

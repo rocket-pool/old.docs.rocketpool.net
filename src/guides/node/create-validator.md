@@ -66,15 +66,14 @@ If the `collateral ratio` is 10% or higher, then you have enough staked to creat
 By default, when you create a new minipool, Rocket Pool will generate a random unique address for it.
 However, the Smartnode provides the ability to search for a custom **vanity address** for the minipool.
 
-A vanity address is one where you effectively pick some set of characters that the address starts with - with the caveat that they must be hexadecimal characters since Ethereum addresses are all hexadecimal.
-That means any of the following characters are legal:
+A vanity address is one where you personally pick the characters that the address starts with.
+As Ethereum addresses are in hexadecimal, any of the following characters are legal:
 
 ```
 0 1 2 3 4 5 6 7 8 9 a b c d e f
 ```
 
-For example, you could make your minipool's address start with a bunch of zeros (`0x000000...`), `0x600d` (hex for "good") or `0xa77e57ed` (hex for "attested", a fitting prefix for a minipool).
-Here is one of the team's test pools with such a prefix: [https://goerli.etherscan.io/address/0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD](https://goerli.etherscan.io/address/0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD)
+As a few examples, you could make your minipool's address start with a bunch of zeros (`0x000000...`), `0x600d` (hex for "good") or `0xa77e57ed` (hex for "attested", a fitting prefix for a minipool).
 
 To find such a vanity address, you will need to **search for it**.
 This searching process involves picking a number, applying it as a "salt" to the hashing algorithm, and comparing the results against what you're looking for.
@@ -113,6 +112,9 @@ In the next step, when we create a minipool, we can specify this salt as an opti
 In general, each additional character you search for will multiply the search time by about 16.
 Because of this, **we recommend you only look for prefixes of 7 or 8 characters max unless you have a very powerful machine with many CPU cores**.
 Otherwise, it might take prohibitively long to find a salt that produces the prefix you want.
+
+For example, an AMD 5600x with 6 cores (12 threads) at 4.8 GHz can search about 3.2 million salts per second.
+On average, it will take a few seconds to find a 6-character prefix, a few minutes to find a 7-character prefix, and a few hours to find an 8-character prefix.
 
 ::: tip NOTE
 The salt that gets generated is specific to the following variables:
