@@ -489,7 +489,7 @@ All four clients are stable and perform very well, so there is no wrong choice (
 Therefore, choosing a random client with not negatively impact your validators but will contribute to the security of the ETH2 ecosystem.
 
 That being said, we also offer you the option to choose a specific client if you have one in mind.
-Users with low-power systems, such as the **Raspberry Pi**, may want to do this as it allows you to explicitly pick an ETH2 client that is tailored to systems with low resources.
+For example, users with low-power systems such as the **Raspberry Pi** may want to explicitly pick an ETH2 client that is tailored to systems with low resources.
 
 For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients.md) section.
 
