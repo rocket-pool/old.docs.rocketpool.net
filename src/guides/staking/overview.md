@@ -73,7 +73,7 @@ You can trade it, lend it, use it as collateral... as rETH is a standard ERC20 t
 
 Each country has their own tax laws, and it would be impossible to document them all here.  
 In some countries, depositing ETH for rETH may be considered **a taxable event**.  
-Tax laws related to crypotcurrencies are in their infancy; each user should do their own research and consider speaking with a tax professional.  
+Tax laws related to cryptocurrencies are in their infancy; each user should do their own research and consider speaking with a tax professional.  
 
 Below are some helpful sites that offer tax assistance to users related to Ethereum.
 **This is not an official endorsement - users are advised to do their own research regarding tax implications and strategies**:
