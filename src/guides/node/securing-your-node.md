@@ -336,7 +336,7 @@ At this point, you should exit the SSH session and try to SSH back in.
 If you are able to do so successfully, then your SSH configuration is still valid!
 
 If you are **not** able to get back in, then something has gone wrong with your configuration.
-**Use the backup SSH session you created at the start of this section to modify the `/etc/ssh/sshd_config` file.
+Use the backup SSH session you created at the start of this section to modify the `/etc/ssh/sshd_config` file.
 
 Try to find the mistake or undo your changes, then restart the SSH server using `sudo systemctl restart sshd`.
 
@@ -346,16 +346,24 @@ Keep doing this until you have it working again and are able to successfully con
 
 ### (Optional) Enable two factor authentication
 
-Two factor authentication is requiring a second security measure, usually on a separate device from your primary one. You may be used to logging into a crypto exchange with a password (primary) and Google Authenticator code (secondary).
+Two factor authentication is requiring a second security measure, usually on a separate device from your primary one.
+
+You may be used to logging into a crypto exchange with a password (primary) and Google Authenticator code (secondary).
 
 SSH can be configured to require a Google Authenticator code, which means that an attacker that somehow compromised your SSH key and it's passphrase would still need the device with the authenticator app on it (presumably your phone).
 
-Before you begin, be sure you installed Google Authenticator or a compatible equivalent installed on your phone. For Android users, consider andOTP which is an open source alternative that supports password locking and convenient backups.
+Before you begin, be sure you installed Google Authenticator or a compatible equivalent installed on your phone.
+
+For Android users, consider andOTP which is an open source alternative that supports password locking and convenient backups.
 
 ::: danger WARNING
 It is recommended to have a second terminal with an ssh connection to your node open, just in case you mistype and lock yourself out.
 
-Similarly to SSH keys, if you lose your 2FA code you will lose access to your node. The good news is that if you have physical access there is usually a way to fix it, but it will be a hassle. Be careful to read the instructions below with care.
+Similarly to SSH keys, if you lose your 2FA code you will lose access to your node.
+
+The good news is that if you have physical access there is usually a way to fix it, but it will be a hassle.
+
+Be careful to read the instructions below with care.
 :::
 
 The first step is to install the Google Authenticator module with this command:
@@ -379,7 +387,9 @@ auth required pam_google_authenticator.so
 
 Then exit the file with `ctrl+x` and type `y` to confirm your changes.
 
-Now `PAM` knows to use Google Authenticator, the next step is to tell `sshd` to use `PAM`. Open the `sshd` config file:
+Now `PAM` knows to use Google Authenticator, the next step is to tell `sshd` to use `PAM`.
+
+Open the `sshd` config file:
 
 ```shell
 sudo nano /etc/ssh/sshd_config
@@ -430,7 +440,9 @@ By default... < long story about time skew > ... Do you want to do so: NO
 Do you want to enable rate-limiting: YES
 ```
 
-You will now see a big QR code on your screen, scan it with your Google Authenticator app to add it. You will also see your secret and a few backup codes looking like this:
+You will now see a big QR code on your screen, scan it with your Google Authenticator app to add it.
+
+You will also see your secret and a few backup codes looking like this:
 
 ```
 Your new secret key is: IRG2TALMR5U2LK5VQ5AQIG3HA4
@@ -445,7 +457,9 @@ Your emergency scratch codes are:
 
 Record the emergency scratch codes somewhere in case you need to recover your 2FA.
 
-You can now try to `ssh` into your node, and you will notice that you are asked for a verification code **and** a password. Go ahead and try it in a new terminal to make sure everything works.
+You can now try to `ssh` into your node, and you will notice that you are asked for a verification code **and** a password.
+
+Go ahead and try it in a new terminal to make sure everything works.
 
 The reason for it asking for a password even though you're using SSH keys is because while `sshd` got the memo about not using passwords, `PAM` didn't yet.
 
