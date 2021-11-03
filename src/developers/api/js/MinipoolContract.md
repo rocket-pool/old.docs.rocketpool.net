@@ -649,14 +649,13 @@ ___
 
 ### stake
 
-▸ **stake**(`validatorPubkey`, `validatorSignature`, `depositDataRoot`, `options?`, `onConfirmation?`): `Promise`<`TransactionReceipt`\>
+▸ **stake**(`validatorSignature`, `depositDataRoot`, `options?`, `onConfirmation?`): `Promise`<`TransactionReceipt`\>
 
 Progress the minipool to staking, sending its ETH deposit to the VRC
 Only accepts calls from the minipool owner (node) while in prelaunch and once scrub period has ended
 
 **`example`** using Typescript
 ```ts
-const validatorPubkey = <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03>;
 const validatorSignature = <Buffer 01 23 45 67 89 ab cd ef 01 23 45 67 89 ab cd ef 01 23 45 67 89 ab cd ef 01 23 45 67 89 ab cd ef 01 23 45 67 89 ab cd ef 01 23 45 67 89 ab cd ef 01 23>;
 const depositDataRoot = <Buffer 48 ad 0b 82 2c d6 81 f9 c9 8b 06 a1 8b 93 4b df 7f 40 76 80 fb 7a 3b 5c cd 2c 92 a6 4a 58 e9 05>;
 const owner = "0x8B0EF9f1932A2e44c3D27bE4C70C3BC07A6A27B3"; // must be the owner of the minipool
@@ -664,16 +663,15 @@ const options = {
 		from: owner,
 		gas: 1000000
 };
-const txReceipt = minipool.stake(validatorPubkey, validatorSignature, depositDataRoot, options).then((txReceipt: TransactionReceipt) => { txReceipt };
+const txReceipt = minipool.stake(validatorSignature, depositDataRoot, options).then((txReceipt: TransactionReceipt) => { txReceipt };
 ```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `validatorPubkey` | `Buffer` | A buffer |
-| `validatorSignature` | `Buffer` | - |
-| `depositDataRoot` | `Buffer` | - |
+| `validatorSignature` | `Buffer` | A buffer containing the validator signature |
+| `depositDataRoot` | `Buffer` | A buffer containing the deposit data |
 | `options?` | `SendOptions` | An optional object of web3.eth.Contract SendOptions |
 | `onConfirmation?` | [`ConfirmationHandler`](../interfaces/internal_/ConfirmationHandler.md) | An optional confirmation handler object |
 
@@ -720,7 +718,7 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:478
+rocketpool/minipool/minipool-contract.ts:472
 
 ___
 
@@ -755,7 +753,7 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:498
+rocketpool/minipool/minipool-contract.ts:492
 
 ___
 
@@ -790,7 +788,7 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:518
+rocketpool/minipool/minipool-contract.ts:512
 
 ___
 
@@ -827,7 +825,7 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:540
+rocketpool/minipool/minipool-contract.ts:534
 
 ___
 
@@ -844,7 +842,7 @@ const options = {
 		from: daoMember,
 		gas: 1000000
 };
-const txReceipt = minipool.finalise(options).then((txReceipt: TransactionReceipt) => { txReceipt };
+const txReceipt = minipool.voteScrub(options).then((txReceipt: TransactionReceipt) => { txReceipt };
 ```
 
 #### Parameters
@@ -862,7 +860,7 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:560
+rocketpool/minipool/minipool-contract.ts:554
 
 ___
 
@@ -897,4 +895,4 @@ a Promise<TransactionReceipt\> that resolves to a TransactionReceipt object repr
 
 #### Defined in
 
-rocketpool/minipool/minipool-contract.ts:580
+rocketpool/minipool/minipool-contract.ts:574
