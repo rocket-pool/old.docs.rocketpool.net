@@ -344,51 +344,56 @@ Once it's been restarted, try connecting with SSH again on your "other" terminal
 Keep doing this until you have it working again and are able to successfully connect.
 :::
 
-### (Optional) Enable two factor authentication
+### (Optional) Enable Two-Factor Authentication
 
-Two factor authentication is requiring a second security measure, usually on a separate device from your primary one.
+Two factor authentication involves requiring a second security measure in addition to your password or SSH key, usually on a separate device from your primary one.
 
-You may be used to logging into a crypto exchange with a password (primary) and Google Authenticator code (secondary).
+For example, you may be familiar with logging into a website such as a crypto exchange using both a password and a Google Authenticator code (or an SMS code).
+This two-step process is an example of two-factor authentication.
 
-SSH can be configured to require a Google Authenticator code, which means that an attacker that somehow compromised your SSH key and it's passphrase would still need the device with the authenticator app on it (presumably your phone).
-
-Before you begin, be sure you installed Google Authenticator or a compatible equivalent installed on your phone.
-
-For Android users, consider andOTP which is an open source alternative that supports password locking and convenient backups.
+SSH can also be configured to require a Google Authenticator code, which means that an attacker that somehow compromised your SSH key and its passphrase would **still need the device with the authenticator app on it** (presumably your phone).
+This adds an extra layer of security to your system.
 
 ::: danger WARNING
-It is recommended to have a second terminal with an ssh connection to your node open, just in case you mistype and lock yourself out.
+We **strongly recommend** that you open a second terminal with an SSH connection to your node, just in case you misconfigure something.
+This way, you will have a backup that is still connected in case you lock yourself out, so you can easily undo your mistakes.
 
-Similarly to SSH keys, if you lose your 2FA code you will lose access to your node.
-
-The good news is that if you have physical access there is usually a way to fix it, but it will be a hassle.
-
-Be careful to read the instructions below with care.
+If you **do** manage to lock yourself out, you will need to physically access your node via its local monitor and keyboard to log in and repair the misconfiguration.
 :::
 
-The first step is to install the Google Authenticator module with this command:
+Start by installing [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US&gl=US) (or a compatible equivalent) on your phone if you don't already have it.
+For Android users, consider [andOTP](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp&hl=en_US&gl=US) which is an open source alternative that supports password locking and convenient backups.
+
+Next, install the Google Authenticator module on your node with this command:
 
 ```shell
 sudo apt install -y libpam-google-authenticator
 ```
 
-We the tell `PAM` (pluggable authentication modules) to use the module. First open the config file:
+Now tell the `PAM` (pluggable authentication modules) to use this module.
+First open the config file:
 
 ```shell
 sudo nano /etc/pam.d/sshd
 ```
 
-Then add these lines to the top of the file:
+Find `@include common-auth` (it should be at the top) and comment it out by adding a `#` in front of it, so it looks like this:
+
+```
+# Standard Un*x authentication.
+#@include common-auth
+```
+
+Next, add these lines to the top of the file:
 
 ```shell
 # Enable Google Authenticator
 auth required pam_google_authenticator.so
 ```
 
-Then exit the file with `ctrl+x` and type `y` to confirm your changes.
+Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.
 
-Now `PAM` knows to use Google Authenticator, the next step is to tell `sshd` to use `PAM`.
-
+Now that `PAM` knows to use Google Authenticator, the next step is to tell `sshd` to use `PAM`.
 Open the `sshd` config file:
 
 ```shell
@@ -403,45 +408,29 @@ Now change the line `ChallengeResponseAuthentication no` to `ChallengeResponseAu
 ChallengeResponseAuthentication yes
 ```
 
-Also add the following line at the bottom of `/etc/ssh/sshd_config`, which indicated to `sshd` that we need both an SSH key and the Google Authenticator code:
+Add the following line to the bottom of the file, which indicates to `sshd` that it needs both an SSH key and the Google Authenticator code:
 
 ```shell
 AuthenticationMethods publickey,keyboard-interactive
 ```
 
-Then exit the file with `ctrl+x` and type `y` to confirm your changes.
+Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.
 
-Next step is to reload the `sshd` daemon so it uses the new settings:
-
-```shell
-sudo systemctl restart sshd.service
-```
-
-Now that `sshd` is set up, we need to create our 2FA codes. In your terminal, run:
+Now that `sshd` is set up, we need to create our 2FA codes.
+In your terminal, run:
 
 ```shell
 google-authenticator 
 ```
 
-It will ask you for some parameters, the recommended defaults are:
+First, it will ask you about time-based tokens.
+Say `y` to this question:
 
 ```
-Do you want me to update your "/home/rocketeer/.google_authenticator" file?: yes
-Make tokens “time-base””: yes
-Update the .google_authenticator file: yes
-Disallow multiple uses: yes
-Increase the original generation time limit: no
-Enable rate-limiting: yes
-
-Do you want authentication tokens to be time-based: YES
-Do you want me to update your "/yourusername/.google_authenticator" file: YES
-Do you want to disallow multiple uses of the same authentication token: YES
-By default... < long story about time skew > ... Do you want to do so: NO
-Do you want to enable rate-limiting: YES
+Do you want authentication tokens to be time-based: y
 ```
 
 You will now see a big QR code on your screen, scan it with your Google Authenticator app to add it.
-
 You will also see your secret and a few backup codes looking like this:
 
 ```
@@ -455,34 +444,29 @@ Your emergency scratch codes are:
   82649596
 ```
 
-Record the emergency scratch codes somewhere in case you need to recover your 2FA.
+::: warning NOTE
+Record the emergency scratch codes somewhere safe in case you need to log into the machine but don't have your 2FA app handy.
+Without the app, you will no longer be able to SSH into the machine!
+:::
 
-You can now try to `ssh` into your node, and you will notice that you are asked for a verification code **and** a password.
 
-Go ahead and try it in a new terminal to make sure everything works.
+Finally, it will ask you for some more parameters; the recommended defaults are as follows:
 
-The reason for it asking for a password even though you're using SSH keys is because while `sshd` got the memo about not using passwords, `PAM` didn't yet.
+```
+Do you want me to update your "/<username>/.google_authenticator" file: y
+Do you want to disallow multiple uses of the same authentication token: y
+By default... < long story about time skew > ... Do you want to do so: n
+Do you want to enable rate-limiting: y
+```
 
-To fix this, open the PAM config:
+Once you're done, restart `sshd` so it grabs the new settings:
 
 ```shell
-sudo nano /etc/pam.d/sshd
-```
-
-Find `@include common-auth` and comment it out by adding a `#` in front of it, so it looks like this:
-
-```
-# Standard Un*x authentication.
-#@include common-auth
-```
-
-Now restart `sshd` for a final time so it grabs the new settings:
-
-```shell
-sudo systemctl restart sshd.service
+sudo systemctl restart sshd
 ```
 
 When you try to SSH into your server with your SSH keys, you should now also be asked for a 2FA verification code, but not for a password.
+
 
 ## ESSENTIAL: Enable Automatic Security Updates
 
