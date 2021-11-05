@@ -53,8 +53,8 @@ Once both transactions finish, you can check your staked RPL amount with `rocket
 The following portion of the output is what you want to verify:
 
 ```
-The node has a total stake of 11763.477483 RPL and an effective stake of 11763.477483 RPL, allowing it to run 41 minipool(s) in total.
-This is currently a 10.88% collateral ratio.
+The node has a total stake of 11763.477483 RPL and an effective stake of 0.0 RPL, allowing it to run 41 minipool(s) in total.
+This is currently a 0.00% collateral ratio.
 The node must keep at least 10810.143971 RPL staked to collateralize its minipools and claim RPL rewards.
 ```
 
