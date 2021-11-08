@@ -67,6 +67,7 @@ By default, when you create a new minipool, Rocket Pool will generate a random u
 However, the Smartnode provides the ability to search for a custom **vanity address** for the minipool.
 
 A vanity address is one where you personally pick the characters that the address starts with.
+This is a purely cosmetic exercise and will not have any practical impact on your minipool's operation.
 As Ethereum addresses are in hexadecimal, any of the following characters are legal:
 
 ```

@@ -30,7 +30,7 @@ If you are not sure how to send cryptocurrency from your existing wallet, please
 ::: danger
 Sending cryptocurrency across wallets is a non-reversible operation!
 If you enter the wrong recipient address, **there is no way to retrieve your tokens**.
-We recommend you send a small amount of ETH first as a **test transaction** to verify that you correctly entered the node wallet's address, and then **whitelist** that address in your other wallet if possible to avoid mistyping it.
+We recommend you send a small amount of ETH first as a **test transaction** to verify that you correctly entered the node wallet's address, and then **whitelist** that address in your other wallet, if possible, to avoid mistyping it.
 :::
 ::::
 
@@ -59,7 +59,7 @@ Once this is complete, you will officially be a member of the Rocket Pool networ
 
 ## Setting your Withdrawal Address
 
-Before anything else, it's probably in your best interest to change the **withdrawal address** for your node.
+Before anything else, we highly recommended you change the **withdrawal address** for your node.
 This is the address that all of your RPL checkpoint rewards, your staked RPL, and your Beacon Chain ETH will be sent to when you claim your checkpoint rewards or exit your validator and withdraw from your minipool.
 
 ::: warning NOTE
@@ -67,6 +67,8 @@ By default, this is set to your node's wallet address.
 However, for security reasons, **it's recommended to set this to a different cold wallet that you control, such as a MetaMask address or a hardware wallet.**
 
 This way, if your node wallet is compromised, the attacker doesn't get access to your staked ETH and RPL by forcing you to exit because all of those funds will be sent to your separate cold wallet (which they hopefully do not have).
+
+Withdrawal addresses are set at a node operator level. If you create multiple minipools they will all refer to the same withdrawal address. So you only need to perform this setup once.
 :::
 
 There are two different ways to do this.
@@ -118,14 +120,14 @@ If you confirm this command when it prompts you, your new withdrawal address wil
 
 ::: danger
 By doing this, you bypass the safety measure associated with Method 1, which requires you to prove that you own the new address.
-If you make a typo here, there is no way to undo it and **your minipool's rewards will essentially be lost forever**.
+If you make a typo here, there is no way to undo it and **your minipool's rewards will be lost forever**.
 
 We **strongly** encourage you to use the test transaction mechanism before confirming this, and if possible, use Method 1 instead.
 :::
 ::::
 
 Once this is done, you will **no longer be able to change your withdrawal address using the `set-withdrawal-address` command**.
-To change it, you will need to send a signed transaction to your minipool from its **active** withdrawal address (the one you just switched to).
+To change it, you will need to send a signed transaction from your **active** withdrawal address (the one you just switched to).
 The Rocket Pool website has a function to help you do this.
 
 
