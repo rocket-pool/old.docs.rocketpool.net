@@ -9,12 +9,9 @@ You’ll need a computer with Google Chrome, Mozilla Firefox, Opera or Brave wit
 
 We will use MetaMask throughout this guide as an example; if you’re using WalletConnect or a web3 enabled browser, please consult its documentation for the relevant steps and match them with these instructions.
 
-::: warning NOTE
-Rocket Pool has not launched on mainnet yet, so you cannot currently stake real ETH.
-However, you can practice staking with Rocket Pool using the Prater test network.
-
-You **do not need to provide any of your real ETH** during this process.
-You will be given **fake test ETH** to use instead.
+::: tip NOTE
+Rocket Pool is now launched on mainnet, meaning that you can stake with real ETH!
+However, you can also practice staking with Rocket Pool using the Prater test network.
 :::
 
 
@@ -24,27 +21,67 @@ Start by installing [MetaMask](https://metamask.io/) if you haven't already.
 Follow the instructions on their site to install the extension, create an account, and sign in.
 
 Next, open the MetaMask panel using its icon in your browser toolbar.
+
+:::: tabs
+::: tab Using Mainnet
 Click on the **network dropdown** in the toolbar at the top and select **Goerli Test Network**:
 
 <center>
 
-![](./images/mm_network.png)
+![](./images/mainnet_network.png)
 
 </center>
 
 Finally, add the rETH token to MetaMask so you can see your balance and access it for trading.
-Click the **Assets** tab, then click **Add Token**:
+Click the **Assets** tab, then click **Import Tokens**:
 
 <center>
 
-![](./images/mm_add_token.png)
+![](./images/mainnet_add_token.png)
 
 </center>
 
-:::: tabs
+Next, select the **Custom Token** tab in following dialog.
+In the **Token Contract Address** box, put the following value for the mainnet rETH contract:
+
+```
+0xae78736Cd615f374D3085123A210448E74Fc6393
+```
+
+The **Token Symbol** should automatically be populated with `rETH`, and the **Decimals of Precision** should automatically be populated with `18`.
+
+<center>
+
+![](./images/mainnet_custom_token.png)
+
+</center>
+
+
+Accept the rest of the prompts, and then you will see the rETH token appear in your list.
+:::
 ::: tab Using the Prater Test Network
-Ensure that **Custom Token** is selected in this dialog.
-In the **Token Contract Address** box, put the following value:
+For the testnet, you **do not need to provide any of your real ETH**.
+You will be given **fake test ETH** to use instead.
+
+Click on the **network dropdown** in the toolbar at the top and select **Goerli Test Network**:
+
+<center>
+
+![](./images/testnet_network.png)
+
+</center>
+
+Finally, add the rETH token to MetaMask so you can see your balance and access it for trading.
+Click the **Assets** tab, then click **Import Tokens**:
+
+<center>
+
+![](./images/testnet_add_token.png)
+
+</center>
+
+Next, select the **Custom Token** tab in following dialog.
+In the **Token Contract Address** box, put the following value for the testnet rETH contract:
 
 ```
 0x178e141a0e3b34152f73ff610437a7bf9b83267a
@@ -52,10 +89,13 @@ In the **Token Contract Address** box, put the following value:
 
 The **Token Symbol** should automatically be populated with `rETH`, and the **Decimals of Precision** should automatically be populated with `18`.
 
+<center>
+
+![](./images/testnet_custom_token.png)
+
+</center>
+
 Accept the rest of the prompts, and then you will see the rETH token appear in your list.
-:::
-::: tab Using Mainnet
-Coming soon!
 :::
 ::::
 
@@ -65,6 +105,19 @@ Coming soon!
 Select which network you're using from the tabs below.
 
 :::: tabs
+::: tab Using Mainnet
+
+Assuming that you have sent ETH to your wallet address in MetaMask, you can head to [https://stake.rocketpool.net/](https://stake.rocketpool.net/) to start staking.
+
+The page should look like this:
+
+<center>
+
+![](./images/rp_mainnet_site.png)
+
+</center>
+
+:::
 ::: tab Using the Prater Test Network
 
 Now that you have a wallet address in MetaMask, you need to fill it with some test ETH.
@@ -80,13 +133,10 @@ The page should look like this:
 
 </center>
 
-If you see a notice about a web3 browser being required, or the current network ID being unsupported, make sure you’ve completed the previous steps correctly before continuing.
-
-:::
-::: tab Using Mainnet
-Coming soon!
 :::
 ::::
+
+If you see a notice about a web3 browser being required, or the current network ID being unsupported, make sure you’ve completed the previous steps correctly before continuing.
 
 Once you're at the site, click on the **select wallet** button in the top middle of the page, then click **connect metamask**.
 
