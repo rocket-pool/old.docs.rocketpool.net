@@ -532,8 +532,8 @@ sudo ufw allow "22/tcp" comment 'Allow SSH'
 
 Allow Geth if you use it (see [the Geth documentation](https://geth.ethereum.org/docs/interface/private-network#setting-up-networking) for more info):
 ```shell
-sudo ufw allow 30303/tcp comment 'Go Ethereum port, standardized by Rockepool'
-sudo ufw allow 30303/udp comment 'Go Ethereum port, standardized by Rockepool'
+sudo ufw allow 30303/tcp comment 'Go Ethereum port, standardized by Rocketpool'
+sudo ufw allow 30303/udp comment 'Go Ethereum port, standardized by Rocketpool'
 ```
 
 Allow your Beacon Client:
