@@ -9,9 +9,8 @@ You’ll need a computer with Google Chrome, Mozilla Firefox, Opera or Brave wit
 
 We will use MetaMask throughout this guide as an example; if you’re using WalletConnect or a web3 enabled browser, please consult its documentation for the relevant steps and match them with these instructions.
 
-::: warning NOTE
-Rocket Pool has not launched on mainnet yet, so you cannot currently stake real ETH.
-However, you can practice staking with Rocket Pool using the Prater test network.
+::: tip NOTE
+You can practice staking with Rocket Pool using the Prater test network.
 
 You **do not need to provide any of your real ETH** during this process.
 You will be given **fake test ETH** to use instead.
