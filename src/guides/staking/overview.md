@@ -47,7 +47,7 @@ rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total ETH staked)
 
 Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
 
-To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates a steady but constant growth:
+To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates slow but steady growth:
 
 <center>
 
@@ -133,7 +133,7 @@ This will come with **a smaller transaction fee** than swapping directly via Roc
 
 
 ### Via a Decentralized Exchange on a Layer 2 Network
-With this method, you will start by bridging your existing ETH (or other tokens of choice) onto an Ethereum Layer 2 network such as [Optimism](https://www.optimism.io/) or [Arbitrum](https://arbitrum.io/) and then use a decentralized exchange on the network to purchase rETH. If you already have tokens on a Layer 2 network, this method is compelling because **the transaction fees are practically nonexistent**. However, if you have not used a Layer 2 network before, it does require a few additional steps to get set up. 
+With this method, you will start by bridging your existing ETH (or other tokens of choice) onto an Ethereum Layer 2 network such as [Optimism](https://www.optimism.io/) or [Arbitrum](https://arbitrum.io/) and then use a decentralized exchange on the network to purchase rETH. If you already have tokens on a Layer 2 network, this method is compelling because **the transaction fees are ~10x smaller than on the Ethereum mainnet**. However, if you have not used a Layer 2 network before, it does require a few additional steps to get set up. 
 
 [Click here to learn how to swap ETH for rETH via a decentralized exchange on a Layer 2 network.](./via-l2.md)
 
