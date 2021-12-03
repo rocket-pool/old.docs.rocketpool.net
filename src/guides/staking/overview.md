@@ -42,10 +42,22 @@ In doing so, you will be given a token called **rETH**. rETH represents both **h
 The value of rETH is determined by the following ratio:
 
 ```
-ETH:rETH ratio = (amount of ETH staked on ETH1) / (total validator balance on ETH2)
+rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total ETH staked)
 ```
 
-As a simple example, say you stake at the very beginning when 1 ETH = 1 rETH.
+Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
+
+To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates a steady but constant growth:
+
+<center>
+
+![](./images/reth_rate.png)
+
+</center>
+
+To help explain what this means practically, let's do a simple example.
+
+Say you stake at the very beginning when 1 ETH = 1 rETH.
 You deposit 10 ETH and receive 10 rETH back.
 
 After a few years, the balances on the Beacon Chain grow due to validator rewards.
@@ -54,8 +66,13 @@ Then 1 ETH would be worth (128/160) = 0.8 rETH; conversely, 1 rETH would be wort
 
 At this point, you could trade your 10 rETH back to Rocket Pool's smart contracts and receive 12.5 ETH in return.
 
+This means **as long as you are holding rETH**, you are staking with Rocket Pool!
+**You do not need to get it from Rocket Pool directly.**
+For example, you can purchase rETH on an exchange; as every rETH token is exactly the same, you will **automatically receive the benefits of staking just by holding the token!**
+
+
 ::: warning NOTE
-Trading rETH back for ETH is only possible when the staking pool has enough ETH in it to handle your trade.
+Trading rETH back for ETH directly with Rocket Pool is only possible when the staking pool has enough ETH in it to handle your trade.
 ETH in this pool comes from two sources:
 
 1. ETH that other stakers have deposited, which hasn't been used by a node operator to create a new validator yet
@@ -72,7 +89,11 @@ You can trade it, lend it, use it as collateral... as rETH is a standard ERC20 t
 ## Tax Implications
 
 Each country has their own tax laws, and it would be impossible to document them all here.  
-In some countries, depositing ETH for rETH may be considered **a taxable event**.  
+In some countries, depositing ETH for rETH may be considered **a taxable event**.
+However, because rETH inherently accumulates value while the actual amount of the token you hold remains constant, simply holding it usually **does not generate any taxable events**.
+
+This makes rETH **a preferable staking token for long-term holding** if your country separates short-term and long-term capital gains taxes.
+
 Tax laws related to cryptocurrencies are in their infancy; each user should do their own research and consider speaking with a tax professional.  
 
 Below are some helpful sites that offer tax assistance to users related to Ethereum.
@@ -80,4 +101,50 @@ Below are some helpful sites that offer tax assistance to users related to Ether
  - [https://koinly.io/](https://koinly.io/)
  - [https://cryptotaxcalculator.io/](https://cryptotaxcalculator.io/)
 
-If you understand the responsibilities and terms associated with Rocket Pool staking and would like to be walked through the process, move ahead to the next page.
+
+## How to Stake with Rocket Pool
+
+As described above, as long as you are holding the rETH token, you are a **Rocket Pool Staker**.
+We will summarize several common ways to acquire it here.
+
+::: warning NOTE
+All of the methods described here rely on the usage of an Ethereum wallet such as [MetaMask](https://metamask.io/).
+If you have never used an Ethereum wallet before, we strongly encourage you to learn more about them and practice using them before staking with Rocket Pool.
+The sections below include some steps that are demonstrated with MetaMask as an example; they should translate to your wallet of choice easily enough for you to follow along.
+:::
+
+
+### Via Rocket Pool Directly
+With this method, you will use a web3 wallet (such as MetaMask) and interact with Rocket Pool's website to swap ETH for rETH and vice-versa.
+This method is **guaranteed** to provide you with the exact amount of rETH that your ETH is worth, since it's coming directly from Rocket Pool's smart contracts, but it can be somewhat expensive if the network's gas prices are high and you're staking a relatively small amount of ETH.
+
+::: tip NOTE
+If you are practicing staking on the Prater Testnet, the direct method above is the only option currently supported.
+:::
+
+[Click here to learn how to stake via Rocket Pool directly.](./via-rp.md)
+
+
+### Via a Decentralized Exchange on Ethereum (Layer 1)
+With this method, you will access a decentralized exchange such as [Uniswap](https://docs.uniswap.org/protocol/introduction) and purchase rETH using your token of choice, just like you would do any other token swap.
+This will come with **a smaller transaction fee** than swapping directly via Rocket Pool's website, but you may receive less rETH than the true value depending on liquidity and the fees that the liquidity providers charge.
+
+[Click here to learn how to swap ETH for rETH via a decentralized exchange on Layer 1.](./via-l1.md)
+
+
+### Via a Decentralized Exchange on a Layer 2 Network
+With this method, you will start by bridging your existing ETH (or other tokens of choice) onto an Ethereum Layer 2 network such as [Optimism](https://www.optimism.io/) or [Arbitrum](https://arbitrum.io/) and then use a decentralized exchange on the network to purchase rETH. If you already have tokens on a Layer 2 network, this method is compelling because **the transaction fees are practically nonexistent**. However, if you have not used a Layer 2 network before, it does require a few additional steps to get set up. 
+
+[Click here to learn how to swap ETH for rETH via a decentralized exchange on a Layer 2 network.](./via-l2.md)
+
+
+### Video Demonstration
+
+
+Community member **Kevster** has put together a helpful video that demonstrates each of these options step-by-step:
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/doXK3iDoQgI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+For a more detailed writeup, select which method you would like to use from the links above and follow the guide for that section.

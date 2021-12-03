@@ -84,7 +84,9 @@ module.exports = {
                 collapsable: true,
                 children: [
                     'staking/overview',
-                    'staking/staking'
+                    'staking/via-rp',
+                    'staking/via-l1',
+                    'staking/via-l2'
                 ]
               },
               {

@@ -1,24 +1,23 @@
-# How to Stake with Rocket Pool
-
-In this guide, we'll walk you through the process of how to stake your ETH with Rocket Pool, providing it for Node Operators to create new ETH2 validators with.
-As described in the [Staking Overview](overview.md), this will involve depositing your ETH into Rocket Pool's vault and receiving an equal value of rETH back.
-By doing this, you will become a **Rocket Pool Staker**.
+# Staking Directly via Rocket Pool
 
 The easiest way to stake with Rocket Pool is done via its web interface to the underlying smart contracts.
-You’ll need a computer with Google Chrome, Mozilla Firefox, Opera or Brave with [MetaMask](https://metamask.io/) installed, or a wallet that supports [WalletConnect](https://walletconnect.com/), or a web3 enabled browser.
 
-We will use MetaMask throughout this guide as an example; if you’re using WalletConnect or a web3 enabled browser, please consult its documentation for the relevant steps and match them with these instructions.
+The advantage is that you will always get exactly as much rETH as your ETH is worth, since Rocket Pool's contracts will directly mint the rETH that you receive.
+No hidden fees, no 
 
-::: warning NOTE
-Rocket Pool has not launched on mainnet yet, so you cannot currently stake real ETH.
-However, you can practice staking with Rocket Pool using the Prater test network.
+The disadvantage is that the gas fee might be quite expensive if you are staking a small amount of ETH - **we strongly recommend you check this before approving the transaction.**
 
-You **do not need to provide any of your real ETH** during this process.
+The process is slightly different for the Prater Testnet and Mainnet, so choose the network you are interested in from the tabs below.
+
+::::::: tabs
+:::::: tab Preparing on the Prater Testnet
+
+::: danger WARNING
+When practicing staking on the test network, you **do not need to provide any of your real ETH** during this process.
 You will be given **fake test ETH** to use instead.
+
+**Do not attempt to move your real ETH on mainnet to the testnet or you will lose it permanently!** 
 :::
-
-
-## Setting up MetaMask
 
 Start by installing [MetaMask](https://metamask.io/) if you haven't already.
 Follow the instructions on their site to install the extension, create an account, and sign in.
@@ -41,8 +40,6 @@ Click the **Assets** tab, then click **Add Token**:
 
 </center>
 
-:::: tabs
-::: tab Using the Prater Test Network
 Ensure that **Custom Token** is selected in this dialog.
 In the **Token Contract Address** box, put the following value:
 
@@ -53,19 +50,6 @@ In the **Token Contract Address** box, put the following value:
 The **Token Symbol** should automatically be populated with `rETH`, and the **Decimals of Precision** should automatically be populated with `18`.
 
 Accept the rest of the prompts, and then you will see the rETH token appear in your list.
-:::
-::: tab Using Mainnet
-Coming soon!
-:::
-::::
-
-
-## Staking via the Rocket Pool Website
-
-Select which network you're using from the tabs below.
-
-:::: tabs
-::: tab Using the Prater Test Network
 
 Now that you have a wallet address in MetaMask, you need to fill it with some test ETH.
 Head over to the [Practicing with the Test Network](../testnet/overview.md#getting-test-eth-on-goerli) page for a quick guide on how to use a testnet faucet to get some test ETH on Goerli.
@@ -82,11 +66,59 @@ The page should look like this:
 
 If you see a notice about a web3 browser being required, or the current network ID being unsupported, make sure you’ve completed the previous steps correctly before continuing.
 
-:::
-::: tab Using Mainnet
-Coming soon!
-:::
-::::
+::::::
+:::::: tab Preparing on the Ethereum Mainnet
+
+Start by installing [MetaMask](https://metamask.io/) if you haven't already.
+Follow the instructions on their site to install the extension, create an account, and sign in.
+
+Next, open the MetaMask panel using its icon in your browser toolbar.
+Click on the **network dropdown** in the toolbar at the top and ensure that **Ethereum Mainnet** is selected:
+
+<center>
+
+![](./images/mm_network_main.png)
+
+</center>
+
+Finally, add the rETH token to MetaMask so you can see your balance and access it for trading.
+Click the **Assets** tab, then click **Add Token**:
+
+<center>
+
+![](./images/mm_add_token.png)
+
+</center>
+
+Ensure that **Custom Token** is selected in this dialog.
+In the **Token Contract Address** box, put the following value:
+
+```
+0xae78736Cd615f374D3085123A210448E74Fc6393
+```
+
+The **Token Symbol** should automatically be populated with `rETH`, and the **Decimals of Precision** should automatically be populated with `18`.
+
+Accept the rest of the prompts, and then you will see the rETH token appear in your list.
+
+Now that you have a wallet address in MetaMask, you need to transfer some ETH into it.
+You will need to supply this from an existing wallet or buy ETH on an exchange.
+
+Once you have some ETH to stake, head to [https://stake.rocketpool.net/](https://stake.rocketpool.net/).
+
+The page should look like this:
+
+<center>
+
+![](./images/rp_test_site.png)
+
+</center>
+
+If you see a notice about a web3 browser being required, or the current network ID being unsupported, make sure you’ve completed the previous steps correctly before continuing.
+
+::::::
+:::::::
+
 
 Once you're at the site, click on the **select wallet** button in the top middle of the page, then click **connect metamask**.
 
@@ -110,6 +142,9 @@ Enter the amount of ETH you want to deposit in the **trade __ ETH** box on the s
 </center>
 
 MetaMask will pop up with a window asking you to confirm your transaction.
+
+**Check the total gas cost of the transaction before you approve it - if it is very expensive relative to your transaction, you may want to consider acquiring rETH via another method!**
+
 Once you confirm it, the transaction will begin.
 When it's been mined and added to the chain, you'll see your balances update!
 
