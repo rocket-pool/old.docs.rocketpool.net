@@ -7,6 +7,11 @@ No hidden fees, no
 
 The disadvantage is that the gas fee might be quite expensive if you are staking a small amount of ETH - **we strongly recommend you check this before approving the transaction.**
 
+::: warning NOTE
+If you stake directly with Rocket Pool, your rETH tokens will be **locked to your account for 24 hours** before you can transfer them or use them in DeFi applications.
+This is a security measure to prevent against timing attacks.
+:::
+
 The process is slightly different for the Prater Testnet and Mainnet, so choose the network you are interested in from the tabs below.
 
 ::::::: tabs
@@ -156,6 +161,11 @@ rETH and ETH have a **dynamic exchange rate**: as the Rocket Pool network earns 
 That's it!
 You're now staking with Rocket Pool.
 All you need to do is hold onto your rETH, and you'll automatically gain your staking rewards as the value of the rETH token increases.
+
+::: warning NOTE
+As a reminder, your rETH tokens will be **locked to your account for 24 hours** before you can transfer them or use them in DeFi applications.
+This is a security measure to prevent against timing attacks.
+:::
 
 
 ## Unstaking

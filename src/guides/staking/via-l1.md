@@ -70,6 +70,19 @@ Now that your wallet is set up and funded, head to this URL which will open Unis
 
 [https://app.uniswap.org/#/swap?inputCurrency=eth&outputCurrency=0xae78736cd615f374d3085123a210448e74fc6393](https://app.uniswap.org/#/swap?inputCurrency=eth&outputCurrency=0xae78736cd615f374d3085123a210448e74fc6393)
 
+::: warning NOTE
+You may initially be prompted with a warning that looks like this:
+
+<center>
+
+![](./images/unknown_token.jpg)
+
+</center>
+
+This is just a temporary warning until Uniswap adds rETH to its canonical token list.
+As long as the token address is `0xae78736cd615f374d3085123a210448e74fc6393`, you can add it safely.
+:::
+
 The page will look like this initially:
 
 <center>

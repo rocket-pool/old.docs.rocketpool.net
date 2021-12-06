@@ -232,6 +232,19 @@ The final step of the process is to do the swap!
 
 Click on the **Select a token** dropdown and enter the address for rETH that you just added to MetaMask (you can also just type rETH, but **make sure it is the correct token and not an impostor or scam token** by verifying its address first).
 
+::: warning NOTE
+You may initially be prompted with a warning that looks like this:
+
+<center>
+
+![](./images/unknown_token.jpg)
+
+</center>
+
+This is just a temporary warning until Uniswap adds rETH to its canonical token list on the Layer you're using.
+As long as the token address is `0x9bcef72be871e61ed4fbbc7630889bee758eb81d` on Optimism or `0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8` on Arbitrum, you can add it safely.
+:::
+
 Next, enter the amount of ETH you want to swap and Uniswap's UI will show you the amount of rETH you will receive in return:
 
 <center>
