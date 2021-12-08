@@ -74,10 +74,13 @@ Withdrawal addresses are set at a node operator level. If you create multiple mi
 There are two different ways to do this.
 Please read both options below to determine which one applies to you.
 
-:::: tabs
-::: tab Method 1
+::::: tabs
+:::: tab Method 1
 **Use this method if your new withdrawal address can be used to sign transactions via MetaMask or WalletConnect.**
 
+::: warning NOTE
+This method will require you to **submit a transaction** from your new withdrawal address, so **you must have a small amount of ETH in that address already.**
+:::
 
 1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
 2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
@@ -103,9 +106,9 @@ Please read both options below to determine which one applies to you.
 ![](./images/confirmed.png)
 </center>
 1. Your new withdrawal address will now be confirmed and activated. You can view this with `rocketpool node status`.
-:::
+::::
 
-::: tab Method 2
+:::: tab Method 2
 
 **Use this method only if your withdrawal address *cannot* be used to sign transactions via MetaMask or WalletConnect.**
 
@@ -125,6 +128,7 @@ If you make a typo here, there is no way to undo it and **your minipool's reward
 We **strongly** encourage you to use the test transaction mechanism before confirming this, and if possible, use Method 1 instead.
 :::
 ::::
+:::::
 
 Once this is done, you will **no longer be able to change your withdrawal address using the `set-withdrawal-address` command**.
 To change it, you will need to send a signed transaction from your **active** withdrawal address (the one you just switched to).
