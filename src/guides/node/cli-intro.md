@@ -561,27 +561,26 @@ To use this flag, you first need to find the `nonce` of your stuck transaction:
 1. Go through them, starting with the most recent, until you find the furthest one down the list that has the `Pending` state.
 1. Mark the `nonce` of that transaction. That's what you'll need.
 
-Once you have it, simply call any transaction with the CLI using the `--nonce <value>` flag after `rocketpool` and before the rest of the command.
+Once you have it, simply call any transaction with the CLI using the `--nonce <value> -i 2.2` flags after `rocketpool` and before the rest of the command.
 
-::: tip
-You will probably want to combine this with the `-g` flag above to set a high gas price.
+::: warning NOTE
+You **must** include the `-i` (priority fee) flag in order to overwrite a previous transaction.
+This number must be at least 10% higher than whatever priority fee your old transaction used.
+The Smartnode uses a priority fee of 2 gwei by default, so a value of `2.2` is usually sufficient for an override.
+
+If your old transaction used a custom fee (say, 10 gwei), you will need to set it at least 10% higher in the overriding transaction (so in this example, 11 gwei).
 :::
 
-For example, say I submitted a transaction with a `nonce` of 10 and a gas price of 5, but the current average gas price is 100 so my transaction is stuck.
-To fix it, I will submit a transaction where I send a small amount of ETH from myself back to myself with a gas price of 150.
+As an example, say I submitted a transaction with a `nonce` of 10 and a max fee of 20 gwei, but the current network fee is 100 gwei so my transaction is stuck.
+To fix it, I will submit a transaction where I send a small amount of ETH from myself back to myself with a higher max fee (say, 150 gwei) and a higher priority fee.
 I'll burn a little gas doing it, but it will unstick the broken transaction:
 
 ```
-$ rocketpool --nonce 10 -g 150 node send 0.0001 eth <node wallet>
+$ rocketpool --nonce 10 -f 150 -i 2.2 node send 0.0001 eth <node wallet address>
 
-Suggested gas price: 24.000000 Gwei
-Estimated gas used: 21000 gas
-Estimated gas cost: 0.000504 ETH
-
-Requested gas price: 150.000000 Gwei
-Maximum requested gas cost: 0.003150 ETH
-
-Are you sure you want to send 0.000100 eth to <node wallet>? This action cannot be undone! [y/n]
+Using the requested max fee of 150.00 gwei (including a max priority fee of 2.20 gwei).
+Total cost: 0.0032 to 0.0032 ETH
+Are you sure you want to send 0.000100 eth to <node wallet address>? This action cannot be undone! [y/n]
 ```
 
 The Smartnode stack will automatically check to make sure that the `nonce` you have provided is valid (it refers to a pending transaction) before sending it and wasting your gas accidentally.
