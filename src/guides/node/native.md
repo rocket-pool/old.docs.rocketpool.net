@@ -595,6 +595,11 @@ sudo mkdir /mnt/rpdata/teku_data
 sudo chown eth2:eth2 /mnt/rpdata/teku_data
 ```
 
+Teku needs Java 11 to function, ensure that you have it installed.
+```
+sudo apt install openjdk-11-jre -y
+```
+
 Now, grab [the latest Teku release](https://github.com/ConsenSys/teku/releases/), or [build it from source](https://github.com/ConsenSys/teku/) if you want.
 
 Copy the `bin` and `lib` folders from the release archive into `/srv/teku/`.
@@ -607,6 +612,8 @@ The following are examples that show typical command line arguments to use in ea
 
 ::::: tabs
 :::: tab Lighthouse x64
+The following assumes you use the default data folder at: `/srv/lighthouse/lighthouse_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/lh-bn.service
 ```
@@ -636,6 +643,8 @@ If you want to use the **Prater testnet** instead, replace the `--network mainne
 :::: 
 
 :::: tab Nimbus x64
+The following assumes you use the default data folder at: `/srv/nimbus/nimbus_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/nimbus.service
 ```
@@ -675,7 +684,7 @@ Next, we have to give the `rp` user the ability to restart the validator client 
 
 Open the `sudoers` file:
 ```
-sudo nano /etc/sudoers
+sudo visudo
 ```
 
 Add this line under `# Cmnd alias specification`:
@@ -702,6 +711,8 @@ Finally, modify `/srv/rocketpool/restart-validator.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
 ::::
 :::: tab Prysm x64
+The following assumes you use the default data folder at: `/srv/prysm/prysm_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/prysm-bn.service
 ```
@@ -733,6 +744,8 @@ ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state
 
 ::::
 :::: tab Teku x64
+The following assumes you use the default data folder at: `/srv/teku/teku_data`.
+If you have a different configuration, like an external SSD, replace all instances of that below with your own folder.
 ```
 sudo nano /etc/systemd/system/teku-bn.service
 ```
@@ -748,7 +761,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=http://localhost:8545 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+ExecStart=/srv/teku/bin/teku --network=mainnet --data-path=/srv/teku/teku_data --p2p-port=9001 --eth1-endpoint=http://localhost:8545 --rest-api-enabled --rest-api-port=5052 --eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target
@@ -1094,7 +1107,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/teku/bin/teku validator-client --network=mainnet --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku"
+ExecStart=/srv/teku/bin/teku validator-client --network=mainnet --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords --beacon-node-api-endpoint="http://localhost:5052" --validators-graffiti="RP Teku" --log-destination=CONSOLE --data-base-path=/srv/rocketpool
 
 [Install]
 WantedBy=multi-user.target
