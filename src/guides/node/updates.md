@@ -101,8 +101,10 @@ Updates can contain new versions of the CLI or the Rocket Pool Docker containers
 
 The most consistent way to find out about new releases is to subscribe to the Rocket Pool Discord server; they will always be posted in the Announcements channel and you will receive a notification.
 
-::: tip NOTE
-Running ```apt-get update``` will not identify the changes to the node software. A new install should be triggered directly via the upgrade method below.
+::: warning NOTE
+Note that running `apt update` will not update the node software.
+This must be done manually using the steps below.
+:::
 
 The steps to upgrade depend on which mode your node uses. Select from the options below:
 
