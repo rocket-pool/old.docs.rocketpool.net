@@ -79,12 +79,41 @@ You do not have control over the remote node that you're connecting to, and you 
 
 Rocket Pool's installer is proud to support all four currently available ETH2 clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
 
-Each of these is a **full client**, meaning you will contribute to the decetralization of the ETH2 network regardless of which client you choose.
+Each of these is a **full client**, meaning you will contribute to the decentralization of the ETH2 network regardless of which client you choose.
 
-By default, the Rocket Pool installer will select a random ETH2 client to help contribute to the diversity of the network - this is important from a security perspective, because if one client is used by a majority of nodes and suffers from a severe bug or attack, it might cause all of those nodes to fail.
+All four clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
+They differ slightly in terms of resource requirements and features, but you cannot go wrong with any of them.
 
-However, this is simply a suggestion - you can choose to select a specific client during Rocket Pool installation if you wish.
-The options below help to describe each client so you can make an informed decision.
+By default, the Rocket Pool installer will offer to select a random ETH2 client for you.
+This will help contribute to the overall **diversity of the network**.
+This is important from a security perspective: if one client is used by a majority of nodes and suffers from a severe bug or attack, it might cause all of those nodes to fail and thus threaten the entire Beacon Chain's stability.
+
+::: warning NOTE
+
+As of September 2021, the distribution of clients on the Beacon Chain looks roughly like this:
+
+<center>
+
+![](./images/network-diversity.png)
+
+*Data obtained from [http://migalabs.es/crawler/dashboard](http://migalabs.es/crawler/dashboard)*
+
+</center>
+
+The overwhelming majority of users are currently using Prysm.
+In the interest of supporting the health of the Beacon Chain, we currently recommend that you consider using a different client.
+Here are some relevant articles about why an even client diversity is crucial to the health of the Beacon Chain if you would like to learn more:
+
+[https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/](https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/)
+
+[https://our.status.im/the-importance-of-client-diversity/](https://our.status.im/the-importance-of-client-diversity/)
+
+[https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c](https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c)
+:::
+
+For users that would like to get up and running quickly, the random client option may be the best choice.
+For users that have a specific client they'd like to use in mind, we provide the ability to easily choose one during Rocket Pool's installation.
+The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
 ### Lighthouse

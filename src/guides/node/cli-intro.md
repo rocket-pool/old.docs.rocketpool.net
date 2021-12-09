@@ -25,15 +25,17 @@ USAGE:
    rocketpool [global options] command [command options] [arguments...]
 
 VERSION:
-   1.0.0-rc3
+   1.1.1
 
 AUTHORS:
    David Rugendyke <david@rocketpool.net>
    Jake Pospischil <jake@rocketpool.net>
    Joe Clapis <joe@rocketpool.net>
+   Kane Wallmann <kane@rocketpool.net>
 
 COMMANDS:
    auction, a   Manage Rocket Pool RPL auctions
+   faucet, f    Access the legacy RPL faucet
    minipool, m  Manage the node's minipools
    network, e   Manage Rocket Pool network parameters
    node, n      Manage the node
@@ -44,30 +46,30 @@ COMMANDS:
    help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --allow-root, -r             Allow rocketpool to be run as the root user
-   --config-path path, -c path  Rocket Pool config asset path (default: "~/.rocketpool")
-   --daemon-path path, -d path  Interact with a Rocket Pool service daemon at a path on the host OS, running outside of docker
-   --host address, -o address   Smart node SSH host address
-   --user name, -u name         Smart node SSH user name
-   --key file, -k file          Smart node SSH key file
-   --passphrase file, -p file   Smart node SSH key passphrase file
-   --known-hosts file, -n file  Smart node SSH known_hosts file (default: current user's ~/.ssh/known_hosts)
-   --gasPrice value, -g value   Desired gas price in gwei
-   --gasLimit value, -l value   Desired gas limit
-   --nonce value                Use this flag to explicitly specify the nonce that this transaction should use, so it can override an existing 'stuck' transaction (default: 0)
-   --help, -h                   show help
-   --version, -v                print the version
+   --allow-root, -r              Allow rocketpool to be run as the root user
+   --config-path path, -c path   Rocket Pool config asset path (default: "~/.rocketpool")
+   --daemon-path path, -d path   Interact with a Rocket Pool service daemon at a path on the host OS, running outside of docker
+   --host address, -o address    DEPRECATED - Smart node SSH host address
+   --user name, -u name          DEPRECATED - Smart node SSH user name
+   --key file, -k file           DEPRECATED - Smart node SSH key file
+   --passphrase file, -p file    DEPRECATED - Smart node SSH key passphrase file
+   --known-hosts file, -n file   DEPRECATED - Smart node SSH known_hosts file (default: current user's ~/.ssh/known_hosts)
+   --gasPrice value, -g value    OBSOLETE - No longer used, please use --maxFee and --maxPrioFee instead
+   --maxFee value, -f value      The max fee (including the priority fee) you want a transaction to cost, in gwei (default: 0)
+   --maxPrioFee value, -i value  The max priority fee you want a transaction to use, in gwei (default: 0)
+   --gasLimit value, -l value    Desired gas limit (default: 0)
+   --nonce value                 Use this flag to explicitly specify the nonce that this transaction should use, so it can override an existing 'stuck' transaction
+   --debug                       Enable debug printing of API commands
+   --help, -h                    show help
+   --version, -v                 print the version
 
 COPYRIGHT:
    (c) 2021 Rocket Pool Pty Ltd
+
 ```
 
 This lists out each of the available commands along with a shortcut for them (the letter next to them), as well as some of the advanced flags you can set when running a command.
 Below, we'll go through the common operations you can expect to use as a node operator.
-
-::: tip
-For a complete description of all of the commands and flags, consult the [Command Reference documentation](../../documentation/smart-node-advanced.md#command-reference).
-:::
 
 
 ## Service Commands
@@ -95,19 +97,20 @@ USAGE:
    rocketpool service [global options] command [command options] [arguments...]
 
 VERSION:
-   1.0.0-rc3
+   1.1.1
 
 COMMANDS:
-   install, i    Install the Rocket Pool service
-   config, c     Configure the Rocket Pool service
-   status, u     View the Rocket Pool service status
-   start, s      Start the Rocket Pool service
-   pause, p      Pause the Rocket Pool service
-   stop, o       Pause the Rocket Pool service (alias of 'rocketpool service pause')
-   terminate, t  Stop the Rocket Pool service and tear down the service stack
-   logs, l       View the Rocket Pool service logs
-   stats, a      View the Rocket Pool service stats
-   version, v    View the Rocket Pool service version information
+   install, i                 Install the Rocket Pool service
+   config, c                  Configure the Rocket Pool service
+   status, u                  View the Rocket Pool service status
+   start, s                   Start the Rocket Pool service
+   pause, p                   Pause the Rocket Pool service
+   stop, o                    Pause the Rocket Pool service (alias of 'rocketpool service pause')
+   terminate, t               Stop the Rocket Pool service and tear down the service stack
+   logs, l                    View the Rocket Pool service logs
+   stats, a                   View the Rocket Pool service stats
+   version, v                 View the Rocket Pool service version information
+   install-update-tracker, d  Install the update tracker that provides the available system update count to the metrics dashboard
 
 GLOBAL OPTIONS:
    --compose-file value, -f value  Optional compose files to override the standard Rocket Pool docker-compose.yml; this flag may be defined multiple times
@@ -223,24 +226,26 @@ USAGE:
    rocketpool node [global options] command [command options] [arguments...]
 
 VERSION:
-   1.0.0-rc3
+   1.1.1
 
 COMMANDS:
-   status, s                  Get the node's status
-   sync, y                    Get the sync progress of the eth1 and eth2 clients
-   register, r                Register the node with Rocket Pool
-   set-withdrawal-address, w  Set the node's withdrawal address
-   set-timezone, t            Set the node's timezone location
-   swap-rpl, p                Swap old RPL for new RPL
-   stake-rpl, k               Stake RPL against the node
-   claim-rpl, c               Claim available RPL rewards for the current checkpoint
-   withdraw-rpl, i            Withdraw RPL staked against the node
-   deposit, d                 Make a deposit and create a minipool
-   send, n                    Send ETH or tokens from the node account to an address
-   burn, b                    Burn tokens for ETH
+   status, s                      Get the node's status
+   sync, y                        Get the sync progress of the eth1 and eth2 clients
+   register, r                    Register the node with Rocket Pool
+   rewards, e                     Get the time and your expected RPL rewards of the next checkpoint
+   set-withdrawal-address, w      Set the node's withdrawal address
+   confirm-withdrawal-address, f  Confirm the node's pending withdrawal address if it has been set back to the node's address itself
+   set-timezone, t                Set the node's timezone location
+   swap-rpl, p                    Swap old RPL for new RPL
+   stake-rpl, k                   Stake RPL against the node
+   claim-rpl, c                   Claim available RPL rewards for the current checkpoint
+   withdraw-rpl, i                Withdraw RPL staked against the node
+   deposit, d                     Make a deposit and create a minipool
+   send, n                        Send ETH or tokens from the node account to an address
 
 GLOBAL OPTIONS:
    --help, -h  show help
+
 ```
 
 Below is a summary of some of the commands you'll tend to need during typical node operation.
@@ -412,14 +417,17 @@ USAGE:
    rocketpool minipool [global options] command [command options] [arguments...]
 
 VERSION:
-   1.0.0-rc3
+   1.1.1
 
 COMMANDS:
-   status, s    Get a list of the node's minipools
-   refund, r    Refund ETH belonging to the node from minipools
-   dissolve, d  Dissolve initialized or prelaunch minipools
-   exit, e      Exit staking minipools from the beacon chain
-   close, c     Withdraw balances from dissolved minipools and close them
+   status, s                   Get a list of the node's minipools
+   refund, r                   Refund ETH belonging to the node from minipools
+   exit, e                     Exit staking minipools from the beacon chain
+   delegate-upgrade, u         Upgrade a minipool's delegate contract to the latest version
+   delegate-rollback, b        Roll a minipool's delegate contract back to its previous version
+   set-use-latest-delegate, l  If enabled, the minipool will ignore its current delegate contract and always use whatever the latest delegate is
+   find-vanity-address, v      Search for a custom vanity minipool address
+
 
 GLOBAL OPTIONS:
    --help, -h  show help
@@ -469,16 +477,47 @@ Note that **this cannot be undone** - once you trigger an exit, the validator wi
 There are some useful global flags that you can add to some of the above commands, which you may want to take advantage of.
 
 
-### Setting a Custom Gas Price
+### Setting a Custom Max Fee or Priority Fee (Gas Price)
 
-By default, Rocket Pool will use the ETH engine to look at the current transaction pool and suggest a reasonable gas price for any transactions you trigger.
-If you prefer, you can set the gas price manually with the `-g` flag.
-To do this, add it after `rocketpool` and before the other command information.
+Starting with [the London ETH1 hardfork](https://coinquora.com/ethereum-london-hard-fork-all-you-need-to-know/) in July of 2021, Ethereum transactions no longer use a single gas price for their transactions.
+Instead, modern Ethereum transactions use two values:
+
+- The **max fee**, which describes the absolute maximum gas price you're willing to accept on a transaction
+- The **max priority fee**, which describes the maximum amount you're willing to "tip" the miner for including your transaction in a block
+
+::: tip TIP
+The way these two values work can be a bit convoluted, so here are some simple examples.
+
+Let's say the current network fee, called the **base fee**, is at 50 gwei.
+You submit a transaction with an **80 gwei** max fee, and a priority fee of **2 gwei**.
+
+Because the network's base fee is lower than your max fee, this transaction could get picked up in the current block.
+It would cost you **50 gwei** for the base fee and **2 gwei** for the priority fee; even though you set your max fee to 80, **it would only cost you 52 gwei total**.
+
+As another example, say you have that same transaction, but now the network's base fee is **100 gwei**.
+Since 100 gwei is larger than your 80 gwei max fee, your transaction **will not** be included in this block.
+Instead, it will simply sit in the transaction pool until the base fee is low enough to include it.
+
+Now, let's say the current base fee is **50 gwei** again, and your transaction has a max fee of **80** gwei and a priority fee of **4 gwei**.
+It would execute with a total cost of **54 gwei**.
+The 4 gwei priority fee would ensure that it was included in front of all of the transactions with a lower priority fee.
+
+If you **really** want the transaction to go through at all costs, you can set the priority fee to be the same as the max fee.
+This emulates the legacy gas behavior, so your transaction will use all of the gas you give it - regardless of whether or not the network's base fee is lower than your max fee or not.
+:::
+
+By default, Rocket Pool will use an oracle to look at the current transaction pool and suggest a reasonable max fee for any transactions you trigger.
+It uses [EtherChain](https://etherchain.org/tools/gasnow) for its primary suggestion oracle, and [Etherscan](https://etherscan.io/gastracker) as a backup.
+
+If you prefer, you can set a custom max fee (in gwei) you'd be willing to pay with the `-f` flag.
+You can also set a custom priority fee with the `-i` flag.
+
+To do this, add them after `rocketpool` and before the other command information.
 
 For example, calling `node set-timezone` with this flag would provide the following output:
 
 ```
-$ rocketpool -g 10 node set-timezone
+$ rocketpool -f 10 node set-timezone
 
 Would you like to detect your timezone automatically? [y/n]
 n
@@ -489,17 +528,16 @@ Australia/Brisbane
 You have chosen to register with the timezone 'Australia/Brisbane', is this correct? [y/n]
 y
 
-Suggested gas price: 24.000000 Gwei
-Estimated gas used: 74259 gas
-Estimated gas cost: 0.001782 ETH
-
-Requested gas price: 10.000000 Gwei
-Maximum requested gas cost: 0.000742 ETH
-
+Using the requested max fee of 10.00 gwei (including a max priority fee of 2.00 gwei).
+Total cost: 0.0005 to 0.0007 ETH
 Are you sure you want to set your timezone? [y/n]
 ```
 
-This shows that the network *recommends* 24 gwei, but it will use your set price of 10 gwei instead when submitting this transaction.
+This shows that regardless of what max fee the network recoomends, it will use your custom max fee of 10 gwei (and priority fee if you specify it) instead when submitting this transaction.
+
+::: warning NOTE
+If you set a manual max fee, we strongly encourage you to use a third-party gas price oracle such as [EtherChain](https://etherchain.org/tools/gasnow) to determine if that fee is high enough for the current network conditions before submitting the transaction.
+:::
 
 
 ### Canceling / Overwriting a Stuck Transaction
@@ -523,27 +561,26 @@ To use this flag, you first need to find the `nonce` of your stuck transaction:
 1. Go through them, starting with the most recent, until you find the furthest one down the list that has the `Pending` state.
 1. Mark the `nonce` of that transaction. That's what you'll need.
 
-Once you have it, simply call any transaction with the CLI using the `--nonce <value>` flag after `rocketpool` and before the rest of the command.
+Once you have it, simply call any transaction with the CLI using the `--nonce <value> -i 2.2` flags after `rocketpool` and before the rest of the command.
 
-::: tip
-You will probably want to combine this with the `-g` flag above to set a high gas price.
+::: warning NOTE
+You **must** include the `-i` (priority fee) flag in order to overwrite a previous transaction.
+This number must be at least 10% higher than whatever priority fee your old transaction used.
+The Smartnode uses a priority fee of 2 gwei by default, so a value of `2.2` is usually sufficient for an override.
+
+If your old transaction used a custom fee (say, 10 gwei), you will need to set it at least 10% higher in the overriding transaction (so in this example, 11 gwei).
 :::
 
-For example, say I submitted a transaction with a `nonce` of 10 and a gas price of 5, but the current average gas price is 100 so my transaction is stuck.
-To fix it, I will submit a transaction where I send a small amount of ETH from myself back to myself with a gas price of 150.
+As an example, say I submitted a transaction with a `nonce` of 10 and a max fee of 20 gwei, but the current network fee is 100 gwei so my transaction is stuck.
+To fix it, I will submit a transaction where I send a small amount of ETH from myself back to myself with a higher max fee (say, 150 gwei) and a higher priority fee.
 I'll burn a little gas doing it, but it will unstick the broken transaction:
 
 ```
-$ rocketpool --nonce 10 -g 150 node send 0.0001 eth <node wallet>
+$ rocketpool --nonce 10 -f 150 -i 2.2 node send 0.0001 eth <node wallet address>
 
-Suggested gas price: 24.000000 Gwei
-Estimated gas used: 21000 gas
-Estimated gas cost: 0.000504 ETH
-
-Requested gas price: 150.000000 Gwei
-Maximum requested gas cost: 0.003150 ETH
-
-Are you sure you want to send 0.000100 eth to <node wallet>? This action cannot be undone! [y/n]
+Using the requested max fee of 150.00 gwei (including a max priority fee of 2.20 gwei).
+Total cost: 0.0032 to 0.0032 ETH
+Are you sure you want to send 0.000100 eth to <node wallet address>? This action cannot be undone! [y/n]
 ```
 
 The Smartnode stack will automatically check to make sure that the `nonce` you have provided is valid (it refers to a pending transaction) before sending it and wasting your gas accidentally.

@@ -677,7 +677,7 @@ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
 
 sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
 
-sudo chown eth2:eth2 /srv/rocketpool/data/ -R
+sudo chown eth2:eth2 /srv/rocketpool/data/validators/ -R
 ```
 
 Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
@@ -848,7 +848,7 @@ sudo mkdir -p /srv/rocketpool/data/validators/nimbus/validators
 
 sudo mkdir -p /srv/rocketpool/data/validators/nimbus/secrets
 
-sudo chown eth2:eth2 /srv/rocketpool/data/ -R
+sudo chown eth2:eth2 /srv/rocketpool/data/validators/ -R
 ```
 
 Next, we have to give the `rp` user the ability to restart the validator client when new validator keys are created.
@@ -934,7 +934,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/teku/bin/teku --network=mainnet --data-path=/mnt/rpdata/teku_data --p2p-port=9001 --eth1-endpoint=9001 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
+ExecStart=ionice -c 2 -n 0 /srv/teku/bin/teku --network=mainnet --data-path=/mnt/rpdata/teku_data --p2p-port=9001 --eth1-endpoint=http://localhost:8545 --rest-api-enabled --rest-api-port=5052 -eth1-deposit-contract-max-request-size=150
 
 [Install]
 WantedBy=multi-user.target

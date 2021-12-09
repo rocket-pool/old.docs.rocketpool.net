@@ -169,7 +169,12 @@ Selected Eth 2.0 client: Nimbus (statusim/nimbus-eth2:multiarch-v1.4.2)
 The first line will tell you if your Smartnode is configured for the Ethereum mainnet or for the Prater testnet.
 
 ::: warning NOTE
+**For Docker / Hybrid users:**
 If you are not on the network you expect to be on, go back to the Installing Rocket Pool section and review the installation instructions - you may have missed the portion that has different instructions depending on which network you want to use.
+
+**For Native users:**
+If you accepted the default settings when you first ran `rp service config`, then it's possible that the network reported here is incorrect.
+However, your `systemctl` service definitions *should* have the correct network baked directly into the command line arguments so you can ignore this discrepancy unless it bothers you. 
 :::
 
 The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's `config.yml` file.
@@ -200,10 +205,10 @@ ac629c08c896   ethereum/client-go:v1.10.3          "sh /setup/start-nod…"   2 
 ```
 
 The key thing to check is the `STATUS` column.
-If none of the entries state `Restarting...`, then the containers should be running properly.
+If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
@@ -251,10 +256,10 @@ a3c22f54eff0   rocketpool/smartnode:v1.0.0-rc3     "/go/bin/rocketpool …"   2 
 ```
 
 The key thing to check is the `STATUS` column.
-If none of the entries state `Restarting...`, then the containers should be running properly.
+If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm as your ETH2 client and letting Rocket Pool manage it via Docker, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.

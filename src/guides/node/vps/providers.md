@@ -91,7 +91,7 @@ Using the same two VPS's the results mirror the previous test:
   - read:  IOPS=3095
   - write: IOPS=1034
 
-While both systems will likely run Rocket Pool without issue, you should look for performance of **at least 5000 read / 1700 IOPS**.
+While both systems will likely run Rocket Pool without issue, you should look for performance of **at least 5000 read IOPS and 1700 write IOPS**.
 
 
 #### CPU Performance

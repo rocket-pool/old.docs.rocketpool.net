@@ -22,6 +22,11 @@ module.exports = {
   ],
 
   /**
+   * ref：https://v1.vuepress.vuejs.org/config/#theme
+   */
+  theme: 'default-prefers-color-scheme',
+
+  /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
@@ -79,7 +84,9 @@ module.exports = {
                 collapsable: true,
                 children: [
                     'staking/overview',
-                    'staking/staking'
+                    'staking/via-rp',
+                    'staking/via-l1',
+                    'staking/via-l2'
                 ]
               },
               {
@@ -97,6 +104,7 @@ module.exports = {
                           'node/local/hardware',
                           'node/local/prepare-pc',
                           'node/local/prepare-pi',
+                          'node/ssh'
                       ]
                     },
                     {
@@ -123,6 +131,7 @@ module.exports = {
                     'node/securing-your-node',
                     'node/starting-rp',
                     'node/cli-intro',
+                    'node/prepare-node',
                     'node/create-validator',
                     {
                       title: 'Monitoring and Maintenance',
@@ -162,7 +171,7 @@ module.exports = {
           children: [
             '',
             {
-              title: 'Integration Examples',
+              title: 'Integration Usage and Examples',
               sidebarDepth: 2,
               collapsable: true,
               children: [
@@ -177,8 +186,142 @@ module.exports = {
               collapsable: true,
               children: [
                   'api/contracts',
-                  'api/go',
-                  'api/js'
+                  {
+                    title: 'Go Bindings',
+                    sidebarDepth: 2,
+                    collapsable: true,
+                    children: [
+                      'api/go/auction',
+                      'api/go/contracts',
+                      {
+                        title: 'dao',
+                        children: [
+                          'api/go/dao',
+                          'api/go/dao-protocol',
+                          'api/go/dao-trustednode',
+
+                        ]
+                      },
+                      'api/go/deposit',
+                      'api/go/minipool',
+                      'api/go/network',
+                      'api/go/node',
+                      'api/go/rewards',
+                      'api/go/rocketpool',
+                      {
+                        title: 'settings',
+                        sidebarDepth: 2,
+                        collapsable: true,
+                        children: [
+                          'api/go/settings-protocol',
+                          'api/go/settings-trustednode',
+                        ]
+                      },
+                      'api/go/storage',
+                      'api/go/tokens',
+                      'api/go/types',
+                      {
+                        title: 'utils',
+                        children: [
+                          'api/go/utils',
+                          'api/go/utils-eth',
+                          'api/go/utils-strings',
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                      title: 'JS Reference',
+                      sidebarDepth: 2,
+                      collapsable: true,
+                      children: [
+                          {
+                              title: 'Auction',
+                              children: [
+                                  'api/js/Auction',
+                              ]
+                          },
+                          {
+                              title: 'Contracts',
+                              children: [
+                                  'api/js/Contracts',
+                              ]
+                          },
+                          {
+                              title: 'DAO',
+                              children: [
+                                  'api/js/DAONodeTrusted',
+                                  'api/js/DAONodeTrustedActions',
+                                  'api/js/DAONodeTrustedProposals',
+                                  'api/js/DAONodeTrustedSettings',
+                                  'api/js/DAOProposal',
+                              ]
+                          },
+                          {
+                              title: 'Deposit',
+                              children: [
+                                  'api/js/Deposit',
+                              ]
+                          },
+                          {
+                              title: 'Minipool',
+                              children: [
+                                  'api/js/Minipool',
+                                  'api/js/MinipoolContract',
+                              ]
+                          },
+                          {
+                              title: 'Network',
+                              children: [
+                                  'api/js/Network',
+                              ]
+                          },
+                          {
+                              title: 'Node',
+                              children: [
+                                  'api/js/Node',
+                              ]
+                          },
+                          {
+                              title: 'Rewards',
+                              children: [
+                                  'api/js/Rewards',
+                                  'api/js/Pool',
+                              ]
+                          },
+                          {
+                              title: 'Settings',
+                              children: [
+                                  'api/js/AuctionSettings',
+                                  'api/js/DepositSettings',
+                                  'api/js/MinipoolSettings',
+                                  'api/js/NetworkSettings',
+                                  'api/js/NodeSettings',
+                              ]
+                          },
+                          {
+                              title: 'Tokens',
+                              children: [
+                                  'api/js/ERC20',
+                                  'api/js/LegacyRPL',
+                                  'api/js/RETH',
+                                  'api/js/RPL',
+                              ]
+                          },
+                          {
+                              title: 'Vault',
+                              children: [
+                                  'api/js/Vault',
+                              ]
+                          },
+                          {
+                              title: 'Rocketpool',
+                              children: [
+                                  'api/js/RocketPool',
+                              ]
+                          },
+                      ]
+                  },
               ]
             },
           ]
@@ -202,7 +345,13 @@ module.exports = {
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    ['vuepress-plugin-zooming', {
+      options: {
+          bgColor: 'black',
+          zIndex: 10000,
+      }
+    }
+    ],
     ['vuepress-plugin-code-copy', {
         color: '#ffbca5',
         staticIcon: true,

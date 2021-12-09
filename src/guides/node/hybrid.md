@@ -139,6 +139,7 @@ chains:
 Change the addresses in `chains/eth1/provider` and `chains/eth1/wsProvider` to `http://<ip_address>:<http_port>` and `ws://<ip_address>:<ws_port>` respectively, where:
 
 - `<ip_address>` is the IP address of the machine running the ETH1 node
+    - *Note that if this is your local machine, you must use the network IP of the machine (e.g. `192.168.1.10`) instead of e.g. `localhost`; otherwise, Docker won't resolve it correctly.*
 - `<http_port>` is the HTTP port for RPC traffic that you specified in your ETH1 client's arguments
 - `<ws_port>` is the Websocket port for RPC traffic that you specified in your ETH1 client's arguments (if using Nimbus for ETH2)
 
@@ -191,7 +192,7 @@ Consult the [Securing your Node](./securing-your-node.md) section for more infor
 ### Updating `docker-compose.yml`
 
 Next, open `~/.rocketpool/docker-compose.yml` in a text editor.
-It will look like this (truncated for brevity):
+It should look like this (truncated for brevity):
 
 ```
 version: "3.4"
@@ -229,6 +230,10 @@ services:
       - eth1
       - eth2
 ```
+
+::: warning NOTE
+If you followed the earlier section on setting up an external ETH1 client, then you already edited this file and it will look slightly different from above but the following instructions still apply.
+:::
 
 Remove the entire `eth2` section under the `services` section.
 Next, go through each other service and remove `eth2` from its list of dependencies (the `depends_on` section).
@@ -285,12 +290,36 @@ chains:
 Change the address in `chains/eth2/provider` to `http://<ip_address>:<http_port>` where:
 
 - `<ip_address>` is the IP address of the machine running the ETH2 node
+    - *Note that if this is your local machine, you must use the network IP of the machine (e.g. `192.168.1.10`) instead of e.g. `localhost`; otherwise, Docker won't resolve it correctly.*
 - `<http_port>` is the port for RPC traffic that you specified in your ETH2 client's arguments
 
 ::: tip NOTE
 In previous Rocket Pool betas, this setting didn't have an `http://` prefix.
 Starting with Smartnode v1.0.0-rc6, that prefix is now included.
 :::
+
+
+## Configuring UFW
+
+If you currently have `ufw` enabled, then it's likely that you don't have rules in place to allow Rocket Pool's Docker containers to access your external clients.
+
+Start by getting the subnet that Docker is currently using:
+```shell
+docker inspect rocketpool_net | grep -Po '(?<="Subnet": ")[0-9./]+'
+```
+
+This will print a CIDR string (for example, `172.18.0.0/16`).
+
+To allow Rocket Pool to access your external ETH1 client (using the above string as an example):
+
+```shell
+sudo ufw allow from 172.18.0.0/16 to any port 8545 comment "Allow Rocket Pool access to Geth"
+```
+
+To allow Rocket Pool to access your external ETH2 client (using the above string as an example):
+```shell
+sudo ufw allow from 172.18.0.0/16 to any port 5052 comment "Allow Rocket Pool access to Lighthouse beacon"
+```
 
 
 ## Wrapping Up
