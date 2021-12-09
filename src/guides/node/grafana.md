@@ -220,6 +220,16 @@ Password: admin
 You will then be prompted to change the default password for the `admin` account.
 Pick something strong and don't forget it!
 
+::: tip Tip
+If you lose the admin password, you can reset it using the following command on your node:
+
+```shell
+docker exec -it rocketpool_grafana grafana-cli admin reset-admin-password admin
+```
+
+You will be able to log into Grafana using the default `admin` credentials once again, and then you will be prompted to change the password for the `admin` account.
+:::
+
 Thanks to community member **tedsteen**'s work, Grafana will automatically connect to your Prometheus instance so it has access to the metrics that it collects. 
 All you need to do is grab the dashboard!
 
