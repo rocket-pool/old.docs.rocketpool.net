@@ -51,7 +51,7 @@ The value of rETH is determined by the following ratio:
 rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total ETH staked)
 ```
 
-Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
+Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**. The rETH/ETH exchange rate is updated every 24 hours based on Rocket Pool network's rewards earned.
 
 To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates slow but steady growth:
 
