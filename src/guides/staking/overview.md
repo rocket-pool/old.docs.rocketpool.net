@@ -91,6 +91,7 @@ In this scenario, you may find other ways to trade your rETH back to ETH (such a
 As an alternative to holding onto and eventually returning your rETH to the Rocket Pool, you are also free to **use it in DeFi applications**.
 You can trade it, lend it, use it as collateral... as rETH is a standard ERC20 token, you can use it in any way you could use any other token.
 
+After the Ethereum proof-of-stake (PoS) merge and enabling of staked ETH withdraws, rETH will remain a separate ERC-20 token from ETH.
 
 ## Tax Implications
 
