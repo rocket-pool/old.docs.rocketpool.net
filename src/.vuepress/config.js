@@ -146,6 +146,7 @@ module.exports = {
                       ]
                     },
                     'node/rewards',
+                    'node/advanced-docker-config',
                     // 'node/troubleshooting',
                     // 'node/faq'
                 ]
