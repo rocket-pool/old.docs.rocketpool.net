@@ -1,6 +1,6 @@
 # Advanced Docker Settings
 
-The Rocketpool smartnode stack runs on Docker and pulls it's configuration from `~/.rocketpool/config.yml` by default. This file contains the settings that the smartnode when the stack is started using `rocketpool service start`.
+The Rocketpool smartnode stack runs on Docker and pulls it's configuration from `~/.rocketpool/config.yml` by default. This file contains the settings that the smartnode when the stack is started using `rocketpool service start`. Note that after every change to the config file you will need to run `rocketpool service stop` and `rocketpool service start`.
 
 There are a number of lines in this configuration file under the `smartnode:` section that you can edit to customize the behaviour of the smartnode stack.
 
