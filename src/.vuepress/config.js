@@ -146,8 +146,8 @@ module.exports = {
                       ]
                     },
                     'node/rewards',
-                    'node/troubleshooting',
-                    'node/faq'
+                    // 'node/troubleshooting',
+                    // 'node/faq'
                 ]
               },
               {
