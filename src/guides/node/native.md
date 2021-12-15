@@ -662,7 +662,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
@@ -730,7 +730,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5053 --grpc-gateway-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
@@ -740,7 +740,7 @@ WantedBy=multi-user.target
 The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `ExecStart` string with the following:
 ```
-ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=/srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /srv/prysm/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5053 --grpc-gateway-port 5052 --eth1-header-req-limit 150
 ```
 :::
 
@@ -827,7 +827,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=taskset 0x01 ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=mainnet --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052
+ExecStart=ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=mainnet --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
@@ -902,7 +902,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --mainnet --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5053 --grpc-gateway-port 5052 --eth1-header-req-limit 150
 
 [Install]
 WantedBy=multi-user.target
@@ -912,7 +912,7 @@ WantedBy=multi-user.target
 The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `ExecStart` string with the following:
 ```
-ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5052 --eth1-header-req-limit 150
+ExecStart=ionice -c 2 -n 0 /srv/prysm/beacon-chain --accept-terms-of-use --prater --genesis-state /srv/prysm/genesis.ssz --datadir /mnt/rpdata/prysm_data --p2p-tcp-port 9001 --p2p-udp-port 9001 --http-web3provider http://localhost:8545 --rpc-port 5053 --grpc-gateway-port 5052 --eth1-header-req-limit 150
 ```
 :::
 
@@ -1082,7 +1082,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/prysm/validator --accept-terms-of-use --mainnet --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5052" --graffiti "RP Prysm"
+ExecStart=/srv/prysm/validator --accept-terms-of-use --mainnet --wallet-dir /srv/rocketpool/data/validators/prysm-non-hd --wallet-password-file /srv/rocketpool/data/validators/prysm-non-hd/direct/accounts/secret --beacon-rpc-provider "localhost:5053" --graffiti "RP Prysm"
 
 [Install]
 WantedBy=multi-user.target

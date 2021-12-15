@@ -161,25 +161,36 @@ You will have to use a different ETH2 validator client.**
 
 Below are examples how how to configure this for each ETH2 client by modifying its command line arguments:
 
-:::: tabs
-::: tab Lighthouse
+::::: tabs
+:::: tab Lighthouse
 ```
 lighthouse beacon ... --http --http-address 0.0.0.0 --http-port 5052
 ```
-:::
+::::
 
-::: tab Prysm
+:::: tab Prysm
 ```
-beacon-chain ... --rpc-host 0.0.0.0 --rpc-port 5052
+beacon-node ... --rpc-host 0.0.0.0 --rpc-port 5053 --grpc-gateway-host 0.0.0.0 --grpc-gateway-port 5052
 ```
-:::
 
-::: tab Teku
+::: warning NOTE
+Prysm temporarily must use both the standard REST API (`--grpc-gateway-host`) and the legacy RPC API (`--rpc-host`).
+If you have an existing external Validator Client for Prysm, you will need to modify its `--beacon-rpc-provider` flag to use port 5053 instead of 5052:
+
+```
+--beacon-rpc-provider http://<your address>:5053
+```
+
+This will be removed in a later version when the Prysm Validator Client can connect to the Beacon Node using the REST API.
+:::
+::::
+
+:::: tab Teku
 ```
 teku ... --rest-api-enabled --rest-api-interface 0.0.0.0 --rest-api-port 5052 --rest-api-host-allowlist=*
 ```
-:::
 ::::
+:::::
 
 Once you have ensured that configuration, restart your ETH2 client so the new settings take effect.
 

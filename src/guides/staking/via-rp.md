@@ -3,13 +3,17 @@
 The easiest way to stake with Rocket Pool is done via its web interface to the underlying smart contracts.
 
 The advantage is that you will always get exactly as much rETH as your ETH is worth, since Rocket Pool's contracts will directly mint the rETH that you receive.
-No hidden fees, no 
+No extra fees, no slippage, no liquidity issues, no sandwiching or front running... you just get the best possible deal for rETH.
 
 The disadvantage is that the gas fee might be quite expensive if you are staking a small amount of ETH - **we strongly recommend you check this before approving the transaction.**
+Also, there is a limit to the amount of ETH that can be in the pool at any given time, so it's possible that the pool could be full until Node Operators pull ETH from it and stake that ETH on the Beacon Chain.
 
 ::: warning NOTE
 If you stake directly with Rocket Pool, your rETH tokens will be **locked to your account for 24 hours** before you can transfer them or use them in DeFi applications.
 This is a security measure to prevent against timing attacks.
+If you get your rETH from a decentralized exchange, your rETH will **not be locked**.
+
+Please take this into consideration when deciding whether or not to stake directly via Rocket Pool.
 :::
 
 The process is slightly different for the Prater Testnet and Mainnet, so choose the network you are interested in from the tabs below.
