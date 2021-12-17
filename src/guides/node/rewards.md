@@ -72,11 +72,11 @@ You can find this setting in `~/.rocketpool/config.yml` on Docker and Hybrid set
 The setting is defined in the `smartnode` section towards the top of the file:
 
 ```yaml
-  rplClaimGasThreshold: 150 # Automatic RPL reward claims and minipool staking will wait until the network's average max fee, in gwei, is below this limit.
+  rplClaimGasThreshold: 150 # Automatic RPL reward claims and minipool staking will wait until the recommended max fee, in gwei, is below this limit.
                             # Set it to 0 to disable automatic claiming of RPL rewards entirely.
 ```
 
-When the network's recommended max fee is higher than this limit, automatic RPL reward claims will be disabled.
+When the recommended max fee is higher than this limit, automatic RPL reward claims will be disabled.
 They will resume once the recommended max fee falls below this limit.
 By default this is set to **150 gwei** but you can change it to any number you want.
 
@@ -86,6 +86,9 @@ In Docker and Hybrid modes, you can do this with `docker restart rocketpool_node
 In Native mode, you can do this with e.g. `sudo systemctl restart rp-node`.
 :::
 
+::: tip NOTE
+The Smartnode queries popular gas oracles for the recommended max fee used in the above calculations. For example, it may use [Etherchain's](https://etherchain.org/tools/gasnow) "Rapid" recommendation or [Etherscan's](https://etherscan.io/gastracker) "High" recommendation.
+:::
 
 ### Disabling Automatic Claims
 
