@@ -98,7 +98,7 @@ Each country has its own tax laws, and it would be impossible to document them a
 In some countries, depositing ETH for rETH may be considered **a taxable event**.
 However, because rETH inherently accumulates value while the actual amount of the token you hold remains constant, simply holding it usually **does not generate any taxable events**.
 
-This makes rETH **a preferable staking token for long-term holding** if your country separates short-term and long-term capital gains taxes.
+This may make rETH **a preferable staking token for long-term holding** if your country separates short-term and long-term capital gains taxes.
 
 Tax laws related to cryptocurrencies are in their infancy; each user should do their own research and consider speaking with a tax professional.  
 

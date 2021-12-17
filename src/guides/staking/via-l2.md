@@ -8,7 +8,7 @@ That being said, one of the main concerns (especially in recent times) is the co
 To help reduce this, the Ethereum network has started adopting the use of [rollups](https://www.youtube.com/watch?v=7pWxCklcNsU) - also known as **Layer 2**.
 
 Layer 2 comprises several separate networks that live underneath Ethereum, executing lots of transactions like Ethereum normally would, but rolling all of them up into one single "mega" transaction and posting *that* to the main Ethereum chain instead.
-Ideally, this means you'd get all of the security benefits associated with Ethereum's decentralized nature, but enjoy **much lower gas fees** for your transactions since the single "mega" transaction's gas fees are distributed evenly amongst each of the smaller ones that were rolled up into it.
+Ideally, this means you'd get all of the security benefits associated with Ethereum's decentralized nature, but enjoy **much lower gas fees** for your transactions since execution and storage costs on Layer 2s can be much lower and only a portion of your transactions must be stored on Layer 1 where state is much more expensive.
 
 Rocket Pool currently supports two Layer 2 networks: [Optimism](https://www.optimism.io/) and [Arbitrum](https://arbitrum.io/).
 Both of them have running versions of [Uniswap](https://docs.uniswap.org/protocol/introduction), the most widely-used decentralized exchange protocol.
@@ -25,7 +25,6 @@ Therefore, we recommend you compare the total rETH you would get on a Layer 2 ne
 
 You can view the current ETH and rETH balances of the [Optimism pool](https://optimistic.etherscan.io/address/0x8f477a5d632b5691a10a571575d55dc9c3d86d7c#tokentxns) and the [Arbitrum pool](https://info.uniswap.org/#/arbitrum/pools/0xaac7de2b91293ba1791503d9127d2bdf2159db65) to determine if they have enough rETH to cover your swap.
 
-Assuming you are interested in exploring 
 In the following example, we will demonstrate how to interact with Layer 2 networks and use Uniswap to swap ETH for rETH.
 
 ::: warning NOTE
@@ -63,7 +62,7 @@ If you don't already have ETH in the account from prior usage, you can do this b
 
 ## Transferring ETH from Layer 1 to Layer 2 via Hop
 
-There are several ways to move bridge ETH from the Ethereum Mainnet to a Layer 2 network.
+There are several ways to bridge ETH from the Ethereum Mainnet to a Layer 2 network.
 In this demonstration, we're going to use the [Hop](https://docs.hop.exchange/faq) protocol - a simple and reliable way to move ETH (and a few other coins) from Layer 1 to several Layer 2 networks, or between Layer 2 networks. 
 
 Navigate to the Hop exchange website here:
@@ -98,7 +97,7 @@ It will then ask if you would like to give Hop access to view the addresses of y
 
 </center>
 
-Click **Connect** and after a brief pause window, your wallet will be connected to Hop.
+Click **Connect** and after a brief pause, your wallet will be connected to Hop.
 You should now see its ETH balance in the top right corner of the screen.
 
 Now, you can use the two dropdowns in the **From** and **To (estimated)** boxes to select your networks, and enter the amount of ETH you want to send in the **From** box.
@@ -154,7 +153,7 @@ If you're not using MetaMask, one of the other providers such as WalletConnect w
 
 Upon clicking that button, MetaMask will pop up with another prompt asking you to select which accounts you want to use, just like it did with Hop.
 Leave your account selected, click **Next**, and then click **Connect** as you did with Hop before.
-After a brief pause window, your wallet will be connected to Uniswap.
+After a brief pause, your wallet will be connected to Uniswap.
 You should now see its ETH balance in the top right corner of the screen.
 
 The first thing to do is change your network from the Ethereum mainnet to the Layer 2 you just swapped to.
