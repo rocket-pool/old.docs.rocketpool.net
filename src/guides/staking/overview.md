@@ -52,6 +52,7 @@ rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total ETH staked)
 ```
 
 Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
+The rETH/ETH exchange rate is updated approximately every 24 hours based on the Beacon Chain rewards earned by Rocket Pool node operators.
 
 To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates slow but steady growth:
 
@@ -90,6 +91,10 @@ In this scenario, you may find other ways to trade your rETH back to ETH (such a
 
 As an alternative to holding onto and eventually returning your rETH to the Rocket Pool, you are also free to **use it in DeFi applications**.
 You can trade it, lend it, use it as collateral... as rETH is a standard ERC20 token, you can use it in any way you could use any other token.
+
+::: tip NOTE
+After the Ethereum Proof-of-Stake (PoS) merge and enabling of staked ETH withdrawals, **rETH will still remain a separate ERC-20 token from ETH**.
+:::
 
 
 ## Tax Implications
