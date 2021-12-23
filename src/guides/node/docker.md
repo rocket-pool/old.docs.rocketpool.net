@@ -475,6 +475,109 @@ If you have your own account with Pocket and would like to use that instead, you
 
 :::::::
 
+
+### ETH1 Fallback Configuration
+
+The next question will ask you to choose a **fallback ETH1 client**:
+
+```
+Would you like to configure a second Eth 1.0 client to act as a fallback in case your primary Eth 1.0 client is unavailable? [y/n]
+```
+
+This is a secondary ETH1 client that is configured to run in standby mode and can take over for your primary client if it ever fails.
+
+For example, this is an extremely useful option if you selected `geth` as your primary client, but you need to [take it down for maintenance](./geth-pruning.md).
+
+The prompt will look like this:
+
+```
+Which Eth 1.0 Fallback client would you like to run?
+1: Infura 	Use infura.io as a light client for Eth 1.0. Not recommended
+ 		    for use in production.
+		    https://infura.io/
+
+2: Pocket 	Use Pocket Network as a light client for Eth 1.0. Suitable
+ 		    for use in production.
+		    https://dashboard.pokt.network/
+
+3: Custom 	Use a custom Eth 1.0 client at a specified address (does not
+ 		    work on localhost).
+```
+
+::: tip NOTE
+Note that Geth is not included in this list, because generally running two copies of Geth on a typical node is prohibitively expensive from a resource perspective.
+:::
+
+Select which one you'd like to use here.
+The configuration options are the same as they were in the previous section where you chose a primary ETH1 client.
+
+::::::: tabs
+
+:::::: tab Infura
+
+::::: tabs
+
+:::: tab Standard Configuration
+
+If you select Infura, you will be presented with the following questions:
+
+```
+Please enter the Infura Project ID
+(the ID of your project created in Infura)
+```
+
+When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
+Enter it here.
+
+::::
+
+:::: tab Advanced Configuration
+
+If you select Infura, you will be presented with the following questions:
+
+```
+Please enter the Infura Project ID
+(the ID of your project created in Infura)
+```
+
+When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
+Enter it here.
+
+::::
+:::::
+::::::
+
+:::::: tab Pocket
+
+::::: tabs
+
+:::: tab Standard Configuration
+
+The standard configuration for Pocket does not ask you any questions.
+It will use the default Pocket Gateway ID that the Pocket team has generously donated to Rocket Pool so node operators can use the network for free.
+
+::::
+
+:::: tab Advanced Configuration
+
+If you select Pocket, you will be presented with the following questions:
+
+```
+Please enter the Pocket App or Load Balancer ID (leave blank for the standard Rocket Pool project ID for Pocket)
+(the ID of your Pocket App; if you use a Load Balancer, prefix it with lb/)
+```
+
+Pocket has generously allowed Rocket Pool node operators to use their network for free.
+If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
+If you have your own account with Pocket and would like to use that instead, you can enter it here.
+
+::::
+:::::
+::::::
+
+:::::::
+
+
 ### ETH2 Configuration
 
 Once you're finished configuring the ETH1 client, you will be prompted with this question:

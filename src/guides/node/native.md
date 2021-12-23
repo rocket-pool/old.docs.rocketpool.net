@@ -662,7 +662,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052 --num-threads=0
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
@@ -827,7 +827,7 @@ Type=simple
 User=eth2
 Restart=always
 RestartSec=5
-ExecStart=ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=mainnet --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rpc --rpc-port=5052 --num-threads=0
+ExecStart=ionice -c 2 -n 0 /srv/nimbus/nimbus --max-peers=60 --non-interactive --network=mainnet --data-dir=/mnt/rpdata/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
