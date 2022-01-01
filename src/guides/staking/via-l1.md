@@ -3,15 +3,18 @@
 As a reminder, you do not have to swap ETH for rETH directly via Rocket Pool in order to enjoy the benefits of decentralized staking.
 All you need to do is hold rETH as it inherently grows in value - how you get it doesn't matter!
 
-Many Rocket Pool community members have made rETH available for trade on decentralized exchanges, such as [Uniswap](https://docs.uniswap.org/protocol/introduction).
-The advantage of using an exchange instead of Rocket Pool directly is that it **tends to have lower gas fees**.
-If this is important to you because you want to stake a small amount of ETH, then using a decentralized exchange might be preferable.
+rETH is available for trade on several decentralized exchanges, such as [Balancer](https://docs.balancer.fi/) and [Uniswap](https://docs.uniswap.org/protocol/introduction).
 
-The disadvantage is that you might not get the best deal on rETH.
-Uniswap requires a small fee that's given to its liquidity providers; also, the exact price might not match the price according to Rocket Pool but it's usually arbitraged to a very close value so this tends not to be an issue.
-Nevertheless, it's always a good idea to compare the rate you would receive on an exchange with the exchange rate according to Rocket Pool. 
+The **Balancer** pool is a special kind of pool known as a [metastable pool](https://docs.balancer.fi/products/balancer-pools/metastable-pools).
+Metastable pools are ideal for tokens like rETH, because **they honor the true exchange rate reported by the Oracle DAO**.
 
-In the following example, we will use Uniswap to demonstrate how to swap ETH for rETH.
+This means exchanging with this pool will have **much lower slippage** and **lower fees** than a conventional decentralized exchange, so you get a much better deal when buying or selling rETH.
+Other decentralized exchanges don't have this property, so you may find that their exchange rate is slightly lower.
+
+Regardless of which pool you use, they all **tend to have lower gas fees** than staking via the official Rocket Pool website.
+This makes them a great choice for users that want to stake a small amount of ETH, though it's always a good idea to compare the rate you would receive on an exchange with the exchange rate according to Rocket Pool. 
+
+In the following examples, we will show how to swap ETH for rETH using both Balancer and Uniswap.
 
 ::: warning NOTE
 Currently this method is only available on Mainnet.
@@ -64,9 +67,84 @@ Now that you have a wallet address in MetaMask, you need to transfer some ETH in
 **You will need to supply this from an existing wallet or buy ETH on an exchange.**
 
 
+## Swapping for rETH via Balancer
+
+Now that your wallet is set up and funded, head to this URL which will open Balancer and automatically show swapping ETH for rETH:
+
+[https://app.balancer.fi/#/trade/ether/0xae78736Cd615f374D3085123A210448E74Fc6393](https://app.balancer.fi/#/trade/ether/0xae78736Cd615f374D3085123A210448E74Fc6393)
+
+The page will look like this initially:
+
+<center>
+
+![](./images/balancer.png)
+
+</center>
+
+Click on the `Connect wallet` button in the top-right corner.
+You will be prompted with a screen that asks you which wallet provider you want to use.
+For this example, select **MetaMask**.
+
+::: tip NOTE
+If you're not using MetaMask, one of the other providers such as WalletConnect will likely be compatible with your wallet.
+:::
+
+Upon clicking that button, MetaMask will pop up with a prompt asking you to select which accounts you want to use.
+Assuming you only have one, your account should already be selected.
+Click **Next**.
+
+It will then ask if you would like to give Balancer access to view the addresses of your accounts:
+
+<center>
+
+![](./images/bal_connect.png)
+
+</center>
+
+Click **Connect** and after a brief pause window, your wallet will be connected to Balancer.
+You should now see its ETH balance in the top left side of the screen.
+
+Now, enter the amount of ETH you want to swap and Balancer's UI will show you the amount of rETH you will receive in return:
+
+<center>
+
+![](./images/bal_swap.png)
+
+</center>
+
+::: warning NOTE
+Notice that the amount of rETH you receive will be **less than** the amount of ETH you put in.
+This is normal, because **rETH is worth more than ETH** and continuously appreciates over time.
+You can see this in the exchange rate highlighted at the right of the screenshot.
+:::
+
+Click **Preview** to see the details of the trade, including the minimum amount you could receive due to slippage.
+If you're satisfied, click **Confirm trade**.
+This will send the request to MetaMask, where you can review the total transaction cost before confirming it:
+
+<center>
+
+![](./images/mm_gas.png)
+
+</center>
+
+::: warning NOTE
+Pay **close attention** to the estimated gas fee here, highlighted in red.
+If it's a significant amount of your overall transaction (here it's over 17%), then it will take a **very long time** before you break even on staking rewards.
+
+If this is the case, you should either wait for the network's average gas price to drop, or [consider using a Layer 2 solution instead](./via-l2.md).
+::: 
+
+If you are happy with the gas fees relative to the total amount of rETH you'll be receiving, click **Confirm** to submit the transaction.
+After a short period, you should see a notification from MetaMask that it completed successfully, and you will now see the rETH token in your wallet.
+
+That's it! You're now staking with Rocket Pool. All you need to do is hold onto your rETH, and you'll automatically gain your staking rewards as the value of the rETH token increases.
+
+
 ## Swapping for rETH via Uniswap
 
-Now that your wallet is set up and funded, head to this URL which will open Uniswap and automatically show swapping ETH for rETH:
+While we recommend you stake through Balancer because it has lower fees and a more accurate ETH-rETH rate, you can also swap for rETH via Uniswap if the need arises.
+Head to this URL which will open Uniswap and automatically show swapping ETH for rETH:
 
 [https://app.uniswap.org/#/swap?inputCurrency=eth&outputCurrency=0xae78736cd615f374d3085123a210448e74fc6393](https://app.uniswap.org/#/swap?inputCurrency=eth&outputCurrency=0xae78736cd615f374d3085123a210448e74fc6393)
 

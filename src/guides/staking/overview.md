@@ -139,8 +139,15 @@ If you are practicing staking on the Prater Testnet, the direct method above is 
 
 
 ### Via a Decentralized Exchange on Ethereum (Layer 1)
-With this method, you will access a decentralized exchange such as [Uniswap](https://docs.uniswap.org/protocol/introduction) and purchase rETH using your token of choice, just like you would do any other token swap.
-This will come with **a smaller transaction fee** than swapping directly via Rocket Pool's website, but you may receive less rETH than the true value depending on liquidity and the fees that the liquidity providers charge.
+With this method, you will access a decentralized exchange such as [Balancer](https://docs.balancer.fi/) or [Uniswap](https://docs.uniswap.org/protocol/introduction) and purchase rETH using your token of choice, just like you would do any other token swap.
+
+Rocket Pool has officially created a [Balancer metastable pool](https://docs.balancer.fi/products/balancer-pools/metastable-pools).
+Metastable pools are ideal for tokens like rETH, because **they honor the true exchange rate reported by the Oracle DAO** - this means exchanging with it will have **much lower slippage** and **lower fees** than a conventional decentralized exchange, so you get a much better deal when buying or selling rETH.
+
+Because of this, and because it has a **smaller transaction fee** than swapping directly via Rocket Pool's website, we **strongly recommended** using Balancer if you want to stake via this route.
+
+If Balancer doesn't work for you, there is also an ETH-rETH liquidity pool on Uniswap.
+Note that this is a conventional pool, so **you will be affected by slippage and higher fees** if you use it, but the gas fee will still be lower than staking directly via Rocket Pool's website.
 
 Note that your rETH will **not be locked to your address** if you stake via an exchange.
 You can move them or use them immediately.
