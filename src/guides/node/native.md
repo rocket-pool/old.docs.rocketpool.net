@@ -564,7 +564,7 @@ If you want to run on the **Prater testnet**, you will need Prater's `genesis.ss
 Download it like this:
 
 ```
-sudo wget https://github.com/eth2-clients/eth2-networks/raw/master/shared/prater/genesis.ssz -O /srv/prysm/genesis.ssz
+sudo wget https://github.com/eth-clients/eth2-networks/raw/master/shared/prater/genesis.ssz -O /srv/prysm/genesis.ssz
 
 sudo chown eth2:eth2 /srv/prysm/genesis.ssz 
 ```
