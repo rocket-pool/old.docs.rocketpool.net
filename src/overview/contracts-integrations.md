@@ -1,5 +1,5 @@
 ---
-permalink: /overview/integrations
+permalink: /overview/contracts-integrations
 ---
 
 # :handshake: Contracts & Integrations
