@@ -110,7 +110,10 @@ COMMANDS:
    logs, l                    View the Rocket Pool service logs
    stats, a                   View the Rocket Pool service stats
    version, v                 View the Rocket Pool service version information
+   prune-eth1, n              Shuts down the main ETH1 client and prunes its database, freeing up disk space, then restarts it when it's done.
    install-update-tracker, d  Install the update tracker that provides the available system update count to the metrics dashboard
+   resync-eth1                Deletes the main ETH1 client's chain data and resyncs it from scratch. Only use this as a last resort!
+   resync-eth2                Deletes the ETH2 client's chain data and resyncs it from scratch. Only use this as a last resort!
 
 GLOBAL OPTIONS:
    --compose-file value, -f value  Optional compose files to override the standard Rocket Pool docker-compose.yml; this flag may be defined multiple times
