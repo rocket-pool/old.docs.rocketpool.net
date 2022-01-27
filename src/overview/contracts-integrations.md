@@ -53,3 +53,4 @@ Wallets         | Coinbase Wallet     | -       | [rETH](https://www.coinbase.co
 &nbsp;          | Gnosis              | -       | [rETH](https://gnosis-safe.io/)
 &nbsp;          | Trust Wallet        | [RPL](https://trustwallet.com/) | [rETH](https://trustwallet.com/)
 
+<!-- &nbsp;          | Zigzap (zkSync)     | [RPL](https://trade.zigzag.exchange/?market=RPL-ETH&network=zksync) | [rETH](https://trade.zigzag.exchange/?market=rETH-ETH&network=zksync) -->
