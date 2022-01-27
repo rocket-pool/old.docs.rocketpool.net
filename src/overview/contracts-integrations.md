@@ -41,6 +41,7 @@ Category        | Service             | Link    | Link
 ----------------|---------------------|---------|--------
 Data Feed       | Subgraph            | [RPL](https://github.com/Data-Nexus/rocket-pool-mainnet) | [rETH](https://github.com/Data-Nexus/rocket-pool-mainnet)
 Exchange        | Balancer (Mainnet)  | -       | [rETH](https://app.balancer.fi/#/trade/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2/0xae78736Cd615f374D3085123A210448E74Fc6393)
+&nbsp;          | Bancor (Mainnet)    | [RPL](https://app.bancor.network/swap?from=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE&to=0xD33526068D116cE69F19A9ee46F0bd304F21A51f) | -
 &nbsp;          | Uniswap (Mainnet)   | [RPL](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xd33526068d116ce69f19a9ee46f0bd304f21a51f&chainId=1) | [rETH](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xae78736Cd615f374D3085123A210448E74Fc6393&chainId=1)
 &nbsp;          | Uniswap (Arbitrum)  | [RPL](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xb766039cc6db368759c1e56b79affe831d0cc507&chainId=42161) | [rETH](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8&chainId=42161)
 &nbsp;          | Uniswap (Optimism)  | -       | [rETH](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x9bcef72be871e61ed4fbbc7630889bee758eb81d&chainId=10)
