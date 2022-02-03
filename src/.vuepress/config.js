@@ -56,6 +56,10 @@ module.exports = {
       {
         text: 'Website',
         link: 'https://www.rocketpool.net'
+      },
+      {
+        text: 'Discord',
+        link: 'https://discord.com/invite/rocketpool'
       }
     ],
     sidebar: {
