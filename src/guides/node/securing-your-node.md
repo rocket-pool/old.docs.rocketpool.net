@@ -11,7 +11,8 @@ If you are comfortable with the command-line terminal and want to go even furthe
 
 ## Assumptions in This Guide
 
-This guide assumes your node runs `Ubuntu 20.04 LTS`, the concepts will carry over to other systems but the example commands may not.
+This guide assumes your node runs `Ubuntu 20.04 LTS`.
+The concepts will carry over to other systems but the example commands may not.
 
 As with all of the commands in this guide, we assume that you are connecting **remotely** to your node's command terminal using `ssh`.
 If you need a refresher on how to use `ssh`, take a look at the [Intro to Secure Shell](./ssh.md) guide first.
@@ -20,7 +21,7 @@ If you need a refresher on how to use `ssh`, take a look at the [Intro to Secure
 ## ESSENTIAL: Keep your Client Machine Secure
 
 ::: warning NOTE
-If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you and you can skip it**.
+If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you - you can skip it**.
 :::
 
 Most Smartnode operators interact with their node remotely by connecting to its terminal from another computer using `ssh`:
@@ -48,7 +49,7 @@ For maximum security, you may want to use a **dedicated machine** as your SSH cl
 ## ESSENTIAL: Secure your SSH Access
 
 ::: warning NOTE
-If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you and you can skip it**.
+If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you - you can skip it**.
 :::
 
 Whether you run your Smartnode at home or you use a VPS in a remote datacenter, it is likely that either you access it through SSH, or that SSH is enabled **even if you do not use it**.
@@ -56,7 +57,7 @@ Whether you run your Smartnode at home or you use a VPS in a remote datacenter, 
 SSH connections are based on secure cryptography, but as with any secure system, the real security comes from using it correctly.
 There are two main things to do for your SSH settings:
 
-1. Use an SSH key to log in remotely, instead of a username and password
+1. Use an SSH key to log in remotely instead of a username and password
 2. Disable password-based authentication entirely, so SSH keys are the only remote login option
 
 As you are probably familiar with now, the default way to log into your node via SSH is with a username and password.
@@ -67,7 +68,7 @@ Luckily, there is an alternative way to log in via SSH: an **SSH key pair**.
 SSH key pairs work similarly to blockchain wallets; they come with a public part (such as your wallet address) and a private part (the private key for your wallet address):
 
 - You provide the **public part** to your node. This way, the node knows you're allowed to connect to it, and it knows that it's really you trying to connect.
-- You keep the **private part** to yourself, on your client machine. This way, you (and only you) can connect to your node.
+- You keep the **private part** to yourself on your client machine. This way, you (and only you) can connect to your node.
     - You can (and should!) protect the private part with a **password**, so someone who steals your key can't use it.
 - From a computer's perspective, the private key is **exponentially harder** to crack than a password is. This mitigates the risk of a brute-force attack against your node.
 
@@ -83,7 +84,7 @@ If you'd like to learn more about SSH key pairs before creating your own, take a
 Let's start by creating a new SSH key pair **on your client machine**.
 There are many varieties of key out there, but we're going to use a key type called [ed25519](https://en.wikipedia.org/wiki/EdDSA#Ed25519) which provides excellent security.
 
-Run the following command **on your client machine** (i.e. you should **not** run this while already SSH'd into your node machine - if you are, **exit out of SSH first**):
+Run the following command **on your client machine** (i.e., you should **not** run this while already SSH'd into your node machine - if you are, **exit out of SSH first**):
 
 ```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -122,7 +123,7 @@ Enter passphrase (empty for no passphrase):
 Whenever you use the key to connect to your node, you will need to enter this password first.
 
 ::: danger WARNING
-**You should not leave this blank**, because otherwise anyone with the SSH key file will be able to use it!
+**You should not leave this blank** - otherwise, anyone with the SSH key file will be able to use it!
 Pick a good password that you (and only you) will know.
 
 Also, **don't forget your password** - there is no way to recover this password if you lose it. 
@@ -168,7 +169,7 @@ ssh-add /home/username/.ssh/id_ed25519
 ```
 
 Note that this is the path of the **private key** that we generated in the previous step, **not the public key**.
-Replace the path with whatvever your system printed in that previous step.
+Replace the path with whatever your system printed in that previous step.
 
 If you get an error saying that the `ssh-agent` is not running, start it by running the following command **on your client machine**:
 
@@ -176,7 +177,7 @@ If you get an error saying that the `ssh-agent` is not running, start it by runn
 eval $(ssh-agent)
 ```
 
-If you don't want to type these two commands every time you open the terminal, you can create a shortcut for adding you key by adding an `alias` to your `~/.bashrc` file.
+If you don't want to type these two commands every time you open the terminal, you can create a shortcut for adding your key by adding an `alias` to your `~/.bashrc` file.
 
 Open the file using the text editor:
 
@@ -237,7 +238,7 @@ Enter your user's password, and you will see the following output:
 ```
 Number of key(s) added: 1
 
-Now try logging into the machine, with:   "ssh 'username@node.ip.address'"
+Now try logging into the machine with:   "ssh 'username@node.ip.address'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
@@ -346,7 +347,7 @@ Keep doing this until you have it working again and are able to successfully con
 
 ### (Optional) Enable Two-Factor Authentication
 
-Two factor authentication involves requiring a second security measure in addition to your password or SSH key, usually on a separate device from your primary one.
+Two-factor authentication involves requiring a second security measure in addition to your password or SSH key, usually on a separate device from your primary one.
 
 For example, you may be familiar with logging into a website such as a crypto exchange using both a password and a Google Authenticator code (or an SMS code).
 This two-step process is an example of two-factor authentication.
@@ -362,7 +363,7 @@ If you **do** manage to lock yourself out, you will need to physically access yo
 :::
 
 Start by installing [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US&gl=US) (or a compatible equivalent) on your phone if you don't already have it.
-For Android users, consider [andOTP](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp&hl=en_US&gl=US) which is an open source alternative that supports password locking and convenient backups.
+For Android users, consider [andOTP](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp&hl=en_US&gl=US) which is an open-source alternative that supports password locking and convenient backups.
 
 Next, install the Google Authenticator module on your node with this command:
 
@@ -371,7 +372,7 @@ sudo apt install -y libpam-google-authenticator
 ```
 
 Now tell the `PAM` (pluggable authentication modules) to use this module.
-First open the config file:
+First, open the config file:
 
 ```shell
 sudo nano /etc/pam.d/sshd
@@ -430,7 +431,7 @@ Say `y` to this question:
 Do you want authentication tokens to be time-based: y
 ```
 
-You will now see a big QR code on your screen, scan it with your Google Authenticator app to add it.
+You will now see a big QR code on your screen; scan it with your Google Authenticator app to add it.
 You will also see your secret and a few backup codes looking like this:
 
 ```
@@ -513,7 +514,7 @@ sudo systemctl restart unattended-upgrades
 ## ESSENTIAL: Enable a Firewall
 
 In general, your machine should only accept network traffic on ports that your ETH1 client, ETH2 client, and Smartnode stack use.
-To enforce that and prevent any unexpected or undesireable traffic, we can install a **firewall** on the node.
+To enforce that and prevent any unexpected or undesirable traffic, we can install a **firewall** on the node.
 
 Ubuntu comes with `ufw` installed by default (the **u**ncomplicated **f**ire **w**all), which is a convenient utility for managing your node's firewall settings.
 
@@ -611,7 +612,7 @@ sudo ufw enable
 ## (Optional) Enable Brute-Force and DDoS Protection
 
 To protect your server from DDoS attacks and brute-force connection attempts, you can install `fail2ban`.
-This program will monitor incoming connections and block IP addressed that try to log in with faulty credentials repeatedly.
+This program will monitor incoming connections and block IP addresses that try to log in with faulty credentials repeatedly.
 
 See [this guide](https://github.com/imthenachoman/How-To-Secure-A-Linux-Server#application-intrusion-detection-and-prevention-with-fail2ban) for more information on intrusion prevention.
 
