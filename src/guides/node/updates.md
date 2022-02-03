@@ -99,7 +99,7 @@ brew update && brew upgrade
 Occasionally, Rocket Pool will release a new version of the Smartnode stack.
 Updates can contain new versions of the CLI or the Rocket Pool Docker containers, as well as new versions of the ETH1 and ETH2 clients.
 
-The most consistent way to find out about new releases is to subscribe to the Rocket Pool Discord server; they will always be posted in the Announcements channel and you will receive a notification.
+The most consistent way to find out about new releases is to subscribe to the Rocket Pool Discord server; they will always be posted in the Releases channel and you will receive a notification.
 
 ::: warning NOTE
 Note that running `apt update` will not update the node software.
