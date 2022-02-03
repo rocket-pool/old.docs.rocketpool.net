@@ -11,7 +11,8 @@ If you are comfortable with the command-line terminal and want to go even furthe
 
 ## Assumptions in This Guide
 
-This guide assumes your node runs `Ubuntu 20.04 LTS`, the concepts will carry over to other systems, but the example commands may not.
+This guide assumes your node runs `Ubuntu 20.04 LTS`.
+The concepts will carry over to other systems but the example commands may not.
 
 As with all of the commands in this guide, we assume that you are connecting **remotely** to your node's command terminal using `ssh`.
 If you need a refresher on how to use `ssh`, take a look at the [Intro to Secure Shell](./ssh.md) guide first.
@@ -20,7 +21,7 @@ If you need a refresher on how to use `ssh`, take a look at the [Intro to Secure
 ## ESSENTIAL: Keep your Client Machine Secure
 
 ::: warning NOTE
-If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you, and you can skip it**.
+If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you - you can skip it**.
 :::
 
 Most Smartnode operators interact with their node remotely by connecting to its terminal from another computer using `ssh`:
@@ -48,7 +49,7 @@ For maximum security, you may want to use a **dedicated machine** as your SSH cl
 ## ESSENTIAL: Secure your SSH Access
 
 ::: warning NOTE
-If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you, and you can skip it**.
+If you use your Smartnode locally (by physically logging into it with a keyboard and monitor directly attached to it), then **this section is not relevant to you - you can skip it**.
 :::
 
 Whether you run your Smartnode at home or you use a VPS in a remote datacenter, it is likely that either you access it through SSH, or that SSH is enabled **even if you do not use it**.
@@ -122,7 +123,7 @@ Enter passphrase (empty for no passphrase):
 Whenever you use the key to connect to your node, you will need to enter this password first.
 
 ::: danger WARNING
-**You should not leave this blank**, because otherwise, anyone with the SSH key file will be able to use it!
+**You should not leave this blank** - otherwise, anyone with the SSH key file will be able to use it!
 Pick a good password that you (and only you) will know.
 
 Also, **don't forget your password** - there is no way to recover this password if you lose it. 
@@ -274,7 +275,7 @@ In this file, paste the **public key** that you retrieved a few steps ago using 
 
 When it's in, save the file with `Ctrl+O` and `Enter`, then press `Ctrl+X` to exit.
 
-Now, exit `ssh` by running the `exit` command, so you return back to your local client machine's terminal. 
+Now, exit `ssh` by running the `exit` command so you return back to your local client machine's terminal. 
 ::::
 
 You should now be able to `ssh` into the node like you normally would, but now you won't have to type the password of the user account.
@@ -301,7 +302,7 @@ Start by logging into your machine using `ssh` as usual:
 ssh user@your.node.ip.address
 ```
 
-As a reminder, **you should do this twice on two separate terminals, so you have a backup session just in case**.
+As a reminder, **you should do this twice on two separate terminals so you have a backup session just in case**.
 You can ignore the backup session for now - we'll tell you when you need it.
 Run the following commands **only in the first session**.
 
@@ -323,7 +324,7 @@ Make the following changes:
 
 Once you're done, save with `Ctrl+O` and `Enter`, then exit with `Ctrl+X`.
 
-Next, restart the SSH server, so it picks up the new settings:
+Next, restart the SSH server so it picks up the new settings:
 
 ```shell
 sudo systemctl restart sshd
@@ -362,7 +363,7 @@ If you **do** manage to lock yourself out, you will need to physically access yo
 :::
 
 Start by installing [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US&gl=US) (or a compatible equivalent) on your phone if you don't already have it.
-For Android users, consider [andOTP](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp&hl=en_US&gl=US), which is an open-source alternative that supports password locking and convenient backups.
+For Android users, consider [andOTP](https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp&hl=en_US&gl=US) which is an open-source alternative that supports password locking and convenient backups.
 
 Next, install the Google Authenticator module on your node with this command:
 
