@@ -67,6 +67,7 @@ module.exports = {
             '',
             'explainer-series',
             'faq',
+            'contracts-integrations',
             'glossary',
           ]
         }
