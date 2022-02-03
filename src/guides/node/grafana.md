@@ -522,6 +522,14 @@ services:
 ...
 ```
 
+After making these modifications, **run the following to apply the changes**:
+
+```
+docker stop rocketpool_grafana
+
+rocketpool service start
+```
+
 To test the SMTP settings, go to the **Alerting** menu and click **Notification channels**.
 
 <center>
