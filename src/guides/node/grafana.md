@@ -487,9 +487,12 @@ GF_<SectionName>_<KeyName>
 
 ### Grafana SMTP Settings for Sending Emails
 
-To send emails from Grafana, e.g. for alerts or to invite other users, SMTP settings need to be configured in the Rocket Pool Metrics Stack. See the [Grafana SMTP configuration](https://grafana.com/docs/grafana/latest/administration/configuration/#smtp) page for reference.
+To send emails from Grafana, e.g. for alerts or to invite other users, SMTP settings need to be configured in the Rocket Pool Metrics Stack.
+See the [Grafana SMTP configuration](https://grafana.com/docs/grafana/latest/administration/configuration/#smtp) page for reference.
 
-Open `~/.rocketpool/docker-compose-metrics.yml` in a text editor. Include the below `GF_SMTP_<KEYNAME>` environment variables in the `environment` section of the `grafana` service, replacing the values with those for your SMTP provider. If using Gmail and [2-Step Verification](https://support.google.com/accounts/answer/185839) is enabled, create an [App Password](https://support.google.com/mail/answer/185833?hl=en) for this service.
+Open `~/.rocketpool/docker-compose-metrics.yml` in a text editor.
+Include the below `GF_SMTP_<KEYNAME>` environment variables in the `environment` section of the `grafana` service, replacing the values with those for your SMTP provider.
+If using Gmail and [2-Step Verification](https://support.google.com/accounts/answer/185839) is enabled, create an [App Password](https://support.google.com/mail/answer/185833?hl=en) for this service.
 
 ```yaml
 version: "3.4"
