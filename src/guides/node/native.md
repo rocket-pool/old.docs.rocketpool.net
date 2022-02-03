@@ -1260,6 +1260,8 @@ Once that's done, change the permissions on the password and wallet files so the
 ```
 sudo chown rp:rp -R /srv/rocketpool/data
 
+sudo chmod -R 775 /srv/rocketpool/data
+
 sudo chmod 660 /srv/rocketpool/data/password
 
 sudo chmod 660 /srv/rocketpool/data/wallet
