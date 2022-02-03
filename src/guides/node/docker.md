@@ -636,6 +636,28 @@ One popular option is Infura, which offers this service for free (though it requ
 
 See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
 
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Lighthouse will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Lighthouse will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Lighthouse supports a feature called [Doppelgänger Detection](https://lighthouse-book.sigmaprime.io/validator-doppelganger.html).
+In a nutshell, this feature will **intentionally** miss a few attestations after Lighthouse's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Lighthouse would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Lighthouse will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
 Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
@@ -693,6 +715,28 @@ Please enter the P2P Port (leave blank for the default of 9001)
 This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
 
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Lighthouse will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Lighthouse will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Lighthouse supports a feature called [Doppelgänger Detection](https://lighthouse-book.sigmaprime.io/validator-doppelganger.html).
+In a nutshell, this feature will **intentionally** miss a few attestations after Lighthouse's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Lighthouse would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Lighthouse will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
 Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
@@ -726,6 +770,28 @@ Please enter the Custom Graffiti (leave blank for none)
 When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
 This is called the block's `graffiti`.
 You can enter a custom message here if you like or leave it blank.
+
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Nimbus will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Nimbus will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Nimbus supports a feature called [Doppelgänger Detection](https://nimbus.guide/faq.html#why-does-my-validator-miss-two-epochs-of-attestations-after-restarting).
+In a nutshell, this feature will **intentionally** miss a few attestations after Nimbus restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Nimbus would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Nimbus will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
@@ -768,6 +834,28 @@ Please enter the P2P Port (leave blank for the default of 9001)
 This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
 
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Nimbus will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Nimbus will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Nimbus supports a feature called [Doppelgänger Detection](https://nimbus.guide/faq.html#why-does-my-validator-miss-two-epochs-of-attestations-after-restarting).
+In a nutshell, this feature will **intentionally** miss a few attestations after Nimbus restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Nimbus would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Nimbus will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
 Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
@@ -801,6 +889,28 @@ Please enter the Custom Graffiti (leave blank for none)
 When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
 This is called the block's `graffiti`.
 You can enter a custom message here if you like or leave it blank.
+
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Prysm will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Prysm will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Prysm supports a feature called Doppelgänger Detection.
+In a nutshell, this feature will **intentionally** miss a few attestations after Prysm's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Prysm would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Prysm will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
@@ -842,6 +952,28 @@ Please enter the P2P Port (leave blank for the default of 9001)
 
 This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
 It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
+
+```
+Would you like to enable Doppelgänger Detection? [y/n]
+(If enabled, Prysm will *intentionally* miss 1 or 2 attestations on startup to check
+ if validator keys are already running elsewhere. If they are, Prysm will disable
+ validation duties for them to prevent you from being slashed.)
+```
+
+Prysm supports a feature called Doppelgänger Detection.
+In a nutshell, this feature will **intentionally** miss a few attestations after Prysm's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Prysm would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Prysm will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
 ::: tip NOTE
 To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
