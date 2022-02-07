@@ -706,8 +706,8 @@ You can now also visit `rocketnode:3001`in your web browser to access your Grafa
 In case the connection is working, you can now set a rule to accept any incoming ssh connections over Tailscale. **Run these on the node machine.**
 
 ```shell
-sudo ufw allow in on tailscale0 comment 
-sudo ufw allow 41641/udp
+sudo ufw allow in on tailscale0 comment 'Allow Tailscale'
+sudo ufw allow 41641/udp comment '(Optional) Extra Tailscale port in case of difficult networks' 
 ```
 Remove the ssh port added before from the firewall:
 
