@@ -68,11 +68,11 @@ You do not have control over the remote node that you're connecting to, and you 
 
 ### Client Comparison Table
 
-| Client | Type | CPU Usage | Minimum RAM Usage | Sync Time | ETH2 Client Compatibility |
-| - | - | - | - | - | - |
-| Geth | Full | Moderate | 2 GB | Moderate | All |
-| Infura | Light | Low | --- | None | All |
-| Pocket | Light | Low | --- | None | Prysm, Lighthouse, Teku |
+| Client | Type  | CPU Usage | Minimum RAM Usage | Sync Time | ETH2 Client Compatibility |
+| ------ | ----- | --------- | ----------------- | --------- | ------------------------- |
+| Geth   | Full  | Moderate  | 2 GB              | Moderate  | All                       |
+| Infura | Light | Low       | ---               | None      | All                       |
+| Pocket | Light | Low       | ---               | None      | Prysm, Lighthouse, Teku   |
 
 
 ## ETH2 Clients
@@ -155,9 +155,9 @@ Teku is Apache 2.0 licensed and written in Java, a language notable for its matu
 
 ### Client Comparison Table
 
-| Client | CPU Usage | Minimum RAM Usage | Sync Time |
-| - | - | - | - |
-| Lighthouse | Moderate | 2 GB | Moderate |
-| Nimbus | Low (Single-threaded) | 0.75 GB | Moderate |
-| Prysm | Moderate | 2 GB | Fast |
-| Teku | Moderate | 4 GB | Slow (normal sync)<br/>Instant ([checkpoint sync](https://www.youtube.com/watch?v=Oz3flfj50Ig)) |
+| Client     | CPU Usage | Minimum RAM Usage | Sync Time                                               |
+| ---------- | --------- | ----------------- | ------------------------------------------------------- |
+| Lighthouse | Moderate  | 2 GB              | Moderate (normal sync)<br/>Instant with checkpoint sync |
+| Nimbus     | Low       | 0.75 GB           | Moderate (normal sync)<br/>Instant with checkpoint sync |
+| Prysm      | Moderate  | 2 GB              | Moderate                                                |
+| Teku       | Moderate  | 4 GB              | Slow (normal sync)<br/>Instant with checkpoint sync     |

@@ -772,6 +772,22 @@ This is called the block's `graffiti`.
 You can enter a custom message here if you like or leave it blank.
 
 ```
+Please enter the Checkpoint Sync Provider (leave blank for none)
+(If you would like to instantly sync using an existing Beacon node, enter its URL.
+ Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
+ Leave this blank if you want to sync normally from the start of the chain.)
+```
+
+Nimbus has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+One popular option is Infura, which offers this service for free (though it requires you to create an account).
+
+See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
+
+```
 Would you like to enable Doppelgänger Detection? [y/n]
 (If enabled, Nimbus will *intentionally* miss 1 or 2 attestations on startup to check
  if validator keys are already running elsewhere. If they are, Nimbus will disable
@@ -815,6 +831,22 @@ Please enter the Custom Graffiti (leave blank for none)
 When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
 This is called the block's `graffiti`.
 You can enter a custom message here if you like or leave it blank.
+
+```
+Please enter the Checkpoint Sync Provider (leave blank for none)
+(If you would like to instantly sync using an existing Beacon node, enter its URL.
+ Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
+ Leave this blank if you want to sync normally from the start of the chain.)
+```
+
+Nimbus has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+One popular option is Infura, which offers this service for free (though it requires you to create an account).
+
+See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
 
 ```
 Please enter the Max Peers (leave blank for the default of 160)
@@ -1104,7 +1136,7 @@ It allows your Beacon client to instantly sync the entire Beacon chain without h
 This means instead of taking **days**, your Beacon client can be ready in a matter of **minutes**.
 All it needs is access to an existing Beacon client that you trust.
 
-Currently, **Lighthouse** and **Teku** support checkpoint syncing.
+Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 
 You can use any Beacon node that provides access to its HTTP API.
 In this example, we will show you how to use the free **Infura** service to do it.
