@@ -215,10 +215,10 @@ Now, open `config.yml` in `nano` or your editor of choice, and make the followin
 - Change `chains.eth1.wsProvider` to `wsProvider: ws://127.0.0.1:8546`
 - Change `chains.eth2.provider` to `provider: http://127.0.0.1:5052`
 
-Change the owner of all files in `/src/rocketpool` to `rp`, to prevent permission conflicts:
+Change the owner of all files in `/srv/rocketpool` to `rp`, to prevent permission conflicts:
 
 ```
-chown -R rp:rp /src/rocketpool
+chown -R rp:rp /srv/rocketpool
 ```
 
 Now open `~/.profile` with your editor of choice and add this line to the end:
