@@ -312,7 +312,7 @@ Starting with Smartnode v1.0.0-rc6, that prefix is now included.
 
 ## Configuring UFW
 
-If you currently have `ufw` enabled, then it's likely that you don't have rules in place to allow Rocket Pool's Docker containers to access your external clients.
+If you currently have `ufw` enabled, then it's likely that you don't have rules in place to allow Rocket Pool's Docker containers to access your external clients. If you have not created the Rocket Pool's docker containers, please do so first before continuing.
 
 Start by getting the subnet that Docker is currently using:
 ```shell
