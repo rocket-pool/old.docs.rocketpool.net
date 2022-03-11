@@ -129,24 +129,24 @@ If you see a notice about a web3 browser being required, or the current network 
 :::::::
 
 
-Once you're at the site, click on the **select wallet** button in the top middle of the page, then click **connect metamask**.
+Once you're at the site, click on the **connect wallet** button. Please read through and accept the Terms of Service & Privacy Policy, this will enable different ways to connect, then click **connect metamask**.
 
 MetaMask will prompt you to select an account to connect to the website.
-Choose one, confirm a few permissions, and you’ll see your account's icon along with your ETH and rETH balances - for example:
+Choose one, confirm a few permissions, and you’ll see your balances update in the UI. You can also see an overview of your balances by clicking the wallet icon located at the top right of the window.
 
 <center>
 
-![](./images/rp_balances.png)
+![](https://cdn-rocketpool.s3.us-west-2.amazonaws.com/rp_balances.mp4)
 
 </center>
 
 Now, all that's left to do is deposit your ETH and receive some rETH back!
 
-Enter the amount of ETH you want to deposit in the **trade __ ETH** box on the screen, then check the **agree to terms of service** box and press **start**:
+Enter the amount of ETH you want to deposit in the **Stake ETH** input field on the screen, then click the **Stake** button.
 
 <center>
 
-![](./images/rp_trade.png)
+![](https://cdn-rocketpool.s3.us-west-2.amazonaws.com/stake.mp4)
 
 </center>
 
@@ -178,11 +178,11 @@ When you're ready to unstake and trade your rETH back for ETH, head back to the 
 
 <center>
 
-![](./images/rp_trade_back.png)
+![](https://cdn-rocketpool.s3.us-west-2.amazonaws.com/unstake.mp4)
 
 </center>
 
-As with staking, enter an amount of rETH to trade back, agree to the Terms of Service, and click **start**.
+As with staking, enter an amount of rETH to unstake and click the **Unstake** button.
 Once again, a confirmation dialog will appear in MetaMask.
 Confirm the transaction, and once it's been mined, you will see the proper balances in your wallet.
 

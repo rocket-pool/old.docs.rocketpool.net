@@ -341,7 +341,13 @@ module.exports = {
       // Import include plugin, ref: https://www.npmjs.com/package/markdown-it-include
       md.use( require( 'markdown-it-include' ), {
         root: `${ __dirname }/../`,
-      } )
+      }),
+      md.use(require('markdown-it-html5-embed'), {
+        html5embed: {
+          useImageSyntax: true,
+          useLinkSyntax: false
+        }
+      })
     }
   },
 
