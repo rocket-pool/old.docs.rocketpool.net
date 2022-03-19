@@ -151,8 +151,9 @@ module.exports = {
                       ]
                     },
                     'node/rewards',
-                    'node/troubleshooting',
-                    'node/faq'
+                    'node/advanced-docker-config',
+                    // 'node/troubleshooting',
+                    // 'node/faq'
                 ]
               },
               {
