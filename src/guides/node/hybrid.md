@@ -178,7 +178,7 @@ Prysm temporarily must use both the standard REST API (`--grpc-gateway-host`) an
 If you have an existing external Validator Client for Prysm, you will need to modify its `--beacon-rpc-provider` flag to use port 5053 instead of 5052:
 
 ```
---beacon-rpc-provider http://<your address>:5053
+--beacon-rpc-provider <your address>:5053
 ```
 
 This will be removed in a later version when the Prysm Validator Client can connect to the Beacon Node using the REST API.
