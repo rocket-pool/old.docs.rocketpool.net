@@ -233,7 +233,9 @@ $ htop
 Your output should look like this at the top:
 ![](../local/images/pi/Swap.png)
 
-If you see a non-zero number in the last row labeled `Swp`, then you're all set.
+If the second number in the last row labeled `Swp` (the one after the `/`) is non-zero, then you're all set.
+For example, if it shows `0K / 16.0G` then your swap space was activated successfully.
+If it shows `0K / 0K` then it did not work and you'll have to confirm that you entered the previous steps properly.
 
 Press `q` or `F10` to quit out of `htop` and get back to the terminal.
 

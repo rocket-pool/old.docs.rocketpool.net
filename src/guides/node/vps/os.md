@@ -41,15 +41,15 @@ This determines what virtual hardware resources your machine will have available
 
 At the time of writing, these are what the different options offer:
 
-| Instance | vCPU | CPU Credits / hour | Mem (GiB) | Storage | Network Performance |
-| - | - | - | - | - | - |
-| t2.nano | 1 | 3 | 0.5 | EBS-Only | Low |
-| t2.micro | 1 | 6 | 1 | EBS-Only | Low to Moderate |
-| t2.small | 1 | 12 | 2 | EBS-Only | Low to Moderate |
-| t2.medium | 2 | 24 | 4 | EBS-Only | Low to Moderate |
-| t2.large | 2 | 36 | 8 | EBS-Only | Low to Moderate |
-| t2.xlarge | 4 | 54 | 16 | EBS-Only | Moderate |
-| t2.2xlarge | 8 | 81 | 32 | EBS-Only | Moderate |
+| Instance   | vCPU | CPU Credits / hour | Mem (GiB) | Storage  | Network Performance |
+| ---------- | ---- | ------------------ | --------- | -------- | ------------------- |
+| t2.nano    | 1    | 3                  | 0.5       | EBS-Only | Low                 |
+| t2.micro   | 1    | 6                  | 1         | EBS-Only | Low to Moderate     |
+| t2.small   | 1    | 12                 | 2         | EBS-Only | Low to Moderate     |
+| t2.medium  | 2    | 24                 | 4         | EBS-Only | Low to Moderate     |
+| t2.large   | 2    | 36                 | 8         | EBS-Only | Low to Moderate     |
+| t2.xlarge  | 4    | 54                 | 16        | EBS-Only | Moderate            |
+| t2.2xlarge | 8    | 81                 | 32        | EBS-Only | Moderate            |
 
 The hardware requirements largely depend on which ETH2 client you plan to run - Nimbus, for example, requires less than 1GB of RAM by itself so it is perfectly reasonable to run it on a **t2.large** instance.
 For more RAM-heavy clients, you may want to go with a **t2.xlarge** instance for extra headroom.
@@ -77,13 +77,13 @@ In the **Security Group** section, keep the **Create a new security group** opti
 Enter a name and description such as **Smartnode** and **Smartnode Group**.
 Remove all of the existing rules in the table and add the following rules:
 
-| Type | Port Range | Source | Description |
-| - | - | - | - |
-| SSH | 22 | [Your public IP address at home] | SSH Access |
-| Custom TCP | 30303 | Anywhere | ETH1 P2P |
-| Custom UDP | 30303 | Anywhere | ETH1 P2P |
-| Custom TCP | 9001 | Anywhere | ETH2 P2P |
-| Custom UDP | 9001 | Anywhere | ETH2 P2P |
+| Type       | Port Range | Source                           | Description |
+| ---------- | ---------- | -------------------------------- | ----------- |
+| SSH        | 22         | [Your public IP address at home] | SSH Access  |
+| Custom TCP | 30303      | Anywhere                         | ETH1 P2P    |
+| Custom UDP | 30303      | Anywhere                         | ETH1 P2P    |
+| Custom TCP | 9001       | Anywhere                         | ETH2 P2P    |
+| Custom UDP | 9001       | Anywhere                         | ETH2 P2P    |
 
 This will allow you to remotely connect to your server via SSH (the command line terminal) from your laptop or desktop.
 It will also allow the ETH1 and ETH2 clients to connect to other nodes on the Ethereum network.
@@ -208,7 +208,9 @@ $ htop
 Your output should look like this at the top:
 ![](../local/images/pi/Swap.png)
 
-If you see a non-zero number in the last row labeled `Swp`, then you're all set.
+If the second number in the last row labeled `Swp` (the one after the `/`) is non-zero, then you're all set.
+For example, if it shows `0K / 16.0G` then your swap space was activated successfully.
+If it shows `0K / 0K` then it did not work and you'll have to confirm that you entered the previous steps properly.
 
 Press `q` or `F10` to quit out of `htop` and get back to the terminal.
 
