@@ -934,7 +934,7 @@ If you'd like to see some examples of what validators are using for Graffiti tod
 :::::::
 
 
-#### ETH2 Checkpoint Syncing with Infura
+#### Beacon Chain Checkpoint Syncing with Infura
 
 **Checkpoint syncing** is a very useful technique that some Beacon Chain clients support.
 It allows your Beacon client to instantly sync the entire Beacon chain without having to start from the beginning and catch up on every block.
@@ -1184,7 +1184,6 @@ Press `y` and `Enter` if you want to automatically apply your new configuration 
 Press `n` and `Enter` if you have other things you want to do before restarting them, and will do it manually later.
 
 In either case, your configuration is done!
-
 
 
 ## Wrapping Up
