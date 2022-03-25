@@ -54,6 +54,11 @@ mkdir -p ~/bin
 Next, download the CLI.
 This depends on what architecture your system uses.
 
+::: tip If you you do not know the architecture of you CPU you can run the following command on most linux systems:
+
+-bash: dpkg --print-architecturer
+:::
+
 For `x64` systems (most normal computers):
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
