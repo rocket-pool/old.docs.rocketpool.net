@@ -215,9 +215,15 @@ Now, open `config.yml` in `nano` or your editor of choice, and make the followin
 - Change `chains.eth1.wsProvider` to `wsProvider: ws://127.0.0.1:8546`
 - Change `chains.eth2.provider` to `provider: http://127.0.0.1:5052`
 
+Change the owner of all files in `/srv/rocketpool` to `rp`, to prevent permission conflicts:
+
+```
+chown -R rp:rp /srv/rocketpool
+```
+
 Now open `~/.profile` with your editor of choice and add this line to the end:
 ```
-alias rp="rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool"
+alias rp="sudo -u rp /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool"
 ```
 
 Save it, then reload your profile:
@@ -225,8 +231,40 @@ Save it, then reload your profile:
 source ~/.profile
 ```
 
-This will let you interact with Rocket Pool's CLI with the `rp` command, which is a nice shortcut.
+This will let you interact with Rocket Pool's CLI with the `rp` command, which is a nice shortcut. In order to prevent permission conflicts, you need to run the `rp` alias as the `rp` user, so you will need to edit the `sudoers` file:
 
+```
+sudo nano /etc/sudoers
+```
+
+Add this line under `# Cmnd alias specification`
+
+```
+Cmnd_Alias RP_USER_CMDS = /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool
+```
+
+In command line enter
+
+```
+echo $USER
+```
+
+Add this line under `# User privilege specification`:
+
+```
+<user>    ALL=(ALL) NOPASSWD: RP_USER_CMDS
+```
+
+where `<user>` is the output of the echo command. That whole section should now look like this:
+
+```
+# Cmnd alias specification
+Cmnd_Alias RP_USER_CMDS = /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+<user>    ALL=(ALL) NOPASSWD: RP_USER_CMDS
+```
 Finally, run the Rocket Pool configuration:
 ```
 rp service config
@@ -702,10 +740,12 @@ rp    ALL=(ALL) NOPASSWD: RP_CMDS
 That whole section should now look like this:
 ```
 # Cmnd alias specification
+Cmnd_Alias RP_USER_CMDS = /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool
 Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
 
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
+<user>    ALL=(ALL) NOPASSWD: RP_USER_CMDS
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
@@ -873,10 +913,12 @@ rp    ALL=(ALL) NOPASSWD: RP_CMDS
 That whole section should now look like this:
 ```
 # Cmnd alias specification
+Cmnd_Alias RP_USER_CMDS = /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool
 Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart nimbus
 
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
+<user>    ALL=(ALL) NOPASSWD: RP_USER_CMDS
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
@@ -1196,10 +1238,12 @@ rp    ALL=(ALL) NOPASSWD: RP_CMDS
 That whole section should now look like this:
 ```
 # Cmnd alias specification
+Cmnd_Alias RP_USER_CMDS = /usr/local/bin/rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool
 Cmnd_Alias RP_CMDS = /usr/bin/systemctl restart <validator service name>
 
 # User privilege specification
 root    ALL=(ALL:ALL) ALL
+<user>    ALL=(ALL) NOPASSWD: RP_USER_CMDS
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
