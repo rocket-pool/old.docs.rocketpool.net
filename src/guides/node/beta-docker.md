@@ -239,7 +239,7 @@ sudo systemctl restart docker
 After that, Docker will store its data on your desired disk.
 
 
-## Configuring the Smartnode Stack
+## Configuring the Smartnode Stack via the Wizard
 
 With all of that setup finished, you can now configure the Smartnode stack.
 To do this, run the configuration command:
@@ -250,10 +250,12 @@ rocketpool service config
 
 This will launch a terminal-based UI that will allow you to quickly and easily configure your node, as well as provide optional fine-grained control over every setting for advanced customization.
 
+::: tip NOTE
+If you've already configured the Smartnode, you will instead be greeted with the [Settings Manager](#configuring-the-smartnode-stack-via-the-settings-manager).
+You can choose to re-open the Wizard from there if you prefer it, and all of your existing settings will be pre-selected for you.
+:::
 
-### Using the TUI Wizard
-
-When you run the config UI for the first time, you will be presented with a screen that looks like this:
+When you run the config UI for the first time (or if you choose to run the Wizard again later), you will be presented with a screen that looks like this:
 
 <center>
 
@@ -285,7 +287,7 @@ Pressing `Enter` while `Quit` is selected will quit the Wizard without saving.
 When you're ready to begin, press `Next`.
 
 
-#### Choosing a Network
+### Choosing a Network
 
 In the next screen, you will be asked to choose which network you want to use:
 
@@ -304,7 +306,7 @@ If you want to practice running a Rocket Pool node on the Prater test network wi
 If you're ready to create a real Rocket Pool node on Mainnet to earn real rewards, select **Mainnet**.
 
 
-#### Execution Client Setup
+### Execution Client Setup
 
 The next screen will ask you how you would like to manage your Execution Client:
 
@@ -331,8 +333,8 @@ As the Smartnode cannot manage external Execution clients, you will still be res
 
 Choose which mode you'd like to use for managing your Execution client and follow the steps in the corresponding tab below:
 
-:::::: tabs
-::::: tab Locally Managed
+:::::::: tabs
+::::::: tab Locally Managed
 
 If you want the Smartnode to manage an Execution client for you, the next screen will ask you to pick a client:
 
@@ -345,15 +347,24 @@ If you want the Smartnode to manage an Execution client for you, the next screen
 Please refer to the [Choosing your ETH clients](./eth-clients.md#eth1-clients) section for a description of each option.
 Once you've made your choice, click on the appropriate tab below to learn how to configure it:
 
-:::: tabs
-::: tab Geth
+:::::: tabs
+::::: tab Geth
 
 If you choose **Geth**, the Wizard will handle all of the configuration for you.
 You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
 You can proceed to the next section.
 
+
+::: warning NOTE
+To make sure your Execution client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
+Configure it to forward **port 30303** on both TCP and UDP to your machine's local IP address.
+This way, other Execution clients can discover it and communicate with it from the outside.
+
+Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
-::: tab Infura
+
+:::::
+::::: tab Infura
 
 If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
 
@@ -367,17 +378,17 @@ When you created an Infura account and an `Ethereum` project for it, it will be 
 Note this is the **Project ID**, *not* the **Secret ID**.
 Enter the **Project ID** here, and press `Next`.
 
-:::
-::: tab Pocket
+:::::
+::::: tab Pocket
 
 If you choose **Pocket**, the Wizard will handle all of the configuration for you.
 You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
 You can proceed to the next section.
 
-:::
-::::
 :::::
-::::: tab Externally Managed
+::::::
+:::::::
+::::::: tab Externally Managed
 
 For an externally managed Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
 
@@ -400,398 +411,170 @@ Because the Smartnode will run in its own Docker container, it will use Docker's
 You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
 
-:::::
-::::::
+:::::::
+::::::::
 
 And with that, your Execution client is all set!
 
 
-#### Fallback Execution Client Setup
+### Fallback Execution Client Setup
 
-// TODO: RESUME HERE
+The next thing to configure is an optional **fallback** Execution client:
 
+<center>
 
+![](./images/tui-fallback-ec.png)
 
+</center>
 
+Think of this like a "spare" Execution client your node can use in case the primary one you selected in the previous step ever goes down for maintenance (which will almost certainly happen at some point).
 
+Choose **None** if you don't want to use a fallback client.
+This isn't recommended, but you have the option if you have a reason not to use one.
 
+**Infura** and **Pocket** behave the same way here as they do in regular Execution client operation; they will just stay idle until your primary Execution client fails, at which point they will take over until it's online again.
+*Note that if you selected one of these for your primary Execution client earlier, you should choose a different one for your fallback Execution client.*
 
+**External** a good choice if you already have a secondary Execution client that you maintain yourself elsewhere (such as on a second machine, outside of the Smartnode stack) and want to use that as your fallback client.
+If this is selected, the Smartnode will simply switch to that if your primary client fails until it resumes operation.
 
+To learn more about configuring these options, click on the appropriate tab below:
 
+:::::: tabs
+::::: tab Infura
 
+If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
 
+<center>
 
+![](./images/tui-fallback-infura.png)
 
+</center>
 
+When you created an Infura account and an `Ethereum` project for it, it will be assigned a unique project ID which is a 32-character hexadecimal string.
+Note this is the **Project ID**, *not* the **Secret ID**.
+Enter the **Project ID** here, and press `Next`.
 
+:::::
+::::: tab Pocket
 
+If you choose **Pocket**, the Wizard will handle all of the configuration for you.
+You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
+You can proceed to the next section.
 
+:::::
+::::: tab External
 
+For an externally managed fallback Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
 
-This will launch a CLI-based interview that will ask you a few questions to help make configuration easy.
+<center>
 
-The first question you will see is as follows:
+![](./images/tui-fallback-external-ec.png)
 
-```
-Some settings (such as port selection) come with recommended defaults.
-Would you like to use them automatically? You can review them at the end of this setup. [y/n]
-```
+</center>
 
-Rocket Pool has many settings, including:
+The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting transactions.
+**If you don't already have your client's API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
+Instructions on this vary from client to client; consult your client's documentation to learn how to set up the HTTP RPC endpoint.
 
-- The network ports to run its various services on
-- The maximum number of peers the ETH1 and ETH2 clients should connect to
-- Login information if you want to publish your node's statistics to the [ethstats](https://ethstats.net/) monitor
+The Websocket URL is only relevant if you are using **Nimbus** as your Consensus client.
+If you are using a different client, you can leave it blank.
+Otherwise, enter it here.
 
-Many people tend to leave these at their default recommended values.
-
-If you answer `y`, Rocket Pool will use the recommended default values for most of the settings, and only ask you about settings that don't have defaults - this is the **standard configuration mode**.
-
-If you answer `n`, it will show you all of the settings so you can change each one individually - this is **advanced configuration mode**.
-
-While going through the sections below, choose the tab that corresponds to the mode you selected.
-
-
-### ETH1 Configuration
-
-The first main question will be you about which ETH1 client you want to use.
-For help deciding on an option, consult the [Choosing your ETH Clients](./eth-clients.md) section.
-
-The prompt will look like this:
-
-```
-Which Eth 1.0 client would you like to run?
-1: Geth 	Geth is one of the three original implementations of the
- 		    Ethereum protocol. It is written in Go, fully open source and
- 		    licensed under the GNU LGPL v3.
-		    https://geth.ethereum.org/
-
-2: Infura 	Use infura.io as a light client for Eth 1.0. Not recommended
- 		    for use in production.
-		    https://infura.io/
-
-3: Pocket 	Use Pocket Network as a light client for Eth 1.0. Suitable
- 		    for use in production.
-		    https://dashboard.pokt.network/
-
-4: Custom 	Use a custom Eth 1.0 client at a specified address (does not
- 		    work on localhost).
-```
-
-::: tip NOTE
-If you already ran `service config` before and selected an ETH1 client, the interview will ask if you want to continue using the same client first.
-::: 
-
-For this configuration mode, where Rocket Pool will install and manage your ETH1 and ETH2 clients, select between Geth, Infura, Pocket, or a custom ETH1 endpoint (for advanced users).
-
-::::::: tabs
-
-:::::: tab Geth
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-The standard configuration for Geth does not ask you any questions.
-It will use the following default values:
-
-- Ethstats Label: (None, disabled)
-- Ethstats Login: (None, disabled)
-- Cache Size: 1024 MB for `x64` systems, 512 MB for `arm64` systems
-- Max Peers: 50 for `x64` systems, 12 for `arm64` systems
-- P2P Port: 30303
-
-::: tip NOTE
-To make sure Geth can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 30303** on both TCP and UDP to your machine's local IP address
-This way, other ETH1 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-::::
-
-:::: tab Advanced Configuration
-
-If you select Geth, you will be presented with the following questions:
-
-```
-Please enter the Ethstats Label (leave blank for none)
-(optional - for reporting Eth 1.0 node status to ethstats.net)
-```
-
-This refers to a statistics aggregation service called [ethstats](https://ethstats.net/), which tracks some information about your node.
-It isn't required and can be left blank to ignore it.
-
-```
-Please enter the Ethstats Login (leave blank for none)
-(optional - for reporting Eth 1.0 node status to ethstats.net)
-```
-
-This lets you enter your `ethstats` credentials for data reporting if you're using that service.
-Again, this is optional and can be left blank.
-
-```
-Please enter the Cache Size (leave blank for the default of 1024)
-(Geth's cache size, in MB - set this to 256 if you have 4 GB
- of RAM, or 512 if you have 8 GB)
-```
-
- This lets you specify how much RAM you want Geth to use for its internal cache.
- By default, **x64** systems will use **1024 MB** and **arm64** systems will use **256 MB**.
- We have provided some guidance on general rules of thumb to set this to based on your total system RAM.
-
- **Raspberry Pi** users can safely set this to **512 MB** if planning to use **Nimbus** for the ETH2 client; otherwise, it should be left at **256 MB**.
-
- ```
- Please enter the Max Peers (leave blank for the default of 50)
-(The maximum number of peers that Geth should connect to -
- this can be lowered down to 12 to improve performance on low-power
- systems or constrained networks)
- ```
-
- This determines how many peers Geth will connect to.
- Generally, a lower peer count means lower overall data usage and lower system resource consumption.
- For low-power systems, this can lead to better overall validator performance.
- However, with a lower peer count, any actions you perform may take slightly longer to propagate out to the entire ETH1 network.
-
- For **x64** systems, this defaults to **50** and for **arm64** systems this defaults to **12**.
-
-```
-Please enter the P2P Port (leave blank for the default of 30303)
-(The port for Geth to use for P2P (blockchain) traffic)
-```
-
-This determines the TCP and UPD port that Geth will use for P2P traffic to communicate with other ETH1 nodes.
-If you have a specific setup where the default port of 30303 is not available, you can change it here.
-
-::: tip NOTE
-To make sure Geth can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 30303** (or whichever port you specified) on both TCP and UDP to your machine's local IP address
-This way, other ETH1 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your fallback Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
 
-::::
-:::::
-
-::::::
-
-:::::: tab Infura
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-If you select Infura, you will be presented with the following questions:
-
-```
-Please enter the Infura Project ID
-(the ID of your project created in Infura)
-```
-
-When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
-Enter it here.
-
-::::
-
-:::: tab Advanced Configuration
-
-If you select Infura, you will be presented with the following questions:
-
-```
-Please enter the Infura Project ID
-(the ID of your project created in Infura)
-```
-
-When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
-Enter it here.
-
-::::
 :::::
 ::::::
 
-:::::: tab Pocket
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-The standard configuration for Pocket does not ask you any questions.
-It will use the default Pocket Gateway ID that the Pocket team has generously donated to Rocket Pool so node operators can use the network for free.
-
-::::
-
-:::: tab Advanced Configuration
-
-If you select Pocket, you will be presented with the following questions:
-
-```
-Please enter the Pocket App or Load Balancer ID (leave blank for the standard Rocket Pool project ID for Pocket)
-(the ID of your Pocket App; if you use a Load Balancer, prefix it with lb/)
-```
-
-Pocket has generously allowed Rocket Pool node operators to use their network for free.
-If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
-If you have your own account with Pocket and would like to use that instead, you can enter it here.
-
-::::
-:::::
-::::::
-
-:::::::
+When you're happy with your fallback Execution client choices, proceed to the next step.
 
 
-### ETH1 Fallback Configuration
+### Consensus Client Setup
 
-The next question will ask you to choose a **fallback ETH1 client**:
+Now that you have an Execution and optional fallback Execution client ready, the next task is to set up the Consensus client.
+The first thing to do is determine which management mode you'd like to use for it, just like you did for the Execution client earlier:
 
-```
-Would you like to configure a second Eth 1.0 client to act as a fallback in case your primary Eth 1.0 client is unavailable? [y/n]
-```
+<center>
 
-This is a secondary ETH1 client that is configured to run in standby mode and can take over for your primary client if it ever fails.
+![](./images/tui-cc-mode.png)
 
-For example, this is an extremely useful option if you selected `geth` as your primary client, but you need to [take it down for maintenance](./geth-pruning.md).
+</center>
 
-The prompt will look like this:
+As with the Execution client management mode, there are two options here.
 
-```
-Which Eth 1.0 Fallback client would you like to run?
-1: Infura 	Use infura.io as a light client for Eth 1.0. Not recommended
- 		    for use in production.
-		    https://infura.io/
+**Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
+Use it if you don't already have a Consensus client and you want the Smartnode to manage one for you.
+By choosing this, the Smartnode will add both a **Beacon Node** (the process used to communicate with the Beacon Chain) and a **Validator Client** (the process used by minipools to validate on the Beacon Chain and earn rewards) as Docker containers that it can control to its stack.
+Don't worry, you'll get to choose *which* client you want to run next.
 
-2: Pocket 	Use Pocket Network as a light client for Eth 1.0. Suitable
- 		    for use in production.
-		    https://dashboard.pokt.network/
+**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have a Consensus client running elsewhere that they manage manually.
+By choosing this, the Smartnode will simply connect to your existing Beacon Node and will not run one of its own.
+However, it *will* run its own Validator Client so it can manage its own validator keys.
 
-3: Custom 	Use a custom Eth 1.0 client at a specified address (does not
- 		    work on localhost).
-```
+For example, users can use this to plug into a Beacon Node that they currently use for solo staking; that way, they don't need to have two separate copies of a Beacon Node.
 
-::: tip NOTE
-Note that Geth is not included in this list, because generally running two copies of Geth on a typical node is prohibitively expensive from a resource perspective.
+:::warning NOTE
+As the Smartnode cannot manage external Consensus clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
 :::
 
-Select which one you'd like to use here.
-The configuration options are the same as they were in the previous section where you chose a primary ETH1 client.
+Choose which mode you'd like to use for managing your Consensus client and follow the steps in the corresponding tab below:
 
 ::::::: tabs
+:::::: tab Locally Managed
 
-:::::: tab Infura
+If you want the Smartnode to manage a Consensus client for you, the next screen will ask you to pick a client:
 
-::::: tabs
+<center>
 
-:::: tab Standard Configuration
+![](./images/tui-local-cc.png)
 
-If you select Infura, you will be presented with the following questions:
+</center>
 
-```
-Please enter the Infura Project ID
-(the ID of your project created in Infura)
-```
+**The preferred choice** for the overall health and diversity of the network is the **Random (Recommended)** choice, which will randomly choose among one of the four supported Consensus clients for you.
 
-When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
-Enter it here.
+If you would prefer to choose an explicit client (for example, if you're on a Raspberry Pi and know you want to use Nimbus), please refer to the [Choosing your ETH clients](./eth-clients.md#eth2-clients) section for a description of each option so you can make an educated decision.
 
-::::
+:::warning NOTE
+There are two conditions that will prompt you with warnings based on client selection:
 
-:::: tab Advanced Configuration
+- The selected client is currently [a supermajority client](https://clientdiversity.org/), meaning that an unhealthy majority of validators on the Beacon Chain use it which threatens the stability of the network
 
-If you select Infura, you will be presented with the following questions:
+- The selected client is **too resource-heavy** for the hardware you're currently using
 
-```
-Please enter the Infura Project ID
-(the ID of your project created in Infura)
-```
+If either of those cases are true for your chosen client, you will be warned and asked to choose a different client.
+You have the option of continuing to use the one you selected, but you must be aware of the risks in doing so.
+:::
 
-When you create an Infura account, you will be given a unique project ID which is a 32-character hexadecimal string.
-Enter it here.
+Once you've made your choice or have been assigned a random client, click on the appropriate tab below to learn how to configure it:
 
-::::
-:::::
-::::::
+:::: tabs
+::: tab Lighthouse
 
-:::::: tab Pocket
+The first option in Lighthouse's configuration will ask about your validator's **graffiti** message:
 
-::::: tabs
+<center>
 
-:::: tab Standard Configuration
+![](./images/tui-local-graffiti.png)
 
-The standard configuration for Pocket does not ask you any questions.
-It will use the default Pocket Gateway ID that the Pocket team has generously donated to Rocket Pool so node operators can use the network for free.
+</center>
 
-::::
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
 
-:::: tab Advanced Configuration
+**Note the maximum length of the graffiti is 16 characters.**
 
-If you select Pocket, you will be presented with the following questions:
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
 
-```
-Please enter the Pocket App or Load Balancer ID (leave blank for the standard Rocket Pool project ID for Pocket)
-(the ID of your Pocket App; if you use a Load Balancer, prefix it with lb/)
-```
+Next up is an option to enable or disable **Checkpoint Sync**:
 
-Pocket has generously allowed Rocket Pool node operators to use their network for free.
-If you leave this blank, you can connect to the Pocket network using Rocket Pool's default project ID.
-If you have your own account with Pocket and would like to use that instead, you can enter it here.
+<center>
 
-::::
-:::::
-::::::
+![](./images/tui-local-checkpoint.png)
 
-:::::::
-
-
-### ETH2 Configuration
-
-Once you're finished configuring the ETH1 client, you will be prompted with this question:
-
-```
-Would you like to run a random Eth 2.0 client (recommended)? [y/n]
-```
-
-Rocket Pool is firmly committed to the health and diversity of the Beacon Chain, which means we do not favor one client over another.
-To this end, the default behavior is to run a **random ETH2 client**.
-All four clients are stable and perform very well, so there is no wrong choice (depending on your available hardware resources).
-Therefore, choosing a random client with not negatively impact your validators but will contribute to the security of the ETH2 ecosystem.
-
-That being said, we also offer you the option to choose a specific client if you have one in mind.
-For example, users with low-power systems such as the **Raspberry Pi** may want to explicitly pick an ETH2 client that is tailored to systems with low resources.
-
-For help comparing the ETH2 clients, consult the [Choosing your ETH Clients](./eth-clients.md) section.
-
-::::::: tabs
-
-:::::: tab Lighthouse
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-The standard configuration for Lighthouse will assign the following defaults:
-
-- Max Peers: 50
-- P2P Port: 9001
-
-In addition, you will be asked the following questions:
-
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
-
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
-
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
+</center>
 
 Lighthouse has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
 This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
@@ -802,12 +585,13 @@ One popular option is Infura, which offers this service for free (though it requ
 
 See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
 
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Lighthouse will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Lighthouse will disable
- validation duties for them to prevent you from being slashed.)
-```
+The final question will ask if you want to enable Doppelgänger Protection:
+
+<center>
+
+![](./images/tui-local-dd.png)
+
+</center>
 
 Lighthouse supports a feature called [Doppelgänger Detection](https://lighthouse-book.sigmaprime.io/validator-doppelganger.html).
 In a nutshell, this feature will **intentionally** miss a few attestations after Lighthouse's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
@@ -824,69 +608,212 @@ In situations where you are moving your validator to a new machine or you are ch
 
 Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
+::: tab Nimbus
 
-::::
+The first option in Nimbus's configuration will ask about your validator's **graffiti** message:
 
-:::: tab Advanced Configuration
+<center>
 
-Lighthouse's configuration includes the following questions:
+![](./images/tui-local-graffiti.png)
 
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
+</center>
 
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
 
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
+**Note the maximum length of the graffiti is 16 characters.**
 
-Lighthouse has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+Next up is an option to enable or disable **Checkpoint Sync**:
+
+<center>
+
+![](./images/tui-local-checkpoint.png)
+
+</center>
+
+Nimbus has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
 This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
-Take a look at [their documentation on checkpoint syncing](https://lighthouse-book.sigmaprime.io/checkpoint-sync.html) for more information if you are curious.
+Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
 One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
 See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
 
-```
-Please enter the Target Peers (leave blank for the default of 50
-(The number of peer connections to maintain - you can try
- lowering this if you have a low-resource system or a constrained
- network)
-```
+The final question will ask if you want to enable Doppelgänger Protection:
 
-This lets you specify a maximum number of P2P peers that Lighthouse should connect to in order to share the state of the Beacon chain.
-If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
+<center>
 
-```
-Please enter the P2P Port (leave blank for the default of 9001)
-(The port to use for P2P (blockchain) traffic)
-```
+![](./images/tui-local-dd.png)
 
-This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
-It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
+</center>
 
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Lighthouse will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Lighthouse will disable
- validation duties for them to prevent you from being slashed.)
-```
+Nimbus supports a feature called [Doppelgänger Protection](https://nimbus.guide/faq.html#why-does-my-validator-miss-two-epochs-of-attestations-after-restarting).
+In a nutshell, this feature will **intentionally** miss a few attestations after Nimbus restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Nimbus would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Nimbus will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
+:::
+::: tab Prysm
+
+The first option in Prysm's configuration will ask about your validator's **graffiti** message:
+
+<center>
+
+![](./images/tui-local-graffiti.png)
+
+</center>
+
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
+
+**Note the maximum length of the graffiti is 16 characters.**
+
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+The final question will ask if you want to enable Doppelgänger Protection:
+
+<center>
+
+![](./images/tui-local-dd.png)
+
+</center>
+
+Prysm supports a feature called Doppelgänger Protection.
+In a nutshell, this feature will **intentionally** miss a few attestations after Prysm's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Prysm would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Prysm will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
+:::
+::: tab Teku
+
+The first option in Teku's configuration will ask about your validator's **graffiti** message:
+
+<center>
+
+![](./images/tui-local-graffiti.png)
+
+</center>
+
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
+
+**Note the maximum length of the graffiti is 16 characters.**
+
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+The final question is an option to enable or disable **Checkpoint Sync**:
+
+<center>
+
+![](./images/tui-local-checkpoint.png)
+
+</center>
+
+Teku has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://docs.teku.consensys.net/en/latest/HowTo/Get-Started/Checkpoint-Start/) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+One popular option is Infura, which offers this service for free (though it requires you to create an account).
+
+See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
+
+:::
+::::
+
+::: warning NOTE
+To make sure your Consensus client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
+Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
+This way, other Consensus clients can discover it and communicate with it from the outside.
+
+Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+:::
+
+::::::
+:::::: tab Externally Managed
+
+Because each Consensus client has slightly different behavior, the Smartnode needs to know which one you're using externally so it can adapt its own behavior accordingly.
+Start by choosing which client you have from the list in the next screen:
+
+<center>
+
+![](./images/tui-external-cc.png)
+
+</center>
+
+::: warning NOTE
+At this time, **Nimbus** is not compatible with External mode because it cannot run as a standalone Validator Container (VC) yet.
+When the client supports this feature, it will be added to the list here.
+:::
+
+Select your client from the tabs below to learn how to finish configuring it.
+
+::::: tabs
+:::: tab Lighthouse
+
+Start by specifying the URL for your Lighthouse Beacon Node's API:
+
+<center>
+
+![](./images/tui-external-lh.png)
+
+</center>
+
+The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting messages.
+**If you don't already have the API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
+See [Lighthouse's documentation](https://lighthouse-book.sigmaprime.io/api-bn.html) for instructions on how to do this.
+
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
+:::
+
+Next, it will ask about your validator's **graffiti** message:
+
+<center>
+
+![](./images/tui-external-graffiti.png)
+
+</center>
+
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
+
+**Note the maximum length of the graffiti is 16 characters.**
+
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+The final question will ask if you want to enable Doppelgänger Protection:
+
+<center>
+
+![](./images/tui-external-dd.png)
+
+</center>
 
 Lighthouse supports a feature called [Doppelgänger Detection](https://lighthouse-book.sigmaprime.io/validator-doppelganger.html).
 In a nutshell, this feature will **intentionally** miss a few attestations after Lighthouse's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
@@ -903,199 +830,53 @@ In situations where you are moving your validator to a new machine or you are ch
 
 Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
+::::
+:::: tab Prysm
 
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+Start by specifying the URL for your Prysm Beacon Node's API and the URL for its JSON-RPC API:
+
+<center>
+
+![](./images/tui-external-prysm.png)
+
+</center>
+
+The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting messages.
+It will prepare its Prysm Validator Client with the JSON-RPC URL so it can communicate with your Beacon Node, as *Prysm's Validator Client currently cannot work over the HTTP API.*
+
+**If you don't already have the API ports enabled and accessible from your Smartnode machine, you will need to set them up now.**
+See [Prysm's documentation](https://docs.prylabs.network/docs/prysm-usage/parameters) for instructions on how to do this.
+**You will need the `grpc-gateway` *and* the `rpc-host` enabled.**
+
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
 
-::::
-:::::
-::::::
+Next, it will ask about your validator's **graffiti** message:
 
-:::::: tab Nimbus
+<center>
 
-::::: tabs
+![](./images/tui-external-graffiti.png)
 
-:::: tab Standard Configuration
+</center>
 
-The standard configuration for Nimbus will assign the following defaults:
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
 
-- Max Peers: 160 on `x64` systems, 80 on `arm64` systems
-- P2P Port: 9001
+**Note the maximum length of the graffiti is 16 characters.**
 
-In addition, you will be asked the following questions:
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
 
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
+The final question will ask if you want to enable Doppelgänger Protection:
 
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
+<center>
 
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
+![](./images/tui-external-dd.png)
 
-Nimbus has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
-This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
-Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
+</center>
 
-You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
-
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
-
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Nimbus will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Nimbus will disable
- validation duties for them to prevent you from being slashed.)
-```
-
-Nimbus supports a feature called [Doppelgänger Detection](https://nimbus.guide/faq.html#why-does-my-validator-miss-two-epochs-of-attestations-after-restarting).
-In a nutshell, this feature will **intentionally** miss a few attestations after Nimbus restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
-
-Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
-After its short waiting period, Nimbus would start validating normally.
-
-*However*, if there *is* another machine running with your validator keys attached, then Nimbus will immediately shut down and issue an error message in its log files.
-The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
-When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
-
-Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
-In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
-
-Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
-
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-
-::::
-
-:::: tab Advanced Configuration
-
-Nimbus's configuration includes the following questions:
-
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
-
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
-
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
-
-Nimbus has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
-This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
-Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
-
-You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
-
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
-
-```
-Please enter the Max Peers (leave blank for the default of 160)
-(The maximum number of peers to try to connect to - you
- can try lowering this if you have a low-resource system or
- a constrained network)
-```
-
-This lets you specify a maximum number of P2P peers that Nimbus should connect to in order to share the state of the Beacon chain.
-If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
-
-```
-Please enter the P2P Port (leave blank for the default of 9001)
-(The port to use for P2P (blockchain) traffic)
-```
-
-This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
-It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
-
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Nimbus will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Nimbus will disable
- validation duties for them to prevent you from being slashed.)
-```
-
-Nimbus supports a feature called [Doppelgänger Detection](https://nimbus.guide/faq.html#why-does-my-validator-miss-two-epochs-of-attestations-after-restarting).
-In a nutshell, this feature will **intentionally** miss a few attestations after Nimbus restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
-
-Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
-After its short waiting period, Nimbus would start validating normally.
-
-*However*, if there *is* another machine running with your validator keys attached, then Nimbus will immediately shut down and issue an error message in its log files.
-The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
-When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
-
-Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
-In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
-
-Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
-
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-
-::::
-:::::
-::::::
-
-:::::: tab Prysm
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-The standard configuration for Prysm will assign the following defaults:
-
-- Max Peers: 45
-- P2P Port: 9001
-
-In addition, you will be asked the following questions:
-
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
-
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
-
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Prysm will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Prysm will disable
- validation duties for them to prevent you from being slashed.)
-```
-
-Prysm supports a feature called Doppelgänger Detection.
+Prysm supports a feature called Doppelgänger Protection.
 In a nutshell, this feature will **intentionally** miss a few attestations after Prysm's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
 
 Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
@@ -1110,188 +891,46 @@ In situations where you are moving your validator to a new machine or you are ch
 
 Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
 
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-
 ::::
+:::: tab Teku
 
-:::: tab Advanced Configuration
+Start by specifying the URL for your Teku Beacon Node's API:
 
-Prysm's configuration includes the following questions:
+<center>
 
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
+![](./images/tui-external-teku.png)
 
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
+</center>
 
-```
-Please enter the Max Peers (leave blank for the default of 45)
-(The maximum number of peers to try to connect to - you
- can try lowering this if you have a low-resource system or
- a constrained network)
-```
+The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting messages.
+**If you don't already have the API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
+See [Teku's documentation](https://docs.teku.consensys.net/en/latest/Reference/CLI/CLI-Syntax/#rest-api-enabled) for instructions on how to do this.
 
-This lets you specify a maximum number of P2P peers that Prysm should connect to in order to share the state of the Beacon chain.
-If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
-
-```
-Please enter the P2P Port (leave blank for the default of 9001)
-(The port to use for P2P (blockchain) traffic)
-```
-
-This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
-It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
-
-```
-Would you like to enable Doppelgänger Detection? [y/n]
-(If enabled, Prysm will *intentionally* miss 1 or 2 attestations on startup to check
- if validator keys are already running elsewhere. If they are, Prysm will disable
- validation duties for them to prevent you from being slashed.)
-```
-
-Prysm supports a feature called Doppelgänger Detection.
-In a nutshell, this feature will **intentionally** miss a few attestations after Prysm's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
-
-Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
-After its short waiting period, Prysm would start validating normally.
-
-*However*, if there *is* another machine running with your validator keys attached, then Prysm will immediately shut down and issue an error message in its log files.
-The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
-When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
-
-Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
-In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
-
-Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
-
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
+
+Next, it will ask about your validator's **graffiti** message:
+
+<center>
+
+![](./images/tui-external-graffiti.png)
+
+</center>
+
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
+
+**Note the maximum length of the graffiti is 16 characters.**
+
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
 
 ::::
 :::::
+
+
 ::::::
-
-:::::: tab Teku
-
-::::: tabs
-
-:::: tab Standard Configuration
-
-The standard configuration for Teku will assign the following defaults:
-
-- Max Peers: 74
-- P2P Port: 9001
-
-In addition, you will be asked the following questions:
-
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
-
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
-
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
-
-Teku has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
-This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
-Take a look at [their documentation on checkpoint syncing](https://docs.teku.consensys.net/en/latest/HowTo/Get-Started/Checkpoint-Start/) for more information if you are curious.
-
-You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
-
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
-
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-
-::::
-
-:::: tab Advanced Configuration
-
-Teku's configuration includes the following questions:
-
-```
-Please enter the Custom Graffiti (leave blank for none)
-(optional - for adding custom text to signed Eth 2.0 blocks - 16 chars max)
-```
-
-When your validator proposes a block on the ETH2 chain, you are allowed to include a short custom string that will be included in it and available for everyone to see.
-This is called the block's `graffiti`.
-You can enter a custom message here if you like or leave it blank.
-
-```
-Please enter the Checkpoint Sync Provider (leave blank for none)
-(If you would like to instantly sync using an existing Beacon node, enter its URL.
- Example: https://<project ID>:<secret>@eth2-beacon-prater.infura.io
- Leave this blank if you want to sync normally from the start of the chain.)
-```
-
-Teku has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
-This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
-Take a look at [their documentation on checkpoint syncing](https://docs.teku.consensys.net/en/latest/HowTo/Get-Started/Checkpoint-Start/) for more information if you are curious.
-
-You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
-
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
-
-```
-Please enter the Max Peers (leave blank for the default of 74)
-(The maximum number of peers to try to connect to - you
- can try lowering this if you have a low-resource system or
- a constrained network)
-```
-
-This lets you specify a maximum number of P2P peers that Teku should connect to in order to share the state of the Beacon chain.
-If you find that your node is running out of resources, you can run `rocketpool service config` again and change this to a lower value, which may improve performance and lower your network data usage.
-
-```
-Please enter the P2P Port (leave blank for the default of 9001)
-(The port to use for P2P (blockchain) traffic)
-```
-
-This is the TCP and UDP port that the ETH2 client will use to connect to its peers.
-It is safe to leave this at the default setting of 9001 unless your system already uses that port for something else.
-
-::: tip NOTE
-To make sure your ETH2 can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** (or whichever port you specified) on both TCP and UDP to your machine's local IP address.
-This way, other ETH2 clients can discover it and communicate with it from the outside.
-
-Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
-:::
-
-::::
-:::::
-::::::
-
 :::::::
 
 
@@ -1351,21 +990,15 @@ Rocket Pool comes with the ability to display a detailed dashboard showing metri
 
 </center>
 
-The next question in the `service config` interview will ask you if you want to enable this:
+The next question in the Wizard will ask you if you want to enable this:
 
-```
-Would you like to enable Rocket Pool's metrics dashboard? [y/n]
-```
+<center>
 
-Answer `y` if you would like to enable it, or `n` if you would rather disable it.
+![](./images/tui-metrics.png)
+
+</center>
 
 If you choose to enable it, you will learn more about setting it up and how to use it in the [Setting up the Grafana Dashboard](./grafana.md) section later in the process.
-
-Enabling it will create three new Docker containers:
-
-- `rocketpool_prometheus`: this runs [Prometheus](https://prometheus.io/docs/introduction/overview/), a tool that collects, stores, and formats metrics and data from lots of endpoints into one convenient place.
-- `rocketpool_exporter` - this runs Prometheus's [Node Exporter](https://prometheus.io/docs/guides/node-exporter/), a small service that collects hardware health about your machine and provides it to Prometheus.
-- `rocketpool_grafana` - this runs [Grafana](https://grafana.com/), a webapp for creating and displaying modular dashboards. It connects to Prometheus to get the raw data, then shows it to you in a pretty format like you see in the screenshot above. 
 
 ::: warning NOTE
 All of the data collected by this system **stays on your machine**.
@@ -1373,84 +1006,185 @@ Rocket Pool does not collect any of the telemetry or send it to a separate servi
 It's purely there for you to use so you can monitor your own node!
 :::
 
-If you answer `y` to the question, you will go through the configuration process for the metrics service which is described below.
+After this question, you've finished setting up the Smartnode!
+You will see the following dialog:
 
-::::: tabs
-:::: tab Standard Configuration
+<center>
 
-In the standard configuration, you will not be asked any further questions.
-The following defaults will be set:
+![](./images/tui-finished.png)
 
-- Beacon Node metrics port: 9100
-- Validator Client metrics port: 9101
-- Rocket Pool node metrics port: 9102
-- Node Exporter metrics port: 9103
-- Prometheus port: 9091
-- Grafana port: 3100
+</center>
 
-::: warning NOTE
-Unlike the ETH1 and ETH2 ports, you **should not** forward any of these ports in your router's configuration.
-For security reasons, these should **only** be accessible on your internal network!
+If you're happy with your setup and are ready to start the Smartnode, click `Save and Exit` here and go to the [Wrapping Up](#wrapping-up) section next.
+
+If you would like to review all of the settings and customize many additional settings that weren't included in the Wizard, click `Review All Settings` and go to the [next section](#configuring-the-smartnode-stack-via-the-settings-manager).
+
+
+## Configuring the Smartnode Stack via the Settings Manager
+
+If you've already run `rocketpool service config`, instead of being greeted by the Wizard, you will see the **Settings Manager** screen:
+
+<center>
+
+![](./images/tui-settings-manager.png)
+
+</center>
+
+There are three main features of this screen:
+
+1. The **Category List**, which lets you drill down into the settings for each category of the Smartnode stack
+2. The **Review Changes and Save** button, which you can use when you're ready to see what settings you've changed and save the updated configuration
+3. The **Open the Config Wizard** button, which will bring you to the [Setup Wizard](#configuring-the-smartnode-stack-via-the-wizard) if you prefer that interface instead
+
+::: tip TIP
+To use the Settings Manager, **press the `Arrow Keys` (up/down/left/right) to navigate between options in the home page**.
+
+Press `Tab` to go **between the category list (1) and the buttons (2 and 3)** at the bottom of the screen. 
+The button that's currently selected will be **highlighted in green**.
+
+**Press `Enter` or `Space` to select a button**, analogous to clicking on it with the mouse.
+
+**Hold `Ctrl` and press `C` at any time to exit the Settings Manager without saving anything**.
 :::
 
-::::
+As you scroll through the categories list, each option will have a helpful description appear in the **Description Box** to the right of the screen.
+Feel free to explore them; nothing you do will be saved until you go through the Review dialog via the **Review Changes and Save** button, and you can press **Ctrl+C** at any time to exit without saving, so you won't accidentally mess something up by playing with the settings here.
 
-:::: tab Advanced Configuration
 
-In the advanced configuration, you will be asked the following questions:
+### Configuring the Settings
+
+From the home screen, select any one of the categories with the `Enter` key to view the settings for that category.
+For example, here is the screen for the **Smartnode and TX Fees** category:
+
+<center>
+
+![](./images/tui-smartnode.png)
+
+</center>
+
+Use the `Arrow Keys` to move up and down between the settings.
+The currently selected one will have a white square at the end of it (if it's a text box or a check box), or will be highlighted in white (if it's a drop down).
+
+Press `Escape` to go back to the home screen of the Settings Manager when you're done.
+
+As you scroll through the settings, each one will show a brief description of what it does in the **Description Box** on the right.
+It will also show the **default value** there in case you want to revert it to its stock setting.
+
+In this example, the **RPL Claim Gas Threshold** setting is currently selected (highlighted with a green box on the left-hand side of the screen).
+It has been changed to `40`, but you can see that it has a default of `150` in the top-right corner (the top of the **Description Box**).
+
+::: tip TIP
+As a reminder, nothing will be saved to disk until you go through the Review dialog via the **Review Changes and Save** button.
+You are encouraged to explore all of the settings to learn about them and see what your Smartnode can do!
+:::
+
+
+### The Setting Types and How to Use Them
+
+The settings manager uses the following setting types and UI elements:
+
+#### Text Boxes
+
+Text boxes are used to enter arbitrary strings of text or numbers.
+They look like this:
+
+<center>
+
+![](./images/tui-textbox.png)
+
+</center>
+
+Enter your desired values into them, then **press `Enter` or use the `Arrow Keys` to navigate to a different setting in order to preserve your changes.**
+If you don't, the Settings Manager will assume you're still updating that setting and won't mark it as changed yet.
+
+
+#### Drop Downs
+
+Drop downs are used to select an option from a list of choices.
+They look like this (when they're open):
+
+<center>
+
+![](./images/tui-dropdown-open.png)
+
+</center>
+
+The **green** item is the one that is currently selected.
+Use the `Arrow Keys` to change options - as you do, the **Description Box** on the right will update to tell you more about the currently selected option.
+When you're happy with your choice, press `Enter` to choose the selected option and the drop down will close, revealing the option that is currently selected:
+
+<center>
+
+![](./images/tui-dropdown-closed.png)
+
+</center>
+
+
+#### Check Boxes
+
+Check boxes are used for simple Yes/No questions.
+They look like this:
+
+<center>
+
+![](./images/tui-checkbox-checked.png)
+
+</center>
+
+When they are checked, they will have an `X` in the middle as you see above.
+When they are *unchecked*, they will simply be blank like this:
+
+<center>
+
+![](./images/tui-checkbox-unchecked.png)
+
+</center>
+
+To change the setting, simply select it and press `Enter`.
+
+
+### Saving Changes
+
+When you're happy with your changes and you'd like to review them before saving, press the **Review Changes and Save** button on the home screen.
+As a reminder, to get to it, press the `Tab` key.
+
+You will be presented with a view that looks like this:
+
+<center>
+
+![](./images/tui-review.png)
+
+</center>
+
+The **Review Box** here will present all of the settings you've changed, showing the old values and the new ones.
+For example, the first line here shows that the **RPL Claim Gas Threshold** used to be `150`, and it's been changed to `40`.
+
+It will also show you which containers are affected by the settings you've modified and will offer to restart them for you after you've saved your changes.
+
+::: tip NOTE
+At this point, your changes **still haven't been saved yet**.
+If you want to go back and modify something, press `Escape` to return to the home screen.
+:::
+
+When you are satisfied with the changes, press `Enter` to save the new configuration to disk.
+You will then exit the Terminal UI and be presented with something like this message:
 
 ```
-Please enter the ETH2 Metrics Port (leave blank for the default of 9100)
-(The port for the Beacon Chain client to make its metrics available on)
+Your changes have been saved!
+The following containers must be restarted for the changes to take effect:
+	rocketpool_watchtower
+	rocketpool_validator
+	rocketpool_eth2
+	rocketpool_node
+Would you like to restart them automatically now? [y/n]
 ```
 
-This is the port that your Beacon Node client (`rocketpool_eth2`) will expose its metrics on.
-It will host an HTTP server on this port so that Prometheus can access it occasionally and collect details about the Beacon chain.
+Press `y` and `Enter` if you want to automatically apply your new configuration changes and restart the affected containers.
 
-```
-Please enter the Validator Metrics Port (leave blank for the default of 9101)
-(The port for the Validator client to make its metrics available on)
-```
+Press `n` and `Enter` if you have other things you want to do before restarting them, and will do it manually later.
 
-This is the port that your Validator client (`rocketpool_validator`) will expose its metrics on.
-It will host an HTTP server on this port so that Prometheus can access it occasionally and collect details about your validator's duties and performance.
+In either case, your configuration is done!
 
-```
-Please enter the Rocket Pool Node Metrics Port (leave blank for the default of 9102)
-(The port for the Rocket Pool Node to make its metrics available on)
-```
-
-This is the port that Rocket Pool's own node container (`rocketpool_node`) will expose its metrics on.
-It will host an HTTP server on this port so that Prometheus can access it occasionally and collect details about the Rocket Pool network, your node's performance, and your rewards.
-
-```
-Please enter the Node Exporter Metrics Port (leave blank for the default of 9103)
-(The port for Prometheus's Node Exporter to make its metrics available on)
-```
-
-This is the port that the Node Exporter container (`rocketpool_exporter`) will expose its metrics on.
-It will host an HTTP server on this port so that Prometheus can access it occasionally and collect details about your system's hardware health.
-
-```
-Please enter the Prometheus Port (leave blank for the default of 9091)
-(The port for Prometheus to make its metrics available on)
-```
-
-This is the port that the Prometheus container (`rocketpool_prometheus`) will listen for incoming requests on.
-It will host an HTTP server on this port so that Grafana can access it to query its collected data.
-
-```
-Please enter the Grafana Port (leave blank for the default of 3100)
-(The port for Grafana to listen on for HTTP requests)
-```
-
-This is the port that the Grafana container (`rocketpool_prometheus`) will host its HTTP server on.
-You will specify this port in your browser when connecting to Grafana (e.g. `http://localhost:3100`) to view the dashboard.
-
-::::
-:::::
-
-Once you finish setting up the Metrics service, you're finished!
 
 
 ## Wrapping Up
