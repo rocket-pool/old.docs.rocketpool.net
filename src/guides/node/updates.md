@@ -97,7 +97,7 @@ brew update && brew upgrade
 ## Updating the Smartnode Stack
 
 Occasionally, Rocket Pool will release a new version of the Smartnode stack.
-Updates can contain new versions of the CLI or the Rocket Pool Docker containers, as well as new versions of the ETH1 and ETH2 clients.
+Updates can contain new versions of the CLI or the Rocket Pool Docker containers, as well as new versions of the Execution and Consensus clients.
 
 The most consistent way to find out about new releases is to subscribe to the Rocket Pool Discord server; they will always be posted in the Releases channel and you will receive a notification.
 
@@ -130,24 +130,21 @@ For `arm64` systems (like the Raspberry Pi):
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
 ```
 
-Now run the install command (**select the tab for the network that you'd like to upgrade**):
+Now run the install command:
 
-:::: tabs
-::: tab The Ethereum Mainnet
 ```
 rocketpool service install -d
 ```
-:::
-::: tab The Prater Testnet
-```
-rocketpool service install -n prater -d
-```
-:::
-::::
 
 The `-d` flag tells it to ignore system dependencies like Docker, since you already have them.
 
-Next, start Rocket Pool up again:
+If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
+
+```
+rocketpool service config
+```
+
+When you're done, start Rocket Pool up again:
 
 ```
 rocketpool service start
@@ -170,7 +167,7 @@ Both the client and service should match the new release version.
 ::::: tab Linux (Native Mode)
 
 ::: warning NOTE
-This will only update the Smartnode stack itself - it **will not** update your ETH1 and ETH2 clients.
+This will only update the Smartnode stack itself - it **will not** update your Execution or Consensus clients.
 You will have to do this manually (see the next section below).
 :::
 
@@ -205,16 +202,13 @@ sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/downl
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-arm64 -O /usr/local/bin/rocketpoold
 ```
 
-You *may* also need to download the new installer package, if it contains an updated `config.yml`.
-This is something you'll have to ask about on Discord, or compare the commit history for yourself.
-If it is the case, then you'll need to replace the file in `/srv/rocketpool/config.yml` with the new one - but be sure to make a backup of the old one first because this will erase all of your settings, so you'll have to copy them over again.
+If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
 
-::: warning NOTE
-The config file package has both mainnet and Prater testnet configurations in it.
-If you do have to upgrade the config files, *make sure you use the ones for the correct network*.
-:::
+```
+rp service config
+```
 
-Next, start Rocket Pool up again:
+When you're done, start Rocket Pool up again:
 
 ```
 sudo systemctl start rp-node rp-watchtower
@@ -253,24 +247,21 @@ For `arm64` systems, such as the Mac mini with M1:
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /usr/local/bin/rocketpool
 ```
 
-Now run the install command (**select the tab for the network that you'd like to upgrade**):
+Now run the install command:
 
-:::: tabs
-::: tab The Ethereum Mainnet
 ```
 rocketpool service install -d
 ```
-:::
-::: tab The Prater Testnet
-```
-rocketpool service install -n prater -d
-```
-:::
-::::
 
 The `-d` flag tells it to ignore system dependencies like Docker, since you already have them.
 
-Next, start Rocket Pool up again:
+If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
+
+```
+rocketpool service config
+```
+
+When you're done, start Rocket Pool up again:
 
 ```
 rocketpool service start
@@ -293,59 +284,50 @@ Both the client and service should match the new release version.
 ::::::
 
 
-## Manually Updating the ETH1 or ETH2 Client
+## Manually Updating the Execution or Consensus Client
 
-Each new release of the Smartnode stack will come with updated references to the latest compatible versions to the ETH1 and ETH2 Docker containers.
+Each new release of the Smartnode stack will come with updated references to the latest compatible versions to the Execution and Consensus Docker containers.
 In some cases, however, you might want to upgrade one of those clients *before* waiting for a new Smartnode stack release.
 This section will show you how to do just that.
 
 :::: tabs
 ::: tab Docker Mode
-Updating to new client versions is fairly straightforward in Docker mode.
-Start by shutting down the containers that you want to update.
+Updating to new client versions is easy in Docker mode.
 
-For ETH1:
-```
-docker stop rocketpool_eth1
-```
-
-For ETH2:
-```
-docker stop rocketpool_eth2
-
-docker stop rocketpool_validator
-```
-
-Next, open the file `~/.rocketpool/config.yml` in your favorite text editor.
-Scroll down to the section that describes the client you want to update.
-For example, here is an excerpt from the Geth section:
+Start by opening the Settings Manager:
 
 ```
-name: Geth
-desc: "\tGeth is one of the three original implementations of the\n
-    \t\tEthereum protocol. It is written in Go, fully open source and\n
-    \t\tlicensed under the GNU LGPL v3."
-image: ethereum/client-go:v1.10.4
-link: https://geth.ethereum.org/
+rocketpool service config
 ```
 
-Note the `image: ethereum/client-go:v1.10.4` line.
-This refers to the name and version of the image to download from [Docker Hub](https://hub.docker.com).
-Replace the version number here with the updated version number, then save the file and exit the editor.
+To change the Execution client version, go to the **Execution Client (ETH1)** category.
+Modify the **Container Tag** setting:
 
-Finally, run `rocketpool service start` to automatically download the new images and restart the containers you had shut down.
+<center>
 
-You should follow the service logs closely after the upgrade to ensure that the new client works as expected.
-Once you're satisfied that everything is working, then you're done.
-That's all there is to it!
+![](./images/tui-ec-container-tag.png)
+
+</center>
+
+To change the Consensus client version, go to the **Consensus Client (ETH2)** category.
+Modify the **Container Tag** setting:
+
+<center>
+
+![](./images/tui-cc-container-tag.png)
+
+</center>
 
 ::: warning NOTE
 This process is slightly different for **Prysm**, because the Smartnode stack needs to use the *DEBUG* images that Prysm provides instead of the normally versioned ones.
 For help upgrading Prysm manually, please visit the `smart-nodes` channel in the Rocket Pool Discord.
 :::
 
-::: tab Hybrid and Native Modes
-First, shut down your ETH1 and/or ETH2 client service.
+When you're happy with your changes, save and exit as usual.
+The Smartnode will offer to restart all of the affected containers automatically.
+
+::: tab Native Mode
+First, shut down your Execution client, Beacon Node, and/or Validator client service depending on what you'd like to update.
 For example, shutting down Geth:
 
 ```

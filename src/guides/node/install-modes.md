@@ -1,8 +1,8 @@
 # Selecting a Rocket Pool Mode
 
 Rocket Pool's Smartnode stack is quite flexible; there are several different ways to run it.
-It can stand up an entire full node from scratch, it can integrate with existing eth1 or eth2 deployments, and it can even run natively as a set of system services.
-In this section, we will cover three typical ways of configuring and using the Smartnode stack.
+It can stand up an entire full node from scratch, it can integrate with existing Execution or Consensus client deployments, and it can even run natively as a set of system services.
+In this section, we will cover the typical ways of configuring and using the Smartnode stack.
 
 
 ## The Default Docker-Based Configuration
@@ -42,10 +42,10 @@ If you would like to use this mode, proceed to the [Configuring a Standard Rocke
 
 ## The Hybrid Configuration with External Clients
 
-The hybrid configuration is well-suited for users that are interested in running a Rocket Pool node, but already have their own ETH1 and/or ETH2 clients running for other purposes (for example, because they're already solo-staking).
+The hybrid configuration is well-suited for users that are interested in running a Rocket Pool node, but already have their own Execution and/or Consensus clients running for other purposes (for example, because they're already solo-staking).
 
-In this mode, Rocket Pool will deploy Docker containers for its own processes and for an ETH2 validator but will ignore the ETH1 and ETH2 client containers for whichever external clients you already run and maintain.
-As Rocket Pool will be creating and maintaining new validator keys for each of your node's minipools, it is important that it runs its own ETH2 validator client.
+In this mode, Rocket Pool will deploy Docker containers for its own processes and for a Validator client it manages, but will ignore the Execution client and Beacon Node containers for whichever external clients you already run and maintain.
+**As Rocket Pool will be creating and maintaining new validator keys for each of your node's minipools, it is important that it runs its own Validator client.**
 
 When using this configuration, the Smartnode will use the following Docker containers (which were described above):
 
@@ -61,13 +61,8 @@ This configuration is not currently compatible with **Nimbus** because Nimbus do
 This may be provided in the future.
 :::
 
-::: warning NOTE
-Currently, some of the Docker containers need to run as the `root` user to function correctly.
-While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
-In this case, we suggest you use the Native configuration mode listed below.
-:::
-
-If you would like to use this mode, proceed to the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
+If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
+When prompted to choose a management mode for your Execution and/or Consensus clients, choose the **Externally Managed** option which is described in detail within that section.
 
 
 ## The Native Configuration without Docker
@@ -76,7 +71,7 @@ This configuration bypasses Docker entirely.
 Instead of running the Smartnode stack via Docker, each process will be installed as a local system service (e.g. via `systemd`).
 This includes the `node`, `watchtower`, `eth1`, `eth2`, and `validator` processes.
 
-This configuration offers the most flexibility because it allows you to fine-tune Rocket Pool's parameters (such as its security posture, where the ETH1 and ETH2 clients live, where the chain data lives, where your keys live, and so on).
+This configuration offers the most flexibility because it allows you to fine-tune Rocket Pool's parameters (such as its security posture, where the Execution and Consensus clients live, where the chain data lives, where your keys live, and so on).
 It is also the most difficult to set up and maintain.
 
 In this mode, the Smartnode Installer is no longer relevant.

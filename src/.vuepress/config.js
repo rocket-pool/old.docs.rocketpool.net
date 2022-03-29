@@ -129,8 +129,17 @@ module.exports = {
                     'node/eth-clients',
                     'node/install-modes',
                     'node/docker',
-                    'node/hybrid',
                     'node/native',
+                  ]
+                },
+                {
+                  title: 'Configuring Rocket Pool',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/config-docker',
+                    'node/config-native',
+                    'node/advanced-config',
                   ]
                 },
                 'node/securing-your-node',

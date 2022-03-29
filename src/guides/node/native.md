@@ -4,9 +4,9 @@ In this section, we will walk through the process of installing the Rocket Pool 
 
 The general plan is as follows:
 - Create system services for the Rocket Pool components (the **node** process, and optionally the **watchtower** process if you are an Oracle Node)
-- Create a system service for the ETH1 client
-- Create a system service for the ETH2 beacon client
-- Create a system service for the ETH2 validator client
+- Create a system service for the Execution client
+- Create a system service for the Beacon node
+- Create a system service for the Validator client
 - Configure Rocket Pool to use communicate with those services
 
 This is a fairly involved setup so it will take some time to complete.
@@ -25,24 +25,24 @@ This includes using the terminal, creating system accounts, managing permissions
 ## Creating Service Accounts
 
 The first step is to create new system accounts for the services and disable logins and shell access for them.
-The reason for having separate user accounts is practical: if your ETH1 or ETH2 clients have a major vulnerability like an [Arbitrary Code Execution](https://en.wikipedia.org/wiki/Arbitrary_code_execution) exploit, doing this will limit the amount of damage an attacker can actually do since they're running on an account with limited permissions.
+The reason for having separate user accounts is practical: if your Execution or Consensus clients have a major vulnerability like an [Arbitrary Code Execution](https://en.wikipedia.org/wiki/Arbitrary_code_execution) exploit, doing this will limit the amount of damage an attacker can actually do since they're running on an account with limited permissions.
 
-We're going to create one account for your ETH1 client, one for your ETH2 client, and one for both Rocket Pool and the validator client.
+We're going to create one account for your Execution client, one for your Beacon Node, and one for both Rocket Pool and the validator client.
 The sharing is necessary because Rocket Pool will create the validator's key files once you create a new minipool, and it will set the permissions so that only its own user has access to them.
-If you're using **Nimbus** for your ETH2 client, then it will share an account with Rocket Pool instead since it doesn't have a separate validator client. 
+If you're using **Nimbus** for your Consensus client, then it will share an account with Rocket Pool instead since it doesn't have a separate validator client. 
 
-Start by creating an account for your ETH1 client, which we'll call `eth1`:
-```
+Start by creating an account for your Execution client, which we'll call `eth1`:
+```shell
 sudo useradd -r -s /sbin/nologin eth1
 ```
 
-Do the same for your ETH2 client, which we'll call `eth2`:
-```
+Do the same for your Beacon Node, which we'll call `eth2`:
+```shell
 sudo useradd -r -s /sbin/nologin eth2
 ```
 
 Finally, make one for the validator and Rocket Pool, which we'll call `rp`:
-```
+```shell
 sudo useradd -r -s /sbin/nologin rp
 ```
 
@@ -52,8 +52,8 @@ Any time you see it used in this guide, just substitute it with `eth2` instead.
 :::
 
 Now, add yourself to the `rp` group.
-You'll need to do this in order to use the Rocket Pool CLI, because it and the Rocket Pool daemon both need to access the ETH1 wallet file.
-```
+You'll need to do this in order to use the Rocket Pool CLI, because it and the Rocket Pool daemon both need to access the Execution layer wallet file.
+```shell
 sudo usermod -aG rp $USER
 ```
 
@@ -65,7 +65,7 @@ After this, logout and back in for the changes to take effect.
 ### Setting up the Binaries
 Start by making a folder for Rocket Pool and a data subfolder.
 You can put this wherever you want; for this guide, I'll put it into `/srv`:
-```
+```shell
 sudo mkdir -p /srv/rocketpool/data
 
 sudo chown -R $USER:$USER /srv/rocketpool
@@ -118,122 +118,25 @@ sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 
 ::::
 
-Next, grab the installation package - we're going to throw almost everything in here away since it's meant to support docker installs, but we need to copy two files:
-1. The config file that Rocket Pool uses to understand the directories and routes for everything
-2. The script that lets Rocket Pool restart the validator service once a new minipool is created (so it can load the new keys)
+Next, grab the validator restart script - Rocket Pool will use this when it needs to restart your Validator Client to load new keys after you create a new minipool:
 
-We also need to create the `settings.yml` file that holds all of your node's specific configuration details.
-
-::: tip NOTE
-The configuration for the **Ethereum mainnet** is different from the configuration for the **Prater testnet**!
-Choose which one you want to use, and follow the appropriate tab below.
-:::
-
-Follow these steps for your system's architecture:
-
-:::: tabs
-::: tab x64 on Mainnet
 ```shell
-cd /tmp
+wget https://github.com/rocket-pool/smartnode-install/raw/release/install/scripts/restart-vc.sh -O /srv/rocketpool/restart-vc.sh
 
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-amd64.tar.xz
-
-tar xf rp-smartnode-install-amd64.tar.xz
-
-cp amd64/rp-smartnode-install/network/mainnet/config.yml /srv/rocketpool
-
-cp amd64/rp-smartnode-install/network/mainnet/chains/eth2/restart-validator.sh /srv/rocketpool
-
-touch -a /srv/rocketpool/settings.yml
-
-cd /srv/rocketpool
+chmod +x /srv/rocketpool/restart-vc.sh
 ```
-:::
-
-::: tab arm64 on Mainnet
-```shell
-cd /tmp
-
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-arm64.tar.xz
-
-tar xf rp-smartnode-install-arm64.tar.xz
-
-cp arm64/rp-smartnode-install/network/mainnet/config.yml /srv/rocketpool
-
-cp arm64/rp-smartnode-install/network/mainnet/chains/eth2/restart-validator.sh /srv/rocketpool
-
-touch -a /srv/rocketpool/settings.yml
-
-cd /srv/rocketpool
-```
-:::
-
-::: tab x64 on the Testnet
-```shell
-cd /tmp
-
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-amd64.tar.xz
-
-tar xf rp-smartnode-install-amd64.tar.xz
-
-cp amd64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
-
-cp amd64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
-
-touch -a /srv/rocketpool/settings.yml
-
-cd /srv/rocketpool
-```
-:::
-
-::: tab arm64 on the Testnet
-```shell
-cd /tmp
-
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-smartnode-install-arm64.tar.xz
-
-tar xf rp-smartnode-install-arm64.tar.xz
-
-cp arm64/rp-smartnode-install/network/prater/config.yml /srv/rocketpool
-
-cp arm64/rp-smartnode-install/network/prater/chains/eth2/restart-validator.sh /srv/rocketpool
-
-touch -a /srv/rocketpool/settings.yml
-
-cd /srv/rocketpool
-```
-:::
-::::
-
-
-Now, open `config.yml` in `nano` or your editor of choice, and make the following changes:
-- Change `smartnode.passwordPath` to `passwordPath: /srv/rocketpool/data/password`
-- Change `smartnode.walletPath` to `walletPath: /srv/rocketpool/data/wallet`
-- Change `smartnode.validatorKeychainPath` to `validatorKeychainPath: /srv/rocketpool/data/validators`
-- Change `smartnode.validatorRestartCommand` to `validatorRestartCommand: "/srv/rocketpool/restart-validator.sh"`
-- Change `chains.eth1.provider` to `provider: http://127.0.0.1:8545`
-- Change `chains.eth1.wsProvider` to `wsProvider: ws://127.0.0.1:8546`
-- Change `chains.eth2.provider` to `provider: http://127.0.0.1:5052`
 
 Now open `~/.profile` with your editor of choice and add this line to the end:
-```
+```shell
 alias rp="rocketpool -d /usr/local/bin/rocketpoold -c /srv/rocketpool"
 ```
 
 Save it, then reload your profile:
-```
+```shell
 source ~/.profile
 ```
 
 This will let you interact with Rocket Pool's CLI with the `rp` command, which is a nice shortcut.
-
-Finally, run the Rocket Pool configuration:
-```
-rp service config
-```
-
-Select your ETH1 and ETH2 clients of choice.
-The actual settings you choose don't matter (you'll be specifying them manually in the command line strings for each service when you create services for them), so just pick the defaults.
 
 
 ### Creating the Services
@@ -264,7 +167,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/rocketpoold --config /srv/rocketpool/config.yml --settings /srv/rocketpool/settings.yml node
+ExecStart=/usr/local/bin/rocketpoold --settings /srv/rocketpool/user-settings.yml node
 
 [Install]
 WantedBy=multi-user.target
@@ -305,7 +208,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/usr/local/bin/rocketpoold --config /srv/rocketpool/config.yml --settings /srv/rocketpool/settings.yml watchtower
+ExecStart=/usr/local/bin/rocketpoold --settings /srv/rocketpool/user-settings.yml watchtower
 
 [Install]
 WantedBy=multi-user.target
@@ -329,7 +232,8 @@ chmod +x /srv/rocketpool/watchtower-log.sh
 
 ::::
 
-## Installing ETH1
+
+## Installing the Execution Client
 
 For the sake of simplicity, we're going to use Geth as our example during this guide.
 If you have another client in mind, adapt these instructions to that client accordingly.
@@ -424,8 +328,8 @@ WantedBy=multi-user.target
 
 Note that the `taskset 0x0c ionice -c 3` at the start is meant for Raspberry Pi's or other similarly low-power systems:
 
-- `taskset 0x0c` constrains Geth to only run on CPUs 2 and 3. This way, it won't interfere with the ETH2 client.
-- `ionice -c 3` tells the system that Geth's disk access is a super low priority - if ETH2 needs to access the SSD, it will always have priority over Geth.
+- `taskset 0x0c` constrains Geth to only run on CPUs 2 and 3. This way, it won't interfere with the Beacon Node.
+- `ionice -c 3` tells the system that Geth's disk access is a super low priority - if the Beacon Node needs to access the SSD, it will always have priority over Geth.
 
 You can omit that prefix if you're not on a low-power system.
 :::
@@ -442,7 +346,7 @@ Some notes:
   - If you have 4 GB of RAM, **set this to 256**.
   - If you have 8 GB of RAM, **you can leave it at 512** so it syncs faster and doesn't require pruning as frequently.
   - For larger amounts of RAM, you can ignore this flag.
-- You can optionally use the `--maxpeers` flag to lower the peer count. The peer count isn't very important for the ETH1 node, and lowering it can free up some extra resources if you need them.
+- You can optionally use the `--maxpeers` flag to lower the peer count. The peer count isn't very important for the Execution client, and lowering it can free up some extra resources if you need them.
 
 Lastly, add a log watcher script so you can check on Geth to see how it's doing:
 ```
@@ -463,12 +367,12 @@ sudo chmod +x /srv/geth/log.sh
 Now you can see the Geth logs by doing `$ /srv/geth/log.sh`.
 This replaces the behavior that `rocketpool service logs eth1` used to provide, since it can't do that without Docker.
 
-All set on the ETH1 client; now for ETH2.
+All set on the the Execution client; now for the Consensus client.
 
 
-## Installing ETH2
+## Installing the Beacon Node
 
-Start by making a folder for your ETH2 binary and log script.
+Start by making a folder for your Beacon Node binary and log script.
 Choose the instructions for the client you want to run:
 
 ::::: tabs
@@ -609,7 +513,7 @@ Copy the `bin` and `lib` folders from the release archive into `/srv/teku/`.
 :::::
 
 
-Next, create a systemd service for your ETH2 client.
+Next, create a systemd service for your Beacon Node.
 The following are examples that show typical command line arguments to use in each one:
 
 ::::: tabs
@@ -709,7 +613,7 @@ root    ALL=(ALL:ALL) ALL
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
-Finally, modify `/srv/rocketpool/restart-validator.sh`:
+Finally, modify `/srv/rocketpool/restart-vc.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
 ::::
 :::: tab Prysm x64
@@ -840,7 +744,7 @@ If you want to use the **Prater testnet** instead, replace the `--network=mainne
 
 Note the following:
 
-- Nimbus is preceeded by `taskset 0x01`. Basically, this constrains Nimbus to only run on CPU 0 (since it's single threaded). If you followed the Geth guide for ETH1 (which constrained Geth to CPU 2 and 3), this will ensure that the processes don't overlap on the same core and will provide maximum performance.
+- Nimbus is preceeded by `taskset 0x01`. Basically, this constrains Nimbus to only run on CPU 0 (since it's single threaded). If you followed the Geth guide for the Execution client (which constrained Geth to CPU 2 and 3), this will ensure that the processes don't overlap on the same core and will provide maximum performance.
 - Change the `--graffiti` to whatever you want.
 - By default, Nimbus will try to connect to 160 peers. We changed it here to `--max-peers=60` to lighten the CPU load a little, but you are free to experiement with this if you want.
 
@@ -880,7 +784,7 @@ root    ALL=(ALL:ALL) ALL
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
-Finally, modify `/srv/rocketpool/restart-validator.sh`:
+Finally, modify `/srv/rocketpool/restart-vc.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart nimbus`
 ::::
 :::: tab Prysm arm64
@@ -952,9 +856,9 @@ If you want to use the **Prater testnet** instead, replace the `--network=mainne
 
 Some notes:
 - The user is set to `eth2`.
-- For arm64 systems, `ionice -c 2 -n 0` tells your system to give ETH2 the highest possible priority for disk I/O (behind critical system processes), so it can process and attest as quickly as possible
+- For arm64 systems, `ionice -c 2 -n 0` tells your system to give your Beacon Node the highest possible priority for disk I/O (behind critical system processes), so it can process and attest as quickly as possible
 
-Next, add a log watcher script in the folder you put your ETH2 client into:
+Next, add a log watcher script in the folder you put your Beacon Node into:
 
 :::: tabs
 ::: tab Lighthouse
@@ -1023,7 +927,7 @@ sudo chmod +x /srv/teku/bn-log.sh
 :::
 ::::
 
-With that, ETH2 is all set.
+With that, the Beacon Node is all set.
 On to the validator client!
 
 
@@ -1031,7 +935,7 @@ On to the validator client!
 
 ::: tip NOTE
 Nimbus does not have a seperate validator client at this time, so it is not included in these instructions.
-If you plan to use Nimbus, you've already taken care of this during the ETH2 client setup and can skip this section.
+If you plan to use Nimbus, you've already taken care of this during the Beacon Node setup and can skip this section.
 :::
 
 First, create a systemd service for your validator client.
@@ -1203,10 +1107,17 @@ root    ALL=(ALL:ALL) ALL
 rp    ALL=(ALL) NOPASSWD: RP_CMDS
 ```
 
-Finally, modify `/srv/rocketpool/restart-validator.sh`:
+Finally, modify `/srv/rocketpool/restart-vc.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart <validator service name>`
 
-The services are now installed, so it's time to enable and start them.
+The services are now installed.
+
+
+## Configuring the Smartnode
+
+Now that your services are all created, it's time to configure the Smartnode stack.
+
+Please visit the [Configuring the Smartnode Stack (Native Mode)](./config-native.md) guide, and return here when you are finished.
 
 
 ## Enabling and Running the Services
