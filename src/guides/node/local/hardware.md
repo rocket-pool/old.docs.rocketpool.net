@@ -124,9 +124,9 @@ Drez's setup:
 
 Here are Drez's comments on why they chose this setup:
 
-*Main reason i am gonna stake on this laptop is because i already had spare one and dont need to spend extra money on new server.
+*Main reason i am gonna stake on this laptop is because i already had spare one and dont need to spend extra money on a new server.
 I like its mobility, compactness, built-in screen for easy monitoring.
-In case of overheating i bought a laptop cooling pad and spare CPU cooler just in case, i also recommend to change thermal compound paste especially if your gonna run on an older machine*
+In case of overheating i bought a laptop cooling pad and spare CPU cooler just in case, i also recommend to change thermal compound paste especially if you're gonna run on an older machine*
 
 
 ## NUCs (Next Unit of Computing) and Mini-PCs
