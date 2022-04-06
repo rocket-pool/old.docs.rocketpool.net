@@ -18,7 +18,7 @@ It is written in Go, fully open source and licensed under the GNU LGPL v3.
 Geth is very popular and widely used on ETH1 nodes around the world.
 It is also currently the only **full client** that Rocket Pool's installer supports.
 This means that it stores a copy of the ETH1 chain on your machine.
-It interacts via peer-to-peer communications with other ETH1 nodes to record and veryify new blocks and transactions.
+It interacts via peer-to-peer communications with other ETH1 nodes to record and verify new blocks and transactions.
 By running a Geth node, you contribute to the decentralization and overall health of the ETH1 network.
 
 Geth runs as a single process.
@@ -119,7 +119,7 @@ The options below help to describe each client so you can make an informed decis
 ### Lighthouse
 
 [Lighthouse](https://lighthouse.sigmaprime.io/) is an open-source Ethereum 2.0 maintained by [Sigma Prime](https://sigmaprime.io/).
-It implements the [Ethereum 2.0 specification](https://notes.ethereum.org/SCIg8AH5SA-O4C1G1LYZHQ?view) as defined by the Ethereum Foundation Research team.
+It implements the [Ethereum 2.0 specification](https://github.com/ethereum/consensus-specs) as defined by the Ethereum Foundation Research team.
 
 Lighthouse is a cutting-edge distributed systems project implementing technologies at the forefront of blockchain research; including proof-of-stake consensus, parallel transaction execution and state separation (sharding).
 
