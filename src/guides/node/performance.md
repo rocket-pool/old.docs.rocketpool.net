@@ -304,7 +304,7 @@ Then use the arrow keys to scroll down, and add the line `* 9 * * * ~/update-not
 
 # This like triggers at 9 AM local time
 # to configure your own times, refer to https://crontab.guru/
-* 9 * * * ~/update-notifier.sh
+0 9 * * * ~/update-notifier.sh
 ```
 
 The press `control+x` to exit and press `Y` when asked whether you want to save your changes.
