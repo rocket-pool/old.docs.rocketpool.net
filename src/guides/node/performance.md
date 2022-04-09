@@ -246,11 +246,11 @@ EXPLORER_URL=https://beaconcha.in/validators/eth1deposits?q=
 NOTIFICATION_URL="$EXPLORER_URL$NODE_ADDRESS"
 
 # Check if the update-notifier file is showing updates available
-if cat /var/lib/update-notifier/updates-available | grep -q '^(?!0)[0-9]* updates can be applied'; then
+if cat /var/lib/update-notifier/updates-available | grep -Pq '^(?!0)[0-9]* updates can be applied'; then
 
 
    MESSAGE_TITLE="⚠️ Rocket Pool node system updates available"
-   MESSAGE_CONTENT="$( cat /var/lib/update-notifier/updates-available | grep '^(?!0)[0-9]* updates can be applied' )"
+   MESSAGE_CONTENT="$( cat /var/lib/update-notifier/updates-available | grep -P '^(?!0)[0-9]* updates can be applied' )"
 
 else
 
