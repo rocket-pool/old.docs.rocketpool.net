@@ -2,8 +2,15 @@
 
 Now that your node is up and running and you have one or more minipools attached, you'll need to keep an eye on everything to make sure it's running smoothly.
 
+You can track your machine either:
 
-## Tracking your Machine's Status
+1. Directly by tapping into your machine metrics
+2. Indirectly through the use of third party tools
+
+It is recommended to use a combination of both depending on your needs.
+
+
+## Directly Tracking your Machine's Status
 
 With respect to your machine's status, there are a few useful metrics you'll probably want to keep an eye on:
 
@@ -118,17 +125,15 @@ Database updated: 2021-06-28 22:00:00
 This will let you keep tabs on your total network usage, which might be helpful if your ISP imposes a data cap.
 
 
-## Watching your Validators' Performance
+## Third-party Performance Monitoring
 
-The next thing you'll want to track is the attestation and block proposal performance of your validators.
-Block explorers like [Beaconcha.in](https://beaconcha.in) to watch your validator's attestation performance and income.
+The best monitoring uses a Swiss-cheese model: every tool has holes, but if you stack them on top of each-other there is less of a chance anything falls through and catches you by surprise.
 
-::: tip NOTE
-The above link is for the **mainnet** version of Beaconcha.in.
-If you're running on the Prater Testnet, use [this link instead](https://prater.beaconcha.in)!
-:::
+Please note that these third-party tools are used by the Rocket Pool community, but are not officially endorsed or supported by the Rocket Pool team. If you have a tool suggestion, or are a tool owner, you are very welcome to add a pull request with details on your tool.
 
-Navigate to that site, and enter the public key for your validator in the search box on the top of the screen.
+### Beaconcha.in website: using the beacon chain as a metric source
+
+The [Beaconcha.in](https://beaconcha.in) block explorer website and app provide a way to track your validator's performance by looking at it's on-chain activity. They also have the option to receive [email notifications](https://beaconcha.in/user/notifications) for significant events like downtime. Navigate to their site, and enter the public key for your validator in the search box on the top of the screen.
 
 ::: tip
 If you forgot your validator's public key, you can easily retrieve it with the command `rocketpool minipool status`.
@@ -136,6 +141,11 @@ If you forgot your validator's public key, you can easily retrieve it with the c
 
 If everything is set up right, you should see something like this:
 ![](./local/images/pi/Beaconchain.png)
+
+::: tip NOTE
+The above link is for the **mainnet** version of Beaconcha.in.
+If you're running on the Prater Testnet, use [this link instead](https://prater.beaconcha.in)!
+:::
 
 This is a record of all of the Beacon Chain activity for your validator.
 You can use it to check your validator's balance on the Beacon Chain to watch it grow over time and calculate your APY.
@@ -148,8 +158,152 @@ You should check the logs of the `eth1`, `eth2`, and `validator` services with `
 
 **You should pin this tab or create a bookmark with it so you can quickly jump to it and check the status of your validator.**
 
-::: tip
-Beaconcha.in has an iOS / Android app that you can download to provide this same information in a convenient phone-friendly form.
-You can also create an account and register with email notifications; these will inform you via email when your validator goes offline and you need to take action.
-:::
+### Beaconcha.in app: validator overview and push notifications
 
+The Beaconcha.in website is a great way to view metrics and set up email alerts. Their mobile app has a more "at-a-glance" nature. It also features a push notification service that includes some useful alerts like
+
+1. Notifications of issues like missed attestations
+2. Notifications of Rocket Pool reward rounds
+3. Over/under-collateralisation of the RPL on your node
+
+Note that the app has a free version, and paid options with convenience features like homescreen widgets.
+
+### Uptimerobot: port-scanning for uptime
+
+The [Uptimerobot]( https://uptimerobot.com/ ) service is a simple service that scans an ip address for an open port. If your machine becomes unavailable on the port you specified, Uptimerobot can send you a notification that there is an issue. The service was a wide variety of notification options, including email, push notification, SMS, phone call and webhooks.
+
+The setup screen looks something like this:
+
+![](./local/images/uptimerobot.png)
+
+The ip to monitor is the remote ip of your node, which you can find by logging into your node by `ssh` or physically, and opening [icanhazip.com]( https://icanhazip.com/ ) in a browser or running the following command in your terminal:
+
+```shell
+curl icanhazip.com
+```
+
+The port to monitor depends on your node setup. If your node is set up for SSH access on port `22` for example, you could monitor that. You could also use the ports used by your consensus and execution clients. If you are staking at home, you might have port-forwarded these on your router, making them suitable for remote port monitoring.
+
+### Rocketpool Metrics Dashboards
+
+There are multiple community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
+
+Community member `VGR` made the [rp-metrics-dashboard.com]( https://www.rp-metrics-dashboard.com/ ) where you can view in-depth statistics on your node, the network and even the [high scores]( https://www.rp-metrics-dashboard.com/highscores ) or the best performing nodes.
+
+![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
+
+A more minimalist tool is the [rocketscan.dev]( https://rocketscan.dev/ ) tool made another community member. It features detailed network and node metrics, including a timeline of your node activity.
+
+![Rocketscan screenshot](./local/images/rocketscan.dev.png)
+
+### Scripting with Pushover (advanced)
+
+The [Pushover]( https://pushover.net/ ) service allows you to send yourself push notifications. To set it up:
+
+1. Create an account at [pushover.net]( https://pushover.net/ )
+1. [Create an API token]( https://pushover.net/apps/build )
+1. Install the Pushover mobile app and/or browser extenion
+1. Call the Pushover API for any action you care about
+
+Calling the Pushover API to send you a push notification is done through a `curl` call structured as such:
+
+```shell
+PUSHOVER_USER=
+PUSHOVER_TOKEN=
+MESSAGE_TITLE=
+MESSAGE_CONTENT=
+curl -f -X POST -d "token=$PUSHOVER_TOKEN&user=$PUSHOVER_USER&title=$MESSAGE_TITLE&message=$MESSAGE_CONTENT&url=&priority=0" https://api.pushover.net/1/messages.json
+```
+
+#### Example: push notification on updates available
+
+If you set up automatic updates using the `unattended-upgrades` and `update-nofifier` packages, you may want to receive a push notification when there are updates available for your node. A potential way to do this is to create a script in `~/update-notifier.sh` and to trigger it daily at 9:00 using `crontab`.
+
+To do this, first create the script by running:
+
+```shell
+nano ~/update-notifier.sh
+```
+
+Then paste the following script:
+
+```shell
+#!/bin/bash
+
+PUSHOVER_USER=
+PUSHOVER_TOKEN=
+NODE_ADDRESS="$(rocketpool node status | grep -Po "(?<=The node )(0x[A-Za-z0-9]{40})")"
+EXPLORER_URL=https://beaconcha.in/validators/eth1deposits?q=
+#EXPLORER_URL=https://rocketscan.dev/node/
+#EXPLORER_URL=https://www.rp-metrics-dashboard.com/dashboard/MAINNET/
+NOTIFICATION_URL="$EXPLORER_URL$NODE_ADDRESS"
+
+# Check if the update-notifier file is showing updates available
+if cat /var/lib/update-notifier/updates-available | grep -q "[0-9]* updates can be applied"; then
+
+
+   MESSAGE_TITLE="⚠️ Rocket Pool node system updates available"
+   MESSAGE_CONTENT="$( cat /var/lib/update-notifier/updates-available | grep "[0-9]* updates can be applied" )"
+
+else
+
+   MESSAGE_TITLE="✅ Rocket Pool node system up to date"
+   MESSAGE_CONTENT="No system updates available"
+
+fi
+
+curl -f -X POST -d "token=$PUSHOVER_TOKEN&user=$PUSHOVER_USER&title=$MESSAGE_TITLE&message=$MESSAGE_CONTENT&url=$NOTIFICATION_URL&priority=0" https://api.pushover.net/1/messages.json
+
+```
+
+The run the following command to mark the script as executable:
+
+```shell
+chmod u+x ~/update-notifier.sh
+```
+
+The run the following command to open your crontab:
+
+```shell
+crontab -e
+```
+
+Then use the arrow keys to scroll down, and add the line `* 9 * * * ~/update-notifier.sh` so the file looks like this:
+
+```shell
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+# This like triggers at 9 AM local time
+# to configure your own times, refer to https://crontab.guru/
+* 9 * * * ~/update-notifier.sh
+```
+
+The press `control+x` to exit and press `Y` when asked whether you want to save your changes.
+
+You should now receive a notification at 09:00 local time if you have updates. You can manually run the script by typing this in your terminal:
+
+```shell
+~/update-notifier.sh
+```
