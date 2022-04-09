@@ -35,7 +35,7 @@ This will give you a nice live view into your system resources, as shown by this
 $ htop
 ```
 
-![](./local/images/pi/Htop.png)
+![Htop screenshot on raspberry pi](./local/images/pi/Htop.png)
 
 On the top display with the bars, the numbered bars each refer to a CPU core's current usage.
 
