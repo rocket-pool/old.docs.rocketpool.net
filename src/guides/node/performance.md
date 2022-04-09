@@ -198,7 +198,14 @@ A more minimalist tool is the [rocketscan.dev]( https://rocketscan.dev/ ) tool m
 
 ### Scripting with Pushover (advanced)
 
-The [Pushover]( https://pushover.net/ ) service allows you to send yourself push notifications. To set it up:
+The [Pushover]( https://pushover.net/ ) service allows you to send yourself push notifications.
+
+::: warning NOTE
+This is an advanced activity to undertake.
+It can be helpful if you are familiar with shell scripting, but is not recommended if you are not comfortable in a shell environment.
+:::
+
+To get started with Pushover:
 
 1. Create an account at [pushover.net]( https://pushover.net/ )
 1. [Create an API token]( https://pushover.net/apps/build )
@@ -307,3 +314,30 @@ You should now receive a notification at 09:00 local time if you have updates. Y
 ```shell
 ~/update-notifier.sh
 ```
+
+#### Example: get notified when your APC UPS daomon activates
+
+Some home stakers are using an Uninterruptible power supply with the `apcupsd` utility to make sure their node shuts down gracefully if their power goes out.
+
+The `apcupsd` utility uses the `apccontrol` script to manage it's logic, thus it is possible to monitor the activity of this daemon by editing the `/etc/apcupsd/apccontrol` file. To do this, run:
+
+```shell
+sudo nano /etc/apcupsd/apccontrol
+```
+
+Then at the top of the line add the following code so the file looks like this:
+
+```shell
+PUSHOVER_USER=
+PUSHOVER_TOKEN=
+MESSAGE_TITLE="UPS Daemon called"
+MESSAGE_CONTENT="called with: $1"
+curl -f -X POST -d "token=$PUSHOVER_TOKEN&user=$PUSHOVER_USER&title=$MESSAGE_TITLE&message=$MESSAGE_CONTENT&url=&priority=0" https://api.pushover.net/1/messages.json
+
+#
+# Copyright (C) 1999-2002 Riccardo Facchetti <riccardo@master.oasi.gpa.it>
+#
+# platforms/apccontrol.  Generated from apccontrol.in by configure.
+```
+
+This will send you a push notification whenever your UPS daemon takes action, includion periodic "self test" functionality.
