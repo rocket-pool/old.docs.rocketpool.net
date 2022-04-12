@@ -1,4 +1,4 @@
-# Configuring a Standard Rocket Pool Node with Docker
+# Creating a Standard Rocket Pool Node with Docker
 
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using the standard [Docker](https://www.docker.com/resources/what-container)-based setup. 
 This will install and configure everything you need to run a complete node, including:
@@ -37,9 +37,9 @@ You must perform the following instructions **on the machine you will use for yo
 If you are not using a keyboard and monitor directly connected to your node machine, you will need to access it remotely (e.g. via SSH) and run these commands on it through that remote connection.
 :::
 
-:::: tabs
+:::::: tabs
 
-::: tab Linux
+::::: tab Linux
 
 On Linux, start by creating a new folder that will hold the CLI application:
 ```shell
@@ -48,6 +48,18 @@ mkdir -p ~/bin
 
 Next, download the CLI.
 This depends on what architecture your system uses.
+
+::: tip TIP
+If you do not know your CPU architecture, you can run the following command to find it:
+
+```shell
+uname -m
+```
+
+The output of this command will print your architecture.
+**Note that `x86_64` is the same as `x64` and `amd64`.**
+**Note that `aarch64` is the same as `arm64`.**
+:::
 
 For `x64` systems (most normal computers):
 ```shell
@@ -76,20 +88,32 @@ $ rocketpool --version
 rocketpool version 1.3.0
 ```
 
-::: tip
+::: tip TIP
 If you see an error message like this,
 ```
 -bash: /home/user/rocketpool: cannot execute binary file: Exec format error
 ```
 
 it means that you downloaded the wrong version above.
-Please check if your system is **x64** or **arm64**, and download the appropriate version.
+Please check if your system is **x64** or **arm64** using the command in the tip above, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
-:::
+:::::
 
-::: tab macOS
+::::: tab macOS
 
 On macOS, download the CLI for your machine with the following command.
+
+::: tip TIP
+If you do not know your CPU architecture, you can run the following command to find it:
+
+```shell
+uname -m
+```
+
+The output of this command will print your architecture.
+**Note that `x86_64` is the same as `x64` and `amd64`.**
+**Note that `aarch64` is the same as `arm64`.**
+:::
 
 For `x64` systems (most Macs):
 ```shell
@@ -114,18 +138,18 @@ $ rocketpool --version
 rocketpool version 1.3.0
 ```
 
-::: tip
+::: tip TIP
 If you see an error message like this,
 ```
 /usr/local/bin/rocketpool: Exec format error
 ```
 
 it means that you downloaded the wrong version above.
-Please check if your system is x64 or arm64, and download the appropriate version.
+Please check if your system is x64 or arm64 using the command in the tip above, and download the appropriate version.
 If your system is neither of those, then you will not be able to run Rocket Pool.
-:::
+:::::
 
-::::
+::::::
 
 
 ## Installing the Smartnode Stack
