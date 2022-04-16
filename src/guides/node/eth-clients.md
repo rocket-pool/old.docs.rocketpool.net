@@ -46,6 +46,10 @@ If you choose a light client, you are trusting that it will represent the ETH1 c
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
 :::
 
+::: warning
+Infura will not work as an ETH1 client after the merge.
+:::
+
 
 ### Pocket
 
@@ -63,6 +67,10 @@ One potential downside of Pocket is that it cannot support websockets based on t
 ::: warning
 If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
+:::
+
+::: warning
+Pocket will not work as an ETH1 client after the merge.
 :::
 
 
