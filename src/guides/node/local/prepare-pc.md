@@ -128,10 +128,10 @@ However, if you want a desktop UI on your node, you can follow [this tutorial](h
 ### Installing and Using SSH
 
 Once the server is installed and you're able to log in, you need to get its IP address.
-An easy way to do this is with `ifconfig`:
+An easy way to do this is with `ifconfig` which is built into the 'net-tools' package:
 
 ```
-sudo apt install ifconfig
+sudo apt install net-tools
 
 ifconfig
 ```
