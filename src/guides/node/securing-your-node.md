@@ -169,7 +169,7 @@ ssh-add /home/username/.ssh/id_ed25519
 ```
 
 Note that this is the path of the **private key** that we generated in the previous step, **not the public key**.
-Replace the path with whatever your system printed in that previous step.
+Replace the path with whatever your system printed in that previous step. Keep in mind that equivalent of the Ubuntu /home/ directory in macOS is called /Users/.
 
 If you get an error saying that the `ssh-agent` is not running, start it by running the following command **on your client machine**:
 
@@ -207,7 +207,7 @@ There are two ways to do this - if one doesn't work, try the other way:
 
 :::: tabs
 ::: tab Using ssh-copy-id
-Run the following command **on your client machine**:
+Remembering to change Ubuntu /home/ directory to equivalent /Users/ directory if you're on macOS, run the following command **on your client machine**:
 
 ```shell
 ssh-copy-id -i /home/username/.ssh/id_ed25519.pub username@node.ip.address
