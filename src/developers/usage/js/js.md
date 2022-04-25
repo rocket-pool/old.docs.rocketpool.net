@@ -30,7 +30,6 @@ const rp = new RocketPool(web3, RocketStorage);
 ```
 
 Alternatively you can also initialize it using a Contract Storage Address:
-```
 ``` javascript
 import Web3 from 'web3';
 import RocketPool from 'rocketpool';
