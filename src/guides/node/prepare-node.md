@@ -81,11 +81,18 @@ Please read both options below to determine which one applies to you.
 ::: warning NOTE
 This method will require you to **submit a transaction** from your new withdrawal address, so **you must have a small amount of ETH in that address already.**
 :::
+ 
+::: warning NOTE
+For Ledger Cold Wallets, Ledger Live does not yet support MetaMask Nativly, and WalletConnect doesnt work.  It WILL work with MetaMask tho! Simply add the Ledger Wallet using MetaMask/Ledger Live.  You will need to have the device connected, unlocked, and the ETH app open.   You also need to go into the settings within the ETH app on the device and enable "blind signing"  this feature will automatically disable after the session.
 
+If you are using Prater Testnet, it is recommendede you create a NEW Etherium Wallet on the Ledger device (It does not have a concept of a test net), then make sure to select the Goerli testnet at the top when adding it to MetaMask.  This makes it easier to not confuse testnet/mainnet.  Ledger Live will not show Goerli but it will hold it! 
+:::
+ 
 1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
 2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
    1. The easiest way to do this is to navigate to the Rocket Pool withdrawal address site (for the [Prater Testnet](https://testnet.rocketpool.net/withdrawal/) or for [Mainnet](https://stake.rocketpool.net/withdrawal/)).
    2. If you haven't already connected Metamask or WalletConnect to the Rocket Pool website, do this now. Click the **select wallet** button in the center of the screen, and choose MetaMask or WalletConnect based on which wallet you would like to use. You will then be prompted asking you to confirm the connection. For example, using MetaMask:
+
 <center>
 ![](./images/connect-metamask.png)
 </center>
