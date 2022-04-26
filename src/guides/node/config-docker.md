@@ -361,7 +361,7 @@ Take a look at [their documentation on checkpoint syncing](https://lighthouse-bo
 You can enter the URL of any Beacon Node that provides access to its REST API here.
 One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -419,7 +419,7 @@ Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/
 You can enter the URL of any Beacon Node that provides access to its REST API here.
 One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -518,7 +518,7 @@ Take a look at [their documentation on checkpoint syncing](https://docs.teku.con
 You can enter the URL of any Beacon Node that provides access to its REST API here.
 One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#eth2-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
 
 :::
 ::::
