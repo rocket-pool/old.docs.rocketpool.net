@@ -793,7 +793,7 @@ You will see the following dialog:
 
 </center>
 
-If you're happy with your setup and are ready to start the Smartnode, click `Save and Exit` here and go to the [Wrapping Up](#wrapping-up) section next.
+If you're happy with your setup and are ready to start the Smartnode, click `Save and Exit` here and go to the [Securing your Node](./securing-your-node.md) section next.
 
 If you would like to review all of the settings and customize many additional settings that weren't included in the Wizard, click `Review All Settings` and go to the [next section](#configuring-via-the-settings-manager).
 
