@@ -125,15 +125,19 @@ Database updated: 2021-06-28 22:00:00
 This will let you keep tabs on your total network usage, which might be helpful if your ISP imposes a data cap.
 
 
-## Third-party Performance Monitoring
+## Third-Party Performance Monitoring
 
 The best monitoring uses a Swiss-cheese model: every tool has holes, but if you stack them on top of each-other there is less of a chance anything falls through and catches you by surprise.
 
-Please note that these third-party tools are used by the Rocket Pool community, but are not officially endorsed or supported by the Rocket Pool team. If you have a tool suggestion, or are a tool owner, you are very welcome to add a pull request with details on your tool.
+Please note that these third-party tools are used by the Rocket Pool community, but are not officially endorsed or supported by the Rocket Pool team.
+If you have a tool suggestion, or are a tool owner, you are very welcome to add a pull request with details on your tool.
 
-### Beaconcha.in website: using the beacon chain as a metric source
 
-The [Beaconcha.in](https://beaconcha.in) block explorer website and app provide a way to track your validator's performance by looking at it's on-chain activity. They also have the option to receive [email notifications](https://beaconcha.in/user/notifications) for significant events like downtime. Navigate to their site, and enter the public key for your validator in the search box on the top of the screen.
+### Beaconcha.in Website: Using the Beacon Chain as a Metric Source
+
+The [Beaconcha.in](https://beaconcha.in) block explorer website and app provide a way to track your validator's performance by looking at it's on-chain activity.
+They also have the option to receive [email notifications](https://beaconcha.in/user/notifications) for significant events like downtime.
+Navigate to their site, and enter the public key for your validator in the search box on the top of the screen.
 
 ::: tip
 If you forgot your validator's public key, you can easily retrieve it with the command `rocketpool minipool status`.
@@ -158,9 +162,12 @@ You should check the logs of the `eth1`, `eth2`, and `validator` services with `
 
 **You should pin this tab or create a bookmark with it so you can quickly jump to it and check the status of your validator.**
 
-### Beaconcha.in app: validator overview and push notifications
 
-The Beaconcha.in website is a great way to view metrics and set up email alerts. Their mobile app has a more "at-a-glance" nature. It also features a push notification service that includes some useful alerts like
+### Beaconcha.in App: Validator Overview and Push Notifications
+
+The Beaconcha.in website is a great way to view metrics and set up email alerts.
+Their mobile app has a more "at-a-glance" nature.
+It also features a push notification service that includes some useful alerts like:
 
 1. Notifications of issues like missed attestations
 2. Notifications of Rocket Pool reward rounds
@@ -168,37 +175,43 @@ The Beaconcha.in website is a great way to view metrics and set up email alerts.
 
 Note that the app has a free version, and paid options with convenience features like homescreen widgets.
 
-### Uptimerobot: port-scanning for uptime
 
-The [Uptimerobot]( https://uptimerobot.com/ ) service is a simple service that scans an ip address for an open port. If your machine becomes unavailable on the port you specified, Uptimerobot can send you a notification that there is an issue. The service was a wide variety of notification options, including email, push notification, SMS, phone call and webhooks.
+### Uptimerobot: Port-scanning for Uptime
+
+The [Uptimerobot](https://uptimerobot.com/) service is a simple service that scans an IP address for an open port.
+If your machine becomes unavailable on the port you specified, Uptimerobot can send you a notification that there is an issue.
+The service was a wide variety of notification options including email, push notification, SMS, phone call, and webhooks.
 
 The setup screen looks something like this:
 
 ![](./local/images/uptimerobot.png)
 
-The ip to monitor is the remote ip of your node, which you can find by logging into your node by `ssh` or physically, and opening [icanhazip.com]( https://icanhazip.com/ ) in a browser or running the following command in your terminal:
+The IP to monitor is the external IP of your node, which you can find by logging into your node by `ssh` or physically, and opening [icanhazip.com](https://icanhazip.com/) in a browser or running the following command in your terminal:
 
 ```shell
 curl icanhazip.com
 ```
 
-The port to monitor depends on your node setup. If your node is set up for SSH access on port `22` for example, you could monitor that. You could also use the ports used by your consensus and execution clients. If you are staking at home, you might have port-forwarded these on your router, making them suitable for remote port monitoring.
+The port to monitor depends on your node setup; users running the typical Smartnode installation will likely have forwarded ports 30303 and 9001 for the Execution and Consensus clients respectively, so these are good choices for uptime monitoring.
+
 
 ### Rocketpool Metrics Dashboards
 
 There are multiple community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
 
-Community member `VGR` made the [rp-metrics-dashboard.com]( https://www.rp-metrics-dashboard.com/ ) where you can view in-depth statistics on your node, the network and even the [high scores]( https://www.rp-metrics-dashboard.com/highscores ) or the best performing nodes.
+Community member `VGR` made the [rp-metrics-dashboard.com](https://www.rp-metrics-dashboard.com/) where you can view in-depth statistics on your node, the network and even the [high scores](https://www.rp-metrics-dashboard.com/highscores) or the best performing nodes:
 
 ![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
 
-A more minimalist tool is the [rocketscan.dev]( https://rocketscan.dev/ ) tool made another community member. It features detailed network and node metrics, including a timeline of your node activity.
+A more minimalist tool is the [rocketscan.dev](https://rocketscan.dev/) tool made another community member.
+It features detailed network and node metrics, including a timeline of your node activity.
 
 ![Rocketscan screenshot](./local/images/rocketscan.dev.png)
 
+
 ### Scripting with Pushover (advanced)
 
-The [Pushover]( https://pushover.net/ ) service allows you to send yourself push notifications.
+The [Pushover](https://pushover.net/) service allows you to send yourself push notifications.
 
 ::: warning NOTE
 This is an advanced activity to undertake.
@@ -207,8 +220,8 @@ It can be helpful if you are familiar with shell scripting, but is not recommend
 
 To get started with Pushover:
 
-1. Create an account at [pushover.net]( https://pushover.net/ )
-1. [Create an API token]( https://pushover.net/apps/build )
+1. Create an account at [pushover.net](https://pushover.net/)
+1. [Create an API token](https://pushover.net/apps/build)
 1. Install the Pushover mobile app and/or browser extenion
 1. Call the Pushover API for any action you care about
 
@@ -222,9 +235,10 @@ MESSAGE_CONTENT=
 curl -f -X POST -d "token=$PUSHOVER_TOKEN&user=$PUSHOVER_USER&title=$MESSAGE_TITLE&message=$MESSAGE_CONTENT&url=&priority=0" https://api.pushover.net/1/messages.json
 ```
 
-#### Example: push notification on updates available
+#### Example: Push Notification on Updates Available
 
-If you set up automatic updates using the `unattended-upgrades` and `update-nofifier` packages, you may want to receive a push notification when there are updates available for your node. A potential way to do this is to create a script in `~/update-notifier.sh` and to trigger it daily at 9:00 using `crontab`.
+If you set up automatic updates using the `unattended-upgrades` and `update-nofifier` packages, you may want to receive a push notification when there are updates available for your node.
+A potential way to do this is to create a script in `~/update-notifier.sh` and to trigger it daily at 9:00 using `crontab`.
 
 To do this, first create the script by running:
 
@@ -263,13 +277,13 @@ curl -f -X POST -d "token=$PUSHOVER_TOKEN&user=$PUSHOVER_USER&title=$MESSAGE_TIT
 
 ```
 
-The run the following command to mark the script as executable:
+Next, run the following command to mark the script as executable:
 
 ```shell
 chmod u+x ~/update-notifier.sh
 ```
 
-The run the following command to open your crontab:
+Now run the following command to open your crontab:
 
 ```shell
 crontab -e
@@ -309,17 +323,19 @@ Then use the arrow keys to scroll down, and add the line `* 9 * * * ~/update-not
 
 The press `control+x` to exit and press `Y` when asked whether you want to save your changes.
 
-You should now receive a notification at 09:00 local time if you have updates. You can manually run the script by typing this in your terminal:
+You should now receive a notification at 09:00 local time if you have updates.
+You can manually run the script by typing this in your terminal:
 
 ```shell
 ~/update-notifier.sh
 ```
 
-#### Example: get notified when your APC UPS daomon activates
+#### Example: Get Notified when your APC UPS Daemon Activates
 
 Some home stakers are using an Uninterruptible power supply with the `apcupsd` utility to make sure their node shuts down gracefully if their power goes out.
 
-The `apcupsd` utility uses the `apccontrol` script to manage it's logic, thus it is possible to monitor the activity of this daemon by editing the `/etc/apcupsd/apccontrol` file. To do this, run:
+The `apcupsd` utility uses the `apccontrol` script to manage its logic, thus it is possible to monitor the activity of this daemon by editing the `/etc/apcupsd/apccontrol` file.
+To do this, run:
 
 ```shell
 sudo nano /etc/apcupsd/apccontrol
