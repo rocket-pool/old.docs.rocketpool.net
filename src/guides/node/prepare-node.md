@@ -83,9 +83,17 @@ This method will require you to **submit a transaction** from your new withdrawa
 :::
  
 ::: warning NOTE
-For Ledger Cold Wallets, Ledger Live does not yet support MetaMask Nativly, and WalletConnect doesnt work.  It WILL work with MetaMask tho! Simply add the Ledger Wallet using MetaMask/Ledger Live.  You will need to have the device connected, unlocked, and the ETH app open.   You also need to go into the settings within the ETH app on the device and enable "blind signing"  this feature will automatically disable after the session.
+For users of **Ledger** hardware wallets, note that Ledger Live does not yet support MetaMask or WalletConnect natively.
+You will need to use MetaMask and connect it to your Ledger instead.
+Follow [the official Ledger instructions](https://www.ledger.com/academy/security/the-safest-way-to-use-metamask) to do this.
 
-If you are using Prater Testnet, it is recommendede you create a NEW Etherium Wallet on the Ledger device (It does not have a concept of a test net), then make sure to select the Goerli testnet at the top when adding it to MetaMask.  This makes it easier to not confuse testnet/mainnet.  Ledger Live will not show Goerli but it will hold it! 
+To work with the Rocket Pool website, you will need to have your Ledger connected, unlocked, and the ETH app open.
+You will also need to **enable "blind signing"** for the current session; you can find this within the Settings portion of the ETH app on the device.
+Bind signing will automatically be disabled after you close the session.
+
+If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion. 
+Make sure to select the **Goerli Testnet** in the network selection dropdown when connecting your Ledger to MetaMask.
+Note that Ledger Live will not show your balance on the test network, but other applications which support the test network (such as MetaMask and Etherscan) will be able to display it.
 :::
  
 1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
