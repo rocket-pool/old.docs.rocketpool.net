@@ -81,11 +81,26 @@ Please read both options below to determine which one applies to you.
 ::: warning NOTE
 This method will require you to **submit a transaction** from your new withdrawal address, so **you must have a small amount of ETH in that address already.**
 :::
+ 
+::: warning NOTE
+For users of **Ledger** hardware wallets, note that Ledger Live does not yet support MetaMask or WalletConnect natively.
+You will need to use MetaMask and connect it to your Ledger instead.
+Follow [the official Ledger instructions](https://www.ledger.com/academy/security/the-safest-way-to-use-metamask) to do this.
 
+To work with the Rocket Pool website, you will need to have your Ledger connected, unlocked, and the ETH app open.
+You will also need to **enable "blind signing"** for the current session; you can find this within the Settings portion of the ETH app on the device.
+Bind signing will automatically be disabled after you close the session.
+
+If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion. 
+Make sure to select the **Goerli Testnet** in the network selection dropdown when connecting your Ledger to MetaMask.
+Note that Ledger Live will not show your balance on the test network, but other applications which support the test network (such as MetaMask and Etherscan) will be able to display it.
+:::
+ 
 1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
 2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
    1. The easiest way to do this is to navigate to the Rocket Pool withdrawal address site (for the [Prater Testnet](https://testnet.rocketpool.net/withdrawal/) or for [Mainnet](https://stake.rocketpool.net/withdrawal/)).
    2. If you haven't already connected Metamask or WalletConnect to the Rocket Pool website, do this now. Click the **select wallet** button in the center of the screen, and choose MetaMask or WalletConnect based on which wallet you would like to use. You will then be prompted asking you to confirm the connection. For example, using MetaMask:
+
 <center>
 ![](./images/connect-metamask.png)
 </center>
