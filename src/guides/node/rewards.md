@@ -68,7 +68,7 @@ In times where gas is very expensive, you may not want the process to automatica
 Since you have 28 days to claim your RPL rewards, hopefully there will be some point within that window where they are more reasonable (though we suggest you weigh the possibility of lower rewards due to more people staking prior to your claim).
 
 To support this, the Smartnode stack provides a setting for the **RPL claim gas threshold**.
-You can find this setting in `~/.rocketpool/config.yml` on Docker and Hybrid setups, and in `/srv/rocketpool/config.yml` in Native setups.
+You can find this setting in `~/.rocketpool/user-settings.yml` on Docker and Hybrid setups, and in `/srv/rocketpool/user-settings.yml` in Native setups.
 The setting is defined in the `smartnode` section towards the top of the file:
 
 ```yaml
