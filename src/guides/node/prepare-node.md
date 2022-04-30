@@ -13,6 +13,7 @@ These only need to be done once though; once you've done them, you can skip to t
 Registering your node and standing up a validator both involve submitting transactions to the Ethereum network from your node wallet.
 This means **you'll need to have some ETH on it** to pay for the gas costs of those transactions.
 You'll also want to provide it with the **RPL token**, because you'll need to stake some of that prior to creating a minipool as collateral.
+The required gas to set up a node + 1 minipool is about ( 0.0025 ETH * gasprice in gwei), so at gasprice 30 that's around 0.075 ETH. See this sheet for an estimation https://docs.google.com/spreadsheets/d/1loB9U8wCIJn73a1DsR-mJJ9PQaYWMlF9asNc7BgM_zc/edit#gid=1413609552 
 
 :::: tabs
 ::: tab Running on the Prater Test Network
