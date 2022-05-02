@@ -334,7 +334,7 @@ Finally, add it to the mount table so it automatically loads when your Pi reboot
 $ sudo nano /etc/fstab
 ```
 
-Add a new line at the end that looks like this:
+Add a new line at the end so that the file looks like this:
 ```
 LABEL=writable  /        ext4   defaults        0 0
 LABEL=system-boot       /boot/firmware  vfat    defaults        0       1

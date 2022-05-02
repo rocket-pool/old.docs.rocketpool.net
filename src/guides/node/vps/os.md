@@ -192,8 +192,6 @@ $ sudo nano /etc/fstab
 
 Add a new line at the end that looks like this:
 ```
-LABEL=writable  /        ext4   defaults        0 0
-...
 /swapfile                            none            swap    sw              0       0
 ```
 
