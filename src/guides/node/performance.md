@@ -124,6 +124,16 @@ Database updated: 2021-06-28 22:00:00
 
 This will let you keep tabs on your total network usage, which might be helpful if your ISP imposes a data cap.
 
+Note that most modern systems more commonly use other network interfaces like eno0 and enp0s31f6 and not eth0.
+If you need to check your network interface, run the following command:
+
+```shell
+ls /sys/class/net
+```
+
+Ethernet (hard-wire) devices usually start with `e`, such as the examples above.
+Wireless devices usually start with `w`.
+
 
 ## Third-Party Performance Monitoring
 
