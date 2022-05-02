@@ -68,13 +68,14 @@ In times where gas is very expensive, you may not want the process to automatica
 Since you have 28 days to claim your RPL rewards, hopefully there will be some point within that window where they are more reasonable (though we suggest you weigh the possibility of lower rewards due to more people staking prior to your claim).
 
 To support this, the Smartnode stack provides a setting for the **RPL claim gas threshold**.
-You can find this setting in `~/.rocketpool/user-settings.yml` on Docker and Hybrid setups, and in `/srv/rocketpool/user-settings.yml` in Native setups.
-The setting is defined in the `smartnode` section towards the top of the file:
+You can find this setting in the `rocketpool service config` Terminal UI, under the `Smartnode and TX Fees` category:
 
-```yaml
-  rplClaimGasThreshold: 150 # Automatic RPL reward claims and minipool staking will wait until the recommended max fee, in gwei, is below this limit.
-                            # Set it to 0 to disable automatic claiming of RPL rewards entirely.
-```
+<center>
+
+![](./images/tui-claim-threshold.png)
+
+</center>
+
 
 When the recommended max fee is higher than this limit, automatic RPL reward claims will be disabled.
 They will resume once the recommended max fee falls below this limit.
