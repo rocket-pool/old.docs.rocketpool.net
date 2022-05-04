@@ -490,20 +490,15 @@ GF_<SectionName>_<KeyName>
 To send emails from Grafana, e.g. for alerts or to invite other users, SMTP settings need to be configured in the Rocket Pool Metrics Stack.
 See the [Grafana SMTP configuration](https://grafana.com/docs/grafana/latest/administration/configuration/#smtp) page for reference.
 
-Open `~/.rocketpool/docker-compose-metrics.yml` in a text editor.
-Include the below `GF_SMTP_<KEYNAME>` environment variables in the `environment` section of the `grafana` service, replacing the values with those for your SMTP provider.
+Open `~/.rocketpool/override/grafana.yml` in a text editor.
+Add an `environment` section below the `x-rp-comment: Add your customizations below this line` line, replacing the values below with those for your SMTP provider.
 If using Gmail and [2-Step Verification](https://support.google.com/accounts/answer/185839) is enabled, create an [App Password](https://support.google.com/mail/answer/185833?hl=en) for this service.
-
 ```yaml
-version: "3.4"
+version: "3.7"
 services:
-...
   grafana:
-    image: grafana/grafana:8.3.2
-    container_name: ${COMPOSE_PROJECT_NAME}_grafana
-    restart: unless-stopped
+    x-rp-comment: Add your customizations below this line
     environment:
-      - GF_SERVER_HTTP_PORT=${GRAFANA_PORT:-3100}
       ## SMTP settings start, replace values with those of your SMTP provider
       - GF_SMTP_ENABLED=true
       - GF_SMTP_HOST=mail.example.com:<port>  # Gmail users should use smtp.gmail.com:587
@@ -512,14 +507,6 @@ services:
       - GF_SMTP_FROM_ADDRESS=admin@example.com
       - GF_SMTP_FROM_NAME="Rocketpool Grafana Admin"
       ## SMTP server settings end
-    ports: 
-      - "${GRAFANA_PORT:-3100}:${GRAFANA_PORT:-3100}/tcp"
-    volumes:
-      - "./grafana-prometheus-datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml"
-      - "grafana-storage:/var/lib/grafana"
-    networks:
-      - net
-...
 ```
 
 After making these modifications, **run the following to apply the changes**:
