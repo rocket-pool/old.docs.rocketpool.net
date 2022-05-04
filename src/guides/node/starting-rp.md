@@ -17,7 +17,7 @@ Simply enter the following command:
 rocketpool service start
 ```
 
-This command will create all of the necessary Docker images if they don't already exist, make sure the Rocket Pool docker network and storage volumes have been initialized, and update any containers if they no longer match the image versions described in `~/.rocketpool/config.yml`.
+This command will create all of the necessary Docker images if they don't already exist, make sure the Rocket Pool docker network and storage volumes have been initialized, and update any containers if they no longer match the configuration settings from `rocketpool service config`'s UI.
 
 The first time you do it, the output should look like this:
 
@@ -79,7 +79,7 @@ Simply enter the following command:
 rocketpool service start
 ```
 
-This command will create all of the necessary Docker images if they don't already exist, make sure the Rocket Pool docker network and storage volumes have been initialized, and update any containers if they no longer match the image versions described in `~/.rocketpool/config.yml`.
+This command will create all of the necessary Docker images if they don't already exist, make sure the Rocket Pool docker network and storage volumes have been initialized, and update any containers if they no longer match the configuration settings from `rocketpool service config`'s UI.
 
 The first time you do it, the output should look like this:
 

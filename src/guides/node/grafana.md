@@ -479,7 +479,7 @@ Take a look at [Grafana's Tutorials](https://grafana.com/tutorials/) page to lea
 
 The tools used in the Rocket Pool Metrics Stack offer a wide array of configuration options beyond what is included in the default Rocket Pool installation. This section includes configuration examples for different use cases.
 
-In general, [Grafana configuration options](https://grafana.com/docs/grafana/latest/administration/configuration/) should be passed through using environment variables in `docker-compose-metrics.yml`. Any config option can be converted to an environment variable using the following syntax:
+In general, [Grafana configuration options](https://grafana.com/docs/grafana/latest/administration/configuration/) should be passed through using environment variables in `override/grafana.yml`. Any config option can be converted to an environment variable using the following syntax:
 
 ```
 GF_<SectionName>_<KeyName>
