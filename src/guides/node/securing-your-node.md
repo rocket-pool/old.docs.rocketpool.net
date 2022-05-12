@@ -559,7 +559,7 @@ This section is for people who feel comfortable with the command-line and firewa
 It is likely that these settings are too restrictive for many non-Smartnode applications.
 
 Be aware that Docker ignores rules set by `ufw`. Outbound restrictions will apply to [Native](node/native.html) Rocket Pool setups only.
-If you are running a [Standard](node/docker.html) Docker-based Rocket Pool setup, you can skip this section.
+**If you are running a [Standard](node/docker.html) Docker-based Rocket Pool setup, you should skip this section.**
 :::
 
 The following commands will lock both in and outbound traffic to only the minimum requirements.
