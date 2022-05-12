@@ -728,11 +728,23 @@ Both the Prater Testnet and Mainnet are supported.
 If you don't have an account already, start by heading to [https://infura.io/register](https://infura.io/register) to create one.
 You can use the free tier for checkpoint syncing, so all you will need to provide is an email address.
 
-Once you are logged in, head to [the ETH2 project page](https://infura.io/dashboard/eth2).
+Once you are logged in, head to [the ETH2 project page](https://infura.io/dashboard/eth2):
+
+<center>
+
+![](./images/infura-projects.png)
+
+</center>
+
 Create a new project here using the `Create New Project` button.
 It can be named anything you want (for example, "RP Checkpoint Sync").
 
-Now, click on the project and go to the `Settings` tab:
+::: warning NOTE
+Make sure you have the `ETH2` project selected, because that's what your Consensus client needs!
+**This is different from the `Ethereum` project you may have used for your fallback Execution client!**
+:::
+
+Now, go to the `ETH2` project and click on the `Settings` button:
 
 <center>
 
