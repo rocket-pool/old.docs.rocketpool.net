@@ -286,6 +286,10 @@ Do this for your ETH1 and ETH2 clients now to verify that they are working prope
 ::::
 :::::
 
+::: tip TIP
+When you're done looking at the logs, you can exit and return to the command prompt using `Ctrl + C`.
+:::
+
 
 ## Setting up a Wallet
 
