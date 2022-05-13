@@ -1,5 +1,10 @@
 # Pruning Geth
 
+::: tip NOTE
+This is meant for `geth` users only.
+Nethermind and Besu do *not* need to be manually pruned.
+:::
+
 If you use `geth` as your primary ETH1 client, you will likely notice that your node's free disk space slowly decreases over time.
 Geth is by far the biggest contributor to this; depending on how much RAM you allocated to its cache during `rocketpool service config`, it can grow at a rate of several gigabytes per day!
 
