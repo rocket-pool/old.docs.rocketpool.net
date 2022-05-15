@@ -137,7 +137,7 @@ If you've never used this SSD before and it's totally empty, then follow this st
 Run this command to find the location of your disk in the device table:
 
 ```
-$ sudo lshw -C disk
+sudo lshw -C disk
   *-disk
        description: SCSI Disk
        product: Portable SSD T5
@@ -157,22 +157,22 @@ Again, **these commands will delete whatever's already on the disk!**
 
 Create a new partition table:
 ```
-$ sudo parted -s /dev/sda mklabel gpt unit GB mkpart primary ext4 0 100%
+sudo parted -s /dev/sda mklabel gpt unit GB mkpart primary ext4 0 100%
 ```
 
 Format the new partition with the `ext4` file system:
 ```
-$ sudo mkfs -t ext4 /dev/sda1
+sudo mkfs -t ext4 /dev/sda1
 ```
 
 Add a label to it (you don't have to do this, but it's fun):
 ```
-$ sudo e2label /dev/sda1 "Rocket Drive"
+sudo e2label /dev/sda1 "Rocket Drive"
 ```
 
 Confirm that this worked by running the command below, which should show output like what you see here:
 ```
-$ sudo blkid
+sudo blkid
 ...
 /dev/sda1: LABEL="Rocket Drive" UUID="1ade40fd-1ea4-4c6e-99ea-ebb804d86266" TYPE="ext4" PARTLABEL="primary" PARTUUID="288bf76b-792c-4e6a-a049-cb6a4d23abc0"
 ```
@@ -186,7 +186,7 @@ Next, let's tune the new filesystem a little to optimize it for validator activi
 By default, ext4 will reserve 5% of its space for system processes.
 Since we don't need that on the SSD because it just stores the ETH1 and ETH2 chain data, we can disable it:
 ```
-$ sudo tune2fs -m 0 /dev/sda1
+sudo tune2fs -m 0 /dev/sda1
 ```
 
 
@@ -195,12 +195,12 @@ $ sudo tune2fs -m 0 /dev/sda1
 In order to use the drive, you have to mount it to the file system.
 Create a new mount point anywhere you like (we'll use `/mnt/rpdata` here as an example, feel free to use that):
 ```
-$ sudo mkdir /mnt/rpdata
+sudo mkdir /mnt/rpdata
 ```
 
 Now, mount the new SSD partition to that folder:
 ```
-$ sudo mount /dev/sda1 /mnt/rpdata
+sudo mount /dev/sda1 /mnt/rpdata
 ```
 
 After this, the folder `/mnt/rpdata` will point to the SSD, so anything you write to that folder will live on the SSD.
@@ -210,7 +210,7 @@ Now, let's add it to the mounting table so it automatically mounts on startup.
 Remember the `UUID` from the `blkid` command you used earlier?
 This is where it will come in handy.
 ```
-$ sudo nano /etc/fstab
+sudo nano /etc/fstab
 ```
 
 This will open up an interactive file editor, which will look like this to start:
@@ -237,17 +237,17 @@ If your SSD is too slow, then it won't work well for a Rocket Pool node and you'
 
 To test it, we're going to use a program called `fio`. Install it like this:
 ```
-$ sudo apt install fio
+sudo apt install fio
 ```
 
 Next, move to your SSD's mount point:
 ```
-$ cd /mnt/rpdata
+cd /mnt/rpdata
 ```
 
 Now, run this command to test the SSD performance:
 ```
-$ sudo fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75
+sudo fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=test --bs=4k --iodepth=64 --size=4G --readwrite=randrw --rwmixread=75
 ```
 
 The output should look like this:
@@ -284,7 +284,7 @@ Check with your manufacturer's support website for the latest firmware and make 
 
 Last but not least, remove the test file you just made:
 ```
-$ sudo rm /mnt/rpdata/test
+sudo rm /mnt/rpdata/test
 ```
 
 ## Setting up Swap Space
@@ -302,7 +302,7 @@ Think of this as extra insurance that you'll (most likely) never need.
 
 The first step is to make a new file that will act as your swap space.
 Decide how much you want to use - a reasonable start would be 8 GB, so you have 8 GB of normal RAM and 8 GB of "backup RAM" for a total of 16 GB.
-To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill. 
+To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill.
 Luckily, since your SSD has 1 or 2 TB of space, allocating 8 to 24 GB for a swapfile is negligible.
 
 For the sake of this walkthrough, let's pick a nice middleground - say, 16 GB of swap space for a total RAM of 24 GB.
@@ -311,27 +311,27 @@ Just substitute whatever number you want in as we go.
 Enter this, which will create a new file called `/mnt/rpdata/swapfile` and fill it with 16 GB of zeros.
 To change the amount, just change the number in `count=16` to whatever you want. **Note that this is going to take a long time, but that's ok.**
 ```
-$ sudo dd if=/dev/zero of=/mnt/rpdata/swapfile bs=1G count=16 status=progress
+sudo dd if=/dev/zero of=/mnt/rpdata/swapfile bs=1G count=16 status=progress
 ```
 
 Next, set the permissions so only the root user can read or write to it (for security):
 ```
-$ sudo chmod 600 /mnt/rpdata/swapfile
+sudo chmod 600 /mnt/rpdata/swapfile
 ```
 
 Now, mark it as a swap file:
 ```
-$ sudo mkswap /mnt/rpdata/swapfile
+sudo mkswap /mnt/rpdata/swapfile
 ```
 
 Next, enable it:
 ```
-$ sudo swapon /mnt/rpdata/swapfile
+sudo swapon /mnt/rpdata/swapfile
 ```
 
 Finally, add it to the mount table so it automatically loads when your Pi reboots:
 ```
-$ sudo nano /etc/fstab
+sudo nano /etc/fstab
 ```
 
 Add a new line at the end so that the file looks like this:
@@ -346,8 +346,8 @@ Press `Ctrl+O` and `Enter` to save, then `Ctrl+X` and `Enter` to exit.
 
 To verify that it's active, run these commands:
 ```
-$ sudo apt install htop
-$ htop
+sudo apt install htop
+htop
 ```
 
 Your output should look like this at the top:
@@ -372,13 +372,13 @@ Since we're going to have a lot of spare RAM with our setup, we can make this "1
 
 To set these, run these commands:
 ```
-$ sudo sysctl vm.swappiness=6
-$ sudo sysctl vm.vfs_cache_pressure=10
+sudo sysctl vm.swappiness=6
+sudo sysctl vm.vfs_cache_pressure=10
 ```
 
 Now, put them into the `sysctl.conf` file so they are reapplied after a reboot:
 ```
-$ sudo nano /etc/sysctl.conf
+sudo nano /etc/sysctl.conf
 ```
 
 Add these two lines to the end:
@@ -443,19 +443,19 @@ We're going to get stats on all three of them as we go.
 For measuring performance, you can use LINPACK.
 We'll build it from source.
 ```
-$ cd ~
-$ sudo apt install gcc
-$ wget http://www.netlib.org/benchmark/linpackc.new -O linpack.c 
+cd ~
+sudo apt install gcc
+wget http://www.netlib.org/benchmark/linpackc.new -O linpack.c
 ...
-$ cc -O3 -o linpack linpack.c -lm
+cc -O3 -o linpack linpack.c -lm
 ...
-$ sudo mv linpack /usr/local/bin
-$ rm linpack.c
+sudo mv linpack /usr/local/bin
+rm linpack.c
 ```
 
 Now run it like this:
 ```
-$ linpack
+linpack
 Enter array size (q to quit) [200]:
 ```
 
@@ -490,7 +490,7 @@ Let's call this the **stock KFLOPS**.
 Next, let's stress the Pi out and watch its temperature under heavy load.
 First, install this package, which will provide a tool called `vcgencmd` that can print details about the Pi:
 ```
-$ sudo apt install libraspberrypi-bin
+sudo apt install libraspberrypi-bin
 ```
 
 Once this is installed, reboot the Pi (this is necessary for some new permission to get applied).
@@ -498,14 +498,14 @@ Next, install a program called **stressberry**.
 This will be our benchmarking tool.
 Install it like this:
 ```
-$ sudo apt install stress python3-pip
-$ pip3 install stressberry
-$ source ~/.profile
+sudo apt install stress python3-pip
+pip3 install stressberry
+source ~/.profile
 ```
 
 Next, run it like this:
 ```
-$ stressberry-run -n "Stock" -d 300 -i 60 -c 4 stock.out
+stressberry-run -n "Stock" -d 300 -i 60 -c 4 stock.out
 ```
 
 This will run a new stress test named "Stock" for 300 seconds (5 minutes) with 60 seconds of cooldown before and after the test, on all 4 cores of the Pi.
@@ -529,7 +529,7 @@ That being said, we generally try to keep the temperatures below 65°C for the s
 
 If you want to monitor the system temperature during normal validating operations, you can do this with `vcgencmd`:
 ```
-$ vcgencmd measure_temp
+vcgencmd measure_temp
 temp=34.0'C
 ```
 
@@ -558,7 +558,7 @@ We're going to go from the stock 1500 MHz up to 1800 MHz - a 20% speedup!
 
 Open this file:
 ```
-$ sudo nano /boot/firmware/usercfg.txt
+sudo nano /boot/firmware/usercfg.txt
 ```
 
 Add these two lines to the end:
@@ -598,7 +598,7 @@ In the worst case you can just remove the `arm_freq` and `over_voltage` lines en
 Once you're logged in, run `linpack` again to test the new performance.
 Here's an example from our test Pi:
 ```
-$ linpack
+linpack
 Enter array size (q to quit) [200]:
 ...
     Reps Time(s) DGEFA   DGESL  OVERHEAD    KFLOPS
@@ -619,7 +619,7 @@ Alright! That's a 19.4% boost in performance, which is to be expected since we'r
 Now let's check the temperatures with the new clock speed and voltage settings:
 
 ```
-$ stressberry-run -n "1800_ov3" -d 300 -i 60 -c 4 1800_ov3.out
+stressberry-run -n "1800_ov3" -d 300 -i 60 -c 4 1800_ov3.out
 ```
 
 You should see output like this:
@@ -662,7 +662,7 @@ If it doesn't, instead of increasing the voltage further, **you should lower you
 For reference, here are the numbers from our 2000 run:
 
 ```
-$ linpack
+linpack
 Enter array size (q to quit) [200]:
 ...
     Reps Time(s) DGEFA   DGESL  OVERHEAD    KFLOPS
@@ -706,7 +706,7 @@ over_voltage=6
 For reference, here are our results:
 
 ```
-$ linpack
+linpack
 Enter array size (q to quit) [200]:
 ...
     Reps Time(s) DGEFA   DGESL  OVERHEAD    KFLOPS

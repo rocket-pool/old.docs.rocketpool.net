@@ -167,27 +167,27 @@ Just substitute whatever number you want in as we go.
 Enter this, which will create a new file called `/swapfile` and fill it with 16 GB of zeros.
 To change the amount, just change the number in `count=16` to whatever you want. **Note that this is going to take a long time, but that's ok.**
 ```
-$ sudo dd if=/dev/zero of=/swapfile bs=1G count=16 status=progress
+sudo dd if=/dev/zero of=/swapfile bs=1G count=16 status=progress
 ```
 
 Next, set the permissions so only the root user can read or write to it (for security):
 ```
-$ sudo chmod 600 /swapfile
+sudo chmod 600 /swapfile
 ```
 
 Now, mark it as a swap file:
 ```
-$ sudo mkswap /swapfile
+sudo mkswap /swapfile
 ```
 
 Next, enable it:
 ```
-$ sudo swapon /swapfile
+sudo swapon /swapfile
 ```
 
 Finally, add it to the mount table so it automatically loads when your server reboots:
 ```
-$ sudo nano /etc/fstab
+sudo nano /etc/fstab
 ```
 
 Add a new line at the end that looks like this:
@@ -199,8 +199,8 @@ Press `Ctrl+O` and `Enter` to save, then `Ctrl+X` and `Enter` to exit.
 
 To verify that it's active, run these commands:
 ```
-$ sudo apt install htop
-$ htop
+sudo apt install htop
+htop
 ```
 
 Your output should look like this at the top:
@@ -225,13 +225,13 @@ Since we're going to have a lot of spare RAM with our setup, we can make this "1
 
 To set these, run these commands:
 ```
-$ sudo sysctl vm.swappiness=6
-$ sudo sysctl vm.vfs_cache_pressure=10
+sudo sysctl vm.swappiness=6
+sudo sysctl vm.vfs_cache_pressure=10
 ```
 
 Now, put them into the `sysctl.conf` file so they are reapplied after a reboot:
 ```
-$ sudo nano /etc/sysctl.conf
+sudo nano /etc/sysctl.conf
 ```
 
 Add these two lines to the end:

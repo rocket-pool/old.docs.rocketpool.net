@@ -83,8 +83,9 @@ Logging out and back in will put it there.
 Now, test running it with the `--version` flag.
 You should see output like this:
 ```
-$ rocketpool --version
-
+rocketpool --version
+```
+```
 rocketpool version 1.3.0
 ```
 
@@ -133,8 +134,9 @@ chmod +x /usr/local/bin/rocketpool
 Now, test running it with the `--version` flag.
 You should see output like this:
 ```
-$ rocketpool --version
-
+rocketpool --version
+```
+```
 rocketpool version 1.3.0
 ```
 
@@ -227,7 +229,7 @@ If you are fine with this default behavior, skip down to the next section.
 To do this, create a new file called `/etc/docker/daemon.json` as the root user:
 
 ```
-$ sudo nano /etc/docker/daemon.json
+sudo nano /etc/docker/daemon.json
 ```
 
 This will be empty at first, which is fine. Add this as the contents:
