@@ -521,6 +521,10 @@ Ubuntu comes with `ufw` installed by default (the **u**ncomplicated **f**ire **w
 The following commands will set `ufw` up with a good default configuration for your Smartnode.
 **Run these on your node machine**.
 
+::: tip NOTE
+Iptables experts might note that Docker bypasses `ufw` settings. Strictly speaking that means that unless you are running in hybrid mode, you do not need the Execution and Consensus client rules. Adding them however has no downside and will make sure that if you ever switch to hybrid mode you will not run into firewall issues.
+:::
+
 Disable connections unless they're explicitly allowed by later rules:
 ```shell
 sudo ufw default deny incoming comment 'Deny all incoming traffic'
