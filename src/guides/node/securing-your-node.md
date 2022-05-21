@@ -516,14 +516,14 @@ sudo systemctl restart unattended-upgrades
 In general, your machine should only accept network traffic on ports that your ETH1 client, ETH2 client, and Smartnode stack use.
 To enforce that and prevent any unexpected or undesirable traffic, we can install a **firewall** on the node.
 
+::: tip NOTE
+If you selected a different execution/consensus client port during the Rocketpool setup, you need to edit the ports below to reflect your settings.
+:::
+
 Ubuntu comes with `ufw` installed by default (the **u**ncomplicated **f**ire **w**all), which is a convenient utility for managing your node's firewall settings.
 
 The following commands will set `ufw` up with a good default configuration for your Smartnode.
 **Run these on your node machine**.
-
-::: tip NOTE
-Iptables experts might note that Docker bypasses `ufw` settings. Strictly speaking that means that unless you are running in hybrid mode, you do not need the Execution and Consensus client rules. Adding them however has no downside and will make sure that if you ever switch to hybrid mode you will not run into firewall issues.
-:::
 
 Disable connections unless they're explicitly allowed by later rules:
 ```shell
@@ -537,20 +537,24 @@ sudo ufw allow "22/tcp" comment 'Allow SSH'
 
 Allow Geth if you use it (see [the Geth documentation](https://geth.ethereum.org/docs/interface/private-network#setting-up-networking) for more info):
 ```shell
-sudo ufw allow 30303/tcp comment 'Go Ethereum port, standardized by Rocketpool'
-sudo ufw allow 30303/udp comment 'Go Ethereum port, standardized by Rocketpool'
+sudo ufw allow 30303/tcp comment 'Execution client port, standardized by Rocketpool'
+sudo ufw allow 30303/udp comment 'Execution client port, standardized by Rocketpool'
 ```
 
 Allow your Beacon Client:
 ```shell
-sudo ufw allow 9001/tcp comment 'Rocketpool default ETH2 port'
-sudo ufw allow 9001/udp comment 'Rocketpool default ETH2 port'
+sudo ufw allow 9001/tcp comment 'Consensus client port, standardized by Rocketpool'
+sudo ufw allow 9001/udp comment 'onsensus client port, standardized by Rocketpool'
 ```
 
 Finally, enable `ufw`:
 ```
 sudo ufw enable
 ```
+
+::: tip NOTE
+Iptables experts might note that Docker bypasses `ufw` settings. Strictly speaking that means that unless you are running in hybrid mode, you do not need the Execution and Consensus client rules. Adding them however has no downside and will make sure that if you ever switch to hybrid mode you will not run into firewall issues.
+:::
 
 
 ## (Optional) Enable Brute-Force and DDoS Protection
