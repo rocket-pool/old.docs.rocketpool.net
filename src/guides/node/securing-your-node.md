@@ -535,16 +535,16 @@ Allow SSH:
 sudo ufw allow "22/tcp" comment 'Allow SSH'
 ```
 
-Allow Geth if you use it (see [the Geth documentation](https://geth.ethereum.org/docs/interface/private-network#setting-up-networking) for more info):
+Allow execution client (formerly referred to as ETH1):
 ```shell
-sudo ufw allow 30303/tcp comment 'Execution client port, standardized by Rocketpool'
-sudo ufw allow 30303/udp comment 'Execution client port, standardized by Rocketpool'
+sudo ufw allow 30303/tcp comment 'Execution client port, standardized by Rocket Pool'
+sudo ufw allow 30303/udp comment 'Execution client port, standardized by Rocket Pool'
 ```
 
-Allow your Beacon Client:
+Allow consensus client (formerly referred to as ETH2):
 ```shell
-sudo ufw allow 9001/tcp comment 'Consensus client port, standardized by Rocketpool'
-sudo ufw allow 9001/udp comment 'onsensus client port, standardized by Rocketpool'
+sudo ufw allow 9001/tcp comment 'Consensus client port, standardized by Rocket Pool'
+sudo ufw allow 9001/udp comment 'Consensus client port, standardized by Rocket Pool'
 ```
 
 Finally, enable `ufw`:
