@@ -40,29 +40,6 @@ Some manual steps will be required during installation.
 For `arm64` systems, the Smartnode installer only natively supports Debian and Debian-based distros such as Ubuntu.
 For other distros, manual steps will be required during installation.
 
-
-#### macOS Support
-
-You will need to install the following pre-requisites:
-
-```Docker Desktop``` by [downloading the binary](https://www.docker.com/products/docker-desktop) installer from the website and dragging it to your Applications folder.
-
-```XCode Command Line Tools``` can be downloaded by opening up the Terminal application (located in /Applications/Utilties) and executing the following command:
-
-```
-xcode-select --install
-```
-
-We highly recommend using [Homebrew](https://brew.sh) as your package manager for Mac. It allows you to install packages easily using the ```brew``` command.
-
-For example, to install ```wget``` using Homebrew execute the following command in the Terminal:
-
-```
-brew install wget
-```
-
-Please ensure your Firewall (Settings -> Security & Privacy -> Firewall) is turned on and allowing the correct ports.
-
 ### Hardware Requirements
 
 The hardware requirements for a node depend largely on which eth1 and eth2 clients you decide to run.

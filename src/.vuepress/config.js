@@ -108,6 +108,7 @@ module.exports = {
                   children: [
                     'node/local/hardware',
                     'node/local/prepare-pc',
+                    'node/local/prepare-mac',
                     'node/local/prepare-pi',
                     'node/ssh'
                   ]
