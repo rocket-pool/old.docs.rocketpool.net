@@ -32,7 +32,7 @@ The first three can be easily viewed with the `htop` program.
 This will give you a nice live view into your system resources, as shown by this screenshot from a Raspberry Pi:
 
 ```
-$ htop
+htop
 ```
 
 ![Htop screenshot on raspberry pi](./local/images/pi/Htop.png)
@@ -86,13 +86,13 @@ If you want to track how much network I/O your system uses over time, you can in
 Here's an example of installing it on a Ubuntu / Debian system:
 
 ```
-$ sudo apt install vnstat
+sudo apt install vnstat
 ```
 
 To run it, do this (assuming `eth0` is the name of the network interface you use for your Internet connection):
 
 ```
-$ vnstat -i eth0
+vnstat -i eth0
 ```
 
 This won't work right away because it needs time to collect data about your system, but as the days and weeks pass, it will end up looking like this:
