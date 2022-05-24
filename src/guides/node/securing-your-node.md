@@ -516,6 +516,10 @@ sudo systemctl restart unattended-upgrades
 In general, your machine should only accept network traffic on ports that your ETH1 client, ETH2 client, and Smartnode stack use.
 To enforce that and prevent any unexpected or undesirable traffic, we can install a **firewall** on the node.
 
+::: tip NOTE
+If you selected a different execution/consensus client port during the Rocketpool setup, you need to edit the ports below to reflect your settings.
+:::
+
 Ubuntu comes with `ufw` installed by default (the **u**ncomplicated **f**ire **w**all), which is a convenient utility for managing your node's firewall settings.
 
 The following commands will set `ufw` up with a good default configuration for your Smartnode.
@@ -531,16 +535,16 @@ Allow SSH:
 sudo ufw allow "22/tcp" comment 'Allow SSH'
 ```
 
-Allow Geth if you use it (see [the Geth documentation](https://geth.ethereum.org/docs/interface/private-network#setting-up-networking) for more info):
+Allow execution client (formerly referred to as ETH1):
 ```shell
-sudo ufw allow 30303/tcp comment 'Go Ethereum port, standardized by Rocketpool'
-sudo ufw allow 30303/udp comment 'Go Ethereum port, standardized by Rocketpool'
+sudo ufw allow 30303/tcp comment 'Execution client port, standardized by Rocket Pool'
+sudo ufw allow 30303/udp comment 'Execution client port, standardized by Rocket Pool'
 ```
 
-Allow your Beacon Client:
+Allow consensus client (formerly referred to as ETH2):
 ```shell
-sudo ufw allow 9001/tcp comment 'Rocketpool default ETH2 port'
-sudo ufw allow 9001/udp comment 'Rocketpool default ETH2 port'
+sudo ufw allow 9001/tcp comment 'Consensus client port, standardized by Rocket Pool'
+sudo ufw allow 9001/udp comment 'Consensus client port, standardized by Rocket Pool'
 ```
 
 Finally, enable `ufw`:
@@ -548,65 +552,11 @@ Finally, enable `ufw`:
 sudo ufw enable
 ```
 
-
-### (Optional) Disable Outgoing Connections by Default
-
-If you want to be extra-restrictive, you can disable all unexpected outgoing connections by default.
-This can, however, be problematic if you install some software that attempts to connect to the Internet but hasn't been whitelisted.
-
-::: warning NOTE
-This section is for people who feel comfortable with the command-line and firewalls.
-It is likely that these settings are too restrictive for many non-Smartnode applications.
-
-Be aware that Docker ignores rules set by `ufw`. Outbound restrictions will apply to [Native](node/native.html) Rocket Pool setups only.
-**If you are running a [Standard](node/docker.html) Docker-based Rocket Pool setup, you should skip this section.**
+::: tip NOTE
+`iptables` experts might note that Docker bypasses `ufw` settings.
+Strictly speaking, that means unless you are running in Hybrid mode, you do not need the Execution and Consensus client rules.
+Adding them, however, has no downside and will make sure that if you ever switch to Hybrid mode you will not run into firewall issues.
 :::
-
-The following commands will lock both in and outbound traffic to only the minimum requirements.
-**Run these on the node machine**.
-
-Disallow everything by default unless it's explicitly whitelisted:
-```shell
-sudo ufw default deny outgoing comment 'Deny all outgoing traffic'
-sudo ufw default deny incoming comment 'Deny all incoming traffic'
-```
-
-Allow DNS calls so your node can resolve URL addresses to IP addresses:
-```shell
-sudo ufw allow out 53 comment 'Allow DNS calls out'
-```
-
-Allow NTP (see below for more info):
-```shell
-sudo ufw allow out 123 comment 'Allow NTP out'
-```
-
-Allow HTTP traffic for things like `apt`:
-```shell
-sudo ufw allow out http comment 'allow HTTP traffic out'
-```
-
-Allow HTTPS traffic for things like `apt`:
-```shell
-sudo ufw allow out https comment 'Allow HTTPS traffic out'
-```
-
-Allow execution clients (e.g. Geth) to connect to peers:
-```shell
-sudo ufw allow out 30303,30313,40303/tcp comment 'Allow execution clients p2p traffic out'
-sudo ufw allow out 30303,30313,40303/udp comment 'Allow execution clients p2p traffic out'
-```
-
-Allow consensus clients (e.g. Lighthouse, Nimbus, Prysm, Teku) to connect to peers:
-```shell
-sudo ufw allow out 9000:9100,12000,13000/tcp comment 'Allow consensus clients p2p traffic out'
-sudo ufw allow out 9000:9100,12000,13000/udp comment 'Allow consensus clients p2p traffic out'
-```
-
-Reload the settings:
-```shell
-sudo ufw enable
-```
 
 
 ## (Optional) Enable Brute-Force and DDoS Protection
