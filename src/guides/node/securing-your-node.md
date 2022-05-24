@@ -553,7 +553,9 @@ sudo ufw enable
 ```
 
 ::: tip NOTE
-Iptables experts might note that Docker bypasses `ufw` settings. Strictly speaking that means that unless you are running in hybrid mode, you do not need the Execution and Consensus client rules. Adding them however has no downside and will make sure that if you ever switch to hybrid mode you will not run into firewall issues.
+`iptables` experts might note that Docker bypasses `ufw` settings.
+Strictly speaking, that means unless you are running in Hybrid mode, you do not need the Execution and Consensus client rules.
+Adding them, however, has no downside and will make sure that if you ever switch to Hybrid mode you will not run into firewall issues.
 :::
 
 
