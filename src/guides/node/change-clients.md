@@ -1,9 +1,4 @@
-# [BETA] Changing Execution or Consensus Clients
-
-::: danger NOTE
-This content only applies to the `v1.3.2` beta of the Smartnode stack.
-Mainnet operators using the latest release (`v1.3.1`) can use the [Changing Consensus Clients](#changing-consensus-clients) portion, but the [Changing Execution Clients](#changing-execution-clients) will not be applicable until v1.3.2 is released.
-:::
+# Changing Execution or Consensus Clients
 
 Under normal circumstances, you will likely just select an Execution and Consensus client when you first create your Rocket Pool node and will let them happily run for the life of your Node.
 However, there are a few situations where you may want to change your client selection.
