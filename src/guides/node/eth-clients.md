@@ -1,14 +1,56 @@
 # Choosing your ETH Clients
+Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both execution and consensus clients in order to operate properly.
 
-Rocket Pool's Smartnode installer can transform your machine into a full ETH1 and ETH2 node, as it requires both clients in order to operate properly.
-If you already have ETH1 and ETH2 clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
-Otherwise, read on to learn more about your choices for ETH1 and ETH2 clients. 
+After the merge the terms ETH1/ETH2 will be deprecated and they will be referred to as only Execution Clients (EC) and Consensus Clients (CC)!
+
+If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
+
+Otherwise, read on to learn more about your choices for Execution and Consensus clients.
+
+::: warning NOTE
+
+As of May 2022, the distribution of clients on the Beacon Chain looks roughly like this:
+
+<center>
+
+![](./images/ethereum-client-diversity.png)
+
+*Data obtained from [https://clientdiversity.org](https://clientdiversity.org)*
+
+</center>
+
+The overwhelming majority of node operators are currently using Geth & Prysm.
+In the interest of supporting the health of the Beacon Chain, we currently recommend that you consider using a different clients.
+Here are some relevant articles about why an even client diversity is crucial to the health of the Beacon Chain if you would like to learn more:
+
+[https://clientdiversity.org/#why](https://clientdiversity.org/#why)
+
+[https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/](https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/)
+
+[https://our.status.im/the-importance-of-client-diversity/](https://our.status.im/the-importance-of-client-diversity/)
+
+[https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c](https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c)
+:::
+
+For users that would like to get up and running quickly, the random client option may be the best choice.
+For users that have a specific client they'd like to use in mind, we provide the ability to easily choose one during Rocket Pool's installation.
+The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
-## ETH1 Clients
 
-Out of the box, Rocket Pool supports three different ETH1 clients: **Geth**, **Infura**, and **Pocket**.
 
+## Execution Clients (ETH1)
+
+Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, **Nethermind**.
+
+::: warning
+Light clients **Infura** and **Pocket** will not be supported post merge and are now considered deprecated within the RocketPool stack and you should not use them for new installations.
+:::
+
+Running an Execution Client means you are storing a copy of the chain on your machine.
+It interacts via peer-to-peer communications with other EC nodes to record and verify new blocks and transactions.
+
+By running a EC node, you contribute to the decentralization and overall health of the ETH network.
 
 ### Geth
 
@@ -16,10 +58,6 @@ Out of the box, Rocket Pool supports three different ETH1 clients: **Geth**, **I
 It is written in Go, fully open source and licensed under the GNU LGPL v3.
 
 Geth is very popular and widely used on ETH1 nodes around the world.
-It is also currently the only **full client** that Rocket Pool's installer supports.
-This means that it stores a copy of the ETH1 chain on your machine.
-It interacts via peer-to-peer communications with other ETH1 nodes to record and verify new blocks and transactions.
-By running a Geth node, you contribute to the decentralization and overall health of the ETH1 network.
 
 Geth runs as a single process.
 It is multithreaded, meaning it can take advantage of your entire CPU.
@@ -28,6 +66,30 @@ This makes it viable for low-power systems.
 
 Geth is compatible with all four of the ETH2 clients.
 
+::: warning
+Geth requires offline pruning of its database periodically. The DB will grow over time so the interval will be dependent on your available disk space.   In the past you could fall back on a light client such as **Infura** or **Pocket** which wont be supported post merge.   **Besu** and **Nethermind** have options for no pruning at all, or online pruning, so you may want to considering using one of those.  
+:::
+
+::: warning
+As of 1.4.0 Besu & Nethermind should be considered in early adopter status. The RocketPool stack fully supports both, but the team and community are still learning these clients so experiences may vary.
+:::
+
+### Besu
+Hyperledger [Besu](https://besu.hyperledger.org/en/stable/)  is an open-source Ethereum client developed under the Apache 2.0 license and written in [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).  With such a large portion of the ETH blockchain running on Geth we really need some diversity! It requires a minimum of 8GB of RAM.
+
+One of the best most exciting features of Besu is that it **does not require pruning!!!!**  It does this using its new (Now GA) [Bonsai Tries](https://consensys.net/blog/news/bonsai-tries-a-big-update-for-small-state-storage-in-hyperledger-besu/) for state storage.  This requires less disk space, and does not require pruning!
+
+
+### Nethermind
+[Nethermind](https://nethermind.io/nethermind-client/) is written in [.NET Core](https://en.wikipedia.org/wiki/.NET). It also helps bring some diversity to the EC space which is a good thing! It is designed with node operators in mind and has lots of features directed at node operators.  It requires 16GB of RAM.
+
+It supports [Online DB Pruning](https://medium.com/nethermind-eth/netherminds-full-pruning-is-here-cutting-the-gordian-knot-5e3450f02de9)! This means you do not need to shut your node down to prune!  It uses a lot of system resources to do this, so depending on your hardware configuration your experience may vary.   
+
+## Execution Light Clients (ETH1)
+::: danger
+Light clients will not work as an execution client after the Merge.
+You will need to run a full execution client.
+:::
 
 ### Infura
 
@@ -42,13 +104,8 @@ Because of this restriction, it is possible to exceed the limits of the free tie
 We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
 
 ::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
-:::
-
-::: danger
-Infura will not work as an ETH1 client after the Merge.
-You will need to run a full ETH1 client.
 :::
 
 
@@ -66,14 +123,10 @@ Pocket normally relies on users paying for transactions via their POKT token, bu
 One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
 
 ::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them. 
+If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
 :::
 
-::: danger
-Pocket will not work as an ETH1 client after the Merge.
-You will need to run a full ETH1 client.
-:::
 
 
 ### Client Comparison Table
@@ -81,49 +134,25 @@ You will need to run a full ETH1 client.
 | Client | Type  | CPU Usage | Minimum RAM Usage | Sync Time | ETH2 Client Compatibility |
 | ------ | ----- | --------- | ----------------- | --------- | ------------------------- |
 | Geth   | Full  | Moderate  | 2 GB              | Moderate  | All                       |
-| Infura | Light | Low       | ---               | None      | All                       |
-| Pocket | Light | Low       | ---               | None      | Prysm, Lighthouse, Teku   |
+| Besu   | Full  | Moderate  | 8 GB              | Moderate  | All                       |
+| Nethermind| Full| Moderate | 16 GB             | Moderate  | All                       |
+| Infura* | Light | Low       | ---               | None      | All                       |
+| Pocket* | Light | Low       | ---               | None      | Prysm, Lighthouse, Teku   |
 
+*Currently in deprecated status, not supported post merge
 
-## ETH2 Clients
+## Consensus Clients (ETH2)
 
-Rocket Pool's installer is proud to support all four currently available ETH2 clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
+Rocket Pool's installer is proud to support all four currently available consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
 
-Each of these is a **full client**, meaning you will contribute to the decentralization of the ETH2 network regardless of which client you choose.
+Each of these is a **full client**, meaning you will contribute to the decentralization of the consensus network regardless of which client you choose.
 
 All four clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
 They differ slightly in terms of resource requirements and features, but you cannot go wrong with any of them.
 
-By default, the Rocket Pool installer will offer to select a random ETH2 client for you.
+By default, the Rocket Pool installer will offer to select a random consensus client for you.
 This will help contribute to the overall **diversity of the network**.
 This is important from a security perspective: if one client is used by a majority of nodes and suffers from a severe bug or attack, it might cause all of those nodes to fail and thus threaten the entire Beacon Chain's stability.
-
-::: warning NOTE
-
-As of September 2021, the distribution of clients on the Beacon Chain looks roughly like this:
-
-<center>
-
-![](./images/network-diversity.png)
-
-*Data obtained from [http://migalabs.es/crawler/dashboard](http://migalabs.es/crawler/dashboard)*
-
-</center>
-
-The overwhelming majority of users are currently using Prysm.
-In the interest of supporting the health of the Beacon Chain, we currently recommend that you consider using a different client.
-Here are some relevant articles about why an even client diversity is crucial to the health of the Beacon Chain if you would like to learn more:
-
-[https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/](https://blog.ethereum.org/2020/08/21/validated-why-client-diversity-matters/)
-
-[https://our.status.im/the-importance-of-client-diversity/](https://our.status.im/the-importance-of-client-diversity/)
-
-[https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c](https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c)
-:::
-
-For users that would like to get up and running quickly, the random client option may be the best choice.
-For users that have a specific client they'd like to use in mind, we provide the ability to easily choose one during Rocket Pool's installation.
-The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
 ### Lighthouse
