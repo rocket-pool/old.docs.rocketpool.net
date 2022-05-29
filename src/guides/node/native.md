@@ -17,7 +17,7 @@ For other distros or operating systems, you may follow the high-level steps desc
 
 ::: warning
 This guide is intended for users that are experienced with Linux system administration and usage.
-This includes using the terminal, creating system accounts, managing permissions, and installing services. 
+This includes using the terminal, creating system accounts, managing permissions, and installing services.
 **If you are not familiar with these activites, we do not recommend that you use the native mode.**
 :::
 
@@ -29,7 +29,7 @@ The reason for having separate user accounts is practical: if your Execution or 
 
 We're going to create one account for your Execution client, one for your Beacon Node, and one for both Rocket Pool and the validator client.
 The sharing is necessary because Rocket Pool will create the validator's key files once you create a new minipool, and it will set the permissions so that only its own user has access to them.
-If you're using **Nimbus** for your Consensus client, then it will share an account with Rocket Pool instead since it doesn't have a separate validator client. 
+If you're using **Nimbus** for your Consensus client, then it will share an account with Rocket Pool instead since it doesn't have a separate validator client.
 
 Start by creating an account for your Execution client, which we'll call `eth1`:
 ```shell
@@ -402,7 +402,7 @@ sudo chown eth2:eth2 /mnt/rpdata/lighthouse_data
 Now, grab [the latest Lighthouse release](https://github.com/sigp/lighthouse/releases/), or [build it from source](https://github.com/sigp/lighthouse/) if you want.
 
 Copy `lighthouse` from the release archive into `/srv/lighthouse/`.
-:::: 
+::::
 
 :::: tab Nimbus
 ```
@@ -470,7 +470,7 @@ Download it like this:
 ```
 sudo wget https://github.com/eth-clients/eth2-networks/raw/master/shared/prater/genesis.ssz -O /srv/prysm/genesis.ssz
 
-sudo chown eth2:eth2 /srv/prysm/genesis.ssz 
+sudo chown eth2:eth2 /srv/prysm/genesis.ssz
 ```
 :::
 
@@ -546,7 +546,7 @@ The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `--network mainnet` flag in the `ExecStart` string with `--network prater`.
 :::
 
-:::: 
+::::
 
 :::: tab Nimbus x64
 The following assumes you use the default data folder at: `/srv/nimbus/nimbus_data`.
@@ -566,7 +566,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url=ws://localhost:8546 --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url="ws://127.0.0.1:8546 --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
@@ -969,7 +969,7 @@ The above configuration is for the **Ethereum mainnet**.
 If you want to use the **Prater testnet** instead, replace the `--network mainnet` flag in the `ExecStart` string with `--network prater`.
 :::
 
-:::: 
+::::
 :::: tab Prysm
 ```
 sudo nano /etc/systemd/system/prysm-vc.service
