@@ -412,7 +412,7 @@ KbdInteractiveAuthentication yes
 Add the following line to the bottom of the file, which indicates to `sshd` that it needs both an SSH key and the Google Authenticator code:
 
 ```shell
-AuthenticationMethods publickey,keyboard-interactive
+AuthenticationMethods publickey,keyboard-interactive:pam
 ```
 
 Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.
