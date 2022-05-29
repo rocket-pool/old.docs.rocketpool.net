@@ -566,7 +566,7 @@ Type=simple
 User=rp
 Restart=always
 RestartSec=5
-ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url="ws://127.0.0.1:8546 --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
+ExecStart=/srv/nimbus/nimbus --non-interactive --network=mainnet --data-dir=/srv/nimbus/nimbus_data --insecure-netkey-password --validators-dir=/srv/rocketpool/data/validators/nimbus/validators --secrets-dir=/srv/rocketpool/data/validators/nimbus/secrets --graffiti="RP Nimbus" --web3-url="ws://127.0.0.1:8546" --tcp-port=9001 --udp-port=9001 --rest --rest-port=5052 --num-threads=0
 
 [Install]
 WantedBy=multi-user.target
