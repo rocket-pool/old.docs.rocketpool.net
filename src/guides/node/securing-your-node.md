@@ -105,7 +105,7 @@ However, you have the option of changing it to something else if you wish.
 The path `~/username/.ssh/id_ed25519` is just an example, assuming your username is `username`.
 You likely have a different username.
 Whenever you see a path like the above in this guide, replace it with whatever path your system actually prints with your actual username.
-::: 
+:::
 
 If you are comfortable with the default setting, simply press `Enter`.
 
@@ -126,7 +126,7 @@ Whenever you use the key to connect to your node, you will need to enter this pa
 **You should not leave this blank** - otherwise, anyone with the SSH key file will be able to use it!
 Pick a good password that you (and only you) will know.
 
-Also, **don't forget your password** - there is no way to recover this password if you lose it. 
+Also, **don't forget your password** - there is no way to recover this password if you lose it.
 :::
 
 Once you finish typing the password, press `Enter`.
@@ -275,12 +275,12 @@ In this file, paste the **public key** that you retrieved a few steps ago using 
 
 When it's in, save the file with `Ctrl+O` and `Enter`, then press `Ctrl+X` to exit.
 
-Now, exit `ssh` by running the `exit` command so you return back to your local client machine's terminal. 
+Now, exit `ssh` by running the `exit` command so you return back to your local client machine's terminal.
 ::::
 
 You should now be able to `ssh` into the node like you normally would, but now you won't have to type the password of the user account.
 
-Instead, you will have to type **the password of your SSH private key**. 
+Instead, you will have to type **the password of your SSH private key**.
 Depending on your system settings, you may only have to do this once per restart, or you may have to do it every time you use the key to connect to your node.
 
 ### Disable Login-via-Password
@@ -294,7 +294,7 @@ All of your **existing** SSH sessions will be preserved.
 However, if you make a mistake, then it's possible that you will not be able to create **new** SSH sessions anymore and effectively lock yourself out of the machine.
 
 To prevent this, we strongly recommend that you create **2 SSH sessions** for the next steps - one for editing things and testing, and one as a backup so you can revert any breaking changes.
-::: 
+:::
 
 Start by logging into your machine using `ssh` as usual:
 
@@ -421,7 +421,7 @@ Now that `sshd` is set up, we need to create our 2FA codes.
 In your terminal, run:
 
 ```shell
-google-authenticator 
+google-authenticator
 ```
 
 First, it will ask you about time-based tokens.
