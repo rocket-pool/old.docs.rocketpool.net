@@ -75,7 +75,7 @@ As of 1.4.0 Besu & Nethermind should be considered in early adopter status. The 
 :::
 
 ### Besu
-Hyperledger [Besu](https://besu.hyperledger.org/en/stable/)  is an open-source Ethereum client developed under the Apache 2.0 license and written in [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).  With such a large portion of the ETH blockchain running on Geth we really need some diversity! It requires a minimum of 8GB of RAM.
+Hyperledger [Besu](https://besu.hyperledger.org/en/stable/)  is an open-source Ethereum client developed under the Apache 2.0 license and written in [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).  With such a large portion of the ETH blockchain running on Geth we really need some diversity! It requires a minimum of 8GB of RAM per their requirements, however we have seen issues running with less than 16GB with memory pressure and even OOMing.  
 
 One of the best most exciting features of Besu is that it **does not require pruning!!!!**  It does this using its new (Now GA) [Bonsai Tries](https://consensys.net/blog/news/bonsai-tries-a-big-update-for-small-state-storage-in-hyperledger-besu/) for state storage.  This requires less disk space, and does not require pruning!
 
