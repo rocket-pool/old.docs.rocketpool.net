@@ -172,6 +172,15 @@ You should check the logs of the `eth1`, `eth2`, and `validator` services with `
 
 **You should pin this tab or create a bookmark with it so you can quickly jump to it and check the status of your validator.**
 
+#### Using Beaconcha.in to Monitor Multiple Minipools
+
+Beaconcha.in has a [dashboard view](https://beaconcha.in/dashboard) that allows you to monitor multiple validators or minipools at once.
+Simply add your validator indices one at a time. If you have a lot of minipools, you can run:
+
+```shell
+rocketpool minipool status | grep Validator.index | awk -F " " '{print $3}' | paste -s -d, -
+```
+to get a comma-separated list, and place it in the URL bar like so: `https://beaconcha.in/dashboard?validators=123456,123457`
 
 ### Beaconcha.in App: Validator Overview and Push Notifications
 
