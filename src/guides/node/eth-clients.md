@@ -81,6 +81,10 @@ One of the best most exciting features of Besu is that it **does not require pru
 
 
 ### Nethermind
+::: warning
+As of 1.4.0 we have seen reports of memory leaks using Nethermind within the Rocketpool stack.  It leads to eventual memory exhaustion and will impact validator performance.  At this time we do not recommend using it for mainnet.
+:::
+
 [Nethermind](https://nethermind.io/nethermind-client/) is written in [.NET Core](https://en.wikipedia.org/wiki/.NET). It also helps bring some diversity to the EC space which is a good thing! It is designed with node operators in mind and has lots of features directed at node operators.  It requires 16GB of RAM.
 
 It supports [Online DB Pruning](https://medium.com/nethermind-eth/netherminds-full-pruning-is-here-cutting-the-gordian-knot-5e3450f02de9)! This means you do not need to shut your node down to prune!  It uses a lot of system resources to do this, so depending on your hardware configuration your experience may vary.   
