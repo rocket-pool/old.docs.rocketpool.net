@@ -1,5 +1,5 @@
 # Choosing your ETH Clients
-Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both execution and consensus clients in order to operate properly.
+Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
 After the merge the terms ETH1/ETH2 will be deprecated and they will be referred to as only Execution Clients (EC) and Consensus Clients (CC)!
 
@@ -19,9 +19,9 @@ As of May 2022, the distribution of clients on the Beacon Chain looks roughly li
 
 </center>
 
-The overwhelming majority of node operators are currently using Geth & Prysm.
-In the interest of supporting the health of the Beacon Chain, we currently recommend that you consider using a different clients.
-Here are some relevant articles about why an even client diversity is crucial to the health of the Beacon Chain if you would like to learn more:
+The overwhelming majority of node operators are currently using Geth and Prysm.
+In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using a different clients.
+Here are some relevant articles about why an even client diversity is crucial to the health of the network if you would like to learn more:
 
 [https://clientdiversity.org/#why](https://clientdiversity.org/#why)
 
@@ -32,68 +32,87 @@ Here are some relevant articles about why an even client diversity is crucial to
 [https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c](https://medium.com/prysmatic-labs/eth2-mainnet-incident-retrospective-f0338814340c)
 :::
 
-For users that would like to get up and running quickly, the random client option may be the best choice.
+For users that would like to get up and running quickly, the Smartnode installer provides a `Random Client` option which may be the best choice.
 For users that have a specific client they'd like to use in mind, we provide the ability to easily choose one during Rocket Pool's installation.
 The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
-
-
 ## Execution Clients (ETH1)
 
-Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, **Nethermind**.
+Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, and **Nethermind**.
 
 ::: warning
-Light clients **Infura** and **Pocket** will not be supported post merge and are now considered deprecated within the RocketPool stack and you should not use them for new installations.
+Light clients (**Infura** and **Pocket**) will not be usable after the Ethereum Merge and are now deprecated.
+You **should not** use them for new installations.
 :::
 
-Running an Execution Client means you are storing a copy of the chain on your machine.
+Running an Execution Client involves storing a copy of the Execution layer blockchain on your machine.
 It interacts via peer-to-peer communications with other EC nodes to record and verify new blocks and transactions.
 
-By running a EC node, you contribute to the decentralization and overall health of the ETH network.
+By running an EC node, you contribute to the decentralization and overall health of the ETH network.
+
 
 ### Geth
 
 [Geth](https://geth.ethereum.org/) (formally named `Go Ethereum`) is one of the three original implementations (along with C++ and Python) of the Ethereum protocol.
 It is written in Go, fully open source and licensed under the GNU LGPL v3.
 
-Geth is very popular and widely used on ETH1 nodes around the world.
+Geth is the oldest and most widely-used Execution Client around the world.
+It has a reputation for being very stable and reliable.
 
-Geth runs as a single process.
 It is multithreaded, meaning it can take advantage of your entire CPU.
-Its RAM usage is configurable, down to a minimum of about 2 GB.
-This makes it viable for low-power systems.
+Its RAM usage is configurable, down to a **minimum of about 4 GB for Mainnet**.
+This makes it viable for low-power systems and high-power systems alike.
 
-Geth is compatible with all four of the ETH2 clients.
+::: warning NOTE
+Geth requires **offline pruning** of its database periodically: its database will grow over time and gradually consume all of your free disk space unless you prune it when your disk runs low on free space.
+The frequency you need to prune will depend on your SSD's size.
 
-::: warning
-Geth requires offline pruning of its database periodically. The DB will grow over time so the interval will be dependent on your available disk space.   In the past you could fall back on a light client such as **Infura** or **Pocket** which wont be supported post merge.   **Besu** and **Nethermind** have options for no pruning at all, or online pruning, so you may want to considering using one of those.  
+For more information on pruning Geth, view the [Pruning Geth](./geth-pruning.md) page.
 :::
 
-::: warning
-As of 1.4.0 Besu & Nethermind should be considered in early adopter status. The RocketPool stack fully supports both, but the team and community are still learning these clients so experiences may vary.
-:::
 
 ### Besu
-Hyperledger [Besu](https://besu.hyperledger.org/en/stable/)  is an open-source Ethereum client developed under the Apache 2.0 license and written in [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).  With such a large portion of the ETH blockchain running on Geth we really need some diversity! It requires a minimum of 8GB of RAM per their requirements, however we have seen issues running with less than 16GB with memory pressure and even OOMing.  
+Hyperledger [Besu](https://besu.hyperledger.org/en/stable/) is an open-source Ethereum client developed under the Apache 2.0 license and written in [Java](https://en.wikipedia.org/wiki/Java_%28programming_language%29).
+Besu's most exciting features is its use of [Bonsai Tries](https://consensys.net/blog/news/bonsai-tries-a-big-update-for-small-state-storage-in-hyperledger-besu/) for state storage. In addition to their better performance characterstics, Bonsai Tries give Besu two interesting advantages over the other clients:
 
-One of the best most exciting features of Besu is that it **does not require pruning!!!!**  It does this using its new (Now GA) [Bonsai Tries](https://consensys.net/blog/news/bonsai-tries-a-big-update-for-small-state-storage-in-hyperledger-besu/) for state storage.  This requires less disk space, and does not require pruning!
+1. Besu does *not* need to be pruned at all; it is effectively maintenance-free in that respect
+2. Besu is able to revisit any past block in the blockchain, though it does this by rewinding each block so reaching blocks from long ago may take some time.
+
+Besu currently runs best with **at least 16 GB of RAM**, though more is preferable.
+
+::: warning NOTE
+Besu is a relatively new addition to the Smartnode.
+The development team and support community are still familiarizing themselves with it, so it may take longer to get help with it in Rocket Pool's Discord server.
+:::
 
 
 ### Nethermind
+
+[Nethermind](https://nethermind.io/nethermind-client/) is written in [.NET Core](https://en.wikipedia.org/wiki/.NET).
+It boasts the fastest sync speed of the Execution clients and has a rich set of configuration options.
+It is designed with node operators in mind and has many features that they will find helpful.
+
+Like Geth, Nethermind requires periodic pruning of its database.
+Unlike Geth, however, Nethermind's database can [be pruned while it stays online](https://medium.com/nethermind-eth/netherminds-full-pruning-is-here-cutting-the-gordian-knot-5e3450f02de9).
+This means you do not need to turn your client off and rely on a fallback in order to prune.
+However, Nethermind's online pruning process is quite resource intensive so users running low-power nodes may see some performance degradation during the process.
+
+Nethermind requires **at least 16GB of RAM**, though more is preferable.
+
 ::: warning
-As of 1.4.0 we have seen reports of memory leaks using Nethermind within the Rocketpool stack.  It leads to eventual memory exhaustion and will impact validator performance.  At this time we do not recommend using it for mainnet.
+As of Smartnode v1.4.1, we have seen reports of memory leaks using Nethermind v1.13.1 which cause it to gradually consume all of the node's available RAM until it crashes.
+Users may want to choose a different client while these issues are resolved.
 :::
 
-[Nethermind](https://nethermind.io/nethermind-client/) is written in [.NET Core](https://en.wikipedia.org/wiki/.NET). It also helps bring some diversity to the EC space which is a good thing! It is designed with node operators in mind and has lots of features directed at node operators.  It requires 16GB of RAM.
-
-It supports [Online DB Pruning](https://medium.com/nethermind-eth/netherminds-full-pruning-is-here-cutting-the-gordian-knot-5e3450f02de9)! This means you do not need to shut your node down to prune!  It uses a lot of system resources to do this, so depending on your hardware configuration your experience may vary.   
 
 ## Execution Light Clients (ETH1)
+
 ::: danger
-Light clients will not work as an execution client after the Merge.
-You will need to run a full execution client.
+Light clients are **deprecated**; they will not work as an Execution client after the Merge.
+You will need to run a **full** Execution client.
 :::
+
 
 ### Infura
 
@@ -132,24 +151,24 @@ You do not have control over the remote node that you're connecting to, and you 
 :::
 
 
-
 ### Client Comparison Table
 
-| Client | Type  | CPU Usage | Minimum RAM Usage | Sync Time | ETH2 Client Compatibility |
-| ------ | ----- | --------- | ----------------- | --------- | ------------------------- |
-| Geth   | Full  | Moderate  | 2 GB              | Moderate  | All                       |
-| Besu   | Full  | Moderate  | 8 GB              | Moderate  | All                       |
-| Nethermind| Full| Moderate | 16 GB             | Moderate  | All                       |
-| Infura* | Light | Low       | ---               | None      | All                       |
-| Pocket* | Light | Low       | ---               | None      | Prysm, Lighthouse, Teku   |
+| Client     | Type  | CPU Usage | Minimum RAM Usage | Sync Time |
+| ---------- | ----- | --------- | ----------------- | --------- |
+| Geth       | Full  | Moderate  | 4 GB              | Moderate  |
+| Besu       | Full  | Moderate  | 16 GB             | Moderate  |
+| Nethermind | Full  | Moderate  | 16 GB             | Fast      |
+| Infura*    | Light | Low       | ---               | None      |
+| Pocket*    | Light | Low       | ---               | None      |
 
-*Currently in deprecated status, not supported post merge
+*Currently in deprecated status, not supported post-merge
+
 
 ## Consensus Clients (ETH2)
 
-Rocket Pool's installer is proud to support all four currently available consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
+Rocket Pool's installer is proud to support all four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
 
-Each of these is a **full client**, meaning you will contribute to the decentralization of the consensus network regardless of which client you choose.
+Each of these is a **full client**, meaning you will contribute to the decentralization of the Consensus network regardless of which client you choose.
 
 All four clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
 They differ slightly in terms of resource requirements and features, but you cannot go wrong with any of them.
@@ -187,6 +206,7 @@ Nimbus is written in [Nim](https://nim-lang.org/) and maintained by the [Status.
 The [Prysm](https://docs.prylabs.network/docs/getting-started/#what-is-prysm) project is a full-featured implementation for the Ethereum 2.0 network written entirely in the [Go programming language](https://golang.org/).
 
 Created by [Prysmatic Labs](https://prysmaticlabs.com/), Prysm implements the official [Ethereum 2.0 specification](https://github.com/ethereum/eth2.0-specs), which is the product of an ongoing collective research and development effort by various teams across the Ethereum ecosystem including the [Ethereum Foundation](https://ethereum.org/).
+
 
 ### Teku
 
