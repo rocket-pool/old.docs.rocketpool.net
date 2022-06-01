@@ -34,6 +34,10 @@ Note that the user must have **root / Administrator** access (or **sudo** privil
 
 There are many variants of the Linux OS (called distributions, or **distros** for short). While you can run Rocket Pool from any modern distro, Rocket Pool's installer can automatically install the entire stack on [Ubuntu](https://ubuntu.com/about), [Debian](https://www.debian.org/intro/why_debian), [CentOS](https://www.centos.org/about/), and [Fedora](https://docs.fedoraproject.org/en-US/project/).
 
+::: warning NOTE
+If you plan to use Ubuntu, we strongly recommend using an **LTS** release such as 20.04. These releases are actively maintained for longer periods of time, which helps with the security and stability of your node.
+:::
+
 For installation on other distros, the Smartnode installer will not be able to automatically install some system dependencies (such as `docker-compose`).
 Some manual steps will be required during installation.
 
