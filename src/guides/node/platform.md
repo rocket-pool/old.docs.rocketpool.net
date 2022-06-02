@@ -5,7 +5,7 @@ Alright! So you've decided to try your hand at running a Rocket Pool node. The f
 
 ## Full Node Requirements
 
-A **full node** is one that runs both a full eth1 client and a full eth2 client along with the Rocket Pool stack. This is the best option in terms of decentralization, self-reliance, and consistency. It also has the highest requirements. While you *can* run Rocket Pool by using publicly available eth1 or eth2 clients (such as [Infura](https://infura.io/) or [Alchemy](https://www.alchemyapi.io/)), relying exclusively on these options is not recommended.
+A **full node** is one that runs both an Execution (ETH1) Client and Consensus (ETH2) Client along with the Rocket Pool stack. This is the best option in terms of decentralization, self-reliance, and consistency. It also has the highest requirements. While you *can* run Rocket Pool by using publicly available Execution (ETH1) and Consensus (ETH2) clients (such as [Infura](https://infura.io/) or [Alchemy](https://www.alchemyapi.io/)), relying exclusively on these options is not recommended.
 
 Here is a simple breakdown of what is required to run a full Rocket Pool node well:
 
@@ -13,7 +13,7 @@ Here is a simple breakdown of what is required to run a full Rocket Pool node we
 - At least **1 MB/s of bandwidth**. A full node usually takes around 500 KB/s to 1 MB/s of network traffic, depending on your settings.
 - **No data cap** imposed by your ISP. Running a full node will take a lot of data - we have seen reports of over 1 TB per month on chain data alone. This can be mitigated somewhat with a few settings tweaks to the ETH clients, but as a rule of thumb, don't run a full node if your Internet plan comes with a monthly data cap.
 - **Stable electricity**. For the same reason as needing a stable Internet connection, you also want to have reliable power. This can be mitigated with a large UPS (backup battery) to deal with short blackouts.
-- A **computer** with sufficient specs. This is pretty flexible because it *really* depends on what eth1 and eth2 client you use, and what settings you configure them with. The computer can be a local machine, or it can be a Virtual Private Server (VPS) hosted in the cloud. Read below for some more information on those two options, and how to decide which is best for you.
+- A **computer** with sufficient specs. This is pretty flexible because it *really* depends on what Execution (ETH1) and Consensus (ETH2) client you use, and what settings you configure them with. The computer can be a local machine, or it can be a Virtual Private Server (VPS) hosted in the cloud. Read below for some more information on those two options, and how to decide which is best for you.
 
 The following are considered *minimum* requirements:
   - Linux or macOS Operating System
@@ -22,7 +22,7 @@ The following are considered *minimum* requirements:
   - 1 TB of free **SSD Disk Space**, though 2 TB is strongly recommended now (*note: this only applies to mainnet; the Prater testnet only requires about 100 GB*)
     - A spinning platter hard drive *is generally not fast enough* to handle the constant random reads and writes that blockchain activity requires; you MUST use a solid state drive.
 
-Typical configurations tend to use 16 or 32 GB of RAM for futureproofing, but at the time of Rocket Pool's launch, the above is sufficient to run a node.
+Typical configurations tend to use 16 or 32 GB of RAM for future proofing, but at the time of Rocket Pool's launch, the above is sufficient to run a node.
 
 ::: warning NOTE
 At this time, only **Linux** and **macOS** platforms are supported.
@@ -39,7 +39,7 @@ Advantages:
 - No monthly fees, other than utilities
 - Complete control over your own machine and its data (including your wallet's key)
 - Access to perform maintenance and upgrades whenever you want
-- Contributes to eth1's, eth2's, and Rocket Pool's decentralization (and thus, their security)
+- Contributes to Execution (ETH1's) and Consensus (ETH2)'s, and Rocket Pool's decentralization (and thus, their security)
 
 Disadvantages:
 
@@ -65,7 +65,7 @@ Advantages:
 
 Disadvantages:
 
-- Makes eth1, eth2, and Rocket Pool somewhat more centralized, which weakens the security of the networks
+- Makes Execution (ETH1) and Consensus (ETH2), and Rocket Pool somewhat more centralized, which weakens the security of the networks
 - Monthly fees
 - Servers may come with data caps, or have expensive network I/O rates
 - Possible for hosts to examine your machine's contents and take your wallet's key if not secured

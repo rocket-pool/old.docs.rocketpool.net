@@ -1,7 +1,7 @@
 # Choosing your ETH Clients
 Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
-After the merge the terms ETH1/ETH2 will be deprecated and they will be referred to as only Execution Clients (EC) and Consensus Clients (CC)!
+After the merge the terms ETH1/ETH2 will be deprecated and they will be referred to as only Execution Clients (ETH1) and Consensus Clients (ETH2) The chains will be referred to as the Execution/ETH1 and Beacon/ETH2 blockchains!
 
 If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
 

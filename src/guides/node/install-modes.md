@@ -18,7 +18,7 @@ This mode is what the Smartnode Installer will deploy for you.
 It uses the following Docker containers:
 
 - `rocketpool_api` - This holds the actual functionality that the Smartnode provides when you interact with it via Rocket Pool's command-line interface (CLI).
-- `rocketpool_node` - This is a background process that will periodically check for and claim RPL rewards after a reward checkpoint (if you have auto-claim enabled, more on this later), and is responsible for actually staking new validators when you create a minipool. 
+- `rocketpool_node` - This is a background process that will periodically check for and claim RPL rewards after a reward checkpoint (if you have auto-claim enabled, more on this later), and is responsible for actually staking new validators when you create a minipool.
 - `rocketpool_watchtower` - This is used by Oracle Nodes to perform oracle-related duties. For regular node operators, this will simply stay idle.
 - `rocketpool_eth1` - This will be your ETH1 client, such as Geth, or a small proxy that routes ETH1 requests to a light client like Infura or Pocket.
 - `rocketpool_eth2` - This will be your ETH2 beacon node client.
@@ -26,16 +26,16 @@ It uses the following Docker containers:
 
 ::: tip NOTE
 **Nimbus** does not have a separate validator client.
-It runs the beacon node and validator clients together inside the ETH2 container.
+It runs the beacon node and validator clients together inside the Consensus (ETH2) container.
 :::
 
 In most situations, this is a good option to choose when creating a new node from scratch.
-It's the fastest, most hands-off procedure. 
-It will also handle updates to the ETH1 and ETH2 clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
+It's the fastest, most hands-off procedure.
+It will also handle updates to the Execution (ETH1) and Consensus (ETH2) clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
 
 :exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
 While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
-In this case, we suggest you use the Native configuration mode listed below.** 
+In this case, we suggest you use the Native configuration mode listed below.**
 
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 

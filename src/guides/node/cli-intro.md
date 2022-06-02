@@ -3,7 +3,7 @@
 As a node operator, the CLI is your primary tool for interacting with Rocket Pool.
 You will use it to create new minipools, check on the status of everything, claim periodic RPL rewards, exit and withdraw from your minipools when you're ready, and a host of other activities.
 
-Once you've finished syncing the ETH1 and ETH2 chains, all of the commands will be available for you to use.
+Once you've finished syncing the Execution (ETH1) and Beacon (ETH2) chains, all of the commands will be available for you to use.
 In this section, we'll go over a brief tour of some of the more common ones and some other tricks that the CLI can do.
 
 
@@ -192,7 +192,7 @@ You may find that a program like `htop` offers better insight into actual resour
 ### `config`
 
 This command runs through the configuration interview again.
-You can use it if you want to change your selection of ETH1 or ETH2 client, or change some of the parameters that you initially specified when you selected them (such as your validator's graffiti message, the max number of peers to connect to, and so on).
+You can use it if you want to change your selection of Execution (ETH1) or Consensus (ETH2) client, or change some of the parameters that you initially specified when you selected them (such as your validator's graffiti message, the max number of peers to connect to, and so on).
 
 You can call this command at any time, but the changes won't take effect until you call `rocketpool service stop` and `rocketpool service start`.
 
@@ -278,7 +278,7 @@ The node has a total of 39 minipool(s):
 
 ### `sync`
 
-This command will show you the current sync status of your ETH1 and ETH2 clients.
+This command will show you the current sync status of your Execution (ETH1) and Consensus (ETH2) clients.
 You'll probably use it a lot when you first set the node up, then never need it again (unless you change or reset your clients).
 
 The output of `rocketpool node sync` will look like this:
@@ -336,7 +336,7 @@ Waiting for the transaction to be mined... **DO NOT EXIT!** This transaction is 
 ```
 
 Most operations only require one transaction, so the CLI will wait until it has been mined and then exit.
-However, `stake-rpl` is one of the few commands that requires *two* transactions, so this dialog will appear twice. 
+However, `stake-rpl` is one of the few commands that requires *two* transactions, so this dialog will appear twice.
 
 
 ### `deposit`
@@ -585,7 +585,7 @@ Are you sure you want to send 0.000100 eth to <node wallet address>? This action
 
 The Smartnode stack will automatically check to make sure that the `nonce` you have provided is valid (it refers to a pending transaction) before sending it and wasting your gas accidentally.
 If not, it will return an error message.
-Otherwise, it will go through and provide you with the transaction details so you can monitor it to confirm that it did, in fact, overwrite your old stuck transaction. 
+Otherwise, it will go through and provide you with the transaction details so you can monitor it to confirm that it did, in fact, overwrite your old stuck transaction.
 
 
 That's it for the common CLI commands.
