@@ -207,6 +207,10 @@ There are two ways to do this - if one doesn't work, try the other way:
 
 :::: tabs
 ::: tab Using ssh-copy-id
+
+**Note**: if your client machine is running Windows, `ssh-copy-id` is not yet available.
+Please follow the instructions in the "Manually Adding the Key" tab.
+
 Run the following command **on your client machine**:
 
 ```shell
@@ -248,9 +252,20 @@ That means it worked!
 ::: tab Manually Adding the Key
 Start by getting the contents of the **public key** - run this command **on your client machine**:
 
-```shell
-cat ~/username/.ssh/id_ed25519.pub
-```
+  * On macOS and Linux:
+  ```shell
+  cat ~/.ssh/id_ed25519.pub
+  ```
+
+  * On Windows (Command Prompt):
+  ```shell
+  type %USERPROFILE%\.ssh\id_ed25519.pub
+  ```
+
+  * On Windows (PowerShell):
+  ```shell
+  type $ENV:UserProfile\.ssh\id_ed25519.pub
+  ```
 
 The output will look something like this:
 
