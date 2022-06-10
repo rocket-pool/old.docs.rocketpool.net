@@ -503,6 +503,12 @@ pip3 install stressberry
 source ~/.profile
 ```
 
+In some cases stressberry could not read temp, so we need to change some permissions with the 2 commands :
+```
+sudo chgrp video /dev/vchiq
+sudo chmod 0660  /dev/vchiq
+```
+
 Next, run it like this:
 ```
 stressberry-run -n "Stock" -d 300 -i 60 -c 4 stock.out
