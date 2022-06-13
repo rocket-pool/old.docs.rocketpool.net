@@ -1,6 +1,6 @@
 # Starting Rocket Pool and Setting Up a Node Wallet
 
-At this point, you should have the complete Rocket Pool infrastructure running, including the Smartnode stack, an ETH1 client, and an ETH2 client.
+At this point, you should have the complete Rocket Pool infrastructure running, including the Smartnode stack, an Execution (ETH1) and an Consensus (ETH2) client.
 You should also have hardened your operating system from outside attackers.
 If you've completed both of these steps, you're ready to create a Rocket Pool node and begin staking.
 If not, please review the previous sections and return here once you've completed those steps.
@@ -27,15 +27,15 @@ $ rocketpool service start
 Creating network "rocketpool_net" with the default driver
 Creating volume "rocketpool_eth1clientdata" with default driver
 Creating volume "rocketpool_eth2clientdata" with default driver
-Creating rocketpool_eth1 ... 
+Creating rocketpool_eth1 ...
 Creating rocketpool_eth1 ... done
-Creating rocketpool_eth2 ... 
-Creating rocketpool_api  ... 
+Creating rocketpool_eth2 ...
+Creating rocketpool_api  ...
 Creating rocketpool_api  ... done
 Creating rocketpool_eth2 ... done
-Creating rocketpool_watchtower ... 
-Creating rocketpool_node       ... 
-Creating rocketpool_validator  ... 
+Creating rocketpool_watchtower ...
+Creating rocketpool_node       ...
+Creating rocketpool_validator  ...
 Creating rocketpool_validator  ... done
 Creating rocketpool_node       ... done
 Creating rocketpool_watchtower ... done
@@ -52,12 +52,12 @@ $ rocketpool service stop
 Are you sure you want to pause the Rocket Pool service? Any staking minipools will be penalized! [y/n]
 y
 
-Stopping rocketpool_node       ... 
-Stopping rocketpool_validator  ... 
-Stopping rocketpool_watchtower ... 
-Stopping rocketpool_eth2       ... 
-Stopping rocketpool_api        ... 
-Stopping rocketpool_eth1       ... 
+Stopping rocketpool_node       ...
+Stopping rocketpool_validator  ...
+Stopping rocketpool_watchtower ...
+Stopping rocketpool_eth2       ...
+Stopping rocketpool_api        ...
+Stopping rocketpool_eth1       ...
 Stopping rocketpool_validator  ... done
 Stopping rocketpool_node       ... done
 Stopping rocketpool_watchtower ... done
@@ -87,11 +87,11 @@ The first time you do it, the output should look like this:
 $ rocketpool service start
 
 Creating network "rocketpool_net" with the default driver
-Creating rocketpool_api  ... 
+Creating rocketpool_api  ...
 Creating rocketpool_api  ... done
-Creating rocketpool_watchtower ... 
-Creating rocketpool_node       ... 
-Creating rocketpool_validator  ... 
+Creating rocketpool_watchtower ...
+Creating rocketpool_node       ...
+Creating rocketpool_validator  ...
 Creating rocketpool_validator  ... done
 Creating rocketpool_node       ... done
 Creating rocketpool_watchtower ... done
@@ -99,7 +99,7 @@ Creating rocketpool_watchtower ... done
 
 If it does, then the Smartnode stack has been successfully initialized and is now running.
 
-Note that your external ETH1 and/or ETH2 clients will not be listed here, as Rocket Pool does not manage them and thus cannot start them.
+Note that your external Execution (ETH1) and/or Consensus (ETH2) clients will not be listed here, as Rocket Pool does not manage them and thus cannot start them.
 You will have to ensure that you've started them separately, using whatever mechanism you originally created them with.
 
 If you ever need to stop the services (for example, during an upgrade or because you need to do maintenance), you can use `rocketpool service stop` to shut everything down.
@@ -111,17 +111,17 @@ $ rocketpool service stop
 Are you sure you want to pause the Rocket Pool service? Any staking minipools will be penalized! [y/n]
 y
 
-Stopping rocketpool_node       ... 
-Stopping rocketpool_validator  ... 
-Stopping rocketpool_watchtower ... 
-Stopping rocketpool_api        ... 
+Stopping rocketpool_node       ...
+Stopping rocketpool_validator  ...
+Stopping rocketpool_watchtower ...
+Stopping rocketpool_api        ...
 Stopping rocketpool_validator  ... done
 Stopping rocketpool_node       ... done
 Stopping rocketpool_watchtower ... done
 Stopping rocketpool_api        ... done
 ```
 
-Again, you will be responsible for manually ensuring that your ETH1 and/or ETH2 clients are stopped appropriately as well, if you want them to be stopped.
+Again, you will be responsible for manually ensuring that your Execution (ETH1) and Consensus (ETH2) clients are stopped appropriately as well, if you want them to be stopped.
 
 ::: tip NOTE
 Once you call this, Rocket Pool will not automatically start after a system reboot.
@@ -132,7 +132,7 @@ You will have to call `rocketpool service start` to start all of the Docker cont
 In native mode, you already set up and started the Smartnode services as part of the [Configuring a Native Rocket Pool Node without Docker](./native.md) section.
 
 Assuming you set them up as `systemd` services, you can start them with `sudo systemctl start ...`.
-For example, if you are using Geth for ETH1 and Teku for ETH2:
+For example, if you are using Geth for Execution (ETH1) and Teku for Consensus (ETH2):
 
 ```
 sudo systemctl start geth teku-bn teku-vc rp-node rp-watchtower
@@ -141,7 +141,7 @@ sudo systemctl start geth teku-bn teku-vc rp-node rp-watchtower
 Stopping them is the same process, but using `sudo systemctl stop ...`.
 
 Note that stopping the services **does not disable autostart**; the processes will automatically start upon a reboot.
-::: 
+:::
 ::::
 
 
@@ -174,7 +174,7 @@ If you are not on the network you expect to be on, go back to the Installing Roc
 
 **For Native users:**
 If you accepted the default settings when you first ran `rp service config`, then it's possible that the network reported here is incorrect.
-However, your `systemctl` service definitions *should* have the correct network baked directly into the command line arguments so you can ignore this discrepancy unless it bothers you. 
+However, your `systemctl` service definitions *should* have the correct network baked directly into the command line arguments so you can ignore this discrepancy unless it bothers you.
 :::
 
 The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's `config.yml` file.
@@ -208,11 +208,11 @@ The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
-::: 
+:::
 
 Still, it might be useful to check the logs of the various services.
 
@@ -259,11 +259,11 @@ The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm or Teku as your ETH2 client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm or Teku as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
-::: 
+:::
 
 Still, it might be useful to check the logs of the various services.
 
@@ -282,7 +282,7 @@ For example, to check Geth's log, you would just run:
 ```
 
 You should see that it is slowly chugging along without any errors.
-Do this for your ETH1 and ETH2 clients now to verify that they are working properly.
+Do this for your Execution (ETH1) and Consensus (ETH2) clients now to verify that they are working properly.
 ::::
 :::::
 
@@ -309,10 +309,10 @@ rocketpool wallet init
 You will first be prompted for a password to protect your wallet's private key.
 Next, you will be presented the **unique 24-word mnemonic** for your new wallet.
 This is the **recovery phrase** for your wallet.
-If you ever lose your machine, you can use this phrase to regenerate your wallet and resurrect all of the ETH2 validators attached to it.
+If you ever lose your machine, you can use this phrase to regenerate your wallet and resurrect all of the Consensus (ETH2) validators attached to it.
 
 ::: warning
-It is **essential** that you write this mnemonic down because this is the only time it will be shown to you, but keep it somewhere safe. 
+It is **essential** that you write this mnemonic down because this is the only time it will be shown to you, but keep it somewhere safe.
 Anyone with this phrase can gain control of your wallet.
 :::
 
@@ -377,7 +377,7 @@ This is the file that must be protected at all times.
 :::
 
 ::: tab Native Mode
-The wallet and password files will be stored in the `data` directory under the Rocket Pool directory that you set up earlier (e.g. `/srv/rocketpool`). 
+The wallet and password files will be stored in the `data` directory under the Rocket Pool directory that you set up earlier (e.g. `/srv/rocketpool`).
 
 Your wallet's private key will be stored in a file located at `/srv/rocketpool/data/wallet`.
 
@@ -389,7 +389,7 @@ This is the file that must be protected at all times.
 
 ## Waiting for Your ETH Clients to Sync
 
-Now that you have a wallet set up, you're going to want to wait until your ETH1 and ETH2 clients have finished syncing with the network before proceeding.
+Now that you have a wallet set up, you're going to want to wait until your Execution (ETH1) and Consensus (ETH2) clients have finished syncing with the network before proceeding.
 
 One easy way to check on their status is with the following command:
 
@@ -397,7 +397,7 @@ One easy way to check on their status is with the following command:
 rocketpool node sync
 ```
 
-This command will show how far along your ETH1 and ETH2 clients are in the syncing process, similar to this:
+This command will show how far along your Execution (ETH1) & Consensus (ETH2) clients are in the syncing process, similar to this:
 
 ```
 $ rocketpool node sync

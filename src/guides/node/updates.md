@@ -21,7 +21,7 @@ Slashing only occurs if you attack the network, and going offline for maintenanc
 
 ## Updating your Operating System
 
-You should frequently check your Operating System's package manager or update service to ensure that quickly apply any new important security patches. 
+You should frequently check your Operating System's package manager or update service to ensure that quickly apply any new important security patches.
 The exact instructions vary for each Operating System and can be found with your system's documentation, but here are a few examples.
 
 :::: tabs
@@ -55,7 +55,7 @@ This will show you the list of packages that are about to be updated, and if the
 12 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 Need to get 51.3 MB of archives.
 After this operation, 52.2 kB of additional disk space will be used.
-Do you want to continue? [Y/n] 
+Do you want to continue? [Y/n]
 ```
 
 Ensure that you have enough space available to do this, then press `y` and `Enter` to begin the update process.
@@ -104,6 +104,14 @@ The most consistent way to find out about new releases is to subscribe to the Ro
 ::: warning NOTE
 Note that running `apt update` will not update the node software.
 This must be done manually using the steps below.
+:::
+
+::: tip TIP
+When you have completed the Smartnode upgrade, the Grafana dashboard will still indicate there is still an update available.
+It will automatically clear within a day when the system next auto-checks for updates.
+
+If you want to clear it immediately after the update, simply run:
+```sudo apt update```
 :::
 
 The steps to upgrade depend on which mode your node uses. Select from the options below:

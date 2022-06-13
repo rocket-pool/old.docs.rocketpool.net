@@ -47,7 +47,7 @@ Please ensure your Firewall (Settings -> Security & Privacy -> Firewall) is turn
 
 ### Hardware Requirements
 
-The hardware requirements for a node depend largely on which eth1 and eth2 clients you decide to run.
+The hardware requirements for a node depend largely on which Execution (ETH1) and Consensus (ETH2) clients you decide to run.
 As shown in [the hardware guide](./hardware.md), there is a wide range of possible configurations that work well.
 However, for the sake of completeness, we have assembled the following hardware profiles:
 

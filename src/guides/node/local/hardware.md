@@ -48,7 +48,7 @@ Xer0's setup:
 Here are Xer0's comments on why they chose this setup:
 
 *Obviously there is no need to build a monstrosity for simply staking on the Ethereum network, but I do have a few reasons why I built something like this.*
- 
+
 1. *Now I believe that 1 or more validators in the future will be worth much more than what we are seeing right now, so I wanted to buy something that will be able to support the network for at least the next 10-20 years without a hiccup.*
 1. *By creating a machine that has at this many cores I've also given myself a lot more headroom to the point of I could run an L2 aggregator on top of this without any problems (regarding hardware) and anything else that I'd want to run on a server.* :)
 1. *I like building computers, and so I built it…*
@@ -63,7 +63,7 @@ Here are Xer0's comments on why they chose this setup:
 Rocket Pool's founder David Rugendyke (known on Discord as **darcius**) spent a long time perfecting his node.
 After some debate, he built a Mini-ITX that's small and portable, but still packs an enormous amount of processing power.
 His rig includes an 8-core Ryzen 7 5800x (3.8 GHz), two DDR4 slots, and two M.2 slots for NVMe SSDs.
-It is truly one of the most high-performance rigs of the Rocket Pool nodes, but with good reason: darcius runs a special type of Rocket Pool node called an Oracle Node, which relays information from the Beacon chain back to the ETH1 chain about all of the Rocket Pool validators.
+It is truly one of the most high-performance rigs of the Rocket Pool nodes, but with good reason: darcius runs a special type of Rocket Pool node called an Oracle Node, which relays information from the Beacon chain back to the Execution (ETH1) chain about all of the Rocket Pool validators.
 With thousands of Rocket Pool minipools active to watch, that job takes a lot of horsepower... but his shelf rig is easily up to the task.
 
 Darcius's setup:
@@ -136,7 +136,7 @@ In fact, one of the most popular setups among stakers is the illustrious NUC.
 A NUC (Next Unit of Computing) is essentially a small, self-contained computer that is designed around very low power usage and maximum efficiency.
 NUCs are great for most stakers that only run a few validators because of their low maintenance, low monthly running costs, and ease of setup.
 Unlike PCs, NUCs come preassembled in a case; all you need to do is add some RAM, add an SSD, and you're up and running!
-Below are a few examples of NUC setups that some Rocket Pool veterans use and recommend. 
+Below are a few examples of NUC setups that some Rocket Pool veterans use and recommend.
 
 
 ### Ken's NUC8i5BEK
@@ -146,7 +146,7 @@ Below are a few examples of NUC setups that some Rocket Pool veterans use and re
 The NUC8i5BEK is one of Intel's own NUCs with an 8th-generation processor.
 Released in 2018, this model comes with a quad-core i5-8259U CPU (2.30 GHz), two DDR4 slots, an M.2 slot for SSDs, and USB 3.1 ports.
 It normally draws about 20 watts, but Discord user **Ken** has been able to optimize it down to 9 watts during normal validation.
-It is more than capable of handling any ETH1 and any ETH2 client, making it an excellent choice for a lightweight, efficient node machine.
+It is more than capable of handling any Execution (ETH1) and any Consensus (ETH2) client, making it an excellent choice for a lightweight, efficient node machine.
 
 Ken's Setup:
 - Base: [Intel NUC8i5BEK](https://www.amazon.com/Intel-NUC-Mainstream-Kit-NUC8i5BEK/dp/B07GX67SBM) ($349)
@@ -260,7 +260,7 @@ While they were originally intended as a simple option to help teach young stude
 It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.1 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
 
 Despite the general consensus in the Ethereum space that Raspberry Pis should not be used for staking, Rocket Pool developer Joe Clapis (known on Discord as **jcrtp**) is confident that his configuration can handle the load of being a Rocket Pool node.
-This makes it the cheapest and lowest power option currently available, but offers the least amount of headroom or flexibility if the future of Ethereum staking demands higher performance. 
+This makes it the cheapest and lowest power option currently available, but offers the least amount of headroom or flexibility if the future of Ethereum staking demands higher performance.
 
 Jcrtp's Setup:
 - Base: [Raspberry Pi 4B 8GB Basic Kit](https://www.amazon.com/CanaKit-Raspberry-Basic-Kit-8GB/dp/B08DJ9MLHV/ref=sr_1_2?dchild=1&keywords=raspberry+pi+4b+8gb&qid=1616386386&sr=8-2) ($90)

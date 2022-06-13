@@ -6,7 +6,7 @@ Specifically, we'll cover how to select the appropriate virtual hardware configu
 You should be able to extrapolate how to apply these steps to any provider once you've become familiar with their ecosystem.
 
 
-## Creating an EC2 Virtual Machine 
+## Creating an EC2 Virtual Machine
 
 The first step is to [create an AWS account](https://portal.aws.amazon.com/billing/signup) if you don't already have one.
 Follow the instructions provided in that link or log in with an existing account, and you will eventually make it to your management console dashboard:
@@ -66,7 +66,7 @@ This can be expanded later thanks to the power of the cloud, so getting the corr
 However, for the sake of your own peace of mind, you should change the size to one of the following figures:
 
 - Use at least **100 GiB** if you're just trying Rocket Pool out on the [Prater Test Network](../../testnet/overview.md).
-- Use at least **1 TiB** (preferably **2 TiB**) if you're going to use this node on the main Ethereum network (**mainnet**). 
+- Use at least **1 TiB** (preferably **2 TiB**) if you're going to use this node on the main Ethereum network (**mainnet**).
 
 Leave the default values for the other settings and click **Next**.
 
@@ -86,7 +86,7 @@ Remove all of the existing rules in the table and add the following rules:
 | Custom UDP | 9001       | Anywhere                         | ETH2 P2P    |
 
 This will allow you to remotely connect to your server via SSH (the command line terminal) from your laptop or desktop.
-It will also allow the ETH1 and ETH2 clients to connect to other nodes on the Ethereum network.
+It will also allow the Execution (ETH1) and Consensus (ETH2) clients to connect to other nodes on the Ethereum network.
 
 ::: warning NOTE
 For SSH access, this will only work if you have a **static public IP address**.
@@ -146,7 +146,7 @@ Once here, you have complete terminal access to the system.
 
 ## Setting up Swap Space
 
-In most cases, if you choose your ETH1 and ETH2 clients and your instance type carefully, you should not run out of RAM.
+In most cases, if you choose your Execution (ETH1) and Consensus (ETH2) clients and your instance type carefully, you should not run out of RAM.
 Then again, it never hurts to add a little more.
 What we're going to do now is add what's called **swap space**.
 Essentially, it means we're going to use the SSD as "backup RAM" in case something goes horribly, horribly wrong and your server runs out of regular RAM.
@@ -158,7 +158,7 @@ Think of this as extra insurance that you'll (most likely) never need.
 
 The first step is to make a new file that will act as your swap space.
 Decide how much you want to use - a reasonable start would be 8 GB, so you have 8 GB of normal RAM and 8 GB of "backup RAM" for a total of 16 GB.
-To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill. 
+To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill.
 Luckily, since your SSD has 1 or 2 TB of space, allocating 8 to 24 GB for a swapfile is negligible.
 
 For the sake of this walkthrough, let's pick a nice middleground - say, 16 GB of swap space for a total RAM of 24 GB.

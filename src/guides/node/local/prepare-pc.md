@@ -47,7 +47,7 @@ For other distros, manual steps will be required during installation.
 
 ### Hardware Requirements
 
-The hardware requirements for a node depend largely on which eth1 and eth2 clients you decide to run.
+The hardware requirements for a node depend largely on which Execution (ETH1) and Consensus (ETH2) clients you decide to run.
 As shown in [the hardware guide](./hardware.md), there is a wide range of possible configurations that work well.
 However, for the sake of completeness, we have assembled the following hardware profiles:
 
@@ -80,11 +80,11 @@ However, for the sake of completeness, we have assembled the following hardware 
 
 
 *\* Note that for mainnet, at the time of this article, 1 TB is sufficient but **2 TB is recommended**.
-The eth1 blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer better future-proofing.
+The Execution (ETH1) blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer better future-proofing.
 The larger your storage, the longer you can go between needing to reclaim space by pruning.*
 
 *\*\* If you are unsure if your disk meets these performance requirements, `fio` is a good way to test them.
-See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-linux/) for Linux instructions, and [here](https://www.nivas.hr/blog/2017/09/19/measuring-disk-io-performance-macos/) for MacOS instructions.* 
+See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-linux/) for Linux instructions, and [here](https://www.nivas.hr/blog/2017/09/19/measuring-disk-io-performance-macos/) for MacOS instructions.*
 
 
 ## Installing the Operating System
@@ -153,7 +153,7 @@ Each router is different, so you will need to consult your router's documentatio
 
 ## Setting up Swap Space
 
-In most cases, if you choose your ETH1 and ETH2 clients and your instance type carefully, you should not run out of RAM.
+In most cases, if you choose your Execution (ETH1) and Consensus (ETH2) clients and your instance type carefully, you should not run out of RAM.
 Then again, it never hurts to add a little more.
 What we're going to do now is add what's called **swap space**.
 Essentially, it means we're going to use the SSD as "backup RAM" in case something goes horribly, horribly wrong and your server runs out of regular RAM.
@@ -165,7 +165,7 @@ Think of this as extra insurance that you'll (most likely) never need.
 
 The first step is to make a new file that will act as your swap space.
 Decide how much you want to use - a reasonable start would be 8 GB, so you have 8 GB of normal RAM and 8 GB of "backup RAM" for a total of 16 GB.
-To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill. 
+To be super safe, you can make it 24 GB so your system has 8 GB of normal RAM and 24 GB of "backup RAM" for a total of 32 GB, but this is probably overkill.
 Luckily, since your SSD has 1 or 2 TB of space, allocating 8 to 24 GB for a swapfile is negligible.
 
 For the sake of this walkthrough, let's pick a nice middleground - say, 16 GB of swap space for a total RAM of 24 GB.
