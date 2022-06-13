@@ -4,7 +4,7 @@ Rocket Pool's Smartnode installer can transform your machine into a full Ethereu
 The terms ETH1/ETH2 have been deprecated; the proper names are now Execution Clients (ETH1) and Consensus Clients (ETH2).
 The chains will be referred to as the **Execution Layer (ETH1)** and the **Beacon Chain or Consensus Layer (ETH2)** in the rest of these guides.
 
-If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./hybrid.md) section.
+If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./install-modes.md#the-hybrid-configuration-with-external-clients) section.
 
 Otherwise, read on to learn more about your choices for Execution and Consensus clients.
 
