@@ -106,8 +106,11 @@ Note that running `apt update` will not update the node software.
 This must be done manually using the steps below.
 :::
 
-::: warning NOTE
-When you have completed the Smartnode upgrade the Grafana dashboard will still indicate there is still an update available.   It will auto clear within a day when the system auto-checks for updates. If you want to clear it immediately after the update simply run
+::: tip TIP
+When you have completed the Smartnode upgrade, the Grafana dashboard will still indicate there is still an update available.
+It will automatically clear within a day when the system next auto-checks for updates.
+
+If you want to clear it immediately after the update, simply run:
 ```sudo apt update```
 :::
 
