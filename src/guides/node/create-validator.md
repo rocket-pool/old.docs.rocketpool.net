@@ -1,4 +1,4 @@
-# Creating a New Minipool (ETH2 Validator)
+# Creating a New Minipool (Validator)
 
 As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the eth1.0 chain that your node manages.
 The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new eth2.0 validator.
@@ -6,7 +6,7 @@ Thus, in order to create a validator using Rocket Pool, you need to **create a m
 
 ::: warning
 Creating a minipool means depositing 16 of your own ETH to the Beacon Chain.
-These funds **cannot be retrieved** until after the eth1.0 chain has merged with the eth2.0 chain, and withdrawals have been implemented.
+These funds **cannot be retrieved** until after the Execution Layer (ETH1) has merged with the Beacon Chain (ETH2), and withdrawals have been implemented.
 By creating the minipool, you are acknowledging that you are effectively locking these funds until that system is in place.
 :::
 
@@ -167,7 +167,7 @@ You can then use the `rocketpool minipool refund` command to receive that 16 ETH
 ::: tip NOTE
 Though depositing 32 ETH lets you bypass the *Rocket Pool queue*, it does **not** bypass the *Beacon Chain queue*.
 You still have to wait through the validator queue until your validator is activated on the Beacon Chain.
-::: 
+:::
 
 Next, you will be prompted about the current network commission rate:
 
@@ -206,7 +206,7 @@ A situation may arise where **your ETH2 validator is activated before your ETH2 
 If this happens, your validator will be assigned attestation and block proposal duties on the Beacon Chain, but it cannot perform those duties until your ETH2 client is fully synced.
 
 In this situation, **every missed attestation and block proposal will cause you to lose ETH!**
-You will continue to slowly leak your ETH until your ETH2 client finishes syncing.
+You will continue to slowly leak your ETH until your Consensus (ETH2) client finishes syncing.
 
 In most cases, **you should cancel the process and wait for your client to sync.**
 

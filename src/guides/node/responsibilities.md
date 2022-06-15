@@ -2,12 +2,12 @@
 
 ## How ETH2 Staking Works
 
-As a reminder, staking in ETH2 is done via **validators**.
+As a reminder, staking in Consensus (ETH2) is done via **validators**.
 A validator is a single ETH2 address, to which 32 ETH was deposited, which is now responsible for helping maintain the consistency and security of the Beacon (ETH2) chain.
 They do this by listening for transactions and new block proposals, and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
-Occasionally, they get to propose new blocks themselves. 
+Occasionally, they get to propose new blocks themselves.
 
-Validators in ETH2 are assigned attestations and block proposals **on a schedule**.
+Validators in Consensus (ETH2) are assigned attestations and block proposals **on a schedule**.
 This is very different from ETH1's proof of work system, where everyone is constantly trying to race each other and come up with the next block before everyone else.
 This means that unlike ETH1 where you aren't guaranteed to earn a block reward unless you find the next block, ETH2 validators are guaranteed to have slow, steady income as long as they perform their duties.
 If a validator is offline and misses an attestation or a block proposal, it will be **slightly penalized**.
@@ -53,7 +53,7 @@ This acts as supplemental insurance against particularly egregious slashing inci
 They are the individuals that run Rocket Pool nodes.
 They put ETH from the staking pool to work by running minipools with it, which earn staking rewards for the Rocket Pool protocol (and thus, increase rETH's value).
 Their job is straightforward, but crucially important: *run ETH2 validators with the highest quality possible, and maximize staking rewards*.
- 
+
 Node operators are responsible for:
 
 - Setting up a computer (either physical or virtual)
@@ -78,4 +78,4 @@ You will receive 14 ETH, and 16 ETH will be returned to the staking pool.
 If you're fairly new to using the command line or computer maintenance, this can seem like a scary challenge.
 Luckily, one of Rocket Pool's most core principles is *decentralization* - the fact that anyone, anywhere, can run a node if they have the determination and knowledge.
 While we can't help with determination, we *can* help with knowledge.
-This section is packed with guides, walkthroughs, and information that will help you understand how to run a great Rocket Pool node. 
+This section is packed with guides, walkthroughs, and information that will help you understand how to run a great Rocket Pool node.

@@ -1,6 +1,6 @@
 # Preparing your Node for Operation
 
-If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the ETH1 and ETH2 chains on your respective clients. 
+If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the Execution (ETH1) and Consensus (ETH2) chains on your respective clients. 
 If so, then you are ready to register your node on the Rocket Pool network and create a minipool with an ETH2 validator!
 If not, please review the previous sections and return here once you've completed those steps.
 
@@ -86,7 +86,7 @@ Please read both options below to determine which one applies to you.
 ::: warning NOTE
 This method will require you to **submit a transaction** from your new withdrawal address, so **you must have a small amount of ETH in that address already.**
 :::
- 
+
 ::: warning NOTE
 For users of **Ledger** hardware wallets, note that Ledger Live does not yet support MetaMask or WalletConnect natively.
 You will need to use MetaMask and connect it to your Ledger instead.
@@ -96,11 +96,11 @@ To work with the Rocket Pool website, you will need to have your Ledger connecte
 You will also need to **enable "blind signing"** for the current session; you can find this within the Settings portion of the ETH app on the device.
 Bind signing will automatically be disabled after you close the session.
 
-If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion. 
+If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion.
 Make sure to select the **Goerli Testnet** in the network selection dropdown when connecting your Ledger to MetaMask.
 Note that Ledger Live will not show your balance on the test network, but other applications which support the test network (such as MetaMask and Etherscan) will be able to display it.
 :::
- 
+
 1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
 2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
    1. The easiest way to do this is to navigate to the Rocket Pool withdrawal address site (for the [Prater Testnet](https://testnet.rocketpool.net/withdrawal/) or for [Mainnet](https://stake.rocketpool.net/withdrawal/)).
@@ -110,7 +110,7 @@ Note that Ledger Live will not show your balance on the test network, but other 
    </center>
    Click **Next**, then click **Confirm** to enable the Rocket Pool website to use your wallet.
    3. Select **Withdrawal Address** from the top menu (or the hamburger menu on the left side if you're on a mobile device).
-   4. You will see this prompt: 
+   4. You will see this prompt:
    <center>
    ![](./images/node-address.png)
    </center>

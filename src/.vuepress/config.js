@@ -177,6 +177,7 @@ module.exports = {
             },
             'node/mainnet',
             'node/v1.3-update.md',
+            'node/v1.5-update.md',
           ]
         }
       ],

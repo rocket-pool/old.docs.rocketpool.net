@@ -44,7 +44,7 @@ On the top display with the bars, the numbered bars each refer to a CPU core's c
 `Swp` shows you how much swap space you're using (85.8 MB) and how much you have total (12.0 GB).
 
 On the bottom table, each row represents a process.
-Your ETH1 and ETH2 clients will likely be on top (in this case, Geth and Nimbus) which you can see in the rightmost column labeled `Command`.
+Your Execution (ETH1) and Consensus (ETH2) clients will likely be on top (in this case, Geth and Nimbus) which you can see in the rightmost column labeled `Command`.
 
 The `RES` column shows you how much RAM each process is taking - in this screenshot, Geth is taking 748 MB and Nimbus is taking 383 MB.
 
@@ -71,12 +71,12 @@ Filesystem        Size  Used Avail Use% Mounted on
 ...
 ```
 
-For conventional setups where you have one drive that stores both your Operating System and your ETH1 / ETH2 chain data, you just need to look at the entry that has `/` in the `Mounted on` column.
+For conventional setups where you have one drive that stores both your Operating System and your Execution (ETH1) and Consensus (ETH2) chain data, you just need to look at the entry that has `/` in the `Mounted on` column.
 This represents your main disk.
 If that ever looks like it's running out of space (say, 80% used or so), then you need to start thinking about doing some cleanup.
 For example, if you're running Geth, you may want to look at [how to prune it](./geth-pruning.md) to clear up some space.
 
-For setups that store the ETH1 / ETH2 chain data on a separate drive (such as the Raspberry Pi, which the above example comes from), you'll want to look at the row that has your chain data folder in the `Mounted on` column as well.
+For setups that store the Execution (ETH1) and Consensus (ETH2) chain data on a separate drive (such as the Raspberry Pi, which the above example comes from), you'll want to look at the row that has your chain data folder in the `Mounted on` column as well.
 In this example we mounted an external SSD to `/mnt/rpdata`, so we'll have to keep an eye on it to make sure it doesn't grow too large either.
 
 

@@ -2,13 +2,13 @@
 
 This guide will walk you through how run a Rocket Pool node using a Raspberry Pi.
 While this is not typically recommended in most staking guides, we recognize that it is attractive because it is a much more affordable option than standing up an entire PC.
-To that end, we've worked hard to tweak and optimize a whole host of settings and have determined a configuration that seems to work well. 
+To that end, we've worked hard to tweak and optimize a whole host of settings and have determined a configuration that seems to work well.
 
-This setup will run **a full ETH1 node** and **a full ETH2 node** on the Pi, making your system contribute to the health of the Etherum network while simultaneously acting as a Rocket Pool node operator.
+This setup will run **a full Execution (ETH1) node** and **a full Consensus (ETH2) node** on the Pi, making your system contribute to the health of the Etherum network while simultaneously acting as a Rocket Pool node operator.
 
 ::: warning NOTE
-This setup works well with the current implementations of eth1 and eth2.
-It's possible that after the merge of the eth1 chain and the beacon chain, a full node may be more computationally demanding.
+This setup works well with the current implementations of Execution (ETH1) and Consensus (ETH2).
+It's possible that after the merge of the Execution (ETH1) chain and the beacon chain, a full node may be more computationally demanding.
 While we have been advised that this is unlikely, there is a chance that the Raspberry Pi may not be able to run a full node post-merge.
 **Please factor this into your decision before settling on it as a node platform.**
 :::
@@ -16,7 +16,7 @@ While we have been advised that this is unlikely, there is a chance that the Ras
 
 ## Preliminary Setup
 
-To run a Rocket Pool node on a Raspberry Pi, you'll need to first have a working Raspberry Pi. 
+To run a Rocket Pool node on a Raspberry Pi, you'll need to first have a working Raspberry Pi.
 If you already have one up and running - great! You can skip down to the [Mounting the SSD](#mounting-the-ssd) section.
 Just make sure you have **a fan attached** before you go.
 If you're starting from scratch, then read on.
@@ -83,7 +83,7 @@ For this guide, we're going to stick to **Ubuntu 20.04**.
 Ubuntu is a tried-and-true OS that's used around the world, and 20.04 is (at the time of this writing) the latest of the Long Term Support (LTS) versions, which means it will keep getting security patches for a very long time.
 If you'd rather stick with a different flavor of Linux like Raspbian, feel free to follow the existing installation guides for that - just keep in mind that this guide is built for Ubuntu, so not all of the instructions may match your OS.
 
-The fine folks at Canonical have written up [a wonderful guide on how to install the Ubuntu Server image onto a Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview). 
+The fine folks at Canonical have written up [a wonderful guide on how to install the Ubuntu Server image onto a Pi](https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview).
 
 Follow **steps 1 through 4** of the guide above for the Server setup.
 For the Operating System image, you want to select `Ubuntu Server 20.04.2 LTS (RPi 3/4/400) 64-bit server OS with long-term support for arm64 architectures`.
@@ -112,7 +112,7 @@ Each router is different, so you will need to consult your router's documentatio
 ## Mounting the SSD
 
 As you may have gathered, after following the above installation instructions, the core OS will be running off of the microSD card.
-That's not nearly large enough or fast enough to hold all of the ETH1 and ETH2 blockchain data, which is where the SSD comes in.
+That's not nearly large enough or fast enough to hold all of the Execution (ETH1) and Consensus (ETH2) blockchain data, which is where the SSD comes in.
 To use it, we have to set it up with a file system and mount it to the Pi.
 
 
@@ -184,7 +184,7 @@ If you see all of that, then you're good. Grab the `UUID="..."` output and put i
 Next, let's tune the new filesystem a little to optimize it for validator activity.
 
 By default, ext4 will reserve 5% of its space for system processes.
-Since we don't need that on the SSD because it just stores the ETH1 and ETH2 chain data, we can disable it:
+Since we don't need that on the SSD because it just stores the Execution (ETH1) and Consensus (ETH2) chain data, we can disable it:
 ```
 sudo tune2fs -m 0 /dev/sda1
 ```
@@ -204,7 +204,7 @@ sudo mount /dev/sda1 /mnt/rpdata
 ```
 
 After this, the folder `/mnt/rpdata` will point to the SSD, so anything you write to that folder will live on the SSD.
-This is where we're going to store the chain data for ETH1 and ETH2.
+This is where we're going to store the chain data for Execution (ETH1) and Consensus (ETH2).
 
 Now, let's add it to the mounting table so it automatically mounts on startup.
 Remember the `UUID` from the `blkid` command you used earlier?
