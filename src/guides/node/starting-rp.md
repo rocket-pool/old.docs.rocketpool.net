@@ -356,6 +356,11 @@ Node account: <your wallet address>
 No validator keys were found.
 ```
 
+You now have to rebuild your keystore:
+```
+$ rocketpool wallet rebuild
+```
+
 If you don't see any errors, then your wallet and validators will be recovered.
 
 
