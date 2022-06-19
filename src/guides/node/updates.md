@@ -196,6 +196,8 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-amd64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
 For `arm64` systems (like the Raspberry Pi):
@@ -208,6 +210,8 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-arm64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
 If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
