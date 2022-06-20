@@ -123,12 +123,19 @@ curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/downloa
 
 For `arm64` systems, such as the Mac mini with M1:
 ```shell
-curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 > /usr/local/bin/rocketpool
+curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 > /opt/homebrew/bin/rocketpool
 ```
 
+For `x64` systems (most Macs):
 Mark it as executable, so it has permissions to run:
 ```shell
 chmod +x /usr/local/bin/rocketpool
+```
+
+For `arm64` systems, such as the Mac mini with M1:
+Mark it as executable, so it has permissions to run:
+```shell
+chmod +x /opt/homebrew/bin/rocketpool
 ```
 
 Now, test running it with the `--version` flag.
