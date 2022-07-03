@@ -34,66 +34,7 @@ The time between now and The Merge is an **excellent time** to switch to a clien
 The first step in the process is an optional one: if you like, you can export your existing chain data for your current Execution client.
 This will let you free up valuable disk space on your node for your new Execution client, and you can keep the old chain data around in case you want to revert back to the old client and pick up where you left off.
 
-To do this, start by **mounting the storage medium you want to export the data to**.
-For example, this could be an external hard drive.
-
-::: tip HINT
-If you don't know how to mount external devices on Linux, it's easy!
-Plug the device into your node, and follow [a guide like this](https://www.addictivetips.com/ubuntu-linux-tips/mount-external-hard-drives-in-linux/) to learn how to mount it.
-:::
-
-Once you have it mounted, note its mount path.
-For this example, let's assume that we want to store the chain data in a folder called `/mnt/external-drive` which the external device is mounted to.
-Replace this with your actual mount path wherever you see it below.
-
-Now, run the following command:
-
-```
-rocketpool service export-eth1-data /mnt/external-drive
-```
-
-This will check that your target folder is reachable and has enough free space to store the chain data.
-The output will look like this:
-
-```
-This will export your execution client's chain data to an external directory, such as a portable hard drive.
-If your execution client is running, it will be shut down.
-Once the export is complete, your execution client will restart automatically.
-
-You have a fallback execution client configured (http://<some address>:8545).
-Rocket Pool (and your consensus client) will use that while the main client is offline.
-
-Chain data size:       26 GiB
-Target dir free space: 287 GiB
-Your target directory has enough space to store the chain data.
-
-NOTE: Once started, this process *will not stop* until the export is complete - even if you exit the command with Ctrl+C.
-Please do not exit until it finishes so you can watch its progress.
-
-Are you sure you want to export your execution layer chain data? [y/n]
-```
-
-As you can see, the chain data is 26 GB (for the Prater testnet; the Ethereum mainnet will be an order of magnitude larger) and the external folder has 287 GiB free so exporting can continue.
-
-When you're ready, enter `y` here and press `Enter`.
-This will stop your Execution client and begin copying its chain data to your target folder.
-You will see the progress of each individual file go past the screen as it runs.
-
-::: warning NOTE
-It's important that you *do not* exit the terminal while this is running.
-If you do, the copy will continue to run in the background but you won't be able to follow its progress!
-:::
-
-Once it's finished, it will automatically restart your Execution client container.
-
-**Note that your existing chain data is not deleted from your node after the export is complete!**
-
-::: tip NOTE
-If you have existing chain data for your new client and want to import it back into your node, simply run the same steps but use the following command instead:
-```
-rocketpool service import-eth1-data /mnt/external-drive
-```
-:::
+Please refer to the [Backing Up Your Node](./backups.md#backup-of-execution-client-eth1-client-data) section of the documentation for details
 
 ### Change your Selected Execution Client
 
