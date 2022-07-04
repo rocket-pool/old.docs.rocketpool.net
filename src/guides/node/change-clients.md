@@ -34,7 +34,8 @@ The time between now and The Merge is an **excellent time** to switch to a clien
 The first step in the process is an optional one: if you like, you can export your existing chain data for your current Execution client.
 This will let you free up valuable disk space on your node for your new Execution client, and you can keep the old chain data around in case you want to revert back to the old client and pick up where you left off.
 
-Please refer to the [Backing Up Your Node](./backups.md#backup-of-execution-client-eth1-client-data) section of the documentation for details
+Please refer to the [Backing Up Your Node](./backups.md##backing-up-your-execution-chain-data) guide for details.
+
 
 ### Change your Selected Execution Client
 
