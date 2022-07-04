@@ -144,6 +144,7 @@ module.exports = {
                   ]
                 },
                 'node/securing-your-node',
+                'node/tailscale',
                 'node/starting-rp',
                 'node/cli-intro',
                 'node/prepare-node',
