@@ -1,77 +1,98 @@
-# Backing Up your Node
+# Backing Up Your Node
 
 ::: tip NOTE
-This is currently written for "Docker Mode" installations, if you are running native, or hybrid it some locations may vary
+This is currently written for **Docker Mode** installations.
+Some locations may vary for Hybrid or Native users.
 :::
 
-Once the "Merge" takes place, there will no longer be an option to have a light fallback client.  This means that having a fast, reliable way to recover a corrupt Execution Client Database becomes critical, as they can take days to sync from scratch.
+In general, the only thing you truly need on hand to recover your node from a complete failure is the **mnemonic for your node wallet**.
+Everything else can be recovered from that quite easily.
 
-There are several things that you want to be able to recover from such as:
+That being said, once the Merge takes place, you will no longer be able to use a light Execution client (e.g. Pocket or Infura) as a fallback if you ever need to resync the Execution layer chain.
+Furthermore, you will be required to have an active and healthy Execution client to attest correctly.
+Having a fast, reliable way to recover from an Execution client failure (such as a corrupt database, SSD malfunction, or compromised / stolen hardware) will be critical, as they can take hours or even days to sync from scratch.
 
-- Total loss of a node - hardware failure
-- Total loss of a node - compromised or stolen
-- Corruption or loss of Execution Client (eth1) or Consensus Client (eth2) Databases
+In this guide, we'll show you how to back up some of these things to help improve your node's resilience and minimize unnecessary downtime.
 
-Generally spekaing the only thing you need to truely backup is your mnemonic Everything else of importance can be recreated from them. Keep them very safe!
-
-There are several other things you can backup to improve your resiliency, we will give examples of both simple and more complex approaches.
-
-## Things that can be backed up
-
-### Rocketpool Configuration
-Rocketpool configuration files are stores in `~/.rocketpool`and are stored in the yml files
-
-File Name - Description
-
-`user-settings.yml` - Contains node specific configuration options
-
-`prometheus.yml` - Contains Prometheus configurations
-
-`grafana-prometheus-datasource.yml` - Contains Data source configuration for Grafana
-
-### Private Keys and Passwords
-
-Your private key and password file is stored in `~/.rocketpool/data`.  You can back these files up if you wish, you just need to be aware of where you store them.   For example storing them on an unencrypted external drive would be a bad idea, since it contains unencrypted versions of your private key and password file.   As mentioned above, this data can be recovered simply by using your mnemonic, which is a far more secure backup of this data.
-
-### Execution Client / ETH1 Client Data
-
-The eth1 client data is likely the most important thing to back up, besides your mnemonic! It can take several days to re-sync your EC/eth1 data.  Once fallback clients are deprecated this means days of downtime and lost ETH! The EC database could be lost due to hardware failure, or simply a database corruption event.
-
-The data is stored within the docker volume, which by default is located at `/var/lib/docker/volumes/rocketpool_eth1clientdata ` 
-
-If you changed your default storage location for docker during install the data is located in `/your external mount point/docker/volumes/rocketpool_eth1clientdata`
-
-::: tip HINT
-If you dont recall if you changed your mount point you can check `/etc/docker/daemon.json` for its location
+::: warning NOTE
+This guide assumes you have installed the Smartnode to the default directory (`~/.rocketpool`).
+If you specified a different installation directory, substitute it accordingly in the instructions below.
 :::
 
+## Items That Can Be Backed Up
 
-### Consensus Client / ETH2 Client Data  
+### Smartnode Configuration
 
-Currently, Lighthouse, Nimbus, and Teku support checkpoint syncing.  Using checkpoint syncing you can very quickly recover your eth2 client data.  This decreases the need to back this data up.   If your Consensus Client / eth2 does not support checkpoint sync, then you may want to backup this data as well.
+The Smartnode's configuration is stored in `~/.rocketpool/user-settings.yml`.
+You can save this and replace it to restore all of your Smartnode settings (i.e., the things you specified in `rocketpool service config`).
 
-The data is stored within the docker volume, which by default is located at `/var/lib/docker/volumes/rocketpool_eth2clientdata ` 
 
-If you changed your default storage location for docker during install the data is located in `your external mount point/docker/volumes/rocketpool_eth2clientdata`
+### Execution Client / ETH1 Client Chain Data
+
+The Execution client's chain data is likely the most important thing to back up.
+As mentioned, it can take several days to re-sync your EC chain data.
+After The Merge, this means hours to days of downtime and lost profits!
+
+The chain data is stored within the `rocketpool_eth1clientdata` Docker volume, which by default is located at `/var/lib/docker/volumes/rocketpool_eth1clientdata`.
+Note this folder is typically not accessible by unprivileged user accounts; you will need to elevate to the `root` user to see it.
+
+::: tip NOTE
+If you changed Docker's storage location during the initial Smartnode installation (such as Raspberry Pi users or people that run Docker on a second SSD), you will find the volume in `/<your external mount point>/docker/volumes/rocketpool_eth1clientdata`
+
+If you don't recall which installation path you use, you can check `/etc/docker/daemon.json` for its location.
+If the file doesn't exist, you use the default location.
+:::
+
+For detailed instructions on how to efficiently back up your Execution chain data, please see the [Backing up your Execution Chain Data](#backing-up-your-execution-chain-data) section below.
+
 
 ### Monitoring & Metrics Data
 
-The data is stored within the docker volume, which by default is located at `/var/lib/docker/volumes/rocketpool_grafana-storage ` 
+This data is stored within the `rocketpool_grafana-storage` Docker volume, which by default is located at `/var/lib/docker/volumes/rocketpool_grafana-storage` (or `/<your external mount point>/docker/volumes/rocketpool_prometheus-data` if you customized your Docker storage location).
 
-If you changed your default storage location for docker during install the data is located in `/your external mount point/docker/volumes/rocketpool_prometheus-data`
 
-If you do not remember if you defined a custom mount point you can check `/etc/docker/
+## Items That Should **Not** Be Backed Up
 
-## Backup of Execution Client / ETH1 Client Data
+### Private Keys and Passwords
 
-### Backing up your Execution Client Data
-Backing up your Execution Client / ETH1 Data is easy!   The built in backup/export tool within Rocketpool utilizes `rsync`, a powerful backup/copy tool within Linux.  
+Your node wallet's private key and the password file used to encrypt it are stored in `~/.rocketpool/data/wallet` and `~/.rocketpool/data/password` respectively.
+These files don't generally need to be backed up, as they can be recovered from your mnemonic using `rocketpool wallet recover`.
 
-The benefit of `rsync` is that the first time it will create a complete copy of the data.    This will take a good amount of time as it is a lot of data (how long depends on your system and drive performance).  However subsequent times you run the command it will only copy the changes making the process dramatically faster!
+If, for some reason, you *do* decide to back up these files, you will need to be **extremely careful** about how you store them.
+Anyone who gains access to these files will gain access to your node wallet, its validators, and any funds you have stored on it for things like gas.
 
-As part of a backup strategy you may want to plan on doing this on a regular basis.  Even after the fallback light clients are deprecated, the minutes of downtime to refresh the eth1 backup once every week or two is better than the days it would take to resync the data from scratch.
+We **strongly recommend** you do not back up these files and just use your wallet mnemonic to recover them if necessary.
 
-To do this, start by **mounting the storage medium you want to export the data to**.
+
+### Consensus Client / ETH2 Client Chain Data  
+
+Unlike the Execution layer data, the Consensus layer data is not nearly as important to your node thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura).
+Consensus clients can easily use this technique to immediately resync to the head of the Beacon chain and resume validation duties.
+
+::: tip NOTE
+Note that although Infura will not be available as an *Execution client* after the Merge, you *can* still use it for Checkpoint syncing your Consensus client!
+:::
+
+
+## Backing up your Execution Chain Data
+
+The Smartnode comes with the ability to back up your Execution chain data via the `rocketpool service export-eth1-data` command.
+Under the hood, this utilizes `rsync`, a powerful backup/copy tool within Linux.
+
+`rsync` compares the files in the source directory (your Docker volume) and the target directory (your backup location).
+If a source file doesn't exist in the target directory, it will be copied entirely.
+However, if it *does* exist, `rsync` will only copy the *changes* between the two files.
+
+This means the first backup will take a good amount of time as it must copy all of the data initially.
+Subsequent backups will only copy the changes between your previous backup and now, making the process much faster.
+
+As part of a backup strategy, you may want to plan to run `export-eth1-data` on a regular basis.
+To ensure the integrity of the chain data, running this command will **safely shut down the Execution client before backing up its data**.
+If you elect to schedule it every week, your Execution client will only be down for a few minutes while it updates the backup.
+This is certainly better than the days it would take to resync the data from scratch.
+
+
+To trigger a backup, start by **mounting the storage medium you want to export the data to**.
 For example, this could be an external hard drive.
 
 ::: tip HINT
@@ -126,14 +147,16 @@ Once it's finished, it will automatically restart your Execution client containe
 **Note that your existing chain data is not deleted from your node after the export is complete!**
 
 
-### Restoring up your Execution Client Data 
+### Restoring Your Execution Chain Data 
 
-If you have existing chain data for your new client and want to import it back into your node, simply run the same steps but use the following command instead:
-
-To restore from a backup taken with the `rocketpool service export-eth1-data` method, simply run the following command.   This will automatically delete the existing eth1 client data.
+If you ever need to restore your backed up chain data, simply run the following command.
 
 ```
 rocketpool service import-eth1-data /mnt/external-drive
 ```
 
+::: danger WARNING
+This will automatically delete any existing Execution client data in your `rocketpool_eth1clientdata` volume!
+:::
 
+Once it's done, your Execution client will be ready to go.
