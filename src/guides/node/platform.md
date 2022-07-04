@@ -8,7 +8,8 @@ Alright! So you've decided to try your hand at running a Rocket Pool node. The f
 A **full node** is one that runs both an Execution (ETH1) Client and Consensus (ETH2) Client along with the Rocket Pool stack. This is the best option in terms of decentralization, self-reliance, and consistency. It also has the highest requirements. While you *can* run Rocket Pool by using publicly available Execution (ETH1) and Consensus (ETH2) clients (such as [Infura](https://infura.io/) or [Alchemy](https://www.alchemyapi.io/)), relying exclusively on these options is not recommended.
 
 ::: warning NOTE
-Use of external clients will be deprecated in 1.5.x and will *not* be supported after the merge!
+Use of light clients will be deprecated in 1.5.0 and will *not* be supported after The Merge!
+You will need to run a full node in order to validate, so we strongly recommend you set one up now instead of relying on light clients.
 :::
 
 Here is a simple breakdown of what is required to run a full Rocket Pool node well:
