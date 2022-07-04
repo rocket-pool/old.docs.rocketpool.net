@@ -503,11 +503,14 @@ pip3 install stressberry
 source ~/.profile
 ```
 
-In some cases stressberry could not read temp, so we need to change some permissions with the 2 commands :
+::: tip NOTE
+If stressberry throws an error about not being able to read temperature information or not being able to open the `vchiq` instance, you can fix it with the following command:
 ```
-sudo chgrp video /dev/vchiq
-sudo chmod 0660  /dev/vchiq
+sudo usermod -aG video $USER
 ```
+
+Then log out and back in, restart your SSH session, or restart the machine and try again.
+:::
 
 Next, run it like this:
 ```
