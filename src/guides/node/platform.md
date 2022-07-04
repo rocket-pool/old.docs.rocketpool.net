@@ -7,10 +7,15 @@ Alright! So you've decided to try your hand at running a Rocket Pool node. The f
 
 A **full node** is one that runs both an Execution (ETH1) Client and Consensus (ETH2) Client along with the Rocket Pool stack. This is the best option in terms of decentralization, self-reliance, and consistency. It also has the highest requirements. While you *can* run Rocket Pool by using publicly available Execution (ETH1) and Consensus (ETH2) clients (such as [Infura](https://infura.io/) or [Alchemy](https://www.alchemyapi.io/)), relying exclusively on these options is not recommended.
 
+::: warning NOTE
+Use of light clients will be deprecated in 1.5.0 and will *not* be supported after The Merge!
+You will need to run a full node in order to validate, so we strongly recommend you set one up now instead of relying on light clients.
+:::
+
 Here is a simple breakdown of what is required to run a full Rocket Pool node well:
 
 - A **stable Internet connection**. The longer you stay online, the better your rewards. A spotty Internet connection will hurt your returns, and by extension, the rETH ratio growth.
-- At least **1 MB/s of bandwidth**. A full node usually takes around 500 KB/s to 1 MB/s of network traffic, depending on your settings.
+- At least **8Mbps of bandwidth both up and down**. A full node usually takes around 4Mbps to 8Mbps up & down of network traffic, depending on your settings.
 - **No data cap** imposed by your ISP. Running a full node will take a lot of data - we have seen reports of over 1 TB per month on chain data alone. This can be mitigated somewhat with a few settings tweaks to the ETH clients, but as a rule of thumb, don't run a full node if your Internet plan comes with a monthly data cap.
 - **Stable electricity**. For the same reason as needing a stable Internet connection, you also want to have reliable power. This can be mitigated with a large UPS (backup battery) to deal with short blackouts.
 - A **computer** with sufficient specs. This is pretty flexible because it *really* depends on what Execution (ETH1) and Consensus (ETH2) client you use, and what settings you configure them with. The computer can be a local machine, or it can be a Virtual Private Server (VPS) hosted in the cloud. Read below for some more information on those two options, and how to decide which is best for you.
