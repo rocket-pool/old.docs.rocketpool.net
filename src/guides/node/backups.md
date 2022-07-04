@@ -10,7 +10,7 @@ Everything else can be recovered from that quite easily.
 
 That being said, once the Merge takes place, you will no longer be able to use a light Execution client (e.g. Pocket or Infura) as a fallback if you ever need to resync the Execution layer chain.
 Furthermore, you will be required to have an active and healthy Execution client to attest correctly.
-Having a fast, reliable way to recover from an Execution client failure (such as a corrupt database, SSD malfunction, or compromised / stolen hardware) will be critical, as they can take hours or even days to sync from scratch.
+Having a fast, reliable way to recover from an Execution client failure (such as a corrupt database, SSD malfunction, or compromised / stolen hardware) will be critical, as it can take hours or even days to sync from scratch.
 
 In this guide, we'll show you how to back up some of these things to help improve your node's resilience and minimize unnecessary downtime.
 
