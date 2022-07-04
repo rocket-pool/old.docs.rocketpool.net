@@ -503,6 +503,15 @@ pip3 install stressberry
 source ~/.profile
 ```
 
+::: tip NOTE
+If stressberry throws an error about not being able to read temperature information or not being able to open the `vchiq` instance, you can fix it with the following command:
+```
+sudo usermod -aG video $USER
+```
+
+Then log out and back in, restart your SSH session, or restart the machine and try again.
+:::
+
 Next, run it like this:
 ```
 stressberry-run -n "Stock" -d 300 -i 60 -c 4 stock.out
