@@ -145,6 +145,7 @@ module.exports = {
                 },
                 'node/securing-your-node',
                 'node/starting-rp',
+                'node/recovering-rp',
                 'node/cli-intro',
                 'node/prepare-node',
                 'node/create-validator',

@@ -296,8 +296,11 @@ When you're done looking at the logs, you can exit and return to the command pro
 If the Smartnode services are up and running, the next step is to set up an ETH1 wallet for your node.
 This is simply an ETH1 address that will hold your node's funds - it will use this to send ETH to your minipool when you begin staking, pay for gas during various transactions, and other various operations.
 
+You have the option of either creating a brand new wallet from scratch, or importing / recovering an existing wallet or address.
+Please choose which option you'd like from the tabs below.
 
-### Creating a New Wallet
+::::: tabs
+:::: tab Creating a New Wallet
 
 The most common way to run a node is to create a new ETH1 address that is dedicated to the node.
 The Smartnode CLI provides a way to do this easily:
@@ -311,57 +314,24 @@ Next, you will be presented the **unique 24-word mnemonic** for your new wallet.
 This is the **recovery phrase** for your wallet.
 If you ever lose your machine, you can use this phrase to regenerate your wallet and resurrect all of the Consensus (ETH2) validators attached to it.
 
-::: warning
+::: warning NOTE
 It is **essential** that you write this mnemonic down because this is the only time it will be shown to you, but keep it somewhere safe.
 Anyone with this phrase can gain control of your wallet.
 :::
 
 
 Once you confirm your mnemonic phrase, you will be presented with the unique ETH1 address for your node wallet.
+::::
+:::: tab Recovering / Importing an Existing Wallet
 
+If you already have a node wallet that you created in a previous installation of the Smartnode, or if you want to import an address that you created elsewhere (such as with **Allnodes**), please follow the instructions in the [Importing an Existing Wallet for your Node](./recovering-rp.md) guide.
 
-### Restoring from an Existing Wallet
+Return here when you're finished.
+::::
+:::::
 
-If you already have a wallet from a previous installation, you can recover it and regenerate all of the validators attached to it instead of making a new one.
 
 ::: warning NOTE
-This will not work until your eth1 node has finished syncing.
-Please watch its log file to see when it's done; once it is, you can run follow this step.
-:::
-
-To do this, use the following command:
-
-```
-rocketpool wallet recover
-```
-
-This will first ask you for a password you want to use to encrypt your wallet.
-After that, it will ask for your **24 word mnemonic recovery phrase**.
-Enter it carefully - it will not be shown on-screen for safety, and it is very easy to make a mistake while typing it so take your time.
-
-When you're done, you should see output similar to this:
-
-```
-$ rocketpool wallet recover
-
-Please enter a password to secure your wallet with:
-
-Please confirm your password:
-
-Please enter your recovery mnemonic phrase:
-
-Recovering node wallet...
-The node wallet was successfully recovered.
-Node account: <your wallet address>
-No validator keys were found.
-```
-
-If you don't see any errors, then your wallet and validators will be recovered.
-
-
-### Your Wallet and Password Files
-
-::: warning
 As of the current build, Rocket Pool needs to have access to your wallet's private key in order to perform its automatic duties.
 **This means that the private key will exist in a file on your machine.**
 If an attacker manages to gain access to your machine, they could gain access to your node wallet and steal all of the tokens that it contains!
@@ -402,15 +372,16 @@ This command will show how far along your Execution (ETH1) & Consensus (ETH2) cl
 ```
 $ rocketpool node sync
 
-Your eth1 client is fully synced.
-Your eth2 client is still syncing (16.96%).
+Your Smartnode is currently using the Prater Test Network.
+
+Your eth2 client is on the correct network.
+
+Your primary execution client is fully synced.
+You do not have a fallback execution client enabled.
+Your consensus client is still syncing (99.69%).
 ```
 
 You can call this occasionally to keep tabs on your clients' progress.
-
-::: tip NOTE
-**Prysm** currently does not support the ability to get the sync progress externally, so Rocket Pool can't read it via this command.
-:::
 
 To get an actual ETA of the sync time, it's easiest to look at the logs for your clients with `rocketpool service logs eth1` and `rocketpool service logs eth2` respectively (or the equivalent log script commands if you're using the hybrid / native modes.)
 Each client typically provides an ETA on its sync status in its log output.
@@ -418,8 +389,10 @@ Each client typically provides an ETA on its sync status in its log output.
 ::: tip NOTE
 It can take **days** to fully sync both ETH1 and ETH2 depending on your client selection and your machine's hardware profile.
 **This is expected**.
-As long as the percentage is steadily rising, you are all set.
 Sit back, relax, and wait for both of them to finish.
 :::
 
-Once your nodes are done syncing, move onto the next section for a brief tour of the CLI.
+
+## Next Steps
+
+Once you've imported or recovered your node wallet and your clients are done syncing, follow the next steps in the [Intro to the Command Line Interface](./cli-intro.md) guide.
