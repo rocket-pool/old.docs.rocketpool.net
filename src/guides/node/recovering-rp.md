@@ -87,7 +87,9 @@ This is a multi-step process, so follow the below sections carefully.
 If your address has already been registered as a Rocket Pool node wallet (such as via a service like **Allnodes**) and already has active minipools, and you'd like to import them into the Smartnode stack along with your address, you will need to provide the private keystore files for each of their corresponding validators.
 These files will be encrypted with a password of your own choosing, so you will need that password for each file as well.
 
-You can request these files from the service that is currently running your node during your migration coordination with them.
+You need to get these files from the service that is currently running your node in order to import it.
+Some service providers may be able to retrieve these files upon request.
+If you use Allnodes, you can get these files during your initial setup process but **will not be able to retrieve them in the future unless you saved them during minipool creation.**
 
 Select your installation mode and follow the steps below. 
 
@@ -250,7 +252,7 @@ Your address's private key will now be stored in the `data/wallet` file (e.g. `~
 
 The private keys for each of your validators will be stored in the `data/validators` folders for each of the Consensus clients that the Smartnode supports.
 
-::: warning NOTE
+::: danger NOTE
 By importing an address in this fashion, the validator keys were **not** derived from your node wallet, and thus they **cannot** be recovered later by simply running `rocketpool wallet recover` as with a normal node wallet.
 
 If you ever need to recover or import this wallet again, you will need to follow this same process which means **you will need to have these validator private keystores and their passwords backed up somewhere safe.**
