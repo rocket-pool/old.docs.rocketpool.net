@@ -5,8 +5,10 @@ This is currently written for **Docker Mode** installations.
 Some locations may vary for Hybrid or Native users.
 :::
 
-In general, the only thing you truly need on hand to recover your node from a complete failure is the **mnemonic for your node wallet**.
+In general, if you created your node wallet and minipools via the Smartnode, the only thing you truly need on hand to recover your node from a complete failure is the **mnemonic for your node wallet**
 Everything else can be recovered from that quite easily.
+
+If you have minipools that have externally-generated validator keys (e.g. you migrated from **Allnodes** to your own self-hosted node), you will need the private keystore files for your validators as well since they cannot be recovered from the node wallet.
 
 That being said, once the Merge takes place, you will no longer be able to use a light Execution client (e.g. Pocket or Infura) as a fallback if you ever need to resync the Execution layer chain.
 Furthermore, you will be required to have an active and healthy Execution client to attest correctly.
