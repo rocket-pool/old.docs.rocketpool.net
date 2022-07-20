@@ -341,6 +341,17 @@ module.exports = {
                     },
                   ]
                 },
+                {
+                    title: 'Subgraph',
+                    sidebarDepth: 3,
+                    collapsable: true,
+                    children: [
+                        'api/subgraph/SubgraphData',
+                        'api/subgraph/Entities',
+                        'api/subgraph/Queries',
+                        'api/subgraph/AdditionalResources',
+                    ]
+                },
               ]
             },
           ]
