@@ -62,7 +62,7 @@ Next, open the **Smartnode and TX Fees** category and change the **Network** dro
 
 <center>
 
-![](./images/tui-change-network.png)
+![](../node/images/tui-change-network.png)
 
 </center>
 

@@ -149,6 +149,7 @@ module.exports = {
                 'node/cli-intro',
                 'node/prepare-node',
                 'node/create-validator',
+                'node/fallback',
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
@@ -168,17 +169,35 @@ module.exports = {
               ]
             },
             {
+              title: 'Redstone and The Merge',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'redstone/whats-new',
+                //'redstone/docker-migration',
+                //'redstone/hybrid-migration',
+                //'redstone/reverse-hybrid-migration',
+                //'redstone/native-migration',
+              ]
+            },
+            {
               title: 'Testing Rocket Pool with the Prater Test Network',
               sidebarDepth: 2,
               collapsable: true,
               children: [
                 'testnet/overview',
-                'testnet/upgrading',
+                'testnet/mainnet',
               ]
             },
-            'node/mainnet',
-            'node/v1.3-update.md',
-            'node/v1.5-update.md',
+            {
+              title: 'Legacy Guides',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'legacy/v1.3-update',
+                'legacy/upgrading'
+              ]
+            }
           ]
         }
       ],

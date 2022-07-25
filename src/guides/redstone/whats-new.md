@@ -1,12 +1,12 @@
 # [BETA] The Rocket Pool Redstone Update
 
 ::: danger NOTICE
-This page is meant for **beta testers only** that are using v1.5.0 of the Smartnode stack on Ropsten.
+This page is meant for **beta testers only** that are using v1.5.0 of the Smartnode stack.
 
-It does *not* apply to node operators practicing on the Prater testnet, or to node operators running on Mainnet.
+It does *not* apply to node operators running validators on Mainnet.
 :::
 
-Rocket Pool's next major update, titled **Redstone**, has been released for beta testing on the Ropsten test network.
+Rocket Pool's next major update, titled **Redstone**, has been released for beta testing on the Ropsten and Prater test networks.
 This page describes the major changes that Redstone brings, including updates to both the Smartnode stack and to the Rocket Pool protocol in general.
 
 Please read through this page thoroughly to understand all of the differences between the previous version of Rocket Pool and Redstone.
@@ -14,7 +14,7 @@ Please read through this page thoroughly to understand all of the differences be
 
 ## Client Changes and The Merge
 
-Ropsten has successfully undergone **The Merge of the Execution and Consensus Layers**.
+Ropsten (and shortly, Prater) have successfully undergone **The Merge of the Execution and Consensus Layers**.
 It no longer uses Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
 While this comes with some exciting financial benefits (which will be discussed later), it also comes with some important changes to the way validators operate.
 
@@ -82,7 +82,7 @@ The output will look like this:
 
 <center>
 
-![](./images/status-fee-distributor.png)
+![](../node/images/status-fee-distributor.png)
 
 </center>
 
@@ -148,7 +148,7 @@ As intervals go by and you accumulate rewards, the output will look like this:
 
 <center>
 
-![](./images/claim-rewards-gb.png)
+![](../node/images/claim-rewards-gb.png)
 
 </center>
 
@@ -159,7 +159,7 @@ You can also specify an amount you want to restake during this claim:
 
 <center>
 
-![](./images/autostake.png)
+![](../node/images/autostake.png)
 
 </center>
 
@@ -170,7 +170,7 @@ If you prefer to build the rewards checkpoint manually instead of downloading th
 
 <center>
 
-![](./images/tui-generate-tree.png)
+![](../node/images/tui-generate-tree.png)
 
 </center>
 
