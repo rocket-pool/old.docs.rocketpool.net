@@ -10,7 +10,7 @@ Before upgrading to v1.5.0 and higher of the Smartnode, please go through the fo
 
 ### Switch to a Full Execution Client
 
-The Merge requires you to run your own Execution client, so you won't be able to use Infura or Pocket anymore.
+The Merge requires you to run your own Execution client, so you won't be able to use light clients like Infura or Pocket anymore.
 v1.5.0 won't have them anymore, and won't let you start the stack until you select a full Execution client.
 
 Because of this change, you should switch to a full client while you're still on v1.4, let it sync to completion, and then upgrade to v1.5.
@@ -22,7 +22,7 @@ Docker Mode makes switching clients very easy.
 ## Upgrading to v1.5.0
 
 Upgrading the Smartnode stack to v1.5.0 is no different than any other upgrade.
-Simply follow [the normal directions here](../node/updates.md#updating-the-smartnode-stack). 
+Simply follow [the normal directions here](../node/updates.md#updating-the-smartnode-stack).
 
 
 ## Things the Smartnode Handles Automatically

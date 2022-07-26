@@ -175,7 +175,7 @@ module.exports = {
               children: [
                 'redstone/whats-new',
                 'redstone/docker-migration',
-                //'redstone/hybrid-migration',
+                'redstone/hybrid-migration',
                 //'redstone/native-migration',
               ]
             },
