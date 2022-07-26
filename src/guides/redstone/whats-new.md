@@ -11,6 +11,14 @@ This page describes the major changes that Redstone brings, including updates to
 
 Please read through this page thoroughly to understand all of the differences between the previous version of Rocket Pool and Redstone.
 
+::: tip ATTENTION
+For detailed information on how to prepare your node for the upgrade and what to do after the upgrade, please look at the following guides:
+
+- [Guide for Docker Mode](./docker-migration.md)
+- [Guide for Hybrid Mode](./hybrid-migration.md)
+- [Guide for Native Mode](./native-migration.md)
+:::
+
 
 ## Client Changes and The Merge
 
@@ -253,28 +261,11 @@ The Smartnode software is designed to ensure honest users will never get penaliz
 If this happens, you will stop attesting and will see error messages in your log files about why the Smartnode can't correctly set your fee recipient.
 
 
-## Installing v1.5.0
+## Guides for Pre- and Post-Upgrade
 
-To install v1.5.0, the most effective way is to monitor the Discord announcements in the `#beta` channel for instructions on the latest version.
+For detailed information on how to prepare your node for the upgrade and what to do after the upgrade, please look at the following guides:
 
+- [Guide for Docker Mode](./docker-migration.md)
+- [Guide for Hybrid Mode](./hybrid-migration.md)
+- [Guide for Native Mode](./native-migration.md)
 
-## Getting Test Ropsten ETH
-
-The faucet bot run in our Discord by community member **Patches** has been adapted to support Ropsten.
-Beta tester node operators with access to the `#faucet` channel in our Discord server can use the following commands to create a node:
-
-- `!ropstenEth` to get 1 ETH for gas to register and provision the node
-- `!ropstenOperator` to get enough ETH to create a minipool
-
-Users without access to the channel can request ETH in the `#support` channel.
-
-
-
-## Known Issues
-
-This section will be regularly updated with issues encountered by our beta testers, or known by the development team during the beta process.
-
-- Fallback execution clients don't work and will be **removed from the TUI** in a future update. Ignore them for now.
-- Nimbus has issues syncing from scratch unless the Execution client is already synced.
-  - A workaround is to fully sync the Execution client with a different Consensus client, then switch to Nimbus once it's done.
-- Instructions for which command line properties to change for Native mode are not written yet.

@@ -174,9 +174,8 @@ module.exports = {
               collapsable: true,
               children: [
                 'redstone/whats-new',
-                //'redstone/docker-migration',
+                'redstone/docker-migration',
                 //'redstone/hybrid-migration',
-                //'redstone/reverse-hybrid-migration',
                 //'redstone/native-migration',
               ]
             },
