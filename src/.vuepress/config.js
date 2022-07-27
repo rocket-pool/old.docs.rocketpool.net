@@ -176,7 +176,7 @@ module.exports = {
                 'redstone/whats-new',
                 'redstone/docker-migration',
                 'redstone/hybrid-migration',
-                //'redstone/native-migration',
+                'redstone/native-migration',
               ]
             },
             {
