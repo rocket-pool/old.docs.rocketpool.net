@@ -138,33 +138,15 @@ For example:
 Nimbus will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
 :::::
 ::::: tab Prysm
-Create a new file called `<data dir>/validators/prysm-non-hd/rp-fee-recipients.json` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipients.json`).
+Create a new file called `<data dir>/validators/prysm-non-hd/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipient.txt`).
 
-The contents of this file should be as follows:
-
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "${RETH_ADDRESS}"
-    }
-}
-```
-
-Where `${RETH_ADDRESS}` is the hex address of the **rETH** token for the network you're running on.
+The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
 You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
 
-For example, on Mainnet, this file would contain:
+For example, on Mainnet, this file would simply hold:
 
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "0xae78736Cd615f374D3085123A210448E74Fc6393"
-    }
-} 
+```
+0xae78736Cd615f374D3085123A210448E74Fc6393 
 ```
 
 ::: tip NOTE
@@ -175,45 +157,27 @@ The default `0x000...000` address is **not safe** and will result in a [penalty]
 Next, modify your Validator Client service by adding the following command line argument to your service definition file:
 
 ```
---proposer-settings-file <data dir>/validators/prysm-non-hd/rp-fee-recipients.json
+--suggested-fee-recipient $(cat <data dir>/validators/prysm-non-hd/rp-fee-recipient.txt)
 ```
 
 For example:
 
 ```
---proposer-settings-file /srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipients.json
+--suggested-fee-recipient $(cat /srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipient.txt)
 ```
 
 Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
 :::::
 ::::: tab Teku
-Create a new file called `<data dir>/validators/teku/rp-fee-recipients.json` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/teku/rp-fee-recipients.json`).
+Create a new file called `<data dir>/validators/teku/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/teku/rp-fee-recipient.txt`).
 
-The contents of this file should be as follows:
-
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "${RETH_ADDRESS}"
-    }
-}
-```
-
-Where `${RETH_ADDRESS}` is the hex address of the **rETH** token for the network you're running on.
+The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
 You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
 
-For example, on Mainnet, this file would contain:
+For example, on Mainnet, this file would simply hold:
 
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "0xae78736Cd615f374D3085123A210448E74Fc6393"
-    }
-} 
+```
+0xae78736Cd615f374D3085123A210448E74Fc6393 
 ```
 
 ::: tip NOTE
@@ -224,13 +188,13 @@ The default `0x000...000` address is **not safe** and will result in a [penalty]
 Next, modify your Validator Client service by adding the following command line argument to your service definition file:
 
 ```
---proposer-settings-file <data dir>/validators/teku/rp-fee-recipients.json
+--validators-proposer-default-fee-recipient=$(cat <data dir>/validators/teku/$FEE_RECIPIENT_FILE)
 ```
 
 For example:
 
 ```
---proposer-settings-file /srv/rocketpool/data/validators/teku/rp-fee-recipients.json
+--validators-proposer-default-fee-recipient=$(cat /srv/rocketpool/data/validators/teku/rp-fee-recipient.txt)
 ```
 
 Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
@@ -255,7 +219,7 @@ Select your Consensus client below to learn how to configure it.
 Add the following command line argument to your Validator Client's service definition file:
 
 ```
---suggested-fee-recipient <address>...
+--suggested-fee-recipient <address>
 ```
 
 Where `<address>` is:
@@ -270,7 +234,7 @@ Where `<address>` is:
 Add the following command line argument to Nimbus's service definition file:
 
 ```
---suggested-fee-recipient=<address>...
+--suggested-fee-recipient=<address>
 ```
 
 Where `<address>` is:
@@ -282,18 +246,10 @@ Where `<address>` is:
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
 ::::: tab Prysm
-Create a new file called `<data dir>/validators/prysm-non-hd/rp-fee-recipients.json` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipients.json`).
+Add the following command line argument to your Validator Client's service definition file:
 
-The contents of this file should be as follows:
-
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "<address>"
-    }
-}
+```
+--suggested-fee-recipient <address>
 ```
 
 Where `<address>` is:
@@ -301,34 +257,14 @@ Where `<address>` is:
 - The [rETH address](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts) **before** the Redstone update is deployed (e.g., `0xae78736Cd615f374D3085123A210448E74Fc6393` on Mainnet)
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
-
-Next, add the following command line argument to your Validator Client's service definition file:
-
-```
---proposer-settings-file <data dir>/validators/prysm-non-hd/rp-fee-recipients.json
-```
-
-For example:
-
-```
---proposer-settings-file /srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipients.json
-```
 
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
 ::::: tab Teku
-Create a new file called `<data dir>/validators/teku/rp-fee-recipients.json` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/teku/rp-fee-recipients.json`).
+Add the following command line argument to your Validator Client's service definition file:
 
-The contents of this file should be as follows:
-
-```json
-{
-    "proposer_config": {
-    },
-    "default_config": {
-        "fee_recipient": "<address>"
-    }
-}
+```
+--validators-proposer-default-fee-recipient=<address>
 ```
 
 Where `<address>` is:
@@ -336,18 +272,6 @@ Where `<address>` is:
 - The [rETH address](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts) **before** the Redstone update is deployed (e.g., `0xae78736Cd615f374D3085123A210448E74Fc6393` on Mainnet)
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
-
-Next, add the following command line argument to your Validator Client's service definition file:
-
-```
---proposer-settings-file <data dir>/validators/teku/rp-fee-recipients.json
-```
-
-For example:
-
-```
---proposer-settings-file /srv/rocketpool/data/validators/teku/rp-fee-recipients.json
-```
 
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
