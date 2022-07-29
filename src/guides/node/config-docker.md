@@ -1,5 +1,11 @@
 # Configuring the Smartnode Stack (Docker Mode)
 
+::: danger WARNING
+This documentation is currently out of date with the release of Smartnode v1.5.0.
+
+It will be updated shortly.
+:::
+
 Running complete Execution layer (ETH1) and Consensus layer (ETH2) clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
 Luckily, the Smartnode is designed to hide all of that complexity so it's quick and easy to configure, while still giving you the freedom to customize everything if you so desire.
 

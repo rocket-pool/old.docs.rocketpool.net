@@ -1,5 +1,11 @@
 # Creating a Native Rocket Pool Node without Docker
 
+::: danger WARNING
+This documentation is currently out of date with the release of Smartnode v1.5.0.
+
+It will be updated shortly.
+:::
+
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack natively onto your system, without the use of Docker containers.
 
 The general plan is as follows:

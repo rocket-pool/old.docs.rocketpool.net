@@ -1,10 +1,4 @@
-# [BETA] The Rocket Pool Redstone Update
-
-::: danger NOTICE
-This page is meant for **beta testers only** that are using v1.5.0 of the Smartnode stack.
-
-It does *not* apply to node operators running validators on Mainnet.
-:::
+# The Rocket Pool Redstone Update
 
 Rocket Pool's next major update, titled **Redstone**, has been released for beta testing on the Ropsten and Prater test networks.
 This page describes the major changes that Redstone brings, including updates to both the Smartnode stack and to the Rocket Pool protocol in general.

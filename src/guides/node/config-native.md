@@ -1,5 +1,11 @@
 # Configuring the Smartnode Stack (Native Mode)
 
+::: danger WARNING
+This documentation is currently out of date with the release of Smartnode v1.5.0.
+
+It will be updated shortly.
+:::
+
 In this section, we'll go over the various methods for configuring the Smartnode if you're using the **Native setup** that doesn't use Docker at all.
 
 ::: warning NOTE
