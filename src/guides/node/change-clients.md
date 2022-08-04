@@ -22,7 +22,7 @@ Prior to changing your Execution client, it's worth noting the following points:
 - While your new client is resyncing, most of the Smartnode CLI functions will be offline since they rely on the Execution client. **You should have a fallback Execution client available before doing this to mitigate the downtime on your Smartnode.**
 
 ::: warning NOTE
-After the Execution and Beacon chains become unified later this year (known as The Merge), light clients such as **Pocket** and **Infura** can *no longer be used by validators*!
+After the Execution and Beacon chains become unified later this year (known as The Merge), remote providers such as **Pocket** and **Infura** can *no longer be used by validators*!
 After The Merge, your only option for a fallback is to have a second full Execution client running on another machine (or in the cloud) that you own and trust.
 
 The time between now and The Merge is an **excellent time** to switch to a client with a smaller market share for the health of the network, and use Pocket or Infura as a fallback Execution client while they're still available.

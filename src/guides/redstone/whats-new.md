@@ -29,13 +29,13 @@ Below is a brief summary of the changes to client behavior as part of The Merge:
 
 - Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
   - **Neither one can operate in isolation any longer.**
-  
+
 - One Execution client must be linked to one, and only one, Consensus client (and vice versa).
   - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
   - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
-  
+
 - **Full execution clients** are required.
-  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
+  - Remote providers (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
 
 
 ## Fee Recipients and Your Distributor
@@ -46,7 +46,7 @@ Unlike the ETH locked on the Beacon Chain, **you don't have to wait for withdraw
 They are simply awarded to you as part of the block proposal process.
 
 In order to know where to send the fees to, your Validator Client requires an extra parameter known as the `fee recipient`.
-This is the address on the Execution Layer (ETH1) that all of the priority fees earned by your node during block proposals will be sent to. 
+This is the address on the Execution Layer (ETH1) that all of the priority fees earned by your node during block proposals will be sent to.
 
 Rocket Pool is designed to fairly distribute these rewards, the same way it fairly distributes your Beacon chain rewards: half of any priority fees your minipool validators earn will go to you (plus the average commission of all of your minipools), and the other half will go to the pool stakers (minus your average commission).
 
@@ -179,7 +179,7 @@ If you prefer to build the rewards checkpoint manually instead of downloading th
 As the tip implies, you will need access to an archive node to do this.
 If your local Execution client is not an archive node, you can specify a separate one (such as Infura or Alchemy) in the `Archive-Mode EC URL` box below it.
 This URL will only be used when generating Merkle trees; it will not be used for validation duties.
-::: 
+:::
 
 ::: danger WARNING
 If you are below 10% RPL collateral *at the time of the snapshot*, you will not be eligible for rewards for that snapshot.
