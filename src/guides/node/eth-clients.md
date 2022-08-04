@@ -146,8 +146,7 @@ You do not have control over the remote node that you're connecting to, and you 
 Like Infura, Pocket is a **remote provider**.
 It is constructed from routers, relays and nodes that combine to listen for incoming blockchain requests, execute them on a node for the blockchain of choice, and transmit the reponse back to the original caller.
 
-Pocket is an interesting option for running a light client, in that it does not have a truly centralized component.
-While using it doesn't contribute to the decentralization of Ethereum, it also doesn't rely on a single-point-of-failure, making this an attractive option for situations where a light client is necessary.
+Pocket is an interesting option for running a remote provider as it promotes the growth of the network, incentivizing new users to run nodes and receive rewards for it, making this an attractive option for situations where a remote provider is necessary.
 
 Pocket normally relies on users paying for transactions via their POKT token, but they have agreed to allow Rocket Pool node operators to use their network **free of charge**.
 
