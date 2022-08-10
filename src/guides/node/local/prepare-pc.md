@@ -47,40 +47,30 @@ For other distros, manual steps will be required during installation.
 
 ### Hardware Requirements
 
-The hardware requirements for a node depend largely on which Execution (ETH1) and Consensus (ETH2) clients you decide to run.
+The hardware requirements for a node depend largely on which Execution and Consensus clients you decide to run.
 As shown in [the hardware guide](./hardware.md), there is a wide range of possible configurations that work well.
 However, for the sake of completeness, we have assembled the following hardware profiles:
-
-
-#### Light Client (Relies on External ETH1 Service)
-- CPU: Dual-core 1.6+ GHz
-- RAM: 8 GB DDR4 2133 MHz
-- SSD: 128 GB, 9k Read IOPS, 3k Write IOPS**
-- Network: 10+ Mbps, 300+ GB monthly data cap
-- ETH1: Infura, Pocket
-- ETH2: Nimbus, Prysm
-
 
 #### Low-Power Full Node
 - CPU: Quad-core 1.6+ GHz
 - RAM: 8 GB DDR4 2400 MHz
-- SSD: 1 TB*, 15k Read IOPS, 5k Write IOPS**
+- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS**
 - Network: 10+ Mbps, 1.5+ TB monthly data cap
-- ETH1: Geth (in low-cache mode), Infura, Pocket
-- ETH2: Nimbus, Prysm
+- Execution Client: Geth (in low-cache mode), Besu 
+- Consensus Client: Nimbus, Prysm
 
 
 #### Typical Full Node
 - CPU: Quad-core, 2.6+ GHz
 - RAM: 16 GB DDR4 3200 MHz
-- SSD: 1 TB*, 15k Read IOPS, 5k Write IOPS**
+- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS**
 - Network: 25+ Mbps, 1.5+ TB monthly data cap
-- ETH1: Any
-- ETH2: Any
+- Execution Client: Any
+- Consensus Client: Any
 
 
-*\* Note that for mainnet, at the time of this article, 1 TB is sufficient but **2 TB is recommended**.
-The Execution (ETH1) blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer better future-proofing.
+*\*
+The Execution blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer some future-proofing.
 The larger your storage, the longer you can go between needing to reclaim space by pruning.*
 
 *\*\* If you are unsure if your disk meets these performance requirements, `fio` is a good way to test them.
@@ -260,7 +250,7 @@ Before installing Rocket Pool, please review the following checklist:
 - Your user account has root / Administrator privileges.
 - You have an SSD that meets the performance requirements.
 - Your SSD is mounted on your file system.
-- You have at least 800 GB of space free for the initial ETH1 and ETH2 syncing process.
+- You have at least 1 TB of space free for the initial Execution and Consensus syncing process.
 - If your ISP caps your data, it is more than 1.5 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!

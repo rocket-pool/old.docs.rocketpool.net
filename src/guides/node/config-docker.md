@@ -1,12 +1,6 @@
 # Configuring the Smartnode Stack (Docker Mode)
 
-::: danger WARNING
-This documentation is currently out of date with the release of Smartnode v1.5.0.
-
-It will be updated shortly.
-:::
-
-Running complete Execution layer (ETH1) and Consensus layer (ETH2) clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
+Running complete Execution layer and Consensus layer clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
 Luckily, the Smartnode is designed to hide all of that complexity so it's quick and easy to configure, while still giving you the freedom to customize everything if you so desire.
 
 In this section, we'll go over the various methods for configuring the Smartnode if you're using the **Docker-based setup** or a **Hybrid setup** where you connect to externally managed Execution or Consensus clients (e.g., clients you manage outside of the Smartnode for solo staking).
@@ -89,31 +83,56 @@ If you want to practice running a Rocket Pool node on the Prater test network wi
 
 If you're ready to create a real Rocket Pool node on Mainnet to earn real rewards, select **Mainnet**.
 
+### Client Mode Setup
+The merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
 
-### Execution Client Setup
+Ropsten & Prater have successfully undergone **The Merge of the Execution and Consensus Layers**. Currently it is estiamted that the Mainnet Merge will occur in early September.
 
-The next screen will ask you how you would like to manage your Execution Client:
+After The Merge, the network will no longer use Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
+While this comes with some exciting financial benefits (which will be discussed later), it also comes with some important changes to the way validators operate.
+
+Below is a brief summary of the changes to client behavior as part of The Merge:
+
+- Your Execution client now uses three API ports:
+  - One for HTTP access to its API (**default 8545**)
+  - One for Websocket access to its API (**default 8546**)
+  - One for the new **Engine API** used by Consensus clients after The Merge (**default 8551**)
+
+- Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
+  - **Neither one can operate in isolation any longer.**
+  
+- One Execution client must be linked to one, and only one, Consensus client (and vice versa).
+  - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
+  - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
+  - Because of this, the way fallback clients work has changed. Now a fallback must be a **Execution/Consensus pair**
+- **Full execution clients** are required.
+  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
+
+You will be presented with two options:
 
 <center>
 
-![](./images/tui-ec-mode.png)
+![](./images/tui-client-mode.png)
 
 </center>
 
-There are two options here.
-
 **Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
-Use it if you don't already have an Execution client and you want the Smartnode to manage one for you.
-By choosing this, the Smartnode will add an Execution client as a Docker container to its stack that it can control.
+Use it if you don't already have a client pair and you want the Smartnode to manage one for you.
+By choosing this, the Smartnode will create, configure and manage an Execution & Consensus Client pair as Docker containers.
 Don't worry, you'll get to choose *which* client you want to run next.
 
-**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have an Execution client running elsewhere that they manage manually.
-By choosing this, the Smartnode will simply connect to your existing client and will not run one of its own.
-For example, users can use this to plug into an Execution client that they currently use for solo staking; that way, they don't need to have two separate copies of an Execution client.
+**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have an Execution & Consensus client pair running elsewhere that they manage manually.
+By choosing this, the Smartnode will simply connect to your existing clients and will not run one of its own.
+For example, users can use this to plug into the clients that they currently use for solo staking; that way, they don't need to have two separate copies of the clients.
 
 :::warning NOTE
 As the Smartnode cannot manage external Execution clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
 :::
+
+
+### Execution Client Setup
+
+
 
 Choose which mode you'd like to use for managing your Execution client and follow the steps in the corresponding tab below:
 
