@@ -28,7 +28,7 @@ The following are considered *minimum* requirements:
   - Linux or macOS Operating System
   - Quad core CPU (or dual-core hyperthreaded); both `x64` and `arm64` are supported
   - 8 GB of RAM (preferably DDR4)
-  - 1 TB of free **SSD Disk Space**, though 2 TB is strongly recommended now (*note: this only applies to mainnet; the Prater testnet only requires about 100 GB*)
+  - 2 TB of free **SSD Disk Space** (*note: this only applies to mainnet; the Prater testnet only requires about 200 GB*)
     - A spinning platter hard drive *is generally not fast enough* to handle the constant random reads and writes that blockchain activity requires; you MUST use a solid state drive.
 
 Typical configurations tend to use 16 or 32 GB of RAM for future proofing, but at the time of Rocket Pool's launch, the above is sufficient to run a node.
@@ -79,4 +79,4 @@ Disadvantages:
 - Servers may come with data caps, or have expensive network I/O rates
 - Possible for hosts to examine your machine's contents and take your wallet's key if not secured
 
-If those advantages sound like they outweight the disadvantages for you, then take a look at our [VPS Node Operator's Guide](vps/providers.html).
+If those advantages sound like they outweigh the disadvantages for you, then take a look at our [VPS Node Operator's Guide](vps/providers.html).

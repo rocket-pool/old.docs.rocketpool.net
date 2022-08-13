@@ -83,32 +83,9 @@ If you want to practice running a Rocket Pool node on the Prater test network wi
 
 If you're ready to create a real Rocket Pool node on Mainnet to earn real rewards, select **Mainnet**.
 
-### Client Mode Setup
-The merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
+### Client Mode
 
-Ropsten & Prater have successfully undergone **The Merge of the Execution and Consensus Layers**. Currently it is estiamted that the Mainnet Merge will occur in early September.
-
-After The Merge, the network will no longer use Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
-While this comes with some exciting financial benefits (which will be discussed later), it also comes with some important changes to the way validators operate.
-
-Below is a brief summary of the changes to client behavior as part of The Merge:
-
-- Your Execution client now uses three API ports:
-  - One for HTTP access to its API (**default 8545**)
-  - One for Websocket access to its API (**default 8546**)
-  - One for the new **Engine API** used by Consensus clients after The Merge (**default 8551**)
-
-- Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
-  - **Neither one can operate in isolation any longer.**
-  
-- One Execution client must be linked to one, and only one, Consensus client (and vice versa).
-  - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
-  - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
-  - Because of this, the way fallback clients work has changed. Now a fallback must be a **Execution/Consensus pair**
-- **Full execution clients** are required.
-  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
-
-You will be presented with two options:
+You will be presented with two options for client mode:
 
 <center>
 
@@ -127,6 +104,29 @@ For example, users can use this to plug into the clients that they currently use
 
 :::warning NOTE
 As the Smartnode cannot manage external Execution clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
+:::
+
+::: tip NOTE
+The merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
+
+After The Merge, the network will no longer use Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
+
+Below is a brief summary of the changes to client behavior as part of The Merge:
+
+- Your Execution client now uses three API ports:
+  - One for HTTP access to its API (**default 8545**)
+  - One for Websocket access to its API (**default 8546**)
+  - One for the new **Engine API** used by Consensus clients after The Merge (**default 8551**)
+
+- Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
+  - **Neither one can operate in isolation any longer.**
+  
+- One Execution client must be linked to one, and only one, Consensus client (and vice versa).
+  - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
+  - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
+  - Because of this, the way fallback clients work has changed. Now a fallback must be a **Execution/Consensus pair**
+- **Full execution clients** are required.
+  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
 :::
 
 
@@ -150,13 +150,9 @@ If you want the Smartnode to manage an Execution client for you, the next screen
 Please refer to the [Choosing your ETH clients](./eth-clients.md#eth1-clients) section for a description of each option.
 Once you've made your choice, click on the appropriate tab below to learn how to configure it:
 
-:::::: tabs
-::::: tab Geth
-
-If you choose **Geth**, the Wizard will handle all of the configuration for you.
+If you choose **Geth**, **Besu**, or **Nethermind**, the Wizard will handle all of the configuration for you.
 You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
 You can proceed to the next section.
-
 
 ::: warning NOTE
 To make sure your Execution client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
@@ -166,34 +162,21 @@ This way, other Execution clients can discover it and communicate with it from t
 Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
 
-:::::
-::::: tab Infura
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
+:::
 
-If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
-
-<center>
-
-![](./images/tui-infura.png)
-
-</center>
-
-When you created an Infura account and an `Ethereum` project for it, it will be assigned a unique project ID which is a 32-character hexadecimal string.
-Note this is the **Project ID**, *not* the **Secret ID**.
-Enter the **Project ID** here, and press `Next`.
-
-:::::
-::::: tab Pocket
-
-If you choose **Pocket**, the Wizard will handle all of the configuration for you.
-You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
-You can proceed to the next section.
-
-:::::
-::::::
 :::::::
-::::::: tab Externally Managed
 
-For an externally managed Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
+
+And with that, your Execution client is all set!
+
+
+
+::::: tab External
+
+For an externally managed fallback Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
 
 <center>
 
@@ -211,100 +194,19 @@ Otherwise, enter it here.
 
 ::: warning NOTE
 Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
-You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
-:::
-
-:::::::
-::::::::
-
-And with that, your Execution client is all set!
-
-
-### Fallback Execution Client Setup
-
-The next thing to configure is an optional **fallback** Execution client:
-
-<center>
-
-![](./images/tui-fallback-ec.png)
-
-</center>
-
-Think of this like a "spare" Execution client your node can use in case the primary one you selected in the previous step ever goes down for maintenance (which will almost certainly happen at some point).
-
-Choose **None** if you don't want to use a fallback client.
-This isn't recommended, but you have the option if you have a reason not to use one.
-
-**Infura** and **Pocket** behave the same way here as they do in regular Execution client operation; they will just stay idle until your primary Execution client fails, at which point they will take over until it's online again.
-*Note that if you selected one of these for your primary Execution client earlier, you should choose a different one for your fallback Execution client.*
-
-**External** a good choice if you already have a secondary Execution client that you maintain yourself elsewhere (such as on a second machine, outside of the Smartnode stack) and want to use that as your fallback client.
-If this is selected, the Smartnode will simply switch to that if your primary client fails until it resumes operation.
-
-To learn more about configuring these options, click on the appropriate tab below:
-
-:::::: tabs
-::::: tab Infura
-
-If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
-
-<center>
-
-![](./images/tui-fallback-infura.png)
-
-</center>
-
-When you created an Infura account and an `Ethereum` project for it, it will be assigned a unique project ID which is a 32-character hexadecimal string.
-Note this is the **Project ID**, *not* the **Secret ID**.
-Enter the **Project ID** here, and press `Next`.
-
-:::::
-::::: tab Pocket
-
-If you choose **Pocket**, the Wizard will handle all of the configuration for you.
-You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
-You can proceed to the next section.
-
-:::::
-::::: tab External
-
-For an externally managed fallback Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
-
-<center>
-
-![](./images/tui-fallback-external-ec.png)
-
-</center>
-
-The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting transactions.
-**If you don't already have your client's API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
-Instructions on this vary from client to client; consult your client's documentation to learn how to set up the HTTP RPC endpoint.
-
-The Websocket URL is only relevant if you are using **Nimbus** as your Consensus client.
-If you are using a different client, you can leave it blank.
-Otherwise, enter it here.
-
-::: warning NOTE
-Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
 You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your fallback Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
 
-:::::
-::::::
-
 When you're happy with your fallback Execution client choices, proceed to the next step.
+
+::::::::
+
 
 
 ### Consensus Client Setup
 
-Now that you have an Execution and optional fallback Execution client ready, the next task is to set up the Consensus client.
+Now that you have an Execution client ready, the next task is to set up the Consensus client.
 The first thing to do is determine which management mode you'd like to use for it, just like you did for the Execution client earlier:
-
-<center>
-
-![](./images/tui-cc-mode.png)
-
-</center>
 
 As with the Execution client management mode, there are two options here.
 
@@ -318,6 +220,12 @@ By choosing this, the Smartnode will simply connect to your existing Beacon Node
 However, it *will* run its own Validator Client so it can manage its own validator keys.
 
 For example, users can use this to plug into a Beacon Node that they currently use for solo staking; that way, they don't need to have two separate copies of a Beacon Node.
+
+<center>
+
+![](./images/tui-cc-mode.png)
+
+</center>
 
 :::warning NOTE
 As the Smartnode cannot manage external Consensus clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
@@ -794,6 +702,11 @@ You can then paste this in the terminal during `rocketpool service config` when 
 
 After that, your Beacon node will be configured to connect to Infura when it first starts up and instantly pull down the latest state of the chain!
 
+### Fallback Node 
+
+Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it). In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
+
+[To learn more about fall back nodes see this section](./fallback.md)
 
 ### Metrics Configuration
 
@@ -1000,7 +913,12 @@ Press `n` and `Enter` if you have other things you want to do before restarting 
 
 In either case, your configuration is done!
 
+::: tip NOTE
+You may see an error message like the one below,  this is not a problem and happens sometime.  You can ignore it, it is a timing thing more than anything and not an actual problem.
 
+`2022/08/13 13:49:41 Error piping stdout: read |0: file already closed`
+
+:::
 ## Configuring via the Command Line
 
 If you use the Smartnode in a headless environment where you can't interact with the Terminal UI, you can configure your node via the command line instead.
