@@ -232,6 +232,7 @@ COMMANDS:
    distribute-fees, b             Distribute the priority fee and MEV rewards from your fee distributor to your withdrawal address and the rETH contract (based on your node's average commission)
    join-smoothing-pool, js        Opt your node into the Smoothing Pool
    leave-smoothing-pool, ls       Leave the Smoothing Pool
+   sign-message, sm               Sign an arbitrary message using the node wallet's private key
 
 GLOBAL OPTIONS:
    --help, -h  show help
