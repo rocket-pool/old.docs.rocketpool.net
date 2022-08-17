@@ -76,125 +76,77 @@ Select your client below to learn how to set it up:
 
 :::::: tabs
 ::::: tab Lighthouse
-Create a new file called `<data dir>/validators/lighthouse/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/lighthouse/rp-fee-recipient.txt`).
-
-The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
-You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
-
-For example, on Mainnet, this file would simply hold:
-
+Modify your Validator Client service by adding the following line *before* the `ExecStart` line:
 ```
-0xae78736Cd615f374D3085123A210448E74Fc6393 
-```
-
-::: tip NOTE
-Using the rETH token address as the default fee recipient is the **safe** default option prior to the Redstone upgrade, after which it will be updated to your node's fee distributor automatically.
-The default `0x000...000` address is **not safe** and will result in a [penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) if, for any reason, you accidentally propose with it after The Merge.
-:::
-
-Next, modify your Validator Client service by adding the following command line argument to your service definition file:
-
-```
---suggested-fee-recipient $(cat <data dir>/validators/lighthouse/rp-fee-recipient.txt)
+EnvironmentFile=<data dir>/validators/rp-fee-recipient-env.txt
 ```
 
 For example:
+```
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+```
+
+Next, add the following command line argument *to the end* of your `ExecStart` line:
 
 ```
---suggested-fee-recipient $(cat /srv/rocketpool/data/validators/lighthouse/rp-fee-recipient.txt)
+--suggested-fee-recipient ${FEE_RECIPIENT}
 ```
 
 Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
 :::::
 ::::: tab Nimbus
-Create a new file called `<data dir>/validators/nimbus/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/nimbus/rp-fee-recipient.txt`).
-
-The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
-You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
-
-For example, on Mainnet, this file would simply hold:
-
+Modify your Validator Client service by adding the following line *before* the `ExecStart` line:
 ```
-0xae78736Cd615f374D3085123A210448E74Fc6393 
-```
-
-::: tip NOTE
-Using the rETH token address as the default fee recipient is the **safe** default option prior to the Redstone upgrade, after which it will be updated to your node's fee distributor automatically.
-The default `0x000...000` address is **not safe** and will result in a [penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) if, for any reason, you accidentally propose with it after The Merge.
-:::
-
-Next, modify the Nimbus service by adding the following command line argument to its service definition file:
-
-```
---suggested-fee-recipient=$(cat <data dir>/validators/nimbus/$FEE_RECIPIENT_FILE)
+EnvironmentFile=<data dir>/validators/rp-fee-recipient-env.txt
 ```
 
 For example:
+```
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+```
+
+Next, add the following command line argument *to the end* of your `ExecStart` line:
 
 ```
---suggested-fee-recipient=$(cat /srv/rocketpool/data/validators/nimbus/rp-fee-recipient.txt)
+--suggested-fee-recipient=${FEE_RECIPIENT}
 ```
 
-Nimbus will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
+Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
 :::::
 ::::: tab Prysm
-Create a new file called `<data dir>/validators/prysm-non-hd/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipient.txt`).
-
-The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
-You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
-
-For example, on Mainnet, this file would simply hold:
-
+Modify your Validator Client service by adding the following line *before* the `ExecStart` line:
 ```
-0xae78736Cd615f374D3085123A210448E74Fc6393 
-```
-
-::: tip NOTE
-Using the rETH token address as the default fee recipient is the **safe** default option prior to the Redstone upgrade, after which it will be updated to your node's fee distributor automatically.
-The default `0x000...000` address is **not safe** and will result in a [penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) if, for any reason, you accidentally propose with it after The Merge.
-:::
-
-Next, modify your Validator Client service by adding the following command line argument to your service definition file:
-
-```
---suggested-fee-recipient $(cat <data dir>/validators/prysm-non-hd/rp-fee-recipient.txt)
+EnvironmentFile=<data dir>/validators/rp-fee-recipient-env.txt
 ```
 
 For example:
+```
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+```
+
+Next, add the following command line argument *to the end* of your `ExecStart` line:
 
 ```
---suggested-fee-recipient $(cat /srv/rocketpool/data/validators/prysm-non-hd/rp-fee-recipient.txt)
+--suggested-fee-recipient ${FEE_RECIPIENT}
 ```
 
 Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
 :::::
 ::::: tab Teku
-Create a new file called `<data dir>/validators/teku/rp-fee-recipient.txt` where `<data dir>` is the absolute path of your Smartnode data directory (for example, `/srv/rocketpool/data/validators/teku/rp-fee-recipient.txt`).
-
-The contents of this file should simply be the hex address of the **rETH** token for the network you're running on.
-You can find the full list of rETH token addresses for each network [on the contracts page](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts).
-
-For example, on Mainnet, this file would simply hold:
-
+Modify your Validator Client service by adding the following line *before* the `ExecStart` line:
 ```
-0xae78736Cd615f374D3085123A210448E74Fc6393 
-```
-
-::: tip NOTE
-Using the rETH token address as the default fee recipient is the **safe** default option prior to the Redstone upgrade, after which it will be updated to your node's fee distributor automatically.
-The default `0x000...000` address is **not safe** and will result in a [penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) if, for any reason, you accidentally propose with it after The Merge.
-:::
-
-Next, modify your Validator Client service by adding the following command line argument to your service definition file:
-
-```
---validators-proposer-default-fee-recipient=$(cat <data dir>/validators/teku/$FEE_RECIPIENT_FILE)
+EnvironmentFile=<data dir>/validators/rp-fee-recipient-env.txt
 ```
 
 For example:
+```
+EnvironmentFile=/srv/rocketpool/data/validators/rp-fee-recipient-env.txt
+```
+
+Next, add the following command line argument *to the end* of your `ExecStart` line:
 
 ```
---validators-proposer-default-fee-recipient=$(cat /srv/rocketpool/data/validators/teku/rp-fee-recipient.txt)
+--validators-proposer-default-fee-recipient=${FEE_RECIPIENT}
 ```
 
 Your VC will now use the file managed by the Smartnode daemon, and will automatically be restarted whenever the fee recipient changes.
@@ -212,6 +164,25 @@ Please read the [penalty specification](https://github.com/rocket-pool/rocketpoo
 Failure to do so could result in your minipools being penalized!
 :::
 
+**Prior to Redstone being deployed**, you can simply use the rETH address for the network you're on (which can be found in [the official contracts page](../../overview/contracts-integrations.md#protocol-contracts)).
+The rETH address is always safe no matter what.
+
+**Once Redstone has been deployed**, you can see the exact address that you should set your fee recipient to via `rocketpool node status`. For example, if you are opted into the Smoothing Pool, it will show the Smoothing Pool's address and note that you must use it as your fee recipient:
+
+<center>
+
+![](../node/images/native-fee-rc-in.png)
+
+</center>
+
+If you are *not* opted into the Smoothing Pool, it will show your fee distributor address and note that you must use it as your fee recipient:
+
+<center>
+
+![](../node/images/native-fee-rc-out.png)
+
+</center>
+
 Select your Consensus client below to learn how to configure it.
 
 :::::: tabs
@@ -228,6 +199,8 @@ Where `<address>` is:
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
 
+As a reminder, `rocketpool node status` will show you the correct fee recipient to use at any time.
+
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
 ::::: tab Nimbus
@@ -242,6 +215,8 @@ Where `<address>` is:
 - The [rETH address](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts) **before** the Redstone update is deployed (e.g., `0xae78736Cd615f374D3085123A210448E74Fc6393` on Mainnet)
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
+
+As a reminder, `rocketpool node status` will show you the correct fee recipient to use at any time.
 
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
@@ -258,6 +233,8 @@ Where `<address>` is:
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
 
+As a reminder, `rocketpool node status` will show you the correct fee recipient to use at any time.
+
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
 ::::: tab Teku
@@ -272,6 +249,8 @@ Where `<address>` is:
 - The [rETH address](https://docs.rocketpool.net/overview/contracts-integrations/#token-contracts) **before** the Redstone update is deployed (e.g., `0xae78736Cd615f374D3085123A210448E74Fc6393` on Mainnet)
 - Your node's **fee distributor** after Redstone is deployed, which you can retrieve with `rocketpool node status` once the contract upgrade occurs
 - The [Smoothing Pool address](https://docs.rocketpool.net/overview/contracts-integrations/#protocol-contracts) if you opt into the Smoothing Pool
+
+As a reminder, `rocketpool node status` will show you the correct fee recipient to use at any time.
 
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
