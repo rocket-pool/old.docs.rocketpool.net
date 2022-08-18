@@ -24,7 +24,9 @@ CPU naming can be deceptive. An Intel core i5 from 2010 is usually less powerful
 You can tell how modern a NUC is by its model number. They are formatted as `NUC` + `generation number` + `model` + `CPU type` + `suffix`. For example a `NUC11PAHi50Z` unit is a 11th generation i5 unit. You can see a list of NUCs [here](https://www.intel.com/content/www/us/en/products/details/nuc/kits/products.html) on the intel website.
 :::
 
-**Guideline:** any modern CPU with 4+ cores.
+The amount of cores on a CPU is less relevant that it's threads. A 2 core CPU with 4 threads will operate fine. It is rare to find a single core or single thread CPU, so as a general rule the most effective thing to do is to use a modern processor.
+
+**Guideline:** any modern CPU.
 
 ### RAM requirements
 
@@ -43,9 +45,13 @@ This element is more important than most people expect. The execution client rel
 If you want to be sure your SSD is sufficient, refer to the [testing SSD performance](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#testing-the-ssd-s-performance) section of the raspberry pi guide.
 
 ::: tip NOTE
-HDD drives store data on spinning disks, SSDs store space on chips (like SD cards). These chips consist of "cells" that store data. The amount of data squashed into a single cell has impact on speed. When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`. These stand for the amount of data in a cell: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1.
+SSD selection can be a little complexer than expected.
 
-Less data in a cell means the drive is probably faster, but more expensive. As a rule of thumb: **NO `QLC`** drives. `TLC` drives are good. The `MLC` and `SLC` are faster than you need, and far more expensive.
+HDD drives store data on spinning disks, SSDs store space on chips (like SD cards). These chips consist of "cells" that store data. The amount of data squashed into a single cell has impact on speed. When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`. These stand for the amount of data in a cell: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1. Less data in a cell means the drive is probably faster, but more expensive.
+
+SSDs come with or without DRAM, which is a hardware element that makes accessing data on the SSD more efficient. Those with DRAM are faster but those without DRAM are cheaper.
+
+As a rule of thumb: only drives with DRAM, NO `QLC` drives. `TLC` drives are good. The `MLC` and `SLC` are faster than you need, and far more expensive. `QLC` drives with DRAM will outperform `TLC` without, but err on the side of caution. 
 :::
 
 The second consideration is drive size. At the time of writing, the `geth` execution client database size runs at about 700GB of space. This will grow steadily over time, and while you can periodically prune the database, it is likely to cross 1TB over the coming year(s). You will have peace of mind with a larger drive.
