@@ -1,29 +1,70 @@
 # Selecting Staking Hardware
 
-So!
-You've decided that you want to run your own Rocket Pool node at home.
-You want to pick the hardware, you want to set it up, and you want to have complete control over everything that happens to it.
-You're determined to help maximize the decentralization of the Ethereum ecosystem while being as secure as you can possibly be.
-Outstanding!
+There are no official specifications for running a Rocket Pool node. This page offers some guidelines and examples that you can use to select staking hardware.
 
-But where do you start?
-How do you pick a computer that's right for you?
-There are dozens of guides with conflicting suggestions out there, or vague parts lists that ask you to fill in the blanks.
-Rather than add another one of those guides to the community, we've decided to go a slightly different route.
-Here, we've collected and listed a few of the staking setups that members of the Rocket Pool community have decided to share.
-We've tried to include a very diverse set of options so you can fully appreciate just how flexible the hardware for running a Rocket Pool node can be.
-We've included complete PC's and servers, small NUCs and mini-PCs, and even a Raspberry Pi in our list!
-We've also asked the users to describe what they like about their setups to help you understand the pros and cons of each one.
+The minimum hardware requirements of your node will depend on the consensus and execution clients that you choose. If for example you intend to run your node on a raspberry pi, you are (at the time of writing) limited to using `geth` as your execution client and `nimbus` as your consensus client.
 
-Take a look at some of Rocket Pool's staking setups below; hopefully you'll find some inspiration for your own node.
+The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity. If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations. This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
 
+::: tip NOTE
+Ethereum staking is very forgiving. If your house is flooded and your staking device is fried, there is no big penalty for taking a week to get back up and running. Component failure might happen at some point, but don't stress about it. Downtime does not get you slashed unless you are offline a really long time.
+:::
 
-## Full Servers and PCs
+## Hardware requirements
 
-PCs and servers come in all shapes and sizes, and all manners of cost and performance.
-They are known for their modularity and flexibility - each component is customizable and swappable, from the motherboard to the memory.
-With countless options available, it can be overwhelming to settle on the right ones for you.
-In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves.
+Ethereum validators are not very computationally expensive, which is to say that once your execution and consensus clients are running, any incremental validator will use negligible resources. In other words: if your machine can run 1 validator, it can probably run 1000 too.
+
+### CPU requirements
+
+Rocket Pool nodes are not very computationally intensive, which is why they can be run on an raspberry pi. The biggest impact of the CPU is how fast your node can sync the state of the blockchain. After the initial sync, the CPU is not used very intensively.
+
+CPU naming can be deceptive. An Intel core i5 from 2010 is usually less powerful than a core i3 from 2022. For this reason, we recommend using a modern CPU, which you can define as "not more than a few years old". Many community members use Intel NUC devices because of their small form factor, but an old i5 NUC may be a worse choice than a new i3.
+
+::: tip NOTE
+You can tell how modern a NUC is by its model number. They are formatted as `NUC` + `generation number` + `model` + `CPU type` + `suffix`. For example a `NUC11PAHi50Z` unit is a 11th generation i5 unit. You can see a list of NUCs [here](https://www.intel.com/content/www/us/en/products/details/nuc/kits/products.html) on the intel website.
+:::
+
+**Guideline:** any modern CPU with 4+ cores.
+
+### RAM requirements
+
+Rocket Pool nodes are being run on devices with as little as 8GB RAM, but that will limit the clients you can use or make the clients run slower than they ideally would. Since memory is not very expensive, it makes sense to give your node a little more. An added benefit of more RAM is that the cache or your clients can be larger, which can lead to less storage space use.
+
+**Guideline:** 16GB.
+
+### SSD requirements
+
+This element is more important than most people expect. The execution client relies heavily on IOPS, or "operations per second". In practice this means that:
+
+- HDD drives will not work
+- SATA or external SSDs can work
+- NVMe SSD drives are preferred
+
+If you want to be sure your SSD is sufficient, refer to the [testing SSD performance](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#testing-the-ssd-s-performance) section of the raspberry pi guide.
+
+::: tip NOTE
+HDD drives store data on spinning disks, SSDs store space on chips (like SD cards). These chips consist of "cells" that store data. The amount of data squashed into a single cell has impact on speed. When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`. These stand for the amount of data in a cell: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1.
+
+Less data in a cell means the drive is probably faster, but more expensive. As a rule of thumb: **NO `QLC`** drives. `TLC` drives are good. The `MLC` and `SLC` are faster than you need, and far more expensive.
+:::
+
+The second consideration is drive size. At the time of writing, the `geth` execution client database size runs at about 700GB of space. This will grow steadily over time, and while you can periodically prune the database, it is likely to cross 1TB over the coming year(s). You will have peace of mind with a larger drive.
+
+**Guideline:** an NVMe drive of 2TB.
+
+### Common accessories
+
+Many node operators improve their setups beyond the minimum requirements. Some common additions include:
+
+- SSD heatsinks to extend the drive lifespan
+- Uninterruptable power supplies in case of power outages
+- A fallback node to have a backup in case something fails
+
+As a general rule: so long as the basics are fine, you do not need to get fancy.
+
+## Example setups
+
+In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves. They are examples of what people are using, not recommendations for how you should run your setup.
 
 
 ### Xer0's Server
