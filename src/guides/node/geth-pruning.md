@@ -32,18 +32,18 @@ You will need to do it manually.
 Pruning Geth means taking the primary Execution (ETH1) client offline so it can clean itself up.
 When this happens, the Smartnode (and your Consensus (ETH2) client) will need some other way to access the ETH1 chain in order to function properly.
 
-The easiest way to provide this is with a **fallback ETH1 client**.
-If you [configured an Execution (ETH1) fallback client](./docker.md#eth1-fallback-configuration) using `rocketpool service config` already, then the Smartnode will automatically switch over to it when your Geth contianer goes down for maintenance for you.
+The easiest way to provide this is with a **fallback node**.
+If you [configured a fall back node](./fallback.md) using `rocketpool service config` already, then the Smartnode will automatically switch over to it when your Geth contianer goes down for maintenance for you.
 It will also inform your Consensus (ETH2) client to use the fallback as well.
 
-::: danger WARNING
-If you don't have an Execution (ETH1) fallback client configured, your Smartnode will stop working until Geth finishes pruning.
+::: danger WARNING 
+If you don't have a fallback node configured, your Smartnode will stop working until Geth finishes pruning.
 Your Consensus (ETH2) client will still attest, but it will fail any block proposals it makes.
 :::
 
 With that in mind, the following two conditions are required to successfully prune Geth:
 
-- A working Execution (ETH1) fallback client configured
+- A working fallback node configured
 - At least **50 GB** of free space remaining on your SSD
 
 
@@ -64,29 +64,7 @@ Once pruning is complete, your ETH1 client will restart automatically.
 You have a fallback ETH1 client configured (custom). Rocket Pool (and your ETH2 client) will use that while the main client is pruning.
 ```
 
-::: warning NOTE
-If you're using Infura, you will see this warning message:
 
-```
-If you are using Infura's free tier, you may hit its rate limit if pruning takes a long time.
-If this happens, you should temporarily disable the `rocketpool_node` container until pruning is complete. This will:
-	- Stop collecting Rocket Pool's network metrics in the Grafana dashboard
-	- Stop automatic operations (claiming RPL rewards and staking new minipools)
-
-To disable the container, run: `docker stop rocketpool_node`
-To re-enable the container one pruning is complete, run: `docker start rocketpool_node`
-```
-
-This warning is to let you know that Infura's free tier may not be enough to reliably act as a fallback for everything Rocket Pool needs while Geth prunes.
-The Smartnode carries out quite a few queries to the Execution (ETH1) client (which scales linearly with the number of minipools you have running).
-
-If you ever notice that the Smartnode or Grafana dashboard stop working properly, take a look at the fallback client's logs with:
-```
-rocketpool service logs eth1-fallback
-```
-
-If you see many messages about rate limits being hit or exceeded, then you will likely need to stop your node container as the warning text suggests so that the Smartnode isn't trying to query Infura so much.
-:::
 
 After this, you will be prompted to confirm that you're ready to prune.
 If you accept, you'll see a few details as the Smartnode prepares things; it should end with a success message:

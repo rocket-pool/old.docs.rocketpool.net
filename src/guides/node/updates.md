@@ -163,10 +163,14 @@ Finally, check the version to make sure the CLI and Smartnode stack are both up 
 ```
 rocketpool service version
 
-Rocket Pool client version: 1.0.0-rc3
-Rocket Pool service version: 1.0.0-rc3
-Selected Eth 1.0 client: Geth (rocketpool/client-go:v1.10.4)
-Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
+Your Smartnode is currently using the Prater Test Network.
+
+Rocket Pool client version: 1.5.0
+Rocket Pool service version: 1.5.0
+Selected Eth 1.0 client: Geth (Locally managed)
+        Image: ethereum/client-go:v1.10.21
+Selected Eth 2.0 client: Lighthouse (Locally managed)
+        Image: rocketpool/lighthouse:mevboost-5ee3bc5
 ```
 
 Both the client and service should match the new release version.

@@ -1,7 +1,7 @@
 # Creating a New Minipool (Validator)
 
-As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the eth1.0 chain that your node manages.
-The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new eth2.0 validator.
+As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the Execution Layer (ETH1) chain that your node manages.
+The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new validator.
 Thus, in order to create a validator using Rocket Pool, you need to **create a minipool**.
 
 ::: warning
@@ -142,17 +142,17 @@ rocketpool node deposit --salt <your salt, e.g. 0x1234abcd>
 :::
 
 ::: danger
-The CLI will then check to ensure that your ETH2 client is synced.
+The CLI will then check to ensure that your Consensus (ETH2) client is synced.
 If not synced, then it will warn you in large red letters.
-A situation may arise where **your ETH2 validator is activated before your ETH2 node finishes syncing**.
-If this happens, your validator will be assigned attestation and block proposal duties on the Beacon Chain, but it cannot perform those duties until your ETH2 client is fully synced.
+A situation may arise where **your ETH2 validator is activated before your Consensus Client (ETH2) finishes syncing**.
+If this happens, your validator will be assigned attestation and block proposal duties on the Beacon Chain, but it cannot perform those duties until your Consensus (ETH2) client is fully synced.
 
 In this situation, **every missed attestation and block proposal will cause you to lose ETH!**
 You will continue to slowly leak your ETH until your Consensus (ETH2) client finishes syncing.
 
 In most cases, **you should cancel the process and wait for your client to sync.**
 
-However, there are situations where the Beacon Chain validator queue is very long, and you believe that your ETH2 client will finish syncing before your validator exits the queue and is activated.
+However, there are situations where the Beacon Chain validator queue is very long, and you believe that your Consensus (ETH2) client will finish syncing before your validator exits the queue and is activated.
 In this case, you may want to do the deposit anyway to save time and begin validating sooner.
 If you **understand these risks** and **believe this is the case**, the CLI will let you go ahead with a deposit anyway.
 :::
