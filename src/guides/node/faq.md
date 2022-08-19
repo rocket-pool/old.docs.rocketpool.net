@@ -16,7 +16,7 @@ To recover your node on a new machine start by making sure your previous machine
 Follow the [steps](./install-modes.md) to install the smartnode on a new machine. Then, recover your node wallet and validator keys by running the command `rocketpool wallet recover` and insert your 24-word mnemonic.
 
 ## Why my clients are not syncing? I have a low amount of peers.
-Clients need to have a healthy amount of peers to be able to properly sync. You can start by running the test [here](https://www.yougetsignal.com/tools/open-ports/) checking if ports 30303 and 9001 are opened.
+Clients need to have a healthy amount of peers to be able to properly sync. You can start by running the test [here](https://www.yougetsignal.com/tools/open-ports/) checking if ports 30303 and 9001 are opened. If they're closed, you'll need to setup port forwarding on your router. Also make sure your node has a static local IP address so the port forwarding sticks.
 
 ## My consensus client is taking too long to sync. What should I do?
 
