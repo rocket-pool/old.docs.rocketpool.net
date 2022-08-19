@@ -2,7 +2,7 @@
 
 There are no official specifications for running a Rocket Pool node. This page offers some guidelines and examples that you can use to select staking hardware.
 
-The minimum hardware requirements of your node will depend on the consensus and execution clients that you choose. If for example you intend to run your node on a raspberry pi, you are (at the time of writing) limited to using `geth` as your execution client and `nimbus` as your consensus client.
+The minimum hardware requirements of your node will depend on the consensus and execution clients that you choose. If for example you intend to run your node on a raspberry pi, you are (at the time of writing) limited to using `geth`/`besu` as your execution client and `nimbus` as your consensus client.
 
 The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity. If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations. This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
 
