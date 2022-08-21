@@ -8,7 +8,7 @@ Here you will find instructions on how to migrate an existing Smartnode stack fr
 
 Pool staking is largely the same process on mainnet as it was on the testnet.
 The URL will be different and the address of the rETH token may be different, but there are no significant changes to the workflow.
-Follow the [Staking Guide](../staking/staking.md), which has been updated with instructions for mainnet.
+Follow the [Staking Guide](../staking/overview.md), which has been updated with instructions for mainnet.
 
 
 ### Differences Between the Testnet and Mainnet
