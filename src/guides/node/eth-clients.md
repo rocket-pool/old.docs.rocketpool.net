@@ -50,7 +50,7 @@ The options below help to describe each client so you can make an informed decis
 Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, and **Nethermind**.
 
 ::: warning
-Light clients (**Infura** and **Pocket**) will not be usable after the Ethereum Merge and are now deprecated.
+Remote providers (**Infura** and **Pocket**) will not be usable after the Ethereum Merge and are now deprecated.
 You **should not** use them for new installations.
 :::
 
@@ -114,10 +114,10 @@ Users may want to choose a different client while these issues are resolved.
 :::
 
 
-## Execution Light Clients (ETH1)
+## Execution Remote Providers (ETH1)
 
 ::: danger
-Light clients are **deprecated**; they will not work as an Execution client after the Merge.
+Remote providers are **deprecated**; they will not work as an Execution client after the Merge.
 You will need to run a **full** Execution client.
 :::
 
@@ -125,9 +125,9 @@ You will need to run a **full** Execution client.
 ### Infura
 
 [Infura](https://infura.io/) is a web service that provides instant access over HTTPS and WebSockets to the Ethereum and IPFS networks.
-It is a **light client**, meaning that it can be interacted with just like a local ETH1 node for information about the chain's state or to submit transactions; however, it doesn't require a full node on your local machine.
+It is a **remote provider**, meaning that it can be interacted with just like a local ETH1 node for information about the chain's state or to submit transactions; however, it doesn't require a full node on your local machine.
 Instead, Infura essentially hosts a full node and gives you remote access to it.
-This convenience comes at a cost: using a light client does not contribute to the decentralization of Ethereum, and instead adds a somewhat centralized component (as you are now depending on it as an external service).
+This convenience comes at a cost: using a remote provider does not contribute to the decentralization of Ethereum, and instead adds a centralized component (as you are now depending on it as an external service to be live _and_ to never be compromised or lie to your validator).
 
 Infura has several pricing tiers, including a free tier for low amounts of usage.
 Rocket Pool may fit into the free tier, depending on what you do with your node.
@@ -135,26 +135,25 @@ Because of this restriction, it is possible to exceed the limits of the free tie
 We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
 
 ::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
+If you choose a remote provider, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
 :::
 
 
 ### Pocket
 
-[Pocket](https://www.pokt.network/) is a decentralized peer-to-peer network of thousands of independent nodes that service requests for a variety of blockchains, including Ethereum.
-Like Infura, Pocket is a **light client**.
+[Pocket](https://www.pokt.network/) is a network of thousands of independent nodes that service requests for a variety of blockchains, including Ethereum.
+Like Infura, Pocket is a **remote provider**.
 It is constructed from routers, relays and nodes that combine to listen for incoming blockchain requests, execute them on a node for the blockchain of choice, and transmit the reponse back to the original caller.
 
-Pocket is an interesting option for running a light client, in that it does not have a truly centralized component.
-While using it doesn't contribute to the decentralization of Ethereum, it also doesn't rely on a single-point-of-failure, making this an attractive option for situations where a light client is necessary.
+Pocket is an interesting option for running a remote provider as it promotes the growth of the network, incentivizing new users to run nodes and receive rewards for it, making this an attractive option for situations where a remote provider is necessary.
 
 Pocket normally relies on users paying for transactions via their POKT token, but they have agreed to allow Rocket Pool node operators to use their network **free of charge**.
 
 One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
 
 ::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
+If you choose a remote provider, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
 You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
 :::
 

@@ -52,7 +52,7 @@ As shown in [the hardware guide](./hardware.md), there is a wide range of possib
 However, for the sake of completeness, we have assembled the following hardware profiles:
 
 
-#### Light Client (Relies on External ETH1 Service)
+#### Remote Provider (Relies on External ETH1 Service)
 - CPU: Dual-core 1.6+ GHz
 - RAM: 8 GB DDR4 2133 MHz
 - SSD: 128 GB, 9k Read IOPS, 3k Write IOPS**
