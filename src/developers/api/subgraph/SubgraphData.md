@@ -5,6 +5,8 @@ title: Subgraph Data Introduction
 
 # Rocket Pool Subgraph Introduction
 
+**`This subgraph is community built and maintained - For questions reach out to Derek | Data Nexus#5320 on discord`**
+
 Rocket Pool has a GraphQL API Endpoint hosted by [The Graph](https://thegraph.com/docs/about/introduction#what-the-graph-is) called a subgraph for indexing and organizing data from the Rocket Pool smart contracts.
 
 This subgraph is can be used to query Rocket Pool data.
