@@ -1,76 +1,127 @@
 # Selecting Staking Hardware
 
-There are no official specifications for running a Rocket Pool node. This page offers some guidelines and examples that you can use to select staking hardware.
+There are no official specifications for running a Rocket Pool node.
+This page offers some guidelines and examples that you can use to select staking hardware.
 
-The minimum hardware requirements of your node will depend on the consensus and execution clients that you choose. If for example you intend to run your node on a raspberry pi, you are (at the time of writing) limited to using `geth`/`besu` as your execution client and `nimbus` as your consensus client.
+The minimum hardware requirements of your node will depend on the Consensus and Execution clients that you choose.
+If, for example, you intend to run your node on a Raspberry Pi, you are (at the time of writing) limited to using `Geth` or `Besu` as your Execution client and `Nimbus` or `Lighthouse` as your Consensus client.
 
-The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity. If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations. This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
+The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity.
+If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations.
+This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
 
-::: tip NOTE
-Ethereum staking is very forgiving. If your house is flooded and your staking device is fried, there is no big penalty for taking a week to get back up and running. Component failure might happen at some point, but don't stress about it. Downtime does not get you slashed unless you are offline a really long time.
-:::
-
-## Hardware requirements
-
-Ethereum validators are not very computationally expensive, which is to say that once your execution and consensus clients are running, any incremental validator will use negligible resources. In other words: if your machine can run 1 validator, it can probably run 1000 too.
-
-### CPU requirements
-
-Rocket Pool nodes are not very computationally intensive, which is why they can be run on an raspberry pi. The biggest impact of the CPU is how fast your node can sync the state of the blockchain. After the initial sync, the CPU is not used very intensively.
-
-CPU naming can be deceptive. An Intel core i5 from 2010 is usually less powerful than a core i3 from 2022. For this reason, we recommend using a modern CPU, which you can define as "not more than a few years old". Many community members use Intel NUC devices because of their small form factor, but an old i5 NUC may be a worse choice than a new i3.
+That being said, we also include details about using a Raspberry Pi at the end for you to explore.
 
 ::: tip NOTE
-You can tell how modern a NUC is by its model number. They are formatted as `NUC` + `generation number` + `model` + `CPU type` + `suffix`. For example a `NUC11PAHi50Z` unit is a 11th generation i5 unit. You can see a list of NUCs [here](https://www.intel.com/content/www/us/en/products/details/nuc/kits/products.html) on the intel website.
+Ethereum staking is very forgiving.
+If your house is flooded and your staking device is fried, there is no big penalty for taking a week to get back up and running (unless you happen to be in a sync committee, which is a very rare event).
+Component failure might happen at some point, but don't stress about it.
+Downtime does not get you slashed unless you are offline during a major outage of the entire Ethereum network.
 :::
 
-The amount of cores on a CPU is less relevant that it's threads. A 2 core CPU with 4 threads will operate fine. It is rare to find a single core or single thread CPU, so as a general rule the most effective thing to do is to use a modern processor.
 
-**Guideline:** any modern CPU.
+## Hardware Requirements
 
-### RAM requirements
+Ethereum validators are not very computationally expensive, which is to say that once your Execution and Consensus clients are running, **any additional validator will use negligible resources**.
+In other words: if your machine can run 1 validator, it can probably run 1000 too.
 
-Rocket Pool nodes are being run on devices with as little as 8GB RAM, but that will limit the clients you can use or make the clients run slower than they ideally would. Since memory is not very expensive, it makes sense to give your node a little more. An added benefit of more RAM is that the cache or your clients can be larger, which can lead to less storage space use.
 
-**Guideline:** 16GB.
+### CPU Requirements
 
-### SSD requirements
+Running a Rocket Pool nodes is not very computationally intensive (which is why they can be run on a Raspberry Pi).
+The biggest impact of the CPU is how fast your node can initially sync the state of the blockchain when you first create it (or if you ever change clients later).
+After the initial sync, the CPU is not used as heavily.
 
-This element is more important than most people expect. The execution client relies heavily on IOPS, or "operations per second". In practice this means that:
+CPU naming can be deceptive; an Intel Core i5 from 2010 is usually **less powerful** than a core i3 from 2022.
+Many community members use Intel NUC devices because of their small form factor, but an old i5 NUC may be a worse choice than a new i3.
+For this reason, we recommend using a "modern" CPU that is, at most, a few years old.
+More specifically, **for x64-based CPUs**, we recommend a CPU that supports the [BMI2](https://en.wikipedia.org/wiki/X86_Bit_manipulation_instruction_set#BMI2_(Bit_Manipulation_Instruction_Set_2)) extension - check the manufacturer's specs for your CPU to see if it is supported.
+Not all modern CPUs support this; for example, Celeron CPUs tend not to include it.
 
-- HDD drives will not work
-- SATA or external SSDs can work
+ARM-based CPUs (such as the Raspberry Pi, the Mac M1 or M2, or the Rock 5B) do not apply to the BMI2 extension above.
+
+::: tip NOTE
+If you are interested in using a NUC, you can tell how modern the NUC is by its model number.
+They are formatted as `NUC` + `generation number` + `model` + `CPU type` + `suffix`.
+For example, a `NUC11PAHi50Z` unit is a 11th generation i5 unit.
+You can see a list of NUCs [here](https://www.intel.com/content/www/us/en/products/details/nuc/kits/products.html) on the Intel website.
+
+Other mini-PCs, such as the Asus PN50 or PN51, do not follow this convention but information about which CPU is used by them should be included in their product pages.
+:::
+
+The amount of cores on a CPU is less relevant that its **number of threads**.
+We recommend a **minimum of 4 threads** for Rocket Pool node operation.
+A 2 core CPU with 4 threads will work without issue.
+It is rare to find a CPU with only 2 threads; even the Raspberry Pi has 4.
+
+**Guideline: any modern CPU with at least 4 threads.**
+
+
+### RAM Requirements
+
+Rocket Pool nodes can operate with as little as 8 GB of RAM.
+We generally recommend having slightly more to offer some headroom and full support for RAM-heavy clients such as Teku.
+An added benefit of more RAM is that you can provide a larger cache size to Execution client, which tends to slow the rate of your disk space usage.
+
+The exact type of RAM (such as DDR3 or DDR4) is not as important; generally DDR3 is fast enough to support node operation.
+
+**Guideline: at least 12 GB of RAM.**
+
+
+### SSD Requirements
+
+This element is more important than most people expect.
+The Execution client relies heavily on IOPS, or "operations per second".
+In practice, this means that:
+
+- HDD (spinning platter) drives will not work
+- SATA or external USB 3.0+ SSDs *can* work
 - NVMe SSD drives are preferred
 
-If you want to be sure your SSD is sufficient, refer to the [testing SSD performance](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#testing-the-ssd-s-performance) section of the raspberry pi guide.
+If you already have an SSD you want to use and want to be sure it has sufficient performance for node operation, refer to the [testing SSD performance](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#testing-the-ssd-s-performance) section of the Raspberry Pi guide.
 
 ::: tip NOTE
-SSD selection can be a little complexer than expected.
+SSD selection can be a complex choice!
 
-HDD drives store data on spinning disks, SSDs store space on chips (like SD cards). These chips consist of "cells" that store data. The amount of data squashed into a single cell has impact on speed. When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`. These stand for the amount of data in a cell: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1. Less data in a cell means the drive is probably faster, but more expensive.
+The method SSDs use to store data on their flash chips has a noticeable impact on speed and longevity.
+When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`.
+These stand for the amount of data contained within a single cell of the flash chip: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1.
 
-SSDs come with or without DRAM, which is a hardware element that makes accessing data on the SSD more efficient. Those with DRAM are faster but those without DRAM are cheaper.
+We recommend **TLC, MLC, or SLC** drives.
+We **do not recommend QLC drives** due to their slower performance and lower total reliability.
 
-As a rule of thumb: only drives with DRAM, NO `QLC` drives. `TLC` drives are good. The `MLC` and `SLC` are faster than you need, and far more expensive. `QLC` drives with DRAM will outperform `TLC` without, but err on the side of caution. 
+SSDs come with or without DRAM, which is a hardware element that makes accessing data on the SSD more efficient.
+Those with DRAM are faster but those without DRAM are cheaper.
+However, DRAM is quite important for providing smooth node operation.
+
+We recommend a drive with a **DRAM** cache.
+We **do not recommend DRAM-less drives**.
 :::
 
-The second consideration is drive size. At the time of writing, the `geth` execution client database size runs at about 700GB of space. This will grow steadily over time, and while you can periodically prune the database, it is likely to cross 1TB over the coming year(s). You will have peace of mind with a larger drive.
+The second consideration is drive size.
+At the time of writing, the `geth` execution client database size requires about 700GB of space after it finishes its initial sync (or after you just finished pruning it).
+This will grow steadily over time, and while you can periodically prune the database, it is likely to cross 1 TB over the coming year(s).
+You will have peace of mind with a larger drive.
 
-**Guideline:** an NVMe drive of 2TB.
+**Guideline: a 2 TB SSD that has TLC or better, with a DRAM cache. NVMe preferred.**
 
-### Common accessories
 
-Many node operators improve their setups beyond the minimum requirements. Some common additions include:
+### Common Accessories
+
+Many node operators improve their setups beyond the minimum requirements.
+Some common additions include:
 
 - SSD heatsinks to extend the drive lifespan
-- Uninterruptable power supplies in case of power outages
+- Uninterruptable power supplies (UPS) in case of power outages
 - A fallback node to have a backup in case something fails
 
-As a general rule: so long as the basics are fine, you do not need to get fancy.
+These are all convenient to have, but not required to run a Rocket Pool node.
 
-## Example setups
 
-In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves. They are examples of what people are using, not recommendations for how you should run your setup.
+## Example Setups
+
+In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves.
+They are examples of what people are using, not recommendations for how you should run your setup.
 
 
 ### Xer0's Server
