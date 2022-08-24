@@ -28,7 +28,7 @@ In other words: if your machine can run 1 validator, it can probably run 1000 to
 
 ### CPU Requirements
 
-Running a Rocket Pool nodes is not very computationally intensive (which is why they can be run on a Raspberry Pi).
+Running a Rocket Pool node is not very computationally intensive (which is why they can be run on a Raspberry Pi).
 The biggest impact of the CPU is how fast your node can initially sync the state of the blockchain when you first create it (or if you ever change clients later).
 After the initial sync, the CPU is not used as heavily.
 
