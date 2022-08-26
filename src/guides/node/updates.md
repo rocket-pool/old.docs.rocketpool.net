@@ -256,7 +256,7 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 
 For `arm64` systems, such as the Mac mini with M1:
 ```shell
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /usr/local/bin/rocketpool
+wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /opt/homebrew/bin/rocketpool
 ```
 
 Now run the install command:
