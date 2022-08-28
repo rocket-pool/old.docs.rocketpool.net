@@ -517,20 +517,20 @@ docker stop rocketpool_grafana
 rocketpool service start
 ```
 
-To test the SMTP settings, go to the **Alerting** menu and click **Notification channels**.
+To test the SMTP settings, go to the **Alerting** menu and click **Contact points**.
 
 <center>
 
-![](./images/grafana-notification-channels.png)
+![](./images/grafana-contact-points.png)
 
 </center>
 
-Click **Add channel** and select **Email** as the type. Enter an email address in the **Addresses** section and click **Test**.
+Click **New contact point** and select **Email** as the Contact point type. Enter an email address in the **Addresses** section and click **Test**.
 
 <center>
 
-![](./images/grafana-new-notification-channel.png)
+![](./images/grafana-new-contact-point.png)
 
 </center>
 
-Check to see that the test email was received.
+Check to see that the test email was received. Click **Save contact point*** when finished.
