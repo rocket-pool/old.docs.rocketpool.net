@@ -20,7 +20,7 @@ It uses the following Docker containers:
 - `rocketpool_api` - This holds the actual functionality that the Smartnode provides when you interact with it via Rocket Pool's command-line interface (CLI).
 - `rocketpool_node` - This is a background process that will periodically check for and claim RPL rewards after a reward checkpoint (if you have auto-claim enabled, more on this later), and is responsible for actually staking new validators when you create a minipool.
 - `rocketpool_watchtower` - This is used by Oracle Nodes to perform oracle-related duties. For regular node operators, this will simply stay idle.
-- `rocketpool_eth1` - This will be your Execution client, such as Geth, or a small proxy that routes ETH1 requests to a light client like Infura or Pocket.
+- `rocketpool_eth1` - This will be your Execution client.
 - `rocketpool_eth2` - This will be your Consensus beacon node client.
 - `rocketpool_validator` -  This will be your Validator client, which is responsible for your validator duties (such as attesting to blocks or proposing new blocks).
 

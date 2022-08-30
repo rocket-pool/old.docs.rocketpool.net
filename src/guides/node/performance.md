@@ -237,7 +237,7 @@ Community member `VGR` made the [rp-metrics-dashboard.com](https://www.rp-metric
 
 ![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
 
-A more minimalist tool is the [rocketscan.dev](https://rocketscan.dev/) tool made another community member.
+A more minimalist tool is the [rocketscan.io](https://rocketscan.io/) tool made another community member.
 It features detailed network and node metrics, including a timeline of your node activity.
 
 ![Rocketscan screenshot](./local/images/rocketscan.dev.png)
@@ -288,7 +288,7 @@ PUSHOVER_USER=
 PUSHOVER_TOKEN=
 NODE_ADDRESS="$(rocketpool node status | grep -Po "(?<=The node )(0x[A-Za-z0-9]{40})")"
 EXPLORER_URL=https://beaconcha.in/validators/eth1deposits?q=
-#EXPLORER_URL=https://rocketscan.dev/node/
+#EXPLORER_URL=https://rocketscan.io/node/
 #EXPLORER_URL=https://www.rp-metrics-dashboard.com/dashboard/MAINNET/
 NOTIFICATION_URL="$EXPLORER_URL$NODE_ADDRESS"
 

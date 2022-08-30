@@ -10,7 +10,7 @@ Before upgrading to v1.5.0 and higher of the Smartnode, please go through the fo
 
 ### Switch to a Full Execution Client
 
-The Merge requires you to run your own Execution client, so you won't be able to use light clients like Infura or Pocket anymore.
+The Merge requires you to run your own Execution client, so you won't be able to use remote providers like Infura or Pocket anymore.
 v1.5.0 won't have them anymore, and won't let you start the stack until you select a full Execution client.
 
 Because of this change, you should switch to a full client while you're still on v1.4, let it sync to completion, and then upgrade to v1.5.
@@ -56,7 +56,7 @@ If you didn't, it will make your [fee distributor contract](./whats-new.md#fee-r
 ### MEV-Boost
 
 [MEV-boost](https://boost.flashbots.net/) is the system Flashbots provides to give MEV rewards to Proof-of-Stake validators after The Merge.
-Rocket Pool has MEV-Boost built into the Smartnode and automatically configures your node to use it, so your proposals get the maximum amount of rewards. 
+Rocket Pool has MEV-Boost built into the Smartnode and automatically configures your node to use it, so your proposals get the maximum amount of rewards.
 
 
 ## Things You Should Do After Upgrading
@@ -76,7 +76,7 @@ Consider taking the following steps:
 
 ### Set Up a Fallback Node
 
-Because The Merge is not compatible with light clients like Infura and Pocket, you'll lose the ability to use them as fallback Execution clients when your primary goes offline.
+Because The Merge is not compatible with remote providers like Infura and Pocket, you'll lose the ability to use them as fallback Execution clients when your primary goes offline.
 
 The Smartnode still has the ability to provide a fallback Execution client (and now a fallback Consensus client as well), but you will now need to use Execution and Consensus clients that you control.
 
@@ -143,7 +143,7 @@ rocketpool service stop
     :::
     ::: tab Linux arm64
     ```
-    wget https://github.com/rocket-pool/smartnode-install/releases/download/v1.4.3/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool    
+    wget https://github.com/rocket-pool/smartnode-install/releases/download/v1.4.3/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
     ```
     :::
     ::: tab Mac x64

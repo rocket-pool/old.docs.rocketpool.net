@@ -627,7 +627,7 @@ Total cost: 0.0005 to 0.0007 ETH
 Are you sure you want to set your timezone? [y/n]
 ```
 
-This shows that regardless of what max fee the network recoomends, it will use your custom max fee of 10 gwei (and priority fee if you specify it) instead when submitting this transaction.
+This shows that regardless of what max fee the network recommends, it will use your custom max fee of 10 gwei (and priority fee if you specify it) instead when submitting this transaction.
 
 ::: warning NOTE
 If you set a manual max fee, we strongly encourage you to use a third-party gas price oracle such as [EtherChain](https://etherchain.org/tools/gasnow) to determine if that fee is high enough for the current network conditions before submitting the transaction.

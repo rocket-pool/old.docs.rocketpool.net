@@ -10,7 +10,7 @@ Before upgrading to v1.5.0 and higher of the Smartnode, please go through the fo
 
 ### Switch to a Full Execution Client
 
-The Merge requires you to run your own Execution client, so you won't be able to use light clients like Infura or Pocket anymore.
+The Merge requires you to run your own Execution client, so you won't be able to use remote providers like Infura or Pocket anymore.
 
 Because of this change, if you're currently using a light Execution client, you should switch to a full client while you're still on v1.4, let it sync to completion, and then upgrade to v1.5.
 
@@ -254,7 +254,7 @@ As a reminder, `rocketpool node status` will show you the correct fee recipient 
 
 **Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) carefully to understand the conditions and expectations around the fee recipient.**
 :::::
-:::::: 
+::::::
 
 
 ### Set Up MEV-Boost
@@ -275,12 +275,12 @@ Flashbots will provide instructions you can follow at that time, and we will lin
 Once we make the announcement that MEV-boost must be enabled by all node operators, you must ensure you have it properly installed and configured with your Beacon Node!
 
 Not doing so will result in your minipool being [penalized](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md).
-::: 
+:::
 
 
 ### Set Up a Fallback Node
 
-Because The Merge is not compatible with light clients like Infura and Pocket, you'll lose the ability to use them as fallback Execution clients when your primary goes offline.
+Because The Merge is not compatible with remote providers like Infura and Pocket, you'll lose the ability to use them as fallback Execution clients when your primary goes offline.
 
 The Smartnode still has the ability to provide a fallback Execution client (and now a fallback Consensus client as well), but you will now need to use Execution and Consensus clients that you control.
 

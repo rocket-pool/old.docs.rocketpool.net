@@ -45,11 +45,13 @@ Some manual steps will be required during installation.
 For `arm64` systems, the Smartnode installer only natively supports Debian and Debian-based distros such as Ubuntu.
 For other distros, manual steps will be required during installation.
 
+
 ### Hardware Requirements
 
 The hardware requirements for a node depend largely on which Execution and Consensus clients you decide to run.
 As shown in [the hardware guide](./hardware.md), there is a wide range of possible configurations that work well.
 However, for the sake of completeness, we have assembled the following hardware profiles:
+
 
 #### Low-Power Full Node
 - CPU: Quad-core 1.6+ GHz
