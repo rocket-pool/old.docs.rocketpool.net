@@ -36,7 +36,7 @@ The easiest way to provide this is with a **fallback node**.
 If you [configured a fall back node](./fallback.md) using `rocketpool service config` already, then the Smartnode will automatically switch over to it when your Geth contianer goes down for maintenance for you.
 It will also inform your Consensus (ETH2) client to use the fallback as well.
 
-::: danger WARNING 
+::: danger WARNING
 If you don't have a fallback node configured, your Smartnode will stop working until Geth finishes pruning.
 Your Consensus (ETH2) client will still attest, but it will fail any block proposals it makes.
 :::

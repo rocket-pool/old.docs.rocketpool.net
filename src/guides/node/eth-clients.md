@@ -82,7 +82,7 @@ Besu's most exciting features is its use of [Bonsai Tries](https://consensys.net
 1. Besu does *not* need to be pruned at all; it is effectively maintenance-free in that respect
 2. Besu is able to revisit any past block in the blockchain, though it does this by rewinding each block so reaching blocks from long ago may take some time.
 
-Besu currently runs best with **16 GB of RAM**, tho running with 8GB is possible.
+Besu currently recommends at least **16 GB of RAM**, though it is possible to run successfully with 8 GB.
 
 ::: warning NOTE
 Besu is a relatively new addition to the Smartnode.
@@ -109,13 +109,13 @@ Users may want to choose a different client while these issues are resolved.
 :::
 
 
-## Execution Light Clients (ETH1)
+## Remote Execution Clients (ETH1)
 
 ::: danger
-Light Clients will no longer be supported after the merge, as a result, they have been removed from the Rocketpool Smart Node as of 1.5.0.  
+Remote Clients will no longer be supported after the Merge.
+As a result, they have been removed from the Rocketpool Smart Node as of v1.5.0.  
 You will need to run a **full** Execution client.
 :::
-
 
 
 ### Client Comparison Table
@@ -123,9 +123,8 @@ You will need to run a **full** Execution client.
 | Client     | Type  | CPU Usage | Minimum RAM Usage | Sync Time |
 | ---------- | ----- | --------- | ----------------- | --------- |
 | Geth       | Full  | Moderate  | 4 GB              | Moderate  |
-| Besu       | Full  | Moderate  | 8 GB              | Moderate  |
+| Besu       | Full  | Moderate  | 8 GB              | Slow      |
 | Nethermind | Full  | Moderate  | 16 GB             | Fast      |
-
 
 
 ## Consensus Clients

@@ -107,9 +107,9 @@ As the Smartnode cannot manage external Execution clients, you will still be res
 :::
 
 ::: tip NOTE
-The merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
+The Merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
 
-After The Merge, the network will no longer use Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
+After The Merge, the network will no longer use Proof-of-Work; instead, validators are now responsible for creating and proposing blocks on both the Execution Layer and the Beacon Chain.
 
 Below is a brief summary of the changes to client behavior as part of The Merge:
 
@@ -131,8 +131,6 @@ Below is a brief summary of the changes to client behavior as part of The Merge:
 
 
 ### Execution Client Setup
-
-
 
 Choose which mode you'd like to use for managing your Execution client and follow the steps in the corresponding tab below:
 
@@ -169,14 +167,11 @@ You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your
 
 :::::::
 
-
 And with that, your Execution client is all set!
-
-
 
 ::::: tab External
 
-For an externally managed fallback Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
+For an externally managed Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
 
 <center>
 
@@ -188,9 +183,8 @@ The Smartnode will use the HTTP URL to communicate with it and perform blockchai
 **If you don't already have your client's API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
 Instructions on this vary from client to client; consult your client's documentation to learn how to set up the HTTP RPC endpoint.
 
-The Websocket URL is only relevant if you are using **Nimbus** as your Consensus client.
-If you are using a different client, you can leave it blank.
-Otherwise, enter it here.
+The Websocket URL is only relevant if you need it for your own usage; the Smartnode does not use it.
+You can leave it blank if you do not need it.
 
 ::: warning NOTE
 Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
@@ -200,7 +194,6 @@ You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your
 When you're happy with your fallback Execution client choices, proceed to the next step.
 
 ::::::::
-
 
 
 ### Consensus Client Setup
@@ -702,11 +695,14 @@ You can then paste this in the terminal during `rocketpool service config` when 
 
 After that, your Beacon node will be configured to connect to Infura when it first starts up and instantly pull down the latest state of the chain!
 
+
 ### Fallback Node 
 
-Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it). In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
+Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it).
+In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
 
 [To learn more about fall back nodes see this section](./fallback.md)
+
 
 ### Metrics Configuration
 
@@ -914,11 +910,17 @@ Press `n` and `Enter` if you have other things you want to do before restarting 
 In either case, your configuration is done!
 
 ::: tip NOTE
-You may see an error message like the one below,  this is not a problem and happens sometime.  You can ignore it, it is a timing thing more than anything and not an actual problem.
+You may see an error message like the one below:
 
-`2022/08/13 13:49:41 Error piping stdout: read |0: file already closed`
+```
+2022/08/13 13:49:41 Error piping stdout: read |0: file already closed
+```
 
+This is not actually an error, it's simply a cosmetic glitch.
+You can safely ignore it.
 :::
+
+
 ## Configuring via the Command Line
 
 If you use the Smartnode in a headless environment where you can't interact with the Terminal UI, you can configure your node via the command line instead.

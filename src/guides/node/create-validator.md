@@ -116,7 +116,7 @@ On average, it will take a few seconds to find a 6-character prefix, a few minut
 The salt that gets generated is specific to the following variables:
 - The network you're using (either the Prater Testnet or Mainnet)
 - The node address
-- The deposit type 16 ETH
+- The deposit type (16 ETH is currently the only valid option)
 - The salt
 
 If you change any of those variables, the minipool address for a given salt will change as well.
@@ -157,7 +157,7 @@ In this case, you may want to do the deposit anyway to save time and begin valid
 If you **understand these risks** and **believe this is the case**, the CLI will let you go ahead with a deposit anyway.
 :::
 
-You will be prompted to confirm the typical gas costs;
+You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts:
 
 ```
 Your eth2 client is on the correct network.

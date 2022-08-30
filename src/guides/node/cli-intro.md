@@ -65,7 +65,7 @@ COPYRIGHT:
 ## Service Commands 
 The service group involves managing the various services the smart node manages for you. 
 
-Here is what the rocketpool service help output will show:
+Here is what the `rocketpool service help` output will show:
 
 ```
 NAME:
@@ -380,7 +380,7 @@ If you accept, your ETH deposit will be processed and you will create a new mini
 
 ### `claim-rewards`
 
-When your node detects a new rewards checkpoint, it will automatically download the JSON file for that interval.
+When your node detects a new rewards checkpoint, it will automatically download the rewards tree file with the information for that interval (if you're using the default of Download Mode - see below for information on generating your own trees instead of downloading them).
 You can then review your rewards using the following command:
 
 ```
@@ -405,7 +405,13 @@ You can also specify an amount you want to restake during this claim:
 
 </center>
 
-This will let you compound your RPL rewards in one transaction, using substantially less gas than you currently need to use today.
+This will let you compound your RPL rewards in one transaction, using substantially less gas than you currently needed to use with the legacy claim system.
+
+::: danger WARNING
+If you are below 10% RPL collateral *at the time of the snapshot*, you will not be eligible for rewards for that snapshot.
+Unlike the current system, where you can simply "top off" before you claim in order to become eligible again, this will be locked in that snapshot forever and **you will never receive rewards for that period**.
+You **must** be above 10% collateral at the time of a snapshot in order to receive rewards for that period.
+:::
 
 ::: tip NOTE
 If you prefer to build the rewards checkpoint manually instead of downloading the one created by the Oracle DAO, you can change this setting from `Download` to `Generate` in the TUI:
@@ -416,18 +422,10 @@ If you prefer to build the rewards checkpoint manually instead of downloading th
 
 </center>
 
-As the tip implies, you will need access to an archive node to do this.
+As the tip implies, you will need access to an Execution client archive node to do this.
 If your local Execution client is not an archive node, you can specify a separate one (such as Infura or Alchemy) in the `Archive-Mode EC URL` box below it.
 This URL will only be used when generating Merkle trees; it will not be used for validation duties.
-::: 
-
-::: danger WARNING
-If you are below 10% RPL collateral *at the time of the snapshot*, you will not be eligible for rewards for that snapshot.
-Unlike the current system, where you can simply "top off" before you claim in order to become eligible again, this will be locked in that snapshot forever and **you will never receive rewards for that period**.
-You **must** be above 10% collateral at the time of a snapshot in order to receive rewards for that period.
 :::
-
-
 
 
 ### `join-smoothing-pool`
@@ -437,10 +435,19 @@ rocketpool node join-smoothing-pool
 
 This will record you as opted-in in the Rocket Pool contracts and automatically change your Validator Client's `fee recipient` from your node's distributor contract to the Smoothing Pool contract.
 
+Note that once you opt in, there is a **28 day cooldown** (one full rewards interval length) until you can opt out.
+
+
 ### `leave-smoothing-pool`
 ```
 rocketpool node leave-smoothing-pool
 ```
+
+This will opt you out of the Smoothing Pool if you're currently opted in, and have waited at least 28 days after opting in.
+Once **the next epoch after the current epoch** is finalized, it will automatically change your node's `fee recipient` from the Smoothing Pool back to your node's distributor contract.
+This is to ensure you don't get penalized for front-running the exit process when you see that you have a proposal coming up.
+
+
 ### `initialize-fee-distributor`
 To initialize your node's distributor, simply run this new command:
 
@@ -451,6 +458,7 @@ rocketpool node initialize-fee-distributor
 ::: warning NOTE
 After the Redstone update, you must call this function before you can create any new minipools with `rocketpool node deposit`.
 :::
+
 
 ### `distribute-fees`
 When your distributor has been initialized, you can claim and distribute its entire balance using the following command:

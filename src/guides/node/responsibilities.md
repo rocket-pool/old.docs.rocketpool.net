@@ -2,14 +2,14 @@
 
 ## How Ethereum Staking Works
 
-As a reminder, staking in Proof Of Stake (ETH2) is done via **validators**.
+As a reminder, staking in Proof of Stake (ETH2) is done via **validators**.
 A validator is a single ETH2 address, to which 32 ETH was deposited, which is now responsible for helping maintain the consistency and security of the Beacon (ETH2) chain.
 They do this by listening for transactions and new block proposals, and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
 Occasionally, they get to propose new blocks themselves.
 
 Validators are assigned attestations and block proposals **on a schedule**.
 This is very different from the proof of work system, where everyone is constantly trying to race each other and come up with the next block before everyone else.
-This means that unlike proof of work where you aren't guaranteed to earn a block reward unless you find the next block, proof of stake validators are guaranteed to have slow, steady income as long as they perform their duties.
+This means that unlike Proof of Work where you aren't guaranteed to earn a block reward unless you find the next block, Proof of Stake validators are guaranteed to have slow, steady income as long as they perform their duties.
 If a validator is offline and misses an attestation or a block proposal, it will be **slightly penalized**.
 The penalties are quite small though; as a rule of thumb, if a validator is offline for X hours, it will make all of its lost ETH back after the same X hours of being back online.
 

@@ -190,13 +190,14 @@ It also features a push notification service that includes some useful alerts li
 
 Note that the app has a free version, and paid options with convenience features like homescreen widgets.
 
-### Renaming your validators on Beaconcha.in
+### Renaming your Validators on Beaconcha.in
 
 The Beaconcha.in website has a feature that allows users to rename their validators, making them easier to identify/search.
 
 To be able to use this feature you need to sign a message using your node wallet's private key, in order to prove you're the person who controls that validator.
 
-The smartnode v1.5.1 includes the ability to sign messages with your node wallets's private key by using the command `rocketpool node sign-message`, then providing the message that you want to sign. It must contain the term 'beaconcha.in' to be used to rename your validators.
+The Smartnode v1.5.1 includes the ability to sign messages with your node wallets's private key by using the command `rocketpool node sign-message`, then providing the message that you want to sign.
+It must contain the term 'beaconcha.in' to be used to rename your validators.
 
 ![](../node/images/sign-message.png)
 
@@ -204,9 +205,11 @@ Open your validator page on Beaconcha.in and click on the `Edit validator name` 
 
 ![](../node/images/edit-validator-name.png)
 
-Copy the result from the sign-message command and paste it in the "Signature" field. Fill your desired nickname and click the `Save changes`button.
+Copy the result from the sign-message command and paste it in the "Signature" field.
+Fill your desired nickname and click the `Save changes`button.
 
 ![](../node/images/paste-signed-message.png)
+
 
 ### Uptimerobot: Port-scanning for Uptime
 

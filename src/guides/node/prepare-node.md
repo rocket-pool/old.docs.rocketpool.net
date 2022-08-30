@@ -153,25 +153,43 @@ Once this is done, you will **no longer be able to change your withdrawal addres
 To change it, you will need to send a signed transaction from your **active** withdrawal address (the one you just switched to).
 The Rocket Pool website has a function to help you do this.
 
-## Setting your Voting Delegate address
-To get involved in Rocket Pool governance you will need to set your voting address from your node. This is a one-time action that delegates voting to another address so they can vote on behalf of your node.
+
+## Setting your Voting Delegate Address
+
+Rocket Pool's governance process uses [Snapshot](https://snapshot.org/#/about) as the platform for hosting governance proposals.
+Voting on them is done in-browser, via a wallet like MetaMask or a bridge like WalletConnect.
+Node operators can vote on these proposals using the RPL they have staked (their **effective stake**).
+
+Since your node's wallet should **never leave your node** (e.g. you should **never import your mnemonic into MetaMask or another wallet**), we have set up a system that allows you to **delegate** your node's voting power to a separate address.
+This could be another wallet (such as a MetaMask account) that you control, or you could delegate your voting power to [one of the Node Operators that have elected to be official delegates](https://delegates.rocketpool.net/).
+
+::: tip NOTE
+If you are an **Allnodes user**, you can use your node account as the voting address and can ignore the following guides.
+They are intended for normal Smartnode operators.
+:::
+
+Setting up a voting delegate address that can vote on behalf of your node is a one-time action.
+Simply run the following command:
+
 ```
 $ rocketpool node set-voting-delegate <address>
 ```
-The address you use, depends on whether you are voting yourself or you are delegating your vote to an official delegate. If you are voting yourself, you will set this address to a browser-based Ethereum address (Metamask or hardware wallet). If you are delegating to an official delegate then you will follow the instructions below.
 
-:::: danger WARNING 
-**DO NOT ENTER YOUR NODE ACCOUNT/MNEMONIC INTO METAMASK**. 
-The voting delegate feature is to support security of your node.
+The address you use depends on whether you are voting yourself or you are delegating your vote to an official delegate.
+If you are voting yourself, use the address of the wallet you want to use in-browser (e.g. your MetaMask account, your hardware wallet, your Argent wallet, etc.).
+
+:::: danger WARNING
+As a reminder, **DO NOT enter your node's wallet or mnemonic into MetaMask or any other wallet!**
+The voting delegate feature is specifically designed to ensure you have no need to do this, which helps maintain the security of your node!
 ::::
-
-If you are an Allnodes user you can use your node account as the voting address.
 
 At anytime, you can reassign your voting power by setting the voting address from your node.
 
-One limitation of Snapshot is that you must have delegated before the proposal you would like to vote on is created. So we suggest that you set up your voting address or delegate early so that you don’t miss any proposal votes.
+One limitation of Snapshot is that **you must have delegated before the proposal you would like to vote on is created**.
+We suggest that you set up your voting address or delegate early so that you don’t miss any proposal votes.
 
 To learn more about how to participate in RocketPool governance, [please check out this medium article](https://medium.com/rocket-pool/rocket-pool-protocol-dao-governance-phase-0-4b8ec7bfe07e)
+
 
 ## Understanding the Redstone Rewards System
 
@@ -200,7 +218,7 @@ This new system has the following features:
 - You can **restake some (or all) of your RPL rewards** as part of the claiming transaction, which further trims down gas requirements compared to today.
 - Currently, **all of your claims must be on Mainnet** but we have the infrastructure in place to build the ability to claim on Layer 2 networks at a later date.
 
-When your node detects a new rewards checkpoint, it will automatically download the JSON file for that interval.
+When your node detects a new rewards checkpoint, it will automatically download the JSON file for that interval unless you opt into manual tree generation (see below).
 You can then review your rewards using the following command:
 
 ```
@@ -242,14 +260,14 @@ If your local Execution client is not an archive node, you can specify a separat
 This URL will only be used when generating Merkle trees; it will not be used for validation duties.
 ::: 
 
-To read more details about the new rewards system check out [this medium article](https://medium.com/rocket-pool/the-merge-0x02-mev-and-the-future-of-the-protocol-c7451337ec40)
-
+To read more details about the new rewards system, please visit [this medium article](https://medium.com/rocket-pool/the-merge-0x02-mev-and-the-future-of-the-protocol-c7451337ec40)
 
 ::: danger WARNING
 If you are below 10% RPL collateral *at the time of the snapshot*, you will not be eligible for rewards for that snapshot.
 Unlike the current system, where you can simply "top off" before you claim in order to become eligible again, this will be locked in that snapshot forever and **you will never receive rewards for that period**.
 You **must** be above 10% collateral at the time of a snapshot in order to receive rewards for that period.
 :::
+
 
 ### Fee Recipients and Your Distributor
 
@@ -319,9 +337,9 @@ rocketpool node distribute-fees
 
 This will send your share of the rewards to your **withdrawal address**.
 
+
 ### Smoothing Pool
 
-One final exciting new feature of the Redstone update is the **Smoothing Pool**.
 The Smoothing Pool is **an opt-in feature** that will collectively pool the priority fees of every member opted into it.
 During a rewards checkpoint, the total ETH balance of the pool is divided into a pool staker portion and a node operator portion.
 All of the rewards in the node operator portion are **distributed fairly to every member of the pool**.
@@ -364,26 +382,6 @@ To leave the pool, run this command:
 ```
 rocketpool node leave-smoothing-pool
 ```
-
-
-### The Penalty System
-
-To ensure that node operators don't "cheat" by manually modifying the fee recipient used in their Validator Client, Rocket Pool employs a penalty system.
-
-The Oracle DAO constantly monitors each block produced by Rocket Pool node operators.
-Any block that has a fee recipient other than one of the following addresses is considered to be **invalid**:
-
-- The rETH address
-- The Smoothing Pool address
-- The node's fee distributor contract (if opted out of the Smoothing Pool)
-
-A minipool that proposed a block with an **invalid** fee recipient will be issued **a strike**.
-On the third strike, the minipool will begin receiving **infractions** - each infraction will dock **10% of its total Beacon Chain balance, including ETH earnings** and send them to the rETH pool stakers upon withdrawing funds from the minipool.
-
-Infractions are at a **minipool** level, not a **node** level.
-
-The Smartnode software is designed to ensure honest users will never get penalized, even if it must take the Validator Client offline to do so.
-If this happens, you will stop attesting and will see error messages in your log files about why the Smartnode can't correctly set your fee recipient.
 
 
 ## Swapping RPL v1 for RPL v2

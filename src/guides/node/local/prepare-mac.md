@@ -58,7 +58,7 @@ However, for the sake of completeness, we have assembled the following hardware 
 - SSD: 2 TB, 15k Read IOPS, 5k Write IOPS**
 - Network: 10+ Mbps, 1.5+ TB monthly data cap
 - Execution Client: Geth (in low-cache mode), Besu 
-- Consensus Client: Nimbus, Prysm
+- Consensus Client: Nimbus, Lighthouse, Prysm
 
 
 #### Typical Full Node

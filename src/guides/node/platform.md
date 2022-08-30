@@ -8,12 +8,7 @@ Alright! So you've decided to try your hand at running a Rocket Pool node. The f
 A **full node** is one that runs both an Execution (ETH1) Client and Consensus (ETH2) Client along with the Rocket Pool stack. This is the best option in terms of decentralization, self-reliance, and consistency. It also has the highest requirements.
 
 ::: warning NOTE
-As of Rocket Pool 1.5, and post Merge. Light or public clients such as Infura, Pocket, or Alchemy are no longer supported
-:::
-
-::: warning NOTE
-Use of light clients will be deprecated in 1.5.0 and will *not* be supported after The Merge!
-You will need to run a full node in order to validate, so we strongly recommend you set one up now instead of relying on light clients.
+As of Smartnode v1.5.0, remote clients such as Infura, Pocket, or Alchemy are no longer supported because they are not compatible with validation duties after The Merge.
 :::
 
 Here is a simple breakdown of what is required to run a full Rocket Pool node well:
@@ -58,7 +53,7 @@ Disadvantages:
 - Can be challenging if you're not experienced with computer maintenance
 - Vulnerable to theft
 
-If the advantages sound like they out weigh the disadvantages for you, then take a look at our [Local Node Operator's Guide](local/hardware.html).
+If the advantages sound like they outweigh the disadvantages for you, then take a look at our [Local Node Operator's Guide](local/hardware.html).
 
 
 ## Running a VPS on the Cloud
