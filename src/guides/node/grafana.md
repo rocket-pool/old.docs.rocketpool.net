@@ -525,7 +525,8 @@ To test the SMTP settings, go to the **Alerting** menu and click **Contact point
 
 </center>
 
-Click **New contact point** and select **Email** as the Contact point type. Enter an email address in the **Addresses** section and click **Test**.
+Click **New contact point** and select **Email** as the Contact point type.
+Enter an email address in the **Addresses** section and click **Test**.
 
 <center>
 
@@ -533,4 +534,5 @@ Click **New contact point** and select **Email** as the Contact point type. Ente
 
 </center>
 
-Check to see that the test email was received. Click **Save contact point*** when finished.
+Check to see that the test email was received.
+Click **Save contact point*** when finished.
