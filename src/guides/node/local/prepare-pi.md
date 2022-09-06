@@ -4,10 +4,10 @@ This guide will walk you through how run a Rocket Pool node using a Raspberry Pi
 While this is not typically recommended in most staking guides, we recognize that it is attractive because it is a much more affordable option than standing up an entire PC.
 To that end, we've worked hard to tweak and optimize a whole host of settings and have determined a configuration that seems to work well.
 
-This setup will run **a full Execution (ETH1) node** and **a full Consensus (ETH2) node** on the Pi, making your system contribute to the health of the Etherum network while simultaneously acting as a Rocket Pool node operator.
+This setup will run **a full Execution node** and **a full Consensus node** on the Pi, making your system contribute to the health of the Ethereum network while simultaneously acting as a Rocket Pool node operator.
 
 ::: warning NOTE
-This setup works well with the current implementations of Execution (ETH1) and Consensus (ETH2).
+This setup works well with the current implementations of Execution and Consensus.
 It's possible that after the merge of the Execution (ETH1) chain and the beacon chain, a full node may be more computationally demanding.
 While we have been advised that this is unlikely, there is a chance that the Raspberry Pi may not be able to run a full node post-merge.
 **Please factor this into your decision before settling on it as a node platform.**
@@ -50,7 +50,7 @@ You can get a lot of this stuff bundled together for convenience - for example, 
 However, you might be able to get it all cheaper if you get the parts separately (and if you have the equipment, you can [3D print your own Pi case](https://www.thingiverse.com/thing:3793664).)
 
 Other components you'll need:
-- A **USB 3.0+ Solid State Drive**. The general recommendation is for a **2 TB drive**, but if it isn't in your budget, a **1 TB drive** is acceptable for now.
+- A **USB 3.0+ Solid State Drive**. The general recommendation is for a **2 TB drive**.
   - The [Samsung T5](https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA2T0B/dp/B073H4GPLQ) is an excellent example of one that is known to work well.
   - :warning: Using a SATA SSD with a SATA-to-USB adapter is **not recommended** because of [problems like this](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=245931).
     If you go this route, we've included a performance test you can use to check if it will work or not in the [Testing the SSD's Performance](#testing-the-ssd-s-performance) section.
@@ -112,7 +112,7 @@ Each router is different, so you will need to consult your router's documentatio
 ## Mounting the SSD
 
 As you may have gathered, after following the above installation instructions, the core OS will be running off of the microSD card.
-That's not nearly large enough or fast enough to hold all of the Execution (ETH1) and Consensus (ETH2) blockchain data, which is where the SSD comes in.
+That's not nearly large enough or fast enough to hold all of the Execution and Consensus blockchain data, which is where the SSD comes in.
 To use it, we have to set it up with a file system and mount it to the Pi.
 
 

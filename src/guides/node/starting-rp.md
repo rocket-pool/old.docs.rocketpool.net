@@ -159,11 +159,12 @@ The output will look like this:
 ```
 Your Smartnode is currently using the Ethereum Mainnet.
 
-Rocket Pool client version: 1.0.0-pre
-Rocket Pool service version: 1.0.0-pre
-Selected Eth 1.0 client: Geth (ethereum/client-go:v1.10.8)
-Selected Eth 2.0 client: Nimbus (statusim/nimbus-eth2:multiarch-v1.4.2)
-
+Rocket Pool client version: 1.5.0
+Rocket Pool service version: 1.5.0
+Selected Eth 1.0 client: Geth (Locally managed)
+        Image: ethereum/client-go:v1.10.21
+Selected Eth 2.0 client: Lighthouse (Locally managed)
+        Image: sigp/lighthouse:v2.5.1
 ```
 
 The first line will tell you if your Smartnode is configured for the Ethereum mainnet or for the Prater testnet.
@@ -195,13 +196,16 @@ docker ps
 The results should look like this:
 
 ```
-CONTAINER ID   IMAGE                               COMMAND                  CREATED       STATUS         PORTS                                                                                                         NAMES
-a3c22f54eff0   rocketpool/smartnode:v1.0.0-rc3     "/go/bin/rocketpool …"   2 hours ago   Up 2 minutes                                                                                                                 rocketpool_node
-0d5818868ef6   statusim/nimbus-eth2:amd64-v1.3.0   "sh /setup/start-val…"   2 hours ago   Up 2 minutes                                                                                                                 rocketpool_validator
-88bea525fa89   rocketpool/smartnode:v1.0.0-rc3     "/go/bin/rocketpool …"   2 hours ago   Up 2 minutes                                                                                                                 rocketpool_watchtower
-4dfc7a2e939b   statusim/nimbus-eth2:amd64-v1.3.0   "sh /setup/start-bea…"   2 hours ago   Up 2 minutes   0.0.0.0:9001->9001/tcp, 0.0.0.0:9001->9001/udp, :::9001->9001/tcp, :::9001->9001/udp                          rocketpool_eth2
-62314e5a0ecf   rocketpool/smartnode:v1.0.0-rc3     "/bin/sleep infinity"    2 hours ago   Up 2 minutes                                                                                                                 rocketpool_api
-ac629c08c896   ethereum/client-go:v1.10.3          "sh /setup/start-nod…"   2 hours ago   Up 2 minutes   8545-8546/tcp, 0.0.0.0:30303->30303/tcp, 0.0.0.0:30303->30303/udp, :::30303->30303/tcp, :::30303->30303/udp   rocketpool_eth1
+CONTAINER ID   IMAGE                         COMMAND                  CREATED       STATUS      PORTS                                                                                                         NAMES
+4c1de08a352b   prom/prometheus:v2.37.0       "/bin/prometheus --w…"   9 days ago    Up 9 days   9090/tcp                                                                                                      rocketpool_prometheus
+56940decdd1f   sigp/lighthouse:v2.5.1        "sh /setup/start-bn.…"   9 days ago    Up 9 days   0.0.0.0:9001->9001/tcp, 0.0.0.0:9001->9001/udp, :::9001->9001/tcp, :::9001->9001/udp                          rocketpool_eth2
+bd061e632535   grafana/grafana:8.5.9         "/run.sh"                9 days ago    Up 9 days   3000/tcp, 0.0.0.0:3100->3100/tcp, :::3100->3100/tcp                                                           rocketpool_grafana
+5c4db92762fb   ethereum/client-go:v1.10.21   "sh /setup/start-ec.…"   9 days ago    Up 9 days   8545-8546/tcp, 0.0.0.0:30303->30303/tcp, 0.0.0.0:30303->30303/udp, :::30303->30303/tcp, :::30303->30303/udp   rocketpool_eth1
+e20c560861fc   rocketpool/smartnode:v1.5.0   "/bin/sleep infinity"    9 days ago    Up 9 days                                                                                                                 rocketpool_api
+4cf8d364fb90   rocketpool/smartnode:v1.5.0   "/go/bin/rocketpool …"   9 days ago    Up 9 days                                                                                                                 rocketpool_watchtower
+9eb944c29997   rocketpool/smartnode:v1.5.0   "/go/bin/rocketpool …"   9 days ago    Up 9 days                                                                                                                 rocketpool_node
+2ca5d3dcb471   sigp/lighthouse:v2.5.1        "sh /setup/start-vc.…"   9 days ago    Up 9 days                                                                                                                 rocketpool_validator
+dedc577fe361   prom/node-exporter:v1.3.1     "/bin/node_exporter …"   2 weeks ago   Up 9 days                                                                                                                 rocketpool_exporter
 ```
 
 The key thing to check is the `STATUS` column.

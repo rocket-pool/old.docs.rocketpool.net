@@ -8,7 +8,7 @@ It will be updated shortly.
 
 Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
-The terms ETH1/ETH2 have been deprecated; the proper names are now Execution Clients (ETH1) and Consensus Clients (ETH2).
+The terms ETH1/ETH2 have been deprecated.
 The chains will be referred to as the **Execution Layer (ETH1)** and the **Beacon Chain or Consensus Layer (ETH2)** in the rest of these guides.
 
 If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./install-modes.md#the-hybrid-configuration-with-external-clients) section.
@@ -17,7 +17,7 @@ Otherwise, read on to learn more about your choices for Execution and Consensus 
 
 ::: warning NOTE
 
-As of May 2022, the distribution of clients on the Beacon Chain looks roughly like this:
+As of August 2022, the distribution of clients on the Beacon Chain looks roughly like this:
 
 <center>
 
@@ -45,14 +45,9 @@ For users that have a specific client they'd like to use in mind, we provide the
 The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
-## Execution Clients (ETH1)
+## Execution Clients
 
 Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, and **Nethermind**.
-
-::: warning
-Remote providers (**Infura** and **Pocket**) will not be usable after the Ethereum Merge and are now deprecated.
-You **should not** use them for new installations.
-:::
 
 Running an Execution Client involves storing a copy of the Execution layer blockchain on your machine.
 It interacts via peer-to-peer communications with other EC nodes to record and verify new blocks and transactions.
@@ -87,7 +82,7 @@ Besu's most exciting features is its use of [Bonsai Tries](https://consensys.net
 1. Besu does *not* need to be pruned at all; it is effectively maintenance-free in that respect
 2. Besu is able to revisit any past block in the blockchain, though it does this by rewinding each block so reaching blocks from long ago may take some time.
 
-Besu currently runs best with **at least 16 GB of RAM**, though more is preferable.
+Besu currently recommends at least **16 GB of RAM**, though it is possible to run successfully with 8 GB.
 
 ::: warning NOTE
 Besu is a relatively new addition to the Smartnode.
@@ -109,52 +104,17 @@ However, Nethermind's online pruning process is quite resource intensive so user
 Nethermind requires **at least 16GB of RAM**, though more is preferable.
 
 ::: warning
-As of Smartnode v1.4.1, we have seen reports of memory leaks using Nethermind v1.13.1 which cause it to gradually consume all of the node's available RAM until it crashes.
+As of Smartnode v1.5.0, we have seen reports of memory leaks using Nethermind v1.13.1 which cause it to gradually consume all of the node's available RAM until it crashes.
 Users may want to choose a different client while these issues are resolved.
 :::
 
 
-## Execution Remote Providers (ETH1)
+## Remote Execution Clients (ETH1)
 
 ::: danger
-Remote providers are **deprecated**; they will not work as an Execution client after the Merge.
+Remote Clients will no longer be supported after the Merge.
+As a result, they have been removed from the Rocketpool Smart Node as of v1.5.0.  
 You will need to run a **full** Execution client.
-:::
-
-
-### Infura
-
-[Infura](https://infura.io/) is a web service that provides instant access over HTTPS and WebSockets to the Ethereum and IPFS networks.
-It is a **remote provider**, meaning that it can be interacted with just like a local ETH1 node for information about the chain's state or to submit transactions; however, it doesn't require a full node on your local machine.
-Instead, Infura essentially hosts a full node and gives you remote access to it.
-This convenience comes at a cost: using a remote provider does not contribute to the decentralization of Ethereum, and instead adds a centralized component (as you are now depending on it as an external service to be live _and_ to never be compromised or lie to your validator).
-
-Infura has several pricing tiers, including a free tier for low amounts of usage.
-Rocket Pool may fit into the free tier, depending on what you do with your node.
-Because of this restriction, it is possible to exceed the limits of the free tier, which will prevent Rocket Pool from working correctly.
-We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
-
-::: warning
-If you choose a remote provider, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
-:::
-
-
-### Pocket
-
-[Pocket](https://www.pokt.network/) is a network of thousands of independent nodes that service requests for a variety of blockchains, including Ethereum.
-Like Infura, Pocket is a **remote provider**.
-It is constructed from routers, relays and nodes that combine to listen for incoming blockchain requests, execute them on a node for the blockchain of choice, and transmit the reponse back to the original caller.
-
-Pocket is an interesting option for running a remote provider as it promotes the growth of the network, incentivizing new users to run nodes and receive rewards for it, making this an attractive option for situations where a remote provider is necessary.
-
-Pocket normally relies on users paying for transactions via their POKT token, but they have agreed to allow Rocket Pool node operators to use their network **free of charge**.
-
-One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
-
-::: warning
-If you choose a remote provider, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
 :::
 
 
@@ -163,15 +123,11 @@ You do not have control over the remote node that you're connecting to, and you 
 | Client     | Type  | CPU Usage | Minimum RAM Usage | Sync Time |
 | ---------- | ----- | --------- | ----------------- | --------- |
 | Geth       | Full  | Moderate  | 4 GB              | Moderate  |
-| Besu       | Full  | Moderate  | 16 GB             | Moderate  |
+| Besu       | Full  | Moderate  | 8 GB              | Slow      |
 | Nethermind | Full  | Moderate  | 16 GB             | Fast      |
-| Infura*    | Light | Low       | ---               | None      |
-| Pocket*    | Light | Low       | ---               | None      |
-
-*Currently in deprecated status, not supported post-merge
 
 
-## Consensus Clients (ETH2)
+## Consensus Clients
 
 Rocket Pool's installer is proud to support all four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
 

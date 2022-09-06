@@ -86,7 +86,7 @@ You should see output like this:
 rocketpool --version
 ```
 ```
-rocketpool version 1.3.0
+rocketpool version 1.5.0
 ```
 
 ::: tip TIP
@@ -176,15 +176,7 @@ rocketpool service install
 This will grab the latest version of the Smartnode stack and set it up.
 You should see output like this (*above some release notes for the latest version which will be printed at the end*):
 
-```
-Step 5 of 8: Checking for existing installation...
-Step 5 of 8: Backing up configuration settings to user-settings-backup.yml...
-Step 6 of 8: Creating Rocket Pool user data directory...
-Step 7 of 8: Downloading Rocket Pool package files...
-Step 8 of 8: Copying package files to Rocket Pool user data directory...
-
-The Rocket Pool service was successfully installed!
-```
+![](./images/rp-install-screen.png)
 
 If there aren't any error messages, then the installation was successful.
 By default, it will be put into the `~/.rocketpool` directory inside of your user account's home folder.
