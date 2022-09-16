@@ -53,10 +53,15 @@ You will be prompted to return here at the appropriate step.
 :::
 
 Rocket Pool provides a faucet in its [Discord server](https://discordapp.com/invite/tCRG54c).
-Join the server and head to the `#faucet` channel in the `TESTNET` group.
-Here, you can interact with a bot that provides Goerli ETH for testing.
+Join the server and head to the [`#support`](https://discord.gg/Uq4D4XYT) channel.
 
-You can type `!help` to receive some useful information about how to use the bot, which will provide the following text:
+Here, you can ask the support team for test net ETH. You will need to provide your node address.
+
+::: warning Note
+The goerly ETH bot is no longer directly accessible to the public due to previous abuse. It is only available to people in the support team with explicit access permission.
+:::
+
+If you have support team permissions you can type `!help` to receive some useful information about how to use the bot, which will provide the following text:
 
 ```
 Rocket Pool Goerli ETH Bot
