@@ -97,7 +97,7 @@ If you set it to **0**, then automatic RPL claims will be disabled entirely.
 You can then trigger a manual claim with the CLI using the following command:
 
 ```
-rocketpool node claim-rpl
+rocketpool node claim-rewards
 ```
 
 ::: tip
@@ -105,7 +105,7 @@ As described in the [Intro to the Command Line Interface](cli-intro.md) section,
 For example:
 
 ```
-rocketpool -f 10 node claim-rpl
+rocketpool -f 10 node claim-rewards
 ```
 
 will trigger a claim transaction using a max fee of 10 gwei and the default priority fee of 2 gwei.
