@@ -48,7 +48,7 @@ In doing so, you will be given a token called **rETH**. rETH represents both **h
 The value of rETH is determined by the following ratio:
 
 ```
-rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total rETH supply)
+rETH:ETH ratio = (total rETH supply) / (total ETH staked + total rETH contract balance + total rETH share distributor balances + total rETH share of smoothing pool balance)
 ```
 
 Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
