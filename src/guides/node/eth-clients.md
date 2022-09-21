@@ -1,11 +1,5 @@
 # Choosing your ETH Clients
 
-::: danger WARNING
-This documentation is currently out of date with the release of Smartnode v1.5.0.
-
-It will be updated shortly.
-:::
-
 Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
 The terms ETH1/ETH2 have been deprecated.

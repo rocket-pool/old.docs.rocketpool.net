@@ -1,19 +1,11 @@
 # Creating a Native Rocket Pool Node without Docker
 
-::: danger WARNING
-This documentation is currently out of date with the release of Smartnode v1.5.0.
-
-It will be updated shortly.
-:::
-
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack natively onto your system, without the use of Docker containers.
 
 The general plan is as follows:
+- Create a standard solo-staking setup with `systemd` services for the Execution Client, the Consensus Client / Beacon Node, and (if not using Nimbus) the Validator Client
 - Create system services for the Rocket Pool components (the **node** process, and optionally the **watchtower** process if you are an Oracle Node)
-- Create a system service for the Execution client
-- Create a system service for the Beacon node
-- Create a system service for the Validator client
-- Configure Rocket Pool to use communicate with those services
+- Configure Rocket Pool to use communicate with your client services
 
 This is a fairly involved setup so it will take some time to complete.
 
@@ -21,59 +13,42 @@ The diversity of Operating Systems and distros available make it impractical to 
 The instructions in this guide are tailored to a Debian-based system (including Ubuntu).
 For other distros or operating systems, you may follow the high-level steps described in the guide but will have to substitute certain commands for the ones that your system uses as appropriate.
 
-::: warning
+::: danger
 This guide is intended for users that are experienced with Linux system administration and usage.
 This includes using the terminal, creating system accounts, managing permissions, and installing services.
+We assume you are familiar with these activities - as you will be managing the bulk of the infrastructure yourself, we only provide limited support for Native installations. 
 **If you are not familiar with these activites, we do not recommend that you use the native mode.**
 :::
 
 
-## Creating Service Accounts
+## Setting up the Execution and Consensus Clients
 
-The first step is to create new system accounts for the services and disable logins and shell access for them.
-The reason for having separate user accounts is practical: if your Execution or Consensus clients have a major vulnerability like an [Arbitrary Code Execution](https://en.wikipedia.org/wiki/Arbitrary_code_execution) exploit, doing this will limit the amount of damage an attacker can actually do since they're running on an account with limited permissions.
+Native mode effectively latches onto a standard solo-staking setup, and simply allows the Smartnode software to attach to the clients that it already runs (with a few small modifications).
 
-We're going to create one account for your Execution client, one for your Beacon Node, and one for both Rocket Pool and the validator client.
-The sharing is necessary because Rocket Pool will create the validator's key files once you create a new minipool, and it will set the permissions so that only its own user has access to them.
-If you're using **Nimbus** for your Consensus client, then it will share an account with Rocket Pool instead since it doesn't have a separate validator client.
+To that end, we recommend you start by following some of the conventional solo staking guides provided by the community:
+- Somer Esat's set of guides per-client: [https://github.com/SomerEsat/ethereum-staking-guides](https://github.com/SomerEsat/ethereum-staking-guides)
+- CoinCashew guides: [https://www.coincashew.com/coins/overview-eth/guide-or-how-to-setup-a-validator-on-eth2-mainnet](https://www.coincashew.com/coins/overview-eth/guide-or-how-to-setup-a-validator-on-eth2-mainnet)
 
-Start by creating an account for your Execution client, which we'll call `eth1`:
-```shell
-sudo useradd -r -s /sbin/nologin eth1
-```
+Note that **you won't actually create a validator as defined in those guides** - Rocket Pool will do that for you.
+**You can ignore the portions involving the Staking Deposit CLI tool.**
 
-Do the same for your Beacon Node, which we'll call `eth2`:
-```shell
-sudo useradd -r -s /sbin/nologin eth2
-```
+You simply need to follow the guides to the point where you have an Execution Client service, a Consensus Client / Beacon Node service, and a Validator Client service (*except for Nimbus, which currently doesn't have a separate Validator Client*) all installed and syncing the chain.
+**Skip the steps that involve funding a validator and recording its mnemonic.**
 
-Finally, make one for the validator and Rocket Pool, which we'll call `rp`:
-```shell
-sudo useradd -r -s /sbin/nologin rp
-```
-
-::: tip NOTE
-If you're using Nimbus, ignore the `rp` account.
-Any time you see it used in this guide, just substitute it with `eth2` instead.
-:::
-
-Now, add yourself to the `rp` group.
-You'll need to do this in order to use the Rocket Pool CLI, because it and the Rocket Pool daemon both need to access the Execution layer wallet file.
-```shell
-sudo usermod -aG rp $USER
-```
-
-After this, logout and back in for the changes to take effect.
+Once your clients are installed and you can see in their logs that they are syncing the chains properly, you can follow the next steps to set up the Rocket Pool Smartnode and connect it to your clients.
 
 
 ## Installing Rocket Pool
 
 ### Setting up the Binaries
+
 Start by making a folder for Rocket Pool and a data subfolder.
 You can put this wherever you want; for this guide, I'll put it into `/srv`:
 ```shell
 sudo mkdir -p /srv/rocketpool/data
+```
 
+```
 sudo chown -R $USER:$USER /srv/rocketpool
 ```
 
@@ -124,7 +99,22 @@ sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 
 ::::
 
-Next, grab the validator restart script - Rocket Pool will use this when it needs to restart your Validator Client to load new keys after you create a new minipool:
+
+### Setting up the Installation Folder
+
+With the CLI and Daemon installed, you'll need to next set up the folder structure and accompanying files that the Smartnode expects to exist.
+Start by creating the following folders:
+
+```
+mkdir /srv/rocketpool/rewards-trees && chown rp:rp /srv/rocketpool/rewards-trees 
+```
+
+```
+mkdir /srv/rocketpool/custom-keys && chown rp:rp /srv/rocketpool/custom-keys
+```
+
+
+ grab the validator restart script - Rocket Pool will use this when it needs to restart your Validator Client to load new keys after you create a new minipool:
 
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/raw/release/install/scripts/restart-vc.sh -O /srv/rocketpool/restart-vc.sh
