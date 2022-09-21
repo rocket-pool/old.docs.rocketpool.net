@@ -45,13 +45,18 @@ As a Rocket Pool staker, your role is to deposit ETH into the deposit pool which
 You can stake as little as **0.01 ETH**.
 
 In doing so, you will be given a token called **rETH**. rETH represents both **how much** ETH you deposited, and **when** you deposited it.
-The value of rETH is determined by the following ratio:
+The ratio includes rewards that Rocket Pool node operators earn from:
+- The Beacon Chain itself
+- Priority fees from block proposals
+- MEV rewards from block proposals
+
+More specifically, the value of rETH is determined by the following ratio:
 
 ```
-rETH:ETH ratio =  (total ETH staked + Beacon Chain rewards) / (total rETH supply)
+rETH:ETH ratio = (total rETH supply) / (total ETH staked + total rETH contract balance + total rETH share of priority fees + total rETH share of MEV rewards)
 ```
 
-Since the Beacon Chain rewards will always be positive and will constantly grow, this means that **rETH's value effectively always increases relative to ETH**.
+Since the Beacon Chain rewards, priority fees, and MEV rewards will constantly accumulate, this means that **rETH's value effectively always increases relative to ETH**.
 The rETH/ETH exchange rate is updated approximately every 24 hours based on the Beacon Chain rewards earned by Rocket Pool node operators.
 
 To illustrate this point, here is a chart of rETH's value (relative to ETH) over time - as expected, it demonstrates slow but steady growth:
