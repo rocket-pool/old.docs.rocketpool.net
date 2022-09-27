@@ -122,7 +122,7 @@ Below are some helpful sites that offer tax assistance to users related to Ether
 **This is not an official endorsement - users are advised to do their own research regarding tax implications and strategies**:
  - [https://koinly.io/](https://koinly.io/)
  - [https://cryptotaxcalculator.io/](https://cryptotaxcalculator.io/)
-
+ - [https://rotki.com/](https://rotki.com/)
 
 ## How to Stake with Rocket Pool
 
