@@ -12,7 +12,8 @@ These only need to be done once though; once you've done them, you can skip to t
 
 Registering your node and standing up a validator both involve submitting transactions to the Ethereum network from your node wallet.
 This means **you'll need to have some ETH on it** to pay for the gas costs of those transactions.
-You'll also want to provide it with the **RPL token**, because you'll need to stake some of that prior to creating a minipool as collateral.
+You'll also need to stake some of the **RPL token** prior to creating a minipool as collateral; you can do this directly on the node, or (preferably) you can use the Rocket Pool website's **Stake on Behalf** function to stake for your node with RPL in your cold wallet.
+We'll discuss the Stake on Behalf feature later in this guide when it's time to stake your RPL.
 
 The ETH required for gas fees to set up a node with one minipool is about 0.0025 ETH times the current gas price in gwei.
 For example, with a gas price of 30 gwei, you would pay about 0.075 ETH in gas fees.
@@ -28,7 +29,9 @@ Please see the [Getting Test RPL on Goerli](../testnet/overview.md#getting-test-
 :::
 ::: tab Running on the Main Network
 We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH and RPL tokens.
-Start by transferring some ETH and RPL from your existing wallet to the node wallet.
+Start by transferring some ETH from your existing wallet to the node wallet.
+If running on Mainnet, **leave your RPL on the wallet you used to purchase it.**
+
 As a reminder, you can use `rocketpool wallet status` to get the address of the node wallet if you need it.
 If you are not sure how to send cryptocurrency from your existing wallet, please consult your wallet's documentation.
 
@@ -42,7 +45,7 @@ We recommend you send a small amount of ETH first as a **test transaction** to v
 
 ## Registering your Node with the Network
 
-Once you have ETH and RPL in your wallet, you can register your node with the Rocket Pool network to access all of its features.
+Once you have ETH in your wallet, you can register your node with the Rocket Pool network to access all of its features.
 To do this, run the following command:
 
 ```

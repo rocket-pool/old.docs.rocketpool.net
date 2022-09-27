@@ -56,26 +56,21 @@ However, for the sake of completeness, we have assembled the following hardware 
 #### Low-Power Full Node
 - CPU: Quad-core 1.6+ GHz
 - RAM: 8 GB DDR4 2400 MHz
-- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS**
+- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS*
 - Network: 10+ Mbps, 1.5+ TB monthly data cap
-- Execution Client: Geth (in low-cache mode), Besu 
-- Consensus Client: Nimbus, Prysm
+- Execution Client: Geth (in low-cache mode)
+- Consensus Client: Nimbus
 
 
 #### Typical Full Node
 - CPU: Quad-core, 2.6+ GHz
 - RAM: 16 GB DDR4 3200 MHz
-- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS**
+- SSD: 2 TB, 15k Read IOPS, 5k Write IOPS*
 - Network: 25+ Mbps, 1.5+ TB monthly data cap
 - Execution Client: Any
 - Consensus Client: Any
 
-
-*\*
-The Execution blockchain [grows quickly](https://ycharts.com/indicators/ethereum_chain_full_sync_data_size), so 2 TB will offer some future-proofing.
-The larger your storage, the longer you can go between needing to reclaim space by pruning.*
-
-*\*\* If you are unsure if your disk meets these performance requirements, `fio` is a good way to test them.
+*\* If you are unsure if your disk meets these performance requirements, `fio` is a good way to test them.
 See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-linux/) for Linux instructions, and [here](https://www.nivas.hr/blog/2017/09/19/measuring-disk-io-performance-macos/) for MacOS instructions.*
 
 
@@ -84,30 +79,57 @@ See [here](https://arstech.net/how-to-measure-disk-performance-iops-with-fio-in-
 If you're using macOS, it's highly likely that you already have the Operating System installed and can skip this step.
 
 If you're installing Linux from scratch, each of the distributions listed above come with helpful and detailed tutorials for installing the Operating System from scratch.
-As an example though, we will walk you through the process of installing and preparing **Ubuntu Server**.
+As an example though, we will walk you through the process of installing and preparing **Debian Server**.
+Debian is a good choice for node operation because it focuses on **maximum stability and reliability** - both of which are highly desirable for node machines that must be running 24/7.
 
-Start by downloading the installation media and putting it onto a USB stick.
-[Here is a detailed guide](https://help.ubuntu.com/community/Installation/FromUSBStick) on how to do this.
-
-Once you have the installer on a bootable USB stick, [follow this excellent guide](https://ubuntu.com/tutorials/install-ubuntu-server#1-overview) to learn how to install Ubuntu Server.
+[Here is a good step-by-step guide](https://itslinuxfoss.com/debian-11-bullseye-guide/) with screenshots that shows you how to install Debian on your node machine from scratch. 
 
 ::: tip
-Ubuntu Server is a **CLI-only** version of Ubuntu.
-It does not have a desktop interface.
-This is largely unnecessary for a node; it adds extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer the Server image.
-However, if you want a desktop UI on your node, you can follow [this tutorial](https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview) instead.
+We have a few helpful amendments to the guide linked above, which you may want to follow:
+
+- When prompted to set up a **root password**, we recommend leaving it **blank**. This will disable the `root` account and instead install the `sudo` package, allowing your user to perform root operations by re-entering its password to elevate its permissions. This is analogous to the way Ubuntu Linux is set up, which may be more familiar to users.
+- In the **Software selection** screen towards the end, you may not want to have a desktop GUI installed.
+  - Desktop GUIs are largely unnecessary for a node; they add extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer to **uncheck GNOME** here.
+  - If you *do* want a desktop UI on your node, we recommend you **uncheck GNOME and check XFCE** instead, as it's lighter on system resources.
+  - Uncheck **web server**, but leave **SSH server** and **standard system utilities** checked.
 :::
 
 
-### Installing and Using SSH
+### Installing `sudo`
+
+Rocket Pool's installer requires the `sudo` program to acquire all of its dependencies.
+If you left the **root user password blank** in the previous step, you will already have this.
+If not, please install it now by running the following commands:
+
+```
+apt update
+```
+
+```
+apt install sudo
+```
+
+```
+usermod -aG sudo $USER
+```
+
+Then restart the machine.
+You should now be able to run commands via `sudo` such as `sudo apt update`. 
+
+
+### Using SSH
 
 Once the server is installed and you're able to log in, you need to get its IP address.
 An easy way to do this is with `ifconfig` which is built into the 'net-tools' package:
 
 ```
+sudo apt update
+```
+```
 sudo apt install net-tools
-
-ifconfig
+```
+```
+sudo ifconfig
 ```
 
 You may see several entries here, but the one you want to look for is going to look something like this:
@@ -128,6 +150,10 @@ Next, install SSH:
 ```
 sudo apt install openssh-server
 ```
+
+::: tip NOTE
+If you had the **SSH server** box checked during Debian's installation, you should already have this installed so this command won't do anything.
+:::
 
 Once this is done, you can log into the machine's terminal remotely from your laptop or desktop using `ssh`.
 
@@ -252,8 +278,8 @@ Before installing Rocket Pool, please review the following checklist:
 - Your user account has root / Administrator privileges.
 - You have an SSD that meets the performance requirements.
 - Your SSD is mounted on your file system.
-- You have at least 1 TB of space free for the initial Execution and Consensus syncing process.
-- If your ISP caps your data, it is more than 1.5 TB per month.
+- You have at least 1.2 TB of disk space free for the initial Execution and Consensus syncing process.
+- If your ISP caps your data, it is more than 2 TB per month.
 
 If you have checked and confirmed all of these items, then you are ready to install Rocket Pool and begin running a node!
 Move on to the [Choosing your ETH Clients](../eth-clients.md) section.

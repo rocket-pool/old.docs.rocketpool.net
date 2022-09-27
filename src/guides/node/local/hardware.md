@@ -4,7 +4,8 @@ There are no official specifications for running a Rocket Pool node.
 This page offers some guidelines and examples that you can use to select staking hardware.
 
 The minimum hardware requirements of your node will depend on the Consensus and Execution clients that you choose.
-If, for example, you intend to run your node on a Raspberry Pi, you are (at the time of writing) limited to using `Geth` or `Besu` as your Execution client and `Nimbus` or `Lighthouse` as your Consensus client.
+If, for example, you intend to run your node on a Raspberry Pi, you are (at the time of writing) limited to using `Geth` as your Execution client and `Nimbus` as your Consensus client.
+If you're using a more powerful NUC with 32+ GB of RAM, all client combinations are open to you.
 
 The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity.
 If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations.
@@ -22,13 +23,17 @@ Downtime does not get you slashed unless you are offline during a major outage o
 
 ## Hardware Requirements
 
-Ethereum validators are not very computationally expensive, which is to say that once your Execution and Consensus clients are running, **any additional validator will use negligible resources**.
-In other words: if your machine can run 1 validator, it can probably run 1000 too.
+Ethereum validators are not very computationally expensive, which is to say that once your Execution and Consensus clients are running, any additional validator will use **a very small amount of additional resources**.
+This grows up to 64 validators, at which point the resources required for adding a 65th validator and beyond are negligible. 
+
+In our experience, most setups, including mini-PCs and NUCs, are capable of running an effectively unlimited number of validators.
+
+If you are using a Raspberry Pi, we suggest you limit the device to **at most 4 minipools** before considering a more robust solution.
 
 
 ### CPU Requirements
 
-Running a Rocket Pool node is not very computationally intensive (which is why they can be run on a Raspberry Pi).
+Running a Rocket Pool node is not very computationally intensive.
 The biggest impact of the CPU is how fast your node can initially sync the state of the blockchain when you first create it (or if you ever change clients later).
 After the initial sync, the CPU is not used as heavily.
 
@@ -65,7 +70,7 @@ An added benefit of more RAM is that you can provide a larger cache size to Exec
 
 The exact type of RAM (such as DDR3 or DDR4) is not as important; generally DDR3 is fast enough to support node operation.
 
-**Guideline: at least 12 GB of RAM.**
+**Guideline: at least 16 GB of RAM.**
 
 
 ### SSD Requirements
@@ -355,9 +360,9 @@ This is certainly the most controversial option on the hardware example list.
 Raspberry Pi's are credit-card sized "single-board computers" that include a CPU and RAM built directly onto the board.
 They are also quite cheap, with the most powerful model only costing $80.
 While they were originally intended as a simple option to help teach young students how to program, the hardware hacking community has become enamored with these capable little computers and have employed them in hundreds of use cases... including staking!
-It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.1 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
+It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.2 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
 
-Despite the general consensus in the Ethereum space that Raspberry Pis should not be used for staking, Rocket Pool developer Joe Clapis (known on Discord as **jcrtp**) is confident that his configuration can handle the load of being a Rocket Pool node.
+Despite the general consensus in the Ethereum space that Raspberry Pis should not be used for staking, Rocket Pool developer Joe Clapis (known on Discord as **jcrtp**) has been successfully running 5 minipools on a Raspberry Pi for over a year - including after the Merge.
 This makes it the cheapest and lowest power option currently available, but offers the least amount of headroom or flexibility if the future of Ethereum staking demands higher performance.
 
 Jcrtp's Setup:
@@ -377,3 +382,8 @@ My goal is to take this to the extreme, and run my Rocket Pool node with the low
 After experimenting for a few months, I've found a configuration for the Raspberry Pi that can accomplish both of these goals.
 Sure, you can get down to 10 watts with a NUC and have more headroom... but that's not the point.
 Having an $80, 5-watt machine contribute to the security of Ethereum as well as a $10,000 rack-mount server just makes me happy.*
+
+::: warning NOTE
+As of September 2022, the only client combination that is performant on a Raspberry Pi is **Geth** and **Nimbus**.
+If you want to use a different Execution or Consensus client, you are advised to choose a different platform.
+:::
