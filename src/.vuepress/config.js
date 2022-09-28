@@ -148,6 +148,8 @@ module.exports = {
                 'node/recovering-rp',
                 'node/cli-intro',
                 'node/prepare-node',
+                'node/mev',
+                'node/smoothing-pool',
                 'node/create-validator',
                 'node/fallback',
                 {
