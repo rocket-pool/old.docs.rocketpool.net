@@ -64,6 +64,8 @@ More information can be found in articles such as these:
 - [https://www.paradigm.xyz/2022/09/base-layer-neutrality](https://www.paradigm.xyz/2022/09/base-layer-neutrality)
 :::
 
+If you're interested in exploring the relative market share and average tips per block from each of the relays, take a look at [https://www.mevboost.org/](https://www.mevboost.org/).
+This site captures many metrics about the various MEV relays so you can better understand the popularity and returns of the relays.
 
 ## MEV-Boost
 
@@ -147,16 +149,134 @@ Start by running `rocketpool service config` and navigate to the `MEV-Boost` opt
 
 </center>
 
+Check the box labeled `Enable MEV-Boost` to enable it.
 
+Once enabled, The screen will look like this (as of Smartnode v1.6.4):
 
+<center>
+
+![](./images/tui-mev-boost-main.png)
+
+</center>
+
+Check the box labeled `Enable MEV-Boost` to enable it.
+
+Below is a description of each option and how to use them.
+
+- The `MEV-Boost Mode` box lets you toggle between a MEV-Boost instance that Rocket Pool manages, and an external one that you manage on your own. This is meant for advanced users that already have MEV-Boost set up and simply want to use it instead of having Rocket Pool run a second copy. Regular Docker Mode users should just leave this set to `Locally Managed`.
+
+- Each of the `Relay` check boxes lets you specify which relays you want to use. **You can enable multiple relays here, you don't need to limit your selection to only one!** Please see the descriptions of each relay above for more information on them.
+  - If you don't care about OFAC sanctions or MEV type, **simply check all of the boxes**.
+  - If you want to ensure compliaces with the OFAC sactions, you should select **Flashbots, bloxRoute Regulated, Blocknative, and Eden.**
+  - If you specifically want to avoid relays that comply with the OFAC sanctions, you should select **bloxRoute Max Profit** and/or **bloxRoute Ethical** depending on how you feel about Sandwich Attacks.
+  - *In a future Smartnode update, we'll replace these explicit relay choices with these profiles instead for simplicity.*
+
+- The `Port` box is not important for Docker mode users.
+- The `Expose API Port` box is not important for Docker mode users.
+- The `Container Tag` box is useful to manually upgrade the version of MEV-Boost that the Smartnode runs if Flashbots releases a new high-priority version you want to use before a Smartnode update with it is released.
+- The `Additional Flags` box is used if you want to add supplemental config flags or parameters directly to the MEV-Boost container. Normally, it will not be useful.
+
+Once you've enabled MEV-Boost and enabled the relays you'd like to do, simply save and exit.
+The Smartnode will restart the relevant containers for you, and automatically set it all up for you.
+
+See below for instructions on how to check that it's working as expected. 
 :::::
 
 ::::: tab Hybrid Mode
+Configuring MEV-Boost is easy with the Smartnode's configuration TUI.
+Start by running `rocketpool service config` and navigate to the `MEV-Boost` option:
 
+<center>
+
+![](./images/tui-mev-boost.png)
+
+</center>
+
+Check the box labeled `Enable MEV-Boost` to enable it.
+
+Once enabled, The screen will look like this (as of Smartnode v1.6.4):
+
+<center>
+
+![](./images/tui-mev-boost-main.png)
+
+</center>
+
+Check the box labeled `Enable MEV-Boost` to enable it.
+
+Below is a description of each option and how to use them.
+
+- The `MEV-Boost Mode` box lets you toggle between a MEV-Boost instance that Rocket Pool manages, and an external one that you manage on your own. Some users prefer to let Rocket Pool manage its own instance of MEV-Boost and connect their externally-managed Beacon Nodes to it. In this case, `Locally Managed` is the best option. If you already run your own MEV-Boost instance and simply want to let Rocket Pool's VC use it (i.e. by enabling blinded block signing), simply leave this on `Externally Managed`. **You don't need to take any further action after this.**
+
+::: warning NOTE
+If you run your own MEV-Boost instance, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
+:::
+
+- If you decided to use a `Locally Managed` instance of MEV-Boost, each of the `Relay` check boxes underneath it will let you specify which relays you want to use. **You can enable multiple relays here, you don't need to limit your selection to only one!** Please see the descriptions of each relay above for more information on them.
+  - If you don't care about OFAC sanctions or MEV type, **simply check all of the boxes**.
+  - If you want to ensure compliaces with the OFAC sactions, you should select **Flashbots, bloxRoute Regulated, Blocknative, and Eden.**
+  - If you specifically want to avoid relays that comply with the OFAC sanctions, you should select **bloxRoute Max Profit** and/or **bloxRoute Ethical** depending on how you feel about Sandwich Attacks.
+  - *In a future Smartnode update, we'll replace these explicit relay choices with these profiles instead for simplicity.*
+
+- The `Port` box determines which port MEV-Boost will listen for incoming connections from your Beacon Node on. If you need to change it because of a port conflict within your node, you can do it here.
+- The `Expose API Port` box **should be checked** so that your externally-managed BN can communicate with the MEV-Boost instance Rocket Pool will manage.
+- The `Container Tag` box is useful to manually upgrade the version of MEV-Boost that the Smartnode runs if Flashbots releases a new high-priority version you want to use before a Smartnode update with it is released.
+- The `Additional Flags` box is used if you want to add supplemental config flags or parameters directly to the MEV-Boost container. Normally, it will not be useful.
+
+Once you've enabled MEV-Boost and enabled the relays you'd like to do, simply save and exit.
+If you're using a `Locally Managed` instance and have the `Expose API Port` box checked, you can then configure your Beacon Node to connect to it at `http://localhost:18550`.
+Please refer to [Flashbots' documentation](https://github.com/flashbots/mev-boost/wiki/Testing) to learn how to enable MEV-Boost on your externally-managed Beacon Node.
+
+::: tip NOTE
+Note that you **may need to permit this in your UFW configuration** if you have the firewall enabled.
+:::
+
+See below for instructions on how to check that it's working as expected. 
 :::::
 
 ::::: tab Native Mode
+Please refer to [Flashbots' documentation](https://github.com/flashbots/mev-boost/wiki/Testing) to learn how to enable MEV-Boost on your Beacon Node and Validator Client services.
 
+::: warning NOTE
+In your MEV-Boost instance, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
+:::
 :::::
 ::::::
 
+
+## Checking MEV-Boost's Logs
+
+To check on MEV-Boost's logs, run the following command (for Docker Mode users and Hybrid users with a locally-managed container):
+
+```
+rocketpool service logs mev-boost
+```
+
+The output will show you which relays you've enabled, their connection status, and begin listening for traffic from your Beacon Node:
+
+```
+mev-boost_1      | time="2022-09-28T22:02:06Z" level=info msg="mev-boost v1.3.1" module=cli
+mev-boost_1      | time="2022-09-28T22:02:06Z" level=info msg="Using genesis fork version: 0x00000000" module=cli
+mev-boost_1      | time="2022-09-28T22:02:06Z" level=info msg="using 4 relays" module=cli relays="[{0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net?id=rocketpool} {0xb0b07cd0abef743db4260b0ed50619cf6ad4d82064cb4fbec9d3ec530f7c5e6793d9f286c4e082c0244ffb9f2658fe88 https://0xb0b07cd0abef743db4260b0ed50619cf6ad4d82064cb4fbec9d3ec530f7c5e6793d9f286c4e082c0244ffb9f2658fe88@bloxroute.regulated.blxrbdn.com?id=rocketpool} {0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433094e5f22f21102ec057841fcb81978ed1ea0fa8246 https://0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433094e5f22f21102ec057841fcb81978ed1ea0fa8246@builder-relay-mainnet.blocknative.com?id=rocketpool} {0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be https://0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be@relay.edennetwork.io?id=rocketpool}]"
+mev-boost_1      | time="2022-09-28T22:02:06Z" level=info msg="Checking relay" module=service relay="https://0xac6e77dfe25ecd6110b8e780608cce0dab71fdd5ebea22a16c0205200f2f8e2e3ad3b71d3499c54ad14d6c21b41a37ae@boost-relay.flashbots.net?id=rocketpool"
+mev-boost_1      | time="2022-09-28T22:02:06Z" level=info msg="Checking relay" module=service relay="https://0xb0b07cd0abef743db4260b0ed50619cf6ad4d82064cb4fbec9d3ec530f7c5e6793d9f286c4e082c0244ffb9f2658fe88@bloxroute.regulated.blxrbdn.com?id=rocketpool"
+mev-boost_1      | time="2022-09-28T22:02:07Z" level=info msg="Checking relay" module=service relay="https://0x9000009807ed12c1f08bf4e81c6da3ba8e3fc3d953898ce0102433094e5f22f21102ec057841fcb81978ed1ea0fa8246@builder-relay-mainnet.blocknative.com?id=rocketpool"
+mev-boost_1      | time="2022-09-28T22:02:07Z" level=info msg="Checking relay" module=service relay="https://0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be@relay.edennetwork.io?id=rocketpool"
+mev-boost_1      | time="2022-09-28T22:02:07Z" level=info msg="listening on 0.0.0.0:18550" module=cli
+```
+
+This indicates that it's running properly.
+
+If you have validators already up and running, you will see messages like this every few minutes in the logs:
+
+```
+mev-boost_1      | time="2022-09-28T21:40:48Z" level=info msg="http: GET /eth/v1/builder/status 200" duration=0.147305645 method=GET module=service path=/eth/v1/builder/status status=200
+mev-boost_1      | time="2022-09-28T21:40:48Z" level=info msg="http: POST /eth/v1/builder/validators 200" duration=0.052895118 method=POST module=service path=/eth/v1/builder/validators status=200
+```
+
+This indicates that your Beacon node was able to properly connect to it and register its validators, indicating that your node is now actively engaging with the MEV relays and is ready to receive blocks from block builders!
+
+
+## Next Steps
+
+Now that MEV-Boost has been set up, take a look at the Smoothing Pool in the next section.
