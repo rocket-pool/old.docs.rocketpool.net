@@ -26,7 +26,71 @@ This means you'll only need to handle the total RPL stake for your node if you p
 :::
 
 
-Run the following command, and the CLI will tell you how much this is (as well as give you a list of options with respect to how much you want to stake):
+### Staking via the Website (Recommended)
+
+The easiest and safest way to stake RPL for your node is to use the website's new **Stake-on-Behalf** feature, which was introduced with the Redstone upgrade.
+This way, you can stake RPL for your node while the RPL is still in the wallet you used to acquire it.
+In other words, you **don't need to send RPL to your node's hot wallet** in order to stake it.
+
+Select which network you're using from the tabs below to be taken to it:
+
+:::: tabs
+::: tab Mainnet
+[https://stake.rocketpool.net/stake-behalf](https://stake.rocketpool.net/stake-behalf)
+:::
+::: tab Prater Testnet
+[https://testnet.rocketpool.net/stake-behalf](https://testnet.rocketpool.net/stake-behalf)
+:::
+::::
+
+Start by connecting your wallet to the website using MetaMask, WalletConnect, or any of the other methods the website supports.
+You will then be presented with this dialog:
+
+<center>
+
+![](./images/stake-behalf-1.png)
+
+</center>
+
+This is a two-step process.
+First, enter the amount of RPL you want to stake and click `Approve` - this will **approve** the staking contract to access that much RPL in your wallet, but **no more than that amount**.
+
+::: tip TIP
+You can approve more than the amount you intend to stake if you trust the Rocket Pool staking contract, and don't want to perform this extra Approve transaction each time you want to stake more RPL.
+:::
+
+Once the RPL is approved, you will see this dialog:
+
+<center>
+
+![](./images/stake-behalf-2.png)
+
+</center>
+
+Enter the amount of RPL you want to stake in the `Stake RPL` box, and enter your node's address in the `on behalf of Node Address` box.
+**Make sure you have the correct node address before doing this!**
+If you need to confirm your node's address, you can quickly retrieve it via the CLI using the `rocketpool node status` command.
+
+When you've entered that information, press the `Stake` button and approve the transaction.
+It will be sent to the Ethereum network, and once included in a block, you're all set!
+
+If you run `rocketpool node status`, you should see your staked RPL appear under the `=== RPL Stake and Minipools ===` section.
+
+
+### Staking via the Node CLI
+
+If you cannot (or do not want to) use the website to stake your RPL, you can also stake it via the node's CLI directly.
+
+First, transfer your RPL from the wallet you acquired it with to your node's address.
+
+::: danger WARNING
+**Please do this carefully and ensure you are sending the RPL to your node's address - transfers on Ethereum cannot be undone!**
+**Sending RPL to the wrong address will result in the loss of your RPL.**
+
+Use the `rocketpool node status` command to verify your node's address if you aren't sure what it is.
+:::
+
+Run the following command:
 
 ```
 rocketpool node stake-rpl
@@ -44,10 +108,8 @@ Please choose an amount of RPL to stake:
 
 Select how much you'd like to stake, then confirm the operation.
 
-::: tip NOTE
-Note that the gas estimates here will likely be incorrect, because this operation will require two sequential transactions: one to give the minipool contract access to your RPL, and one to perform the staking.
-The gas estimator can't calculate the price for the second transaction until the first one is completed.
-:::
+The first time you run this command, it will involve two transactions - one to **approve** the Rocket Pool staking contract to access your RPL, and one to **stake** your RPL with it.
+Subsequent runs will only require the **stake** transaction, since the token has already been approved. 
 
 Once both transactions finish, you can check your staked RPL amount with `rocketpool node status`.
 The following portion of the output is what you want to verify:
@@ -297,3 +359,10 @@ You **do not** need to create a new node for each minipool.
 If you would like to make a second (or third, or fourth...) minipool for your node, all you need to do is run `rocketpool node deposit` again.
 Note that you may need to stake more RPL first to maintain an overall collateral level of at least 10% before you do this.
 Also, you won't be able to reuse an old vanity address salt - you'll need to search for another unique one for each of your minipools.
+
+
+## Next Steps
+
+Now that you have a minipool up and running, the next steps will walk you through how to monitor the health of your node, check for and apply updates, and maintain it throughout its life.
+
+**Please read through the `Monitoring and Maintenance` section next to learn more about these topics.**

@@ -148,10 +148,10 @@ module.exports = {
                 'node/recovering-rp',
                 'node/cli-intro',
                 'node/prepare-node',
-                'node/mev',
-                'node/smoothing-pool',
-                'node/create-validator',
                 'node/fallback',
+                'node/fee-distrib-sp',
+                'node/mev',
+                'node/create-validator',
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,

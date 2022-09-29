@@ -1,15 +1,19 @@
 # MEV, MEV-Boost, and MEV Rewards
 
-Now that [the Merge](https://ethereum.org/en/upgrades/merge/) has passed, node operators receive priority fees (tips) from the transactions they include in any blocks that they propose.
-These fees come from and stay on the Execution layer, so unlike most validation rewards locked on the Beacon Chain, these fees are *immediately liquid*.
-In general, priority fees provide almost as much ETH to you as Beacon Chain rewards do, so they are a very nice benefit of the Merge.
+In the previous section, you learned about how node operators earn priority fees.
+Priority fees are a great boost to a node operator's income, but they aren't the *only* form of liquid reward available to you on the Execution layer.
+There is a supplemental form of rewards available, known as **MEV rewards**.
 
-That being said, they aren't the *only* form of liquid reward available to you on the Execution layer.
+::: tip NOTE
+As a quick reminder here's a breakdown of the different types of rewards and which layer they're provided on:
+- Consensus Layer (locked until withdrawals): attestations, block proposals, sync committees, slashing reports
+- Execution Layer (liquid): priority fees and MEV from block proposals
+:::
 
 
 ## What is MEV
 
-When your validator creates a block, it usually does so with a very simple algorithm: keep track of a list of pending transactions, shove as many as them into the block you're building as possible (sorted so the ones with the highest tips come first), and submit that block to the chain.
+When your validator creates a block, it usually does so with a very simple algorithm: keep track of a list of pending transactions, bundle as many as them into the block you're building as possible (prioritizing so the ones with the highest tips come first), and submit that block to the chain.
 
 However, Ethereum network users have discovered an interesting side-effect of being able to see the publicly available pool of pending transactions (known as the **mempool**).
 Having this knowledge allows them to employ clever and sophisticated algorithms to modify the ordering of those transactions, and in some cases, introduce *new* transactions between them.
@@ -66,6 +70,7 @@ More information can be found in articles such as these:
 
 If you're interested in exploring the relative market share and average tips per block from each of the relays, take a look at [https://www.mevboost.org/](https://www.mevboost.org/).
 This site captures many metrics about the various MEV relays so you can better understand the popularity and returns of the relays.
+
 
 ## MEV-Boost
 
@@ -279,4 +284,5 @@ This indicates that your Beacon node was able to properly connect to it and regi
 
 ## Next Steps
 
-Now that MEV-Boost has been set up, take a look at the Smoothing Pool in the next section.
+Now that MEV-Boost has been set up, you're ready to create a new minipool and start validating on the Ethereum network!
+Read the next section to walk through this process.
