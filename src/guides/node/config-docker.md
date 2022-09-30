@@ -1,4 +1,4 @@
-# Configuring the Smartnode Stack (Docker Mode)
+# Configuring the Smartnode Stack (Docker / Hybrid Mode)
 
 Running complete Execution layer and Consensus layer clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
 Luckily, the Smartnode is designed to hide all of that complexity so it's quick and easy to configure, while still giving you the freedom to customize everything if you so desire.
@@ -93,40 +93,17 @@ You will be presented with two options for client mode:
 
 </center>
 
-**Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
+**Locally Managed** (also known as **"Docker Mode"**) is the default choice.
 Use it if you don't already have a client pair and you want the Smartnode to manage one for you.
 By choosing this, the Smartnode will create, configure and manage an Execution & Consensus Client pair as Docker containers.
 Don't worry, you'll get to choose *which* client you want to run next.
 
-**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have an Execution & Consensus client pair running elsewhere that they manage manually.
+**Externally Managed** (also known as **"Hybrid Mode"**) is a convenient choice for users that already have an Execution & Consensus client pair running elsewhere that they manage manually.
 By choosing this, the Smartnode will simply connect to your existing clients and will not run one of its own.
 For example, users can use this to plug into the clients that they currently use for solo staking; that way, they don't need to have two separate copies of the clients.
 
 :::warning NOTE
 As the Smartnode cannot manage external Execution clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
-:::
-
-::: tip NOTE
-The Merge brings with it some major changes to the way Execution & Consensus clients are run and managed.
-
-After The Merge, the network will no longer use Proof-of-Work; instead, validators are now responsible for creating and proposing blocks on both the Execution Layer and the Beacon Chain.
-
-Below is a brief summary of the changes to client behavior as part of The Merge:
-
-- Your Execution client now uses three API ports:
-  - One for HTTP access to its API (**default 8545**)
-  - One for Websocket access to its API (**default 8546**)
-  - One for the new **Engine API** used by Consensus clients after The Merge (**default 8551**)
-
-- Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
-  - **Neither one can operate in isolation any longer.**
-  
-- One Execution client must be linked to one, and only one, Consensus client (and vice versa).
-  - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
-  - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
-  - Because of this, the way fallback clients work has changed. Now a fallback must be a **Execution/Consensus pair**
-- **Full execution clients** are required.
-  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
 :::
 
 
