@@ -453,7 +453,7 @@ The setup is identical to the **Network Usage** box above, so simply follow thos
 
 ### OS Disk Space Used
 
-This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth](./geth-pruning.md)).
+This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth or Nethermind](./pruning.md)).
 
 The steps are the same as the **SSD Latency** box above, so simply follow those instructions for this box too.
 As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive.

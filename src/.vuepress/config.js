@@ -161,7 +161,7 @@ module.exports = {
                     'node/grafana',
                     'node/updates',
                     'node/backups',
-                    'node/geth-pruning',
+                    'node/pruning',
                     'node/change-clients'
                   ]
                 },

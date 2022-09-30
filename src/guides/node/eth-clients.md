@@ -1,11 +1,5 @@
 # Choosing your ETH Clients
 
-::: danger WARNING
-This documentation is currently out of date with the release of Smartnode v1.5.0.
-
-It will be updated shortly.
-:::
-
 Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
 The terms ETH1/ETH2 have been deprecated.
@@ -16,7 +10,6 @@ If you already have Execution and Consensus clients up and running on a separate
 Otherwise, read on to learn more about your choices for Execution and Consensus clients.
 
 ::: warning NOTE
-
 As of August 2022, the distribution of clients on the Beacon Chain looks roughly like this:
 
 <center>
@@ -28,7 +21,7 @@ As of August 2022, the distribution of clients on the Beacon Chain looks roughly
 </center>
 
 The overwhelming majority of node operators are currently using Geth and Prysm.
-In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using a different clients.
+In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using different clients.
 Here are some relevant articles about why an even client diversity is crucial to the health of the network if you would like to learn more:
 
 [https://clientdiversity.org/#why](https://clientdiversity.org/#why)
@@ -47,12 +40,11 @@ The options below help to describe each client so you can make an informed decis
 
 ## Execution Clients
 
-Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, and **Nethermind**.
+Rocket Pool supports three different Execution clients: **Geth**, **Besu**, and **Nethermind**.
 
-Running an Execution Client involves storing a copy of the Execution layer blockchain on your machine.
+Running an Execution client involves storing a copy of the Execution layer blockchain on your machine.
 It interacts via peer-to-peer communications with other EC nodes to record and verify new blocks and transactions.
-
-By running an EC node, you contribute to the decentralization and overall health of the ETH network.
+A full Execution client is **required** to run a validator now that the Execution and Consensus layers have merged.
 
 
 ### Geth
@@ -71,7 +63,7 @@ This makes it viable for low-power systems and high-power systems alike.
 Geth requires **offline pruning** of its database periodically: its database will grow over time and gradually consume all of your free disk space unless you prune it when your disk runs low on free space.
 The frequency you need to prune will depend on your SSD's size.
 
-For more information on pruning Geth, view the [Pruning Geth](./geth-pruning.md) page.
+For more information on pruning Geth, view the [Pruning the Execution Client](./pruning.md) page.
 :::
 
 
@@ -83,11 +75,6 @@ Besu's most exciting features is its use of [Bonsai Tries](https://consensys.net
 2. Besu is able to revisit any past block in the blockchain, though it does this by rewinding each block so reaching blocks from long ago may take some time.
 
 Besu currently recommends at least **16 GB of RAM**, though it is possible to run successfully with 8 GB.
-
-::: warning NOTE
-Besu is a relatively new addition to the Smartnode.
-The development team and support community are still familiarizing themselves with it, so it may take longer to get help with it in Rocket Pool's Discord server.
-:::
 
 
 ### Nethermind
@@ -103,18 +90,14 @@ However, Nethermind's online pruning process is quite resource intensive so user
 
 Nethermind requires **at least 16GB of RAM**, though more is preferable.
 
-::: warning
-As of Smartnode v1.5.0, we have seen reports of memory leaks using Nethermind v1.13.1 which cause it to gradually consume all of the node's available RAM until it crashes.
-Users may want to choose a different client while these issues are resolved.
-:::
+::: tip NOTE
+Nethermind requires periodic pruning of its database periodically: its database will grow over time and gradually consume all of your free disk space unless you prune it when your disk runs low on free space.
+The frequency you need to prune will depend on your SSD's size.
 
+Unlike Geth, however, Nethermind **remains online** while it is pruning.
+This makes it a compelling choice for nodes because they won't have any down time during pruning.
 
-## Remote Execution Clients (ETH1)
-
-::: danger
-Remote Clients will no longer be supported after the Merge.
-As a result, they have been removed from the Rocketpool Smart Node as of v1.5.0.  
-You will need to run a **full** Execution client.
+For more information on pruning Nethermind, view the [Pruning the Execution Client](./pruning.md) page.
 :::
 
 
@@ -123,13 +106,13 @@ You will need to run a **full** Execution client.
 | Client     | Type  | CPU Usage | Minimum RAM Usage | Sync Time |
 | ---------- | ----- | --------- | ----------------- | --------- |
 | Geth       | Full  | Moderate  | 4 GB              | Moderate  |
-| Besu       | Full  | Moderate  | 8 GB              | Slow      |
+| Besu       | Full  | Moderate  | 6 GB              | Slow      |
 | Nethermind | Full  | Moderate  | 16 GB             | Fast      |
 
 
 ## Consensus Clients
 
-Rocket Pool's installer is proud to support all four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
+Rocket Pool's installer is proud to support four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
 
 Each of these is a **full client**, meaning you will contribute to the decentralization of the Consensus network regardless of which client you choose.
 
@@ -181,9 +164,16 @@ Teku is Apache 2.0 licensed and written in Java, a language notable for its matu
 
 ### Client Comparison Table
 
-| Client     | CPU Usage | Minimum RAM Usage | Sync Time                                               |
-| ---------- | --------- | ----------------- | ------------------------------------------------------- |
-| Lighthouse | Moderate  | 2 GB              | Moderate (normal sync)<br/>Instant with checkpoint sync |
-| Nimbus     | Low       | 0.75 GB           | Moderate (normal sync)<br/>Instant with checkpoint sync |
-| Prysm      | Moderate  | 2 GB              | Moderate                                                |
-| Teku       | Moderate  | 4 GB              | Slow (normal sync)<br/>Instant with checkpoint sync     |
+| Client     | CPU Usage | Minimum RAM Usage | Sync Time                    |
+| ---------- | --------- | ----------------- | ---------------------------- |
+| Lighthouse | Moderate  | 2 GB              | Instant with checkpoint sync |
+| Nimbus     | Low       | 0.75 GB           | Instant with checkpoint sync |
+| Prysm      | Moderate  | 2 GB              | Instant with checkpoint sync |
+| Teku       | Moderate  | 4 GB              | Instant with checkpoint sync |
+
+
+## Note for Raspberry Pi Users
+
+After the Merge of the Execution and Consensus layers in September 2022, our experience with staking on a Raspberry Pi has shown that currently the **only viable client pair** is **Geth** for your Execution client, and **Nimbus** for your Consensus client.
+
+Other platforms can reliably run any combination of clients, but for Raspberry Pi users, we **strongly recommend** using Geth and Nimbus.
