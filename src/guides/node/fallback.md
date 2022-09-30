@@ -1,6 +1,6 @@
 # Specifying a Fallback Node
 
-Starting with **1.5.0** of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because [you use Geth and need to prune it](./geth-pruning.md)).
+Starting with **1.5.0** of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because [you use Geth and need to prune it](./pruning.md)).
 In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains.
 
 Essentially, it allows you to *temporarily* use another pair of clients for things like querying the chains, sending transactions, and receiving blocks to attest to.
@@ -41,10 +41,10 @@ At the time of v1.5.0's release, the following Validator clients have Fallback c
 
 | Name | Supports Fallback | Valid Fallback Clients |
 | ---- | ----------------- | ---------------------- |
-| Lighthouse | Yes | Any |
+| Lighthouse | Yes | Any (doppelganger protection off)<br>Lighthouse (doppelganger protection on) |
 | Nimbus | No |  |
 | Prysm | Yes | Prysm |
-| Teku | No |  |
+| Teku | Yes | Any |
 
 If Fallback support is critical for you and your current Consensus client selection does not offer it, you may want to consider using a different Consensus client.
 Luckily, [switching clients is very easy with the Smartnode](./change-clients.md#changing-consensus-clients).
@@ -190,3 +190,9 @@ docker start rocketpool_eth1 rocketpool_eth2
 
 And you're done!
 Your fallback setup is working.
+
+
+## Next Steps
+
+Whether or not you've opted into creating and/or running a fallback node for your setup, the next step is to learn about **priority fees**.
+Click on the next section of the guide when you're ready to proceed.

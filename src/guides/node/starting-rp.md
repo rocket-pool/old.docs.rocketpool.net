@@ -34,6 +34,8 @@ Creating rocketpool_api  ...
 Creating rocketpool_api  ... done
 Creating rocketpool_eth2 ... done
 Creating rocketpool_watchtower ...
+Creating rocketpool_mev-boost   ... 
+Creating rocketpool_mev-boost   ... done
 Creating rocketpool_node       ...
 Creating rocketpool_validator  ...
 Creating rocketpool_validator  ... done
@@ -55,6 +57,7 @@ y
 Stopping rocketpool_node       ...
 Stopping rocketpool_validator  ...
 Stopping rocketpool_watchtower ...
+Stopping rocketpool_mev-boost  ...
 Stopping rocketpool_eth2       ...
 Stopping rocketpool_api        ...
 Stopping rocketpool_eth1       ...
@@ -62,6 +65,7 @@ Stopping rocketpool_validator  ... done
 Stopping rocketpool_node       ... done
 Stopping rocketpool_watchtower ... done
 Stopping rocketpool_api        ... done
+Stopping rocketpool_mev-boost  ... done
 Stopping rocketpool_eth2       ... done
 Stopping rocketpool_eth1       ... done
 ```
@@ -154,17 +158,17 @@ You can do this with the following command:
 rocketpool service version
 ```
 
-The output will look like this:
+The output will look like this **(note that you may have a newer version than what is displayed here, this is just an example)**:
 
 ```
 Your Smartnode is currently using the Ethereum Mainnet.
 
-Rocket Pool client version: 1.5.0
-Rocket Pool service version: 1.5.0
+Rocket Pool client version: 1.6.4
+Rocket Pool service version: 1.6.4
 Selected Eth 1.0 client: Geth (Locally managed)
-        Image: ethereum/client-go:v1.10.21
+        Image: ethereum/client-go:v1.10.25
 Selected Eth 2.0 client: Lighthouse (Locally managed)
-        Image: sigp/lighthouse:v2.5.1
+        Image: sigp/lighthouse:v3.1.0
 ```
 
 The first line will tell you if your Smartnode is configured for the Ethereum mainnet or for the Prater testnet.
@@ -175,10 +179,11 @@ If you are not on the network you expect to be on, go back to the Installing Roc
 
 **For Native users:**
 If you accepted the default settings when you first ran `rp service config`, then it's possible that the network reported here is incorrect.
-However, your `systemctl` service definitions *should* have the correct network baked directly into the command line arguments so you can ignore this discrepancy unless it bothers you.
+Simply switch it in the `rp service config` TUI, in the `Smartnode` section, to the proper network and restart your `node` and `watchtower` services.
 :::
 
-The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's `config.yml` file.
+The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's configuration.
+
 
 ## Checking the Service Status and Logs
 
@@ -212,7 +217,7 @@ The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm or Teku as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
@@ -263,7 +268,7 @@ The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm or Teku as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using Prysm as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.

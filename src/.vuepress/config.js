@@ -148,8 +148,10 @@ module.exports = {
                 'node/recovering-rp',
                 'node/cli-intro',
                 'node/prepare-node',
-                'node/create-validator',
                 'node/fallback',
+                'node/fee-distrib-sp',
+                'node/mev',
+                'node/create-validator',
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
@@ -159,7 +161,7 @@ module.exports = {
                     'node/grafana',
                     'node/updates',
                     'node/backups',
-                    'node/geth-pruning',
+                    'node/pruning',
                     'node/change-clients'
                   ]
                 },

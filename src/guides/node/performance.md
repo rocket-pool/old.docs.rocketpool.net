@@ -72,7 +72,7 @@ Filesystem        Size  Used Avail Use% Mounted on
 For conventional setups where you have one drive that stores both your Operating System and your Execution (ETH1) and Consensus (ETH2) chain data, you just need to look at the entry that has `/` in the `Mounted on` column.
 This represents your main disk.
 If that ever looks like it's running out of space (say, 80% used or so), then you need to start thinking about doing some cleanup.
-For example, if you're running Geth, you may want to look at [how to prune it](./geth-pruning.md) to clear up some space.
+For example, if you're running Geth, you may want to look at [how to prune it](./pruning.md) to clear up some space.
 
 For setups that store the Execution (ETH1) and Consensus (ETH2) chain data on a separate drive (such as the Raspberry Pi, which the above example comes from), you'll want to look at the row that has your chain data folder in the `Mounted on` column as well.
 In this example we mounted an external SSD to `/mnt/rpdata`, so we'll have to keep an eye on it to make sure it doesn't grow too large either.

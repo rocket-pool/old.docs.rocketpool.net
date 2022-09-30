@@ -6,13 +6,6 @@ To that end, we've worked hard to tweak and optimize a whole host of settings an
 
 This setup will run **a full Execution node** and **a full Consensus node** on the Pi, making your system contribute to the health of the Ethereum network while simultaneously acting as a Rocket Pool node operator.
 
-::: warning NOTE
-This setup works well with the current implementations of Execution and Consensus.
-It's possible that after the merge of the Execution (ETH1) chain and the beacon chain, a full node may be more computationally demanding.
-While we have been advised that this is unlikely, there is a chance that the Raspberry Pi may not be able to run a full node post-merge.
-**Please factor this into your decision before settling on it as a node platform.**
-:::
-
 
 ## Preliminary Setup
 
@@ -700,13 +693,12 @@ An increase of 7 more degrees, but still under our threshold of 65°C.
 
 ## Going to 2100 MHz (Heavy)
 
-The highest we're going to take the Pi in this guide is 2100 MHz.
-This represents a solid **40% speedup** over the stock configuration.
+The next step represents a solid **40% speedup** over the stock configuration.
 
 **NOTE: Not all Pi's are capable of doing this while staying at `over_voltage=6`.
 Try it, and if it breaks, go back to 2000 MHz.**
 
-This is the configuration we use on our Pi:
+The configuration will look like this:
 ```
 arm_freq=2100
 over_voltage=6
@@ -740,7 +732,44 @@ Current temperature: 58.9°C - Frequency: 2100MHz
 ```
 
 Just shy of 60°C, so there's plenty of room.
-We are happy with this performance and temperature range, so this is what we run.
+
+
+## Going to 2250 MHz (Extreme)
+
+This is the setting we run our Pi's at, which has been stable for over a year at the time of writing.
+Still, **users are cautioned in overclocking this high** - ensure you do thorough stability tests and have plenty of thermal headroom before attempting to make this your node's production configuration!
+
+Our configuration is:
+```
+arm_freq=2250
+over_voltage=10
+```
+
+Here are our results:
+```
+    Reps Time(s) DGEFA   DGESL  OVERHEAD    KFLOPS
+----------------------------------------------------
+    1024   0.95  85.69%   3.85%  10.47%  1650081.294
+    2048   1.91  85.64%   3.91%  10.45%  1646779.068
+    4096   3.84  85.41%   4.15%  10.44%  1637706.598
+    8192   7.75  85.50%   4.03%  10.46%  1620589.096
+   16384  15.34  85.43%   4.13%  10.44%  1638067.854
+```
+
+That's 46% faster than the stock configuration!
+
+OV10 is as the stock firmware will let the Pi go, and 2250 MHz is the fastest we could reliably run in production.
+
+The temperatures in the stress test get this high:
+```
+Current temperature: 70.6°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+```
+
+But during actual validation, they tend to stay below 60C which is acceptable for us.
 
 
 ## Next Steps
