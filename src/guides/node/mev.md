@@ -240,11 +240,113 @@ See below for instructions on how to check that it's working as expected.
 :::::
 
 ::::: tab Native Mode
-Please refer to [Flashbots' documentation](https://github.com/flashbots/mev-boost/wiki/Testing) to learn how to enable MEV-Boost on your Beacon Node and Validator Client services.
-
-::: warning NOTE
-In your MEV-Boost instance, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
+::: tip NOTE
+If you are using any consensus client other than Teku, then you have already [installed and configured MEV](./native.md#installing-mev-boost) when setting up your node. In this case, you can skip the additional Teku-only configuration steps described below.
 :::
+
+::: danger WARNING
+When configuring your node's MEV-Boost relays, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
+:::
+
+If you are running the Teku consensus client, then completing the configuration of MEV-Boost for Teku requires creating a separate configuration file that includes your node's fee distributor address as described in the next section.
+
+<b>Completing the MEV-Boost Configuration for Teku</b>
+
+You can determine your node's fee address by executing the command ```rp node status```. If you [opted into the smoothing pool](./fee-distrib-sp.md#the-smoothing-pool), the displayed fee address is the [Deposit Pool's contract address](../../overview/contracts-integrations.md#deposit-pool-contract-version-history). Otherwise, the command displays a unique fee distributor address for your node. (If the status indicates that you haven't set up your node's fee distributor address yet, you can do so using the ```rp node initialize-fee-distributor``` command. For more information, see [Node commands](../node/cli-intro.md#node-commands).)
+
+::: danger WARNING
+Because Teku uses a custom configuration file, you must assume full responsibility for ensuring the fee recipient is always set to the correct address in the file.
+
+Please read the [penalty specification](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) to understand what it must be set to given your configuration, and when you can safely change it from one value to another.
+
+Failure to do so could result in your minipools being penalized!
+:::
+
+You're now ready to create the Teku proposer configuration file:
+```shell
+sudo nano /etc/teku/proposerConfig.json
+```
+Define the contents of the file to enable MEV by default:
+```json
+{
+  "default_config": {
+    "fee_recipient": "<address>",
+    "builder": {
+      "enabled": true
+    }
+  }
+}
+```
+where `<address>` is the fee address you obtained from the `rp node status` command earlier (without the angle brackets).
+For example:
+```json
+{
+  "default_config": {
+    "fee_recipient": "0x2cac916b2A963Bf162f076C0a8a4a8200BCFBfb4",
+    "builder": {
+      "enabled": true
+    }
+  }
+}
+```
+After saving the file, update its owner:
+```shell
+sudo chown mevboost:mevboost /etc/teku/proposerConfig.json
+```
+
+Now, update the service files for both your Teku consensus client and validator client to enable MEV-Boost.
+To update the consensus client service configuration:
+```shell
+sudo nano /etc/systemd/system/teku-bn.service
+```
+Include the following arguments in the consensus client's `ExecStart` command:
+```
+--validators-builder-registration-default-enabled=true \
+--builder-endpoint=http://127.0.0.1:18550
+``` 
+For example:
+```
+ExecStart=/srv/teku/bin/teku \
+  --network=mainnet \
+  --data-path=/srv/teku/teku_data \
+  --p2p-port=9001 \
+  --rest-api-enabled \
+  --rest-api-port=5052 \
+  --eth1-deposit-contract-max-request-size=150 \
+  --ee-endpoint=http://localhost:8551 \
+  --ee-jwt-secret-file="/secrets/jwtsecret" \
+  --validators-builder-registration-default-enabled=true \
+  --builder-endpoint=http://127.0.0.1:18550 \
+  --validators-proposer-default-fee-recipient=${FEE_RECIPIENT}
+```
+To update the validator client configuration:
+```shell
+sudo nano /etc/systemd/system/teku-vc.service
+```
+Include the following arguments in the validator client's `ExecStart` command:
+```
+--validators-builder-registration-default-enabled=true \
+--validators-proposer-config="/etc/teku/proposerConfig.json"
+```
+For example:
+```
+ExecStart=/srv/teku/bin/teku validator-client \
+  --network=mainnet \
+  --validator-keys=/srv/rocketpool/data/validators/teku/keys:/srv/rocketpool/data/validators/teku/passwords \
+  --beacon-node-api-endpoint="http://localhost:5052" \
+  --validators-graffiti="RP Teku" \
+  --log-destination=CONSOLE \
+  --data-base-path=/srv/rocketpool \
+  --validators-builder-registration-default-enabled=true \
+  --validators-proposer-config="/etc/teku/proposerConfig.json" \
+  --validators-proposer-default-fee-recipient=${FEE_RECIPIENT}
+```
+Finally, you must reload and restart the consensus and validator client services:
+```shell
+sudo systemctl daemon-reload
+sudo systemctl restart teku-bn teku-vc
+```
+You have now finished configuring MEV-Boost for Teku.
 :::::
 ::::::
 
