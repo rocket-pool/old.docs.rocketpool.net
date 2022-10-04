@@ -21,13 +21,6 @@ Prior to changing your Execution client, it's worth noting the following points:
 - By default, the Smartnode will leave your old client's chain data on your drive in case you want to revert back to your old Execution client and pick up where you left off. You may want to **export it to a different location** and delete it to free up space prior to changing clients, since Execution clients can use hundreds of gigabytes. We have steps below on how to do this.
 - While your new client is resyncing, most of the Smartnode CLI functions will be offline since they rely on the Execution client. **You should have a fallback Execution client available before doing this to mitigate the downtime on your Smartnode.**
 
-::: warning NOTE
-After the Execution and Beacon chains become unified later this year (known as The Merge), remote providers such as **Pocket** and **Infura** can *no longer be used by validators*!
-After The Merge, your only option for a fallback is to have a second full Execution client running on another machine (or in the cloud) that you own and trust.
-
-The time between now and The Merge is an **excellent time** to switch to a client with a smaller market share for the health of the network, and use Pocket or Infura as a fallback Execution client while they're still available.
-:::
-
 
 ### (Optional) Export your Execution Client's Database
 
@@ -67,6 +60,13 @@ Your new Execution client will begin syncing immediately.
 As usual, you can follow it with `rocketpool service logs eth1`.
 **We recommend you do this to verify there are no errors, and that it works properly.**
 
+::: danger NOTE
+Now that the Execution and Consensus layers have merged, taking down your Execution client will *also* take down your Consensus client until your Execution client has finished resyncing.
+This means your node will **stop attesting and proposing blocks, and it will leak ETH instead of earning it!**
+
+To avoid this and continue validating while your Execution client resyncs, **please set up a [fallback node](./fallback.md)**.
+:::
+
 
 ### (Recommended) Remove your Old Chain Data
 
@@ -90,11 +90,6 @@ You should do this as soon as possible after switching clients to prevent unnece
 
 Changing Consensus clients is even easier than Execution clients, thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura).
 This feature lets you immediately sync a new Consensus client with the network, so there's no need to preserve your old chain data.
-
-::: warning WARNING
-**Prysm** is currently in the process of adding support for Checkpoint Sync.
-It will be enabled in a future version, and we do not recommend you change clients to Prysm until it supports Checkpoint Sync.
-:::
 
 Start by using the `rocketpool service config` UI and navigating to the `Consensus Client (ETH2)` section.
 Next, select the `Consensus Client` dropdown:
