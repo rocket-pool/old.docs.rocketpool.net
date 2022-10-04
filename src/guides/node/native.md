@@ -173,11 +173,11 @@ Next, download the following scripts - Rocket Pool will use them when it needs t
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/raw/release/install/scripts/restart-vc.sh -O /srv/rocketpool/restart-vc.sh
 
-wget https://github.com/rocket-pool/smartnode-install/raw/release/install/scripts/stop-vc.sh -O /srv/rocketpool/stop-vc.sh
+wget https://github.com/rocket-pool/smartnode-install/raw/release/install/scripts/stop-validator.sh -O /srv/rocketpool/stop-validator.sh
 
 chmod +x /srv/rocketpool/restart-vc.sh
 
-chmod +x /srv/rocketpool/stop-vc.sh
+chmod +x /srv/rocketpool/stop-validator.sh
 ```
 
 Now open `~/.profile` with your editor of choice and add this line to the end:
@@ -318,7 +318,7 @@ Where `<validator service name>` is the name of your VC service (e.g. `lighthous
 Now, modify `/srv/rocketpool/restart-vc.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl restart <validator service name>`
 
-Also modify `/srv/rocketpool/stop-vc.sh`:
+Also modify `/srv/rocketpool/stop-validator.sh`:
 - Uncomment the line at the end and change it to `sudo systemctl stop <validator service name>`
 
 All set!
