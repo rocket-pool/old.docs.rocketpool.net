@@ -163,9 +163,9 @@ mkdir -p /srv/rocketpool/data/validators && sudo chown -R rp:rp /srv/rocketpool/
 
 sudo chmod 775 /srv/rocketpool/data/validators
 
-mkdir /srv/rocketpool/rewards-trees && sudo chown rp:rp /srv/rocketpool/rewards-trees
+mkdir /srv/rocketpool/data/rewards-trees && sudo chown rp:rp /srv/rocketpool/data/rewards-trees
 
-mkdir /srv/rocketpool/custom-keys && sudo chown rp:rp /srv/rocketpool/custom-keys
+mkdir /srv/rocketpool/data/custom-keys && sudo chown rp:rp /srv/rocketpool/data/custom-keys
 ```
 
 Next, download the following scripts - Rocket Pool will use them when it needs to stop or restart your Validator Client to change its fee recipient (discussed later) or load new keys after you create a new minipool:
