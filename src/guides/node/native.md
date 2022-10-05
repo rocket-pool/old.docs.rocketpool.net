@@ -511,6 +511,22 @@ Now, add or change the following parameters in the Teku VC's service definition 
 ::::
 
 
+### Relaxing `umask`
+
+By default, your system will typically come with a [`umask`]() configuration that will strip the `+w` bit from the group permissions whenever the `node` daemon creates a new folder.
+This is problematic for several consensus clients, because they will actually write things such as lock files or other metadata into the directories that the Smartnode creates when it generates new validator keys during a minipool deposit.
+
+To combat this and ensure your VC works correctly, please **relax your `umask` settings**.
+For example, instead of `0022`, you should consider setting it to `0002` for the `rp` user.
+
+Every system is different, so please consult [a guide](https://www.howtogeek.com/812961/umask-linux/) that covers your Operating System to learn how to do this.
+
+::: warning WARNING
+This step is *crucial* to ensure the automatic staking and validating duties are handled properly.
+If you notice permissions problems in your VC's logs after your minipool passes the 12-hour scrub check and enters `staking` status, you will likely need to run `sudo chmod 775` on the folder containing your validator keys so your VC service can write to that folder.
+:::
+
+
 ### Reloading the VC Service
 
 With these changes made, you can now reload and restart the VC service using the following:
