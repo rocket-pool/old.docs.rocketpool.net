@@ -142,7 +142,7 @@ sudo chown rp:rp /usr/local/bin/rocketpoold
 
 Finally, **set the `suid` bit** and other permissions bits on the daemon binary:
 ```
-sudo chmod u+s,g+s,o-rwx /usr/local/bin/rocketpoold
+sudo chmod u+sx,g+sx,o-rwx /usr/local/bin/rocketpoold
 ```
 
 This will ensure that the daemon always runs as the `rp` user, so it always has the proper permissions set.
@@ -159,13 +159,13 @@ With the CLI and Daemon installed, you'll need to next set up the folder structu
 Start by creating the following folders:
 
 ```
-mkdir -p /srv/rocketpool/data/validators && sudo chown -R rp:rp /srv/rocketpool/data
+mkdir -p /srv/rocketpool/data/validators && sudo chmod 775 /srv/rocketpool/data/validators
 
-sudo chmod 775 /srv/rocketpool/data/validators
+mkdir /srv/rocketpool/data/rewards-trees
 
-mkdir /srv/rocketpool/data/rewards-trees && sudo chown rp:rp /srv/rocketpool/data/rewards-trees
+mkdir /srv/rocketpool/data/custom-keys
 
-mkdir /srv/rocketpool/data/custom-keys && sudo chown rp:rp /srv/rocketpool/data/custom-keys
+sudo chown -R rp:rp /srv/rocketpool/data
 ```
 
 Next, download the following scripts - Rocket Pool will use them when it needs to stop or restart your Validator Client to change its fee recipient (discussed later) or load new keys after you create a new minipool:
