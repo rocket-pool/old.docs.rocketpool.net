@@ -28,7 +28,9 @@ For test RPL, we have added a similar faucet function directly to the CLI.
 Please see the [Getting Test RPL on Goerli](../testnet/overview.md#getting-test-rpl-on-goerli) guide to acquire some.
 :::
 ::: tab Running on the Main Network
-We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH and RPL tokens.
+We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH.
+If you need RPL, you can purchase it on a centralized exchange such as [Kraken](https://www.kraken.com/prices/rocket-pool?quote=usd) or a decentralized exchange such as [Balancer](https://app.balancer.fi/#/trade/ether/0xD33526068D116cE69F19A9ee46F0bd304F21A51f).
+
 Start by transferring some ETH from your existing wallet to the node wallet.
 If running on Mainnet, **leave your RPL on the wallet you used to purchase it.**
 
