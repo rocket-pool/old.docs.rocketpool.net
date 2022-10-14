@@ -140,8 +140,6 @@ The sections below include some steps that are demonstrated with MetaMask as an 
 With this method, you will use a web3 wallet (such as MetaMask) and interact with Rocket Pool's website to swap ETH for rETH and vice-versa.
 This method is **guaranteed** to provide you with the exact amount of rETH that your ETH is worth, since it's coming directly from Rocket Pool's smart contracts, but it can be somewhat expensive if the network's gas prices are high and you're staking a relatively small amount of ETH.
 
-Note, however, that your rETH tokens will be **locked to your address for 24 hours** if you use this method to prevent timing attacks on the network.
-
 ::: tip NOTE
 If you are practicing staking on the Prater Testnet, the direct method above is the only option currently supported.
 :::
@@ -160,17 +158,11 @@ Because of this, and because it has a **smaller transaction fee** than swapping 
 If Balancer doesn't work for you, there is also an ETH-rETH liquidity pool on Uniswap.
 Note that this is a conventional pool, so **you will be affected by slippage and higher fees** if you use it, but the gas fee will still be lower than staking directly via Rocket Pool's website.
 
-Note that your rETH will **not be locked to your address** if you stake via an exchange.
-You can move them or use them immediately.
-
 [Click here to learn how to swap ETH for rETH via a decentralized exchange on Layer 1.](./via-l1.md)
 
 
 ### Via a Decentralized Exchange on a Layer 2 Network
 With this method, you will start by bridging your existing ETH (or other tokens of choice) onto an Ethereum Layer 2 network such as [Optimism](https://www.optimism.io/) or [Arbitrum](https://arbitrum.io/) and then use a decentralized exchange on the network to purchase rETH. If you already have tokens on a Layer 2 network, this method is compelling because **the transaction fees are ~10x smaller than on the Ethereum mainnet**. However, if you have not used a Layer 2 network before, it does require a few additional steps to get set up. 
-
-Note that your rETH will **not be locked to your address** if you stake via an exchange.
-You can move them or use them immediately.
 
 [Click here to learn how to swap ETH for rETH via a decentralized exchange on a Layer 2 network.](./via-l2.md)
 
