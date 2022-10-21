@@ -10,7 +10,7 @@ If you're not interested in how staking works and just want to learn how to stak
 ## How Ethereum Staking Works
 
 Before getting into Rocket Pool, let's talk about staking on Ethereum in general.
-Since [the Merge](https://ethereum.org/en/upgrades/merge/) on September 15th, 2022, Ethereum now comprises two blockchains in parallel: the Execution layer (formerly ETH1), which contains all of Ethereum's transaction data, and the Consensus layer (also known as the [Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/), formerly ETH2) which consists of a network of **validators** that collectively determine the validity of each transactionand each block broadcast to the network.
+Since [the Merge](https://ethereum.org/en/upgrades/merge/) on September 15th, 2022, Ethereum now comprises two blockchains in parallel: the Execution layer (formerly ETH1), which contains all of Ethereum's transaction data, and the Consensus layer (also known as the [Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/), formerly ETH2) which consists of a network of **validators** that collectively determine the validity of each transaction and each block broadcast to the network.
 
 **Staking** is the process of creating and maintaining one (or more) of these validators on the Beacon Chain to help the network maintain the consistency and security of the Ethereum blockchain.
 Validators do this by listening for transactions and new block proposals, and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
