@@ -26,7 +26,7 @@ The amount of ETH ready to be staked. The deposit pool is funded by regular user
 The fundamental cryptocurrency coin generated and used by the Ethereum protocol.
 
 ## eth1.0
-The original Ethereum 1.0 protocol that uses a consensus mechanism known as proof of work (PoW) and uses miners to validate the block-chain.
+The original Ethereum 1.0 protocol that uses a consensus mechanism known as proof of work (PoW) and uses miners to validate the blockchain.
 
 ## Execution (ETH1) Client
 Ethereum Software clients that run the execution layer.
