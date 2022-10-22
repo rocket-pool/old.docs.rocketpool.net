@@ -221,7 +221,7 @@ sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
 
 ```
-rp service config
+rocketpool service config
 ```
 
 When you're done, start Rocket Pool up again:

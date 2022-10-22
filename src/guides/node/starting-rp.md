@@ -178,8 +178,8 @@ The first line will tell you if your Smartnode is configured for the Ethereum ma
 If you are not on the network you expect to be on, go back to the Installing Rocket Pool section and review the installation instructions - you may have missed the portion that has different instructions depending on which network you want to use.
 
 **For Native users:**
-If you accepted the default settings when you first ran `rp service config`, then it's possible that the network reported here is incorrect.
-Simply switch it in the `rp service config` TUI, in the `Smartnode` section, to the proper network and restart your `node` and `watchtower` services.
+If you accepted the default settings when you first ran `rocketpool service config`, then it's possible that the network reported here is incorrect.
+Simply switch it in the `rocketpool service config` TUI, in the `Smartnode` section, to the proper network and restart your `node` and `watchtower` services.
 :::
 
 The second set of lines will tell you which clients you're using, and which versions of them are defined in Rocket Pool's configuration.

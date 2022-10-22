@@ -26,7 +26,7 @@ Choose which mode you'd like to learn more about from the list above, or simply 
 To configure the Smartnode, run the configuration command:
 
 ```
-rp service config
+rocketpool service config
 ```
 
 This will launch a terminal-based UI that will allow you to quickly and easily configure your node, as well as provide optional fine-grained control over the settings that are relevant to Native mode.
