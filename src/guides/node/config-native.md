@@ -1,11 +1,5 @@
 # Configuring the Smartnode Stack (Native Mode)
 
-::: danger WARNING
-This documentation is currently out of date with the release of Smartnode v1.5.0.
-
-It will be updated shortly.
-:::
-
 In this section, we'll go over the various methods for configuring the Smartnode if you're using the **Native setup** that doesn't use Docker at all.
 
 ::: warning NOTE
@@ -140,6 +134,14 @@ The next screen will have a few other miscellaneous settings:
 Leave these as the default options unless you have decided to use a directory other than `/srv/rocketpool` for your Smartnode installation.
 
 
+### Fallback Clients
+
+Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it).
+In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
+
+[To learn more about fall back nodes, see this section](./fallback.md) and return here when you're done.
+
+
 ### Metrics
 
 Rocket Pool has the ability to integrate with Prometheus and Grafana to produce convenient web-based dashboards that let you observe your node's health at a glance:
@@ -165,6 +167,25 @@ All of the data collected by this system **stays on your machine**.
 Rocket Pool does not collect any of the telemetry or send it to a separate service.
 It's purely there for you to use so you can monitor your own node!
 :::
+
+
+### MEV Configuration
+
+Since the Merge of the Execution and Consensus layers in September 2022, Ethereum validators now have the ability to earn priority fees and participate in Maximal Extractable Value (or MEV for short).
+
+Starting with Smartnode v1.7.0, MEV is now *opt-out* so a notification about configuring it is presented as part of the initial setup, as you see in the next screen:
+
+<center>
+
+![](./images/tui-native-mev.png)
+
+</center>
+
+[Please read our MEV guide to learn more about MEV, its configuration, and what to do in this section of the wizard.](./mev.md)
+Return here when you're finished.
+
+
+### Completion
 
 After this question, you've finished setting up the Smartnode configuration.
 You will see the following dialog:
