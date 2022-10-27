@@ -911,6 +911,29 @@ This is not actually an error, it's simply a cosmetic glitch.
 You can safely ignore it.
 :::
 
+::: tip NOTE
+If you are running Mac OS, you may see an issue complaining about node_exporter.
+You will need to run these commands to fix.
+```
+rocketpool service stop
+nano ~/.rocketpool/override/exporter.yml
+```
+Replace the entire contents of the file with:
+```
+# Enter your own customizations for the node exporter container here. These changes will persist after upgrades, so you only need to do them once.
+#
+# See https://docs.docker.com/compose/extends/#adding-and-overriding-configuration
+# for more information on overriding specific parameters of docker-compose files.
+
+version: "3.7"
+services:
+  node-exporter:
+    x-rp-comment: Add your customizations below this line
+    volumes:   ["/proc:/host/proc:ro","/sys:/host/sys:ro"]
+```
+then finally ```rocketpool service start```.
+:::
+
 
 ## Configuring via the Command Line
 
