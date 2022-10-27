@@ -25,7 +25,7 @@ USAGE:
    rocketpool [global options] command [command options] [arguments...]
 
 VERSION:
-   1.5.0
+   1.7.0-dev
 
 AUTHORS:
    David Rugendyke <david@rocketpool.net>
@@ -35,7 +35,6 @@ AUTHORS:
 
 COMMANDS:
    auction, a   Manage Rocket Pool RPL auctions
-   faucet, f    Access the legacy RPL faucet
    minipool, m  Manage the node's minipools
    network, e   Manage Rocket Pool network parameters
    node, n      Manage the node
@@ -74,9 +73,6 @@ NAME:
 USAGE:
    rocketpool service [global options] command [command options] [arguments...]
 
-VERSION:
-   1.5.0
-
 COMMANDS:
    install, i                 Install the Rocket Pool service
    config, c                  Configure the Rocket Pool service
@@ -86,10 +82,11 @@ COMMANDS:
    stop, o                    Pause the Rocket Pool service (alias of 'rocketpool service pause')
    logs, l                    View the Rocket Pool service logs
    stats, a                   View the Rocket Pool service stats
-   compose                    View the Rocket Pool service docker-compose config
+   compose                    View the Rocket Pool service docker compose config
    version, v                 View the Rocket Pool service version information
    prune-eth1, n              Shuts down the main ETH1 client and prunes its database, freeing up disk space, then restarts it when it's done.
    install-update-tracker, d  Install the update tracker that provides the available system update count to the metrics dashboard
+   check-cpu-features, ccf    Checks if your CPU supports all of the features required by the "modern" version of certain client images. If not, it prints what features are missing.
    get-config-yaml            Generate YAML that shows the current configuration schema, including all of the parameters and their descriptions
    export-eth1-data           Exports the execution client (eth1) chain data to an external folder. Use this if you want to back up your chain data before switching execution clients.
    import-eth1-data           Imports execution client (eth1) chain data from an external folder. Use this if you want to restore the data from an execution client that you previously backed up.
@@ -97,10 +94,9 @@ COMMANDS:
    resync-eth2                Deletes the ETH2 client's chain data and resyncs it from scratch. Only use this as a last resort!
    terminate, t               Deletes all of the Rocket Pool Docker containers and volumes, including your ETH1 and ETH2 chain data and your Prometheus database (if metrics are enabled). Only use this if you are cleaning up the Smartnode and want to start over!
 
-GLOBAL OPTIONS:
-   --compose-file value, -f value  Optional compose files to override the standard Rocket Pool docker-compose.yml; this flag may be defined multiple times
+OPTIONS:
+   --compose-file value, -f value  Optional compose files to override the standard Rocket Pool docker compose YAML files; this flag may be defined multiple times
    --help, -h                      show help
-
 ```
 ### `status`
 
@@ -209,9 +205,6 @@ NAME:
 USAGE:
    rocketpool node [global options] command [command options] [arguments...]
 
-VERSION:
-   1.5.0
-
 COMMANDS:
    status, s                      Get the node's status
    sync, y                        Get the sync progress of the eth1 and eth2 clients
@@ -232,9 +225,9 @@ COMMANDS:
    distribute-fees, b             Distribute the priority fee and MEV rewards from your fee distributor to your withdrawal address and the rETH contract (based on your node's average commission)
    join-smoothing-pool, js        Opt your node into the Smoothing Pool
    leave-smoothing-pool, ls       Leave the Smoothing Pool
-   sign-message, sm               Sign an arbitrary message using the node wallet's private key
+   sign-message, sm               Sign an arbitrary message with the node's private key
 
-GLOBAL OPTIONS:
+OPTIONS:
    --help, -h  show help
 ```
 
@@ -510,9 +503,6 @@ NAME:
 USAGE:
    rocketpool minipool [global options] command [command options] [arguments...]
 
-VERSION:
-   1.5.0
-
 COMMANDS:
    status, s                   Get a list of the node's minipools
    stake, t                    Stake a minipool after the scrub check, moving it from prelaunch to staking.
@@ -523,7 +513,7 @@ COMMANDS:
    set-use-latest-delegate, l  If enabled, the minipool will ignore its current delegate contract and always use whatever the latest delegate is
    find-vanity-address, v      Search for a custom vanity minipool address
 
-GLOBAL OPTIONS:
+OPTIONS:
    --help, -h  show help
 ```
 
