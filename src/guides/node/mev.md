@@ -119,7 +119,7 @@ In phase 1, MEV-Boost is provided to all node operators as an **opt-in** configu
 Node operators are encouraged to use it because it improves rETH's returns and thus keeps the protocol competitive, but are not required to use it.
 Node operators can elect to use **one or more** of the trusted relays listed above but cannot use a custom (untrusted) relay.
 
-This is the **current** phase.
+This phase ended in November 2022.
 
 
 ### Phase 2: Opt-Out
@@ -128,7 +128,7 @@ In phase 2, MEV-Boost is enabled by default for all node operators.
 Node operators can elect to use **one or more** of the trusted relays listed above but cannot use a custom (untrusted) relay.
 Node operators that choose to opt-out of MEV-boost must do so explicitly before starting the Smartnode.
 
-This phase is estimated to begin in **October 2022**.
+This is the **current phase**.
 
 
 ### Phase 3: Required
@@ -156,7 +156,7 @@ Start by running `rocketpool service config` and navigate to the `MEV-Boost` opt
 
 Check the box labeled `Enable MEV-Boost` to enable it.
 
-Once enabled, The screen will look like this (as of Smartnode v1.6.4):
+Once enabled, The screen will look like this (*as of Smartnode v1.7.0*):
 
 <center>
 
@@ -164,24 +164,24 @@ Once enabled, The screen will look like this (as of Smartnode v1.6.4):
 
 </center>
 
-Check the box labeled `Enable MEV-Boost` to enable it.
-
 Below is a description of each option and how to use them.
 
 - The `MEV-Boost Mode` box lets you toggle between a MEV-Boost instance that Rocket Pool manages, and an external one that you manage on your own. This is meant for advanced users that already have MEV-Boost set up and simply want to use it instead of having Rocket Pool run a second copy. Regular Docker Mode users should just leave this set to `Locally Managed`.
 
-- Each of the `Relay` check boxes lets you specify which relays you want to use. **You can enable multiple relays here, you don't need to limit your selection to only one!** Please see the descriptions of each relay above for more information on them.
-  - If you don't care about OFAC sanctions or MEV type, **simply check all of the boxes**.
-  - If you want to ensure compliaces with the OFAC sactions, you should select **Flashbots, bloxRoute Regulated, Blocknative, and Eden.**
-  - If you specifically want to avoid relays that comply with the OFAC sanctions, you should select **bloxRoute Max Profit** and/or **bloxRoute Ethical** depending on how you feel about Sandwich Attacks.
-  - *In a future Smartnode update, we'll replace these explicit relay choices with these profiles instead for simplicity.*
+- The `Selection Mode` box lets you switch between **Profile Mode** and **Relay Mode**.
+  - **Profile Mode** is the default. It lets you select which relays to enable based on their "profiles". A relay's profile is made of the following choices:
+    - Whether it's **regulated** (complies with government sanctions lists such as the OFAC list and blacklists certain addresses) or **unregulated** (*does not* censor any transactions based on any blacklists)
+    - Whether it **allows all types of MEV** or explicitly prohibits bundles that involve sandwich attacks or front-running Ethereum users
+  - You can **select multiple profiles**.
+  - Each profile you select has a set of relays that adhere to it which are listed in the description box; enabling that profile will enable all of those relays.
+  - Advanced users can change this to **Relay Mode**, which lets them explicitly select which relays they would like to use.
 
 - The `Port` box is not important for Docker mode users.
 - The `Expose API Port` box is not important for Docker mode users.
 - The `Container Tag` box is useful to manually upgrade the version of MEV-Boost that the Smartnode runs if Flashbots releases a new high-priority version you want to use before a Smartnode update with it is released.
 - The `Additional Flags` box is used if you want to add supplemental config flags or parameters directly to the MEV-Boost container. Normally, it will not be useful.
 
-Once you've enabled MEV-Boost and enabled the relays you'd like to do, simply save and exit.
+Once you've enabled MEV-Boost and enabled the relays you'd like, simply save and exit.
 The Smartnode will restart the relevant containers for you, and automatically set it all up for you.
 
 See below for instructions on how to check that it's working as expected. 
@@ -199,7 +199,7 @@ Start by running `rocketpool service config` and navigate to the `MEV-Boost` opt
 
 Check the box labeled `Enable MEV-Boost` to enable it.
 
-Once enabled, The screen will look like this (as of Smartnode v1.6.4):
+Once enabled, The screen will look like this (*as of Smartnode v1.7.0*):
 
 <center>
 
@@ -217,18 +217,20 @@ Below is a description of each option and how to use them.
 If you run your own MEV-Boost instance, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
 :::
 
-- If you decided to use a `Locally Managed` instance of MEV-Boost, each of the `Relay` check boxes underneath it will let you specify which relays you want to use. **You can enable multiple relays here, you don't need to limit your selection to only one!** Please see the descriptions of each relay above for more information on them.
-  - If you don't care about OFAC sanctions or MEV type, **simply check all of the boxes**.
-  - If you want to ensure compliaces with the OFAC sactions, you should select **Flashbots, bloxRoute Regulated, Blocknative, and Eden.**
-  - If you specifically want to avoid relays that comply with the OFAC sanctions, you should select **bloxRoute Max Profit** and/or **bloxRoute Ethical** depending on how you feel about Sandwich Attacks.
-  - *In a future Smartnode update, we'll replace these explicit relay choices with these profiles instead for simplicity.*
+- If you decided to use a `Locally Managed` instance of MEV-Boost, he `Selection Mode` box lets you switch between **Profile Mode** and **Relay Mode**.
+  - **Profile Mode** is the default. It lets you select which relays to enable based on their "profiles". A relay's profile is made of the following choices:
+    - Whether it's **regulated** (complies with government sanctions lists such as the OFAC list and blacklists certain addresses) or **unregulated** (*does not* censor any transactions based on any blacklists)
+    - Whether it **allows all types of MEV** or explicitly prohibits bundles that involve sandwich attacks or front-running Ethereum users
+  - You can **select multiple profiles**.
+  - Each profile you select has a set of relays that adhere to it which are listed in the description box; enabling that profile will enable all of those relays.
+  - Advanced users can change this to **Relay Mode**, which lets them explicitly select which relays they would like to use.
 
 - The `Port` box determines which port MEV-Boost will listen for incoming connections from your Beacon Node on. If you need to change it because of a port conflict within your node, you can do it here.
 - The `Expose API Port` box **should be checked** so that your externally-managed BN can communicate with the MEV-Boost instance Rocket Pool will manage.
 - The `Container Tag` box is useful to manually upgrade the version of MEV-Boost that the Smartnode runs if Flashbots releases a new high-priority version you want to use before a Smartnode update with it is released.
 - The `Additional Flags` box is used if you want to add supplemental config flags or parameters directly to the MEV-Boost container. Normally, it will not be useful.
 
-Once you've enabled MEV-Boost and enabled the relays you'd like to do, simply save and exit.
+Once you've enabled MEV-Boost and enabled the relays you'd like, simply save and exit.
 If you're using a `Locally Managed` instance and have the `Expose API Port` box checked, you can then configure your Beacon Node to connect to it at `http://localhost:18550`.
 Please refer to [Flashbots' documentation](https://github.com/flashbots/mev-boost/wiki/Testing) to learn how to enable MEV-Boost on your externally-managed Beacon Node.
 

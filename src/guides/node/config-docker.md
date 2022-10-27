@@ -103,7 +103,8 @@ By choosing this, the Smartnode will simply connect to your existing clients and
 For example, users can use this to plug into the clients that they currently use for solo staking; that way, they don't need to have two separate copies of the clients.
 
 :::warning NOTE
-As the Smartnode cannot manage external Execution clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
+Since the Execution-Consensus Layer Merge, you *cannot* mix and match these modes (e.g., you cannot have a local Execution client but an externally-managed Consensus client).
+You must either choose all locally-managed or all externally-managed.
 :::
 
 
@@ -176,32 +177,9 @@ When you're happy with your fallback Execution client choices, proceed to the ne
 ### Consensus Client Setup
 
 Now that you have an Execution client ready, the next task is to set up the Consensus client.
-The first thing to do is determine which management mode you'd like to use for it, just like you did for the Execution client earlier:
+The "mode" (local or external) will be inherited from the choice you used for your Execution client earlier.
 
-As with the Execution client management mode, there are two options here.
-
-**Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
-Use it if you don't already have a Consensus client and you want the Smartnode to manage one for you.
-By choosing this, the Smartnode will add both a **Beacon Node** (the process used to communicate with the Beacon Chain) and a **Validator Client** (the process used by minipools to validate on the Beacon Chain and earn rewards) as Docker containers that it can control to its stack.
-Don't worry, you'll get to choose *which* client you want to run next.
-
-**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have a Consensus client running elsewhere that they manage manually.
-By choosing this, the Smartnode will simply connect to your existing Beacon Node and will not run one of its own.
-However, it *will* run its own Validator Client so it can manage its own validator keys.
-
-For example, users can use this to plug into a Beacon Node that they currently use for solo staking; that way, they don't need to have two separate copies of a Beacon Node.
-
-<center>
-
-![](./images/tui-cc-mode.png)
-
-</center>
-
-:::warning NOTE
-As the Smartnode cannot manage external Consensus clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
-:::
-
-Choose which mode you'd like to use for managing your Consensus client and follow the steps in the corresponding tab below:
+Choose which mode you selected earlier from the tabs below:
 
 ::::::: tabs
 :::::: tab Locally Managed
@@ -364,6 +342,23 @@ The message will be preserved forever, so think of it like a fun little way to l
 **Note the maximum length of the graffiti is 16 characters.**
 
 If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+Next up is an option to enable or disable **Checkpoint Sync**:
+
+<center>
+
+![](./images/tui-local-checkpoint.png)
+
+</center>
+
+Prysm has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://docs.prylabs.network/docs/prysm-usage/checkpoint-sync) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+One popular option is Infura, which offers this service for free (though it requires you to create an account).
+
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -678,7 +673,7 @@ After that, your Beacon node will be configured to connect to Infura when it fir
 Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it).
 In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
 
-[To learn more about fall back nodes see this section](./fallback.md)
+[To learn more about fall back nodes, see this section](./fallback.md) and return here when you're done.
 
 
 ### Metrics Configuration
@@ -706,6 +701,25 @@ All of the data collected by this system **stays on your machine**.
 Rocket Pool does not collect any of the telemetry or send it to a separate service.
 It's purely there for you to use so you can monitor your own node!
 :::
+
+
+### MEV Configuration
+
+Since the Merge of the Execution and Consensus layers in September 2022, Ethereum validators now have the ability to earn priority fees and participate in Maximal Extractable Value (or MEV for short).
+
+Starting with Smartnode v1.7.0, MEV is now *opt-out* so its configuration is presented as part of the initial setup, as you see in the next screen:
+
+<center>
+
+![](./images/tui-mev-mode.png)
+
+</center>
+
+[Please read our MEV guide to learn more about MEV, its configuration, and what to do in this section of the wizard.](./mev.md)
+Return here when you're finished.
+
+
+### Completion
 
 After this question, you've finished setting up the Smartnode!
 You will see the following dialog:
