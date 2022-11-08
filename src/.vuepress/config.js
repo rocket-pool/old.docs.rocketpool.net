@@ -191,6 +191,18 @@ module.exports = {
               ]
             },
             {
+              title: 'Running an Oracle DAO Node',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'odao/overview',
+                'odao/setup',
+                'odao/testing',
+                'odao/monitoring',
+                'odao/duties'
+              ]
+            },
+            {
               title: 'Legacy Guides',
               sidebarDepth: 2,
               collapsable: true,
