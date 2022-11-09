@@ -471,14 +471,14 @@ This might be useful if you want to move your funds on the wallet elsewhere.
 The syntax for using the `send` command is like this:
 
 ```
-rocketpool node send <amount> <token> <address>
+rocketpool node send <amount> <token> <address or ENS name>
 ```
 
 The arguments are as follows:
 
 - `<amount>` is the amount of the token to send.
 - `<token>` is the token to send - this can be `eth`, `rpl`, `fsrpl` (the old legacy RPL token), or `reth`.
-- `<address>` is the Ethereum address to send the tokens to.
+- `<address or ENS name>` is the Ethereum address (or ENS name) to send the tokens to.
 
 For example:
 
