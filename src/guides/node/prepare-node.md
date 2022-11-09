@@ -196,19 +196,19 @@ We suggest that you set up your voting address or delegate early so that you don
 To learn more about how to participate in RocketPool governance, [please check out this medium article](https://medium.com/rocket-pool/rocket-pool-protocol-dao-governance-phase-0-4b8ec7bfe07e)
 
 
-## Map an ENS name to your node wallet
+## Map an ENS Name to your Node Wallet
 
-If you want your node wallet address to be mapped to a human-readable name like 'alice.eth', follow these steps:
+If you want your node wallet address to be mapped to a human-readable name like `alice.eth`, follow these steps:
 
-1) Purchase an ENS name at their [website](https://app.ens.domains).
+1) Purchase an ENS name at [the official ENS website](https://app.ens.domains).
 
-2) Still at the ENS website, setup the **forward resolution** for the name, defining which address will be used when someone references your .eth name.
+2) Still at the ENS website, setup the **forward resolution** for the name, defining which address will be used when someone references your `.eth` name.
 - Select "My account"
-- click on the ENS name you want to edit
-- click on "Add/edit record"
+- Click on the ENS name you want to edit
+- Click on "Add/edit record"
 - Insert your desired ETH address, click "Confirm" and submit the transaction.
 
-3) After the previous transaction is confirmed, you can use the smartnode cli to setup the **reverse resolution**. This will allow applications to map back from your node wallet address to your .eth name.
+3) After the previous transaction is confirmed, you can use the Smartnode CLI to setup the **reverse resolution**. This will allow applications to map back from your node wallet address to your `.eth` name.
 
 Execute the command:
 ```
@@ -217,11 +217,12 @@ rocketpool wallet set-ens-name <your-ens-name.eth>
 
 This action also requires sending a transaction. You'll need to confirm the desired parameters and submit the transaction.
 
-::: tip NOTE
-**Make sure you completed step 2 to setup the forward resolution before running the cli command to setup the reverse resolution**. This is a safety measure to stop wallets from trying to impersonate an ENS name they don't control.
+::: warning NOTE
+**Make sure you completed step 2 to setup the forward resolution before running the CLI command to setup the reverse resolution**. This is a safety measure to stop wallets from trying to impersonate an ENS name they don't control.
 :::
 
 4) After the transaction was succesfully included in a block, run `rocketpool node status` to see that your your wallet is now associated to your ENS name.
+
 
 ## Next Steps
 
