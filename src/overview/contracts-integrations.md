@@ -55,7 +55,8 @@ Goerli*  | v1.1 (current) | [0x2cac916b2A963Bf162f076C0a8a4a8200BCFBfb4](https:/
 Category        | Service             | Link    | Link
 ----------------|---------------------|---------|--------
 Data Feeds      | Subgraph            | [RPL](https://github.com/Data-Nexus/rocket-pool-mainnet) | [rETH](https://github.com/Data-Nexus/rocket-pool-mainnet)
-Exchanges       | Balancer (Mainnet)  | -       | [ETH/rETH](https://app.balancer.fi/#/trade/ether/0xae78736Cd615f374D3085123A210448E74Fc6393)
+Exchanges       | 1inch (Mainnet)     | -       | [ETH/rETH](https://app.1inch.io/#/1/unified/swap/ETH/rETH)
+&nbsp;          | Balancer (Mainnet)  | -       | [ETH/rETH](https://app.balancer.fi/#/trade/ether/0xae78736Cd615f374D3085123A210448E74Fc6393)
 &nbsp;          | Bancor (Mainnet)    | [ETH/RPL](https://app.bancor.network/swap?from=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE&to=0xD33526068D116cE69F19A9ee46F0bd304F21A51f) | [ETH/rETH](https://app.bancor.network/swap?from=0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE&to=0xae78736Cd615f374D3085123A210448E74Fc6393)
 &nbsp;          | Curve (Mainnet)     | -       | [wstETH/rETH](https://curve.fi/factory-crypto/14)
 &nbsp;          | Uniswap (Mainnet)   | [ETH/RPL](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xd33526068d116ce69f19a9ee46f0bd304f21a51f&chainId=1) | [ETH/rETH](https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0xae78736Cd615f374D3085123A210448E74Fc6393&chainId=1)
