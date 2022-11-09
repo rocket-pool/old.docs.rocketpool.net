@@ -28,7 +28,7 @@ Under the current Proof-of-Stake rules, all attestations and block proposals are
 Until withdrawals from the Beacon Chain are implemented by the Ethereum core developers, this means **there is currently no way to access staked ETH or the Beacon Chain portion of the rewards.**
 Validators will simply accrue larger and larger balances until they **voluntarily exit** the validator (or get **slashed** for attempting to attack the network).
 
-However, now that the Execution and Consensys layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
+However, now that the Execution and Consensus layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
 Unlike Beacon rewards, these priority fees are provided **directly on the Execution layer** and are available for use immediately today.
 If the validator is participating in [a MEV network](https://ethereum.org/en/developers/docs/mev/) to propose a block built by someone else, that builder will provide a supplemental tip to the validator known as a **MEV reward**.
 This is *also* available directly on the Execution layer and is provided at the same time as priority fees.
