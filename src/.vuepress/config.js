@@ -199,7 +199,7 @@ module.exports = {
                 'odao/setup',
                 'odao/testing',
                 'odao/monitoring',
-                'odao/duties'
+                'odao/proposals'
               ]
             },
             {

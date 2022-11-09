@@ -148,4 +148,9 @@ If you receive this, then your watchtower can build the tree correctly.
 
 ::: danger NOTE
 While this proves you can build the tree, you *must* ensure your Web3.Storage API token has been entered into the Smartnode's configuration so it can upload the resulting tree to IPFS.
-::: 
+:::
+
+
+### Next Steps
+
+Next up, we'll cover how to monitor your node's performance.
