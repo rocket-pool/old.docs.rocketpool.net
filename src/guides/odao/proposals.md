@@ -19,6 +19,18 @@ Essentially, they work as follows:
 
 ## Making a Proposal
 
+Once you make a proposal, it will enter a **review period** where the other members can see it and discuss it, but will not be able to vote on it.
+At the time of writing, this is currently **7 days**.
+
+After the review period, there will be a **voting period** where members can vote either for the proposal, or against it.
+At the time of writing, this is currently **14 days**.
+
+If the proposal reaches quorum before it expires (that is, if enough members vote in favor of it to reach consensus), it will be **passed**.
+Quorum is a configurable parameter by the Oracle DAO; it is currently set to at least **51%** of the total member pool.
+
+Once a vote is passed, it can be **executed** which causes its changes to go into effect.
+At the time of writing, the execution is **14 days** after the proposal was passed.
+
 The process for making a new proposal depends on the type of proposal you want to make.
 Select a type from the tabs below.
 
