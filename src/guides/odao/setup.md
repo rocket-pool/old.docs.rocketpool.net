@@ -182,7 +182,7 @@ Challenge Meeting Window: 900 Blocks
 Cost for Non-members to Challenge Members: 1.000000 ETH
 ```
 
-Each of these is described in the [Performing Oracle DAO Duties](duties.md) section.
+This command is described in more detail in the [Oracle DAO Proposals](./proposals.md) section.
 
 
 ### proposal-settings
@@ -197,7 +197,7 @@ Window to Execute an Accepted Proposal: 168h0m0s
 Window to Act on an Executed Proposal: 168h0m0s
 ```
 
-Each of these is described in the [Performing Oracle DAO Duties](duties.md) section.
+This command is described in more detail in the [Oracle DAO Proposals](./proposals.md) section.
 
 
 ### minipool-settings
@@ -214,7 +214,7 @@ Scrub Period: 1h0m0s
 The `propose` command is used to submit governance proposals that the rest of the Oracle DAO can vote on.
 These can involve changing a setting or modifying the Oracle DAO members (i.e., inviting or kicking other members).
 
-This command is described in more detail in the [Performing Oracle DAO Duties](duties.md) section.
+This command is described in more detail in the [Oracle DAO Proposals](./proposals.md) section.
 
 
 ### proposals
@@ -240,7 +240,7 @@ OPTIONS:
    
 ```
 
-This command is described in more detail in the [Performing Oracle DAO Duties](duties.md) section.
+This command is described in more detail in the [Oracle DAO Proposals](./proposals.md) section.
 
 
 ### join / leave
