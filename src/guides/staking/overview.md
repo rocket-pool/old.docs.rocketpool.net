@@ -10,7 +10,7 @@ If you're not interested in how staking works and just want to learn how to stak
 ## How Ethereum Staking Works
 
 Before getting into Rocket Pool, let's talk about staking on Ethereum in general.
-Since [the Merge](https://ethereum.org/en/upgrades/merge/) on September 15th, 2022, Ethereum now comprises two blockchains in parallel: the Execution layer (formerly ETH1), which contains all of Ethereum's transaction data, and the Consensus layer (also known as the [Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/), formerly ETH2) which consists of a network of **validators** that collectively determine the validity of each transactionand each block broadcast to the network.
+Since [the Merge](https://ethereum.org/en/upgrades/merge/) on September 15th, 2022, Ethereum now comprises two blockchains in parallel: the Execution layer (formerly ETH1), which contains all of Ethereum's transaction data, and the Consensus layer (also known as the [Beacon Chain](https://ethereum.org/en/eth2/beacon-chain/), formerly ETH2) which consists of a network of **validators** that collectively determine the validity of each transaction and each block broadcast to the network.
 
 **Staking** is the process of creating and maintaining one (or more) of these validators on the Beacon Chain to help the network maintain the consistency and security of the Ethereum blockchain.
 Validators do this by listening for transactions and new block proposals, and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
@@ -28,7 +28,7 @@ Under the current Proof-of-Stake rules, all attestations and block proposals are
 Until withdrawals from the Beacon Chain are implemented by the Ethereum core developers, this means **there is currently no way to access staked ETH or the Beacon Chain portion of the rewards.**
 Validators will simply accrue larger and larger balances until they **voluntarily exit** the validator (or get **slashed** for attempting to attack the network).
 
-However, now that the Execution and Consensys layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
+However, now that the Execution and Consensus layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
 Unlike Beacon rewards, these priority fees are provided **directly on the Execution layer** and are available for use immediately today.
 If the validator is participating in [a MEV network](https://ethereum.org/en/developers/docs/mev/) to propose a block built by someone else, that builder will provide a supplemental tip to the validator known as a **MEV reward**.
 This is *also* available directly on the Execution layer and is provided at the same time as priority fees.
