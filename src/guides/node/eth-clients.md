@@ -112,11 +112,11 @@ For more information on pruning Nethermind, view the [Pruning the Execution Clie
 
 ## Consensus Clients
 
-Rocket Pool's installer is proud to support four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
+Rocket Pool's installer is proud to support five currently available Consensus clients: **Lighthouse**, **Lodestar**, **Nimbus**, **Prysm**, and **Teku**.
 
 Each of these is a **full client**, meaning you will contribute to the decentralization of the Consensus network regardless of which client you choose.
 
-All four clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
+All five clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
 They differ slightly in terms of resource requirements and features, but you cannot go wrong with any of them.
 
 By default, the Rocket Pool installer will offer to select a random consensus client for you.
@@ -135,6 +135,14 @@ Lighthouse has no official affiliation with the Ethereum Foundation and will con
 
 Lighthouse is implemented in [Rust](https://www.rust-lang.org/) and will maintain a focus on security and efficiency.
 
+
+### Lodestar
+
+[Lodestar](https://lodestar.chainsafe.io/) is the fifth open-source Ethereum consensus client maintained by [ChainSafe Systems](https://chainsafe.io/). Our flagship product is our production-capable beacon chain and validator client for Ethereum consensus. Our software and tooling is uniquely situated as the go-to for researchers and developers for rapid prototyping and browser usage. Millions of developers around the world are familiar with Typescript, and Lodestar's high-quality codebases are excellent introductions to the Ethereum world.
+
+Lodestar has also been a leader in light client research, standardization, and implementation of Ethereum light clients. We strive to work with other client implementers, researchers and developers to demonstrate the importance of having browsers utilize trustless data directly from the blockchain.
+
+Lodestar's niche is in its implementation language, [Typescript](https://www.typescriptlang.org/).
 
 ### Nimbus
 
@@ -167,6 +175,7 @@ Teku is Apache 2.0 licensed and written in Java, a language notable for its matu
 | Client     | CPU Usage | Minimum RAM Usage | Sync Time                    |
 | ---------- | --------- | ----------------- | ---------------------------- |
 | Lighthouse | Moderate  | 2 GB              | Instant with checkpoint sync |
+| Lodestar   | Moderate  | 4 GB              | Instant with checkpoint sync |
 | Nimbus     | Low       | 0.75 GB           | Instant with checkpoint sync |
 | Prysm      | Moderate  | 2 GB              | Instant with checkpoint sync |
 | Teku       | Moderate  | 4 GB              | Instant with checkpoint sync |
