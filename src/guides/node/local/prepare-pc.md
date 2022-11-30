@@ -89,7 +89,7 @@ We have a few helpful amendments to the guide linked above, which you may want t
 
 - When prompted to set up a **root password**, we recommend leaving it **blank**. This will disable the `root` account and instead install the `sudo` package, allowing your user to perform root operations by re-entering its password to elevate its permissions. This is analogous to the way Ubuntu Linux is set up, which may be more familiar to users.
 - In the **Software selection** screen towards the end, you may not want to have a desktop GUI installed.
-  - Desktop GUIs are largely unnecessary for a node; they add extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer to **uncheck GNOME** here.
+  - Desktop GUIs are largely unnecessary for a node; they add extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer to **uncheck GNOME and Debian desktop environment** here.
   - If you *do* want a desktop UI on your node, we recommend you **uncheck GNOME and check XFCE** instead, as it's lighter on system resources.
   - Uncheck **web server**, but leave **SSH server** and **standard system utilities** checked.
 :::
