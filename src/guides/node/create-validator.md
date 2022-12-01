@@ -219,7 +219,9 @@ In this case, you may want to do the deposit anyway to save time and begin valid
 If you **understand these risks** and **believe this is the case**, the CLI will let you go ahead with a deposit anyway.
 :::
 
-You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts:
+You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts. 
+
+*If you want to take advantage of [rocketarb](https://github.com/xrchz/rocketarb/blob/main/README.md) to capture the profit of the MEV rETH arbitrage opportunity that launching your minipool creates - this is the step where you will do it. Instructions can be found on the rocketarb README*
 
 ```
 Your eth2 client is on the correct network.
