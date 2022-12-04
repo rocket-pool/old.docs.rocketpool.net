@@ -68,12 +68,8 @@ We **strongly recommend** you do not back up these files and just use your walle
 
 ### Consensus Client / ETH2 Client Chain Data  
 
-Unlike the Execution layer data, the Consensus layer data is not nearly as important to your node thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura).
+Unlike the Execution layer data, the Consensus layer data is not nearly as important to your node thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing).
 Consensus clients can easily use this technique to immediately resync to the head of the Beacon chain and resume validation duties.
-
-::: tip NOTE
-Note that although Infura will not be available as an *Execution client* after the Merge, you *can* still use it for Checkpoint syncing your Consensus client!
-:::
 
 
 ## Backing up your Execution Chain Data

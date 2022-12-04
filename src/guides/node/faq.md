@@ -44,7 +44,7 @@ Also, make sure your node has a static local IP address so the port forwarding d
 
 ### My consensus client is taking too long to sync. What should I do?
 
-Consensus clients can take a long time to sync if you didn't start the sync process using [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura).
+Consensus clients can take a long time to sync if you didn't start the sync process using [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing).
 Even if you're running it for a long time, it's usually faster to configure the checkpoint sync URL, clear the current sync data with `rocketpool service resync-eth2` and start over.
 Your client should be synced in less than a minute.
 
