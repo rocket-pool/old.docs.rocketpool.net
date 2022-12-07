@@ -88,7 +88,7 @@ You should do this as soon as possible after switching clients to prevent unnece
 
 ## Changing Consensus Clients
 
-Changing Consensus clients is even easier than Execution clients, thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura).
+Changing Consensus clients is even easier than Execution clients, thanks to [Checkpoint Sync](./config-docker.md#beacon-chain-checkpoint-syncing).
 This feature lets you immediately sync a new Consensus client with the network, so there's no need to preserve your old chain data.
 
 Start by using the `rocketpool service config` UI and navigating to the `Consensus Client (ETH2)` section.
@@ -113,11 +113,7 @@ Next, verify that you're using a Checkpoint Sync provider:
 
 </center>
 
-If you don't have a Checkpoint Sync provider configured, [you can easily use Infura to do it for free](./config-docker.md#beacon-chain-checkpoint-syncing-with-infura)!
-
-::: tip NOTE
-**This will work even after The Merge** - Checkpoint Syncing from Infura is *not* related to using Infura as an Execution client, and it will continue to be supported.
-:::
+If you don't have a Checkpoint Sync provider configured, [you can easily use instructions from here to do it for free](./config-docker.md#beacon-chain-checkpoint-syncing)!
 
 When you're happy with your choice, press `Esc` to return to the main menu, then `Tab` to highlight the `Review Changes and Save` button.
 You will be presented with the review screen, which will show your client selection change:

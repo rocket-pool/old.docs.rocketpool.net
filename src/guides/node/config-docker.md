@@ -240,9 +240,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://lighthouse-book.sigmaprime.io/checkpoint-sync.html) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -298,9 +297,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -356,9 +354,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://docs.prylabs.network/docs/prysm-usage/checkpoint-sync) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -414,9 +411,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://docs.teku.consensys.net/en/latest/HowTo/Get-Started/Checkpoint-Start/) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 :::
 ::::
@@ -610,7 +606,7 @@ If you'd like to see some examples of what validators are using for Graffiti tod
 :::::::
 
 
-#### Beacon Chain Checkpoint Syncing with Infura
+#### Beacon Chain Checkpoint Syncing
 
 **Checkpoint syncing** is a very useful technique that some Beacon Chain clients support.
 It allows your Beacon client to instantly sync the entire Beacon chain without having to start from the beginning and catch up on every block.
@@ -620,52 +616,26 @@ All it needs is access to an existing Beacon client that you trust.
 Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 
 You can use any Beacon node that provides access to its HTTP API.
-In this example, we will show you how to use the free **Infura** service to do it.
+Currently, many node operators are using invis.tools - a service operated by a prominent Rocket Pool community member that allows Rocket Pool node operators to checkpoint sync easily.
 Both the Prater Testnet and Mainnet are supported.
+If you trust the community member, you can use the following URLs for checkpoint syncing:
 
-If you don't have an account already, start by heading to [https://infura.io/register](https://infura.io/register) to create one.
-You can use the free tier for checkpoint syncing, so all you will need to provide is an email address.
+- [For Mainnet] `https://sync.invis.tools`
+- [For Prater Testnet] `https://goerli-sync.invis.tools`
 
-Once you are logged in, head to [the ETH2 project page](https://infura.io/dashboard/eth2):
+You can paste the URL in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
 
-<center>
-
-![](./images/infura-projects.png)
-
-</center>
-
-Create a new project here using the `Create New Project` button.
-It can be named anything you want (for example, "RP Checkpoint Sync").
+After that, your Beacon node will automatically connect to the checkpoint sync node when it first starts up and instantly pull down the latest state of the chain!
 
 ::: warning NOTE
-Make sure you have the `ETH2` project selected, because that's what your Consensus client needs!
-**This is different from the `Ethereum` project you may have used for your fallback Execution client!**
+Checkpoint Sync will only occur if you *don't have any Beacon Chain data yet*.
+In other words, if you start syncing normally and decide to checkpoint sync later, you will have to remove your chain data first in order for checkpoint sync to work.
+This can easily be done with the following command:
+
+```
+rocketpool service resync-eth2
+```
 :::
-
-Now, go to the `ETH2` project and click on the `Settings` button:
-
-<center>
-
-![](./images/infura-settings.png)
-
-</center>
-
-Here, there is a section called `Keys`.
-In this section, first select `Mainnet` or `Prater` from the `Endpoints` dropdown, depending on whether you're using the Prater Testnet or Mainnet.
-
-Next, click on the small clipboard icon to the right of the long `https://...` string:
-
-<center>
-
-![](./images/infura-keys.png)
-
-</center>
-
-This is your personal, private access string for Infura's Beacon node.
-Clicking on the clipboard icon will copy it to your clipboard.
-You can then paste this in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
-
-After that, your Beacon node will be configured to connect to Infura when it first starts up and instantly pull down the latest state of the chain!
 
 
 ### Fallback Node 
