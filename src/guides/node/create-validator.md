@@ -197,11 +197,12 @@ rocketpool node deposit
 ```
 
 ::: tip TIP
-If the market Value of rETH is higher than its ETH backing (ie, rETH is at a premium), there is an opportunity to arbitrage the difference when creating a minipool.
+If the market value of rETH is higher than its ETH backing (i.e., rETH is at a premium on the market), there is an opportunity to arbitrage the difference when creating a minipool.
 The value of the arbitrage is equal to the amount of protocol ETH in the minipool times the premium (minus a small amount of gas).
-Eg, if making a minipool when there's a 2.5% premium: `16 ETH * .025 = 0.4 ETH`.
+E.g., if making a minipool when there's a 2.5% premium: `16 ETH * .025 = 0.4 ETH`.
+In other words, you could receive 0.4 ETH back during these conditions just for creating a minipool!
 
-If you're interested in taking advantage of this opporunity, please ask about it on the [RP discord server](https://discord.gg/rocketpool).
+If you're interested in taking advantage of this opportunity, feel free to inquire about it on the [RP discord server](https://discord.gg/rocketpool).
 :::
 
 ::: tip NOTE
