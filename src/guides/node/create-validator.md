@@ -195,6 +195,16 @@ This is done with the following command:
 ```
 rocketpool node deposit
 ```
+
+::: tip TIP
+If the market value of rETH is higher than its ETH backing (i.e., rETH is at a premium on the market), there is an opportunity to arbitrage the difference when creating a minipool.
+The value of the arbitrage is equal to the amount of protocol ETH in the minipool times the premium (minus a small amount of gas).
+E.g., if making a minipool when there's a 2.5% premium: `16 ETH * .025 = 0.4 ETH`.
+In other words, you could receive 0.4 ETH back during these conditions just for creating a minipool!
+
+If you're interested in taking advantage of this opportunity, feel free to inquire about it on the [RP discord server](https://discord.gg/rocketpool).
+:::
+
 ::: tip NOTE
 If you want to use a salt for a vanity address that you found using the process above, run the following command instead:
 
