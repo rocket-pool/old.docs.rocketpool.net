@@ -616,15 +616,26 @@ All it needs is access to an existing Beacon client that you trust.
 Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 
 You can use any Beacon node that provides access to its HTTP API.
-Currently, many node operators are using invis.tools operated and provided by a Rocketpool community member. Both the Prater Testnet and Mainnet are supported.
-If you trust the community member, you can access their checkpoint sync URLs at 
+Currently, many node operators are using invis.tools - a service operated by a prominent Rocket Pool community member that allows Rocket Pool node operators to checkpoint sync easily.
+Both the Prater Testnet and Mainnet are supported.
+If you trust the community member, you can use the following URLs for checkpoint syncing:
 
 - [For Mainnet] `https://sync.invis.tools`
 - [For Prater Testnet] `https://goerli-sync.invis.tools`
 
 You can paste the URL in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
 
-After that, your Beacon node will be configured to connect to Checkpoint sync node when it first starts up and instantly pull down the latest state of the chain!
+After that, your Beacon node will automatically connect to the checkpoint sync node when it first starts up and instantly pull down the latest state of the chain!
+
+::: warning NOTE
+Checkpoint Sync will only occur if you *don't have any Beacon Chain data yet*.
+In other words, if you start syncing normally and decide to checkpoint sync later, you will have to remove your chain data first in order for checkpoint sync to work.
+This can easily be done with the following command:
+
+```
+rocketpool service resync-eth2
+```
+:::
 
 
 ### Fallback Node 
