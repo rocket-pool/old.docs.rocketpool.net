@@ -202,7 +202,9 @@ The value of the arbitrage is equal to the amount of protocol ETH in the minipoo
 E.g., if making a minipool when there's a 2.5% premium: `16 ETH * .025 = 0.4 ETH`.
 In other words, you could receive 0.4 ETH back during these conditions just for creating a minipool!
 
-If you're interested in taking advantage of this opportunity, feel free to inquire about it on the [RP discord server](https://discord.gg/rocketpool).
+If you're interested in taking advantage of this opportunity, consider using the community-developed [rocketarb](https://github.com/xrchz/rocketarb/blob/main/README.md) tool to capture the profit of the MEV rETH arbitrage opportunity that launching your minipool creates.
+
+To learn more about rocketarb, feel free to inquire about it on the [RP discord server](https://discord.gg/rocketpool).
 :::
 
 ::: tip NOTE
@@ -229,7 +231,7 @@ In this case, you may want to do the deposit anyway to save time and begin valid
 If you **understand these risks** and **believe this is the case**, the CLI will let you go ahead with a deposit anyway.
 :::
 
-You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts:
+You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts. 
 
 ```
 Your eth2 client is on the correct network.
