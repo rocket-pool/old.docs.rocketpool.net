@@ -1,9 +1,10 @@
 # Creating a Standard Rocket Pool Node with Docker
 
-In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using the standard [Docker](https://www.docker.com/resources/what-container)-based setup. 
+In this section, we will walk through the process of installing the Rocket Pool Smartnode stack using the standard [Docker](https://www.docker.com/resources/what-container)-based setup.
 This will install and configure everything you need to run a complete node, including:
+
 - The Rocket Pool **Smartnode** software
-- An **Execution** (formerly ETH1) client of your choice, or a connection to an existing client you already manage 
+- An **Execution** (formerly ETH1) client of your choice, or a connection to an existing client you already manage
 - A **Consensus** (formerly ETH2) client of your choice, or a connection to an existing client you already manage
 - A **Validator** client that will handle your Beacon Chain validation duties
 - (Optionally) a **monitoring stack** for capturing performance and health metrics
@@ -17,7 +18,6 @@ If you are on the node machine and using a Desktop UI, you will need to open a t
 Refer to your OS's instructions to learn how to do this if you are unfamiliar.
 :::
 
-
 ## Process Overview
 
 At a high level, here's what is involved in installing Rocket Pool:
@@ -26,7 +26,6 @@ At a high level, here's what is involved in installing Rocket Pool:
 1. Use the CLI to install the Smartnode stack
 1. Configure the Smartnode stack with an easy-to-use UI in the terminal
 1. Done!
-
 
 ## Downloading the Rocket Pool CLI
 
@@ -42,6 +41,7 @@ If you are not using a keyboard and monitor directly connected to your node mach
 ::::: tab Linux
 
 On Linux, start by creating a new folder that will hold the CLI application:
+
 ```shell
 mkdir -p ~/bin
 ```
@@ -62,35 +62,41 @@ The output of this command will print your architecture.
 :::
 
 For `x64` systems (most normal computers):
+
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
 ```
 
-For `arm64` systems, such as the Raspberry Pi:
+For `arm64` systems, such as the Raspberry Pi or Rock 5:
+
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
 ```
 
 Mark it as executable, so it has permissions to run:
+
 ```shell
 chmod +x ~/bin/rocketpool
 ```
 
 Next, **log out and log back in** (or close SSH and reconnect), or simply restart.
 This is because the path that you saved the CLI to (`~/bin`) may not be in your system's `PATH` variable (the list of places your system searches for executables) yet.
-Logging out and back in will put it there. 
+Logging out and back in will put it there.
 
 Now, test running it with the `--version` flag.
 You should see output like this:
+
 ```
 rocketpool --version
 ```
+
 ```
 rocketpool version 1.5.0
 ```
 
 ::: tip TIP
 If you see an error message like this,
+
 ```
 -bash: /home/user/rocketpool: cannot execute binary file: Exec format error
 ```
@@ -117,38 +123,45 @@ The output of this command will print your architecture.
 :::
 
 For `x64` systems (most Macs):
+
 ```shell
 curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-amd64 > /usr/local/bin/rocketpool
 ```
 
 For `arm64` systems, such as the Mac mini with M1:
+
 ```shell
 curl -L https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 > /opt/homebrew/bin/rocketpool
 ```
 
 For `x64` systems (most Macs):
 Mark it as executable, so it has permissions to run:
+
 ```shell
 chmod +x /usr/local/bin/rocketpool
 ```
 
 For `arm64` systems, such as the Mac mini with M1:
 Mark it as executable, so it has permissions to run:
+
 ```shell
 chmod +x /opt/homebrew/bin/rocketpool
 ```
 
 Now, test running it with the `--version` flag.
 You should see output like this:
+
 ```
 rocketpool --version
 ```
+
 ```
 rocketpool version 1.3.0
 ```
 
 ::: tip TIP
 If you see an error message like this,
+
 ```
 /usr/local/bin/rocketpool: Exec format error
 ```
@@ -159,7 +172,6 @@ If your system is neither of those, then you will not be able to run Rocket Pool
 :::::
 
 ::::::
-
 
 ## Installing the Smartnode Stack
 
@@ -174,7 +186,7 @@ rocketpool service install
 ```
 
 This will grab the latest version of the Smartnode stack and set it up.
-You should see output like this (*above some release notes for the latest version which will be printed at the end*):
+You should see output like this (_above some release notes for the latest version which will be printed at the end_):
 
 ![](./images/rp-install-screen.png)
 
@@ -199,6 +211,7 @@ Docker provides common [install instructions here](https://docs.docker.com/engin
 Docker-compose provides common [install instructions here](https://docs.docker.com/compose/install/).
 
 Once both are installed, make sure you give your user account permission to use Docker:
+
 ```shell
 sudo usermod -aG docker $USER
 ```
@@ -208,12 +221,12 @@ Finally, re-run the installer with the `-d` flag to skip Docker installation:
 ```
 rocketpool service install -d
 ```
+
 :::
 
 After this, **log out and back in or restart your SSH session** for the settings to take effect.
 
 Once this is finished, the Smartnode stack will be ready to run.
-
 
 ## Configuring Docker's Storage Location
 
@@ -245,6 +258,7 @@ In the case of Raspberry Pi users, it should be `/mnt/rpdata` or whatever folder
 Press `Ctrl+O, Enter` to save the file, and `Ctrl+X, Enter` to exit the editor.
 
 Next, make the folder:
+
 ```
 sudo mkdir -p <your external mount point>/docker
 ```
@@ -252,12 +266,12 @@ sudo mkdir -p <your external mount point>/docker
 (Again, for example, this would be `/mnt/rpdata/docker` for Raspberry Pi users.)
 
 Now, restart the docker daemon so it picks up on the changes:
+
 ```
 sudo systemctl restart docker
 ```
 
 After that, Docker will store its data on your desired disk.
-
 
 ## Configuring the Smartnode Stack
 
