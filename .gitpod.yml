@@ -5,6 +5,7 @@ tasks:
   - init: |
       nvm install
       nvm use
-      yarn nvm
-      yarn install && yarn run build
-    command: yarn run dev
+      yarn nvm && yarn install && yarn run build
+    command: |
+      nvm use
+      yarn nvm && yarn run dev
