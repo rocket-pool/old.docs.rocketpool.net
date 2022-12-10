@@ -1,6 +1,6 @@
 # Preparing a Rock 5B
 
-This guide will walk you through how run a Rocket Pool node using a [Radxa Rock 5B](https://wiki.radxa.com/Rock5), which is an ARM device derived from the Raspberry Pi architecture but [boosted](https://emteria.com/blog/radxa-rock-5#:~:text=Rock%205%20Model%20B%20or,the%2040%2Dpin%20GPIO%20connector). The Rock 5 has been popularized for ETH staking by the [The Daily Gwei](https://www.youtube.com/watch?v=_Nj11uljR3g) , [Marceu](https://twitter.com/marceaueth/status/1597251242194980866) and [EtherumOnArm](https://twitter.com/EthereumOnARM/status/1597889744821944320).
+This guide will walk you through how run a Rocket Pool node using a [Radxa Rock 5B](https://wiki.radxa.com/Rock5), which is an ARM device derived from the Raspberry Pi architecture but [boosted](https://emteria.com/blog/radxa-rock-5#:~:text=Rock%205%20Model%20B%20or,the%2040%2Dpin%20GPIO%20connector). The Rock 5 has been popularized for ETH staking by the [The Daily Gwei](https://www.youtube.com/watch?v=_Nj11uljR3g) , [Marceu](https://twitter.com/marceaueth/status/1597251242194980866) and [EtherumOnArm](https://twitter.com/EthereumOnARM/status/1597889744821944320). You can watch the recording of [Diego Losada](https://www.youtube.com/watch?v=lPjsXJX6skI)'s great workshop at DevCon 6.
 
 This guide itself is derived from the [Raspberry Pi setup](prepare-pi.md) guide. There are a lot of similarities between setting up a Raspberry Pi and Rock 5B, but there are also some differences.
 
@@ -109,16 +109,15 @@ If you've never used this SSD before and it's totally empty, then follow this st
 
 Run this command to find the location of your disk in the device table:
 
-```
-sudo lshw -C disk
-  *-disk
-       description: SCSI Disk
-       product: Portable SSD T5
-       vendor: Samsung
-       physical id: 0.0.0
-       bus info: scsi@0:0.0.0
-       logical name: /dev/sda
-       ...
+```bash
+$lsblk -o UUID,NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL,MODEL
+UUID                                 NAME        FSTYPE  SIZE MOUNTPOINT LABEL  MODEL
+                                     sda                 1.8T                   PSSD_T7
+3CEE-4EAE                            └─sda1      exfat   1.8T            T7
+                                     mtdblock0            16M
+                                     mmcblk0            29.8G
+C6EA-F413                            ├─mmcblk0p1 vfat    512M /boot      boot
+67ad0e7b-3914-48d6-97c2-c48e5e0e405b └─mmcblk0p2 ext4   29.3G /          rootfs
 ```
 
 The important thing you need is the `logical name: /dev/sda` portion, or rather, the **`/dev/sda`** part of it.
