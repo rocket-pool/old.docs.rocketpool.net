@@ -2,5 +2,9 @@
 # Docs here: (see https://www.gitpod.io/docs/config-gitpod-file)
 
 tasks:
-  - init: yarn install && yarn run build
+  - init: |
+      nvm install
+      nvm use
+      yarn nvm
+      yarn install && yarn run build
     command: yarn run dev

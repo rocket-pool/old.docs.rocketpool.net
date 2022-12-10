@@ -110,6 +110,7 @@ module.exports = {
                     'node/local/prepare-pc',
                     'node/local/prepare-mac',
                     'node/local/prepare-pi',
+                    'node/local/prepare-rock5',
                     'node/ssh'
                   ]
                 },

@@ -17,7 +17,7 @@
   "devDependencies": {
     "markdown-it-include": "^2.0.0",
     "node-sass": "^4.0.0",
-    "vuepress": "^1.8.2",
+    "vuepress": "^1.9.7",
     "vuepress-plugin-element-tabs": "^0.2.8",
     "vuepress-plugin-zooming": "^1.1.8",
     "vuepress-theme-default-prefers-color-scheme": "^2.0.0"

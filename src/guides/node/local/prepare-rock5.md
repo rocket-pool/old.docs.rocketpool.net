@@ -53,15 +53,23 @@ There are a few varieties of Linux OS that support the Rock 5.
 For this guide, we're going to stick to **Ubuntu 20.04**.
 Ubuntu is a tried-and-true OS that's used around the world, and 20.04 is (at the time of this writing) the latest of the Long Term Support (LTS) versions, which means it will keep getting security patches for a very long time.
 
-The Radxa team provides an [official page](https://wiki.radxa.com/Rock5/downloads) with OS images including [Ubuntu image](https://github.com/radxa/debos-radxa/releases/download/20221031-1045/rock-5b-ubuntu-focal-server-arm64-20221031-1328-gpt.img.xz) and a great [installation guide](https://wiki.radxa.com/Rock5/linux/ubuntu).
+The Radxa team provides an [official page](https://wiki.radxa.com/Rock5/downloads) with OS images including [Ubuntu image](https://github.com/radxa/debos-radxa/releases/download/20221031-1045/rock-5b-ubuntu-focal-server-arm64-20221031-1328-gpt.img.xz). Follow the [MicroSD Image Flash Guide](https://wiki.radxa.com/Rock5/install/microSD) to prepare an Ubuntu system boot image.
+
+You can alternatively use an eMMC module instead of a Micro SD Card for system boot image. eMMC cards are more expensive but generally more performant and reliable. Radxa provides [eMMC Image Flash Guides](https://wiki.radxa.com/Rock5/install).
+
+Since we are only going to be using the Micro SD or eMMC image for system boot and all other heavy read/write operations will be on the SSD drive, it is not that important whether you pick a Micro SD or an eMMC card.
+
+Once the Micro SD (or eMMC) system boot card is plugged in the Rock 5, you can connect the computer to the power and turn it on. A bright green LED light on the board should come on.
+
+Next, follow the [Ubuntu setup guide](https://wiki.radxa.com/Rock5/linux/ubuntu).
 
 We recommend using the **ssh** option to securely connect to the Rock 5 to avoid the hassle of hooking up a monitor and a keyboard to the tiny single board computer (SBC).
+
+If you aren't familiar with `ssh`, take a look at the [Intro to Secure Shell](../ssh.md) guide.
 
 **Be sure to change the root password** as instructed by the Radxa install guide.
 
 Once that's complete, you're ready to start preparing Ubuntu to run a Rocket Pool node.
-
-If you aren't familiar with `ssh`, take a look at the [Intro to Secure Shell](../ssh.md) guide.
 
 ::: warning NOTE
 At this point, you should _strongly consider_ configuring your router to make your Pi's IP address **static**.
