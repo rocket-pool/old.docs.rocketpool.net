@@ -6,8 +6,6 @@ This guide itself is derived from the [Raspberry Pi setup](prepare-pi.md) guide.
 
 Unlike the Raspberry Pi, Rock 5B is powerful enough to compete with NUC and PC setups, while being more affordable overall. Under $400 for a full setup.
 
-[https://twitter.com/EthereumOnARM/status/1597889744821944320/photo/1]
-
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">You can run a full/archive/staking <a href="https://twitter.com/hashtag/Ethereum?src=hash&amp;ref_src=twsrc%5Etfw">#Ethereum</a> node for &lt;$400. Break down: <br><br>✔️<a href="https://twitter.com/theradxa?ref_src=twsrc%5Etfw">@theradxa</a> Rock 5B board (16 GB): $189 <br>✔️Acrylic case with passive heatsink: $13 <br>✔️Crucial P2 NVMe SSD 2TB: $140<br>✔️MicroSD: $8<br>✔️Ethernet cable: $6 <br>✔️Power supply: $9<br><br>✅Total cost: ~$365<br><br>Some links👇 <a href="https://t.co/bwom18NbiT">pic.twitter.com/bwom18NbiT</a></p>&mdash; Ethereum on ARM 🦇🔊🐼👉👈🐼 (@EthereumOnARM) <a href="https://twitter.com/EthereumOnARM/status/1597889744821944320?ref_src=twsrc%5Etfw">November 30, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 This setup will run **a full Execution node** and **a full Consensus node** , making your system contribute to the health of the Ethereum network while simultaneously acting as a Rocket Pool node operator.
