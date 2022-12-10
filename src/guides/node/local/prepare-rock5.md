@@ -55,7 +55,9 @@ Ubuntu is a tried-and-true OS that's used around the world, and 20.04 is (at the
 
 The Radxa team provides an [official page](https://wiki.radxa.com/Rock5/downloads) with OS images including [Ubuntu image](https://github.com/radxa/debos-radxa/releases/download/20221031-1045/rock-5b-ubuntu-focal-server-arm64-20221031-1328-gpt.img.xz) and a great [installation guide](https://wiki.radxa.com/Rock5/linux/ubuntu).
 
-We recommend using the **ssh** option to securely connect to the Rock 5 to avoid the hassle of hooking up a monitor and a keyboard to the tiny single board computer (SBC). Be sure to change the root password as instructed by the Radxa install guide.
+We recommend using the **ssh** option to securely connect to the Rock 5 to avoid the hassle of hooking up a monitor and a keyboard to the tiny single board computer (SBC).
+
+**Be sure to change the root password** as instructed by the Radxa install guide.
 
 Once that's complete, you're ready to start preparing Ubuntu to run a Rocket Pool node.
 
