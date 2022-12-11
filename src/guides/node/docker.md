@@ -232,7 +232,7 @@ Once this is finished, the Smartnode stack will be ready to run.
 
 By default, Docker will store all of its container data on your operating system's drive.
 In some cases, this is not what you want.
-For example, on **Raspberry Pi** systems, all of the chain data should be stored on the external SSD, not on the MicroSD card.
+For example, on **Raspberry Pi** and **Rock 5** systems, all of the chain data should be stored on the external SSD, not on the MicroSD card.
 
 ::: tip NOTE
 If you are fine with this default behavior, skip down to the next section.
@@ -253,7 +253,7 @@ This will be empty at first, which is fine. Add this as the contents:
 ```
 
 where `<your external mount point>` is the directory that your other drive is mounted to.
-In the case of Raspberry Pi users, it should be `/mnt/rpdata` or whatever folder you set up in the [Preparing a Raspberry Pi](./local/prepare-pi.md) section.
+In the case of Raspberry Pi and Rock 5 users, it should be `/mnt/rpdata` or whatever folder you set up in the [Preparing a Raspberry Pi](./local/prepare-pi.md) or [Preparing a Rock 5 ](./local/prepare-rock5.md) section.
 
 Press `Ctrl+O, Enter` to save the file, and `Ctrl+X, Enter` to exit the editor.
 
@@ -263,7 +263,7 @@ Next, make the folder:
 sudo mkdir -p <your external mount point>/docker
 ```
 
-(Again, for example, this would be `/mnt/rpdata/docker` for Raspberry Pi users.)
+(Again, for example, this would be `/mnt/rpdata/docker` for Raspberry Pi or Rock 5 users.)
 
 Now, restart the docker daemon so it picks up on the changes:
 
