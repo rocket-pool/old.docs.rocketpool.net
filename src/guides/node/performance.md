@@ -215,6 +215,7 @@ Signed Message:
     "version": "1"
 }
 ```
+
 Open your validator page on Beaconcha.in and click on the `Edit validator name` button.
 
 ![](../node/images/edit-validator-name.png)
@@ -244,13 +245,9 @@ The port to monitor depends on your node setup; users running the typical Smartn
 
 ### Rocketpool Metrics Dashboards
 
-There are multiple community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
+There are community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
 
-Community member `VGR` made the [rp-metrics-dashboard.com](https://www.rp-metrics-dashboard.com/) where you can view in-depth statistics on your node, the network and even the [high scores](https://www.rp-metrics-dashboard.com/highscores) or the best performing nodes:
-
-![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
-
-A more minimalist tool is the [rocketscan.io](https://rocketscan.io/) tool made another community member.
+One minimalist tool is [rocketscan.io](https://rocketscan.io/) made by a community member.
 It features detailed network and node metrics, including a timeline of your node activity.
 
 ![Rocketscan screenshot](./local/images/rocketscan.dev.png)
