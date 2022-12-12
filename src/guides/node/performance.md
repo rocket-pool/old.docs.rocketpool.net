@@ -200,8 +200,21 @@ To be able to use this feature you need to sign a message using your node wallet
 The Smartnode v1.5.1 includes the ability to sign messages with your node wallets's private key by using the command `rocketpool node sign-message`, then providing the message that you want to sign.
 It must contain the term 'beaconcha.in' to be used to rename your validators.
 
-![](../node/images/sign-message.png)
+```bash
+rocketpool node sign-message
 
+Please enter the message you want to sign: (EIP-191 personal_sign)
+Signing a message to use on beaconcha.in
+
+Signed Message:
+
+{
+    "address": "0x8046c795489c6068883be04e723a011e5ca556a4",
+    "msg": "Signing a message to use on beaconcha.in",
+    "sig": "0x2ea26499f48ece2e91b79fabf726ea0b5830f48f93ed6fec9f7f1475cb06b96446519ce8c6114429f7b66c55851ea41e45b8854de505f67fc966b3b235fe29a01c",
+    "version": "1"
+}
+```
 Open your validator page on Beaconcha.in and click on the `Edit validator name` button.
 
 ![](../node/images/edit-validator-name.png)

@@ -147,71 +147,9 @@ Next, you need to swap the legacy v1 RPL to v2.
 rocketpool node swap-rpl
 ```
 
-When prompted you cas choose to swap all or some. About 300 v2 RPL should be enough to start a minipool.
-Your interaction should look something like this:
+When prompted you cas choose to **_swap all_** v1 RPL to v2.
 
-```bash
-Would you like to swap your entire old RPL balance (600.000000 RPL)? [y/n]
-n
-
-Please enter an amount of old RPL to swap:
-300
-
-Before swapping legacy RPL for new RPL, you must first give the new RPL contract approval to interact with your legacy RPL.
-This only needs to be done once for your node.
-+============== Suggested Gas Prices ==============+
-| Avg Wait Time |  Max Fee  |    Total Gas Cost    |
-| 15 Seconds    | 28 gwei   | 0.0007 to 0.0011 ETH |
-| 1 Minute      | 20 gwei   | 0.0005 to 0.0008 ETH |
-| 3 Minutes     | 16 gwei   | 0.0004 to 0.0006 ETH |
-| >10 Minutes   | 14 gwei   | 0.0003 to 0.0005 ETH |
-+==================================================+
-
-These prices include a maximum priority fee of 2.00 gwei.
-Please enter your max fee (including the priority fee) or leave blank for the default of 20 gwei:
-
-
-Using a max fee of 20.00 gwei and a priority fee of 2.00 gwei.
-Do you want to let the new RPL contract interact with your legacy RPL? [y/n]
-y
-
-Approving legacy RPL for swapping...
-Transaction has been submitted with hash 0x18b846e0035fb6f660a30ba83e08ab306695940e638f8a7e9175f33f6383a94e.
-You may follow its progress by visiting:
-https://goerli.etherscan.io/tx/0x18b846e0035fb6f660a30ba83e08ab306695940e638f8a7e9175f33f6383a94e
-
-Waiting for the transaction to be included in a block... you may wait here for it, or press CTRL+C to exit and return to the terminal.
-
-Successfully approved access to legacy RPL.
-RPL Swap Gas Info:
-+============== Suggested Gas Prices ==============+
-| Avg Wait Time |  Max Fee  |    Total Gas Cost    |
-| 15 Seconds    | 28 gwei   | 0.0022 to 0.0033 ETH |
-| 1 Minute      | 20 gwei   | 0.0015 to 0.0022 ETH |
-| 3 Minutes     | 17 gwei   | 0.0012 to 0.0018 ETH |
-| >10 Minutes   | 15 gwei   | 0.0010 to 0.0016 ETH |
-+==================================================+
-
-These prices include a maximum priority fee of 2.00 gwei.
-Please enter your max fee (including the priority fee) or leave blank for the default of 20 gwei:
-
-
-Using a max fee of 20.00 gwei and a priority fee of 2.00 gwei.
-Are you sure you want to swap 300.000000 old RPL for new RPL? [y/n]
-y
-
-Swapping old RPL for new RPL...
-Transaction has been submitted with hash 0xf8a2910ad940c9283a513c1904a203ce3137a29f92ac52d9cf9a9536a6646dac.
-You may follow its progress by visiting:
-https://goerli.etherscan.io/tx/0xf8a2910ad940c9283a513c1904a203ce3137a29f92ac52d9cf9a9536a6646dac
-
-Waiting for the transaction to be included in a block... you may wait here for it, or press CTRL+C to exit and return to the terminal.
-
-Successfully swapped 300.000000 old RPL for new RPL.
-
-```
-
-Now check status:
+Next, check status:
 
 ```bash
 rocketpool node status
@@ -224,7 +162,7 @@ Your Smartnode is currently using the Prater Test Network.
 
 === Account and Balances ===
 The node 0x8046c795489c6068883BE04E723a011E5ca556A4 has a balance of 16.576736 ETH and 300.000000 RPL.
-The node has a balance of 300.000000 old RPL which can be swapped for new RPL.
+The node has a balance of 600.000000 old RPL which can be swapped for new RPL.
 The node is registered with Rocket Pool with a timezone location of US/Central.
 
 === Penalty Status ===
