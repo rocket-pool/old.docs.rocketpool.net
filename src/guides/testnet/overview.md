@@ -147,7 +147,7 @@ Next, you need to swap the legacy v1 RPL to v2.
 rocketpool node swap-rpl
 ```
 
-When prompted you cas choose swap half (300) for now. If you are staking 16 ETH to test, then about 20 v2 RPL should be enough. 300 is more than enough.
+When prompted you cas choose to swap all or some. About 300 v2 RPL should be enough to start a minipool.
 Your interaction should look something like this:
 
 ```bash
