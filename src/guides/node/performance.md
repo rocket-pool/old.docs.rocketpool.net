@@ -21,8 +21,9 @@ With respect to your machine's status, there are a few useful metrics you'll pro
 
 ::: tip NOTE
 The sections below show you some ways to monitor things, but they require you to be logged into the terminal of your machine.
-There is a better, much more convenient and much nicer-looking method that uses a [Grafana web dashboard](grafana.md) but it is still under development.
-Stay tuned for the completion of that section!
+There is a better, much more convenient and much nicer-looking method that uses a web dashboard.
+See [Setting up the Grafana Dashboard](grafana.md) section
+but keep in mind that it is still under development and considered experimental!
 :::
 
 ### CPU, RAM, and Swap
@@ -209,7 +210,6 @@ Copy the result from the sign-message command and paste it in the "Signature" fi
 Fill your desired nickname and click the `Save changes`button.
 
 ![](../node/images/paste-signed-message.png)
-
 
 ### Uptimerobot: Port-scanning for Uptime
 
