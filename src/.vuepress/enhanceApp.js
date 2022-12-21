@@ -10,5 +10,8 @@ export default ({
   router, // the router instance for the app
   siteData // site metadata
 }) => {
-  // ...apply enhancements for the site.
+  router.addRoutes([
+    { path: '/whitepaper', redirect: '/overview/explainer-series/' },
+  ])
 }
+
