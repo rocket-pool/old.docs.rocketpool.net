@@ -46,7 +46,7 @@ The validators can then examine these bids, determine which one ultimately provi
 This "marketplace" where block builders interact with validators is known as a **relay**.
 Different relays have different rules (such as which of the aforementioned "flavors" of MEV they permit from block builders, and whether or not they comply with certain government sanction regulations), but ultimately they all serve this same marketplace function.
 
-Rocket Pool currently offers its node operators access to **six different relays**:
+Rocket Pool currently offers its node operators access to **multiple different relays**:
 
 | Name | Regulation | MEV Types |
 | - | - | - |
@@ -56,6 +56,7 @@ Rocket Pool currently offers its node operators access to **six different relays
 | [bloXroute Regulated](https://docs.bloxroute.com/apis/mev-solution/mev-relay-for-validators) | Complies with OFAC Sanctions* | All types |
 | [Blocknative](https://docs.blocknative.com/) | Complies with OFAC Sanctions* | All types |
 | [Eden Network](https://v2.docs.edennetwork.io/eden-relay/overview) | Complies with OFAC Sanctions* | All types |
+| [Ultra Sound](https://relay.ultrasound.money/) | Unregulated | All types |
 
 ::: warning NOTE
 *Relays that comply with OFAC sanctions follow the blacklist of addresses that the United States Office of Foreign Assets Control (OFAC) maintains.
