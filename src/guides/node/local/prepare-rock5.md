@@ -8,8 +8,17 @@ Unlike the Raspberry Pi, Rock 5B is powerful enough to compete with NUC and PC s
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">You can run a full/archive/staking <a href="https://twitter.com/hashtag/Ethereum?src=hash&amp;ref_src=twsrc%5Etfw">#Ethereum</a> node for &lt;$400. Break down: <br><br>✔️<a href="https://twitter.com/theradxa?ref_src=twsrc%5Etfw">@theradxa</a> Rock 5B board (16 GB): $189 <br>✔️Acrylic case with passive heatsink: $13 <br>✔️Crucial P2 NVMe SSD 2TB: $140<br>✔️MicroSD: $8<br>✔️Ethernet cable: $6 <br>✔️Power supply: $9<br><br>✅Total cost: ~$365<br><br>Some links👇 <a href="https://t.co/bwom18NbiT">pic.twitter.com/bwom18NbiT</a></p>&mdash; Ethereum on ARM 🦇🔊🐼👉👈🐼 (@EthereumOnARM) <a href="https://twitter.com/EthereumOnARM/status/1597889744821944320?ref_src=twsrc%5Etfw">November 30, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+
+
 This setup will run **a full Execution node** and **a full Consensus node** , making your system contribute to the health of the Ethereum network while simultaneously acting as a Rocket Pool node operator.
 
+# Prebuilt Hardware
+
+If you want to save time on ordering parts, assembling and software install, you can [order Proteus](https://twitter.com/jcrtp_eth/status/1606550470407118848?s=20&t=TQBB4tG__VjjslDYlGqnNQ) - a pre-built Rock5B box created by [Mercadian Systems](https://github.com/mercadian).
+
+If you go this route, you can skip straight to the [Securing your Node](../securing-your-node.md) section.
+
+# DIY Hardware Assembly
 ## Preliminary Setup
 
 To run a Rocket Pool node on a Rock 5, you'll need to first have a working Rock 5.
@@ -391,6 +400,34 @@ vm.vfs_cache_pressure=10
 ```
 
 Then save and exit like you've done before (`Ctrl+O`, `Ctrl+X`).
+
+## Optimizing CPU Performance
+
+ARM systems like Rock5B are mainly built for low energy consumption devices such as mobile phones. By default the Rock5B is configured for energy saving mode. However since your validator node will not be running on batteries as a mobile device does most of the time, you can switch to performance mode.
+
+This optimization will help minimize any potential missed or delayed attestations.
+
+To run this optimization, you can either download [this script](https://github.com/mercadian/radxa-debos/blob/04a43e3fa5a8533a0f7f89afcad4c89390cf851a/rootfs/scripts/optimize_rock.sh) provided by Mercadian or manually execute the steps below:
+
+```bash
+# Set the CPU governor to performance so the CPU always runs with the max core speeds
+echo 'GOVERNOR="performance"' | sudo tee -a /etc/default/cpufrequtils
+
+# Create the service for setting the DMC governor to performance on startup
+sudo tee -a /etc/systemd/system/dmc-governor.service >/dev/null <<EOF
+[Unit]
+Description=Sets the DMC (memory controller) governor to "performance"
+After=default.target
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo "performance" > /sys/class/devfreq/dmc/governor'
+[Install]
+WantedBy=default.target
+EOF
+
+sudo systemctl enable dmc-governor.service
+
+ ```
 
 ## Next Steps
 
