@@ -333,8 +333,8 @@ This is a large file, so you'll have to navigate through it using the arrow keys
 Make the following changes:
 
 1. Uncomment `#AuthorizedKeysFile` if it is commented (by removing the `#` in front of it)
-2. Change `ChallengeResponseAuthentication yes` to `ChallengeResponseAuthentication no`
-3. Change `PasswordAuthentication yes` to `PasswordAuthentication no`
+2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` and uncomment (by removing the `#` in front of it)
+3. Change `PasswordAuthentication yes` to `PasswordAuthentication no` and uncomment (by removing the `#` in front of it)
 4. Change `PermitRootLogin yes` to `PermitRootLogin prohibit-password` unless it's already set to that and has a `#` in front of it
 
 Once you're done, save with `Ctrl+O` and `Enter`, then exit with `Ctrl+X`.
@@ -416,12 +416,12 @@ Open the `sshd` config file:
 sudo nano /etc/ssh/sshd_config
 ```
 
-Now change the line `ChallengeResponseAuthentication no` to `ChallengeResponseAuthentication yes` so it looks like this:
+Now change the line `KbdInteractiveAuthentication no` to `KbdInteractiveAuthentication yes` so it looks like this:
 
 ```
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
-ChallengeResponseAuthentication yes
+KbdInteractiveAuthentication yes
 ```
 
 Add the following line to the bottom of the file, which indicates to `sshd` that it needs both an SSH key and the Google Authenticator code:
