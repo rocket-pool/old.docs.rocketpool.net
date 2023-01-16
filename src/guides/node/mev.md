@@ -218,7 +218,7 @@ Below is a description of each option and how to use them.
 If you run your own MEV-Boost instance, you **must** only register with the trusted relays listed above. If your Rocket Pool validator proposes a block that was sent via an untrusted relay, the Oracle DAO will **flag you for cheating** and possibly stealing MEV from the rETH stakers. This will result in [a penalty](https://github.com/rocket-pool/rocketpool-research/blob/master/Penalties/penalty-system.md) on your minipool!
 :::
 
-- If you decided to use a `Locally Managed` instance of MEV-Boost, he `Selection Mode` box lets you switch between **Profile Mode** and **Relay Mode**.
+- If you decided to use a `Locally Managed` instance of MEV-Boost, the `Selection Mode` box lets you switch between **Profile Mode** and **Relay Mode**.
   - **Profile Mode** is the default. It lets you select which relays to enable based on their "profiles". A relay's profile is made of the following choices:
     - Whether it's **regulated** (complies with government sanctions lists such as the OFAC list and blacklists certain addresses) or **unregulated** (*does not* censor any transactions based on any blacklists)
     - Whether it **allows all types of MEV** or explicitly prohibits bundles that involve sandwich attacks or front-running Ethereum users
