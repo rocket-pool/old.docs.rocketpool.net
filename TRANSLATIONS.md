@@ -4,6 +4,6 @@
 
 To add a new language you need to:
 
-1. Add the language slug to `/src/.vuepress/config.js`
+1. Add the language slug to `/src/.vuepress/config.js` both under `locales` and `"/slug/": { nav }`
 2. Run `npm run multilang:missing`, which creates placeholder files for the new language
 3. Translate all files that begin with `.TODO.`

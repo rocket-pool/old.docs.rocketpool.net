@@ -91,15 +91,15 @@ module.exports = {
     '/nl/': {
       nav: [
         {
-          text: 'Overview',
+          text: 'Overzicht',
           link: '/nl/overview/',
         },
         {
-          text: 'Guides',
+          text: 'Handleidingen',
           link: '/guides/'
         },
         {
-          text: 'For Developers',
+          text: 'Voor Ontwikkelaars',
           link: '/developers/'
         },
         {
