@@ -11,10 +11,12 @@
   "scripts": {
     "nvm": "nodever=$(<.nvmrc) && node -v | grep -q \"v$nodever\" && echo \"Correct node version\" || echo '\u001b[31mWARNING: UNSUPPORTED NODE VERSION\u001b[0m\n'",
     "dev": "npm run nvm && vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "multilang:missing": "node scripts/multilang.js --missing"
   },
   "license": "MIT",
   "devDependencies": {
+    "@root/walk": "^1.1.0",
     "markdown-it-include": "^2.0.0",
     "node-sass": "^4.0.0",
     "vuepress": "^1.8.2",

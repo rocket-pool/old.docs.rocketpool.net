@@ -3,6 +3,9 @@ node_modules
 /dist/
 /src/.vuepress/dist/
 
+# Ignore missing translation files
+src/**/.TODO.*
+
 # local env files
 *.env
 *.env.local
