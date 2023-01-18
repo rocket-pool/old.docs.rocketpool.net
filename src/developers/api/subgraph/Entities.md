@@ -72,8 +72,8 @@ Description: Summarizes staker related balances at a specific block and timestam
 | Field                         | Type    | Description                                                                                                                      |
 | ----------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | id                            | ID!     | Composite key based on transaction hash of the triggered event and its log index.                                                |
-| previousCheckpointId          | String  | Id to the the previous checkpoint.                                                                                               |
-| nextCheckpointId              | String  | Id to the the next checkpoint.                                                                                                   |
+| previousCheckpointId          | String  | Id to the previous checkpoint.                                                                                               |
+| nextCheckpointId              | String  | Id to the next checkpoint.                                                                                                   |
 | stakerETHActivelyStaking      | BigInt! | Staker ETH (in WEI) balance (initial deposit + (ETH network rewards - average node fee)) on the beacon chain at this checkpoint. |
 | stakerETHWaitingInDepositPool | BigInt! | Staker ETH (in WEI) waiting in the deposit pool at this checkpoint.                                                              |
 | stakerETHInRocketETHContract  | BigInt! | Staker ETH (in WEI) in the RocketETH contract at this checkpoint.                                                                |
@@ -120,11 +120,11 @@ Description: A node address that was registered by a node operator.
 | totalNodeRewardsClaimed      | BigInt!               | Total claim amount accrued via the regular reward claim contract.                                       |
 | averageODAORewardClaim       | BigInt!               | Average reward claim this node has done via the ODAO reward claim contract.                             |
 | averageNodeRewardClaim       | BigInt!               | Average reward claim this node has done via the regular reward claim contract.                          |
-| odaoRewardClaimCount         | BigInt!               | Total amount of successfull RPL claims a node has done via the ODAO reward claim contract.              |
-| nodeRewardClaimCount         | BigInt!               | Total amount of successfull RPL claims a node has done via the regular node reward claim contract.      |
+| odaoRewardClaimCount         | BigInt!               | Total amount of successful RPL claims a node has done via the ODAO reward claim contract.              |
+| nodeRewardClaimCount         | BigInt!               | Total amount of successful RPL claims a node has done via the regular node reward claim contract.      |
 | minimumEffectiveRPL          | BigInt!               | Current minimum RPL needed to collateralize all staking minipools of this node by the bare minimum.     |
 | maximumEffectiveRPL          | BigInt!               | Current maximum RPL needed to collateralize all staking minipools of this node to the absolute maximum. |
-| queuedMinipools              | BigInt!               | Current queueud minipools                                                                               |
+| queuedMinipools              | BigInt!               | Current queued minipools                                                                               |
 | stakingMinipools             | BigInt!               | Current staking minipools                                                                               |
 | stakingUnbondedMinipools     | BigInt!               | Current unbonded staking minipools                                                                      |
 | withdrawableMinipools        | BigInt!               | Current withdrawable minipools.                                                                         |
@@ -151,7 +151,7 @@ Description: Keeps track of the RPL staking transactions for a node.
 
 ## RPLRewardInterval
 
-Description: Represents an reward interval during which RPL can be claimed by different types of claimers.
+Description: Represents a reward interval during which RPL can be claimed by different types of claimers.
 
 | Field                                | Type               | Description                                                                                                   |
 | ------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------------------------- |
@@ -214,12 +214,12 @@ Description: Represents a network balance checkpoint for all nodes.
 | Field                          | Type    | Description                                                                                                                   |
 | ------------------------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | id                             | ID!     | Composite key based on transaction hash of the triggered event and its log index.                                             |
-| previousCheckpointId           | String  | Id to the the previous checkpoint.                                                                                            |
-| nextCheckpointId               | String  | Id to the the next checkpoint.                                                                                                |
+| previousCheckpointId           | String  | Id to the previous checkpoint.                                                                                            |
+| nextCheckpointId               | String  | Id to the next checkpoint.                                                                                                |
 | nodesRegistered                | BigInt! | Total number of registered RocketPool nodes at this checkpoint.                                                               |
-| oracleNodesRegistered          | BigInt! | Total number of oracle nodes registrered with RocketPool at this checkpoint.                                                  |
-| rplStaked                      | BigInt! | RPL staked accross all nodes at this checkpoint.                                                                              |
-| effectiveRPLStaked             | BigInt! | Effective RPL staked accross all nodes at this checkpoint.                                                                    |
+| oracleNodesRegistered          | BigInt! | Total number of oracle nodes registered with RocketPool at this checkpoint.                                                  |
+| rplStaked                      | BigInt! | RPL staked across all nodes at this checkpoint.                                                                              |
+| effectiveRPLStaked             | BigInt! | Effective RPL staked across all nodes at this checkpoint.                                                                    |
 | minimumEffectiveRPL            | BigInt! | Minimum RPL needed to collateralize the staking minipools by the absolute minimum at this checkpoint.                         |
 | maximumEffectiveRPL            | BigInt! | maximum RPL needed to collateralize the staking minipools to the absolute maximum at this checkpoint.                         |
 | minimumEffectiveRPLNewMinipool | BigInt! | Minimum RPL needed to start a new minipool at this checkpoint.                                                                |
@@ -233,12 +233,12 @@ Description: Represents a network balance checkpoint for all nodes.
 | averageNodeRewardClaim         | BigInt! | Average reward per claim via the regular node reward claim contract from all previous checkpoints up to this checkpoint.      |
 | rplPriceInETH                  | BigInt! | The RPL price in ETH at this checkpoint.                                                                                      |
 | averageRplPriceInETH           | BigInt! | The average RPL price in ETH up to this checkpoint.                                                                           |
-| queuedMinipools                | BigInt! | Current queued minipools accross all nodes at this checkpoint.                                                                |
-| stakingMinipools               | BigInt! | Current staking minipools accross all nodes at this checkpoint.                                                               |
-| stakingUnbondedMinipools       | BigInt! | Current unbonded staking minipools accross all nodes at this checkpoint.                                                      |
-| withdrawableMinipools          | BigInt! | Withdrawable minipools accross all nodes at this checkpoint.                                                                  |
-| totalFinalizedMinipools        | BigInt! | Total finalized minipools accross all nodes up to this checkpoint.                                                            |
-| averageFeeForActiveMinipools   | BigInt! | Average minipool fee accross all nodes and the active (NOT finalized or destroyed) minipools at this checkpoint.              |
+| queuedMinipools                | BigInt! | Current queued minipools across all nodes at this checkpoint.                                                                |
+| stakingMinipools               | BigInt! | Current staking minipools across all nodes at this checkpoint.                                                               |
+| stakingUnbondedMinipools       | BigInt! | Current unbonded staking minipools across all nodes at this checkpoint.                                                      |
+| withdrawableMinipools          | BigInt! | Withdrawable minipools across all nodes at this checkpoint.                                                                  |
+| totalFinalizedMinipools        | BigInt! | Total finalized minipools across all nodes up to this checkpoint.                                                            |
+| averageFeeForActiveMinipools   | BigInt! | Average minipool fee across all nodes and the active (NOT finalized or destroyed) minipools at this checkpoint.              |
 | newMinipoolFee                 | BigInt! | Fee to start a new minipool at this checkpoint.                                                                               |
 | block                          | BigInt! | Block number that was associated with this checkpoint.                                                                        |
 | blockTime                      | BigInt! | Block timestamp that was associated with this checkpoint.                                                                     |
@@ -264,12 +264,12 @@ Description: Represents a balance checkpoint for a node.
 | totalNodeRewardsClaimed      | BigInt!                       | Total accrued claimed rewards via the regular node reward claim contract up to this checkpoint.              |
 | averageODAORewardClaim       | BigInt!                       | Average rewards accrued via the ODAO reward claim contract for this node up to this checkpoint.              |
 | averageNodeRewardClaim       | BigInt!                       | Average rewards accrued via the regular node reward claim contract for this node up to this checkpoint.      |
-| odaoRewardClaimCount         | BigInt!                       | Total successfull claims a node has done via the ODAO reward claim contract up to this checkpoint.           |
-| nodeRewardClaimCount         | BigInt!                       | Total successfull claims a node has done via the regular node reward claim contract up to this checkpoint.   |
+| odaoRewardClaimCount         | BigInt!                       | Total successful claims a node has done via the ODAO reward claim contract up to this checkpoint.           |
+| nodeRewardClaimCount         | BigInt!                       | Total successful claims a node has done via the regular node reward claim contract up to this checkpoint.   |
 | queuedMinipools              | BigInt!                       | Queued minipools for this node at this checkpoint.                                                           |
 | stakingMinipools             | BigInt!                       | Staking minipools for this node at this checkpoint.                                                          |
 | stakingUnbondedMinipools     | BigInt!                       | Unbonded staking minipools for this node at this checkpoint.                                                 |
-| withdrawableMinipools        | BigInt!                       | Withdrawable minipools accross for this node at this checkpoint.                                             |
+| withdrawableMinipools        | BigInt!                       | Withdrawable minipools across for this node at this checkpoint.                                             |
 | totalFinalizedMinipools      | BigInt!                       | Total Finalized minipools for this node up to this checkpoint.                                               |
 | averageFeeForActiveMinipools | BigInt!                       | Average minipool fee for this node and the active (NOT finalized or destroyed) minipools at this checkpoint. |
 | block                        | BigInt!                       | Block number that was associated with this checkpoint.                                                       |
