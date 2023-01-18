@@ -333,7 +333,7 @@ This is a large file, so you'll have to navigate through it using the arrow keys
 Make the following changes:
 
 1. Uncomment `#AuthorizedKeysFile` if it is commented (by removing the `#` in front of it)
-2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` and uncomment (by removing the `#` in front of it)
+2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` and uncomment (by removing the `#` in front of it) - **note that older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`**
 3. Change `PasswordAuthentication yes` to `PasswordAuthentication no` and uncomment (by removing the `#` in front of it)
 4. Change `PermitRootLogin yes` to `PermitRootLogin prohibit-password` unless it's already set to that and has a `#` in front of it
 
@@ -423,11 +423,12 @@ Now change the line `KbdInteractiveAuthentication no` to `KbdInteractiveAuthenti
 # some PAM modules and threads)
 KbdInteractiveAuthentication yes
 ```
+(Older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`.)
 
 Add the following line to the bottom of the file, which indicates to `sshd` that it needs both an SSH key and the Google Authenticator code:
 
 ```shell
-AuthenticationMethods publickey,keyboard-interactive
+AuthenticationMethods publickey,keyboard-interactive:pam
 ```
 
 Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.
