@@ -145,8 +145,12 @@ module.exports = {
                 },
                 'node/securing-your-node',
                 'node/starting-rp',
+                'node/recovering-rp',
                 'node/cli-intro',
                 'node/prepare-node',
+                'node/fallback',
+                'node/fee-distrib-sp',
+                'node/mev',
                 'node/create-validator',
                 {
                   title: 'Monitoring and Maintenance',
@@ -157,7 +161,7 @@ module.exports = {
                     'node/grafana',
                     'node/updates',
                     'node/backups',
-                    'node/geth-pruning',
+                    'node/pruning',
                     'node/change-clients'
                   ]
                 },
@@ -167,16 +171,46 @@ module.exports = {
               ]
             },
             {
+              title: 'Redstone and The Merge',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'redstone/whats-new',
+                'redstone/docker-migration',
+                'redstone/hybrid-migration',
+                'redstone/native-migration',
+              ]
+            },
+            {
               title: 'Testing Rocket Pool with the Prater Test Network',
               sidebarDepth: 2,
               collapsable: true,
               children: [
                 'testnet/overview',
-                'testnet/upgrading',
+                'testnet/mainnet',
               ]
             },
-            'node/mainnet',
-            'node/v1.3-update.md',
+            {
+              title: 'Running an Oracle DAO Node',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'odao/overview',
+                'odao/setup',
+                'odao/testing',
+                'odao/monitoring',
+                'odao/proposals'
+              ]
+            },
+            {
+              title: 'Legacy Guides',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'legacy/v1.3-update',
+                'legacy/upgrading'
+              ]
+            }
           ]
         }
       ],
@@ -338,6 +372,17 @@ module.exports = {
                       ]
                     },
                   ]
+                },
+                {
+                    title: 'Subgraph',
+                    sidebarDepth: 3,
+                    collapsable: true,
+                    children: [
+                        'api/subgraph/SubgraphData',
+                        'api/subgraph/Entities',
+                        'api/subgraph/Queries',
+                        'api/subgraph/AdditionalResources',
+                    ]
                 },
               ]
             },

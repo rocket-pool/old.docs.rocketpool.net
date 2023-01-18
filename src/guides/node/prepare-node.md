@@ -1,6 +1,6 @@
 # Preparing your Node for Operation
 
-If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the ETH1 and ETH2 chains on your respective clients. 
+If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the Execution (ETH1) and Consensus (ETH2) chains on your respective clients. 
 If so, then you are ready to register your node on the Rocket Pool network and create a minipool with an ETH2 validator!
 If not, please review the previous sections and return here once you've completed those steps.
 
@@ -12,7 +12,8 @@ These only need to be done once though; once you've done them, you can skip to t
 
 Registering your node and standing up a validator both involve submitting transactions to the Ethereum network from your node wallet.
 This means **you'll need to have some ETH on it** to pay for the gas costs of those transactions.
-You'll also want to provide it with the **RPL token**, because you'll need to stake some of that prior to creating a minipool as collateral.
+You'll also need to stake some of the **RPL token** prior to creating a minipool as collateral; you can do this directly on the node, or (preferably) you can use the Rocket Pool website's **Stake on Behalf** function to stake for your node with RPL in your cold wallet.
+We'll discuss the Stake on Behalf feature later in this guide when it's time to stake your RPL.
 
 The ETH required for gas fees to set up a node with one minipool is about 0.0025 ETH times the current gas price in gwei.
 For example, with a gas price of 30 gwei, you would pay about 0.075 ETH in gas fees.
@@ -27,8 +28,12 @@ For test RPL, we have added a similar faucet function directly to the CLI.
 Please see the [Getting Test RPL on Goerli](../testnet/overview.md#getting-test-rpl-on-goerli) guide to acquire some.
 :::
 ::: tab Running on the Main Network
-We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH and RPL tokens.
-Start by transferring some ETH and RPL from your existing wallet to the node wallet.
+We assume that you already have a separate Ethereum-compatible wallet that is holding your ETH.
+If you need RPL, you can purchase it on a centralized exchange such as [Kraken](https://www.kraken.com/prices/rocket-pool?quote=usd) or a decentralized exchange such as [Balancer](https://app.balancer.fi/#/trade/ether/0xD33526068D116cE69F19A9ee46F0bd304F21A51f).
+
+Start by transferring some ETH from your existing wallet to the node wallet.
+If running on Mainnet, **leave your RPL on the wallet you used to purchase it.**
+
 As a reminder, you can use `rocketpool wallet status` to get the address of the node wallet if you need it.
 If you are not sure how to send cryptocurrency from your existing wallet, please consult your wallet's documentation.
 
@@ -42,7 +47,7 @@ We recommend you send a small amount of ETH first as a **test transaction** to v
 
 ## Registering your Node with the Network
 
-Once you have ETH and RPL in your wallet, you can register your node with the Rocket Pool network to access all of its features.
+Once you have ETH in your wallet, you can register your node with the Rocket Pool network to access all of its features.
 To do this, run the following command:
 
 ```
@@ -86,7 +91,7 @@ Please read both options below to determine which one applies to you.
 ::: warning NOTE
 This method will require you to **submit a transaction** from your new withdrawal address, so **you must have a small amount of ETH in that address already.**
 :::
- 
+
 ::: warning NOTE
 For users of **Ledger** hardware wallets, note that Ledger Live does not yet support MetaMask or WalletConnect natively.
 You will need to use MetaMask and connect it to your Ledger instead.
@@ -96,12 +101,12 @@ To work with the Rocket Pool website, you will need to have your Ledger connecte
 You will also need to **enable "blind signing"** for the current session; you can find this within the Settings portion of the ETH app on the device.
 Bind signing will automatically be disabled after you close the session.
 
-If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion. 
+If you are using Prater Testnet and want to use your Ledger as your withdrawal address, **you must create a new Ethereum wallet on your Ledger** first to ensure you don't connect your live address to the test network, which tends to cause confusion.
 Make sure to select the **Goerli Testnet** in the network selection dropdown when connecting your Ledger to MetaMask.
 Note that Ledger Live will not show your balance on the test network, but other applications which support the test network (such as MetaMask and Etherscan) will be able to display it.
 :::
- 
-1. Run `rocketpool node set-withdrawal-address <your cold wallet address>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
+
+1. Run `rocketpool node set-withdrawal-address <your cold wallet address or ENS name>`. Your new withdrawal address will be marked as "pending". Until you confirm it, **your old withdrawal address will still be used**.
 2. To confirm it, you must send a special transaction **from your new withdrawal address** to the minipool contract to verify that you own the withdrawal address.
    1. The easiest way to do this is to navigate to the Rocket Pool withdrawal address site (for the [Prater Testnet](https://testnet.rocketpool.net/withdrawal/) or for [Mainnet](https://stake.rocketpool.net/withdrawal/)).
    2. If you haven't already connected Metamask or WalletConnect to the Rocket Pool website, do this now. Click the **select wallet** button in the center of the screen, and choose MetaMask or WalletConnect based on which wallet you would like to use. You will then be prompted asking you to confirm the connection. For example, using MetaMask:
@@ -110,7 +115,7 @@ Note that Ledger Live will not show your balance on the test network, but other 
    </center>
    Click **Next**, then click **Confirm** to enable the Rocket Pool website to use your wallet.
    3. Select **Withdrawal Address** from the top menu (or the hamburger menu on the left side if you're on a mobile device).
-   4. You will see this prompt: 
+   4. You will see this prompt:
    <center>
    ![](./images/node-address.png)
    </center>
@@ -154,38 +159,75 @@ To change it, you will need to send a signed transaction from your **active** wi
 The Rocket Pool website has a function to help you do this.
 
 
-## Swapping RPL v1 for RPL v2
+## Setting your Voting Delegate Address
 
-In many cases, the RPL that you start with is going to be the legacy RPL token that is no longer used.
-Luckily, the CLI offers a function that allows you to easily swap it for the modern RPL token used by the network today.
+Rocket Pool's governance process uses [Snapshot](https://snapshot.org/#/about) as the platform for hosting governance proposals.
+Voting on them is done in-browser, via a wallet like MetaMask or a bridge like WalletConnect.
+Node operators can vote on these proposals using the RPL they have staked (their **effective stake**).
 
-**Swapping will be done at a 1-to-1 ratio**; if you have 1000 of the RPL v1 token, you can swap it for 1000 of the RPL v2 token.
-All you will need to do is pay a small amount of gas for the transaction.
+Since your node's wallet should **never leave your node** (e.g. you should **never import your mnemonic into MetaMask or another wallet**), we have set up a system that allows you to **delegate** your node's voting power to a separate address.
+This could be another wallet (such as a MetaMask account) that you control, or you could delegate your voting power to [one of the Node Operators that have elected to be official delegates](https://delegates.rocketpool.net/).
 
-**This swap can be done at any time.**
+::: tip NOTE
+If you are an **Allnodes user**, you can use your node account as the voting address and can ignore the following guides.
+They are intended for normal Smartnode operators.
+:::
 
-To do this, run the following command:
-
-```
-rocketpool node swap-rpl
-```
-
-This will ask you if you want to swap all of the RPL v1 in your node wallet for RPL v2 or specify a custom amount.
-When you've made your choice, confirm the transaction and wait for it to be processed and added to the blockchain.
-
-Once the transaction is accepted, you can confirm that it worked with `rocketpool node status`:
+Setting up a voting delegate address that can vote on behalf of your node is a one-time action.
+Simply run the following command:
 
 ```
-The node <node address> has a balance of 131.973495 ETH and 1440.000000 RPL.
-
-The node is registered with Rocket Pool with a timezone location of Etc/UTC.
-
-The node has a total stake of 0.000000 RPL and an effective stake of 0.000000 RPL, allowing it to run 0 minipool(s) in total.
-The node does not have any minipools yet.
+$ rocketpool node set-voting-delegate <address or ENS name>
 ```
 
-You should see your new RPL v2 balance on the top line where it describes how much RPL you currently have.
+The address or ENS name you use depends on whether you are voting yourself or you are delegating your vote to an official delegate.
+If you are voting yourself, use the address of the wallet you want to use in-browser (e.g. your MetaMask account, your hardware wallet, your Argent wallet, etc.).
 
-With that, your node is prepared!
-It's time to make a minipool and start staking your ETH.
-Click on the next section to learn about that process next.
+:::: danger WARNING
+As a reminder, **DO NOT enter your node's wallet or mnemonic into MetaMask or any other wallet!**
+The voting delegate feature is specifically designed to ensure you have no need to do this, which helps maintain the security of your node!
+::::
+
+At anytime, you can reassign your voting power by setting the voting address from your node.
+
+One limitation of Snapshot is that **you must have delegated before the proposal you would like to vote on is created**.
+We suggest that you set up your voting address or delegate early so that you don’t miss any proposal votes.
+
+To learn more about how to participate in RocketPool governance, [please check out this medium article](https://medium.com/rocket-pool/rocket-pool-protocol-dao-governance-phase-0-4b8ec7bfe07e)
+
+
+## Map an ENS Name to your Node Wallet
+
+If you want your node wallet address to be mapped to a human-readable name like `alice.eth`, follow these steps:
+
+1) Purchase an ENS name at [the official ENS website](https://app.ens.domains).
+
+2) Still at the ENS website, setup the **forward resolution** for the name, defining which address will be used when someone references your `.eth` name.
+- Select "My account"
+- Click on the ENS name you want to edit
+- Click on "Add/edit record"
+- Insert your desired ETH address, click "Confirm" and submit the transaction.
+
+3) After the previous transaction is confirmed, you can use the Smartnode CLI to setup the **reverse resolution**. This will allow applications to map back from your node wallet address to your `.eth` name.
+
+Execute the command:
+```
+rocketpool wallet set-ens-name <your-ens-name.eth>
+```
+
+This action also requires sending a transaction. You'll need to confirm the desired parameters and submit the transaction.
+
+::: warning NOTE
+**Make sure you completed step 2 to setup the forward resolution before running the CLI command to setup the reverse resolution**. This is a safety measure to stop wallets from trying to impersonate an ENS name they don't control.
+:::
+
+4) After the transaction was succesfully included in a block, run `rocketpool node status` to see that your your wallet is now associated to your ENS name.
+
+
+## Next Steps
+
+The next steps to prepare your node will teach you about setting up a fallback node, how priority fees work, your Fee Distributor and the Smoothing Pool, and MEV.
+Each topic will require you to make a choice about how you want to run your node.
+Please move on to the next sections in the guide when you're ready.
+
+Once you're done with those topics, you'll be guided through the process of making a minipool and earning staking rewards. 

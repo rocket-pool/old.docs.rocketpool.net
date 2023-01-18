@@ -9,7 +9,6 @@ You can track your machine either:
 
 It is recommended to use a combination of both depending on your needs.
 
-
 ## Directly Tracking your Machine's Status
 
 With respect to your machine's status, there are a few useful metrics you'll probably want to keep an eye on:
@@ -44,13 +43,12 @@ On the top display with the bars, the numbered bars each refer to a CPU core's c
 `Swp` shows you how much swap space you're using (85.8 MB) and how much you have total (12.0 GB).
 
 On the bottom table, each row represents a process.
-Your ETH1 and ETH2 clients will likely be on top (in this case, Geth and Nimbus) which you can see in the rightmost column labeled `Command`.
+Your Execution (ETH1) and Consensus (ETH2) clients will likely be on top (in this case, Geth and Nimbus) which you can see in the rightmost column labeled `Command`.
 
 The `RES` column shows you how much RAM each process is taking - in this screenshot, Geth is taking 748 MB and Nimbus is taking 383 MB.
 
 The `CPU%` column shows you how much CPU power each process is consuming.
 100% represents a single core, so if it's over 100%, that means it's using a lot from multiple cores (like Geth is here, with 213%).
-
 
 ### Remaining Free Disk Space
 
@@ -71,14 +69,13 @@ Filesystem        Size  Used Avail Use% Mounted on
 ...
 ```
 
-For conventional setups where you have one drive that stores both your Operating System and your ETH1 / ETH2 chain data, you just need to look at the entry that has `/` in the `Mounted on` column.
+For conventional setups where you have one drive that stores both your Operating System and your Execution (ETH1) and Consensus (ETH2) chain data, you just need to look at the entry that has `/` in the `Mounted on` column.
 This represents your main disk.
 If that ever looks like it's running out of space (say, 80% used or so), then you need to start thinking about doing some cleanup.
-For example, if you're running Geth, you may want to look at [how to prune it](./geth-pruning.md) to clear up some space.
+For example, if you're running Geth, you may want to look at [how to prune it](./pruning.md) to clear up some space.
 
-For setups that store the ETH1 / ETH2 chain data on a separate drive (such as the Raspberry Pi, which the above example comes from), you'll want to look at the row that has your chain data folder in the `Mounted on` column as well.
+For setups that store the Execution (ETH1) and Consensus (ETH2) chain data on a separate drive (such as the Raspberry Pi, which the above example comes from), you'll want to look at the row that has your chain data folder in the `Mounted on` column as well.
 In this example we mounted an external SSD to `/mnt/rpdata`, so we'll have to keep an eye on it to make sure it doesn't grow too large either.
-
 
 ### Network I/O and Data Usage
 
@@ -134,14 +131,12 @@ ls /sys/class/net
 Ethernet (hard-wire) devices usually start with `e`, such as the examples above.
 Wireless devices usually start with `w`.
 
-
 ## Third-Party Performance Monitoring
 
 The best monitoring uses a Swiss-cheese model: every tool has holes, but if you stack them on top of each-other there is less of a chance anything falls through and catches you by surprise.
 
 Please note that these third-party tools are used by the Rocket Pool community, but are not officially endorsed or supported by the Rocket Pool team.
 If you have a tool suggestion, or are a tool owner, you are very welcome to add a pull request with details on your tool.
-
 
 ### Beaconcha.in Website: Using the Beacon Chain as a Metric Source
 
@@ -172,6 +167,16 @@ You should check the logs of the `eth1`, `eth2`, and `validator` services with `
 
 **You should pin this tab or create a bookmark with it so you can quickly jump to it and check the status of your validator.**
 
+#### Using Beaconcha.in to Monitor Multiple Minipools
+
+Beaconcha.in has a [dashboard view](https://beaconcha.in/dashboard) that allows you to monitor multiple validators or minipools at once.
+Simply add your validator indices one at a time. If you have a lot of minipools, you can run:
+
+```shell
+rocketpool minipool status | grep Validator.index | awk -F " " '{print $3}' | paste -s -d, -
+```
+
+to get a comma-separated list, and place it in the URL bar like so: `https://beaconcha.in/dashboard?validators=123456,123457`
 
 ### Beaconcha.in App: Validator Overview and Push Notifications
 
@@ -184,6 +189,26 @@ It also features a push notification service that includes some useful alerts li
 3. Over/under-collateralisation of the RPL on your node
 
 Note that the app has a free version, and paid options with convenience features like homescreen widgets.
+
+### Renaming your Validators on Beaconcha.in
+
+The Beaconcha.in website has a feature that allows users to rename their validators, making them easier to identify/search.
+
+To be able to use this feature you need to sign a message using your node wallet's private key, in order to prove you're the person who controls that validator.
+
+The Smartnode v1.5.1 includes the ability to sign messages with your node wallets's private key by using the command `rocketpool node sign-message`, then providing the message that you want to sign.
+It must contain the term 'beaconcha.in' to be used to rename your validators.
+
+![](../node/images/sign-message.png)
+
+Open your validator page on Beaconcha.in and click on the `Edit validator name` button.
+
+![](../node/images/edit-validator-name.png)
+
+Copy the result from the sign-message command and paste it in the "Signature" field.
+Fill your desired nickname and click the `Save changes`button.
+
+![](../node/images/paste-signed-message.png)
 
 
 ### Uptimerobot: Port-scanning for Uptime
@@ -204,7 +229,6 @@ curl icanhazip.com
 
 The port to monitor depends on your node setup; users running the typical Smartnode installation will likely have forwarded ports 30303 and 9001 for the Execution and Consensus clients respectively, so these are good choices for uptime monitoring.
 
-
 ### Rocketpool Metrics Dashboards
 
 There are multiple community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
@@ -213,11 +237,10 @@ Community member `VGR` made the [rp-metrics-dashboard.com](https://www.rp-metric
 
 ![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
 
-A more minimalist tool is the [rocketscan.dev](https://rocketscan.dev/) tool made another community member.
+A more minimalist tool is the [rocketscan.io](https://rocketscan.io/) tool made another community member.
 It features detailed network and node metrics, including a timeline of your node activity.
 
 ![Rocketscan screenshot](./local/images/rocketscan.dev.png)
-
 
 ### Scripting with Pushover (advanced)
 
@@ -265,7 +288,7 @@ PUSHOVER_USER=
 PUSHOVER_TOKEN=
 NODE_ADDRESS="$(rocketpool node status | grep -Po "(?<=The node )(0x[A-Za-z0-9]{40})")"
 EXPLORER_URL=https://beaconcha.in/validators/eth1deposits?q=
-#EXPLORER_URL=https://rocketscan.dev/node/
+#EXPLORER_URL=https://rocketscan.io/node/
 #EXPLORER_URL=https://www.rp-metrics-dashboard.com/dashboard/MAINNET/
 NOTIFICATION_URL="$EXPLORER_URL$NODE_ADDRESS"
 

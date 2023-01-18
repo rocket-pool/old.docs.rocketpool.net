@@ -1,12 +1,12 @@
-# Creating a New Minipool (ETH2 Validator)
+# Creating a New Minipool (Validator)
 
-As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the eth1.0 chain that your node manages.
-The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new eth2.0 validator.
+As a reminder, a `minipool` in Rocket Pool terms refers to a unique smart contract instance on the Execution Layer (ETH1) chain that your node manages.
+The minipool handles 16 of your ETH, 16 ETH from the rETH staking pool, and merges them together so that it can send 32 ETH to the Beacon Chain deposit contract to create a new validator.
 Thus, in order to create a validator using Rocket Pool, you need to **create a minipool**.
 
 ::: warning
 Creating a minipool means depositing 16 of your own ETH to the Beacon Chain.
-These funds **cannot be retrieved** until after the eth1.0 chain has merged with the eth2.0 chain, and withdrawals have been implemented.
+These funds **cannot be retrieved** until after the Execution Layer (ETH1) has merged with the Beacon Chain (ETH2), and withdrawals have been implemented.
 By creating the minipool, you are acknowledging that you are effectively locking these funds until that system is in place.
 :::
 
@@ -26,7 +26,71 @@ This means you'll only need to handle the total RPL stake for your node if you p
 :::
 
 
-Run the following command, and the CLI will tell you how much this is (as well as give you a list of options with respect to how much you want to stake):
+### Staking via the Website (Recommended)
+
+The easiest and safest way to stake RPL for your node is to use the website's new **Stake-on-Behalf** feature, which was introduced with the Redstone upgrade.
+This way, you can stake RPL for your node while the RPL is still in the wallet you used to acquire it.
+In other words, you **don't need to send RPL to your node's hot wallet** in order to stake it.
+
+Select which network you're using from the tabs below to be taken to it:
+
+:::: tabs
+::: tab Mainnet
+[https://stake.rocketpool.net/stake-behalf](https://stake.rocketpool.net/stake-behalf)
+:::
+::: tab Prater Testnet
+[https://testnet.rocketpool.net/stake-behalf](https://testnet.rocketpool.net/stake-behalf)
+:::
+::::
+
+Start by connecting your wallet to the website using MetaMask, WalletConnect, or any of the other methods the website supports.
+You will then be presented with this dialog:
+
+<center>
+
+![](./images/stake-behalf-1.png)
+
+</center>
+
+This is a two-step process.
+First, enter the amount of RPL you want to stake and click `Approve` - this will **approve** the staking contract to access that much RPL in your wallet, but **no more than that amount**.
+
+::: tip TIP
+You can approve more than the amount you intend to stake if you trust the Rocket Pool staking contract, and don't want to perform this extra Approve transaction each time you want to stake more RPL.
+:::
+
+Once the RPL is approved, you will see this dialog:
+
+<center>
+
+![](./images/stake-behalf-2.png)
+
+</center>
+
+Enter the amount of RPL you want to stake in the `Stake RPL` box, and enter your node's address in the `on behalf of Node Address` box.
+**Make sure you have the correct node address before doing this!**
+If you need to confirm your node's address, you can quickly retrieve it via the CLI using the `rocketpool node status` command.
+
+When you've entered that information, press the `Stake` button and approve the transaction.
+It will be sent to the Ethereum network, and once included in a block, you're all set!
+
+If you run `rocketpool node status`, you should see your staked RPL appear under the `=== RPL Stake and Minipools ===` section.
+
+
+### Staking via the Node CLI
+
+If you cannot (or do not want to) use the website to stake your RPL, you can also stake it via the node's CLI directly.
+
+First, transfer your RPL from the wallet you acquired it with to your node's address.
+
+::: danger WARNING
+**Please do this carefully and ensure you are sending the RPL to your node's address - transfers on Ethereum cannot be undone!**
+**Sending RPL to the wrong address will result in the loss of your RPL.**
+
+Use the `rocketpool node status` command to verify your node's address if you aren't sure what it is.
+:::
+
+Run the following command:
 
 ```
 rocketpool node stake-rpl
@@ -44,10 +108,8 @@ Please choose an amount of RPL to stake:
 
 Select how much you'd like to stake, then confirm the operation.
 
-::: tip NOTE
-Note that the gas estimates here will likely be incorrect, because this operation will require two sequential transactions: one to give the minipool contract access to your RPL, and one to perform the staking.
-The gas estimator can't calculate the price for the second transaction until the first one is completed.
-:::
+The first time you run this command, it will involve two transactions - one to **approve** the Rocket Pool staking contract to access your RPL, and one to **stake** your RPL with it.
+Subsequent runs will only require the **stake** transaction, since the token has already been approved. 
 
 Once both transactions finish, you can check your staked RPL amount with `rocketpool node status`.
 The following portion of the output is what you want to verify:
@@ -97,11 +159,6 @@ $ rocketpool minipool find-vanity-address
 Please specify the address prefix you would like to search for (must start with 0x):
 0xa77e57
 
-Please choose a deposit type to search for:
-1: 32 ETH (minipool begins staking immediately)
-2: 16 ETH (minipool begins staking after ETH is assigned)
-2
-
 Running with 12 threads.
 Found on thread 3: salt 0x5cd7fb = 0xA77E57c892C9e98B0B81289e4AfdA62fb59c5DDD
 Finished in 1.91145873s
@@ -121,7 +178,7 @@ On average, it will take a few seconds to find a 6-character prefix, a few minut
 The salt that gets generated is specific to the following variables:
 - The network you're using (either the Prater Testnet or Mainnet)
 - The node address
-- The deposit type (16 or 32 ETH)
+- The deposit type (16 ETH is currently the only valid option)
 - The salt
 
 If you change any of those variables, the minipool address for a given salt will change as well.
@@ -139,6 +196,17 @@ This is done with the following command:
 rocketpool node deposit
 ```
 
+::: tip TIP
+If the market value of rETH is higher than its ETH backing (i.e., rETH is at a premium on the market), there is an opportunity to arbitrage the difference when creating a minipool.
+The value of the arbitrage is equal to the amount of protocol ETH in the minipool times the premium (minus a small amount of gas).
+E.g., if making a minipool when there's a 2.5% premium: `16 ETH * .025 = 0.4 ETH`.
+In other words, you could receive 0.4 ETH back during these conditions just for creating a minipool!
+
+If you're interested in taking advantage of this opportunity, consider using the community-developed [rocketarb](https://github.com/xrchz/rocketarb/blob/main/README.md) tool to capture the profit of the MEV rETH arbitrage opportunity that launching your minipool creates.
+
+To learn more about rocketarb, feel free to inquire about it on the [RP discord server](https://discord.gg/rocketpool).
+:::
+
 ::: tip NOTE
 If you want to use a salt for a vanity address that you found using the process above, run the following command instead:
 
@@ -147,84 +215,61 @@ rocketpool node deposit --salt <your salt, e.g. 0x1234abcd>
 ```
 :::
 
-You will first be prompted to choose how much ETH you want to deposit to your new minipool:
-
-```
-Please choose an amount of ETH to deposit:
-1: 32 ETH (minipool begins staking immediately)
-2: 16 ETH (minipool begins staking after ETH is assigned)
-```
-
-If you choose **16 ETH**, you will enter the Rocket Pool minipool queue.
-This queue will wait for 16 ETH to become available from the rETH staking pool.
-Once it's available, it will be merged with your own 16 ETH, used to create a minipool, and deposited into the Beacon Chain deposit contract to create a new validator.
-
-If you choose **32 ETH**, you will bypass the Rocket Pool minipool queue entirely.
-You will immediately create a minipool and a new Beacon Chain validator.
-When 16 ETH becomes available from the rETH staking pool and there are no other minipools in the queue that chose the 16 ETH deposit option, then **you will be given 16 ETH back from the rETH staking pool**.
-You can then use the `rocketpool minipool refund` command to receive that 16 ETH back to your withdrawal address.
-
-::: tip NOTE
-Though depositing 32 ETH lets you bypass the *Rocket Pool queue*, it does **not** bypass the *Beacon Chain queue*.
-You still have to wait through the validator queue until your validator is activated on the Beacon Chain.
-::: 
-
-Next, you will be prompted about the current network commission rate:
-
-```
-The current network node commission rate that your minipool should receive is 20.000000%.
-The suggested maximum commission rate slippage for your deposit transaction is 1.000000%.
-This will result in your minipool receiving a minimum possible commission rate of 19.000000%.
-Do you want to use the suggested maximum commission rate slippage? [y/n]
-```
-
-This will tell you what the **current** commission rate is, which is based on how many minipools are in the queue and how much rETH is available in the staking pool, waiting to be staked.
-The lowest it can go is 5%, and the highest it can go is 20%.
-Once your minipool is created, **its commission rate will be locked until you exit the validator and close the minipool**.
-
-The commission rate chosen is ultimately set when your minipool enters the Rocket Pool queue, which can be a few minutes after you issue the deposit command to the network.
-Because of this, it's possible that it might move slightly between the time when you issued the deposit command, and when the minipool is added to the queue.
-This prompt asks you how much you are willing to allow the commission to drop by during this period before you would rather just cancel the deposit entirely.
-
-For example: say the CLI claims that the current commission is 20% when you issue the `deposit` command.
-It takes 5 minutes for your minipool to be added to the Rocket Pool queue.
-In that time, the commission rate falls to 17%.
-
-If you set a slippage of 2%, then the lowest you are willing to let it go down is 18%.
-Since 17% is less than 18%, your deposit will be cancelled and your ETH will be refunded to you.
-**Note that you will still have to pay some gas fees, even if the transaction is reverted in this way.**
-
-If you set a slippage of 4%, then the lowest you are willing to let it go down is 16%.
-Since 17% is greater than 16%, your minipool will be created and added to the queue with a commission rate of 17% for its entire life.
-
-Using this knowledge, answer the prompt by deciding if the suggested slippage rate is acceptable or if you want to change it.
-
 ::: danger
-After you set your acceptable slippage, the CLI will then check to ensure that your ETH2 client is synced.
+The CLI will then check to ensure that your Consensus (ETH2) client is synced.
 If not synced, then it will warn you in large red letters.
-A situation may arise where **your ETH2 validator is activated before your ETH2 node finishes syncing**.
-If this happens, your validator will be assigned attestation and block proposal duties on the Beacon Chain, but it cannot perform those duties until your ETH2 client is fully synced.
+A situation may arise where **your ETH2 validator is activated before your Consensus Client (ETH2) finishes syncing**.
+If this happens, your validator will be assigned attestation and block proposal duties on the Beacon Chain, but it cannot perform those duties until your Consensus (ETH2) client is fully synced.
 
 In this situation, **every missed attestation and block proposal will cause you to lose ETH!**
-You will continue to slowly leak your ETH until your ETH2 client finishes syncing.
+You will continue to slowly leak your ETH until your Consensus (ETH2) client finishes syncing.
 
 In most cases, **you should cancel the process and wait for your client to sync.**
 
-However, there are situations where the Beacon Chain validator queue is very long, and you believe that your ETH2 client will finish syncing before your validator exits the queue and is activated.
+However, there are situations where the Beacon Chain validator queue is very long, and you believe that your Consensus (ETH2) client will finish syncing before your validator exits the queue and is activated.
 In this case, you may want to do the deposit anyway to save time and begin validating sooner.
 If you **understand these risks** and **believe this is the case**, the CLI will let you go ahead with a deposit anyway.
 :::
 
-At this point you will be given the typical gas cost estimation:
+You will next be prompted with the network's current gas costs recommendations; confirm your gas price selection and follow the rest of the prompts. 
 
 ```
-Your eth2 client is synced, you may safely create a minipool.
-Suggested gas price: 10.319561 Gwei
-Estimated gas used: 1957383 gas
-Estimated gas cost: 0.020199 ETH
+Your eth2 client is on the correct network.
 
-You are about to deposit 16.000000 ETH to create a minipool with a minimum possible commission rate of 19.000000%.
+Your minipool will use the current fixed commission rate of 15.00%.
+Your consensus client is synced, you may safely create a minipool.
++============== Suggested Gas Prices ==============+
+| Avg Wait Time |  Max Fee  |    Total Gas Cost    |
+| 15 Seconds    | 15 gwei   | 0.0244 to 0.0366 ETH |
+| 1 Minute      | 10 gwei   | 0.0157 to 0.0235 ETH |
+| 3 Minutes     | 7 gwei    | 0.0100 to 0.0150 ETH |
+| >10 Minutes   | 6 gwei    | 0.0080 to 0.0120 ETH |
++==================================================+
+
+These prices include a maximum priority fee of 2.00 gwei.
+Please enter your max fee (including the priority fee) or leave blank for the default of 10 gwei:
+
+
+Using a max fee of 10.00 gwei and a priority fee of 2.00 gwei.
+You are about to deposit 16.000000 ETH to create a minipool with a minimum possible commission rate of 15.000000%.
 ARE YOU SURE YOU WANT TO DO THIS? Running a minipool is a long-term commitment, and this action cannot be undone! [y/n]
+y
+
+Creating minipool...
+Transaction has been submitted with hash <transaction hash>.
+You may follow its progress by visiting:
+<link to transaction>
+
+Waiting for the transaction to be mined... you may wait here for it, or press CTRL+C to exit and return to the terminal.
+
+The node deposit of 16.000000 ETH was made successfully!
+Your new minipool's address is: <new minipool address>
+The validator pubkey is: <new validator public key>
+
+Your minipool is now in Initialized status.
+Once the 16 ETH deposit has been matched by the staking pool, it will move to Prelaunch status.
+After that, it will move to Staking status once 1h0m0s have passed.
+You can watch its progress using `rocketpool service logs node`.
 ```
 
 Note that creating a minipool **is an expensive transaction**!
@@ -235,15 +280,10 @@ Once the transaction completes, you will be given the address of your new minipo
 You can visit these with any block explorers if you'd like.
 
 
-
 ## Confirming a Successful Stake
 
 Upon creation, your minipool will be put into the `initialized` state.
 It will remain here until it's your turn in the Rocket Pool queue to be given 16 ETH from the staking pool so you can stake your new validator on the Beacon Chain.
-
-::: tip NOTE
-If you did a 32 ETH deposit, you will skip this step and go immediately to the `prelaunch` step below.
-:::
 
 Once this happens, your minipool will move into the `prelaunch` state for a certain period of time (currently 12 hours).
 Your 16 ETH deposit will be transferred to be Beacon Chain, and the Oracle DAO [will verify that it is all correct](https://github.com/rocket-pool/rocketpool-research/blob/master/Reports/withdrawal-creds-exploit.md).
@@ -258,11 +298,24 @@ For example, when it has moved into `prelaunch`, you will likely see something l
 --------------------
 
 Address:              <your minipool address>
-Status updated:       2021-06-21, 01:14 +0000 UTC
-Node fee:             20.000000%
+Penalties:            0
+Status updated:       2022-08-17, 01:24 +0000 UTC
+Node fee:             15.000000%
 Node deposit:         16.000000 ETH
-RP ETH assigned:      2021-06-21, 01:14 +0000 UTC
+RP ETH assigned:      2022-08-17, 01:24 +0000 UTC
 RP deposit:           16.000000 ETH
+Validator pubkey:     <your validator public key>
+Validator index:      0
+Validator seen:       no
+Use latest delegate:  no
+Delegate address:     <your delegate address>
+Rollback delegate:    <none>
+Effective delegate:   <your delegate address> 
+
+
+0 finalized minipool(s):
+
+
 
 ```
 
@@ -279,24 +332,29 @@ $ rocketpool minipool status
 
 --------------------
 
-Address:              <your minipool address>
-Status updated:       2021-06-21, 01:19 +0000 UTC
-Node fee:             20.000000%
+Address:              <your validator address>
+Penalties:            0
+Status updated:       2022-07-17, 20:01 +0000 UTC
+Node fee:             15.000000%
 Node deposit:         16.000000 ETH
-RP ETH assigned:      2021-06-21, 01:19 +0000 UTC
+RP ETH assigned:      2022-07-17, 18:58 +0000 UTC
 RP deposit:           16.000000 ETH
-Validator pubkey:     <your eth2 validator address>
-Validator index:      0
-Validator seen:       no
+Validator pubkey:     <your validator public key>
+Validator index:      <your validator index number>
+Validator active:     yes
+Validator balance:    32.018460 ETH
+Expected rewards:     16.010614 ETH
+Use latest delegate:  no
+Delegate address:     <your delegate address>
+Rollback delegate:    <none>
+Effective delegate:   <your delegate address> 
 
---------------------
+
+0 finalized minipool(s):
+
 ```
 
 Once the Beacon Chain accepts both of the 16 ETH deposits (one from you and one from the staking pool), your validator will enter the Beacon Chain queue where it will wait for its turn to become activated and start staking.
-
-::: tip NOTE
-If you did a 32 ETH deposit, you will be refunded 16 ETH at this stage which you can claim using `rocketpool minipool refund`.
-:::
 
 At this point, you're done!
 Congratulations!
@@ -313,3 +371,10 @@ You **do not** need to create a new node for each minipool.
 If you would like to make a second (or third, or fourth...) minipool for your node, all you need to do is run `rocketpool node deposit` again.
 Note that you may need to stake more RPL first to maintain an overall collateral level of at least 10% before you do this.
 Also, you won't be able to reuse an old vanity address salt - you'll need to search for another unique one for each of your minipools.
+
+
+## Next Steps
+
+Now that you have a minipool up and running, the next steps will walk you through how to monitor the health of your node, check for and apply updates, and maintain it throughout its life.
+
+**Please read through the `Monitoring and Maintenance` section next to learn more about these topics.**

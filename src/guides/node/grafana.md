@@ -13,7 +13,7 @@ Now that you have your node up and running, you'll probably want to have a conve
 There are many tools out there that do this job.
 One of the most popular is called [Grafana](https://grafana.com/) - an easy-to-use, general-purpose dashboard system that you can access with a browser.
 
-Rocket Pool comes out-of-the-box with support for Grafana and its dependencies; it even comes with a pre-built dashboard for each of the ETH2 clients.
+Rocket Pool comes out-of-the-box with support for Grafana and its dependencies; it even comes with a pre-built dashboard for each of the Consensus (ETH2) clients.
 For example, here is a snapshot of what the dashboard for Nimbus looks like:
 
 
@@ -68,7 +68,7 @@ Would you like to enable Rocket Pool's metrics dashboard? [y/n]
 ```
 
 Enter `y`, to enable the Prometheus, Node Exporter, and Grafana Docker containers for you.
-It will also modify your ETH2 and Validator clients so they expose their own metrics to Prometheus.
+It will also modify your Consensus (ETH2) and Validator clients so they expose their own metrics to Prometheus.
 
 For those who prefer to fine-tune their port settings, the interview will ask you if you'd like to change any of the ports used for the above services.
 Note that all of these ports are restricted to Docker's internal network with the exception of the Grafana port - that will be opened on your machine (so you can access it via a browser from other machines, such as your desktop or phone) so you may want to change that if the default port conflicts with something you already have.
@@ -139,7 +139,7 @@ After you reconfigure the Smartnode to enable / disable metrics, you'll have to 
 rocketpool service stop
 
 rocketpool service start
-``` 
+```
 
 The Operating System and Rocket Pool update tracker is **not installed by default** for maximum flexibility, but the process is simple.
 If you would like to install it so your dashboard shows you how many updates are available for your system, you can do it with this command:
@@ -230,7 +230,7 @@ docker exec -it rocketpool_grafana grafana-cli admin reset-admin-password admin
 You will be able to log into Grafana using the default `admin` credentials once again, and then you will be prompted to change the password for the `admin` account.
 :::
 
-Thanks to community member **tedsteen**'s work, Grafana will automatically connect to your Prometheus instance so it has access to the metrics that it collects. 
+Thanks to community member **tedsteen**'s work, Grafana will automatically connect to your Prometheus instance so it has access to the metrics that it collects.
 All you need to do is grab the dashboard!
 
 ::::
@@ -257,7 +257,7 @@ Start by going to the **Create** menu (the plus icon on the right-side bar) and 
 
 ![](./images/grafana-import.png)
 
-When prompted for the URL, select the option from the below list based on which ETH2 client you are using:
+When prompted for the URL, select the option from the below list based on which Consensus (ETH2) client you are using:
 
 - Lighthouse: [https://grafana.com/grafana/dashboards/14883](https://grafana.com/grafana/dashboards/14883)
 - Nimbus: [https://grafana.com/grafana/dashboards/14884](https://grafana.com/grafana/dashboards/14884)
@@ -388,10 +388,10 @@ NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 ...
 loop25        7:25   0   132K  1 loop /snap/gtk2-common-themes/9
 loop26        7:26   0  65,1M  1 loop /snap/gtk-common-themes/1515
-nvme0n1     259:0    0 238,5G  0 disk 
+nvme0n1     259:0    0 238,5G  0 disk
 ├─nvme0n1p1 259:1    0   512M  0 part /boot/efi
 ├─nvme0n1p2 259:2    0 150,1G  0 part /
-├─nvme0n1p3 259:3    0  87,4G  0 part 
+├─nvme0n1p3 259:3    0  87,4G  0 part
 └─nvme0n1p4 259:4    0   527M  0 part
 ```
 
@@ -453,7 +453,7 @@ The setup is identical to the **Network Usage** box above, so simply follow thos
 
 ### OS Disk Space Used
 
-This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth](./geth-pruning.md)).
+This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth or Nethermind](./pruning.md)).
 
 The steps are the same as the **SSD Latency** box above, so simply follow those instructions for this box too.
 As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive.
@@ -517,20 +517,22 @@ docker stop rocketpool_grafana
 rocketpool service start
 ```
 
-To test the SMTP settings, go to the **Alerting** menu and click **Notification channels**.
+To test the SMTP settings, go to the **Alerting** menu and click **Contact points**.
 
 <center>
 
-![](./images/grafana-notification-channels.png)
+![](./images/grafana-contact-points.png)
 
 </center>
 
-Click **Add channel** and select **Email** as the type. Enter an email address in the **Addresses** section and click **Test**.
+Click **New contact point** and select **Email** as the Contact point type.
+Enter an email address in the **Addresses** section and click **Test**.
 
 <center>
 
-![](./images/grafana-new-notification-channel.png)
+![](./images/grafana-new-contact-point.png)
 
 </center>
 
 Check to see that the test email was received.
+Click **Save contact point*** when finished.

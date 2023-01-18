@@ -21,7 +21,7 @@ Slashing only occurs if you attack the network, and going offline for maintenanc
 
 ## Updating your Operating System
 
-You should frequently check your Operating System's package manager or update service to ensure that quickly apply any new important security patches. 
+You should frequently check your Operating System's package manager or update service to ensure that quickly apply any new important security patches.
 The exact instructions vary for each Operating System and can be found with your system's documentation, but here are a few examples.
 
 :::: tabs
@@ -55,7 +55,7 @@ This will show you the list of packages that are about to be updated, and if the
 12 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
 Need to get 51.3 MB of archives.
 After this operation, 52.2 kB of additional disk space will be used.
-Do you want to continue? [Y/n] 
+Do you want to continue? [Y/n]
 ```
 
 Ensure that you have enough space available to do this, then press `y` and `Enter` to begin the update process.
@@ -104,6 +104,14 @@ The most consistent way to find out about new releases is to subscribe to the Ro
 ::: warning NOTE
 Note that running `apt update` will not update the node software.
 This must be done manually using the steps below.
+:::
+
+::: tip TIP
+When you have completed the Smartnode upgrade, the Grafana dashboard will still indicate there is still an update available.
+It will automatically clear within a day when the system next auto-checks for updates.
+
+If you want to clear it immediately after the update, simply run:
+```sudo apt update```
 :::
 
 The steps to upgrade depend on which mode your node uses. Select from the options below:
@@ -155,10 +163,14 @@ Finally, check the version to make sure the CLI and Smartnode stack are both up 
 ```
 rocketpool service version
 
-Rocket Pool client version: 1.0.0-rc3
-Rocket Pool service version: 1.0.0-rc3
-Selected Eth 1.0 client: Geth (rocketpool/client-go:v1.10.4)
-Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
+Your Smartnode is currently using the Prater Test Network.
+
+Rocket Pool client version: 1.5.0
+Rocket Pool service version: 1.5.0
+Selected Eth 1.0 client: Geth (Locally managed)
+        Image: ethereum/client-go:v1.10.21
+Selected Eth 2.0 client: Lighthouse (Locally managed)
+        Image: rocketpool/lighthouse:mevboost-5ee3bc5
 ```
 
 Both the client and service should match the new release version.
@@ -188,6 +200,8 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-amd64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
 For `arm64` systems (like the Raspberry Pi):
@@ -200,6 +214,8 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-arm64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
 If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
@@ -244,7 +260,7 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 
 For `arm64` systems, such as the Mac mini with M1:
 ```shell
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /usr/local/bin/rocketpool
+wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /opt/homebrew/bin/rocketpool
 ```
 
 Now run the install command:

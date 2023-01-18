@@ -1,44 +1,85 @@
 # A Node Operator's Responsibilities
 
-## How ETH2 Staking Works
+## How Ethereum Staking Works
 
-As a reminder, staking in ETH2 is done via **validators**.
-A validator is a single ETH2 address, to which 32 ETH was deposited, which is now responsible for helping maintain the consistency and security of the Beacon (ETH2) chain.
-They do this by listening for transactions and new block proposals, and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
-Occasionally, they get to propose new blocks themselves. 
+As a reminder, staking in Proof of Stake is done via **validators**.
+A validator is essentially a single Beacon Chain address to which 32 ETH was deposited on the Execution layer.
+Validators are responsible for maintaining the consistency and security of the Beacon Chain.
+They do this by listening for transactions and new block proposals and **attesting** that the proposed block contains legal, valid transactions by doing some number crunching and verification behind the scenes.
+Occasionally, they get to propose new blocks themselves.
 
-Validators in ETH2 are assigned attestations and block proposals **on a schedule**.
-This is very different from ETH1's proof of work system, where everyone is constantly trying to race each other and come up with the next block before everyone else.
-This means that unlike ETH1 where you aren't guaranteed to earn a block reward unless you find the next block, ETH2 validators are guaranteed to have slow, steady income as long as they perform their duties.
+Validators are assigned attestations and block proposals **on a randomized schedule**.
+This is very different from the old Proof of Work system, where everyone was constantly trying to race each other and come up with the next block before everyone else.
+This means that unlike Proof of Work where miners weren't guaranteed to earn a block reward unless they found the next block, Proof of Stake validators *are* guaranteed to have slow, steady income as long as they perform their duties.
 If a validator is offline and misses an attestation or a block proposal, it will be **slightly penalized**.
 The penalties are quite small though; as a rule of thumb, if a validator is offline for X hours, it will make all of its lost ETH back after the same X hours of being back online.
 
-ETH2 validators are rewarded for attestations and block proposals, but **those rewards stay on the ETH2 chain with the validator**.
-There is no way to retrieve them back on the ETH1 chain right now, so unlike mining, you will not be given ETH slowly over time to use as you see fit.
-Instead, your validator will simply accrue a larger and larger balance over time, but you won't be able to access it until you **voluntarily exit** your validator.
-This will retire it from its duties and return the balance back to you.
-Note that *this is not currently possible until the ETH1 and ETH2 chains merge, and withdrawals have been implemented*.
+### Rewards
 
-If an ETH2 validator violates one of the core rules of the Beacon chain and appears to be attacking the network, it may get **slashed**.
+Now that [the Execution and Consensus layers have merged](https://ethereum.org/en/upgrades/merge/), validators are able to earn five different types of rewards:
+
+| Type | Layer | Frequency | Amount |
+| - | - | - | - |
+| Attestation | Consensus | Once per Epoch (every 6.4 minutes on average) | 0.000014 ETH* |
+| Block Proposal | Consensus | [Every 2 months on average](https://proposalprobab.web.app/)** | 0.02403 ETH* |
+| [Sync Committee](https://blockdaemon.com/blog/ethereum-altair-hard-folk-light-clients-sync-committees/) | Consensus | Every 2 years on average** | 0.11008 ETH* |
+| Slashing Reward | Consensus | Very rarely included in Block Proposals | Up to 0.0625 ETH |
+| Priority Fees | Execution | Included in Block Proposals | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
+| MEV Rewards | Execution | Also included in Block Proposals when using [MEV-boost](https://boost.flashbots.net/) | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
+
+**Varies based on the total number of validators in the network.
+Approximated for 435,000 active validators.*
+
+***These are subject to randomness; there can be "dry spells" multiple times longer than the average without being given one.*
+
+Rewards provided on the **Consensus Layer** (the Beacon Chain) are *not currently liquid*.
+They are locked on the chain until withdrawals have been implemented into the core Ethereum protocol.
+
+Rewards provided on the **Execution Layer**, however, **are liquid** and can be accessed instantly (or once per Rocket Pool rewards interval, if opted into the **Smoothing Pool**).
+We will describe these rewards in more detail, including how to configure and access them, later on in the guide.
+
+
+### Penalties
+
+Validators are penalized for small amounts of ETH if they are offline and fail to perform their assigned duties.
+This is called **leaking**.
+If a validator violates one of the core rules of the Beacon chain and appears to be attacking the network, it may get **slashed**.
 Slashing is a forceful exit of your validator without your permission, accompanied by a relatively large fine that removes some of your validator's ETH balance.
+
 Realistically, the only condition that can cause a slashing is if you run your validator's keys on two nodes at the same time (such as a failover / redundancy setup, where your backup node accidentally turns on while your main node is still running).
 Don't let this happen, and **you won't get slashed**.
 Slashing *cannot occur* from being offline for maintenance.
 
+Below is a table that shows the penalties that can happen to a validator:
+
+| Type | Layer | Amount |
+| - | - | - |
+| Missed Attestation | Consensus | -0.000011 ETH* per attestation (-9/10 the value of a normal attestation reward) |
+| Missed Proposal | Consensus | 0 |
+| Missed Sync Committee | Consensus | -0.00047 ETH* per epoch (-0.1 ETH total if offline for the whole sync committee) |
+| Slashing | Consensus | At least 1/32 of your balance, up to your entire balance in extreme circumstances |
+
+**Varies based on the total number of validators in the network.
+Approximated for 435,000 active validators.*
+
+::: tip TIP
+As a rule of thumb, if you're offline for X hours (and you aren't in a sync committee), then you'll make all of your leaked ETH back after X hours once you're back online and attesting.
+:::
+
 
 ## How Rocket Pool Nodes Work
 
-Unlike solo stakers, who are required to put 32 ETH up for deposit to create a new validator, Rocket Pool nodes only need to deposit 16 ETH per validator.
-This will be coupled with 16 ETH from the staking pool (which "normal" stakers deposited in exchange for rETH) to create a new ETH2 validator.
+Unlike solo stakers which are required to put 32 ETH up for deposit to create a new validator, Rocket Pool nodes only need to deposit 16 ETH per validator.
+This will be coupled with 16 ETH from the staking pool (which "normal" stakers deposited in exchange for rETH) to create a new validator.
 This new validator is called a **minipool**.
 
 To the Beacon chain, a minipool looks exactly the same as a normal validator.
 It has the same responsibilities, same rules it must follow, same rewards, and so on.
 The only difference is in how the minipool was created on the ETH1 chain, and how withdrawals work when the node operator decides to voluntarily exit the minipool.
-All of the creation, withdrawing, and rewards delegation is handled by Rocket Pool's **smart contracts** on the ETH1 chain.
+All of the creation, withdrawing, and rewards delegation is handled by Rocket Pool's **smart contracts** on the Ethereum chain.
 This makes it completely decentralized.
 
-A Rocket Pool **Node** is a single computer with an ETH1 wallet that was registered with Rocket Pool's smart contracts.
+A Rocket Pool **Node** is a single computer with an Ethereum wallet that was registered with Rocket Pool's smart contracts.
 The node can then create as many minipools as it can afford, all running happily on the same machine together.
 **A single Rocket Pool node can run many, many minipools.**
 Each minipool has a negligible impact on overall system performance; some people have been able to run hundreds of them on a single node during Rocket Pool's beta tests.
@@ -52,13 +93,13 @@ This acts as supplemental insurance against particularly egregious slashing inci
 **Node operators** are the heart and soul of Rocket Pool.
 They are the individuals that run Rocket Pool nodes.
 They put ETH from the staking pool to work by running minipools with it, which earn staking rewards for the Rocket Pool protocol (and thus, increase rETH's value).
-Their job is straightforward, but crucially important: *run ETH2 validators with the highest quality possible, and maximize staking rewards*.
- 
+Their job is straightforward, but crucially important: *run validators with the highest quality possible, and maximize staking rewards*.
+
 Node operators are responsible for:
 
 - Setting up a computer (either physical or virtual)
 - Configuring it correctly, including their home network if applicable
-- Installing Rocket Pool on it and setting up minipools to perform ETH2 validation
+- Installing Rocket Pool on it and setting up minipools to perform validation
 - Securing it, both from outside and inside threats
 - Maintaining it for the life of their validators
 
@@ -66,7 +107,7 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn half of the validator's total ETH rewards, *plus* an extra commission (varies from an additional 5 to 20 percentage points)
+- You earn half of the validator's total ETH rewards, *plus* an extra 15% commission paid by the pool staker's half 
 - You earn interest on the RPL you stake as supplemental insurance
 - You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
 
@@ -78,4 +119,4 @@ You will receive 14 ETH, and 16 ETH will be returned to the staking pool.
 If you're fairly new to using the command line or computer maintenance, this can seem like a scary challenge.
 Luckily, one of Rocket Pool's most core principles is *decentralization* - the fact that anyone, anywhere, can run a node if they have the determination and knowledge.
 While we can't help with determination, we *can* help with knowledge.
-This section is packed with guides, walkthroughs, and information that will help you understand how to run a great Rocket Pool node. 
+This section is packed with guides, walkthroughs, and information that will help you understand how to run a great Rocket Pool node.

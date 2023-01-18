@@ -8,7 +8,7 @@ Here you will find instructions on how to migrate an existing Smartnode stack fr
 
 Pool staking is largely the same process on mainnet as it was on the testnet.
 The URL will be different and the address of the rETH token may be different, but there are no significant changes to the workflow.
-Follow the [Staking Guide](../staking/staking.md), which has been updated with instructions for mainnet.
+Follow the [Staking Guide](../staking/overview.md), which has been updated with instructions for mainnet.
 
 
 ### Differences Between the Testnet and Mainnet
@@ -20,8 +20,8 @@ Follow the [Staking Guide](../staking/staking.md), which has been updated with i
 ## Smartnode Operation on Mainnet
 
 ::: danger NOTE
-**Nothing** from the test network can be migrated to mainnet. 
-The chain data is different for both ETH1 and ETH2, so you must remove the old chain data and resync the mainnet chains from scratch.
+**Nothing** from the test network can be migrated to mainnet.
+The chain data is different for both Execution (ETH1) and Consensus (ETH2), so you must remove the old chain data and resync the mainnet chains from scratch.
 Your validators on the testnet do not carry over to mainnet.
 Also, for security, compatibility, and safety purposes, **you must make a new wallet on mainnet!**
 **Do not use your testnet node wallet on mainnet!**
@@ -37,7 +37,7 @@ If you want to preserve your test network setup, you should back up your hard dr
 - If you are using Geth, your node's workload will be **considerabily higher**. Geth takes approximately 20x the storage space of Goerli (400 GB as of 2021-09-05), and requires more CPU power and RAM to process. If you're using the Rocket Pool Grafana dashboard, be prepared to see much higher usage.
 - Your Beacon Chain peers (and thus, your attestation effectiveness) will be **higher** than the testnet. Peers on mainnet are much more diverse and tend to be higher quality than on the testnet.
 - The RPL rewards checkpoint occurs every **28 days** instead of every 3 days, to help offset high gas costs.
-- The RPL price used by the Rocket Pool network (and thus, your collateral level) along with the total effective staked RPL across the network are reported **once every 24 hours** instead of once every hour. 
+- The RPL price used by the Rocket Pool network (and thus, your collateral level) along with the total effective staked RPL across the network are reported **once every 24 hours** instead of once every hour.
 
 
 ### Automatic Migration (Docker Mode Only)
@@ -62,7 +62,7 @@ Next, open the **Smartnode and TX Fees** category and change the **Network** dro
 
 <center>
 
-![](./images/tui-change-network.png)
+![](../node/images/tui-change-network.png)
 
 </center>
 
@@ -160,7 +160,7 @@ You can reuse them and ignore the steps involved in setting them up in the insta
 
 You will need to redo some of the installation steps including:
 - Create the `/srv/rocketpool` folder and its skeleton framework, and set the permissions properly
-- Get the latest release versions of the ETH1, ETH2, and Validator client binaries
+- Get the latest release versions of the Execution (ETH1) and Consensus (ETH2), and Validator client binaries
 - Set the **`ExecStart` string** in the services (**use the mainnet configuration defined in the installation guide!)**
 - Get the latest CLI and Daemon binaries
 - Get the latest configuration files from the installer archive, put them into `/srv/rocketpool`, and adjust them to match your node's setup

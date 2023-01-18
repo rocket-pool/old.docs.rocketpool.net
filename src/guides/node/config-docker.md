@@ -1,6 +1,6 @@
-# Configuring the Smartnode Stack (Docker Mode)
+# Configuring the Smartnode Stack (Docker / Hybrid Mode)
 
-Running complete Execution layer (ETH1) and Consensus layer (ETH2) clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
+Running complete Execution layer and Consensus layer clients can be daunting; there are several options to choose from and each of them has a plethora of different settings.
 Luckily, the Smartnode is designed to hide all of that complexity so it's quick and easy to configure, while still giving you the freedom to customize everything if you so desire.
 
 In this section, we'll go over the various methods for configuring the Smartnode if you're using the **Docker-based setup** or a **Hybrid setup** where you connect to externally managed Execution or Consensus clients (e.g., clients you manage outside of the Smartnode for solo staking).
@@ -83,31 +83,32 @@ If you want to practice running a Rocket Pool node on the Prater test network wi
 
 If you're ready to create a real Rocket Pool node on Mainnet to earn real rewards, select **Mainnet**.
 
+### Client Mode
 
-### Execution Client Setup
-
-The next screen will ask you how you would like to manage your Execution Client:
+You will be presented with two options for client mode:
 
 <center>
 
-![](./images/tui-ec-mode.png)
+![](./images/tui-client-mode.png)
 
 </center>
 
-There are two options here.
-
-**Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
-Use it if you don't already have an Execution client and you want the Smartnode to manage one for you.
-By choosing this, the Smartnode will add an Execution client as a Docker container to its stack that it can control.
+**Locally Managed** (also known as **"Docker Mode"**) is the default choice.
+Use it if you don't already have a client pair and you want the Smartnode to manage one for you.
+By choosing this, the Smartnode will create, configure and manage an Execution & Consensus Client pair as Docker containers.
 Don't worry, you'll get to choose *which* client you want to run next.
 
-**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have an Execution client running elsewhere that they manage manually.
-By choosing this, the Smartnode will simply connect to your existing client and will not run one of its own.
-For example, users can use this to plug into an Execution client that they currently use for solo staking; that way, they don't need to have two separate copies of an Execution client.
+**Externally Managed** (also known as **"Hybrid Mode"**) is a convenient choice for users that already have an Execution & Consensus client pair running elsewhere that they manage manually.
+By choosing this, the Smartnode will simply connect to your existing clients and will not run one of its own.
+For example, users can use this to plug into the clients that they currently use for solo staking; that way, they don't need to have two separate copies of the clients.
 
 :::warning NOTE
-As the Smartnode cannot manage external Execution clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
+Since the Execution-Consensus Layer Merge, you *cannot* mix and match these modes (e.g., you cannot have a local Execution client but an externally-managed Consensus client).
+You must either choose all locally-managed or all externally-managed.
 :::
+
+
+### Execution Client Setup
 
 Choose which mode you'd like to use for managing your Execution client and follow the steps in the corresponding tab below:
 
@@ -125,13 +126,9 @@ If you want the Smartnode to manage an Execution client for you, the next screen
 Please refer to the [Choosing your ETH clients](./eth-clients.md#eth1-clients) section for a description of each option.
 Once you've made your choice, click on the appropriate tab below to learn how to configure it:
 
-:::::: tabs
-::::: tab Geth
-
-If you choose **Geth**, the Wizard will handle all of the configuration for you.
+If you choose **Geth**, **Besu**, or **Nethermind**, the Wizard will handle all of the configuration for you.
 You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
 You can proceed to the next section.
-
 
 ::: warning NOTE
 To make sure your Execution client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
@@ -141,32 +138,16 @@ This way, other Execution clients can discover it and communicate with it from t
 Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
 
-:::::
-::::: tab Infura
+::: warning NOTE
+Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
+You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
+:::
 
-If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
-
-<center>
-
-![](./images/tui-infura.png)
-
-</center>
-
-When you created an Infura account and an `Ethereum` project for it, it will be assigned a unique project ID which is a 32-character hexadecimal string.
-Note this is the **Project ID**, *not* the **Secret ID**.
-Enter the **Project ID** here, and press `Next`.
-
-:::::
-::::: tab Pocket
-
-If you choose **Pocket**, the Wizard will handle all of the configuration for you.
-You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
-You can proceed to the next section.
-
-:::::
-::::::
 :::::::
-::::::: tab Externally Managed
+
+And with that, your Execution client is all set!
+
+::::: tab External
 
 For an externally managed Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
 
@@ -180,125 +161,25 @@ The Smartnode will use the HTTP URL to communicate with it and perform blockchai
 **If you don't already have your client's API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
 Instructions on this vary from client to client; consult your client's documentation to learn how to set up the HTTP RPC endpoint.
 
-The Websocket URL is only relevant if you are using **Nimbus** as your Consensus client.
-If you are using a different client, you can leave it blank.
-Otherwise, enter it here.
-
-::: warning NOTE
-Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
-You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
-:::
-
-:::::::
-::::::::
-
-And with that, your Execution client is all set!
-
-
-### Fallback Execution Client Setup
-
-The next thing to configure is an optional **fallback** Execution client:
-
-<center>
-
-![](./images/tui-fallback-ec.png)
-
-</center>
-
-Think of this like a "spare" Execution client your node can use in case the primary one you selected in the previous step ever goes down for maintenance (which will almost certainly happen at some point).
-
-Choose **None** if you don't want to use a fallback client.
-This isn't recommended, but you have the option if you have a reason not to use one.
-
-**Infura** and **Pocket** behave the same way here as they do in regular Execution client operation; they will just stay idle until your primary Execution client fails, at which point they will take over until it's online again.
-*Note that if you selected one of these for your primary Execution client earlier, you should choose a different one for your fallback Execution client.*
-
-**External** a good choice if you already have a secondary Execution client that you maintain yourself elsewhere (such as on a second machine, outside of the Smartnode stack) and want to use that as your fallback client.
-If this is selected, the Smartnode will simply switch to that if your primary client fails until it resumes operation.
-
-To learn more about configuring these options, click on the appropriate tab below:
-
-:::::: tabs
-::::: tab Infura
-
-If you choose **Infura**, you will be presented with a follow-on screen asking you to enter your Project ID:
-
-<center>
-
-![](./images/tui-fallback-infura.png)
-
-</center>
-
-When you created an Infura account and an `Ethereum` project for it, it will be assigned a unique project ID which is a 32-character hexadecimal string.
-Note this is the **Project ID**, *not* the **Secret ID**.
-Enter the **Project ID** here, and press `Next`.
-
-:::::
-::::: tab Pocket
-
-If you choose **Pocket**, the Wizard will handle all of the configuration for you.
-You can manually adjust some of its parameters at the end of this process, but the defaults that it uses are completely appropriate for node operation.
-You can proceed to the next section.
-
-:::::
-::::: tab External
-
-For an externally managed fallback Execution client, the next screen will prompt you for the URLs of its HTTP-based RPC (web3) API and its Websocket-based RPC API:
-
-<center>
-
-![](./images/tui-fallback-external-ec.png)
-
-</center>
-
-The Smartnode will use the HTTP URL to communicate with it and perform blockchain activities, such as querying the chain's state and submitting transactions.
-**If you don't already have your client's API port enabled and accessible from your Smartnode machine, you will need to set it up now.**
-Instructions on this vary from client to client; consult your client's documentation to learn how to set up the HTTP RPC endpoint.
-
-The Websocket URL is only relevant if you are using **Nimbus** as your Consensus client.
-If you are using a different client, you can leave it blank.
-Otherwise, enter it here.
+The Websocket URL is only relevant if you need it for your own usage; the Smartnode does not use it.
+You can leave it blank if you do not need it.
 
 ::: warning NOTE
 Because the Smartnode will run in its own Docker container, it will use Docker's internal network.
 You won't be able to use hostnames like `localhost` or `127.0.0.1` here; if your fallback Execution client is running on the same machine as the Smartnode, you will need to provide the machine's LAN IP address instead. 
 :::
 
-:::::
-::::::
-
 When you're happy with your fallback Execution client choices, proceed to the next step.
+
+::::::::
 
 
 ### Consensus Client Setup
 
-Now that you have an Execution and optional fallback Execution client ready, the next task is to set up the Consensus client.
-The first thing to do is determine which management mode you'd like to use for it, just like you did for the Execution client earlier:
+Now that you have an Execution client ready, the next task is to set up the Consensus client.
+The "mode" (local or external) will be inherited from the choice you used for your Execution client earlier.
 
-<center>
-
-![](./images/tui-cc-mode.png)
-
-</center>
-
-As with the Execution client management mode, there are two options here.
-
-**Locally Managed** (formerly called **"Docker Mode"**) is the default choice.
-Use it if you don't already have a Consensus client and you want the Smartnode to manage one for you.
-By choosing this, the Smartnode will add both a **Beacon Node** (the process used to communicate with the Beacon Chain) and a **Validator Client** (the process used by minipools to validate on the Beacon Chain and earn rewards) as Docker containers that it can control to its stack.
-Don't worry, you'll get to choose *which* client you want to run next.
-
-**Externally Managed** (formerly called **"Hybrid Mode"**) is a convenient choice for users that already have a Consensus client running elsewhere that they manage manually.
-By choosing this, the Smartnode will simply connect to your existing Beacon Node and will not run one of its own.
-However, it *will* run its own Validator Client so it can manage its own validator keys.
-
-For example, users can use this to plug into a Beacon Node that they currently use for solo staking; that way, they don't need to have two separate copies of a Beacon Node.
-
-:::warning NOTE
-As the Smartnode cannot manage external Consensus clients, you will still be responsible for regularly updating yours and diagnosing any issues it may encounter (as you currently do with it today).
-:::
-
-Choose which mode you'd like to use for managing your Consensus client and follow the steps in the corresponding tab below:
+Choose which mode you selected earlier from the tabs below:
 
 ::::::: tabs
 :::::: tab Locally Managed
@@ -359,9 +240,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://lighthouse-book.sigmaprime.io/checkpoint-sync.html) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -417,9 +297,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://nimbus.guide/trusted-node-sync.html) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -461,6 +340,22 @@ The message will be preserved forever, so think of it like a fun little way to l
 **Note the maximum length of the graffiti is 16 characters.**
 
 If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+Next up is an option to enable or disable **Checkpoint Sync**:
+
+<center>
+
+![](./images/tui-local-checkpoint.png)
+
+</center>
+
+Prysm has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://docs.prylabs.network/docs/prysm-usage/checkpoint-sync) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 The final question will ask if you want to enable Doppelgänger Protection:
 
@@ -516,9 +411,8 @@ This is preferred over conventional syncing because it doesn't require any time 
 Take a look at [their documentation on checkpoint syncing](https://docs.teku.consensys.net/en/latest/HowTo/Get-Started/Checkpoint-Start/) for more information if you are curious.
 
 You can enter the URL of any Beacon Node that provides access to its REST API here.
-One popular option is Infura, which offers this service for free (though it requires you to create an account).
 
-See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing-with-infura) if you'd like to use it.
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 :::
 ::::
@@ -712,7 +606,7 @@ If you'd like to see some examples of what validators are using for Graffiti tod
 :::::::
 
 
-#### Beacon Chain Checkpoint Syncing with Infura
+#### Beacon Chain Checkpoint Syncing
 
 **Checkpoint syncing** is a very useful technique that some Beacon Chain clients support.
 It allows your Beacon client to instantly sync the entire Beacon chain without having to start from the beginning and catch up on every block.
@@ -722,52 +616,34 @@ All it needs is access to an existing Beacon client that you trust.
 Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 
 You can use any Beacon node that provides access to its HTTP API.
-In this example, we will show you how to use the free **Infura** service to do it.
+Currently, many node operators are using invis.tools - a service operated by a prominent Rocket Pool community member that allows Rocket Pool node operators to checkpoint sync easily.
 Both the Prater Testnet and Mainnet are supported.
+If you trust the community member, you can use the following URLs for checkpoint syncing:
 
-If you don't have an account already, start by heading to [https://infura.io/register](https://infura.io/register) to create one.
-You can use the free tier for checkpoint syncing, so all you will need to provide is an email address.
+- [For Mainnet] `https://sync.invis.tools`
+- [For Prater Testnet] `https://goerli-sync.invis.tools`
 
-Once you are logged in, head to [the ETH2 project page](https://infura.io/dashboard/eth2):
+You can paste the URL in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
 
-<center>
-
-![](./images/infura-projects.png)
-
-</center>
-
-Create a new project here using the `Create New Project` button.
-It can be named anything you want (for example, "RP Checkpoint Sync").
+After that, your Beacon node will automatically connect to the checkpoint sync node when it first starts up and instantly pull down the latest state of the chain!
 
 ::: warning NOTE
-Make sure you have the `ETH2` project selected, because that's what your Consensus client needs!
-**This is different from the `Ethereum` project you may have used for your fallback Execution client!**
+Checkpoint Sync will only occur if you *don't have any Beacon Chain data yet*.
+In other words, if you start syncing normally and decide to checkpoint sync later, you will have to remove your chain data first in order for checkpoint sync to work.
+This can easily be done with the following command:
+
+```
+rocketpool service resync-eth2
+```
 :::
 
-Now, go to the `ETH2` project and click on the `Settings` button:
 
-<center>
+### Fallback Node 
 
-![](./images/infura-settings.png)
+Starting with 1.5.0 of the Smartnode stack, you can provide a "fallback" Execution client and Consensus client pair that can take over for your primary clients if they ever go offline (such as because you use Geth and need to prune it).
+In this situation, your primary node machine will still be responsible for attesting and proposing blocks with your minipools' validator keys, but it will connect to an external machine to interact with the Execution layer and Beacon chains. 
 
-</center>
-
-Here, there is a section called `Keys`.
-In this section, first select `Mainnet` or `Prater` from the `Endpoints` dropdown, depending on whether you're using the Prater Testnet or Mainnet.
-
-Next, click on the small clipboard icon to the right of the long `https://...` string:
-
-<center>
-
-![](./images/infura-keys.png)
-
-</center>
-
-This is your personal, private access string for Infura's Beacon node.
-Clicking on the clipboard icon will copy it to your clipboard.
-You can then paste this in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
-
-After that, your Beacon node will be configured to connect to Infura when it first starts up and instantly pull down the latest state of the chain!
+[To learn more about fall back nodes, see this section](./fallback.md) and return here when you're done.
 
 
 ### Metrics Configuration
@@ -795,6 +671,25 @@ All of the data collected by this system **stays on your machine**.
 Rocket Pool does not collect any of the telemetry or send it to a separate service.
 It's purely there for you to use so you can monitor your own node!
 :::
+
+
+### MEV Configuration
+
+Since the Merge of the Execution and Consensus layers in September 2022, Ethereum validators now have the ability to earn priority fees and participate in Maximal Extractable Value (or MEV for short).
+
+Starting with Smartnode v1.7.0, MEV is now *opt-out* so its configuration is presented as part of the initial setup, as you see in the next screen:
+
+<center>
+
+![](./images/tui-mev-mode.png)
+
+</center>
+
+[Please read our MEV guide to learn more about MEV, its configuration, and what to do in this section of the wizard.](./mev.md)
+Return here when you're finished.
+
+
+### Completion
 
 After this question, you've finished setting up the Smartnode!
 You will see the following dialog:
@@ -974,6 +869,40 @@ Press `y` and `Enter` if you want to automatically apply your new configuration 
 Press `n` and `Enter` if you have other things you want to do before restarting them, and will do it manually later.
 
 In either case, your configuration is done!
+
+::: tip NOTE
+You may see an error message like the one below:
+
+```
+2022/08/13 13:49:41 Error piping stdout: read |0: file already closed
+```
+
+This is not actually an error, it's simply a cosmetic glitch.
+You can safely ignore it.
+:::
+
+::: tip NOTE
+If you are running Mac OS, you may see an issue complaining about node_exporter.
+You will need to run these commands to fix.
+```
+rocketpool service stop
+nano ~/.rocketpool/override/exporter.yml
+```
+Replace the entire contents of the file with:
+```
+# Enter your own customizations for the node exporter container here. These changes will persist after upgrades, so you only need to do them once.
+#
+# See https://docs.docker.com/compose/extends/#adding-and-overriding-configuration
+# for more information on overriding specific parameters of docker-compose files.
+
+version: "3.7"
+services:
+  node-exporter:
+    x-rp-comment: Add your customizations below this line
+    volumes:   ["/proc:/host/proc:ro","/sys:/host/sys:ro"]
+```
+then finally ```rocketpool service start```.
+:::
 
 
 ## Configuring via the Command Line

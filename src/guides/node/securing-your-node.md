@@ -207,6 +207,10 @@ There are two ways to do this - if one doesn't work, try the other way:
 
 :::: tabs
 ::: tab Using ssh-copy-id
+
+**Note**: if your client machine is running Windows, `ssh-copy-id` is not yet available.
+Please follow the instructions in the "Manually Adding the Key" tab.
+
 Run the following command **on your client machine**:
 
 ```shell
@@ -248,9 +252,20 @@ That means it worked!
 ::: tab Manually Adding the Key
 Start by getting the contents of the **public key** - run this command **on your client machine**:
 
-```shell
-cat ~/username/.ssh/id_ed25519.pub
-```
+  * On macOS and Linux:
+  ```shell
+  cat ~/.ssh/id_ed25519.pub
+  ```
+
+  * On Windows (Command Prompt):
+  ```shell
+  type %USERPROFILE%\.ssh\id_ed25519.pub
+  ```
+
+  * On Windows (PowerShell):
+  ```shell
+  type $ENV:UserProfile\.ssh\id_ed25519.pub
+  ```
 
 The output will look something like this:
 
@@ -318,8 +333,8 @@ This is a large file, so you'll have to navigate through it using the arrow keys
 Make the following changes:
 
 1. Uncomment `#AuthorizedKeysFile` if it is commented (by removing the `#` in front of it)
-2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` (older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`)
-3. Change `PasswordAuthentication yes` to `PasswordAuthentication no`
+2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` and uncomment (by removing the `#` in front of it) - **note that older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`**
+3. Change `PasswordAuthentication yes` to `PasswordAuthentication no` and uncomment (by removing the `#` in front of it)
 4. Change `PermitRootLogin yes` to `PermitRootLogin prohibit-password` unless it's already set to that and has a `#` in front of it
 
 Once you're done, save with `Ctrl+O` and `Enter`, then exit with `Ctrl+X`.
@@ -514,7 +529,7 @@ sudo systemctl restart unattended-upgrades
 
 ## ESSENTIAL: Enable a Firewall
 
-In general, your machine should only accept network traffic on ports that your ETH1 client, ETH2 client, and Smartnode stack use.
+In general, your machine should only accept network traffic on ports that your Execution (ETH1) client, Consensus (ETH2) client, and Smartnode stack use.
 To enforce that and prevent any unexpected or undesirable traffic, we can install a **firewall** on the node.
 
 ::: tip NOTE
