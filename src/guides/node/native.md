@@ -24,7 +24,7 @@ For other distros or operating systems, you may follow the high-level steps desc
 This guide is intended for users that are experienced with Linux system administration and usage.
 This includes using the terminal, creating system accounts, managing permissions, and installing services.
 We assume you are familiar with these activities - as you will be managing the bulk of the infrastructure yourself, we only provide limited support for Native installations. 
-**If you are not familiar with these activites, we do not recommend that you use Native Mode.**
+**If you are not familiar with these activities, we do not recommend that you use Native Mode.**
 :::
 
 
