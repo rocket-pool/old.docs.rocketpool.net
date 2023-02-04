@@ -6,7 +6,7 @@ Thus, in order to create a validator using Rocket Pool, you need to **create a m
 
 ::: warning
 Creating a minipool means depositing 16 of your own ETH to the Beacon Chain.
-These funds **cannot be retrieved** until after the Execution Layer (ETH1) has merged with the Beacon Chain (ETH2), and withdrawals have been implemented.
+These funds **cannot be retrieved** until after the Execution Layer (ETH1) has merged with the Beacon Chain (ETH2) (completed September 15, 2022), and withdrawals have been implemented sometime in 2023.
 By creating the minipool, you are acknowledging that you are effectively locking these funds until that system is in place.
 :::
 
