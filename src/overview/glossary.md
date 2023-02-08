@@ -92,7 +92,17 @@ A deposit pool where the holder of RPL tokens can deposit their RPL for use by t
 A token that represents a regular user’s deposit into the staking pool. Users receive an equivalent value of rETH token for each ETH coin they deposit. As interest is earned by staking on the Ethereum network the value of the rETH token increases with respect to ETH. This token does not need to be locked within the network and it can be traded, sold or held as the user desires.
 
 ## RPL (Rocket Pool Token)
-This is a token issued by the Rocket Pool contract. It serves two purposes: first, as supplemental insurance against slashing that Node Operators are required to provide before creating new minipools; second, as the governance token used to vote in the Protocol DAO.
+This is a token issued by the Rocket Pool contract, and serves several purposes.
+
+For Node Operators:
+- It's required to launch a minipool and thus access commission
+- It provides its own yield as RPL rewards (70% of inflation goes to NO RPL rewards)
+- It provides voting power for governance
+
+For the protocol:
+- It serves as secondary collateral (e.g., against slashing)
+- It provides funding for the oDAO (15% of inflation)
+- It provides funding for the pDAO (15% of inflation)
 
 ## Stake
 An amount of coin or token that is deposited as an assurance collateral to perform some work.  An individual can stake ETH either as a regular user by swapping ETH for rETH or as a node operator by depositing ETH for use as part of the Beaconchain PoS consensus process. A person who stakes their ETH (e.g. a staker) is rewarded with an APY or return on their deposited ETH.
