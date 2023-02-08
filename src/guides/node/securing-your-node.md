@@ -278,13 +278,14 @@ Copy this output and store it somewhere convenient - you're going to need it in 
 
 Next, use `ssh` to connect to your node like you normally would (using your node's username and password).
 
-Once you're connected to your node, run the following command:
+Once you're connected to your node, run the following commands:
 
 ```shell
+mkdir -p ~/.ssh
 nano ~/.ssh/authorized_keys
 ```
 
-This will open a text editor for the file used to store all of the public keys that your node's user account trusts.
+The second command will open a text editor for the file used to store all of the public keys that your node's user account trusts.
 
 In this file, paste the **public key** that you retrieved a few steps ago using the `cat` command (the whole line starting with `ssh-ed25519`).
 
