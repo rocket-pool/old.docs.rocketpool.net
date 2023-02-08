@@ -255,7 +255,7 @@ To get started with Pushover:
 
 1. Create an account at [pushover.net](https://pushover.net/)
 1. [Create an API token](https://pushover.net/apps/build)
-1. Install the Pushover mobile app and/or browser extenion
+1. Install the Pushover mobile app and/or browser extension
 1. Call the Pushover API for any action you care about
 
 Calling the Pushover API to send you a push notification is done through a `curl` call structured as such:

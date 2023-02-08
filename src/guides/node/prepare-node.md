@@ -1,6 +1,6 @@
 # Preparing your Node for Operation
 
-If you're here, then you've succesfully started the Smartnode services, created a wallet, and finished syncing both the Execution (ETH1) and Consensus (ETH2) chains on your respective clients. 
+If you're here, then you've successfully started the Smartnode services, created a wallet, and finished syncing both the Execution (ETH1) and Consensus (ETH2) chains on your respective clients. 
 If so, then you are ready to register your node on the Rocket Pool network and create a minipool with an ETH2 validator!
 If not, please review the previous sections and return here once you've completed those steps.
 
@@ -221,7 +221,7 @@ This action also requires sending a transaction. You'll need to confirm the desi
 **Make sure you completed step 2 to setup the forward resolution before running the CLI command to setup the reverse resolution**. This is a safety measure to stop wallets from trying to impersonate an ENS name they don't control.
 :::
 
-4) After the transaction was succesfully included in a block, run `rocketpool node status` to see that your your wallet is now associated to your ENS name.
+4) After the transaction was successfully included in a block, run `rocketpool node status` to see that your your wallet is now associated to your ENS name.
 
 
 ## Next Steps
