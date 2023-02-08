@@ -344,31 +344,11 @@ However, `stake-rpl` is one of the few commands that requires *two* transactions
 ### `deposit`
 
 This command will let you deposit ETH and create a new minipool (a new ETH2 validator).
-As with `stake-rpl`, this is an interactive command that will perform a transaction.
 
-It will start by asking you how much you want to deposit to the new minipool:
-
-```
-Please choose an amount of ETH to deposit:
-1: 32 ETH (minipool begins staking immediately)
-2: 16 ETH (minipool begins staking after ETH is assigned)
-```
-
-(For more information on these options, see the next section on [Creating a Minipool](./create-validator.md)).
-
-Once you select your deposit amount, it will prompt you for your choice of commission rate slippage:
-
-```
-The current network node commission rate that your minipool should receive is 20.000000%.
-The suggested maximum commission rate slippage for your deposit transaction is 1.000000%.
-This will result in your minipool receiving a minimum possible commission rate of 19.000000%.
-Do you want to use the suggested maximum commission rate slippage? [y/n]
-```
-
-Again, this option will be described in more detail in the next section.
-
-After that, you will be prompted with the expected gas cost for the transaction and one final confirmation dialog.
+You will be prompted with the expected gas cost for the transaction and one final confirmation dialog.
 If you accept, your ETH deposit will be processed and you will create a new minipool (and a corresponding ETH2 validator).
+
+(For more information, see the next section on [Creating a Minipool](./create-validator.md)).
 
 
 ### `claim-rewards`
