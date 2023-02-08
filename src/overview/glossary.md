@@ -100,7 +100,7 @@ For Node Operators:
 - It provides voting power for governance
 
 For the protocol:
-- It serves as secondary collateral (eg, against slashing)
+- It serves as secondary collateral (e.g., against slashing)
 - It provides funding for the oDAO (15% of inflation)
 - It provides funding for the pDAO (15% of inflation)
 
