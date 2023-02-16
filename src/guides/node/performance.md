@@ -233,11 +233,7 @@ The port to monitor depends on your node setup; users running the typical Smartn
 
 There are multiple community-lead initiatives to provide an overview of your node performance, as well as the Rocket Pool network as a whole.
 
-Community member `VGR` made the [rp-metrics-dashboard.com](https://www.rp-metrics-dashboard.com/) where you can view in-depth statistics on your node, the network and even the [high scores](https://www.rp-metrics-dashboard.com/highscores) or the best performing nodes:
-
-![Rocketpool Metrics Dashboard screenshot](./local/images/rp-metrics-dashboard.com.png)
-
-A more minimalist tool is the [rocketscan.io](https://rocketscan.io/) tool made another community member.
+A minimalist tool is [rocketscan.io](https://rocketscan.io/), made by another community member.
 It features detailed network and node metrics, including a timeline of your node activity.
 
 ![Rocketscan screenshot](./local/images/rocketscan.dev.png)
