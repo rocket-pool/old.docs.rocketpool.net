@@ -622,7 +622,7 @@ A list of checkpoint sync urls can be found via the following links:
 
 - [Checkpoint Sync Urls](https://eth-clients.github.io/checkpoint-sync-endpoints/)
 
-From these links you can find a checkpoint sync url and paste the URL in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
+Choose a relevant checkpoint sync url and paste in the terminal during `rocketpool service config` when it prompts you for a Checkpoint Sync Provider.
 
 After that, your Beacon node will automatically connect to the checkpoint sync node when it first starts up and instantly pull down the latest state of the chain!
 
