@@ -618,7 +618,7 @@ Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 You can use any Beacon node that provides access to its HTTP API.
 Currently, many node operators are using the checkpoint-sync-endpoints - a service that allows Rocket Pool node operators to checkpoint sync easily.
 Both the Prater/Goerli Testnet and Mainnet are supported.
-A list of checkpoint sync urls can be found via the following links:
+A list of checkpoint sync urls can be found via the following link:
 
 - [Checkpoint Sync Urls](https://eth-clients.github.io/checkpoint-sync-endpoints/)
 
