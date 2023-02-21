@@ -1,0 +1,10 @@
+# This configuration file is for GitPod Continuous Dev Environment
+# Docs here: (see https://www.gitpod.io/docs/config-gitpod-file)
+
+tasks:
+  - init: |
+      nvm install && nvm use
+      yarn nvm && yarn install && yarn run build
+    command: |
+      nvm install && nvm use
+      yarn nvm && yarn run dev

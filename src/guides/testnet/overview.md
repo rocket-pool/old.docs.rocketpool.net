@@ -3,7 +3,7 @@
 An Ethereum **test network** (`testnet` for short) is an Ethereum blockchain, functionally identical to the standard Ethereum blockchain, but it's intended to be used for testing smart contracts before they go live onto the main "real" blockchain (called `mainnet`).
 Testnets run in parallel with mainnet - there are actually several of them running right now!
 
-You can read more about some of the ETH1 testnets [here](https://support.mycrypto.com/how-to/getting-started/where-to-get-testnet-ether) if you like. 
+You can read more about some of the ETH1 testnets [here](https://support.mycrypto.com/how-to/getting-started/where-to-get-testnet-ether) if you like.
 Rocket Pool uses **Goerli** for its ETH1 testnet.
 You can use a block explorer for it here if you'd like to take a look at it: [https://goerli.etherscan.io/](https://goerli.etherscan.io/)
 
@@ -20,7 +20,6 @@ You will **lose your funds** forever if you do this!
 You should only use test ETH that you received on the Goerli network from a faucet (described below)!
 :::
 
-
 ## Configuring the Testnet
 
 [The default configuration of Rocket Pool using Docker](../node/install-modes.md) handles all of the settings involved in using a testnet for you automatically.
@@ -35,7 +34,6 @@ If you're using [a different setup](../node/install-modes.md) with an external E
 - For **Teku**: add `--network=prater` to the launch command.
 
 Check the next section to learn how to get some test ETH on Goerli, which you'll need to test Rocket Pool out.
-
 
 ## Getting Test ETH on Goerli
 
@@ -73,7 +71,7 @@ If you aren't planning to register a node and just want some ETH to test staking
 without the angle brackets.
 If your wallet doesn't have any ETH already, the bot will send your wallet 1 ETH to test with.
 
-If you *are* planning to run a node, do the following:
+If you _are_ planning to run a node, do the following:
 
 1. Start by running the `!goerliEth` command above to acquire enough gas to register your node
 2. Register your node (see the [Preparing your Node](../node/prepare-node.md) page for instructions)
@@ -83,7 +81,7 @@ If you *are* planning to run a node, do the following:
 !nodeOperator <your goerli address>
 ```
 
-In order to use `!nodeOperator`, the address you provide it *must* be a registered Rocket Pool node.
+In order to use `!nodeOperator`, the address you provide it _must_ be a registered Rocket Pool node.
 Therefore, you must follow these 3 steps in that order.
 
 ::: warning NOTE
@@ -91,7 +89,6 @@ To prevent abuse, there is a cooldown timer on sending messages in the faucet ch
 Therefore, there will be a delay between when you can run the `!goerliEth` and `!nodeOperator` commands.
 If you want to bypass this, you can always ask for help - someone who has a cooldown available will likely be able to run the command for you.
 :::
-
 
 ## Getting Test RPL on Goerli
 
@@ -142,4 +139,52 @@ Successfully withdrew 600.000000 RPL from the faucet.
 This will provide you with 600 of the **legacy (v1) RPL** token, which is analogous to the original RPL token on mainnet.
 Rocket Pool uses a **new (v2) RPL** token which supports the inflation used to reward node operators.
 
-To learn how to swap legacy RPL for new RPL, follow the steps in the [Creating a Minipool (ETH2 Validator)](../node/create-validator.md) guide.
+## Swapping legacy v1 RPL to v2 RPL
+
+Next, you need to swap the legacy v1 RPL to v2.
+
+```bash
+rocketpool node swap-rpl
+```
+
+When prompted you cas choose to **_swap all_** v1 RPL to v2.
+
+Next, check status:
+
+```bash
+rocketpool node status
+```
+
+You should see something like this
+
+```bash
+Your Smartnode is currently using the Prater Test Network.
+
+=== Account and Balances ===
+The node 0x8046c795489c6068883BE04E723a011E5ca556A4 has a balance of 16.576736 ETH and 300.000000 RPL.
+The node has a balance of 600.000000 old RPL which can be swapped for new RPL.
+The node is registered with Rocket Pool with a timezone location of US/Central.
+
+=== Penalty Status ===
+The node does not have any penalties for cheating with an invalid fee recipient.
+
+=== DAO Voting ===
+The node does not currently have a voting delegate set, and will not be able to vote on Rocket Pool governance proposals.
+Rocket Pool has no governance proposals being voted on.
+
+=== Withdrawal Address ===
+The node's withdrawal address has not been changed, so rewards and withdrawals will be sent to the node itself.
+Consider changing this to a cold wallet address that you control using the `set-withdrawal-address` command.
+
+=== Fee Distributor and Smoothing Pool ===
+The node is not opted into the Smoothing Pool.
+To learn more about the Smoothing Pool, please visit https://docs.rocketpool.net/guides/redstone/whats-new.html#smoothing-pool.
+The node's fee distributor 0x6d72CeF856ED1add2291cb397B7ed6775018Fd52 has a balance of 0.000000 ETH.
+
+=== RPL Stake and Minipools ===
+The node has a total stake of 0.000000 RPL and an effective stake of 0.000000 RPL, allowing it to run 0 minipool(s) in total.
+The node does not have any minipools yet.
+
+```
+
+Now you are ready to proceed with [Creating a Minipool (ETH2 Validator)](../node/create-validator.md) guide.
