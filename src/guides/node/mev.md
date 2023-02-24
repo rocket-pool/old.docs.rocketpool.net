@@ -54,7 +54,7 @@ Rocket Pool currently offers its node operators access to **multiple different r
 | [bloXroute Max Profit](https://docs.bloxroute.com/apis/mev-solution/mev-relay-for-validators) | Unregulated | All types |
 | [bloXroute Ethical](https://docs.bloxroute.com/apis/mev-solution/mev-relay-for-validators) | Unregulated | "Benign" (no front-running or sandwiching) |
 | [bloXroute Regulated](https://docs.bloxroute.com/apis/mev-solution/mev-relay-for-validators) | Complies with OFAC Sanctions* | All types |
-| [Blocknative](https://docs.blocknative.com/) | Complies with OFAC Sanctions* | All types |
+| [Blocknative](https://docs.blocknative.com/blocknative-relay/mev-relay-instructions-for-ethereum-validators) | Complies with OFAC Sanctions* | All types |
 | [Eden Network](https://v2.docs.edennetwork.io/eden-relay/overview) | Complies with OFAC Sanctions* | All types |
 | [Ultra Sound](https://relay.ultrasound.money/) | Unregulated | All types |
 
