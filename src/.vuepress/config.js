@@ -171,14 +171,15 @@ module.exports = {
               ]
             },
             {
-              title: 'Redstone and The Merge',
+              title: 'The Atlas Upgrade',
               sidebarDepth: 2,
               collapsable: true,
               children: [
-                'redstone/whats-new',
-                'redstone/docker-migration',
-                'redstone/hybrid-migration',
-                'redstone/native-migration',
+                'atlas/whats-new',
+                'atlas/withdrawals',
+                'atlas/lebs',
+                'atlas/solo-staker-migration',
+                'atlas/credit',
               ]
             },
             {
@@ -208,7 +209,18 @@ module.exports = {
               collapsable: true,
               children: [
                 'legacy/v1.3-update',
-                'legacy/upgrading'
+                'legacy/upgrading',
+                {
+                  title: 'Redstone and The Merge',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'redstone/whats-new',
+                    'redstone/docker-migration',
+                    'redstone/hybrid-migration',
+                    'redstone/native-migration',
+                  ]
+                },
               ]
             }
           ]
