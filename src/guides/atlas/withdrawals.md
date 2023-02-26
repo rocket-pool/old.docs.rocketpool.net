@@ -170,11 +170,23 @@ To retrieve the funds and close the minipool, run the following command:
 rocketpool minipool close
 ```
 
-This will present you with a list of minipools that are eligible for closure.
-Dissolved minipools (ones that were scrubbed by the Oracle DAO for violation of launch conditions) are also listed here.
+This will present you with a list of minipools that are eligible for closure:
 
+```
+Please select a minipool to close:
+1: All available minipools
+2: 0xffCAB546539b55756b1F85678f229dd707328A2F (32.074633 ETH available, 8.026494 ETH is yours plus a refund of 0.000000 ETH)
+```
 
-// TODO - finish this once the exit is done
+Here you can see the total balance for each eligible minipool, how much of that balance will be distributed to you, and how much of that balance is reserved for you as a refund (which bypasses distribution).
+
+Select which minipool you'd like to distribute and close from the list, confirm the action, and all you need to do is wait for your transaction to be validated.
+Once it does, your share of the minipool balance (and your refund) will be sent to your withdrawal address, and the minipool will enter the `finalized` state.
+
+You can verify it by looking at the transaction on a block explorer; for example, feel free to look at [the transaction for closing the above minipool](https://zhejiang.beaconcha.in/tx/0x5557d5e052422d4a46bb4204cabb8093b22fc944664aa0d5d4e8c9adca1865a5).
+
+At this point, your effective RPL will be updated to remove this minipool from the calculation.
+You can now unstake any RPL you have that would put you over the 150% limit. 
 
 
 ## Exiting your Validator
