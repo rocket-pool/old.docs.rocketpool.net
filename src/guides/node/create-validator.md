@@ -26,7 +26,7 @@ This means you'll only need to handle the total RPL stake for your node if you p
 :::
 
 
-### Staking via the Website (Recommended)
+### Staking via the Website (deactivated until Atlas upgrade)
 
 The easiest and safest way to stake RPL for your node is to use the website's new **Stake-on-Behalf** feature, which was introduced with the Redstone upgrade.
 This way, you can stake RPL for your node while the RPL is still in the wallet you used to acquire it.
