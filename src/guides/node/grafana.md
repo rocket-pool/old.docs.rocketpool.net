@@ -368,8 +368,8 @@ The **SSD Latency** chart tracks how long it takes for read/write operations to 
 This is helpful in gauging how fast your SSD is, so you know if it becomes a bottleneck if your validator suffers from poor performance.
 To update the SSD you want to track in the chart, click on the **SSD Latency** title and select **Edit**.
 
-This chart has two query fields (two textboxes) with four `device=""` portions in total.
-You'll need to update all four of these fields with the device you want to track.
+This chart has four query fields (four textboxes) with eight `device=""` portions in total.
+You'll need to update the first four of these portions with the device you want to track.
 
 Simply place your cursor in-between the quote marks and press `Ctrl+Spacebar` to get Grafana's auto-complete list, and select the correct option from there for each of the `device=""` portions.
 **You want to start from the leftmost empty setting first, or the auto-complete list may not appear.**
@@ -402,6 +402,8 @@ Typically this will be `sda` for SATA drives or `nvme0n1` for NVMe drives.
 
 If you *did* change Docker's default location to a different drive, or if you're running a hybrid / native setup, you should be able to use the same technique of "following the mount point" to determine which device your chain data resides on.
 :::
+
+Optionally, you can also track latency of a second disk on your system. This is aimed at people that keep their Operating System and chain data on separate drives, such as **Raspberry Pi** users. To set this up, simply follow the instructions above for the last two query fields, substituting `device=""` portion values with those of the disk you want to track.
 
 Once you're happy with your selections, click the blue **Apply** button in the top right corner of the screen to save the settings.
 
@@ -451,22 +453,20 @@ You might find it useful to watch if, for example, your ISP limits you to a cert
 The setup is identical to the **Network Usage** box above, so simply follow those instructions for this box too.
 
 
-### OS Disk Space Used
+### Disk Space Used
 
 This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth or Nethermind](./pruning.md)).
 
 The steps are the same as the **SSD Latency** box above, so simply follow those instructions for this box too.
-As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive.
+As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive. Fill this into the first query field.
 
+Optionally, you can also track the free space of a second disk on your system. Set this up by following the same process, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your second drive's mount point is. Update the second query field with the disk associated with that partition.
 
-### Disk 2 Space Used
+### Disk Temp
 
-This is an optional field that tracks the free space of a second disk on your system.
-It is aimed at people that keep their Operating System and chain data on separate drives, such as **Raspberry Pi** users.
+This tracks the current temperature of your Operating System disk. The steps are the same as the **CPU Temp** box above, so simply follow those instructions for this box too, substituting CPU chip and sensor values with those of your Operating System disk. Fill these values into the first query field.
 
-Setting it up is the same as the **SSD Latency** box above, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your 2nd drive's mount point is.
-Use the disk associated with that partition.
-
+Optionally, you can also track the current temperature of a second disk on your system. Set this up by following the same process, substituting the chip and sensor values with those of your second drive. Fill these values into the second query field.
 
 ## Customizing the Dashboard
 
