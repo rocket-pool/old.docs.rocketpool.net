@@ -68,7 +68,7 @@ This means you will get all the benefits of Rocket Pool minipools, including:
 - Commission on the portion of those minipools provided by rETH stakers
 - Access to Rocket Pool's [Smoothing Pool](../node/fee-distrib-sp.md#the-smoothing-pool) to pool and evenly distribute rewards from block proposals and MEV 
 
-To learn more about converting a solo validator into a minipool, please visit the [Convering a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
+To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
 
 
 ## New Smartnode Features 
