@@ -74,15 +74,18 @@ This is the address that all of your RPL checkpoint rewards, your staked RPL, an
 To reiterate, **whoever controls the withdrawal address can access ALL your staked RPL, ETH, and rewards.**
 
 ::: warning NOTE
-By default, this is set to your node's wallet address.
+Upon setting up your node for the first time, this is set to your node's wallet address.
 However, for security reasons, **it is vitally important to set this to a different address controlled by a cold wallet.** 
-A cold wallet could be a hardware wallet or smart contract wallet.
-We strongly recommend against using a hot wallet such as MetaMask.
-[See here](https://ethereum.org/en/security/#wallet-security) for some basics on wallet security from the Ethereum Foundation.
+A cold wallet could be a hardware wallet (such as a [Ledger](https://www.ledger.com/), [Trezor](https://trezor.io/), or [Grid+](https://gridplus.io/)), or a Smart Contract wallet (such as [Argent](https://www.argent.xyz/)).
+
+We **strongly recommend** that you DO NOT to use a hot wallet such as MetaMask as your withdrawal address.
 
 This way, if your node wallet is compromised, the attacker doesn't get access to your staked ETH and RPL by forcing you to exit because all of those funds will be sent to your separate cold wallet (which they hopefully do not have).
 
-Withdrawal addresses are set at a node operator level. If you create multiple minipools they will all refer to the same withdrawal address. So you only need to perform this setup once.
+Withdrawal addresses are set at a node operator level.
+If you create multiple minipools, they will all refer to the same withdrawal address so you only need to perform this setup once.
+
+[See here](https://ethereum.org/en/security/#wallet-security) for some basics on wallet security from the Ethereum Foundation.
 :::
 
 There are two different ways to do this.
