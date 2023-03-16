@@ -75,8 +75,10 @@ To reiterate, **whoever controls the withdrawal address can access ALL your stak
 
 ::: warning NOTE
 By default, this is set to your node's wallet address.
-However, for security reasons, **it is vitally important to set this to a different address controlled by a hardware wallet. 
-A hardware wallet is well worth the cost relative the amount of capital required to run a node!**
+However, for security reasons, **it is vitally important to set this to a different address controlled by a cold wallet.** 
+A cold wallet could be a hardware wallet or smart contract wallet.
+Do not use a hot wallet such as MetaMask!
+[See here](https://ethereum.org/en/security/#wallet-security) for some basics on wallet security from the Ethereum Foundation.
 
 This way, if your node wallet is compromised, the attacker doesn't get access to your staked ETH and RPL by forcing you to exit because all of those funds will be sent to your separate cold wallet (which they hopefully do not have).
 
