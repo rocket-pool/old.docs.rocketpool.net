@@ -78,7 +78,7 @@ Upon setting up your node for the first time, this is set to your node's wallet 
 However, for security reasons, **it is vitally important to set this to a different address controlled by a cold wallet.** 
 A cold wallet could be a hardware wallet (such as a [Ledger](https://www.ledger.com/), [Trezor](https://trezor.io/), or [Grid+](https://gridplus.io/)), or a Smart Contract wallet (such as [Argent](https://www.argent.xyz/)).
 
-We **strongly recommend** that you DO NOT to use a hot wallet such as MetaMask as your withdrawal address.
+We **strongly recommend** that you DO NOT use a hot wallet such as MetaMask as your withdrawal address.
 
 This way, if your node wallet is compromised, the attacker doesn't get access to your staked ETH and RPL by forcing you to exit because all of those funds will be sent to your separate cold wallet (which they hopefully do not have).
 
