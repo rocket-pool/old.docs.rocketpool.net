@@ -97,7 +97,7 @@ It comes with the following highly requested features:
 - Stats about Rocket Pool's Snapshot-based governance votes
 - And more!
 
-Grafana's dashboard uploading service is unfortunately not working right now so it can't imported from their service via ID, but you can import it via JSON - [the dashboard's JSON is available in our GitHub repository](https://raw.githubusercontent.com/rocket-pool/smartnode-install/atlas/Dashboards/Rocket%20Pool%20Dashboard%20v1.2.0-rc1.json).
+Grafana's dashboard uploading service is unfortunately not working right now so it can't be imported from their service via ID, but you can import it via JSON - [the dashboard's JSON is available in our GitHub repository](https://raw.githubusercontent.com/rocket-pool/smartnode-install/atlas/Dashboards/Rocket%20Pool%20Dashboard%20v1.2.0-rc1.json).
 Simply click the link, copy the JSON, and pop it into your dashboard's import dialog.
 
 This new dashboard was a labor of love that involved extensive help from community member **0xFornax** - thank you for all of your hard work!
