@@ -70,7 +70,7 @@ Once this is complete, you will officially be a member of the Rocket Pool networ
 ## Setting your Withdrawal Address
 
 Before anything else, we highly recommended you change the **withdrawal address** for your node.
-This is the address that all of your RPL checkpoint rewards, your staked RPL, and your Beacon Chain ETH will be sent to when you claim your checkpoint rewards or exit your validator and withdraw from your minipool. To reiterate, **whoever controls the withdrawal address can access ALL funds associated with your node.**
+This is the address that all of your RPL checkpoint rewards, your staked RPL, and your Beacon Chain ETH will be sent to when you claim your checkpoint rewards or exit your validator and withdraw from your minipool. To reiterate, **whoever controls the withdrawal address can access ALL your staked RPL, ETH, and rewards.**
 
 ::: warning NOTE
 By default, this is set to your node's wallet address.
