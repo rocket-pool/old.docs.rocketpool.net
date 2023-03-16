@@ -25,7 +25,7 @@ The original Rocket Pool minipool contract wasn't designed with this capability 
 Luckily, Atlas provides a powerful new **minipool delegate contract** that gives node operators the ability to access the minipool's balance at any time.
 
 The minipool delegate contract is simply an extension of your own minipool that adds new functionality to it; you can upgrade to it at any time, and upgrades are **opt-in** so that Rocket Pool can't force new behavior on your minipool without your consent.
-That being said, the original delegate was designed around withdrawal behavior that is no longer accurate so withdrawaling ETH and RPL while using it is not supported by the Smartnode.
+That being said, the original delegate was designed around withdrawal behavior that is no longer accurate so withdrawing ETH and RPL while using it is not supported by the Smartnode.
 For more information, see [the note on the original delegate](#a-note-on-the-old-delegate) at the bottom of this guide.
 
 If you intend to access your rewards, **you should upgrade to the Atlas delegate**.
@@ -89,7 +89,7 @@ There are some **important rules** about how the new delegate determines how to 
 
 - If your minipool has **below 8 ETH**, it will be treated as **skimmed rewards**. You can safely distribute them between you and the rETH stakers. Your minipool will remain alive and continue during this process.
 - If your minipool has **above 32 ETH**, it will be treated as **full balance and rewards** from a validator that has exited and withdrawn. You can safely distribute them between you and the rETH stakers. Your minipool will be **finalized**, meaning it is no longer active and has been shut down.
-- If your minipool has **between 8 and 32 ETH**, it will be treated as **full rewards** from a **slashed validator**. 16 ETH will be given to the rETH stakers, and you will be given whatever is left over. If your minipool has less than 16 ETH, the entire balance will be give to the rETH stakers.
+- If your minipool has **between 8 and 32 ETH**, it will be treated as **full rewards** from a **slashed validator**. 16 ETH will be given to the rETH stakers, and you will be given whatever is left over. If your minipool has less than 16 ETH, the entire balance will be given to the rETH stakers.
 
 The sections below cover how to access your rewards in each scenario.
 
@@ -282,7 +282,7 @@ If you'd like to access your rewards, you **must** upgrade to the Atlas delegate
 ::: danger DANGER
 If you are an advanced user and bypass the CLI to invoke the distribution functionality on the contract directly via a third-party tool, be advised of the following things:
 1. The delegate's distribution function will revert if the minipool's balance is **below 16 ETH**. Balances below 16 ETH **cannot be accessed.** 
-2. If the minipool has **between 16 and 32 ETH** in its balance, distribution by the original delegate will assume your validator has been **slashed**. It will return 16 ETH to the staking pool and give you whatever is left over. It will *only* function properly if the minipool balanace is above 32 ETH.
+2. If the minipool has **between 16 and 32 ETH** in its balance, distribution by the original delegate will assume your validator has been **slashed**. It will return 16 ETH to the staking pool and give you whatever is left over. It will *only* function properly if the minipool balance is above 32 ETH.
 3. The minipool will never enter the `finalized` state because the Oracle DAO will never mark it as `withdrawable`, so even though you may be able to access your ETH, **your RPL will be locked** until you upgrade to the Atlas delegate.
 
 Because of these points, we **strongly recommend** you just upgrade to the Atlas delegate in the first place and avoid them entirely.
