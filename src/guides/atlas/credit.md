@@ -49,7 +49,7 @@ Your consensus client is synced, you may safely create a minipool.
 
 The second set of lines here is the relevant one: they tell you that you have enough ETH in your credit balance to cover this deposit *and that it is available for use*, so it will use the balance automatically and won't require any supplemental ETH from your node wallet.
 
-See [the availability secion below](#credit-availability) for details on credit balance availability.
+See [the availability section below](#credit-availability) for details on credit balance availability.
 
 
 ## Viewing your Current Credit Balance
