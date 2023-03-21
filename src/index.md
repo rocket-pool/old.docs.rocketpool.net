@@ -1,7 +1,7 @@
 ---
 home: false
 heroImage: /images/logo.png
-tagline: Decentralised & Trustless ETH2 Staking Protocol
+tagline: Decentralised & Trustless ETH Staking Protocol
 actionText: Get Started →
 actionLink: /overview/
 features:
