@@ -56,7 +56,7 @@ To learn more about 8-ETH bond minipools, please visit the [8-ETH Bonded Minipoo
 ### Solo Validator Conversion
 
 Part of the Shapella upgrade involves the ability for solo validators to [change their validators' withdrawal credentials](https://notes.ethereum.org/@launchpad/withdrawals-faq) from the original (now unused) BLS-based withdrawal key to an address on the Execution layer.
-This address will the be the receipient for all of that validator's rewards its full ETH balance once it exits the Beacon Chain.
+This address will the be the recipient for all of that validator's rewards its full ETH balance once it exits the Beacon Chain.
 
 Regular Rocket Pool node operators don't need to worry about any of this, as the protocol automatically set this up for your minipools when you created them.
 *However*, as part of this new requirement for solo validators, Atlas brings an exciting opportunity: the ability to **create a special minipool** that will become the withdrawal address for your **existing solo validator**.
@@ -68,12 +68,12 @@ This means you will get all the benefits of Rocket Pool minipools, including:
 - Commission on the portion of those minipools provided by rETH stakers
 - Access to Rocket Pool's [Smoothing Pool](../node/fee-distrib-sp.md#the-smoothing-pool) to pool and evenly distribute rewards from block proposals and MEV 
 
-To learn more about converting a solo validator into a minipool, please viit the [Converting a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
+To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
 
 
 ## New Smartnode Features 
 
-In addition to core changes to the Rocket Pool protocol, Atlas also brings some exciting upgrade to the Smartnode stack itself which are present in v1.9.0.
+In addition to core changes to the Rocket Pool protocol, Atlas also brings some exciting upgrades to the Smartnode stack itself which are present in v1.9.0.
 
 
 ### Unified Grafana Dashboard
@@ -97,7 +97,7 @@ It comes with the following highly requested features:
 - Stats about Rocket Pool's Snapshot-based governance votes
 - And more!
 
-Grafana's dashboard uploading service is unfortunately not working right now so it can't imported from their service via ID, but you can import it via JSON - [the dashboard's JSON is available in our GitHub repository](https://raw.githubusercontent.com/rocket-pool/smartnode-install/atlas/Dashboards/Rocket%20Pool%20Dashboard%20v1.2.0-rc1.json).
+Grafana's dashboard uploading service is unfortunately not working right now so it can't be imported from their service via ID, but you can import it via JSON - [the dashboard's JSON is available in our GitHub repository](https://raw.githubusercontent.com/rocket-pool/smartnode-install/atlas/Dashboards/Rocket%20Pool%20Dashboard%20v1.2.0-rc2.json).
 Simply click the link, copy the JSON, and pop it into your dashboard's import dialog.
 
 This new dashboard was a labor of love that involved extensive help from community member **0xFornax** - thank you for all of your hard work!
