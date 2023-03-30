@@ -24,17 +24,12 @@ Validators in Ethereum are assigned attestations and block proposals **on a sche
 This is very different from the old Proof of Work (PoW) system, where everyone is constantly trying to race each other and come up with the next block before everyone else.
 This means that unlike PoW where a miner isn't guaranteed to earn a block reward unless they find the next block, Proof of Stake validators are guaranteed to have slow, steady income as long as they perform their duties.
 
-Under the current Proof-of-Stake rules, all attestations and block proposals are provided on the Beacon Chain.
-Until withdrawals from the Beacon Chain are implemented by the Ethereum core developers, this means **there is currently no way to access staked ETH or the Beacon Chain portion of the rewards.**
-Validators will simply accrue larger and larger balances until they **voluntarily exit** the validator (or get **slashed** for attempting to attack the network).
+Initially, validator rewards simply accrued on the Beacon Chain against each validator and were inaccessible by their operator. As of the "Shapella" hard fork, validator rewards are routinely ["skimmed"](../node/skimming.md) to the Execution Layer address defined by the validator's withdrawal credentials. 
 
-However, now that the Execution and Consensus layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
-Unlike Beacon rewards, these priority fees are provided **directly on the Execution layer** and are available for use immediately today.
+Additionally, now that the Execution and Consensus layers have merged, validators are *also* awarded with **priority fees** for transactions included in blocks they propose.
+These priority fees are paid **directly on the Execution layer** according the "Fee Recipient" set by the block proposer.
 If the validator is participating in [a MEV network](https://ethereum.org/en/developers/docs/mev/) to propose a block built by someone else, that builder will provide a supplemental tip to the validator known as a **MEV reward**.
 This is *also* available directly on the Execution layer and is provided at the same time as priority fees.
-
-Because priority fees and MEV rewards are available on the Execution layer immediately, they give validators access to some liquid ETH.
-
 
 ## How Rocket Pool Works
 

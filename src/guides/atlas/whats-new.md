@@ -1,10 +1,5 @@
 # The Rocket Pool Atlas Update
 
-::: warning NOTE
-This page describes features that are currently in BETA and only apply to certain test networks.
-Nothing here is live on Mainnet yet.
-:::
-
 Rocket Pool's next major update, titled **Atlas**, has been released for beta testing on the Zhejiang and Prater (Goerli) test networks.
 This page describes the major changes that Atlas brings, including updates to both the Smartnode stack and to the Rocket Pool protocol in general.
 
@@ -31,8 +26,6 @@ This comes in two flavors:
 Atlas introduces a new delegate contract for minipools that allows node operators to **distribute** the minipool's ETH balance, splitting it evenly between the node operator and the rETH holders (plus commission, of course) at any time.
 This gives node operators **immediate access** to their Beacon Chain rewards!
 
-To learn more about withdrawals and rewards, please visit the [Withdrawals](./withdrawals.md) guide.
-
 
 ### 8-ETH Bonded Minipools
 
@@ -48,7 +41,7 @@ New minipools be created with either 8 ETH or 16 ETH.
 16 ETH minipools are unchanged from how they work today, and are available for users that want to minimize their exposure to the RPL token.
 
 Finally, once the Shapella upgrade has been applied, node operators can **migrate existing 16-ETH minipools directly into 8-ETH minipool without needing to exit**.
-This will give them 8 ETH back in [deposit credit](./credit.md), which can be used to create a **new 8-ETH minipool for free**!
+This will give them 8 ETH back in [deposit credit](../node/credit.md), which can be used to create a **new 8-ETH minipool for free**!
 
 To learn more about 8-ETH bond minipools, please visit the [8-ETH Bonded Minipools](./lebs.md) guide.
 
@@ -68,7 +61,7 @@ This means you will get all the benefits of Rocket Pool minipools, including:
 - Commission on the portion of those minipools provided by rETH stakers
 - Access to Rocket Pool's [Smoothing Pool](../node/fee-distrib-sp.md#the-smoothing-pool) to pool and evenly distribute rewards from block proposals and MEV 
 
-To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
+To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](../node/solo-staker-migration.md) guide.
 
 
 ## New Smartnode Features 

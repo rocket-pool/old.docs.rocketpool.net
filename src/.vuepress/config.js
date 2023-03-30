@@ -152,6 +152,8 @@ module.exports = {
                 'node/fee-distrib-sp',
                 'node/mev',
                 'node/create-validator',
+                'node/solo-staker-migration',
+                'node/leb-migration',
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
@@ -166,20 +168,11 @@ module.exports = {
                   ]
                 },
                 'node/rewards',
+                'node/skimming',
+                'node/credit',
+                'node/withdraw',
                 'node/troubleshooting',
                 'node/faq'
-              ]
-            },
-            {
-              title: 'The Atlas Upgrade',
-              sidebarDepth: 2,
-              collapsable: true,
-              children: [
-                'atlas/whats-new',
-                'atlas/withdrawals',
-                'atlas/lebs',
-                'atlas/solo-staker-migration',
-                'atlas/credit',
               ]
             },
             {
@@ -210,6 +203,15 @@ module.exports = {
               children: [
                 'legacy/v1.3-update',
                 'legacy/upgrading',
+                {
+                  title: 'Atlas and Withdrawals',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'atlas/whats-new',
+                    'atlas/lebs',
+                  ]
+                },
                 {
                   title: 'Redstone and The Merge',
                   sidebarDepth: 2,

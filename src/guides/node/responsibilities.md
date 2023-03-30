@@ -32,10 +32,12 @@ Approximated for 435,000 active validators.*
 
 ***These are subject to randomness; there can be "dry spells" multiple times longer than the average without being given one.*
 
-Rewards provided on the **Consensus Layer** (the Beacon Chain) are *not currently liquid*.
-They are locked on the chain until withdrawals have been implemented into the core Ethereum protocol.
+Rewards for performing validation duties are routinely ["skimmed"](./skimming.md) to minipools and can be distributed by
+Node Operators as desired.
 
-Rewards provided on the **Execution Layer**, however, **are liquid** and can be accessed instantly (or once per Rocket Pool rewards interval, if opted into the **Smoothing Pool**).
+Rewards provided by participating in MEV are either paid to Node Operators' fee distributor for immediate distribution or
+once per Rocket Pool rewards interval, if opted into the **Smoothing Pool**.
+
 We will describe these rewards in more detail, including how to configure and access them, later on in the guide.
 
 
