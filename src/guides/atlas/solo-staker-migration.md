@@ -64,7 +64,7 @@ If none of these conditions are blockers for you, then you are eligible to begin
 
 The first step is to **create a new "vacant" minipool**.
 Unlike conventional minipools, which make a new validator during their creation, vacant minipools are special minipools designed to manage *existing* validators.
-As a consequence, vacant minipools behave slightly differently that conventional minipools during the `prelaunch` stage.
+As a consequence, vacant minipools behave slightly differently than conventional minipools during the `prelaunch` stage.
 Once initialization is finished and they enter the `staking` stage, they become conventional minipools.
 
 During vacant minipool creation, you will be given the option of having the Smartnode automatically **change your validator's withdrawal credentials** from the old BLS withdrawal key to the new vacant minipool address.
