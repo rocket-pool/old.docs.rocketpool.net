@@ -9,13 +9,25 @@ based on your commission rate and ratio of supplied and provided ETH.
 
 ## Automatic Distribution
 
-TBD section on the automatic skimming system
+By default, the Smartnode is configured to automatically distribute your minipools when their balance reaches **1 ETH**. This
+threshold can be configured in the TUI by following the steps below.
 
-## Manual Distribution
+Run:
+
+```
+rocketpool service config
+```
+
+Navigate to the setting `Smartnode and TX Fee Settings > Auto Distribute Threshold` shown below.
+
+![](./images/tui-automatic-skimming.png)
+
+Changing this setting will adjust the threshold at which the Smartnode will automatically distribute your minipools.
+Setting the parameter to 0 will disable automatic distributions.
 
 ::: warning WARNING
-If you decide to disable automatic distribution, it is highly recommended that you still perform a manual distribution 
-on a regular basis.
+If you decide to disable automatic distribution, it is important that you still perform a manual distribution on a regular 
+basis. Read the [manual distribution section](#manual-distribution) that follows on how to do this.
 
 After a long period of time your skimmed rewards may exceed 8 ETH. If this situation occurs you will no longer be able
 to distribute them and will need to exit your validator to access your accrued rewards.
@@ -24,6 +36,9 @@ Rocket Pool features a failsafe design which allows anyone, after a long waiting
 its balance exceeds 8 ETH. To protect your capital, the Smartnode monitors this situation and will automatically exit
 your minipool if it occurs.
 :::
+
+## Manual Distribution
+
 
 If you have disabled the automatic distribution of skimmed rewards, you will need to routinely distribute them yourself
 with the following process.
