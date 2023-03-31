@@ -4,14 +4,12 @@ There are no official specifications for running a Rocket Pool node.
 This page offers some guidelines and examples that you can use to select staking hardware.
 
 The minimum hardware requirements of your node will depend on the Consensus and Execution clients that you choose.
-If, for example, you intend to run your node on a Raspberry Pi, you are (at the time of writing) limited to using `Geth` as your Execution client and `Nimbus` as your Consensus client.
+If, for example, you intend to run your node on a low powered device, you may be limited to using `Geth` as your Execution client and `Nimbus` as your Consensus client.
 If you're using a more powerful NUC with 32+ GB of RAM, all client combinations are open to you.
 
 The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity.
 If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations.
 This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
-
-That being said, we also include details about using a Raspberry Pi at the end for you to explore.
 
 ::: tip NOTE
 Ethereum staking is very forgiving.
@@ -28,8 +26,6 @@ This grows up to 64 validators, at which point the resources required for adding
 
 In our experience, most setups, including mini-PCs and NUCs, are capable of running an effectively unlimited number of validators.
 
-If you are using a Raspberry Pi, we suggest you limit the device to **at most 4 minipools** before considering a more robust solution.
-
 
 ### CPU Requirements
 
@@ -43,7 +39,7 @@ For this reason, we recommend using a "modern" CPU that is, at most, a few years
 More specifically, **for x64-based CPUs**, we recommend a CPU that supports the [BMI2](https://en.wikipedia.org/wiki/X86_Bit_manipulation_instruction_set#BMI2_(Bit_Manipulation_Instruction_Set_2)) extension - check the manufacturer's specs for your CPU to see if it is supported.
 Not all modern CPUs support this; for example, Celeron CPUs tend not to include it.
 
-ARM-based CPUs (such as the Raspberry Pi, the Mac M1 or M2, or the Rock 5B) do not apply to the BMI2 extension above.
+ARM-based CPUs (such as the Mac M1 or M2, or the Rock 5B) do not apply to the BMI2 extension above.
 
 ::: tip NOTE
 If you are interested in using a NUC, you can tell how modern the NUC is by its model number.
@@ -57,7 +53,7 @@ Other mini-PCs, such as the Asus PN50 or PN51, do not follow this convention but
 The amount of cores on a CPU is less relevant that its **number of threads**.
 We recommend a **minimum of 4 threads** for Rocket Pool node operation.
 A 2 core CPU with 4 threads will work without issue.
-It is rare to find a CPU with only 2 threads; even the Raspberry Pi has 4.
+It is rare to find a CPU with only 2 threads.
 
 **Guideline: any modern CPU with at least 4 threads.**
 
@@ -83,7 +79,7 @@ In practice, this means that:
 - SATA or external USB 3.0+ SSDs *can* work
 - NVMe SSD drives are preferred
 
-If you already have an SSD you want to use and want to be sure it has sufficient performance for node operation, refer to the [testing SSD performance](https://docs.rocketpool.net/guides/node/local/prepare-pi.html#testing-the-ssd-s-performance) section of the Raspberry Pi guide.
+If you already have an SSD you want to use and want to be sure it has sufficient performance for node operation.
 
 ::: tip NOTE
 SSD selection can be a complex choice!
@@ -350,40 +346,3 @@ Here are moralcompass's comments on why they chose this setup:
 - *Dual intel NIC (in case I decide to repurpose this as my router one day)*
 - *NVME + SATA slots (prefer NVME for speed and options with higher TBW endurance. SATA gives option of HDD or SSD. I avoided M.SATA interfaces because these SSDs seem to be turning legacy)*
 - *USB and serial ports available for graceful shutdown signal from UPS*
-
-
-## Jcrtp's Raspberry Pi
-
-![](./images/jcrtp.jpg)
-
-This is certainly the most controversial option on the hardware example list.
-Raspberry Pi's are credit-card sized "single-board computers" that include a CPU and RAM built directly onto the board.
-They are also quite cheap, with the most powerful model only costing $80.
-While they were originally intended as a simple option to help teach young students how to program, the hardware hacking community has become enamored with these capable little computers and have employed them in hundreds of use cases... including staking!
-It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.2 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
-
-Despite the general consensus in the Ethereum space that Raspberry Pis should not be used for staking, Rocket Pool developer Joe Clapis (known on Discord as **jcrtp**) has been successfully running 5 minipools on a Raspberry Pi for over a year - including after the Merge.
-This makes it the cheapest and lowest power option currently available, but offers the least amount of headroom or flexibility if the future of Ethereum staking demands higher performance.
-
-Jcrtp's Setup:
-- Base: [Raspberry Pi 4B 8GB Basic Kit](https://www.amazon.com/CanaKit-Raspberry-Basic-Kit-8GB/dp/B08DJ9MLHV/ref=sr_1_2?dchild=1&keywords=raspberry+pi+4b+8gb&qid=1616386386&sr=8-2) ($90)
-- MicroSD Card: [Samsung EVO Select 32GB U1 MB-ME32GA/AM](https://www.amazon.com/Samsung-MicroSDHC-Adapter-MB-ME32GA-AM/dp/B06XWN9Q99) ($7)
-- Case: [3D Printed from Thingiverse](https://www.thingiverse.com/thing:3793664) ($2)
-- Fan: [Scythe Mini Kaze 2 40mm Fan](https://www.amazon.com/Scythe-Mini-Quiet-3500RPM-Single/dp/B07ZHMTRK6) ($7)
-- SSD: [Samsung T5 1TB Portable SSD](https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA1T0B/dp/B073H552FJ) ($120)
-  - Also recommended: [the 2TB model](https://www.amazon.com/dp/B073H4GPLQ) ($240)
-- **Total: $226 to $346**
-
-Here are jcrtp's comments on why he chose this setup:
-
-*I think of staking as the antithesis to PoW mining.
-Proof-of-stake offers the same, if not better, security as proof-of-work but prides itself on requiring much, much fewer computational resources.
-My goal is to take this to the extreme, and run my Rocket Pool node with the lowest possible power consumption without sacrificing the security of the network.
-After experimenting for a few months, I've found a configuration for the Raspberry Pi that can accomplish both of these goals.
-Sure, you can get down to 10 watts with a NUC and have more headroom... but that's not the point.
-Having an $80, 5-watt machine contribute to the security of Ethereum as well as a $10,000 rack-mount server just makes me happy.*
-
-::: warning NOTE
-As of September 2022, the only client combination that is performant on a Raspberry Pi is **Geth** and **Nimbus**.
-If you want to use a different Execution or Consensus client, you are advised to choose a different platform.
-:::

@@ -9,7 +9,7 @@ If you are using a previous version, you must upgrade to v1.6.5 or higher before
 In this section, we will walk through the process of installing the Rocket Pool Smartnode stack natively onto your system, without the use of Docker containers.
 
 The general plan is as follows:
-1. Create a standard solo-staking setup with `systemd` services for the Execution Client, the Consensus Client / Beacon Node, and (if not using Nimbus) the Validator Client
+1. Create a standard solo-staking setup with `systemd` services for the Execution Client, the Consensus Client / Beacon Node, and the Validator Client
 2. Create system services for the Rocket Pool components (the **node** and **watchtower** processes)
 3. Configure Rocket Pool to communicate with your client services
 4. Update your Validator Client service definition to use Rocket Pool's fee recipient and validator keys
@@ -39,7 +39,7 @@ To that end, we recommend you start by following some of the conventional solo s
 Note that **you won't actually create a validator as defined in those guides** - Rocket Pool will do that for you.
 **You can ignore the portions involving the Staking Deposit CLI tool.**
 
-You simply need to follow the guides to the point where you have an Execution Client service, a Consensus Client / Beacon Node service, and a Validator Client service (*except for Nimbus, which currently doesn't have a separate Validator Client*) all installed and syncing the chain.
+You simply need to follow the guides to the point where you have an Execution Client service, a Consensus Client / Beacon Node service, and a Validator Client service all installed and syncing the chain.
 **Skip the steps that involve funding a validator and recording its mnemonic.**
 
 Also, there is a special case for the **fee recipient** - when you get to the portion of the guide where you specify the fee recipient in your Validator Client configuration, **leave it blank for now**.
@@ -65,7 +65,7 @@ You'll need to do this in order to use the Rocket Pool CLI, because it and the R
 sudo usermod -aG rp $USER
 ```
 
-Finally, add the user account for your **Validator Client** (or for your **Beacon Node** if using Nimbus, since Nimbus doesn't have a separate validator client) to the `rp` group as well.
+Finally, add the user account for your **Validator Client** to the `rp` group as well.
 The name of that user account depends on which guide you followed to set up your VC service.
 
 For example, if your VC runs as user `lighthousevalidator`, you would do the following:
@@ -536,7 +536,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart <vc-service>
 ```
 
-**If not using Prysm**, please watch the VC's logs carefully (or the BN's logs in the case of Nimbus) to ensure that it successfully started properly and the following are defined correctly:
+**If not using Prysm**, please watch the VC's logs carefully to ensure that it successfully started properly and the following are defined correctly:
 
 - The fee recipient
 - The data path

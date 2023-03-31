@@ -109,7 +109,6 @@ module.exports = {
                     'node/local/hardware',
                     'node/local/prepare-pc',
                     'node/local/prepare-mac',
-                    'node/local/prepare-pi',
                     'node/ssh'
                   ]
                 },
@@ -223,6 +222,7 @@ module.exports = {
                     'redstone/native-migration',
                   ]
                 },
+                'node/local/prepare-pi',
               ]
             }
           ]

@@ -24,11 +24,6 @@ It uses the following Docker containers:
 - `rocketpool_eth2` - This will be your Consensus beacon node client.
 - `rocketpool_validator` -  This will be your Validator client, which is responsible for your validator duties (such as attesting to blocks or proposing new blocks).
 
-::: tip NOTE
-**Nimbus** does not have a separate validator client.
-It runs the beacon node and validator clients together inside the Consensus container.
-:::
-
 In most situations, this is a good option to choose when creating a new node from scratch.
 It's the fastest, most hands-off procedure.
 It will also handle updates to the Execution and Consensus clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
@@ -55,11 +50,6 @@ When using this configuration, the Smartnode will use the following Docker conta
 - `rocketpool_validator`
 
 The `rocketpool_eth1` and `rocketpool_eth2` containers will either be included or excluded, depending on which clients you already have running externally.
-
-::: tip NOTE
-This configuration is not currently compatible with **Nimbus** because Nimbus does not offer a separate, dedicated validator client in its official Docker images.
-This may be provided in the future.
-:::
 
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 When prompted to choose a management mode for your Execution and/or Consensus clients, choose the **Externally Managed** option which is described in detail within that section.
