@@ -10,7 +10,7 @@ If you already have Execution and Consensus clients up and running on a separate
 Otherwise, read on to learn more about your choices for Execution and Consensus clients.
 
 ::: warning NOTE
-As of August 2022, the distribution of clients on the Beacon Chain looks roughly like this:
+As of March 2023, the distribution of clients on the Beacon Chain looks roughly like this:
 
 <center>
 
@@ -20,7 +20,7 @@ As of August 2022, the distribution of clients on the Beacon Chain looks roughly
 
 </center>
 
-The overwhelming majority of node operators are currently using Geth and Prysm.
+The overwhelming majority of node operators are currently using Geth as an Execution Client and either Prysm or Lighthouse as a Consensus Client.
 In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using different clients.
 Here are some relevant articles about why an even client diversity is crucial to the health of the network if you would like to learn more:
 
@@ -139,7 +139,7 @@ Lighthouse is implemented in [Rust](https://www.rust-lang.org/) and will maintai
 ### Nimbus
 
 [Nimbus](https://nimbus.team/) is a client implementation for both Ethereum 2.0 and Ethereum 1.0 that strives to be as lightweight as possible in terms of resources used.
-This allows it to perform well on embedded systems and resource-restricted devices - including **Raspberry Pis** and mobile devices.
+This allows it to perform well on embedded systems and resource-restricted devices.
 
 However, resource-restricted hardware is not the only thing Nimbus is good for.
 Its low resource consumption makes it easy to run Nimbus together with other workloads on your server (this is especially valuable for stakers looking to lower the cost of their server instances).
@@ -162,18 +162,17 @@ PegaSys is an arm of [ConsenSys](https://consensys.net/) dedicated to building e
 Teku is Apache 2.0 licensed and written in Java, a language notable for its maturity & ubiquity.
 
 
+### Lodestar
+
+[Lodestar](https://lodestar.chainsafe.io/) is a TypeScript implementation of the Ethereum Consensus specification developed by [ChainSafe Systems](https://chainsafe.io/).
+
+
 ### Client Comparison Table
 
 | Client     | CPU Usage | Minimum RAM Usage | Sync Time                    |
-| ---------- | --------- | ----------------- | ---------------------------- |
+|------------| --------- | ----------------- | ---------------------------- |
 | Lighthouse | Moderate  | 2 GB              | Instant with checkpoint sync |
 | Nimbus     | Low       | 0.75 GB           | Instant with checkpoint sync |
 | Prysm      | Moderate  | 2 GB              | Instant with checkpoint sync |
 | Teku       | Moderate  | 4 GB              | Instant with checkpoint sync |
-
-
-## Note for Raspberry Pi Users
-
-After the Merge of the Execution and Consensus layers in September 2022, our experience with staking on a Raspberry Pi has shown that currently the **only viable client pair** is **Geth** for your Execution client, and **Nimbus** for your Consensus client.
-
-Other platforms can reliably run any combination of clients, but for Raspberry Pi users, we **strongly recommend** using Geth and Nimbus.
+| Lodestar   | Moderate  | 4 GB              | Instant with checkpoint sync |

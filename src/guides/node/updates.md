@@ -132,7 +132,7 @@ For `x64` systems (most normal machines):
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
 ```
 
-For `arm64` systems (like the Raspberry Pi):
+For `arm64` systems:
 
 ```
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
@@ -204,7 +204,7 @@ sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/downl
 sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
-For `arm64` systems (like the Raspberry Pi):
+For `arm64` systems:
 
 ```
 sudo mv /usr/local/bin/rocketpool /usr/local/bin/rocketpool_bak

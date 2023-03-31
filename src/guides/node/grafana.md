@@ -433,7 +433,7 @@ As a reminder, you want the drive that houses the partition which has `/` in the
 ### Disk 2 Space Used
 
 This is an optional field that tracks the free space of a second disk on your system.
-It is aimed at people that keep their Operating System and chain data on separate drives, such as **Raspberry Pi** users.
+It is aimed at people that keep their Operating System and chain data on separate drives.
 
 Setting it up is the same as the **SSD Latency** box above, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your 2nd drive's mount point is.
 Use the disk associated with that partition.

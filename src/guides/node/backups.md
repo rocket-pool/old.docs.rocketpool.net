@@ -39,7 +39,7 @@ The chain data is stored within the `rocketpool_eth1clientdata` Docker volume, w
 Note this folder is typically not accessible by unprivileged user accounts; you will need to elevate to the `root` user to see it.
 
 ::: tip NOTE
-If you changed Docker's storage location during the initial Smartnode installation (such as Raspberry Pi users or people that run Docker on a second SSD), you will find the volume in `/<your external mount point>/docker/volumes/rocketpool_eth1clientdata`
+If you changed Docker's storage location during the initial Smartnode installation (such as people that run Docker on a second SSD), you will find the volume in `/<your external mount point>/docker/volumes/rocketpool_eth1clientdata`
 
 If you don't recall which installation path you use, you can check `/etc/docker/daemon.json` for its location.
 If the file doesn't exist, you use the default location.

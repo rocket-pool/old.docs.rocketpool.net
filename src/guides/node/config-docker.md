@@ -194,7 +194,7 @@ If you want the Smartnode to manage a Consensus client for you, the next screen 
 
 **The preferred choice** for the overall health and diversity of the network is the **Random (Recommended)** choice, which will randomly choose among one of the four supported Consensus clients for you.
 
-If you would prefer to choose an explicit client (for example, if you're on a Raspberry Pi and know you want to use Nimbus), please refer to the [Choosing your ETH clients](./eth-clients.md#eth2-clients) section for a description of each option so you can make an educated decision.
+If you would prefer to choose an explicit client, please refer to the [Choosing your ETH clients](./eth-clients.md#eth2-clients) section for a description of each option so you can make an educated decision.
 
 :::warning NOTE
 There are two conditions that will prompt you with warnings based on client selection:
@@ -415,6 +415,63 @@ You can enter the URL of any Beacon Node that provides access to its REST API he
 See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
 
 :::
+::: tab Lodestar
+
+The first option in Lodestar's configuration will ask about your validator's **graffiti** message:
+
+<center>
+
+![](./images/tui-local-graffiti.png)
+
+</center>
+
+This is an optional custom message you can attach to any blocks you propose on the Beacon Chain.
+The message will be preserved forever, so think of it like a fun little way to leave your mark!
+
+**Note the maximum length of the graffiti is 16 characters.**
+
+If you'd like to see some examples of what validators are using for Graffiti today, [take a look here](https://beaconcha.in/blocks).
+
+Next up is an option to enable or disable **Checkpoint Sync**:
+
+<center>
+
+![](./images/tui-local-checkpoint.png)
+
+</center>
+
+Lodestar has the ability to instantly sync to the latest block on the Beacon Chain network by connecting to an existing Beacon Node that you trust.
+This is preferred over conventional syncing because it doesn't require any time (whereas conventional syncing can take days) and comes with some security benefits.
+Take a look at [their documentation on checkpoint syncing](https://chainsafe.github.io/lodestar/usage/beacon-management/#checkpoint-sync) for more information if you are curious.
+
+You can enter the URL of any Beacon Node that provides access to its REST API here.
+
+See [the section below on Checkpoint Syncing](#beacon-chain-checkpoint-syncing) if you'd like to use it.
+
+The final question will ask if you want to enable Doppelgänger Protection:
+
+<center>
+
+![](./images/tui-local-dd.png)
+
+</center>
+
+Lodestar supports a feature called Doppelgänger Detection.
+In a nutshell, this feature will **intentionally** miss a few attestations after Lodestar's Validator Client restarts; while doing this, it will listen to see if attestations are still being sent to the network using your validator keys.
+
+Ideally, there would not be any attestations (which means no other machine is running with your validator keys attached).
+After its short waiting period, Lodestar would start validating normally.
+
+*However*, if there *is* another machine running with your validator keys attached, then Lodestar will immediately shut down and issue an error message in its log files.
+The reason for this is that if it were to start attesting as well, then you would start **double attesting** which is a **slashable offense**.
+When slashed, your validator would be forcibly exited from the Beacon chain and you would be penalized a significant amount of ETH.
+
+Most of the time, doppelgänger detection will result in nothing but a few missed attestations after a client restart.
+In situations where you are moving your validator to a new machine or you are changing to a new Beacon client, however, **doppelgänger detection can prevent you from being slashed by double attesting accidentally**.
+
+Think of it as cheap insurance for your minipools; you'll miss a trivial bit of profit every time you restart, but you can be fairly confident that you won't accidentally run your keys in two places and get slashed for it.
+
+:::
 ::::
 
 ::: warning NOTE
@@ -612,8 +669,6 @@ If you'd like to see some examples of what validators are using for Graffiti tod
 It allows your Beacon client to instantly sync the entire Beacon chain without having to start from the beginning and catch up on every block.
 This means instead of taking **days**, your Beacon client can be ready in a matter of **minutes**.
 All it needs is access to an existing Beacon client that you trust.
-
-Currently, **Lighthouse**, **Nimbus**, and **Teku** support checkpoint syncing.
 
 You can use any Beacon node that provides access to its HTTP API.
 Currently, many node operators are using the checkpoint-sync-endpoints - a service that allows Rocket Pool node operators to checkpoint sync easily.

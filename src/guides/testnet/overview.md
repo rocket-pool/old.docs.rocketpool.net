@@ -33,6 +33,7 @@ If you're using [a different setup](../node/install-modes.md) with an external E
 - For **Nimbus**: add `--network=prater` to the launch command.
 - For **Prysm**: add `--prater` to the launch command.
 - For **Teku**: add `--network=prater` to the launch command.
+- For **Lodestar**: prefix the launch command with `LODESTAR_NETWORK=goerli`
 
 Check the next section to learn how to get some test ETH on Goerli, which you'll need to test Rocket Pool out.
 

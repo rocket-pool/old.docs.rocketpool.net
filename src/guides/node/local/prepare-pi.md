@@ -1,5 +1,10 @@
 # Preparing a Raspberry Pi
 
+::: warning NOTE
+This page has been left here for archival purposes. We no longer recommend running Rocket Pool on a Raspberry Pi due to the
+increased hardware and performance requirements of running an Ethereum validator.
+:::
+
 This guide will walk you through how run a Rocket Pool node using a Raspberry Pi.
 While this is not typically recommended in most staking guides, we recognize that it is attractive because it is a much more affordable option than standing up an entire PC.
 To that end, we've worked hard to tweak and optimize a whole host of settings and have determined a configuration that seems to work well.

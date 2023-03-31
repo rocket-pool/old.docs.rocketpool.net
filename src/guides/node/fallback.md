@@ -18,36 +18,15 @@ If your main node ever goes offline, **your fallback will not start validating f
 
 ## Supported Clients
 
-Not all clients are capable of supporting fallback nodes.
-The `rocketpool service config` TUI will show you whether your client selection supports it or not in the description box when you hover over the `Fallback Clients` page.
+As of v1.9.0, all our supported validator clients have added Fallback support with only a few limitations:
 
-If your client supports it, you will see a description like this:
-
-<center>
-
-![](./images/tui-fallback-ok.png)
-
-</center>
-
-If your client does not support it, you will see a description like this and you will be unable to press `Enter` to enter the settings page:
-
-<center>
-
-![](./images/tui-fallback-disabled.png)
-
-</center>
-
-At the time of v1.5.0's release, the following Validator clients have Fallback client support:
-
-| Name | Supports Fallback | Valid Fallback Clients |
-| ---- | ----------------- | ---------------------- |
-| Lighthouse | Yes | Any (doppelganger protection off)<br>Lighthouse (doppelganger protection on) |
-| Nimbus | No |  |
-| Prysm | Yes | Prysm |
-| Teku | Yes | Any |
-
-If Fallback support is critical for you and your current Consensus client selection does not offer it, you may want to consider using a different Consensus client.
-Luckily, [switching clients is very easy with the Smartnode](./change-clients.md#changing-consensus-clients).
+| Name       | Supports Fallback | Valid Fallback Clients                                                       |
+|------------|-------------------|------------------------------------------------------------------------------|
+| Lighthouse | Yes               | Any (doppelganger protection off)<br>Lighthouse (doppelganger protection on) |
+| Nimbus     | Yes               | Any                                                                          |
+| Prysm      | Yes               | Prysm                                                                        |
+| Teku       | Yes               | Any                                                                          |
+| Lodestar   | Yes               | Any                                                                          |
 
 
 ## Setting up a New Node (Docker Mode)
