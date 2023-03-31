@@ -83,6 +83,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
+            'atlas/whats-new',
             {
               title: 'Staking with Rocket Pool',
               sidebarDepth: 1,
@@ -208,7 +209,6 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
-                    'atlas/whats-new',
                     'atlas/lebs',
                   ]
                 },
