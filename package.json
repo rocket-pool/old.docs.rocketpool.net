@@ -1,7 +1,7 @@
 {
   "name": "rocketpool-docs",
   "version": "0.9.0",
-  "description": "Rocket Pool Documentation - Decentralised ETH2 Proof of Stake Protocol",
+  "description": "Rocket Pool Documentation - Decentralised Ethereum Liquid Staking Protocol",
   "main": "index.js",
   "authors": {
     "name": "David Rugendyke",
