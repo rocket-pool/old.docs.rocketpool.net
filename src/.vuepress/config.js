@@ -83,6 +83,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
+            'atlas/whats-new',
             {
               title: 'Staking with Rocket Pool',
               sidebarDepth: 1,
@@ -109,7 +110,6 @@ module.exports = {
                     'node/local/hardware',
                     'node/local/prepare-pc',
                     'node/local/prepare-mac',
-                    'node/local/prepare-pi',
                     'node/ssh'
                   ]
                 },
@@ -152,6 +152,8 @@ module.exports = {
                 'node/fee-distrib-sp',
                 'node/mev',
                 'node/create-validator',
+                'node/solo-staker-migration',
+                'node/leb-migration',
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
@@ -166,20 +168,11 @@ module.exports = {
                   ]
                 },
                 'node/rewards',
+                'node/skimming',
+                'node/credit',
+                'node/withdraw',
                 'node/troubleshooting',
                 'node/faq'
-              ]
-            },
-            {
-              title: 'The Atlas Upgrade',
-              sidebarDepth: 2,
-              collapsable: true,
-              children: [
-                'atlas/whats-new',
-                'atlas/withdrawals',
-                'atlas/lebs',
-                'atlas/solo-staker-migration',
-                'atlas/credit',
               ]
             },
             {
@@ -211,6 +204,14 @@ module.exports = {
                 'legacy/v1.3-update',
                 'legacy/upgrading',
                 {
+                  title: 'Atlas and Withdrawals',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'atlas/lebs',
+                  ]
+                },
+                {
                   title: 'Redstone and The Merge',
                   sidebarDepth: 2,
                   collapsable: true,
@@ -221,6 +222,7 @@ module.exports = {
                     'redstone/native-migration',
                   ]
                 },
+                'node/local/prepare-pi',
               ]
             }
           ]

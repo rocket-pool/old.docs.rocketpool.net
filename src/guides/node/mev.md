@@ -57,6 +57,7 @@ Rocket Pool currently offers its node operators access to **multiple different r
 | [Blocknative](https://docs.blocknative.com/blocknative-relay/mev-relay-instructions-for-ethereum-validators) | Complies with OFAC Sanctions* | All types |
 | [Eden Network](https://v2.docs.edennetwork.io/eden-relay/overview) | Complies with OFAC Sanctions* | All types |
 | [Ultra Sound](https://relay.ultrasound.money/) | Unregulated | All types |
+| [AESTUS](https://aestus.live/) | Unregulated | All types |
 
 ::: warning NOTE
 *Relays that comply with OFAC sanctions follow the blacklist of addresses that the United States Office of Foreign Assets Control (OFAC) maintains.

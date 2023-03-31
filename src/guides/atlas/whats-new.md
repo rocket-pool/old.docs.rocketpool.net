@@ -1,12 +1,6 @@
-# The Rocket Pool Atlas Update
+# The Atlas Update
 
-::: warning NOTE
-This page describes features that are currently in BETA and only apply to certain test networks.
-Nothing here is live on Mainnet yet.
-:::
-
-Rocket Pool's next major update, titled **Atlas**, has been released for beta testing on the Zhejiang and Prater (Goerli) test networks.
-This page describes the major changes that Atlas brings, including updates to both the Smartnode stack and to the Rocket Pool protocol in general.
+This page describes the major changes that Rocket Pool's next major update, titled **Atlas**, brings to the protocol including updates to both the Smartnode stack and to the Rocket Pool protocol in general.
 
 Please read through this page thoroughly to understand all of the differences between the previous version of Rocket Pool (Redstone) and Atlas.
 
@@ -30,8 +24,7 @@ This comes in two flavors:
 
 Atlas introduces a new delegate contract for minipools that allows node operators to **distribute** the minipool's ETH balance, splitting it evenly between the node operator and the rETH holders (plus commission, of course) at any time.
 This gives node operators **immediate access** to their Beacon Chain rewards!
-
-To learn more about withdrawals and rewards, please visit the [Withdrawals](./withdrawals.md) guide.
+It also puts the rETH holders's share back into the deposit pool, so it can be used to unstake rETH for ETH at the protocol's exchange rate (or to create new minipools).
 
 
 ### 8-ETH Bonded Minipools
@@ -47,10 +40,12 @@ These represent 10% of the amount you're *borrowing* from the protocol, and 150%
 New minipools be created with either 8 ETH or 16 ETH.
 16 ETH minipools are unchanged from how they work today, and are available for users that want to minimize their exposure to the RPL token.
 
-Finally, once the Shapella upgrade has been applied, node operators can **migrate existing 16-ETH minipools directly into 8-ETH minipool without needing to exit**.
-This will give them 8 ETH back in [deposit credit](./credit.md), which can be used to create a **new 8-ETH minipool for free**!
+To learn how to make new minipools using an 8 ETH bond, please visit the [minipool creation guide](../node/create-validator.md).
 
-To learn more about 8-ETH bond minipools, please visit the [8-ETH Bonded Minipools](./lebs.md) guide.
+Also, once Atlas has been applied, node operators can **migrate existing 16-ETH minipools directly into 8-ETH minipool without needing to exit**.
+This will give them 8 ETH back in [deposit credit](../node/credit.md), which can be used to create a **new 8-ETH minipool for free**!
+
+To learn more about 8-ETH bond minipools, please visit the [bond reduction guide](../node/leb-migration.md).
 
 
 ### Solo Validator Conversion
@@ -68,7 +63,7 @@ This means you will get all the benefits of Rocket Pool minipools, including:
 - Commission on the portion of those minipools provided by rETH stakers
 - Access to Rocket Pool's [Smoothing Pool](../node/fee-distrib-sp.md#the-smoothing-pool) to pool and evenly distribute rewards from block proposals and MEV 
 
-To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](./solo-staker-migration.md) guide.
+To learn more about converting a solo validator into a minipool, please visit the [Converting a Solo Validator into a Minipool](../node/solo-staker-migration.md) guide.
 
 
 ## New Smartnode Features 
@@ -76,13 +71,27 @@ To learn more about converting a solo validator into a minipool, please visit th
 In addition to core changes to the Rocket Pool protocol, Atlas also brings some exciting upgrades to the Smartnode stack itself which are present in v1.9.0.
 
 
+### Automatic Rewards Distributions
+
+If you're already an active Rocket Pool node operator, you may be familiar with the `rocketpool_node` process that handles certain automated processes.
+For example, it ensures you have the correct fee recipient and automatically runs the second `stake` transaction for you after `prelaunch` minipools pass the 12-hour scrub check.
+
+Starting with Atlas, the `node` has a new duty: **automatic distribution of minipool rewards!**
+This is due to the way [the Shapella upgrade works](../node/skimming.md), by skimming your rewards from the Beacon Chain into your minipool every few days.
+
+Whenever one of your minipools reaches a balance larger than a user-specified threshold (default of 1 ETH), the node will automatically run `distribute-balance` on it.
+This will send your portion of the rewards to your withdrawal address, and the pool staker's portion back to the deposit pool.
+
+Changing the threshold can be done in the `Smartnode and TX Fees` section of the `service config` TUI, under the `Auto-Distribute Threshold` setting.
+
+
 ### Unified Grafana Dashboard
 
-By popular demand, we have created a new **Grafana dashboard** to help node operators track and assess the status, progress, and overall health of their nodes:
+By popular demand, we have created a new [**Grafana dashboard**](https://grafana.com/grafana/dashboards/18391-rocket-pool-dashboard-v1-2-0/) to help node operators track and assess the status, progress, and overall health of their nodes:
 
 <center>
 
-![](./images/grafana-1.2.png)
+![](../node/images/grafana-1.2.jpg)
 
 </center>
 
@@ -95,13 +104,12 @@ It comes with the following highly requested features:
 - Tracking of the Smoothing Pool's balance
 - Tracking of claimed and unclaimed rewards, now including ETH from the Smoothing Pool
 - Stats about Rocket Pool's Snapshot-based governance votes
+- Room for tracking a second SSD's used space and temperature if you have one for your OS and a different one for your chain data
 - And more!
 
-Grafana's dashboard uploading service is unfortunately not working right now so it can't be imported from their service via ID, but you can import it via JSON - [the dashboard's JSON is available in our GitHub repository](https://raw.githubusercontent.com/rocket-pool/smartnode-install/atlas/Dashboards/Rocket%20Pool%20Dashboard%20v1.2.0-rc2.json).
-Simply click the link, copy the JSON, and pop it into your dashboard's import dialog.
+You can import the new dashboard from the official Grafana service using ID `18391` by following our [Grafana guide](../node/grafana.md).
 
 This new dashboard was a labor of love that involved extensive help from community member **0xFornax** - thank you for all of your hard work!
-
 
 
 ### Nimbus Changes
@@ -130,9 +138,3 @@ This makes the `node` process much less taxing on the Execution client for node 
 This new system hasn't made its way into the CLI itself yet, so any commands you run there (such as `rocketpool minipool status`) will still use the old single-query setup.
 Over time we'll introduce it into the CLI too, which will make all of its commands lightning fast (*except for waiting for transactions to be validated, that still takes a while*).
 
-
-### Zhejiang Testnet
-
-Finally, what would all of these great new features be without a way to test them?
-Smartnode v1.9.0 introduces support for the [Zhejiang](https://zhejiang.ethpandaops.io/) test network.
-Similar to how Ropsten was introduced in v1.5.0 to allow people to get an early preview of the Merge, Zhejiang **already has both Shapella and Atlas deployed** so testers can experiment with the new features before they make their way to Goerli (Prater) and ultimately onto Mainnet.

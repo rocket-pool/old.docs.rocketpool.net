@@ -1,17 +1,11 @@
 # The Deposit Credit System
 
-::: warning NOTE
-This page describes features that are currently in BETA and only apply to certain test networks.
-Nothing here is live on Mainnet yet.
-:::
-
-The Atlas upgrade introduces an interesting new feature for Rocket Pool node operators: the **deposit credit system**.  
-Simply put, the deposit credit system is a mechanism to track ETH that was previously bonded by node operators but is no longer required and make it available for use again.
+The deposit credit system is a mechanism to track ETH that was previously bonded by node operators but is no longer required and make it available for use again.
 The source of this credit comes from two places:
-- Migrating an existing 16-ETH bonded minipool down to an [8-ETH bonded minipool](./lebs.md) (which adds 8 ETH to the node operator's credit balance)
-- [Migrating an existing solo validator](./solo-staker-migration.md) into a minipool (which adds either 16 or 24 ETH to the node operator's credit balance, depending on which type of minipool they create during migration)
+- [Migrating an existing 16-ETH bonded minipool down to an 8-ETH bonded minipool](./leb-migration.md) (which adds 8 ETH to the node operator's credit balance)
+- [Migrating an existing solo validator](../node/solo-staker-migration.md) into a minipool (which adds either 16 or 24 ETH to the node operator's credit balance, depending on which type of minipool they create during migration)
 
-At the launch of Atlas, every node operator begins with a credit balance of **0**.
+Every node operator begins with a credit balance of **0 ETH**.
 Either of these two actions will increase that balance accordingly.
 
 This ETH is *not* made liquid and returned to the node operator; instead, it can be used to **create additional minipools** without requiring any ETH from the node operator.
@@ -25,7 +19,7 @@ See the [Credit Availability](#credit-availability) section below for more detai
 ## An Example
 
 Say you have a credit balance of 0 ETH, and a single minipool with a 16-ETH bond.
-You can then [migrate that minipool to an 8-ETH bond](./lebs.md#migrating-16-eth-minipools-to-8-eth).
+You can then [migrate that minipool to an 8-ETH bond](./leb-migration.md).
 This will result in **8 ETH** that is no longer bonded.
 That 8 ETH will be placed into your **credit balance**.
 

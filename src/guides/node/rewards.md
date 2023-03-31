@@ -3,7 +3,6 @@
 As a Rocket Pool node operator, you are entitled to regular rewards that will be provided in the form of the RPL token and (if you are opted into the Smoothing Pool) some ETH as well.
 This section will describe how these rewards work and how you can claim them.
 
-
 ## Rewards and Checkpoints
 
 At regular intervals, Rocket Pool will flag a **checkpoint** on the network.

@@ -1,10 +1,5 @@
 # Converting a Solo Validator into a Minipool
 
-::: warning NOTE
-This page describes features that are currently in BETA and only apply to certain test networks.
-Nothing here is live on Mainnet yet.
-:::
-
 When the Beacon Chain was first launched, validators were created with a special pair of cryptographic keys - the **validator key** and the **withdrawal key**.
 
 The validator key is a "hot key", which means it needs to be stored on an active machine connected to the Internet; this is the key used to sign your attestations and proposals, and also serves as your "address" on the Beacon Chain (the hex string used to identify your validator).
@@ -32,7 +27,7 @@ Conversion into a minipool is not for everyone, but this section will help you m
 Rocket Pool minipools enjoy several advantages over conventional solo staking validators:
 - They **earn commission** on the portion of ETH they borrow from the pool stakers (currently either 16 or 24 ETH).
 - Your existing 32 ETH bond could be used to create up to **three additional validators** (on top of the one you already have).
-- They are eligible for participation in the [Smoothing Pool](../node/fee-distrib-sp.md#the-smoothing-pool) which pools all Execution layer rewards (e.g., from block proposals and [MEV rewards](../node/mev.md)) and fairly distributes them among participants during each rewards interval.
+- They are eligible for participation in the [Smoothing Pool](fee-distrib-sp.md#the-smoothing-pool) which pools all Execution layer rewards (e.g., from block proposals and [MEV rewards](mev.md)) and fairly distributes them among participants during each rewards interval.
 - They earn RPL inflation rewards (which currently provide a higher APR than ETH staking rewards).
 
 That being said, there are some differences that are important to highlight:
@@ -51,11 +46,11 @@ If you would like to continue with the process, please read the next sections.
 
 In order to begin the conversion process, you will need to meet the following criteria:
 
-1. You must have [a node registered with the Rocket Pool network](../node/prepare-node.md) to host the new minipool.
+1. You must have [a node registered with the Rocket Pool network](prepare-node.md) to host the new minipool.
 1. The node must have enough RPL staked to support the new minipool (minimum of 1.6 ETH worth of RPL for converting to 16 ETH minipool, minimum of 2.4 ETH worth of RPL if converting to an 8 ETH minipool).
 1. The validator you want to migrate must be **active** on the Beacon chain. It cannot be pending, slashed, exiting / exited, or withdrawn.
 1. The validator must have a balance of **at least 32 ETH** on the Beacon chain.
-1. The validator must have [BLS key withdrawal credentials](insert launchpad withdrawal guide link here) (`0x00` credentials). Conversion **cannot** be done on validators that have already migrated to other Execution layer withdrawal credentials (`0x01` credentials).
+1. The validator must have [BLS key withdrawal credentials](https://launchpad.ethereum.org/en/withdrawals) (`0x00` credentials). Conversion **cannot** be done on validators that have already migrated to other Execution layer withdrawal credentials (`0x01` credentials).
 
 If none of these conditions are blockers for you, then you are eligible to begin validator conversion.
 
@@ -123,12 +118,12 @@ Please choose an amount of ETH you want to use as your deposit for the new minip
 
 If you select **8 ETH**, you will convert your validator into an 8-ETH bonded minipool.
 Your original 32 ETH deposit will be converted into an 8 ETH deposit, with 24 ETH borrowed from the pool stakers.
-Once the conversion process is complete, you will have a [credit balance](./credit.md) of 24 ETH which you can use to create more minipools.
+Once the conversion process is complete, you will have a [credit balance](../atlas/credit.md) of 24 ETH which you can use to create more minipools.
 Choosing this option will require your node to have a minimum of **2.4 ETH worth of RPL staked**.
 
 If you select **16 ETH**, you will convert your validator into a 16-ETH bonded minipool.
 Your original 32 ETH deposit will be converted into an 16 ETH deposit, with 16 ETH borrowed from the pool stakers.
-Once the conversion process is complete, you will have a [credit balance](./credit.md) of 16 ETH which you can use to create more minipools.
+Once the conversion process is complete, you will have a [credit balance](../atlas/credit.md) of 16 ETH which you can use to create more minipools.
 Choosing this option will require your node to have a minimum of **1.6 ETH worth of RPL staked**.
 
 Once you select an option, the Smartnode will run a few checks to confirm that the validator you entered and your node both pass all of the prerequisite requirements listed above.
@@ -333,11 +328,11 @@ By this time, you should have completed steps 1 and 2 (creating the vacant minip
 The next step is to wait for the **scrub check** to complete.
 This is a process carried out by the Oracle DAO to verify the following:
 
-1. Your validator's balance on the Beacon Chain (and your minipool's balance on the Execution layer) must add up to **at least** the balance your validator had when you first created the vacant minipool, minus a small buffer of 0.001 ETH to account for any accidental missed attestations during maintenance.
-  - For example, if your validator had a Beacon Chain balance of 35 ETH when you performed step 1, the combined Beacon Chain and minipool balances must be **at least** 34.999 ETH throughout the entire duration of the scrub check.
-1. Your validator must remain in the **actively staking** status for the entire scrub check - it cannot be slashed, exited, or withdrawn.
-1. Your validator's withdrawal credentials must either be the **original BLS-based withdrawal key credentials**, or the **new 0x01 credentials using the minipool's address**. Any other credentials will cause the minipool to be scrubbed.
-  - You are given a grace period of **approximately X days** to perform the withdrawal credentials change (85% of the scrub period's duration).
+1. Your validator's balance on the Beacon Chain (and your minipool's balance on the Execution layer) must add up to **at least** the balance your validator had when you first created the vacant minipool, minus a small buffer of 0.01 ETH to account for any accidental missed attestations during maintenance.
+  - For example, if your validator had a Beacon Chain balance of 35 ETH when you performed step 1, the combined Beacon Chain and minipool balances must be **at least** 34.99 ETH throughout the entire duration of the scrub check.
+2. Your validator must remain in the **actively staking** status for the entire scrub check - it cannot be slashed, exited, or withdrawn.
+3. Your validator's withdrawal credentials must either be the **original BLS-based withdrawal key credentials**, or the **new 0x01 credentials using the minipool's address**. Any other credentials will cause the minipool to be scrubbed.
+  - You are given a grace period of **approximately 2 and a half days** to perform the withdrawal credentials change (85% of the scrub period's 3-day duration).
 
 The scrub check is transient; you don't have to do anything during this time other than keep your validator online and performing well.
 
@@ -354,7 +349,7 @@ rocketpool_node  | 2023/03/06 04:51:32 Checking for minipools to promote...
 rocketpool_node  | 2023/03/06 04:51:32 Minipool 0x8F3F149e4416a94e0ee909dE32f8A11C2F3e211C has 44m0s left until it can be promoted.
 ```
 
-It will last for **X days**, after which you have passed and can proceed to [Step 5](#step-5-promoting-the-minipool) to promote the vacant minipool into a full one.
+It will last for **3 days**, after which you have passed and can proceed to [Step 5](#step-5-promoting-the-minipool) to promote the vacant minipool into a full one.
 
 
 ### Working with Scrubbed Minipools
@@ -458,7 +453,7 @@ Simply select your minipool from the list, approve the transaction, and your ref
 
 ## Using your Node Credit
 
-Now that you have an active promoted minipool, you will notice your node hasa credit balance when you run `rocketpool node status`:
+Now that you have an active promoted minipool, you will notice your node has a credit balance when you run `rocketpool node status`:
 
 ```
 Your Smartnode is currently using the Zhejiang Test Network.
@@ -468,7 +463,7 @@ The node 0x9BA1401Eb7D779eC51f910B066e9C4351cD28911 has a balance of 355.785269 
 The node has 24.000000 ETH in its credit balance, which can be used to make new minipools.
 ```
 
-In this example, since we converted the original 32 ETH validator bond into an 8-ETH minipool, we have received [**24 ETH in credit**](./credit.md).
+In this example, since we converted the original 32 ETH validator bond into an 8-ETH minipool, we have received [**24 ETH in credit**](../atlas/credit.md).
 This credit can be used to create new minipools and validators for free!
 
 Simply run the `rocketpool node deposit` command, and select which bond amount you would like to use.

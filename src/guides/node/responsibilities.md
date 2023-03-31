@@ -32,10 +32,12 @@ Approximated for 435,000 active validators.*
 
 ***These are subject to randomness; there can be "dry spells" multiple times longer than the average without being given one.*
 
-Rewards provided on the **Consensus Layer** (the Beacon Chain) are *not currently liquid*.
-They are locked on the chain until withdrawals have been implemented into the core Ethereum protocol.
+Rewards for performing validation duties are routinely ["skimmed"](./skimming.md) to minipools and can be distributed by
+Node Operators as desired.
 
-Rewards provided on the **Execution Layer**, however, **are liquid** and can be accessed instantly (or once per Rocket Pool rewards interval, if opted into the **Smoothing Pool**).
+Rewards provided by participating in MEV are either paid to Node Operators' fee distributor for immediate distribution or
+once per Rocket Pool rewards interval, if opted into the **Smoothing Pool**.
+
 We will describe these rewards in more detail, including how to configure and access them, later on in the guide.
 
 
@@ -69,8 +71,8 @@ As a rule of thumb, if you're offline for X hours (and you aren't in a sync comm
 
 ## How Rocket Pool Nodes Work
 
-Unlike solo stakers which are required to put 32 ETH up for deposit to create a new validator, Rocket Pool nodes only need to deposit 16 ETH per validator.
-This will be coupled with 16 ETH from the staking pool (which "normal" stakers deposited in exchange for rETH) to create a new validator.
+Unlike solo stakers which are required to put 32 ETH up for deposit to create a new validator, Rocket Pool nodes only need to deposit 8 or 16 ETH per validator (the "bond").
+This will be coupled with 24 or 16 ETH (the "borrowed") from the staking pool (which "normal" stakers deposited in exchange for rETH) to create a new validator.
 This new validator is called a **minipool**.
 
 To the Beacon chain, a minipool looks exactly the same as a normal validator.
@@ -84,8 +86,8 @@ The node can then create as many minipools as it can afford, all running happily
 **A single Rocket Pool node can run many, many minipools.**
 Each minipool has a negligible impact on overall system performance; some people have been able to run hundreds of them on a single node during Rocket Pool's beta tests.
 
-A minipool's upfront cost is 16 ETH, plus at least 1.6 ETH worth of the **RPL token**.
-This acts as supplemental insurance against particularly egregious slashing incidents, and lets you participate in Rocket Pool's DAO where you can vote on changes to the smart contracts.
+A minipool's upfront cost is either 16 ETH, plus at least 1.6 ETH worth of the **RPL token**, or 8 ETH plus at least 2.4 ETH worth of the RPL token.
+The supplemental RPL collateral acts as supplemental insurance against particularly egregious slashing incidents, and lets you participate in Rocket Pool's DAO where you can vote on changes to the smart contracts.
 
 
 ## Rocket Pool Node Operators
@@ -107,14 +109,14 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn half of the validator's total ETH rewards, *plus* an extra 15% commission paid by the pool staker's half 
+- You earn half of the validator's total ETH rewards, *plus* an extra 14% commission paid by the pool staker's half 
 - You earn interest on the RPL you stake as supplemental insurance
 - You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
 
 That being said, as a node operator **you are responsible for your own performance**.
 If your node performs poorly and you actually end up losing ETH by the time you decide to exit your minipool, all of the lost ETH is coming out of your share.
 For example: if you exit with a balance of 30 ETH, then your minipool lost 2 ETH from its initial 32 ETH deposit.
-You will receive 14 ETH, and 16 ETH will be returned to the staking pool.
+You will receive 14 or 6 ETH (depending on your **bond size**), and 24 or 16 ETH will be returned to the staking pool.
 
 If you're fairly new to using the command line or computer maintenance, this can seem like a scary challenge.
 Luckily, one of Rocket Pool's most core principles is *decentralization* - the fact that anyone, anywhere, can run a node if they have the determination and knowledge.
