@@ -107,6 +107,7 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/local/overview',
                     'node/local/hardware',
                     'node/local/prepare-pc',
                     'node/local/prepare-mac',
@@ -118,8 +119,17 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/vps/overview',
                     'node/vps/providers',
                     'node/vps/os'
+                  ]
+                },
+                {
+                  title: 'Securing your Node',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/securing-your-node',
                   ]
                 },
                 {
@@ -127,6 +137,7 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/installing/overview',
                     'node/eth-clients',
                     'node/install-modes',
                     'node/docker',
@@ -138,27 +149,47 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/config/overview',
                     'node/config-docker',
                     'node/config-native',
                     'node/advanced-config',
                   ]
                 },
-                'node/securing-your-node',
-                'node/starting-rp',
-                'node/recovering-rp',
-                'node/cli-intro',
-                'node/prepare-node',
-                'node/fallback',
-                'node/fee-distrib-sp',
-                'node/mev',
-                'node/create-validator',
-                'node/solo-staker-migration',
-                'node/leb-migration',
+                {
+                  title: 'Provisioning your Node',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/provisioning/overview',
+                    'node/starting-rp',
+                    'node/wallet-init',
+                    'node/recovering-rp',
+                    'node/prepare-node',
+                    'node/cli-intro',
+                    'node/fallback',
+                    'node/fee-distrib-sp',
+                    'node/mev',
+                  ]
+                },
+                {
+                  title: 'Creating or Migrating Minipools',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/minipools/overview',
+                    'node/create-validator',
+                    'node/minipools/delegates',
+                    'node/solo-staker-migration',
+                    'node/leb-migration',
+                    'node/credit',
+                  ]
+                },
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/maintenance/overview',
                     'node/performance',
                     'node/grafana',
                     'node/updates',
@@ -167,10 +198,24 @@ module.exports = {
                     'node/change-clients'
                   ]
                 },
-                'node/rewards',
-                'node/skimming',
-                'node/credit',
-                'node/withdraw',
+                {
+                  title: 'Claiming Rewards',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/rewards/overview',
+                    'node/rewards',
+                    'node/skimming',
+                  ]
+                },
+                {
+                  title: 'Exiting your Minipools',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/withdraw',
+                  ]
+                },
                 'node/troubleshooting',
                 'node/faq'
               ]

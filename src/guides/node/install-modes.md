@@ -28,9 +28,11 @@ In most situations, this is a good option to choose when creating a new node fro
 It's the fastest, most hands-off procedure.
 It will also handle updates to the Execution and Consensus clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
 
-:exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
+::: warning NOTE
+Currently, some of the Docker containers need to run as the `root` user to function correctly.
 While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
-In this case, we suggest you use the Native configuration mode listed below.**
+In this case, we suggest you use the Native configuration mode listed below.
+:::
 
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 
@@ -66,6 +68,9 @@ It is also the most difficult to set up and maintain.
 
 In this mode, the Smartnode Installer is no longer relevant.
 You are responsible for manually instantiating, maintaining, and upgrading the Smartnode infrastructure, the ETH clients, and the validator clients.
+
+::: danger WARNING
 While we provide some example documentation on how to do this, we suggest that this mode should only be used by **experienced system administrators**.
+:::
 
 If you would like to use this mode, proceed to the [Configuring a Native Rocket Pool Node without Docker](./native.md) section.

@@ -7,6 +7,12 @@ The frequency of skims depends on the number of activate validators on the Beaco
 Skimmed rewards will accrue in each of your minipools until you "distribute" them. This process distributes the skimmed rewards between you, as the node operator, and rETH holders
 based on your commission rate and ratio of supplied and provided ETH.
 
+::: warning NOTE
+In order to access your minipool's balance, you will need to upgrade to the [Atlas delegate](./minipools/delegates.md) first.
+The old Redstone delegate cannot be used to distribute the minipool's balance.
+:::
+
+
 ## Automatic Distribution
 
 By default, the Smartnode is configured to automatically distribute your minipools when their balance reaches **1 ETH**. This
@@ -37,8 +43,8 @@ its balance exceeds 8 ETH. To protect your capital, the Smartnode monitors this 
 your minipool if it occurs.
 :::
 
-## Manual Distribution
 
+## Manual Distribution
 
 If you have disabled the automatic distribution of skimmed rewards, you will need to routinely distribute them yourself
 with the following process.

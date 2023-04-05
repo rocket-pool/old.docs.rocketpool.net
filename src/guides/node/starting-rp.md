@@ -1,4 +1,4 @@
-# Starting Rocket Pool and Setting Up a Node Wallet
+# Starting Rocket Pool
 
 At this point, you should have the complete Rocket Pool infrastructure running, including the Smartnode stack, an Execution (ETH1) and an Consensus (ETH2) client.
 You should also have hardened your operating system from outside attackers.
@@ -268,7 +268,7 @@ The key thing to check is the `STATUS` column.
 If none of the entries state `Restarting...`, then the containers should be running properly (see the below note for an exception about the `rocketpool_validator` container).
 
 ::: warning NOTE
-If you are using Prysm as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
+If you are using **Lodestar** or **Prysm** as your Consensus (ETH2) client, you will likely notice the `rocketpool_validator` container is constantly restarting.
 This is okay!
 The validator container will fail until a new validator has been created using the `rocketpool node deposit` command, which we will cover in the [Creating a Minipool (ETH2 Validator)](./create-validator.md) section.
 Once this is done, the container will function correctly - until then, just ignore it.
@@ -300,75 +300,9 @@ When you're done looking at the logs, you can exit and return to the command pro
 :::
 
 
-## Setting up a Wallet
-
-If the Smartnode services are up and running, the next step is to set up an ETH1 wallet for your node.
-This is simply an ETH1 address that will hold your node's funds - it will use this to send ETH to your minipool when you begin staking, pay for gas during various transactions, and other various operations.
-
-You have the option of either creating a brand new wallet from scratch, or importing / recovering an existing wallet or address.
-Please choose which option you'd like from the tabs below.
-
-::::: tabs
-:::: tab Creating a New Wallet
-
-The most common way to run a node is to create a new ETH1 address that is dedicated to the node.
-The Smartnode CLI provides a way to do this easily:
-
-```
-rocketpool wallet init
-```
-
-You will first be prompted for a password to protect your wallet's private key.
-Next, you will be presented the **unique 24-word mnemonic** for your new wallet.
-This is the **recovery phrase** for your wallet.
-If you ever lose your machine, you can use this phrase to regenerate your wallet and resurrect all of the Consensus (ETH2) validators attached to it.
-
-::: warning NOTE
-It is **essential** that you write this mnemonic down because this is the only time it will be shown to you, but keep it somewhere safe.
-Anyone with this phrase can gain control of your wallet.
-:::
-
-
-Once you confirm your mnemonic phrase, you will be presented with the unique ETH1 address for your node wallet.
-::::
-:::: tab Recovering / Importing an Existing Wallet
-
-If you already have a node wallet that you created in a previous installation of the Smartnode, or if you want to import an address that you created elsewhere (such as with **Allnodes**), please follow the instructions in the [Importing an Existing Wallet for your Node](./recovering-rp.md) guide.
-
-Return here when you're finished.
-::::
-:::::
-
-
-::: warning NOTE
-As of the current build, Rocket Pool needs to have access to your wallet's private key in order to perform its automatic duties.
-**This means that the private key will exist in a file on your machine.**
-If an attacker manages to gain access to your machine, they could gain access to your node wallet and steal all of the tokens that it contains!
-Please ensure that you have followed the security guide in the [Securing your Node](./securing-your-node.md) section before you continue, and are comfortable with your security posture.
-:::
-
-:::: tabs
-::: tab Docker and Hybrid Modes
-Your wallet's private key will be stored in a file located at `~/.rocketpool/data/wallet`.
-
-The password used to encrypt your wallet's key will be stored in `~/.rocketpool/data/password`.
-This is the file that must be protected at all times.
-:::
-
-::: tab Native Mode
-The wallet and password files will be stored in the `data` directory under the Rocket Pool directory that you set up earlier (e.g. `/srv/rocketpool`).
-
-Your wallet's private key will be stored in a file located at `/srv/rocketpool/data/wallet`.
-
-The password used to encrypt your wallet's key will be stored in `/srv/rocketpool/data/password`.
-This is the file that must be protected at all times.
-:::
-::::
-
-
 ## Waiting for Your ETH Clients to Sync
 
-Now that you have a wallet set up, you're going to want to wait until your Execution (ETH1) and Consensus (ETH2) clients have finished syncing with the network before proceeding.
+Now that your clients have started up, you're going to want to wait until your Execution (ETH1) and Consensus (ETH2) clients have finished syncing with the network before proceeding.
 
 One easy way to check on their status is with the following command:
 
@@ -404,4 +338,6 @@ Sit back, relax, and wait for both of them to finish.
 
 ## Next Steps
 
-Once you've imported or recovered your node wallet and your clients are done syncing, follow the next steps in the [Intro to the Command Line Interface](./cli-intro.md) guide.
+Once your clients have synced, you're ready to either [create a new wallet](./wallet-init.md) if this is your first node, or [recover an existing wallet](./recovering-rp.md) if you're restoring from a backup or migrating from another provider such as Allnodes to your own hardware. 
+
+Select which one you'd like to learn more about and follow the steps in the corresponding guide.

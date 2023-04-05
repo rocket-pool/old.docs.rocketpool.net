@@ -20,8 +20,9 @@ A bond reduction involves the following steps:
 
 To perform a successful bond reduction without being scrubbed, the minipool must follow these rules:
 
+1. The minipool must be upgraded to the [Atlas delegate](./minipools/delegates.md); the old Redstone delegate cannot be used.
 1. The minipool's validator on the Beacon Chain must be **pending or actively staking**. It cannot be slashed, exiting / exited, or withdrawable / withdrawn.
-2. The minipool's validator balance on the Beacon Chain must be **at least 31.999 ETH** (32 ETH with a small buffer for poorly-timed complications resulting in missed attestations after a rewards skim).
+1. The minipool's validator balance on the Beacon Chain must be **at least 31.999 ETH** (32 ETH with a small buffer for poorly-timed complications resulting in missed attestations after a rewards skim).
 
 The minipool must obey these conditions for the **entire duration** of the scrub check, during which time the Oracle DAO will be watching it to ensure compliance with the conditions above.
 
@@ -38,6 +39,7 @@ It will be reduced to the network value (**currently set to a flat 14%**).
 
 Note that as demonstrated by the [example math](#rewards) section, an 8-ETH minipool at 14% is *still more profitable* than a 16-ETH minipool at 20% so holding onto a high commission rate is not a compelling reason to retain a 16 ETH bond.
 :::
+
 
 ### Step 1: Beginning Bond Reduction
 
@@ -63,7 +65,7 @@ Please select a minipool to begin the ETH bond reduction for:
 Once you've selected one or more minipools to reduce, the Smartnode will check if those minipools are eligible for bond reduction.
 
 To be eligible, these conditions must be satisfied:
-- The minipool has been upgraded to use the [Atlas minipool delegate contract](./withdrawals.md#the-minipool-delegate).
+- The minipool has been upgraded to use the [Atlas minipool delegate contract](./minipools/delegates.md).
 - The minipool's validator must have a Beacon Chain balance of at least 32 ETH.
 - The minipool's validator must be pending or active.
 - You have enough RPL staked to support the minimum RPL collateral level that would be required *after* the bond reduction.

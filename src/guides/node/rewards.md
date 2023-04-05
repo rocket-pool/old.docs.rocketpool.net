@@ -158,3 +158,44 @@ Your node has received 208.551820 RPL staking rewards in total.
 
 You may claim these rewards at any time. You no longer need to claim them within this interval.
 ```
+:::
+
+
+## Execution-Layer Rewards in your Fee Distributor
+
+If you're **not** opted into the Smoothing Pool, the Execution-layer portion of your rewards from block proposals (including transaction fees and MEV) will be sent to your node's [Fee Distributor](./fee-distrib-sp.md#fee-distributors-and-the-smoothing-pool) contract instead.
+
+To check the balance of your Fee Distributor, you can either use a chain explorer like [https://etherscan.io](https://etherscan.io) or simply run `rocketpool node status` - there will be a section called **Fee Distributor and Smoothing Pool** that shows it:
+
+```
+=== Fee Distributor and Smoothing Pool ===
+The node is not opted into the Smoothing Pool.
+To learn more about the Smoothing Pool, please visit https://docs.rocketpool.net/guides/redstone/whats-new.html#smoothing-pool.
+The node's fee distributor 0xA0bfbFC582f5814585f8455Ed6D7B620eA9a9EE4 has a balance of 1.143598 ETH.
+```
+
+
+### Distributing the Balance
+
+To access the Fee Distributor's balance, you will **distribute** it (hence the name, *Fee Distributor*).
+This will calculate your share of the rewards (based on your node's average minipool commission) and send it to your node's withdrawal address; the rest is sent to the staking pool.
+
+Distribution can be done **at any time**.
+You can sit on the balance and let it accumulate if you choose, or distribute it regularly.
+
+To distribute the balance, run the following command:
+
+```
+rocketpool node distribute-fees
+```
+
+This will show how much goes to you and how much goes to the staking pool:
+```
+Your node's average commission is 15.00%.
+Your fee distributor's balance of 1.143599 ETH will be distributed as follows:
+	Your withdrawal address will receive 0.657569 ETH.
+	rETH pool stakers will receive 0.486030 ETH.
+```
+
+Simply confirm the gas price you want and submit the transaction.
+Once it's been completed, your portion of the rewards will be available in your node's withdrawal address.

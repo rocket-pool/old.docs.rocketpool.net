@@ -1,7 +1,9 @@
 # Securing your Node
 
 The goal of this guide is to walk you through steps you can take to secure your node against malicious actors.
-It will describe both **essential** actions, which you **must** take, and **nice-to-have** actions, which are helpful but not required.
+Whether you're running a local server at home or a VPS server / virtual machine on the cloud, the tips here will help you harden your node against outside attack and help protect it during its lifespan.
+
+This section will describe both **essential** actions, which you **must** take, and **nice-to-have** actions, which are helpful but not required.
 
 ::: tip NOTE
 This guide is meant to be an **introduction** to some of the things you can do to harden your node machine.

@@ -1,4 +1,4 @@
-# Importing an Existing Wallet for your Node
+# Importing / Recovering an Existing Wallet
 
 If you already have a wallet you'd like to use for your node, or if you're recovering a wallet you already created with the Smartnode earlier, this guide will help you through the import / recovery process.
 
