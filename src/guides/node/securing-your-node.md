@@ -340,6 +340,9 @@ Make the following changes:
 
 Once you're done, save with `Ctrl+O` and `Enter`, then exit with `Ctrl+X`.
 
+Finally, run `sudo sshd -T | grep -i passwordauthentication` and make sure that it prints `passwordauthentication no`.  
+If it does not, you may need to run `sudo nano /etc/ssh/sshd_config.d/50-cloud-init.conf` and set `PasswordAuthentication yes` to `PasswordAuthentication no` in that file as well. Save and exit as before, with `Ctrl+O` and `Enter`, then `Ctrl+X`
+
 Next, restart the SSH server so it picks up the new settings:
 
 ```shell
