@@ -195,7 +195,8 @@ module.exports = {
                     'node/updates',
                     'node/backups',
                     'node/pruning',
-                    'node/change-clients'
+                    'node/change-clients',
+                    'node/maintenance/node-migration'
                   ]
                 },
                 {
