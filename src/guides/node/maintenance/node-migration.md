@@ -45,25 +45,73 @@ This is designed for maximum safety, so while you may think some of the steps ar
 1. **Prepare the new node** by following these guides, starting from the "Preparing a Node" section and ending once you have the Smartnode installed and are syncing an Execution and Consensus client.
    - :warning: **DO NOT** initialize a new wallet or recover your old wallet on the node. Allow it to sync the clients *without a wallet present*.
 
-1. **WAIT** until your clients are fully synced on the new node.
+2. **WAIT** until your clients are fully synced on the new node.
    
-1. **Stop validating** on your old node (for example, using `rocketpool service stop` to shut down the validator client).
+3. Confirm that you have recorded your mnemonic correctly by running `rocketpool wallet test-recovery` on your new machine. This will *simulate* key recovery to confirm your node wallet and all of your minipools' validator keys can be recovered correctly, but will not *actually* recover them and save them to disk so there is no risk of slashing.
+   1. If the Smartnode fails to recover your node wallet using the mnemonic you provided, then your mnemonic may be invalid. **STOP** going through this process; removing the keys from your old node means they could be **lost forever**.
+   2. In this situation we recommend exiting your validators and withdrawing your capital as soon as possible, so you can start over with a new node that you have the working mnemonic for. 
    
-1. **Delete your keys** from your old node (for example, using `rocketpool wallet purge`).
-   1. **VERIFY** the keys have been removed by looking if your node's `data` folder (default is `~/.rocketpool/data/validators/`) - each Consensus Client will have its own folder under that data folder with its own copy of the keys. Ensure **all of them** have been deleted.
+4. **Stop validating** on your old node (for example, using `rocketpool service stop` to shut down the validator client).
+   
+5. **Delete your keys** from your old node (for example, using `rocketpool wallet purge`).
+   1. **VERIFY** the keys have been removed by looking if your node's `data` folder (default is `~/.rocketpool/data/validators/`) - each Consensus Client will have its own folder under that data folder with its own copy of the keys.
+   2. Please see the [Verifying Key Removal](#verifying-key-removal) section below for instructions on how to do this.
+   3. Ensure **all of them** have been deleted.
 
-1. **Power off** your old node and disconnect it from the Internet, by removing the Ethernet cable or Wi-Fi module.
+6. **Power off** your old node and disconnect it from the Internet, by removing the Ethernet cable or Wi-Fi module.
 
-1. **Wipe the SSD** from your old node, using one of the following methods:
+7. **Wipe the SSD** from your old node, using one of the following methods:
    1. Use a bootable USB drive with a Linux installation (such as the popular [GParted](https://gparted.org/download.php)) and use it to erase the drive.
-   1. **Physically remove it** from your old node, attach it to another machine using a USB converter, and use a tool such as [GParted](https://installati.one/debian/11/gparted/) to erase the drive.
-   1. **Physically remove it** from your old node and hit it with a hammer to break it and ensure it will never be used again.
+   2. **Physically remove it** from your old node, attach it to another machine using a USB converter, and use a tool such as [GParted](https://installati.one/debian/11/gparted/) to erase the drive.
+   3. **Physically remove it** from your old node and hit it with a hammer to break it and ensure it will never be used again.
 
-1. **WAIT** for at least 15 minutes before proceeding. Use a block explorer like [https://beaconcha.in](https://beaconcha.in) to look at your validator's attestation record. Wait until at least one attestation has been recorded as missing *and the corresponding epoch has been finalized*.
+8. **WAIT** for at least 15 minutes before proceeding. Use a block explorer like [https://beaconcha.in](https://beaconcha.in) to look at your validator's attestation record. Wait until at least one attestation has been recorded as missing *and the corresponding epoch has been finalized*.
    1. NOTE: if you have multiple minipools, you must ensure *all of them* have missed at least one attestation that has been finalized.
 
-1. **Recover your node wallet** on the new machine by following the instructions in [Importing / Recovering an Existing Wallet](../recovering-rp.md).
+9.  **Recover your node wallet** on the new machine by following the instructions in [Importing / Recovering an Existing Wallet](../recovering-rp.md).
 
-1. **Restart your Validator Client** to ensure that your validator keys are loaded (e.g., with `docker restart rocketpool_validator`).
+10. **Restart your Validator Client** to ensure that your validator keys are loaded (e.g., with `docker restart rocketpool_validator`).
 
 Your validator keys will now be loaded on your new node, and you can begin attesting safely with it.
+
+
+## Verifying Key Removal
+
+Validator keys are stored on your disk in the form of `json` files.
+They are kept inside your node's `data` folder.
+By default, you can find them here:
+
+```
+~/.rocketpool/data/validators/
+```
+
+::: warning NOTE
+If you changed your `data` directory using the `service config` TUI (e.g., you are using an Aegis key and set that as your `data` folder, the above path should be changed to `<your data folder>/validators`.)
+:::
+
+Each client will have its own copy of the keys, since each client expects them in a different format or configuration.
+
+To **find** the keys on disk, run the following command:
+
+```
+sudo find ~/.rocketpool/data/validators -type f -name "*.json"
+```
+
+For example, on a machine with two minipools, the output would look like this:
+
+```
+/home/joe/.rocketpool/data/validators/teku/keys/0x831862d79685079037dbba67acfa1faf13a5863b94c1c39126e9a52155d32b7733ba65a56ba172e0fcb2b7d77e8a125b.json
+/home/joe/.rocketpool/data/validators/teku/keys/0x900189d6bf7b0635ce1d81046c0d882d52ccf05e3f4fb29e7b9db4c9fb72c6587256fd41a785f103e15a253f3d24a610.json
+/home/joe/.rocketpool/data/validators/lighthouse/validators/0x831862d79685079037dbba67acfa1faf13a5863b94c1c39126e9a52155d32b7733ba65a56ba172e0fcb2b7d77e8a125b/voting-keystore.json
+/home/joe/.rocketpool/data/validators/lighthouse/validators/0x900189d6bf7b0635ce1d81046c0d882d52ccf05e3f4fb29e7b9db4c9fb72c6587256fd41a785f103e15a253f3d24a610/voting-keystore.json
+/home/joe/.rocketpool/data/validators/nimbus/validators/0x831862d79685079037dbba67acfa1faf13a5863b94c1c39126e9a52155d32b7733ba65a56ba172e0fcb2b7d77e8a125b/keystore.json
+/home/joe/.rocketpool/data/validators/nimbus/validators/0x900189d6bf7b0635ce1d81046c0d882d52ccf05e3f4fb29e7b9db4c9fb72c6587256fd41a785f103e15a253f3d24a610/keystore.json
+/home/joe/.rocketpool/data/validators/prysm-non-hd/direct/accounts/all-accounts.keystore.json
+/home/joe/.rocketpool/data/validators/prysm-non-hd/direct/keymanageropts.json
+/home/joe/.rocketpool/data/validators/lodestar/validators/0x831862d79685079037dbba67acfa1faf13a5863b94c1c39126e9a52155d32b7733ba65a56ba172e0fcb2b7d77e8a125b/voting-keystore.json
+/home/joe/.rocketpool/data/validators/lodestar/validators/0x900189d6bf7b0635ce1d81046c0d882d52ccf05e3f4fb29e7b9db4c9fb72c6587256fd41a785f103e15a253f3d24a610/voting-keystore.json
+```
+
+This shows an example where the keys have **not** been deleted yet and are still on the filesystem.
+
+If your keys **have** been deleted, you should not see *any* of the hex strings (the large strings starting with `0x`) in any of the folders for any of the clients within the output of that command.
