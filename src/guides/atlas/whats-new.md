@@ -37,7 +37,7 @@ In fact, running two 8-ETH minipool instead of one 16-ETH minipool will provide 
 Creating an 8 ETH minipool requires that you stake a **minimum of 2.4 ETH worth of RPL** and a **maximum of 12 ETH worth of RPL**.
 These represent 10% of the amount you're *borrowing* from the protocol, and 150% of the amount you're *bonding* (staking) yourself.
 
-New minipools be created with either 8 ETH or 16 ETH.
+New minipools can be created with either 8 ETH or 16 ETH.
 16 ETH minipools are unchanged from how they work today, and are available for users that want to minimize their exposure to the RPL token.
 
 To learn how to make new minipools using an 8 ETH bond, please visit the [minipool creation guide](../node/create-validator.md).
@@ -51,7 +51,7 @@ To learn more about 8-ETH bond minipools, please visit the [bond reduction guide
 ### Solo Validator Conversion
 
 Part of the Shapella upgrade involves the ability for solo validators to [change their validators' withdrawal credentials](https://notes.ethereum.org/@launchpad/withdrawals-faq) from the original (now unused) BLS-based withdrawal key to an address on the Execution layer.
-This address will the be the recipient for all of that validator's rewards its full ETH balance once it exits the Beacon Chain.
+This address will be the recipient for all of that validator's rewards and its full ETH balance once it exits the Beacon Chain.
 
 Regular Rocket Pool node operators don't need to worry about any of this, as the protocol automatically set this up for your minipools when you created them.
 *However*, as part of this new requirement for solo validators, Atlas brings an exciting opportunity: the ability to **create a special minipool** that will become the withdrawal address for your **existing solo validator**.
