@@ -403,7 +403,9 @@ Typically this will be `sda` for SATA drives or `nvme0n1` for NVMe drives.
 If you *did* change Docker's default location to a different drive, or if you're running a hybrid / native setup, you should be able to use the same technique of "following the mount point" to determine which device your chain data resides on.
 :::
 
-Optionally, you can also track latency of a second disk on your system. This is aimed at people that keep their Operating System and chain data on separate drives, such as **Raspberry Pi** users. To set this up, simply follow the instructions above for the last two query fields, substituting `device=""` portion values with those of the disk you want to track.
+Optionally, you can also track latency of a second disk on your system.
+This is aimed at people that keep their Operating System and chain data on separate drives.
+To set this up, simply follow the instructions above for the last two query fields, substituting `device=""` portion values with those of the disk you want to track.
 
 Once you're happy with your selections, click the blue **Apply** button in the top right corner of the screen to save the settings.
 
@@ -458,9 +460,13 @@ The setup is identical to the **Network Usage** box above, so simply follow thos
 This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth or Nethermind](./pruning.md)).
 
 The steps are the same as the **SSD Latency** box above, so simply follow those instructions for this box too.
-As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive. Fill this into the first query field.
+As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive.
+Fill this into the first query field.
 
-Optionally, you can also track the free space of a second disk on your system. Set this up by following the same process, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your second drive's mount point is. Update the second query field with the disk associated with that partition.
+Optionally, you can also track the free space of a second disk on your system.
+Set this up by following the same process, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your second drive's mount point is.
+Update the second query field with the disk associated with that partition.
+
 
 ### Disk Temp
 
