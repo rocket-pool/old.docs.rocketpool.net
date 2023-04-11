@@ -184,7 +184,7 @@ Setting up a voting delegate address that can vote on behalf of your node is a o
 Simply run the following command:
 
 ```
-$ rocketpool node set-voting-delegate <address or ENS name>
+rocketpool node set-voting-delegate <address or ENS name>
 ```
 
 The address or ENS name you use depends on whether you are voting yourself or you are delegating your vote to an official delegate.
