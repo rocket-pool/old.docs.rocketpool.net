@@ -51,6 +51,7 @@ In order to begin the conversion process, you will need to meet the following cr
 1. The validator you want to migrate must be **active** on the Beacon chain. It cannot be pending, slashed, exiting / exited, or withdrawn.
 1. The validator must have a balance of **at least 32 ETH** on the Beacon chain.
 1. The validator must have [BLS key withdrawal credentials](https://launchpad.ethereum.org/en/withdrawals) (`0x00` credentials). Conversion **cannot** be done on validators that have already migrated to other Execution layer withdrawal credentials (`0x01` credentials).
+1. (Optional) If you intend to have the Smartnode migrate the withdrawal credentials for you automatically, you must have your **mnemonic phrase on hand**.
 
 If none of these conditions are blockers for you, then you are eligible to begin validator conversion.
 
