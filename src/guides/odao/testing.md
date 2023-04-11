@@ -10,7 +10,7 @@ The best way to do this is to have it build the Redstone rewards Merkle tree usi
 It can also "dry run" the current interval by pretending that it ended at the latest finalized epoch (at the time of running it) and producing a partial tree from the start of the interval up to that point.
 
 ::: tip TIP
-For more information on the rewards tree itself and accompanying files, please visit the formal specification: [https://github.com/rocket-pool/rocketpool-research/blob/master/Merkle%20Rewards%20System/merkle-tree-spec.md](https://github.com/rocket-pool/rocketpool-research/blob/master/Merkle%20Rewards%20System/merkle-tree-spec.md).
+For more information on the rewards tree itself and accompanying files, please visit [**the formal specification**](https://github.com/rocket-pool/rocketpool-research/blob/master/Merkle%20Rewards%20System/merkle-tree-spec.md).
 :::
 
 `treegen` can be used as a standalone binary (currently only built for Linux systems, x64 and arm64) or as a Docker container.

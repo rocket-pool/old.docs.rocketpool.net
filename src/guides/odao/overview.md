@@ -28,7 +28,7 @@ To run an Oracle DAO node, you will require the following:
 
 - Access to an **Execution Client's RPC endpoint**. This can be a locally-run client, as is the case with most Rocket Pool nodes, or it can link to external clients that you or your organization maintain independently.
 - Access to an **Archive-Mode Execution Client**, which can either act as your primary client or a supplementary (fallback) client. It will only be used in rare circumstances where duties require your node to recall an Execution Layer state that has been pruned from your Execution Client. Nevertheless, it is **critical** that you have access to an Archive Node during these periods to ensure your duties are able to be fulfilled successfully.
-  - You can use a service such as [Infura](https://infura.io/pricing) or [Alchemy](https://www.alchemy.com/pricing) for this if you cannot host your own Archive Node.
+  - We **strongly** recommend you use an on-premises archive node for this, as services such as [Infura](https://infura.io/pricing) or [Alchemy](https://www.alchemy.com/pricing) have shown some difficulty in keeping up with demand during critical periods such as constructing the rewards tree.
 - Access to an **Archive-Mode Beacon Node's REST API endpoint** (via HTTP). This can be a locally-run client, as is the case with most Rocket Pool nodes, or it can link to external clients that you or your organization maintain independently.
 - The standard Smartnode CLI.
 - The Smartnode daemon configured and running in `watchtower` mode (this is included with the standard Smartnode bundle for all users, but only actively performs duties for Oracle DAO nodes).
@@ -37,6 +37,8 @@ To run an Oracle DAO node, you will require the following:
 - A [web3.storage](https://web3.storage/) account, used for submitting the generated rewards tree artifacts to their IPFS pinning service.
 
 ::: warning NOTE
+If you simply cannot run an on-premises archive node and *must* rely on a third-party service, consider the following:
+
 If you plan to use **Infura** for your Archive Mode fallback, you must have at least the **Team** plan.
 The free tier and the Developer tier are not sufficient.
 
