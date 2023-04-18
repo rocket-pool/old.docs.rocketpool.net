@@ -128,8 +128,9 @@ div[class*="language-"] pre[class*="code-copy-added"]
           color $accentColor !important
           border-color $accentColor !important
           font-weight 600
+          &:hover, &:active, &:focus, &:visited, &:target
+            background-color $codeBgColor!important
           .algolia-docsearch-suggestion--highlight
-            //background rgba(255, 255, 255, 0.6)
             background $codeBgColor !important
         .algolia-docsearch-suggestion--wrapper
           background $codeBgColor !important
@@ -155,3 +156,7 @@ div[class*="language-"] pre[class*="code-copy-added"]
         color $textColor
         &:hover, &:active, &:focus, &:visited, &:target
           background-color $codeBgColor!important
+  .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion.suggestion-layout-simple
+    background-color $codeBgColor!important
+  .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content
+    background-color $codeBgColor!important
