@@ -22,7 +22,7 @@ Now that [the Execution and Consensus layers have merged](https://ethereum.org/e
 | - | - | - | - |
 | Attestation | Consensus | Once per Epoch (every 6.4 minutes on average) | 0.000014 ETH* |
 | Block Proposal | Consensus | [Every 2 months on average](https://proposalprobab.web.app/)** | 0.02403 ETH* |
-| [Sync Committee](https://blockdaemon.com/blog/ethereum-altair-hard-folk-light-clients-sync-committees/) | Consensus | Every 2 years on average** | 0.11008 ETH* |
+| [Sync Committee](https://github.com/ethereum/annotated-spec/blob/master/altair/sync-protocol.md) | Consensus | Every 2 years on average** | 0.11008 ETH* |
 | Slashing Reward | Consensus | Very rarely included in Block Proposals | Up to 0.0625 ETH |
 | Priority Fees | Execution | Included in Block Proposals | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
 | MEV Rewards | Execution | Also included in Block Proposals when using [MEV-boost](https://boost.flashbots.net/) | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
