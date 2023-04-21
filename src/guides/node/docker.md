@@ -61,7 +61,7 @@ sudo snap remove --purge docker
 ```
 
 After which, it is recommended that you reboot the machine (`sudo systemctl reboot`)
-::::
+:::
 
 ## Downloading the Rocket Pool CLI
 
