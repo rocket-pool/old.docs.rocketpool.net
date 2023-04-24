@@ -109,7 +109,7 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn half of the validator's total ETH rewards, *plus* an extra 14% commission paid by the pool staker's half 
+- You earn the validator's ETH rewards attributed to your bond proportion (25% for an 8 ETH minipool, 50% for a 16 ETH minipool), *plus* an extra 14% commission paid by the pool staker's half 
 - You earn interest on the RPL you stake as supplemental insurance
 - You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
 
