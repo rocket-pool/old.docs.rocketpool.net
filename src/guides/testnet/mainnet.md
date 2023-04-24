@@ -82,7 +82,7 @@ Back up anything you want to keep (such as your `data` folder which contains you
 The Smartnode will handle switching over automatically.
 
 When it's done, you will be left with a fresh install on Mainnet.
-All of your settings (such as client choice) will be preserved, but you will need to create a new wallet.
+All of your settings (such as client choice) will be preserved, but you will need to create a new wallet. Also, you likely will not have a *Checkpoint Sync URL* on mainnet and should set one up as explained [here](../node/config-docker.html#beacon-chain-checkpoint-syncing); otherwise it will take a long time to sync the mainnet beacon chain.
 
 ### Migrating Manually
 
