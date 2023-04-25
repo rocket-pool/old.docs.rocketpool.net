@@ -70,8 +70,8 @@ Stopping rocketpool_eth2       ... done
 Stopping rocketpool_eth1       ... done
 ```
 
-::: tip NOTE
-Once you call this, Rocket Pool will not automatically start after a system reboot.
+::: warning NOTE
+Once you call this, Rocket Pool will **not** automatically start after a system reboot.
 You will have to call `rocketpool service start` to start all of the Docker containers and enable auto-start on reboot again.
 
 :::
