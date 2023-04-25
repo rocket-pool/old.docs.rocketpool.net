@@ -27,6 +27,41 @@ At a high level, here's what is involved in installing Rocket Pool:
 1. Configure the Smartnode stack with an easy-to-use UI in the terminal
 1. Done!
 
+## Before You Start
+
+::: warning
+If using Ubuntu, it is recommended that before installing Rocket Pool you double check that docker was not installed alongside the operating system.
+
+The Ubuntu installer gets docker from the snap package manager, which will conflict with the version of docker installed by Smartnode.
+
+Run `snap list`, and make sure `docker` was not installed.
+
+For example, this is the output on a machine where docker is not installed:
+```
+Name    Version        Rev    Tracking       Publisher   Notes
+core20  20230308       1852   latest/stable  canonical✓  base
+lxd     5.0.2-838e1b2  24322  5.0/stable/…   canonical✓  -
+snapd   2.59.1         18933  latest/stable  canonical✓  snapd
+```
+
+And here is the output if it was installed:
+```
+Name    Version        Rev    Tracking       Publisher   Notes
+core20  20230308       1852   latest/stable  canonical✓  base
+docker  20.10.17       2746   latest/stable  canonical✓  -
+lxd     5.0.2-838e1b2  24322  5.0/stable/…   canonical✓  -
+snapd   2.59.1         18933  latest/stable  canonical✓  snapd
+```
+
+If you see it in the `snap list` output, be sure to remove it with:
+```shell
+sudo systemctl stop snap.docker.dockerd.service
+
+sudo snap remove --purge docker
+```
+
+After which, it is recommended that you reboot the machine (`sudo systemctl reboot`)
+:::
 
 ## Downloading the Rocket Pool CLI
 
