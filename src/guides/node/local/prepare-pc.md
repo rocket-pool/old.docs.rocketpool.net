@@ -92,6 +92,8 @@ We have a few helpful amendments to the guide linked above, which you may want t
   - Desktop GUIs are largely unnecessary for a node; they add extra overhead and most of the time will not be used since you'll be remote controlling it via the terminal anyway, so we prefer to **uncheck GNOME and Debian desktop environment** here.
   - If you *do* want a desktop UI on your node, we recommend you **uncheck GNOME and check XFCE** instead, as it's lighter on system resources.
   - Uncheck **web server**, but leave **SSH server** and **standard system utilities** checked.
+- If you have created a flash drive from an iso, you may need to disable the CD-ROM repository in order to run `apt`.  You can find an explanation of how to do this [here](https://www.linuxtechi.com/things-to-do-after-installing-debian-11/).
+- Your system may be set up to sleep/hibernate by default. To disable these settings, you can run the following command: `sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target`
 :::
 
 

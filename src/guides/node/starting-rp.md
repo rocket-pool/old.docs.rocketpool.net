@@ -335,6 +335,11 @@ It can take **days** to fully sync both ETH1 and ETH2 depending on your client s
 Sit back, relax, and wait for both of them to finish.
 :::
 
+::: warning NOTE
+If your node is not syncing at all or has no peers, it may be because your router is blocking ports 30303 and 9001. If they're closed, you'll need to setup port forwarding on your router. Also, make sure your node has a static local IP address so the port forwarding does not break due to your node getting a new address.
+:::
+
+
 
 ## Next Steps
 
