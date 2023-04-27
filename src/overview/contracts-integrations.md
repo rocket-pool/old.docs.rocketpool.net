@@ -23,18 +23,20 @@ Goerli*  | Deposit  | [0x2cac916b2A963Bf162f076C0a8a4a8200BCFBfb4](https://goerl
 
 ## Token Contracts
 
-Chain    | Asset | Address
----------|-------|---------
-Mainnet  | RPL   | [0xD33526068D116cE69F19A9ee46F0bd304F21A51f](https://etherscan.io/token/0xd33526068d116ce69f19a9ee46f0bd304f21a51f)
-&nbsp;   | rETH  | [0xae78736Cd615f374D3085123A210448E74Fc6393](https://etherscan.io/token/0xae78736cd615f374d3085123a210448e74fc6393)
-Arbitrum | RPL   | [0xb766039cc6db368759c1e56b79affe831d0cc507](https://arbiscan.io/token/0xb766039cc6db368759c1e56b79affe831d0cc507)
-&nbsp;   | rETH  | [0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8](https://arbiscan.io/token/0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8)
-Optimism | RPL   | (not deployed to Optimism - *in progress*)
-&nbsp;   | rETH  | [0x9bcef72be871e61ed4fbbc7630889bee758eb81d](https://optimistic.etherscan.io/token/0x9bcef72be871e61ed4fbbc7630889bee758eb81d)
-Polygon  | RPL   | [0x7205705771547cf79201111b4bd8aaf29467b9ec](https://polygonscan.com/token/0x7205705771547cf79201111b4bd8aaf29467b9ec)
-&nbsp;   | rETH  | [0x0266F4F08D82372CF0FcbCCc0Ff74309089c74d1](https://polygonscan.com/token/0x0266F4F08D82372CF0FcbCCc0Ff74309089c74d1)
-Goerli*  | RPL   | [0x5e932688e81a182e3de211db6544f98b8e4f89c7](https://goerli.etherscan.io/address/0x5e932688e81a182e3de211db6544f98b8e4f89c7)
-&nbsp;   | rETH  | [0x178E141a0E3b34152f73Ff610437A7bf9B83267A](https://goerli.etherscan.io/address/0x178E141a0E3b34152f73Ff610437A7bf9B83267A)
+ Chain            | Asset | Address                                                                                                                        
+------------------|-------|--------------------------------------------------------------------------------------------------------------------------------
+ Mainnet          | RPL   | [0xD33526068D116cE69F19A9ee46F0bd304F21A51f](https://etherscan.io/token/0xd33526068d116ce69f19a9ee46f0bd304f21a51f)            
+ &nbsp;           | rETH  | [0xae78736Cd615f374D3085123A210448E74Fc6393](https://etherscan.io/token/0xae78736cd615f374d3085123a210448e74fc6393)            
+ Arbitrum         | RPL   | [0xb766039cc6db368759c1e56b79affe831d0cc507](https://arbiscan.io/token/0xb766039cc6db368759c1e56b79affe831d0cc507)             
+ &nbsp;           | rETH  | [0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8](https://arbiscan.io/token/0xec70dcb4a1efa46b8f2d97c310c9c4790ba5ffa8)             
+ Optimism         | RPL   | [0xc81d1f0eb955b0c020e5d5b264e1ff72c14d1401](https://optimistic.etherscan.io/token/0xc81d1f0eb955b0c020e5d5b264e1ff72c14d1401) 
+ &nbsp;           | rETH  | [0x9bcef72be871e61ed4fbbc7630889bee758eb81d](https://optimistic.etherscan.io/token/0x9bcef72be871e61ed4fbbc7630889bee758eb81d) 
+ Polygon          | RPL   | [0x7205705771547cf79201111b4bd8aaf29467b9ec](https://polygonscan.com/token/0x7205705771547cf79201111b4bd8aaf29467b9ec)         
+ &nbsp;           | rETH  | [0x0266F4F08D82372CF0FcbCCc0Ff74309089c74d1](https://polygonscan.com/token/0x0266F4F08D82372CF0FcbCCc0Ff74309089c74d1)         
+ Goerli*          | RPL   | [0x5e932688e81a182e3de211db6544f98b8e4f89c7](https://goerli.etherscan.io/address/0x5e932688e81a182e3de211db6544f98b8e4f89c7)   
+ &nbsp;           | rETH  | [0x178E141a0E3b34152f73Ff610437A7bf9B83267A](https://goerli.etherscan.io/address/0x178E141a0E3b34152f73Ff610437A7bf9B83267A)   
+ Optimism Goerli* | RPL   | [0xa00E3A3511aAC35cA78530c85007AFCd31753819](https://goerli-optimism.etherscan.io/address/0xa00E3A3511aAC35cA78530c85007AFCd31753819)   
+ &nbsp;           | rETH  | [0x1010824414d822cd2167f9ad73a2a99bd2e0e4ae](https://goerli-optimism.etherscan.io/address/0x1010824414d822cd2167f9ad73a2a99bd2e0e4ae)   
 
 <small>* Testnet</small>
 
