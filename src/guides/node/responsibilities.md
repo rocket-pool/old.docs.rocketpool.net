@@ -109,8 +109,15 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn the validator's ETH rewards attributed to your bond proportion (25% for an 8 ETH minipool, 50% for a 16 ETH minipool), *plus* an extra 14% commission paid by the pool staker's half 
+- You earn a portion of each validator's ETH rewards
+  - 100% of the rewards attributed to your bonded ETH
+  - 14% commission paid on the borrowed ETH
+  - For an 8 ETH minipool: `(8 + 0.14 * 24) / 32 = 35.5%` of the validator's rewards
+  - For a 16 ETH minipool: `(16 + 0.14 * 16) / 32 = 57.5%` of the validator's rewards
 - You earn interest on the RPL you stake as supplemental insurance
+  - At the end of a period (every 28 days), there's a snapshot of your RPL 
+  - You must have at least 10% of the value of your total borrowed ETH to earn RPL rewards
+  - You can earn yield on RPL up to 150% of the value of your total bonded ETH
 - You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
 
 That being said, as a node operator **you are responsible for your own performance**.
