@@ -208,4 +208,4 @@ The node has 8.000000 ETH in its credit balance, which can be used to make new m
 ```
 
 The bond reduction process has **increased the node's** [deposit credit balance](./credit.md) by 8 ETH.
-This credit can be used to make another 8-ETH minipool for free (no ETH required from the node wallet, except for gas)!
+This credit can be used to [make another 8-ETH minipool](./create-validator.md#depositing-eth-and-creating-a-minipool) for free (no ETH required from the node wallet, except for gas)!

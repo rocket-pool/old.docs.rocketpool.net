@@ -32,6 +32,11 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
+    algolia: {
+      apiKey: '55cef043a9a4342516d9f70a0fcd42ef',
+      indexName: 'rocketpool',
+      appId: 'V3ID5G8G80',
+    },
     repo: 'rocket-pool/docs.rocketpool.net',
     editLinks: true,
     docsDir: 'src',

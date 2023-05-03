@@ -104,10 +104,10 @@ Most hosted server options should have far more CPU resources than necessary so 
 ## Provider Comparison (Placeholders)
 | Provider | Model| CPU | RAM (GB) | SSD Storage (GB) | Price (Month) USD | Type |
 | -------- | ----------------------------------------------------------------------- | -- | -- | ---- | ------- | --------- |
-| Contabo  | [VPS XL SSD](https://contabo.com/en/vps/vps-xl-ssd/)                    | 10 | 60 | 1600 | $35     | VPS       |
-| Netcup   | [VPS 6000 G9](https://www.netcup.eu/bestellen/produkt.php?produkt=2604) | 12 | 48 | 1200 | $35     | VPS       |
-| Hetzner  | [CPX41](https://www.hetzner.com/cloud)                                  | 8  | 16 | 1210*| $64     | VPS       |
-| OVH      | [Rise-1](https://www.ovhcloud.com/en/bare-metal/rise/rise-1/)           | 4  | 32 | 2000*| $120    | Dedicated |
-| AWS      | [t2.large](https://aws.amazon.com/ec2/instance-types/t2/)               | 2  | 8  | 1000* | $200    | Cloud     |
+| Contabo  | [VPS XL SSD](https://contabo.com/en/vps/vps-xl-ssd/)                    | 10 | 60 | 1600 | $35 (Set currency to EUR) | VPS       |
+| Netcup   | [VPS 6000 G9](https://www.netcup.eu/bestellen/produkt.php?produkt=2604) | 12 | 48 | 1200 | $35                       | VPS       |
+| Hetzner  | [CPX41](https://www.hetzner.com/cloud)                                  | 8  | 16 | 1210*| $64                       | VPS       |
+| OVH      | [Rise-1](https://www.ovhcloud.com/en/bare-metal/rise/rise-1/)           | 4  | 32 | 2000*| $120                      | Dedicated |
+| AWS      | [t2.large](https://aws.amazon.com/ec2/instance-types/t2/)               | 2  | 8  | 1000* | $200                     | Cloud     |
 
 _* Additional storage needs to be configured when ordering_

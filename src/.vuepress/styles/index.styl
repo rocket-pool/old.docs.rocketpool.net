@@ -87,3 +87,76 @@ div[class*="language-"] pre[class*="code-copy-added"]
     background-color: #18191b !important;
     border-right-color: #25272a !important;
     border-left-color: #25272a !important;
+
+@media (prefers-color-scheme: dark)
+  .algolia-search-wrapper
+    & > span
+      vertical-align middle
+    .algolia-autocomplete
+      line-height normal
+      .ds-dropdown-menu
+        background-color $accentColor !important
+        border 1px solid $accentColor !important
+        border-radius 4px
+        font-size 16px
+        margin 6px 0 0
+        padding 4px
+        text-align left
+        &:before
+          border-color $accentColor !important
+          background-color $codeBgColor !important
+        [class*=ds-dataset-]
+          border none
+          padding 0
+          background-color $codeBgColor !important
+        .ds-suggestions
+          margin-top 0
+        .ds-suggestion
+          border-bottom 1px solid $accentColor !important
+      .algolia-docsearch-suggestion--highlight
+        color $accentColor !important
+      .algolia-docsearch-suggestion
+        border-color $accentColor !important
+        padding 0
+        background-color $codeBgColor !important
+        &:hover, &:active, &:focus, &:visited, &:target
+          background-color $codeBgColor!important
+        .algolia-docsearch-suggestion--category-header
+          padding 5px 10px
+          margin-top 0
+          background $codeBgColor !important
+          color $accentColor !important
+          border-color $accentColor !important
+          font-weight 600
+          &:hover, &:active, &:focus, &:visited, &:target
+            background-color $codeBgColor!important
+          .algolia-docsearch-suggestion--highlight
+            background $codeBgColor !important
+        .algolia-docsearch-suggestion--wrapper
+          background $codeBgColor !important
+          padding 0
+        .algolia-docsearch-suggestion--title
+          font-weight 600
+          margin-bottom 0
+          color white !important
+        .algolia-docsearch-suggestion--subcategory-column
+          vertical-align top
+          padding 5px 7px 5px 5px
+          border-color $accentColor !important
+          background $codeBgColor !important
+          &:after
+            display none
+        .algolia-docsearch-suggestion--subcategory-column-text
+          color white !important
+      .algolia-docsearch-footer
+        display: none !important
+        border-color $borderColor
+      .ds-cursor .algolia-docsearch-suggestion--content
+        background-color $codeBgColor !important
+        color $textColor
+        &:hover, &:active, &:focus, &:visited, &:target
+          background-color $codeBgColor!important
+  .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion.suggestion-layout-simple
+    background-color $codeBgColor!important
+  .algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content
+    background-color $codeBgColor!important
