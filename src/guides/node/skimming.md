@@ -85,7 +85,7 @@ It will not be shared with the rETH holders.
 ::: tip NOTE
 You might be wondering why the amount going to the node operator (0.031200 ETH) appears lower than you might expect in this case.
 That's because in this example, we used an 8-ETH bonded minipool (an LEB8) instead of a 16-ETH bonded minipool!
-Read [**our guide on 8-ETH bonded minipools**](lebs.md) if you'd like to learn more about them.
+Read [**our guide on 8-ETH bonded minipools**](./leb-migration.md) if you'd like to learn more about them.
 :::
 
 Enter the number of the minipool that you want to distribute.
