@@ -109,18 +109,16 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn a portion of each validator's ETH rewards
-  - 100% of the rewards attributed to your bonded ETH
-  - 14% commission paid on the borrowed ETH
-  - For an 8 ETH minipool: `(8 + 0.14 * 24) / 32 = 35.5%` of the validator's rewards
-  - For a 16 ETH minipool: `(16 + 0.14 * 16) / 32 = 57.5%` of the validator's rewards
-- You earn interest on the RPL you stake as supplemental insurance
-  - At the end of a period (every 28 days), there's a snapshot of your RPL 
-  - You must have at least 10% of the value of your total borrowed ETH to earn RPL rewards
-  - You can earn yield on RPL up to 150% of the value of your total bonded ETH
-- You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
+- You earn your portion of each validator's ETH rewards, plus commission.
+  - For an 8 ETH-bonded minipool, this comes to **35.5%** of the validator's rewards (an extra **10.5%** over solo staking).
+  - For a 16 ETH-bonded minipool, this comes to **57.5%** of the validator's rewards (an extra **7.5%** over solo staking).
+- You earn interest on the RPL you stake as supplemental insurance.
+  - At the end of a period (every 28 days), there's a snapshot of your RPL.
+  - You can earn yield on RPL **up to 150%** of the value of your total bonded ETH.
+  - To be eligible for these rewards, you must have **at least 10%** of the value of your **total borrowed ETH** to earn RPL rewards.
+- You will be able to participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings.
 
-That being said, as a node operator **you are responsible for your own performance**.
+In light of gaining access to these benefits, as a node operator **you are responsible for your own performance**.
 If your node performs poorly and you actually end up losing ETH by the time you decide to exit your minipool, all of the lost ETH is coming out of your share.
 For example: if you exit with a balance of 30 ETH, then your minipool lost 2 ETH from its initial 32 ETH deposit.
 You will receive 14 or 6 ETH (depending on your **bond size**), and 24 or 16 ETH will be returned to the staking pool.
