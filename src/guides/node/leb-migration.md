@@ -37,7 +37,7 @@ Upon a successful bond reduction, the minipool's bond amount will be reduced fro
 If you reduce a 16-ETH minipool with a 20% commission, **you will not keep that 20% commission**.
 It will be reduced to the network value (**currently set to a flat 14%**).
 
-Note that as demonstrated by the [example math](#rewards) section, an 8-ETH minipool at 14% is *still more profitable* than a 16-ETH minipool at 20% so holding onto a high commission rate is not a compelling reason to retain a 16 ETH bond.
+Note that as demonstrated by the [example math](./create-validator.md#rewards) section, an 8-ETH minipool at 14% is *still more profitable* than a 16-ETH minipool at 20% so holding onto a high commission rate is not a compelling reason to retain a 16 ETH bond.
 :::
 
 
