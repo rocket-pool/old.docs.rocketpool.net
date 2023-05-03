@@ -22,7 +22,8 @@ It can't send them to your minipool address, because it has to work for solo sta
 Instead, the way it works is fairly straightforward: when Rocket Pool starts up your Validator Client, it passes in an argument called the **fee recipient**.
 The fee recipient is simply an address on the Execution layer where you want the tips to go.
 
-Rocket Pool is designed to fairly distribute these rewards between you and the rETH pool stakers, the same way it fairly distributes your Beacon chain rewards: half (25% in the case of an 8ETH minipool) of any priority fees your minipool validators earn will go to you (plus the average commission of all of your minipools), and the other half (75% in the case of an 8ETH minipool) will go to the pool stakers (minus your average commission).
+Rocket Pool is designed to fairly distribute these rewards between you and the rETH pool stakers, the same way it fairly distributes your Beacon chain rewards: your portion of any priority fees your minipool validators earn will go to you (plus the average commission of all of your minipools), and the remaining portion will go to the pool stakers (minus your average commission).
+The exact portion depends on the number of 8 ETH-bonded versus 16 ETH-bonded minipools you have.
 
 To that end, the Smartnode will automatically set your node's `fee recipient` to either of these special contracts:
 - Your node's own personal **Fee Distributor** (the default)
