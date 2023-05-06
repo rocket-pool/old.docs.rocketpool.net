@@ -473,7 +473,7 @@ The node is opted into the Smoothing Pool.
 Note that, should you choose to opt in/out of the Smoothing Pool, for any migrated minipools still owned by your Consensus Client, you must re-apply the changes to your Suggested Fee Recipient, and direct it to the corresponding address.
 
 ::: danger WARNING
-Failure to successfully change your client's Suggested Fee Recipient may result in penalties being applied to your node, per review by oDAO members.
+Failure to successfully change your client's Suggested Fee Recipient may result in penalties being applied to your node, per review by the oDAO.
 :::
 
 
