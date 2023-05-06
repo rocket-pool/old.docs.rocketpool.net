@@ -82,7 +82,7 @@ Back up anything you want to keep (such as your `data` folder which contains you
 The Smartnode will handle switching over automatically.
 
 When it's done, you will be left with a fresh install on Mainnet.
-All of your settings (such as client choice) will be preserved, but you will need to create a new wallet.
+All of your settings (such as client choice) will be preserved, but you will need to create a new wallet. Also, you likely will not have a *Checkpoint Sync URL* on mainnet and should set one up as explained [here](../node/config-docker.html#beacon-chain-checkpoint-syncing); otherwise it will take a long time to sync the mainnet beacon chain.
 
 ### Migrating Manually
 
@@ -120,7 +120,7 @@ If for any reason you cannot leverage the Smartnode's automatic migration proces
    You will overwrite this with the latest version of the CLI anyway, but if you want to be thorough, you can remove the old one first.
 
 At this point your testnet installation has been purged, and you can safely migrate to a new mainnet installation.
-Follow the [Docker Mode installation](docker.md) guide carefully to set it up.
+Follow the [Creating Node with Docker](../node/docker.md) guide carefully to set it up.
 ::::
 
 :::: tab Native Mode
@@ -166,6 +166,6 @@ You will need to redo some of the installation steps including:
 - Get the latest configuration files from the installer archive, put them into `/srv/rocketpool`, and adjust them to match your node's setup
 :::
 
-At this point you're ready to migrate following [the installation guide](./native.md).
+At this point you're ready to migrate following the [native installation guide](../node/native.md).
 ::::
 :::::

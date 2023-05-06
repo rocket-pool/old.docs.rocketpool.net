@@ -323,7 +323,33 @@ rocketpool service logs validator
 You can also verify that a chain explorer such as [https://beaconcha.in](https://beaconcha.in) can see your Validator Client attesting with your validator's key.
 
 
-## Step 4: Waiting for the Scrub Check
+## Step 4: Assign the Correct Fee Recipient
+
+Once you've started the migration process, it is **imperative** that you ensure your [fee recipient](./fee-distrib-sp.md#fee-recipients) is set properly (either to your node's [fee distributor](./fee-distrib-sp.md#your-fee-distributor) or to the [Smoothing Pool](./fee-distrib-sp.md#the-smoothing-pool) if you have opted into it).
+If you do not do this and leave it on the fee recipient for your solo validators, you will be penalized and a portion of your Beacon Chain stake will be deducted to compensate for the loss.
+
+::: tip NOTE
+**This step is only required if you leave your validator key in your own externally-managed Validator Client.**
+
+If you remove it from your own VC and import it into the VC managed by Rocket Pool, your fee recipient will be assigned to the correct address automatically by the `node` process.
+:::
+
+As you may retain other solo-staking keys in your VC that you do *not* want to set to the fee distributor or Smoothing Pool, the only way to accomplish this is to use a VC configuration file to manually set the fee recipient for the validator being migrated.
+
+This process depends on which Consensus Client you use; consult the documentation for the specifics but here are some helpful links:
+
+[Lighthouse: via `validator_definitions.yml`](https://lighthouse-book.sigmaprime.io/suggested-fee-recipient.html#1-setting-the-fee-recipient-in-the-validator_definitionsyml)
+
+**Lodestar** does not currently support setting validator-specific fee recipients. Please do not use Lodestar if you are keeping the key in your externally-managed VC with other solo keys that are not being migrated.
+
+[Nimbus: via the keymanager API](https://nimbus.guide/keymanager-api.html)
+
+[Prysm: via `proposer-settings-file`](https://docs.prylabs.network/docs/execution-node/fee-recipient#configure-fee-recipient-via-jsonyaml-validator-only)
+
+[Teku: via `validators-proposer-config`](https://docs.teku.consensys.net/how-to/configure/use-proposer-config-file)
+
+
+## Step 5: Waiting for the Scrub Check
 
 By this time, you should have completed steps 1 and 2 (creating the vacant minipool and changing your validator's withdrawal credentials) and optionally step 3 (importing the key into the Smartnode).
 The next step is to wait for the **scrub check** to complete.
@@ -379,7 +405,7 @@ rocketpool minipool close
 Once again, this will send the minipool's full balance to your node's withdrawal address.
 
 
-## Step 5: Promoting the Minipool
+## Step 6: Promoting the Minipool
 
 When the scrub check has been passed successfully, you can promote the vacant minipool to a full minipool.
 This can be done two ways:

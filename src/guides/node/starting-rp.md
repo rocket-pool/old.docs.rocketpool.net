@@ -70,8 +70,8 @@ Stopping rocketpool_eth2       ... done
 Stopping rocketpool_eth1       ... done
 ```
 
-::: tip NOTE
-Once you call this, Rocket Pool will not automatically start after a system reboot.
+::: warning NOTE
+Once you call this, Rocket Pool will **not** automatically start after a system reboot.
 You will have to call `rocketpool service start` to start all of the Docker containers and enable auto-start on reboot again.
 
 :::
@@ -334,6 +334,11 @@ It can take **days** to fully sync both ETH1 and ETH2 depending on your client s
 **This is expected**.
 Sit back, relax, and wait for both of them to finish.
 :::
+
+::: warning NOTE
+If your node is not syncing at all or has no peers, it may be because your router is blocking ports 30303 and 9001. If they're closed, you'll need to setup port forwarding on your router. Also, make sure your node has a static local IP address so the port forwarding does not break due to your node getting a new address.
+:::
+
 
 
 ## Next Steps

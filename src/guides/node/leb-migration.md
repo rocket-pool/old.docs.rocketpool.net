@@ -37,7 +37,7 @@ Upon a successful bond reduction, the minipool's bond amount will be reduced fro
 If you reduce a 16-ETH minipool with a 20% commission, **you will not keep that 20% commission**.
 It will be reduced to the network value (**currently set to a flat 14%**).
 
-Note that as demonstrated by the [example math](#rewards) section, an 8-ETH minipool at 14% is *still more profitable* than a 16-ETH minipool at 20% so holding onto a high commission rate is not a compelling reason to retain a 16 ETH bond.
+Note that as demonstrated by the [example math](./create-validator.md#rewards) section, an 8-ETH minipool at 14% is *still more profitable* than a 16-ETH minipool at 20% so holding onto a high commission rate is not a compelling reason to retain a 16 ETH bond.
 :::
 
 
@@ -208,4 +208,4 @@ The node has 8.000000 ETH in its credit balance, which can be used to make new m
 ```
 
 The bond reduction process has **increased the node's** [deposit credit balance](./credit.md) by 8 ETH.
-This credit can be used to make another 8-ETH minipool for free (no ETH required from the node wallet, except for gas)!
+This credit can be used to [make another 8-ETH minipool](./create-validator.md#depositing-eth-and-creating-a-minipool) for free (no ETH required from the node wallet, except for gas)!

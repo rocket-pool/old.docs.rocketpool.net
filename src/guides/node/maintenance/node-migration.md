@@ -15,7 +15,7 @@ Though there are several conditions that can be interpreted as "attacking the ne
 This occurs when your validator submits two attestations (or two block proposals) for the same slot that have different votes (e.g., it votes on two different candidate blocks for a particular slot instead of picking one).
 
 To combat this, your Validator Client hosts what's called a **Slashing Database**.
-The Slashing Database is simple a record of your validator's votes (i.e., the slot of each vote and the hash of the block that vote was for), so it knows not to vote on something that it's already voted on.
+The Slashing Database is simply a record of your validator's votes (i.e., the slot of each vote and the hash of the block that vote was for), so it knows not to vote on something that it's already voted on.
 
 
 ### Avoiding Being Slashed

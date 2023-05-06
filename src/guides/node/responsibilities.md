@@ -22,7 +22,7 @@ Now that [the Execution and Consensus layers have merged](https://ethereum.org/e
 | - | - | - | - |
 | Attestation | Consensus | Once per Epoch (every 6.4 minutes on average) | 0.000014 ETH* |
 | Block Proposal | Consensus | [Every 2 months on average](https://proposalprobab.web.app/)** | 0.02403 ETH* |
-| [Sync Committee](https://blockdaemon.com/blog/ethereum-altair-hard-folk-light-clients-sync-committees/) | Consensus | Every 2 years on average** | 0.11008 ETH* |
+| [Sync Committee](https://github.com/ethereum/annotated-spec/blob/master/altair/sync-protocol.md) | Consensus | Every 2 years on average** | 0.11008 ETH* |
 | Slashing Reward | Consensus | Very rarely included in Block Proposals | Up to 0.0625 ETH |
 | Priority Fees | Execution | Included in Block Proposals | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
 | MEV Rewards | Execution | Also included in Block Proposals when using [MEV-boost](https://boost.flashbots.net/) | Typically 0.01 to 0.1 ETH; very rarely 1+ ETH |
@@ -109,11 +109,16 @@ It's a big responsibility, and not a simple set-it-and-forget-it kind of job; yo
 With great responsibility, however, comes great rewards.
 Here are the major benefits of running a Rocket Pool node:
 
-- You earn half of the validator's total ETH rewards, *plus* an extra 14% commission paid by the pool staker's half 
-- You earn interest on the RPL you stake as supplemental insurance
-- You can participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings
+- You earn your portion of each validator's ETH rewards, plus commission.
+  - For an 8 ETH-bonded minipool, this comes to **35.5%** of the validator's rewards (an extra **10.5%** over solo staking).
+  - For a 16 ETH-bonded minipool, this comes to **57.5%** of the validator's rewards (an extra **7.5%** over solo staking).
+- You earn interest on the RPL you stake as supplemental insurance.
+  - At the end of a period (every 28 days), there's a snapshot of your RPL.
+  - You can earn yield on RPL **up to 150%** of the value of your total bonded ETH.
+  - To be eligible for these rewards, you must have **at least 10%** of the value of your **total borrowed ETH** to earn RPL rewards.
+- You will be able to participate in the DAO and get to vote on changes to Rocket Pool's protocol or settings.
 
-That being said, as a node operator **you are responsible for your own performance**.
+In light of gaining access to these benefits, as a node operator **you are responsible for your own performance**.
 If your node performs poorly and you actually end up losing ETH by the time you decide to exit your minipool, all of the lost ETH is coming out of your share.
 For example: if you exit with a balance of 30 ETH, then your minipool lost 2 ETH from its initial 32 ETH deposit.
 You will receive 14 or 6 ETH (depending on your **bond size**), and 24 or 16 ETH will be returned to the staking pool.
