@@ -25,9 +25,6 @@ The amount of ETH ready to be staked. The deposit pool is funded by regular user
 ## ETH
 The fundamental cryptocurrency coin generated and used by the Ethereum protocol.
 
-## eth1.0
-The original Ethereum 1.0 protocol that uses a consensus mechanism known as proof of work (PoW) and uses miners to validate the block-chain.
-
 ## Execution (ETH1) Client
 Ethereum Software clients that run the execution layer.
 
@@ -35,22 +32,19 @@ Ethereum Software clients that run the execution layer.
 Ethereum Software clients that run the consensus layer.
 
 ## eth2.0 (the Beaconchain)
-The Ethereum 2.0 network and update to the Ethernet network that was launched in December 2020 and will replace the older proof-of-work eth1.0 consensus mechanism. Deprecated term - now known simply as the Beaconchain.
+The Ethereum 2.0 network and update to the Ethernet network that was launched in December 2020 and replaced the  proof-of-work eth1.0 consensus mechanism in September 2022. Deprecated term - now known simply as the Beaconchain or the consensus layer.
 
 ## Insurance
-The amount of RPL token, expressed as a percentage of the value of ETH staked by the node operator, that a node operator needs to deposit when they start a minipool validator. The RPL insurance staked by a node operator will act as insurance to reimburse regular users in the event that the node operator exits staking with less than 16 ETH in their validators.
+The amount of RPL token, expressed as a percentage of the value of ETH provided by the protocol, that a node operator needs to deposit when they start a minipool validator. The RPL insurance staked by a node operator will act as insurance to reimburse regular users in the event that the node operator exits staking with less than 16 ETH in their validators.
 
 ## Minipool (Validator)
-A validator that was funded and initialized via the Rocket Pool software.  It is most commonly composed of an equal amount of ETH contributed from regular users via the deposit pool and ETH contributed from node operators during their registration process.
+A validator that was funded and initialized via the Rocket Pool software.  It is composed of ETH contributed from regular users via the deposit pool and ETH contributed from node operators during their registration process.
 
 ## Node
 In the Ethereum network, nodes are devices (computers) that run Ethereum client software.
 
 ## Node Commission
 The amount of supplemental ETH awarded to a node operator. This is effectively the “fee” that is taken from normal stakers; in Rocket Pool, that fee is given to the node operators. When Rocketpool launched, it ranged from 5 - 20% with the ideal target of 10%, with each minipool’s commission locked for life upon the creation of the minipool. New minipools activated are now at a set 15% commission rate.
-
-## Node Commission, slippage
-The amount of negative slippage in node commission that a node operator is willing to accept when forming a minipool validator.  Slippage is the difference between the commission rate shown and the commission rate you are willing to accept when the transaction completes. The amount of negative slippage tolerated is chosen by the node operator when they initially form a minipool validator.
 
 ## Node Operator
 An individual that wishes to secure the Ethereum network by operating a node (computer) that will run the Rocket Pool software, an eth2 validator client, and optionally an eth1 and eth2 beacon client as well. Node operators will earn ETH APY rewards at a greater rate than solo-stakers on the Ethereum 2.0 network.
@@ -73,9 +67,6 @@ A special node run by trusted members of the Rocket Pool community that relays i
 ## Proof-of-Stake (PoS)
 The consensus mechanism used in eth2.0, where users vote on the correctness of new blocks by staking the ETH in their wallet.
 
-## Proof-of-Work (PoW)
-Proof of Work (PoW) is the mechanism that allows the decentralized Ethereum network to come to a consensus, or agree on things like account balances and the order of transactions.  Proof-of-work is the underlying algorithm that sets the difficulty and rules for the work miners do.
-
 ## Protocol DAO (pDAO)
 The DAO composed of all holders of RPL tokens. *See also DAO.*
 
@@ -85,14 +76,21 @@ The term given to “normal” node operators that do not have the additional re
 ## Regular Stakers
 A retail (regular) user that wants to earn interest on their ETH coin without decoupling it from the underlying value of ETH. A regular staker interacts with the Rocket pool platform by swapping ETH coins for rETH tokens. Their ETH is entered into the staking pool, where it is acquired by Node Operators when they create new minipools.
 
-## Re-Insurance Pool
-A deposit pool where the holder of RPL tokens can deposit their RPL for use by the Rocket pool network to earn APY. The collective supply of RPL deposited into this pool will act as a second layer of insurance to reimburse regular uses whose initial ETH deposit may have been lost due to a minipool exiting with less than the sum of 16ETH plus any RPL insurance held by the node operator.
-
 ## rETH (Rocket Pool Staking Deposit Token)
 A token that represents a regular user’s deposit into the staking pool. Users receive an equivalent value of rETH token for each ETH coin they deposit. As interest is earned by staking on the Ethereum network the value of the rETH token increases with respect to ETH. This token does not need to be locked within the network and it can be traded, sold or held as the user desires.
 
 ## RPL (Rocket Pool Token)
-This is a token issued by the Rocket Pool contract. It serves two purposes: first, as supplemental insurance against slashing that Node Operators are required to provide before creating new minipools; second, as the governance token used to vote in the Protocol DAO.
+This is a token issued by the Rocket Pool contract, and serves several purposes.
+
+For Node Operators:
+- It's required to launch a minipool and thus access commission
+- It provides its own yield as RPL rewards (70% of inflation goes to NO RPL rewards)
+- It provides voting power for governance
+
+For the protocol:
+- It serves as secondary collateral (e.g., against slashing)
+- It provides funding for the oDAO (15% of inflation)
+- It provides funding for the pDAO (15% of inflation)
 
 ## Stake
 An amount of coin or token that is deposited as an assurance collateral to perform some work.  An individual can stake ETH either as a regular user by swapping ETH for rETH or as a node operator by depositing ETH for use as part of the Beaconchain PoS consensus process. A person who stakes their ETH (e.g. a staker) is rewarded with an APY or return on their deposited ETH.

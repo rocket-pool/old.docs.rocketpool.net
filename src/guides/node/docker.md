@@ -27,6 +27,41 @@ At a high level, here's what is involved in installing Rocket Pool:
 1. Configure the Smartnode stack with an easy-to-use UI in the terminal
 1. Done!
 
+## Before You Start
+
+::: warning
+If using Ubuntu, it is recommended that before installing Rocket Pool you double check that docker was not installed alongside the operating system.
+
+The Ubuntu installer gets docker from the snap package manager, which will conflict with the version of docker installed by Smartnode.
+
+Run `snap list`, and make sure `docker` was not installed.
+
+For example, this is the output on a machine where docker is not installed:
+```
+Name    Version        Rev    Tracking       Publisher   Notes
+core20  20230308       1852   latest/stable  canonical✓  base
+lxd     5.0.2-838e1b2  24322  5.0/stable/…   canonical✓  -
+snapd   2.59.1         18933  latest/stable  canonical✓  snapd
+```
+
+And here is the output if it was installed:
+```
+Name    Version        Rev    Tracking       Publisher   Notes
+core20  20230308       1852   latest/stable  canonical✓  base
+docker  20.10.17       2746   latest/stable  canonical✓  -
+lxd     5.0.2-838e1b2  24322  5.0/stable/…   canonical✓  -
+snapd   2.59.1         18933  latest/stable  canonical✓  snapd
+```
+
+If you see it in the `snap list` output, be sure to remove it with:
+```shell
+sudo systemctl stop snap.docker.dockerd.service
+
+sudo snap remove --purge docker
+```
+
+After which, it is recommended that you reboot the machine (`sudo systemctl reboot`)
+:::
 
 ## Downloading the Rocket Pool CLI
 
@@ -66,7 +101,7 @@ For `x64` systems (most normal computers):
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
 ```
 
-For `arm64` systems, such as the Raspberry Pi:
+For `arm64` systems:
 ```shell
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
 ```
@@ -86,7 +121,7 @@ You should see output like this:
 rocketpool --version
 ```
 ```
-rocketpool version 1.3.0
+rocketpool version 1.5.0
 ```
 
 ::: tip TIP
@@ -176,15 +211,7 @@ rocketpool service install
 This will grab the latest version of the Smartnode stack and set it up.
 You should see output like this (*above some release notes for the latest version which will be printed at the end*):
 
-```
-Step 5 of 8: Checking for existing installation...
-Step 5 of 8: Backing up configuration settings to user-settings-backup.yml...
-Step 6 of 8: Creating Rocket Pool user data directory...
-Step 7 of 8: Downloading Rocket Pool package files...
-Step 8 of 8: Copying package files to Rocket Pool user data directory...
-
-The Rocket Pool service was successfully installed!
-```
+![](./images/rp-install-screen.png)
 
 If there aren't any error messages, then the installation was successful.
 By default, it will be put into the `~/.rocketpool` directory inside of your user account's home folder.
@@ -227,7 +254,6 @@ Once this is finished, the Smartnode stack will be ready to run.
 
 By default, Docker will store all of its container data on your operating system's drive.
 In some cases, this is not what you want.
-For example, on **Raspberry Pi** systems, all of the chain data should be stored on the external SSD, not on the MicroSD card.
 
 ::: tip NOTE
 If you are fine with this default behavior, skip down to the next section.
@@ -248,7 +274,6 @@ This will be empty at first, which is fine. Add this as the contents:
 ```
 
 where `<your external mount point>` is the directory that your other drive is mounted to.
-In the case of Raspberry Pi users, it should be `/mnt/rpdata` or whatever folder you set up in the [Preparing a Raspberry Pi](./local/prepare-pi.md) section.
 
 Press `Ctrl+O, Enter` to save the file, and `Ctrl+X, Enter` to exit the editor.
 
@@ -256,8 +281,6 @@ Next, make the folder:
 ```
 sudo mkdir -p <your external mount point>/docker
 ```
-
-(Again, for example, this would be `/mnt/rpdata/docker` for Raspberry Pi users.)
 
 Now, restart the docker daemon so it picks up on the changes:
 ```

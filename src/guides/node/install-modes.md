@@ -10,7 +10,7 @@ In this section, we will cover the typical ways of configuring and using the Sma
 The default mode, and the most common way to run a Smartnode, is to have it create an entire full node instance on your local machine that Rocket Pool manages.
 
 To accomplish this, the Smartnode uses [Docker containers](https://www.docker.com/resources/what-container).
-In essence, a Docker container is a small sandbox that comes preconfigured with a program, all of its dependencies, and all of the configuration needed to run correctly.
+In essence, a Docker container is a small sandbox that comes pre-configured with a program, all of its dependencies, and all of the configuration needed to run correctly.
 When it's no longer needed, it can simply be thrown away.
 It's a nice little self-contained bundle that lets things work without making a mess of your actual filesystem or other programs.
 
@@ -20,22 +20,19 @@ It uses the following Docker containers:
 - `rocketpool_api` - This holds the actual functionality that the Smartnode provides when you interact with it via Rocket Pool's command-line interface (CLI).
 - `rocketpool_node` - This is a background process that will periodically check for and claim RPL rewards after a reward checkpoint (if you have auto-claim enabled, more on this later), and is responsible for actually staking new validators when you create a minipool.
 - `rocketpool_watchtower` - This is used by Oracle Nodes to perform oracle-related duties. For regular node operators, this will simply stay idle.
-- `rocketpool_eth1` - This will be your ETH1 client, such as Geth, or a small proxy that routes ETH1 requests to a light client like Infura or Pocket.
-- `rocketpool_eth2` - This will be your ETH2 beacon node client.
-- `rocketpool_validator` -  This will be your ETH2 validator client, which is responsible for your validator duties (such as attesting to blocks or proposing new blocks).
-
-::: tip NOTE
-**Nimbus** does not have a separate validator client.
-It runs the beacon node and validator clients together inside the Consensus (ETH2) container.
-:::
+- `rocketpool_eth1` - This will be your Execution client.
+- `rocketpool_eth2` - This will be your Consensus beacon node client.
+- `rocketpool_validator` -  This will be your Validator client, which is responsible for your validator duties (such as attesting to blocks or proposing new blocks).
 
 In most situations, this is a good option to choose when creating a new node from scratch.
 It's the fastest, most hands-off procedure.
-It will also handle updates to the Execution (ETH1) and Consensus (ETH2) clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
+It will also handle updates to the Execution and Consensus clients with every new Smartnode release, so you don't have to worry about them (though you can manually upgrade them at any time if you desire).
 
-:exclamation: **NOTE: Currently, some of the Docker containers need to run as the `root` user to function correctly.
+::: warning NOTE
+Currently, some of the Docker containers need to run as the `root` user to function correctly.
 While Docker containers are generally quite good at preventing a user from escaping into your main Operating System, you may not be comfortable with this requirement for security reasons.
-In this case, we suggest you use the Native configuration mode listed below.**
+In this case, we suggest you use the Native configuration mode listed below.
+:::
 
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 
@@ -56,11 +53,6 @@ When using this configuration, the Smartnode will use the following Docker conta
 
 The `rocketpool_eth1` and `rocketpool_eth2` containers will either be included or excluded, depending on which clients you already have running externally.
 
-::: tip NOTE
-This configuration is not currently compatible with **Nimbus** because Nimbus does not offer a separate, dedicated validator client in its official Docker images.
-This may be provided in the future.
-:::
-
 If you would like to use this mode, proceed to the [Configuring a Standard Rocket Pool Node with Docker](./docker.md) section.
 When prompted to choose a management mode for your Execution and/or Consensus clients, choose the **Externally Managed** option which is described in detail within that section.
 
@@ -76,6 +68,9 @@ It is also the most difficult to set up and maintain.
 
 In this mode, the Smartnode Installer is no longer relevant.
 You are responsible for manually instantiating, maintaining, and upgrading the Smartnode infrastructure, the ETH clients, and the validator clients.
+
+::: danger WARNING
 While we provide some example documentation on how to do this, we suggest that this mode should only be used by **experienced system administrators**.
+:::
 
 If you would like to use this mode, proceed to the [Configuring a Native Rocket Pool Node without Docker](./native.md) section.

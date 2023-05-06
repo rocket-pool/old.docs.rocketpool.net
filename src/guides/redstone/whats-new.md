@@ -1,20 +1,22 @@
-# [BETA] The Rocket Pool Redstone Update
+# The Rocket Pool Redstone Update
 
-::: danger NOTICE
-This page is meant for **beta testers only** that are using v1.5.0 of the Smartnode stack on Ropsten.
-
-It does *not* apply to node operators practicing on the Prater testnet, or to node operators running on Mainnet.
-:::
-
-Rocket Pool's next major update, titled **Redstone**, has been released for beta testing on the Ropsten test network.
+Rocket Pool's next major update, titled **Redstone**, has been released for beta testing on the Ropsten and Prater test networks.
 This page describes the major changes that Redstone brings, including updates to both the Smartnode stack and to the Rocket Pool protocol in general.
 
 Please read through this page thoroughly to understand all of the differences between the previous version of Rocket Pool and Redstone.
 
+::: tip ATTENTION
+For detailed information on how to prepare your node for the upgrade and what to do after the upgrade, please look at the following guides:
+
+- [Guide for Docker Mode](./docker-migration.md)
+- [Guide for Hybrid Mode](./hybrid-migration.md)
+- [Guide for Native Mode](./native-migration.md)
+:::
+
 
 ## Client Changes and The Merge
 
-Ropsten has successfully undergone **The Merge of the Execution and Consensus Layers**.
+Ropsten (and shortly, Prater) have successfully undergone **The Merge of the Execution and Consensus Layers**.
 It no longer uses Proof-of-Work; instead, validators on Ropsten are now responsible for creating and proposing blocks on both chains.
 While this comes with some exciting financial benefits (which will be discussed later), it also comes with some important changes to the way validators operate.
 
@@ -27,13 +29,13 @@ Below is a brief summary of the changes to client behavior as part of The Merge:
 
 - Execution clients now require a Consensus client to function, and Consensus clients now require an Execution client to function.
   - **Neither one can operate in isolation any longer.**
-  
+
 - One Execution client must be linked to one, and only one, Consensus client (and vice versa).
   - You will not be able to link multiple Execution clients to a single Consensus client, or multiple Consensus clients to a single Execution client.
   - Because of this, **fallback execution clients are no longer available** for Rocket Pool node operators.
-  
+
 - **Full execution clients** are required.
-  - Light clients (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
+  - Remote providers (like Infura and Pocket) can no longer be used by any validators, Rocket Pool or otherwise.
 
 
 ## Fee Recipients and Your Distributor
@@ -44,7 +46,7 @@ Unlike the ETH locked on the Beacon Chain, **you don't have to wait for withdraw
 They are simply awarded to you as part of the block proposal process.
 
 In order to know where to send the fees to, your Validator Client requires an extra parameter known as the `fee recipient`.
-This is the address on the Execution Layer (ETH1) that all of the priority fees earned by your node during block proposals will be sent to. 
+This is the address on the Execution Layer (ETH1) that all of the priority fees earned by your node during block proposals will be sent to.
 
 Rocket Pool is designed to fairly distribute these rewards, the same way it fairly distributes your Beacon chain rewards: half of any priority fees your minipool validators earn will go to you (plus the average commission of all of your minipools), and the other half will go to the pool stakers (minus your average commission).
 
@@ -82,7 +84,7 @@ The output will look like this:
 
 <center>
 
-![](./images/status-fee-distributor.png)
+![](../node/images/status-fee-distributor.png)
 
 </center>
 
@@ -148,7 +150,7 @@ As intervals go by and you accumulate rewards, the output will look like this:
 
 <center>
 
-![](./images/claim-rewards-gb.png)
+![](../node/images/claim-rewards-gb.png)
 
 </center>
 
@@ -159,7 +161,7 @@ You can also specify an amount you want to restake during this claim:
 
 <center>
 
-![](./images/autostake.png)
+![](../node/images/autostake.png)
 
 </center>
 
@@ -170,14 +172,14 @@ If you prefer to build the rewards checkpoint manually instead of downloading th
 
 <center>
 
-![](./images/tui-generate-tree.png)
+![](../node/images/tui-generate-tree.png)
 
 </center>
 
 As the tip implies, you will need access to an archive node to do this.
 If your local Execution client is not an archive node, you can specify a separate one (such as Infura or Alchemy) in the `Archive-Mode EC URL` box below it.
 This URL will only be used when generating Merkle trees; it will not be used for validation duties.
-::: 
+:::
 
 ::: danger WARNING
 If you are below 10% RPL collateral *at the time of the snapshot*, you will not be eligible for rewards for that snapshot.
@@ -253,28 +255,11 @@ The Smartnode software is designed to ensure honest users will never get penaliz
 If this happens, you will stop attesting and will see error messages in your log files about why the Smartnode can't correctly set your fee recipient.
 
 
-## Installing v1.5.0
+## Guides for Pre- and Post-Upgrade
 
-To install v1.5.0, the most effective way is to monitor the Discord announcements in the `#beta` channel for instructions on the latest version.
+For detailed information on how to prepare your node for the upgrade and what to do after the upgrade, please look at the following guides:
 
+- [Guide for Docker Mode](./docker-migration.md)
+- [Guide for Hybrid Mode](./hybrid-migration.md)
+- [Guide for Native Mode](./native-migration.md)
 
-## Getting Test Ropsten ETH
-
-The faucet bot run in our Discord by community member **Patches** has been adapted to support Ropsten.
-Beta tester node operators with access to the `#faucet` channel in our Discord server can use the following commands to create a node:
-
-- `!ropstenEth` to get 1 ETH for gas to register and provision the node
-- `!ropstenOperator` to get enough ETH to create a minipool
-
-Users without access to the channel can request ETH in the `#support` channel.
-
-
-
-## Known Issues
-
-This section will be regularly updated with issues encountered by our beta testers, or known by the development team during the beta process.
-
-- Fallback execution clients don't work and will be **removed from the TUI** in a future update. Ignore them for now.
-- Nimbus has issues syncing from scratch unless the Execution client is already synced.
-  - A workaround is to fully sync the Execution client with a different Consensus client, then switch to Nimbus once it's done.
-- Instructions for which command line properties to change for Native mode are not written yet.

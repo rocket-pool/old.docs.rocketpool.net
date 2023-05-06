@@ -1,7 +1,8 @@
 # Choosing your ETH Clients
+
 Rocket Pool's Smartnode installer can transform your machine into a full Ethereum node, as it requires both Execution and Consensus clients in order to operate properly.
 
-The terms ETH1/ETH2 have been deprecated; the proper names are now Execution Clients (ETH1) and Consensus Clients (ETH2).
+The terms ETH1/ETH2 have been deprecated.
 The chains will be referred to as the **Execution Layer (ETH1)** and the **Beacon Chain or Consensus Layer (ETH2)** in the rest of these guides.
 
 If you already have Execution and Consensus clients up and running on a separate machine (for example, if you're already solo-staking), then skip this section and move onto the [Configuring a Hybrid Rocket Pool Node with External Clients](./install-modes.md#the-hybrid-configuration-with-external-clients) section.
@@ -9,8 +10,7 @@ If you already have Execution and Consensus clients up and running on a separate
 Otherwise, read on to learn more about your choices for Execution and Consensus clients.
 
 ::: warning NOTE
-
-As of May 2022, the distribution of clients on the Beacon Chain looks roughly like this:
+As of March 2023, the distribution of clients on the Beacon Chain looks roughly like this:
 
 <center>
 
@@ -20,8 +20,8 @@ As of May 2022, the distribution of clients on the Beacon Chain looks roughly li
 
 </center>
 
-The overwhelming majority of node operators are currently using Geth and Prysm.
-In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using a different clients.
+The overwhelming majority of node operators are currently using Geth as an Execution Client and either Prysm or Lighthouse as a Consensus Client.
+In the interest of supporting the health of the Execution Layer (formerly ETH1) and the Beacon Chain (formerly ETH2), we currently recommend that you consider using different clients.
 Here are some relevant articles about why an even client diversity is crucial to the health of the network if you would like to learn more:
 
 [https://clientdiversity.org/#why](https://clientdiversity.org/#why)
@@ -38,19 +38,13 @@ For users that have a specific client they'd like to use in mind, we provide the
 The options below help to describe each client so you can make an informed decision if you'd like to specify which one you want.
 
 
-## Execution Clients (ETH1)
+## Execution Clients
 
-Out of the box, Rocket Pool supports three different execution clients: **Geth**, **Besu**, and **Nethermind**.
+Rocket Pool supports three different Execution clients: **Geth**, **Besu**, and **Nethermind**.
 
-::: warning
-Light clients (**Infura** and **Pocket**) will not be usable after the Ethereum Merge and are now deprecated.
-You **should not** use them for new installations.
-:::
-
-Running an Execution Client involves storing a copy of the Execution layer blockchain on your machine.
+Running an Execution client involves storing a copy of the Execution layer blockchain on your machine.
 It interacts via peer-to-peer communications with other EC nodes to record and verify new blocks and transactions.
-
-By running an EC node, you contribute to the decentralization and overall health of the ETH network.
+A full Execution client is **required** to run a validator now that the Execution and Consensus layers have merged.
 
 
 ### Geth
@@ -69,7 +63,7 @@ This makes it viable for low-power systems and high-power systems alike.
 Geth requires **offline pruning** of its database periodically: its database will grow over time and gradually consume all of your free disk space unless you prune it when your disk runs low on free space.
 The frequency you need to prune will depend on your SSD's size.
 
-For more information on pruning Geth, view the [Pruning Geth](./geth-pruning.md) page.
+For more information on pruning Geth, view the [Pruning the Execution Client](./pruning.md) page.
 :::
 
 
@@ -80,12 +74,7 @@ Besu's most exciting features is its use of [Bonsai Tries](https://consensys.net
 1. Besu does *not* need to be pruned at all; it is effectively maintenance-free in that respect
 2. Besu is able to revisit any past block in the blockchain, though it does this by rewinding each block so reaching blocks from long ago may take some time.
 
-Besu currently runs best with **at least 16 GB of RAM**, though more is preferable.
-
-::: warning NOTE
-Besu is a relatively new addition to the Smartnode.
-The development team and support community are still familiarizing themselves with it, so it may take longer to get help with it in Rocket Pool's Discord server.
-:::
+Besu currently recommends at least **16 GB of RAM**, though it is possible to run successfully with 8 GB.
 
 
 ### Nethermind
@@ -101,54 +90,14 @@ However, Nethermind's online pruning process is quite resource intensive so user
 
 Nethermind requires **at least 16GB of RAM**, though more is preferable.
 
-::: warning
-As of Smartnode v1.4.1, we have seen reports of memory leaks using Nethermind v1.13.1 which cause it to gradually consume all of the node's available RAM until it crashes.
-Users may want to choose a different client while these issues are resolved.
-:::
+::: tip NOTE
+Nethermind requires periodic pruning of its database periodically: its database will grow over time and gradually consume all of your free disk space unless you prune it when your disk runs low on free space.
+The frequency you need to prune will depend on your SSD's size.
 
+Unlike Geth, however, Nethermind **remains online** while it is pruning.
+This makes it a compelling choice for nodes because they won't have any down time during pruning.
 
-## Execution Light Clients (ETH1)
-
-::: danger
-Light clients are **deprecated**; they will not work as an Execution client after the Merge.
-You will need to run a **full** Execution client.
-:::
-
-
-### Infura
-
-[Infura](https://infura.io/) is a web service that provides instant access over HTTPS and WebSockets to the Ethereum and IPFS networks.
-It is a **light client**, meaning that it can be interacted with just like a local ETH1 node for information about the chain's state or to submit transactions; however, it doesn't require a full node on your local machine.
-Instead, Infura essentially hosts a full node and gives you remote access to it.
-This convenience comes at a cost: using a light client does not contribute to the decentralization of Ethereum, and instead adds a somewhat centralized component (as you are now depending on it as an external service).
-
-Infura has several pricing tiers, including a free tier for low amounts of usage.
-Rocket Pool may fit into the free tier, depending on what you do with your node.
-Because of this restriction, it is possible to exceed the limits of the free tier, which will prevent Rocket Pool from working correctly.
-We therefore do not recommend using Infura regularly for production, but it is a useful fallback for periods where your local ETH1 client is down for maintenance.
-
-::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
-:::
-
-
-### Pocket
-
-[Pocket](https://www.pokt.network/) is a decentralized peer-to-peer network of thousands of independent nodes that service requests for a variety of blockchains, including Ethereum.
-Like Infura, Pocket is a **light client**.
-It is constructed from routers, relays and nodes that combine to listen for incoming blockchain requests, execute them on a node for the blockchain of choice, and transmit the reponse back to the original caller.
-
-Pocket is an interesting option for running a light client, in that it does not have a truly centralized component.
-While using it doesn't contribute to the decentralization of Ethereum, it also doesn't rely on a single-point-of-failure, making this an attractive option for situations where a light client is necessary.
-
-Pocket normally relies on users paying for transactions via their POKT token, but they have agreed to allow Rocket Pool node operators to use their network **free of charge**.
-
-One potential downside of Pocket is that it cannot support websockets based on the nature of the protocol so it is incompatible with the Nimbus ETH2 client.
-
-::: warning
-If you choose a light client, you are trusting that it will represent the ETH1 chain accurately and to pass your transactions onto the network without modifying or abusing them.
-You do not have control over the remote node that you're connecting to, and you must accept any risks that come with using it.
+For more information on pruning Nethermind, view the [Pruning the Execution Client](./pruning.md) page.
 :::
 
 
@@ -157,21 +106,17 @@ You do not have control over the remote node that you're connecting to, and you 
 | Client     | Type  | CPU Usage | Minimum RAM Usage | Sync Time |
 | ---------- | ----- | --------- | ----------------- | --------- |
 | Geth       | Full  | Moderate  | 4 GB              | Moderate  |
-| Besu       | Full  | Moderate  | 16 GB             | Moderate  |
+| Besu       | Full  | Moderate  | 6 GB              | Slow      |
 | Nethermind | Full  | Moderate  | 16 GB             | Fast      |
-| Infura*    | Light | Low       | ---               | None      |
-| Pocket*    | Light | Low       | ---               | None      |
-
-*Currently in deprecated status, not supported post-merge
 
 
-## Consensus Clients (ETH2)
+## Consensus Clients
 
-Rocket Pool's installer is proud to support all four currently available Consensus clients: **Lighthouse**, **Nimbus**, **Prysm**, and **Teku**.
+Rocket Pool's installer is proud to support five currently available Consensus clients: **Lighthouse**, **Lodestar**, **Nimbus**, **Prysm**, and **Teku**.
 
 Each of these is a **full client**, meaning you will contribute to the decentralization of the Consensus network regardless of which client you choose.
 
-All four clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
+All five clients are quite low-risk, low-maintenance, and will generate practically identical total rewards from validation.
 They differ slightly in terms of resource requirements and features, but you cannot go wrong with any of them.
 
 By default, the Rocket Pool installer will offer to select a random consensus client for you.
@@ -191,10 +136,19 @@ Lighthouse has no official affiliation with the Ethereum Foundation and will con
 Lighthouse is implemented in [Rust](https://www.rust-lang.org/) and will maintain a focus on security and efficiency.
 
 
+### Lodestar
+
+[Lodestar](https://lodestar.chainsafe.io/) is the fifth open-source Ethereum consensus client maintained by [ChainSafe Systems](https://chainsafe.io/). Our flagship product is our production-capable beacon chain and validator client for Ethereum consensus. Our software and tooling is uniquely situated as the go-to for researchers and developers for rapid prototyping and browser usage. Millions of developers around the world are familiar with Typescript, and Lodestar's high-quality codebases are excellent introductions to the Ethereum world.
+
+Lodestar has also been a leader in light client research, standardization, and implementation of Ethereum light clients. We strive to work with other client implementers, researchers and developers to demonstrate the importance of having browsers utilize trustless data directly from the blockchain.
+
+Lodestar's niche is in its implementation language, [Typescript](https://www.typescriptlang.org/).
+
+
 ### Nimbus
 
 [Nimbus](https://nimbus.team/) is a client implementation for both Ethereum 2.0 and Ethereum 1.0 that strives to be as lightweight as possible in terms of resources used.
-This allows it to perform well on embedded systems and resource-restricted devices - including **Raspberry Pis** and mobile devices.
+This allows it to perform well on embedded systems and resource-restricted devices.
 
 However, resource-restricted hardware is not the only thing Nimbus is good for.
 Its low resource consumption makes it easy to run Nimbus together with other workloads on your server (this is especially valuable for stakers looking to lower the cost of their server instances).
@@ -217,11 +171,17 @@ PegaSys is an arm of [ConsenSys](https://consensys.net/) dedicated to building e
 Teku is Apache 2.0 licensed and written in Java, a language notable for its maturity & ubiquity.
 
 
+### Lodestar
+
+[Lodestar](https://lodestar.chainsafe.io/) is a TypeScript implementation of the Ethereum Consensus specification developed by [ChainSafe Systems](https://chainsafe.io/).
+
+
 ### Client Comparison Table
 
-| Client     | CPU Usage | Minimum RAM Usage | Sync Time                                               |
-| ---------- | --------- | ----------------- | ------------------------------------------------------- |
-| Lighthouse | Moderate  | 2 GB              | Moderate (normal sync)<br/>Instant with checkpoint sync |
-| Nimbus     | Low       | 0.75 GB           | Moderate (normal sync)<br/>Instant with checkpoint sync |
-| Prysm      | Moderate  | 2 GB              | Moderate                                                |
-| Teku       | Moderate  | 4 GB              | Slow (normal sync)<br/>Instant with checkpoint sync     |
+| Client     | CPU Usage | Minimum RAM Usage | Sync Time                    |
+|------------| --------- | ----------------- | ---------------------------- |
+| Lighthouse | Moderate  | 2 GB              | Instant with checkpoint sync |
+| Lodestar   | Moderate  | 4 GB              | Instant with checkpoint sync |
+| Nimbus     | Low       | 0.75 GB           | Instant with checkpoint sync |
+| Prysm      | Moderate  | 2 GB              | Instant with checkpoint sync |
+| Teku       | Moderate  | 4 GB              | Instant with checkpoint sync |

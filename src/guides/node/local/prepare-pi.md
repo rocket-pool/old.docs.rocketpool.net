@@ -1,17 +1,15 @@
 # Preparing a Raspberry Pi
 
+::: warning NOTE
+This page has been left here for archival purposes. We no longer recommend running Rocket Pool on a Raspberry Pi due to the
+increased hardware and performance requirements of running an Ethereum validator.
+:::
+
 This guide will walk you through how run a Rocket Pool node using a Raspberry Pi.
 While this is not typically recommended in most staking guides, we recognize that it is attractive because it is a much more affordable option than standing up an entire PC.
 To that end, we've worked hard to tweak and optimize a whole host of settings and have determined a configuration that seems to work well.
 
-This setup will run **a full Execution (ETH1) node** and **a full Consensus (ETH2) node** on the Pi, making your system contribute to the health of the Etherum network while simultaneously acting as a Rocket Pool node operator.
-
-::: warning NOTE
-This setup works well with the current implementations of Execution (ETH1) and Consensus (ETH2).
-It's possible that after the merge of the Execution (ETH1) chain and the beacon chain, a full node may be more computationally demanding.
-While we have been advised that this is unlikely, there is a chance that the Raspberry Pi may not be able to run a full node post-merge.
-**Please factor this into your decision before settling on it as a node platform.**
-:::
+This setup will run **a full Execution node** and **a full Consensus node** on the Pi, making your system contribute to the health of the Ethereum network while simultaneously acting as a Rocket Pool node operator.
 
 
 ## Preliminary Setup
@@ -50,7 +48,7 @@ You can get a lot of this stuff bundled together for convenience - for example, 
 However, you might be able to get it all cheaper if you get the parts separately (and if you have the equipment, you can [3D print your own Pi case](https://www.thingiverse.com/thing:3793664).)
 
 Other components you'll need:
-- A **USB 3.0+ Solid State Drive**. The general recommendation is for a **2 TB drive**, but if it isn't in your budget, a **1 TB drive** is acceptable for now.
+- A **USB 3.0+ Solid State Drive**. The general recommendation is for a **2 TB drive**.
   - The [Samsung T5](https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA2T0B/dp/B073H4GPLQ) is an excellent example of one that is known to work well.
   - :warning: Using a SATA SSD with a SATA-to-USB adapter is **not recommended** because of [problems like this](https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=245931).
     If you go this route, we've included a performance test you can use to check if it will work or not in the [Testing the SSD's Performance](#testing-the-ssd-s-performance) section.
@@ -112,7 +110,7 @@ Each router is different, so you will need to consult your router's documentatio
 ## Mounting the SSD
 
 As you may have gathered, after following the above installation instructions, the core OS will be running off of the microSD card.
-That's not nearly large enough or fast enough to hold all of the Execution (ETH1) and Consensus (ETH2) blockchain data, which is where the SSD comes in.
+That's not nearly large enough or fast enough to hold all of the Execution and Consensus blockchain data, which is where the SSD comes in.
 To use it, we have to set it up with a file system and mount it to the Pi.
 
 
@@ -503,6 +501,15 @@ pip3 install stressberry
 source ~/.profile
 ```
 
+::: tip NOTE
+If stressberry throws an error about not being able to read temperature information or not being able to open the `vchiq` instance, you can fix it with the following command:
+```
+sudo usermod -aG video $USER
+```
+
+Then log out and back in, restart your SSH session, or restart the machine and try again.
+:::
+
 Next, run it like this:
 ```
 stressberry-run -n "Stock" -d 300 -i 60 -c 4 stock.out
@@ -691,13 +698,12 @@ An increase of 7 more degrees, but still under our threshold of 65°C.
 
 ## Going to 2100 MHz (Heavy)
 
-The highest we're going to take the Pi in this guide is 2100 MHz.
-This represents a solid **40% speedup** over the stock configuration.
+The next step represents a solid **40% speedup** over the stock configuration.
 
 **NOTE: Not all Pi's are capable of doing this while staying at `over_voltage=6`.
 Try it, and if it breaks, go back to 2000 MHz.**
 
-This is the configuration we use on our Pi:
+The configuration will look like this:
 ```
 arm_freq=2100
 over_voltage=6
@@ -731,7 +737,44 @@ Current temperature: 58.9°C - Frequency: 2100MHz
 ```
 
 Just shy of 60°C, so there's plenty of room.
-We are happy with this performance and temperature range, so this is what we run.
+
+
+## Going to 2250 MHz (Extreme)
+
+This is the setting we run our Pi's at, which has been stable for over a year at the time of writing.
+Still, **users are cautioned in overclocking this high** - ensure you do thorough stability tests and have plenty of thermal headroom before attempting to make this your node's production configuration!
+
+Our configuration is:
+```
+arm_freq=2250
+over_voltage=10
+```
+
+Here are our results:
+```
+    Reps Time(s) DGEFA   DGESL  OVERHEAD    KFLOPS
+----------------------------------------------------
+    1024   0.95  85.69%   3.85%  10.47%  1650081.294
+    2048   1.91  85.64%   3.91%  10.45%  1646779.068
+    4096   3.84  85.41%   4.15%  10.44%  1637706.598
+    8192   7.75  85.50%   4.03%  10.46%  1620589.096
+   16384  15.34  85.43%   4.13%  10.44%  1638067.854
+```
+
+That's 46% faster than the stock configuration!
+
+OV10 is as the stock firmware will let the Pi go, and 2250 MHz is the fastest we could reliably run in production.
+
+The temperatures in the stress test get this high:
+```
+Current temperature: 70.6°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+Current temperature: 71.1°C - Frequency: 2251MHz
+```
+
+But during actual validation, they tend to stay below 60C which is acceptable for us.
 
 
 ## Next Steps

@@ -1,7 +1,9 @@
 # Securing your Node
 
 The goal of this guide is to walk you through steps you can take to secure your node against malicious actors.
-It will describe both **essential** actions, which you **must** take, and **nice-to-have** actions, which are helpful but not required.
+Whether you're running a local server at home or a VPS server / virtual machine on the cloud, the tips here will help you harden your node against outside attack and help protect it during its lifespan.
+
+This section will describe both **essential** actions, which you **must** take, and **nice-to-have** actions, which are helpful but not required.
 
 ::: tip NOTE
 This guide is meant to be an **introduction** to some of the things you can do to harden your node machine.
@@ -278,13 +280,14 @@ Copy this output and store it somewhere convenient - you're going to need it in 
 
 Next, use `ssh` to connect to your node like you normally would (using your node's username and password).
 
-Once you're connected to your node, run the following command:
+Once you're connected to your node, run the following commands:
 
 ```shell
+mkdir -p ~/.ssh
 nano ~/.ssh/authorized_keys
 ```
 
-This will open a text editor for the file used to store all of the public keys that your node's user account trusts.
+The second command will open a text editor for the file used to store all of the public keys that your node's user account trusts.
 
 In this file, paste the **public key** that you retrieved a few steps ago using the `cat` command (the whole line starting with `ssh-ed25519`).
 
@@ -333,11 +336,15 @@ This is a large file, so you'll have to navigate through it using the arrow keys
 Make the following changes:
 
 1. Uncomment `#AuthorizedKeysFile` if it is commented (by removing the `#` in front of it)
-2. Change `ChallengeResponseAuthentication yes` to `ChallengeResponseAuthentication no`
-3. Change `PasswordAuthentication yes` to `PasswordAuthentication no`
+2. Change `KbdInteractiveAuthentication yes` to `KbdInteractiveAuthentication no` and uncomment (by removing the `#` in front of it) - **note that older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`**
+3. Change `PasswordAuthentication yes` to `PasswordAuthentication no` and uncomment (by removing the `#` in front of it)
 4. Change `PermitRootLogin yes` to `PermitRootLogin prohibit-password` unless it's already set to that and has a `#` in front of it
 
 Once you're done, save with `Ctrl+O` and `Enter`, then exit with `Ctrl+X`.
+
+Finally, run `sudo sshd -T | grep -i passwordauthentication` and make sure that it prints `passwordauthentication no`.  
+If it does not, you may need to run `sudo nano /etc/ssh/sshd_config.d/50-cloud-init.conf` and set `PasswordAuthentication yes` to `PasswordAuthentication no` in that file as well.
+Save and exit as before, with `Ctrl+O` and `Enter`, then `Ctrl+X`
 
 Next, restart the SSH server so it picks up the new settings:
 
@@ -416,18 +423,19 @@ Open the `sshd` config file:
 sudo nano /etc/ssh/sshd_config
 ```
 
-Now change the line `ChallengeResponseAuthentication no` to `ChallengeResponseAuthentication yes` so it looks like this:
+Now change the line `KbdInteractiveAuthentication no` to `KbdInteractiveAuthentication yes` so it looks like this:
 
 ```
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
-ChallengeResponseAuthentication yes
+KbdInteractiveAuthentication yes
 ```
+(Older versions of SSH call this option `ChallengeResponseAuthentication` instead of `KbdInteractiveAuthentication`.)
 
 Add the following line to the bottom of the file, which indicates to `sshd` that it needs both an SSH key and the Google Authenticator code:
 
 ```shell
-AuthenticationMethods publickey,keyboard-interactive
+AuthenticationMethods publickey,keyboard-interactive:pam
 ```
 
 Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.

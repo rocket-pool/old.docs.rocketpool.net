@@ -1,29 +1,19 @@
 # Setting up the Grafana Dashboard
 
-::: warning NOTE
-The Smartnode metrics and dashboard are still **experimental**.
-If you encounter issues while setting them up using the guides below, please report them to the Rocket Pool team on the official Discord server.
-
-Also, note that the Smartnode's metrics collector and Grafana dashboard are *entirely optional*.
-You do not need to set them up to successfully run the Smartnode stack.
-:::
-
 Now that you have your node up and running, you'll probably want to have a convenient way to monitor everything about it at a glance to make sure it's functioning correctly (and what kind of earnings it's generating for you).
 
 There are many tools out there that do this job.
 One of the most popular is called [Grafana](https://grafana.com/) - an easy-to-use, general-purpose dashboard system that you can access with a browser.
 
 Rocket Pool comes out-of-the-box with support for Grafana and its dependencies; it even comes with a pre-built dashboard for each of the Consensus (ETH2) clients.
-For example, here is a snapshot of what the dashboard for Nimbus looks like:
+For example, here is a snapshot of what the dashboard looks like on the Prater test network:
 
+![](./images/grafana-1.2.jpg)
 
-![](./images/nimbus-dashboard.png)
-
-The pre-built dashboard was based on many rounds of feedback from the Rocket Pool community during the beta tests and the final Prater testnet.
-It includes the following information all in a convenient format:
+The standard dashboard includes the following information all in a convenient format:
 
 - **Top left:** some important statistics about your machine's health and performance, and any pending system updates
-- **Top right:** the activity and performance of your validators on the Beacon Chain
+- **Top right:** the activity and performance of your validators on the Beacon Chain, along with some Execution and Consensus client stats
 - **Bottom left:** details about the entire Rocket Pool network, for reference
 - **Bottom right:** details about your staking rewards, both ETH and RPL
 
@@ -32,8 +22,7 @@ In this guide, we'll show you how to enable Rocket Pool's metrics system so you 
 
 ## Overview of the Rocket Pool Metrics Stack
 
-Starting with Smartnode v1.0.0-RC6, the Smartnode comes with an optional supplement to the traditional stack.
-It uses the following capabilities:
+If you choose to enable metrics during the Smartnode configuration process, your node will add the following processes:
 
 - [Prometheus](https://prometheus.io/) - a data collection, storage, and reporting system that captures all of the metrics you see above (any many more) and stores them, so they can be looked at over time
 - The Prometheus [Node Exporter](https://github.com/prometheus/node_exporter) - a service that collects information about your machine's health (such as CPU usage, RAM usage, free disk space and swap space, etc.) and reports it to Prometheus
@@ -42,11 +31,6 @@ It uses the following capabilities:
 
 The default configuration will create Docker containers with all of these services that live alongside the rest of the Smartnode's Docker containers.
 It will open up a port on your node machine for Grafana, so you can access its dashboard from any machine on your local network with a browser.
-
-::: warning NOTE
-This guide assumes you don't have a Prometheus and Grafana setup already in use, and need to create one from scratch.
-If you already have an existing setup, you can derive the necessary information for attaching the relevant metrics to your Prometheus instance using the Native mode guides below.
-:::
 
 
 ## Enabling the Metrics Server
@@ -257,24 +241,14 @@ Start by going to the **Create** menu (the plus icon on the right-side bar) and 
 
 ![](./images/grafana-import.png)
 
-When prompted for the URL, select the option from the below list based on which Consensus (ETH2) client you are using:
+When prompted for the dashboard ID in the **Import via grafana.com** box, enter `18391` or use the full URL ([(https://grafana.com/grafana/dashboards/18391](https://grafana.com/grafana/dashboards/18391)) and press the **Load** button.
 
-- Lighthouse: [https://grafana.com/grafana/dashboards/14883](https://grafana.com/grafana/dashboards/14883)
-- Nimbus: [https://grafana.com/grafana/dashboards/14884](https://grafana.com/grafana/dashboards/14884)
-- Prysm: [https://grafana.com/grafana/dashboards/14885](https://grafana.com/grafana/dashboards/14885)
-- Teku: [https://grafana.com/grafana/dashboards/14886](https://grafana.com/grafana/dashboards/14886)
-
-::: tip Tip
-If you don't remember which client you have, you can check quickly by running `rocketpool service version` on your node.
-:::
-
-Enter one of the URLs above into the **Import via grafana.com** box and press the **Load** button.
 You will be prompted with some information about the dashboard here, such as its name and where you'd like to store it (the default **General** folder is fine unless you use a lot of dashboards and want to organize them).
 
 Under the **Prometheus** drop-down at the bottom, you should only have a single option labeled **Prometheus (default)**.
 Select this option.
 
-Your screen should look like this (using Lighthouse as an example):
+Your screen should look like this:
 
 ![](./images/grafana-import2.png)
 
@@ -291,12 +265,9 @@ For example, here is the tooltip for the **Your Validator Share** box:
 However, we aren't done setting things up yet - there is still a little more configuration to do.
 
 ::: warning NOTE
-Some of the boxes (notably the APR ones) calculate their values by comparing today's value with yesterday's value.
-Until the metrics server has been running for more than a day, these will say **N/A** or **No data**.
+Some of the boxes (notably the APR ones) have been temporarily disabled due to the way Shapella provides skimmed rewards.
 
-This is normal!
-
-Just wait a day until it has enough data to calculate its values correctly.
+They will be enabled again in a future version of the Smartnode that can track historical rewards properly.
 :::
 
 
@@ -368,8 +339,8 @@ The **SSD Latency** chart tracks how long it takes for read/write operations to 
 This is helpful in gauging how fast your SSD is, so you know if it becomes a bottleneck if your validator suffers from poor performance.
 To update the SSD you want to track in the chart, click on the **SSD Latency** title and select **Edit**.
 
-This chart has two query fields (two textboxes) with four `device=""` portions in total.
-You'll need to update all four of these fields with the device you want to track.
+This chart has four query fields (four textboxes) with eight `device=""` portions in total.
+You'll need to update the first four of these portions with the device you want to track.
 
 Simply place your cursor in-between the quote marks and press `Ctrl+Spacebar` to get Grafana's auto-complete list, and select the correct option from there for each of the `device=""` portions.
 **You want to start from the leftmost empty setting first, or the auto-complete list may not appear.**
@@ -402,6 +373,10 @@ Typically this will be `sda` for SATA drives or `nvme0n1` for NVMe drives.
 
 If you *did* change Docker's default location to a different drive, or if you're running a hybrid / native setup, you should be able to use the same technique of "following the mount point" to determine which device your chain data resides on.
 :::
+
+Optionally, you can also track latency of a second disk on your system.
+This is aimed at people that keep their Operating System and chain data on separate drives.
+To set this up, simply follow the instructions above for the last two query fields, substituting `device=""` portion values with those of the disk you want to track.
 
 Once you're happy with your selections, click the blue **Apply** button in the top right corner of the screen to save the settings.
 
@@ -451,21 +426,25 @@ You might find it useful to watch if, for example, your ISP limits you to a cert
 The setup is identical to the **Network Usage** box above, so simply follow those instructions for this box too.
 
 
-### OS Disk Space Used
+### Disk Space Used
 
-This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth](./geth-pruning.md)).
+This keeps tabs on how full your Operating System disk is getting, so you know when it's time to clean up (and if your chain data lives on the same drive, time to [prune Geth or Nethermind](./pruning.md)).
 
 The steps are the same as the **SSD Latency** box above, so simply follow those instructions for this box too.
 As a reminder, you want the drive that houses the partition which has `/` in the `MOUNTPOINT` column for this one because that will be your Operating System drive.
+Fill this into the first query field.
+
+Optionally, you can also track the free space of a second disk on your system.
+This is aimed at people that keep their Operating System and chain data on separate drives.
+Set this up by following the same process, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your second drive's mount point is.
+Update the second query field with the disk associated with that partition.
 
 
-### Disk 2 Space Used
+### Disk Temp
 
-This is an optional field that tracks the free space of a second disk on your system.
-It is aimed at people that keep their Operating System and chain data on separate drives, such as **Raspberry Pi** users.
+This tracks the current temperature of your Operating System disk. The steps are the same as the **CPU Temp** box above, so simply follow those instructions for this box too, substituting CPU chip and sensor values with those of your Operating System disk. Fill these values into the first query field.
 
-Setting it up is the same as the **SSD Latency** box above, but instead of looking at which partition has `/` in the `MOUNTPOINT` column, you want to look for the one that has whatever your 2nd drive's mount point is.
-Use the disk associated with that partition.
+Optionally, you can also track the current temperature of a second disk on your system. Set this up by following the same process, substituting the chip and sensor values with those of your second drive. Fill these values into the second query field.
 
 
 ## Customizing the Dashboard
@@ -474,6 +453,7 @@ While the standard dashboard tries to do a good job capturing everything you'd w
 You can add new graphs, change the way graphs look, move things around, and much more!
 
 Take a look at [Grafana's Tutorials](https://grafana.com/tutorials/) page to learn how to play with it and set it up to your liking.
+
 
 ## Customizing the Metrics Stack
 
@@ -484,6 +464,7 @@ In general, [Grafana configuration options](https://grafana.com/docs/grafana/lat
 ```
 GF_<SectionName>_<KeyName>
 ```
+
 
 ### Grafana SMTP Settings for Sending Emails
 
@@ -517,20 +498,22 @@ docker stop rocketpool_grafana
 rocketpool service start
 ```
 
-To test the SMTP settings, go to the **Alerting** menu and click **Notification channels**.
+To test the SMTP settings, go to the **Alerting** menu and click **Contact points**.
 
 <center>
 
-![](./images/grafana-notification-channels.png)
+![](./images/grafana-contact-points.png)
 
 </center>
 
-Click **Add channel** and select **Email** as the type. Enter an email address in the **Addresses** section and click **Test**.
+Click **New contact point** and select **Email** as the Contact point type.
+Enter an email address in the **Addresses** section and click **Test**.
 
 <center>
 
-![](./images/grafana-new-notification-channel.png)
+![](./images/grafana-new-contact-point.png)
 
 </center>
 
 Check to see that the test email was received.
+Click **Save contact point*** when finished.

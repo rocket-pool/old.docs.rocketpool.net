@@ -1,29 +1,128 @@
 # Selecting Staking Hardware
 
-So!
-You've decided that you want to run your own Rocket Pool node at home.
-You want to pick the hardware, you want to set it up, and you want to have complete control over everything that happens to it.
-You're determined to help maximize the decentralization of the Ethereum ecosystem while being as secure as you can possibly be.
-Outstanding!
+There are no official specifications for running a Rocket Pool node.
+This page offers some guidelines and examples that you can use to select staking hardware.
 
-But where do you start?
-How do you pick a computer that's right for you?
-There are dozens of guides with conflicting suggestions out there, or vague parts lists that ask you to fill in the blanks.
-Rather than add another one of those guides to the community, we've decided to go a slightly different route.
-Here, we've collected and listed a few of the staking setups that members of the Rocket Pool community have decided to share.
-We've tried to include a very diverse set of options so you can fully appreciate just how flexible the hardware for running a Rocket Pool node can be.
-We've included complete PC's and servers, small NUCs and mini-PCs, and even a Raspberry Pi in our list!
-We've also asked the users to describe what they like about their setups to help you understand the pros and cons of each one.
+The minimum hardware requirements of your node will depend on the Consensus and Execution clients that you choose.
+If, for example, you intend to run your node on a low powered device, you may be limited to using `Geth` as your Execution client and `Nimbus` as your Consensus client.
+If you're using a more powerful NUC with 32+ GB of RAM, all client combinations are open to you.
 
-Take a look at some of Rocket Pool's staking setups below; hopefully you'll find some inspiration for your own node.
+The guidelines below assume you want a **comfortable** level of hardware, meaning you have excess capacity.
+If you keep these guidelines in mind, your node will have plenty of resources to run any of the Rocket Pool supported client combinations.
+This will allow you to choose a `random` client pair, which is very important for client diversity on the Ethereum network.
+
+::: tip NOTE
+Ethereum staking is very forgiving.
+If your house is flooded and your staking device is fried, there is no big penalty for taking a week to get back up and running (unless you happen to be in a sync committee, which is a very rare event).
+Component failure might happen at some point, but don't stress about it.
+Downtime does not get you slashed unless you are offline during a major outage of the entire Ethereum network.
+:::
 
 
-## Full Servers and PCs
+## Hardware Requirements
 
-PCs and servers come in all shapes and sizes, and all manners of cost and performance.
-They are known for their modularity and flexibility - each component is customizable and swappable, from the motherboard to the memory.
-With countless options available, it can be overwhelming to settle on the right ones for you.
+Ethereum validators are not very computationally expensive, which is to say that once your Execution and Consensus clients are running, any additional validator will use **a very small amount of additional resources**.
+This grows up to 64 validators, at which point the resources required for adding a 65th validator and beyond are negligible. 
+
+In our experience, most setups, including mini-PCs and NUCs, are capable of running an effectively unlimited number of validators.
+
+
+### CPU Requirements
+
+Running a Rocket Pool node is not very computationally intensive.
+The biggest impact of the CPU is how fast your node can initially sync the state of the blockchain when you first create it (or if you ever change clients later).
+After the initial sync, the CPU is not used as heavily.
+
+CPU naming can be deceptive; an Intel Core i5 from 2010 is usually **less powerful** than a core i3 from 2022.
+Many community members use Intel NUC devices because of their small form factor, but an old i5 NUC may be a worse choice than a new i3.
+For this reason, we recommend using a "modern" CPU that is, at most, a few years old.
+More specifically, **for x64-based CPUs**, we recommend a CPU that supports the [BMI2](https://en.wikipedia.org/wiki/X86_Bit_manipulation_instruction_set#BMI2_(Bit_Manipulation_Instruction_Set_2)) extension - check the manufacturer's specs for your CPU to see if it is supported.
+Not all modern CPUs support this; for example, Celeron CPUs tend not to include it.
+
+ARM-based CPUs (such as the Mac M1 or M2, or the Rock 5B) do not apply to the BMI2 extension above.
+
+::: tip NOTE
+If you are interested in using a NUC, you can tell how modern the NUC is by its model number.
+They are formatted as `NUC` + `generation number` + `model` + `CPU type` + `suffix`.
+For example, a `NUC11PAHi50Z` unit is a 11th generation i5 unit.
+You can see a list of NUCs [here](https://www.intel.com/content/www/us/en/products/details/nuc/kits/products.html) on the Intel website.
+
+Other mini-PCs, such as the Asus PN50 or PN51, do not follow this convention but information about which CPU is used by them should be included in their product pages.
+:::
+
+The amount of cores on a CPU is less relevant that its **number of threads**.
+We recommend a **minimum of 4 threads** for Rocket Pool node operation.
+A 2 core CPU with 4 threads will work without issue.
+It is rare to find a CPU with only 2 threads.
+
+**Guideline: any modern CPU with at least 4 threads.**
+
+
+### RAM Requirements
+
+Rocket Pool nodes can operate with as little as 8 GB of RAM.
+We generally recommend having slightly more to offer some headroom and full support for RAM-heavy clients such as Teku.
+An added benefit of more RAM is that you can provide a larger cache size to Execution client, which tends to slow the rate of your disk space usage.
+
+The exact type of RAM (such as DDR3 or DDR4) is not as important; generally DDR3 is fast enough to support node operation.
+
+**Guideline: at least 16 GB of RAM.**
+
+
+### SSD Requirements
+
+This element is more important than most people expect.
+The Execution client relies heavily on IOPS, or "operations per second".
+In practice, this means that:
+
+- HDD (spinning platter) drives will not work
+- SATA or external USB 3.0+ SSDs *can* work
+- NVMe SSD drives are preferred
+
+If you already have an SSD you want to use and want to be sure it has sufficient performance for node operation.
+
+::: tip NOTE
+SSD selection can be a complex choice!
+
+The method SSDs use to store data on their flash chips has a noticeable impact on speed and longevity.
+When shopping for an SSD you might notice labels like `QLC`, `TLC` or `SLC`.
+These stand for the amount of data contained within a single cell of the flash chip: `Q` for "quad" means 4, `T` for "triple" means 3, `M` for "multi" means 2, and `S` for "single" means 1.
+
+We recommend **TLC, MLC, or SLC** drives.
+We **do not recommend QLC drives** due to their slower performance and lower total reliability.
+
+SSDs come with or without DRAM, which is a hardware element that makes accessing data on the SSD more efficient.
+Those with DRAM are faster but those without DRAM are cheaper.
+However, DRAM is quite important for providing smooth node operation.
+
+We recommend a drive with a **DRAM** cache.
+We **do not recommend DRAM-less drives**.
+:::
+
+The second consideration is drive size.
+At the time of writing, the `geth` execution client database size requires about 700GB of space after it finishes its initial sync (or after you just finished pruning it).
+This will grow steadily over time, and while you can periodically prune the database, it is likely to cross 1 TB over the coming year(s).
+You will have peace of mind with a larger drive.
+
+**Guideline: a 2 TB SSD that has TLC or better, with a DRAM cache. NVMe preferred.**
+
+
+### Common Accessories
+
+Many node operators improve their setups beyond the minimum requirements.
+Some common additions include:
+
+- SSD heatsinks to extend the drive lifespan
+- Uninterruptable power supplies (UPS) in case of power outages
+- A fallback node to have a backup in case something fails
+
+These are all convenient to have, but not required to run a Rocket Pool node.
+
+
+## Example Setups
+
 In this section, we'll showcase a few of the varied builds that Rocket Pool's community has created for themselves.
+They are examples of what people are using, not recommendations for how you should run your setup.
 
 
 ### Xer0's Server
@@ -83,7 +182,7 @@ Darcius's setup:
 Veteran hardware enthusiast **YorickDowne** has a lot of experience building and maintaining servers.
 Using that knowledge, he has settled on a flexible microATX setup.
 His machine is considerably smaller than a typical PC, but still manages to fit in server-grade technology that maximizes resilience and uptime - key metrics when running a Rocket Pool node.
-He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth2-docker.net/docs/Usage/Hardware).
+He has recommendations for both Intel and AMD setups, which you can find [on his website](https://eth-docker.net/docs/Usage/Hardware).
 The Intel version uses a quad core i3-9100F (3.6 GHz) or a Xeon CPU, and the AMD version suggests any Ryzen CPU that supports ECC memory.
 For both configurations, he suggests 16 GB of ECC RAM, and a 1 TB NVMe SSD.
 
@@ -247,35 +346,3 @@ Here are moralcompass's comments on why they chose this setup:
 - *Dual intel NIC (in case I decide to repurpose this as my router one day)*
 - *NVME + SATA slots (prefer NVME for speed and options with higher TBW endurance. SATA gives option of HDD or SSD. I avoided M.SATA interfaces because these SSDs seem to be turning legacy)*
 - *USB and serial ports available for graceful shutdown signal from UPS*
-
-
-## Jcrtp's Raspberry Pi
-
-![](./images/jcrtp.jpg)
-
-This is certainly the most controversial option on the hardware example list.
-Raspberry Pi's are credit-card sized "single-board computers" that include a CPU and RAM built directly onto the board.
-They are also quite cheap, with the most powerful model only costing $80.
-While they were originally intended as a simple option to help teach young students how to program, the hardware hacking community has become enamored with these capable little computers and have employed them in hundreds of use cases... including staking!
-It comes with a quad core ARM64 processor at 1.5 GHz (overclockable to 2.1 GHz), up to 8 GB of DDR4 RAM, and only draws 5 to 8 watts during use.
-
-Despite the general consensus in the Ethereum space that Raspberry Pis should not be used for staking, Rocket Pool developer Joe Clapis (known on Discord as **jcrtp**) is confident that his configuration can handle the load of being a Rocket Pool node.
-This makes it the cheapest and lowest power option currently available, but offers the least amount of headroom or flexibility if the future of Ethereum staking demands higher performance.
-
-Jcrtp's Setup:
-- Base: [Raspberry Pi 4B 8GB Basic Kit](https://www.amazon.com/CanaKit-Raspberry-Basic-Kit-8GB/dp/B08DJ9MLHV/ref=sr_1_2?dchild=1&keywords=raspberry+pi+4b+8gb&qid=1616386386&sr=8-2) ($90)
-- MicroSD Card: [Samsung EVO Select 32GB U1 MB-ME32GA/AM](https://www.amazon.com/Samsung-MicroSDHC-Adapter-MB-ME32GA-AM/dp/B06XWN9Q99) ($7)
-- Case: [3D Printed from Thingiverse](https://www.thingiverse.com/thing:3793664) ($2)
-- Fan: [Scythe Mini Kaze 2 40mm Fan](https://www.amazon.com/Scythe-Mini-Quiet-3500RPM-Single/dp/B07ZHMTRK6) ($7)
-- SSD: [Samsung T5 1TB Portable SSD](https://www.amazon.com/Samsung-T5-Portable-SSD-MU-PA1T0B/dp/B073H552FJ) ($120)
-  - Also recommended: [the 2TB model](https://www.amazon.com/dp/B073H4GPLQ) ($240)
-- **Total: $226 to $346**
-
-Here are jcrtp's comments on why he chose this setup:
-
-*I think of staking as the antithesis to PoW mining.
-Proof-of-stake offers the same, if not better, security as proof-of-work but prides itself on requiring much, much fewer computational resources.
-My goal is to take this to the extreme, and run my Rocket Pool node with the lowest possible power consumption without sacrificing the security of the network.
-After experimenting for a few months, I've found a configuration for the Raspberry Pi that can accomplish both of these goals.
-Sure, you can get down to 10 watts with a NUC and have more headroom... but that's not the point.
-Having an $80, 5-watt machine contribute to the security of Ethereum as well as a $10,000 rack-mount server just makes me happy.*

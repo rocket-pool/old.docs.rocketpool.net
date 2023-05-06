@@ -33,6 +33,7 @@ If you're using [a different setup](../node/install-modes.md) with an external E
 - For **Nimbus**: add `--network=prater` to the launch command.
 - For **Prysm**: add `--prater` to the launch command.
 - For **Teku**: add `--network=prater` to the launch command.
+- For **Lodestar**: prefix the launch command with `LODESTAR_NETWORK=goerli`
 
 Check the next section to learn how to get some test ETH on Goerli, which you'll need to test Rocket Pool out.
 
@@ -52,34 +53,17 @@ If you are planning to run a node, please go through the [Node Operator Guide](.
 You will be prompted to return here at the appropriate step.
 :::
 
-Rocket Pool provides a faucet in its [Discord server](https://discordapp.com/invite/tCRG54c).
-Join the server and head to the `#faucet` channel in the `TESTNET` group.
-Here, you can interact with a bot that provides Goerli ETH for testing.
+Rocket Pool provides a faucet in its [Discord server](https://discord.gg/rocketpool).
+Join the server and head to the `#support` channel.
 
-You can type `!help` to receive some useful information about how to use the bot, which will provide the following text:
+Here, you can ask the support team for testnet ETH.
+You will need to provide the users there with your node address, and they will provide you with ETH.
 
-```
-Rocket Pool Goerli ETH Bot
-
-Welcome to the Rocket Pool Goerli ETH Faucet. See below for my commands.
-
-!goerliEth <address>
-Sends 1 goerli eth to the address specified.
-Ex: !goerliEth 0x56d389C4E07A48d429035532402301310B8143A0
-Purpose: so you can test out UI staking at https://beta.rocketpool.net/ and/or register your node.
-
-!nodeOperator <address>
-Sends 17 goerli eth to the address specified.
-Ex: !nodeOperator 0x56d389C4E07A48d429035532402301310B8143A0
-Purpose: so you can set up your 16 goerli eth node.
-Note: you must be registered with Rocket Pool before requesting.
-
-!help
-Shows this message.
-
-!mod
-Tags the maintainers of this bot, please use if you are experiencing any issues.
-```
+::: warning NOTE
+The testnet faucet bot is no longer directly accessible to the public due to previous abuse.
+It is only available to people in the support team with explicit access permission.
+Simply state your intentions, and someone with faucet permissions will assist you.
+:::
 
 If you aren't planning to register a node and just want some ETH to test staking to receive rETH, or if you are planning to register a node but haven't yet, type the following command in the channel:
 

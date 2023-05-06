@@ -132,7 +132,7 @@ For `x64` systems (most normal machines):
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O ~/bin/rocketpool
 ```
 
-For `arm64` systems (like the Raspberry Pi):
+For `arm64` systems:
 
 ```
 wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O ~/bin/rocketpool
@@ -163,10 +163,14 @@ Finally, check the version to make sure the CLI and Smartnode stack are both up 
 ```
 rocketpool service version
 
-Rocket Pool client version: 1.0.0-rc3
-Rocket Pool service version: 1.0.0-rc3
-Selected Eth 1.0 client: Geth (rocketpool/client-go:v1.10.4)
-Selected Eth 2.0 client: Nimbus (statusim/nimbus:v1.4.0)
+Your Smartnode is currently using the Prater Test Network.
+
+Rocket Pool client version: 1.5.0
+Rocket Pool service version: 1.5.0
+Selected Eth 1.0 client: Geth (Locally managed)
+        Image: ethereum/client-go:v1.10.21
+Selected Eth 2.0 client: Lighthouse (Locally managed)
+        Image: rocketpool/lighthouse:mevboost-5ee3bc5
 ```
 
 Both the client and service should match the new release version.
@@ -196,9 +200,11 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-amd64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
-For `arm64` systems (like the Raspberry Pi):
+For `arm64` systems:
 
 ```
 sudo mv /usr/local/bin/rocketpool /usr/local/bin/rocketpool_bak
@@ -208,6 +214,8 @@ sudo mv /usr/local/bin/rocketpoold /usr/local/bin/rocketpoold_bak
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-arm64 -O /usr/local/bin/rocketpool
 
 sudo wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-daemon-linux-arm64 -O /usr/local/bin/rocketpoold
+
+sudo chmod +x /usr/local/bin/rocketpool /usr/local/bin/rocketpoold
 ```
 
 If you'd like to see what's changed, open the Settings Manager - the Review Page will show you what's new:
@@ -252,7 +260,7 @@ wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/r
 
 For `arm64` systems, such as the Mac mini with M1:
 ```shell
-wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /usr/local/bin/rocketpool
+wget https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-darwin-arm64 -O /opt/homebrew/bin/rocketpool
 ```
 
 Now run the install command:

@@ -32,6 +32,11 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
+    algolia: {
+      apiKey: '55cef043a9a4342516d9f70a0fcd42ef',
+      indexName: 'rocketpool',
+      appId: 'V3ID5G8G80',
+    },
     repo: 'rocket-pool/docs.rocketpool.net',
     editLinks: true,
     docsDir: 'src',
@@ -83,6 +88,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
+            'atlas/whats-new',
             {
               title: 'Staking with Rocket Pool',
               sidebarDepth: 1,
@@ -106,10 +112,10 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/local/overview',
                     'node/local/hardware',
                     'node/local/prepare-pc',
                     'node/local/prepare-mac',
-                    'node/local/prepare-pi',
                     'node/ssh'
                   ]
                 },
@@ -118,8 +124,18 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/vps/overview',
                     'node/vps/providers',
                     'node/vps/os'
+                  ]
+                },
+                {
+                  title: 'Securing your Node',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/securing-your-node',
+                    'node/tailscale'
                   ]
                 },
                 {
@@ -127,6 +143,7 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/installing/overview',
                     'node/eth-clients',
                     'node/install-modes',
                     'node/docker',
@@ -138,31 +155,74 @@ module.exports = {
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/config/overview',
                     'node/config-docker',
                     'node/config-native',
                     'node/advanced-config',
                   ]
                 },
-                'node/securing-your-node',
-                'node/tailscale',
-                'node/starting-rp',
-                'node/cli-intro',
-                'node/prepare-node',
-                'node/create-validator',
+                {
+                  title: 'Provisioning your Node',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/provisioning/overview',
+                    'node/starting-rp',
+                    'node/wallet-init',
+                    'node/recovering-rp',
+                    'node/prepare-node',
+                    'node/cli-intro',
+                    'node/fallback',
+                    'node/fee-distrib-sp',
+                    'node/mev',
+                  ]
+                },
+                {
+                  title: 'Creating or Migrating Minipools',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/minipools/overview',
+                    'node/create-validator',
+                    'node/minipools/delegates',
+                    'node/solo-staker-migration',
+                    'node/leb-migration',
+                    'node/credit',
+                  ]
+                },
                 {
                   title: 'Monitoring and Maintenance',
                   sidebarDepth: 2,
                   collapsable: true,
                   children: [
+                    'node/maintenance/overview',
                     'node/performance',
                     'node/grafana',
                     'node/updates',
                     'node/backups',
-                    'node/geth-pruning',
-                    'node/change-clients'
+                    'node/pruning',
+                    'node/change-clients',
+                    'node/maintenance/node-migration'
                   ]
                 },
-                'node/rewards',
+                {
+                  title: 'Claiming Rewards',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/rewards/overview',
+                    'node/rewards',
+                    'node/skimming',
+                  ]
+                },
+                {
+                  title: 'Exiting your Minipools',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'node/withdraw',
+                  ]
+                },
                 'node/troubleshooting',
                 'node/faq'
               ]
@@ -173,12 +233,50 @@ module.exports = {
               collapsable: true,
               children: [
                 'testnet/overview',
-                'testnet/upgrading',
+                'testnet/mainnet',
               ]
             },
-            'node/mainnet',
-            'node/v1.3-update.md',
-            'node/v1.5-update.md',
+            {
+              title: 'Running an Oracle DAO Node',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'odao/overview',
+                'odao/setup',
+                'odao/testing',
+                'odao/monitoring',
+                'odao/proposals'
+              ]
+            },
+            {
+              title: 'Legacy Guides',
+              sidebarDepth: 2,
+              collapsable: true,
+              children: [
+                'legacy/v1.3-update',
+                'legacy/upgrading',
+                {
+                  title: 'Atlas and Withdrawals',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'atlas/lebs',
+                  ]
+                },
+                {
+                  title: 'Redstone and The Merge',
+                  sidebarDepth: 2,
+                  collapsable: true,
+                  children: [
+                    'redstone/whats-new',
+                    'redstone/docker-migration',
+                    'redstone/hybrid-migration',
+                    'redstone/native-migration',
+                  ]
+                },
+                'node/local/prepare-pi',
+              ]
+            }
           ]
         }
       ],
@@ -340,6 +438,17 @@ module.exports = {
                       ]
                     },
                   ]
+                },
+                {
+                    title: 'Subgraph',
+                    sidebarDepth: 3,
+                    collapsable: true,
+                    children: [
+                        'api/subgraph/SubgraphData',
+                        'api/subgraph/Entities',
+                        'api/subgraph/Queries',
+                        'api/subgraph/AdditionalResources',
+                    ]
                 },
               ]
             },
