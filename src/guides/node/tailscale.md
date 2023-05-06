@@ -43,7 +43,7 @@ You can find instructions for this on their website; for example, here are the [
 If you have UFW configured, you will also want to follow the [UFW Configuration Instructions](https://tailscale.com/kb/1077/secure-server-ubuntu-18-04/)).
 :::
 
-Next, add Tailscale’s package signing key and repository **on your Rocket Pool node**:
+First, add Tailscale’s package signing key and repository **on your Rocket Pool node**:
 
 ```shell
 curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
@@ -75,7 +75,11 @@ You may also change the name of the **node machine** through the dashboard, e.g.
 
 ![](./images/tailscale-dashboard-servers.png)
 
-It is suggested to [disable key expiry](https://tailscale.com/kb/1028/key-expiry) to prevent the need to periodically re-authenticate.
+It is suggested to [disable key expiry](https://tailscale.com/kb/1028/key-expiry) for the node machine to prevent the need to periodically re-authenticate.
+
+::: tip Note
+If you would like to access your node using a memorable hostname such as rocketnode, you can do so by enabling MagicDNS in the Tailscale settings.
+:::
 
 You should now be able to `exit` the SSH session to your node on your client, and SSH into your node again through Tailscale using `ssh your.user@rocketnode`.
 
@@ -88,26 +92,29 @@ ssh your.user@rocketnode -p 1234
 ```
 :::
 
-You can now also visit `http://rocketnode:3100`in your web browser to access your Grafana dashboard from your **client**.
+You can now also visit `http://rocketnode:3100` in your web browser to access your Grafana dashboard from your **client**.
 
 If you have UFW configured, you can now add a rule to accept any incoming SSH connections over Tailscale.
 
 ::: danger WARNING
-The following steps will modify your SSH configuration and firewall rules.
+The following steps will modify your firewall rules.
 **You must have at least 2 SSH sessions open to your node machine before proceeding - one for modifying the configuration and testing it afterwards, and one that will stay logged in as a backup in case your changes break SSH so you can revert them!
 :::
 
 **Run these commands on the node machine.**
 
+Allow access to all incoming ssh connections over Talscale.
+
 ```shell
-sudo ufw allow in on tailscale0 comment 
-sudo ufw allow 41641/udp
+sudo ufw allow in on tailscale0
 ```
 
-Remove the SSH port added before from the firewall (for example, if you used the default port of 22):
+You may also remove access to the SSH port adding from the [enabling a firewall](securing-your-node.md#essential-enable-a-firewall) steps to competely lock down your node.
+Note that you **will not** be able to login from the local network as tailscale will become the only way to login.
+Only run the following command if you are okay with this.
 
 ```shell
-sudo ufw delete "22/tcp" comment 'Allow SSH'
+sudo ufw delete "22/tcp"
 ```
 
 Once you’ve set up firewall rules to restrict all non-Tailscale connections, restart UFW and SSH:
