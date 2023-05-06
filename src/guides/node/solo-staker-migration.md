@@ -470,7 +470,7 @@ The node's fee distributor <fee distributer contract address> has a balance of 0
 The node is opted into the Smoothing Pool.
 ```
 
-Note that, should you choose to opt in/out of the Smoothing Pool, for any migrated minipools still owned by your Consensus Client, you must re-apply the changes to your Suggested Fee Recipient, and direct it to the corresponding address.
+Note that, should you later choose to opt in or out of the Smoothing Pool at any time, for any migrated minipools still owned by your Consensus Client, you must also re-apply the changes to your client's Suggested Fee Recipient, and direct it to the corresponding address.
 
 ::: danger WARNING
 Failure to successfully change your client's Suggested Fee Recipient may result in penalties being applied to your node, per review by the oDAO.
