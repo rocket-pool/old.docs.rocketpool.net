@@ -7,6 +7,7 @@ When you have decided that you no longer want to run a minipool and want to acce
 1. Send a voluntarily exit request for the minipool's validator from the Beacon Chain.
 2. Wait for your validator to exit.
 3. Wait for your validator's balance to be withdrawn to your minipool on the Execution layer.
+4. Close the minipool to distrubute the rewards and access the funds
 
 We'll cover each step below.
 
@@ -69,8 +70,8 @@ If you need a refresher on how to do that process, please see the [**Exiting you
 :::
 
 If you have exited your validator from the Beacon Chain and your balance has been deposited into the minipool contract, you can safely withdraw the entire thing in one command.
-Unlike the `distribute` command, this process will actually **finalize** your minipool which closes it and renders it inactive.
-For all intents and purposes, once your balance has been withdrawn from the Beacon Chain and you go through the following process to access the funds, the minipool's duty is over.
+Unlike [manual distribution](skimming.md#manual-distribution), this process will actually **finalize** your minipool which closes it and renders it inactive.
+Once your balance has been withdrawn from the Beacon Chain and you go through the following process to access the funds, the minipool's duty is over.
 
 To retrieve the funds and close the minipool, run the following command:
 
@@ -88,10 +89,12 @@ Please select a minipool to close:
 
 Here you can see the total balance for each eligible minipool, how much of that balance will be distributed to you, and how much of that balance is reserved for you as a refund (which bypasses distribution).
 
-Select which minipool you'd like to distribute and close from the list, confirm the action, and all you need to do is wait for your transaction to be validated.
+Select which minipool you'd like to distribute and close from the list, confirm the action, and wait for your transaction to be validated.
 Once it does, your share of the minipool balance (and your refund) will be sent to your withdrawal address, and the minipool will enter the `finalized` state.
 
-You can verify it by looking at the transaction on a block explorer; for example, feel free to look at [the transaction for closing the above minipool (Prater Testnet)](https://zhejiang.beaconcha.in/tx/0x5557d5e052422d4a46bb4204cabb8093b22fc944664aa0d5d4e8c9adca1865a5 ).
+You can verify it by looking at the transaction on a block explorer; for example, feel free to look at [the transaction for closing the above minipool (Prater Testnet)](https://zhejiang.beaconcha.in/tx/0x5557d5e052422d4a46bb4204cabb8093b22fc944664aa0d5d4e8c9adca1865a5).
+
+### Unstaking RPL
 
 At this point, your effective RPL will be updated to remove this minipool from the calculation.
 You can now unstake any RPL you have that would put you over the 150% limit.
