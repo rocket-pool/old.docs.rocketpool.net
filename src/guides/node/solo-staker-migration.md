@@ -452,6 +452,31 @@ rocketpool minipool refund
 Simply select your minipool from the list, approve the transaction, and your refund will be sent to your node's withdrawal address.
 
 
+## (If Skipped Step 3) Changing your Consensus Client's Fee Recipient
+
+If you didn't opt to have the Smartnode's Validator Client run your newly migrated minipool, it is your responsibility to adjust your Consensus Client's fee recipient address to that of your Rocket Pool node's Fee Distributor address, or, if opted-in to the Smoothing Pool, its address instead (<b>0xd4E96eF8eee8678dBFf4d535E033Ed1a4F7605b7</b>). This is required in order to fairly destribute Execution Layer rewards to the rETH pool stakers and your withdrawal address. This configuration is commonly known as the <b>Suggsted Fee Recipient</b>, and has slightly different flag names, depending on your consensus client (e.g. ```--suggestedFeeRecipient``` or ```--suggested-fee-recipient```. Please consult the appropriate documentation for your Consensus Client for further configuration information and where to apply this change.
+
+You can find your node's Fee Distributor address by running the following command:
+
+```
+rocketpool node status
+```
+
+You'll find the address listed within this section:
+
+```
+=== Fee Distributor and Smoothing Pool ===
+The node's fee distributor <fee distributer contract address> has a balance of 0.000000 ETH.
+The node is opted into the Smoothing Pool.
+```
+
+Note that, should you choose to opt in/out of the Smoothing Pool, for any migrated minipools still owned by your Consensus Client, you must re-apply the changes to your Suggested Fee Recipient, and direct it to the corresponding address.
+
+::: danger WARNING
+Failure to successfully change your client's Suggested Fee Recipient may result in penalties being applied to your node, per review by oDAO members.
+:::
+
+
 ## Using your Node Credit
 
 Now that you have an active promoted minipool, you will notice your node has a credit balance when you run `rocketpool node status`:
