@@ -84,7 +84,7 @@ This will present you with a list of minipools that are eligible for closure:
 ```
 Please select a minipool to close:
 1: All available minipools
-2: 0xd8E804cFA64ADb386F52DB20717810130c90f674 (32.074633 ETH available, 8.026494 ETH is yours plus a refund of 0.000000 ETH)
+2: 0xd8E804cFA64ADb386F52DB20717810130c90f674 (32.007209 ETH available, 8.002559 ETH is yours plus a refund of 0.000000 ETH)
 ```
 
 Here you can see the total balance for each eligible minipool, how much of that balance will be distributed to you, and how much of that balance is reserved for you as a refund (which bypasses distribution).
@@ -92,7 +92,7 @@ Here you can see the total balance for each eligible minipool, how much of that 
 Select which minipool you'd like to distribute and close from the list, confirm the action, and wait for your transaction to be validated.
 Once it does, your share of the minipool balance (and your refund) will be sent to your withdrawal address, and the minipool will enter the `finalized` state.
 
-You can verify it by looking at the transaction on a block explorer; for example, feel free to look at [the transaction for closing the above minipool (Prater Testnet)](https://zhejiang.beaconcha.in/tx/0x5557d5e052422d4a46bb4204cabb8093b22fc944664aa0d5d4e8c9adca1865a5).
+You can verify it by looking at the transaction on a block explorer; for example, see [the transaction for closing the above minipool (Goerli Testnet)](https://goerli.etherscan.io/tx/0xe81415b3b66f9b42d43ac17a0983e792725726c9fdd35ac855745bd12a053509).
 
 ### Unstaking RPL
 
