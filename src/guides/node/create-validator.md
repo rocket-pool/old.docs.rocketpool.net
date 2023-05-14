@@ -9,7 +9,7 @@ Thus, in order to create a validator using Rocket Pool, you need to **create a m
 ## Choosing a Bond Size
 
 ::: warning NOTE
-8-ETH bonded minipools are a feature of the [**Atlas**](../atlas/whats-new.md) upgrade and will not be available until Atlas has launched.
+8-ETH bonded minipools are a feature of the [**Atlas**](../atlas/whats-new.md) upgrade, which was launched on April 17th 2023.
 ::: 
 
 Before creating a minipool, the first step is to choose the amount of ETH you want to bond.
