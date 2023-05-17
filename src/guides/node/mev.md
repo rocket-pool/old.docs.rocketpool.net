@@ -86,7 +86,7 @@ MEV-Boost is [open source](https://github.com/flashbots/mev-boost) and has been 
 
 Below is a good visual depiction of how the entire MEV ecosystem functions, and where MEV-Boost fits in:
 
-![](https://raw.githubusercontent.com/flashbots/mev-boost/develop/docs/mev-boost-integration-overview.png)
+![](./images/mev-boost-integration-overview.png)
 
 <center>
 
@@ -115,7 +115,7 @@ Each of the relays listed above currently act in this role.
 We are taking a three-phase approach towards tranistioning to the Trusted Block Builder design:
 
 
-### Phase 1: Opt-In
+### Phase 1: Opt-In![mev-boost-integration-overview.png](..%2F..%2F..%2F..%2F..%2F..%2FDesktop%2Fmev-boost-integration-overview.png)
 
 In phase 1, MEV-Boost is provided to all node operators as an **opt-in** configuration.
 Node operators are encouraged to use it because it improves rETH's returns and thus keeps the protocol competitive, but are not required to use it.
