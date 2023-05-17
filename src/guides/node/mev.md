@@ -86,7 +86,7 @@ MEV-Boost is [open source](https://github.com/flashbots/mev-boost) and has been 
 
 Below is a good visual depiction of how the entire MEV ecosystem functions, and where MEV-Boost fits in:
 
-![](https://raw.githubusercontent.com/flashbots/mev-boost/main/docs/mev-boost-integration-overview.png)
+![](https://raw.githubusercontent.com/flashbots/mev-boost/develop/docs/mev-boost-integration-overview.png)
 
 <center>
 
