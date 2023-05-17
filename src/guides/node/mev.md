@@ -115,7 +115,7 @@ Each of the relays listed above currently act in this role.
 We are taking a three-phase approach towards tranistioning to the Trusted Block Builder design:
 
 
-### Phase 1: Opt-In![mev-boost-integration-overview.png](..%2F..%2F..%2F..%2F..%2F..%2FDesktop%2Fmev-boost-integration-overview.png)
+### Phase 1: Opt-In!
 
 In phase 1, MEV-Boost is provided to all node operators as an **opt-in** configuration.
 Node operators are encouraged to use it because it improves rETH's returns and thus keeps the protocol competitive, but are not required to use it.
