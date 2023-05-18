@@ -77,15 +77,25 @@ This means you'll only need to handle the total RPL stake for your node if you p
 :::
 
 
-### Staking via the Website (Deactivated until Atlas upgrade)
+### Staking via the Website
 
-::: warning NOTE
-This function has been **disabled** until the Atlas upgrade.
-:::
+The easiest and safest way to stake RPL for your node is to use the protocol's **Stake-on-Behalf** feature, which was 
+reintroduced with the Atlas upgrade. This way, you can stake RPL for your node while the RPL is still in the wallet 
+you used to acquire it. In other words, you **don't need to send RPL to your node's hot wallet** in order to stake it.
 
-The easiest and safest way to stake RPL for your node is to use the website's new **Stake-on-Behalf** feature, which was introduced with the Redstone upgrade.
-This way, you can stake RPL for your node while the RPL is still in the wallet you used to acquire it.
-In other words, you **don't need to send RPL to your node's hot wallet** in order to stake it.
+#### Whitelisting an address to stake on behalf
+
+You first must whitelist an address to have permission to stake on behalf of your node. This only needs to be performed
+once per address you wish to stake from. You can do this via the following Smartnode command:
+
+```bash
+rocketpool node add-address-to-stake-rpl-whitelist address-or-ens
+```
+
+Where `address-or-ens` is the address or and ENS name that resolves to your desired address. You will be asked to
+confirm the whitelist addition and after the transaction is confirmed, you can then navigate to the relevant page below.
+
+#### Staking RPL on behalf of
 
 Select which network you're using from the tabs below to be taken to it:
 
@@ -131,6 +141,15 @@ It will be sent to the Ethereum network, and once included in a block, you're al
 
 If you run `rocketpool node status`, you should see your staked RPL appear under the `=== RPL Stake and Minipools ===` section.
 
+#### Removing an address from the stake whitelist
+
+If you ever want to remove an address from your stake-on-behalf whitelist, you may do so with the following Smartnode command:
+
+```bash
+rocketpool node remove-address-from-stake-rpl-whitelist address-or-ens
+```
+
+Where `address-or-ens` is the address or and ENS name resolving to the address you want to remove from the whitelist.
 
 ### Staking via the Node CLI
 
