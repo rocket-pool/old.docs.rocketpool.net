@@ -8,7 +8,7 @@ One of the most popular is called [Grafana](https://grafana.com/) - an easy-to-u
 Rocket Pool comes out-of-the-box with support for Grafana and its dependencies; it even comes with a pre-built dashboard for each of the Consensus (ETH2) clients.
 For example, here is a snapshot of what the dashboard looks like on the Prater test network:
 
-![](./images/grafana-1.2.jpg)
+![](./images/grafana-1.3.jpg)
 
 The standard dashboard includes the following information all in a convenient format:
 

@@ -91,7 +91,7 @@ By popular demand, we have created a new [**Grafana dashboard**](https://grafana
 
 <center>
 
-![](../node/images/grafana-1.2.jpg)
+![](../node/images/grafana-1.3.jpg)
 
 </center>
 
