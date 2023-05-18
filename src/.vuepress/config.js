@@ -220,6 +220,7 @@ module.exports = {
                   collapsable: true,
                   children: [
                     'node/withdraw',
+                    'node/rescue-dissolved',
                   ]
                 },
                 'node/troubleshooting',
