@@ -49,6 +49,21 @@ In the future, this will be fixed and there will only be one checkbox like the o
 ::: 
 
 
+### MEV-Boost
+
+To enable access to MEV-Boost, go to the **MEV-Boost** category and check the **Expose API Port** box:
+
+<center>
+
+![](./images/tui-mev-expose-ports.png)
+
+</center>
+
+This will open the HTTP API port (default 18550) on your node, so other machines on your local network can connect to it.
+
+For example, if your node's local IP address were `192.168.1.45`, then by enabling this option you could use `http://192.168.1.45:18550` as the MEV-Boost URL for your other services.
+
+
 ## Customizing the Docker-Compose Definition Files
 
 While the Settings Manager contains many options you can use to customize your node, it doesn't wrap all of the features that `docker-compose` provides.
