@@ -17,7 +17,7 @@ Mainnet  | Deposit  | [0xDD3f50F8A6CafbE9b31a427582963f465E745AF8](https://ether
 Goerli*  | Deposit  | [0xa9A6A14A3643690D0286574976F45abBDAD8f505](https://goerli.etherscan.io/address/0xa9A6A14A3643690D0286574976F45abBDAD8f505)
 &nbsp;   | Storage  | [0xd8Cd47263414aFEca62d6e2a3917d6600abDceB3](https://goerli.etherscan.io/address/0xd8Cd47263414aFEca62d6e2a3917d6600abDceB3)
 
-Within the protocol, the Storage contract is used to find all the other deployed contract addresses as needed.
+Within the protocol, the Storage contract is used to find all the other deployed contract addresses as needed (see this [example](https://docs.rocketpool.net/developers/usage/contracts/contracts.html#interacting-with-rocket-pool)).
 See [All Active Deployed Protocol Contracts](#all-active-deployed-protocol-contracts) below for a full list of addresses. 
 
 <small>* Testnet</small>
@@ -209,4 +209,4 @@ Goerli*  | addressQueueStorage                   | [0xF7d23f90c96D998e3E809acD92
 
 This list was updated 5/20/2023
 
-The addresses can be queried on chain by passing in the proper key to `rocketStorage.getAddress` (eg, pass in `keccak("contract.addressrocketNodeManager")`).
+The addresses can be queried on chain as shown in this [example](https://docs.rocketpool.net/developers/usage/contracts/contracts.html#interacting-with-rocket-pool).
