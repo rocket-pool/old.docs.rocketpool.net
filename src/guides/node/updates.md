@@ -72,7 +72,9 @@ Next, check if your system needs to be rebooted:
 cat /var/run/reboot-required
 ```
 
-If the above command prints `*** System restart required ***`, then you should restart your machine to finish applying the updates when you are able:
+If the above command prints `No such file or directory`, then reboot is not required and you can skip the step below. 
+
+However if the command prints `*** System restart required ***`, then you should restart your machine to finish applying the updates when you are able:
 
 ```
 sudo reboot
