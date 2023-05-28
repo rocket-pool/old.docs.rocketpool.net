@@ -17,7 +17,7 @@ Follow the instructions provided in that link or log in with an existing account
 
 </center>
 
-Next, click on the drop-down at the top right of the screen to select the geographic reason you want your server to physically reside in.
+Next, click on the drop-down at the top right of the screen to select the geographic region you want your server to physically reside in.
 Servers cannot be moved between regions once they're created, so you want to ensure you're happy with the currently selected option before actually creating the server.
 
 Now, click **Services** in the toolbar.
