@@ -135,6 +135,7 @@ module.exports = {
                   collapsable: true,
                   children: [
                     'node/securing-your-node',
+                    'node/tailscale'
                   ]
                 },
                 {
