@@ -131,9 +131,8 @@ You can manually adjust some of its parameters at the end of this process, but t
 You can proceed to the next section.
 
 ::: warning NOTE
-To make sure your Execution client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 30303** on both TCP and UDP to your machine's local IP address.
-This way, other Execution clients can discover it and communicate with it from the outside.
+**Open up the P2P port in your router's port forwarding setup**. Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
+This way, other Consensus clients can discover it and communicate with it from the outside. This will help your Consensus client sync quickly and improve performance (and thus rewards).
 
 Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
@@ -475,9 +474,8 @@ Think of it as cheap insurance for your minipools; you'll miss a trivial bit of 
 ::::
 
 ::: warning NOTE
-To make sure your Consensus client can sync quickly, you may want to **open up the P2P port in your router's port forwarding setup**.
-Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
-This way, other Consensus clients can discover it and communicate with it from the outside.
+**Open up the P2P port in your router's port forwarding setup**. Configure it to forward **port 9001** on both TCP and UDP to your machine's local IP address.
+This way, other Consensus clients can discover it and communicate with it from the outside. This will help your Consensus client sync quickly and improve performance (and thus rewards). 
 
 Each router has a different way of doing this, so **you'll need to check out your router's manual on how to set up port forwarding**.
 :::
