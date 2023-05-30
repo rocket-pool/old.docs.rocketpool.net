@@ -293,4 +293,4 @@ After that, Docker will store its data on your desired disk.
 ## Configuring the Smartnode Stack
 
 The next step in the installation process is to do an initial configuration of your node.
-Move on to the [Configuring the Smartnode Stack](config-docker.md) section for a walkthrough of this process.
+Move on to the [Configuring Rocketpool](overview.md) section for a walkthrough of this process.
