@@ -438,6 +438,11 @@ Add the following line to the bottom of the file, which indicates to `sshd` that
 AuthenticationMethods publickey,keyboard-interactive:pam
 ```
 
+You will also need to set
+```shell
+PermitRootLogin yes
+```
+
 Then save and exit the file with `Ctrl+O`, `Enter`, and `Ctrl+X`.
 
 Now that `sshd` is set up, we need to create our 2FA codes.
