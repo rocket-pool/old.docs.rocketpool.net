@@ -27,6 +27,24 @@ module.exports = {
   theme: 'default-prefers-color-scheme',
 
   /**
+   * ref：https://vuepress.vuejs.org/guide/i18n.html
+   */
+  locales: {
+
+    // Default sub-path is english
+    '/': {
+      lang: 'en-US'
+    },
+
+    // Dutch language subpath
+    '/nl/': {
+      lang: 'nl-NL',
+      description: 'Rocket Pool Documentatie - Gedecentraliseerd ETH2 Proof of Stake Protocol'
+    }
+
+  },
+
+  /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
@@ -45,6 +63,12 @@ module.exports = {
     lastUpdated: false,
     logo: '/images/logo-small.png',
     smoothScroll: true,
+
+    /* ///////////////////////////////
+    // Navigation
+    // /////////////////////////////*/
+
+    // English
     nav: [
       {
         text: 'Overview',
@@ -67,6 +91,33 @@ module.exports = {
         link: 'https://discord.com/invite/rocketpool'
       }
     ],
+
+    // Dutch
+    '/nl/': {
+      nav: [
+        {
+          text: 'Overzicht',
+          link: '/nl/overview/',
+        },
+        {
+          text: 'Handleidingen',
+          link: '/guides/'
+        },
+        {
+          text: 'Voor Ontwikkelaars',
+          link: '/developers/'
+        },
+        {
+          text: 'Website',
+          link: 'https://www.rocketpool.net'
+        },
+        {
+          text: 'Discord',
+          link: 'https://discord.com/invite/rocketpool'
+        }
+      ],
+    },
+
     sidebar: {
       '/overview/': [
         {
