@@ -171,11 +171,6 @@ PegaSys is an arm of [ConsenSys](https://consensys.net/) dedicated to building e
 Teku is Apache 2.0 licensed and written in Java, a language notable for its maturity & ubiquity.
 
 
-### Lodestar
-
-[Lodestar](https://lodestar.chainsafe.io/) is a TypeScript implementation of the Ethereum Consensus specification developed by [ChainSafe Systems](https://chainsafe.io/).
-
-
 ### Client Comparison Table
 
 | Client     | CPU Usage | Minimum RAM Usage | Sync Time                    |
